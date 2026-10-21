@@ -1,0 +1,802 @@
+# Module: csv_export
+# Filename: csv_export.py
+
+  0           RESUME                   0
+
+ 20           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (math)
+              STORE_NAME               0 (math)
+
+ 21           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('Decimal', 'ROUND_FLOOR'))
+              IMPORT_NAME              1 (decimal)
+              IMPORT_FROM              2 (Decimal)
+              STORE_NAME               2 (Decimal)
+              IMPORT_FROM              3 (ROUND_FLOOR)
+              STORE_NAME               3 (ROUND_FLOOR)
+              POP_TOP
+
+ 23           LOAD_NAME                2 (Decimal)
+              PUSH_NULL
+              LOAD_CONST               3 ('0.5')
+              CALL                     1
+              STORE_NAME               4 (_HALF)
+
+ 27           LOAD_CONST               4 ('excel-br')
+              LOAD_CONST               5 ('delim')
+              LOAD_CONST               6 (';')
+              LOAD_CONST               7 ('bom')
+              LOAD_CONST               8 (True)
+              LOAD_CONST               9 ('loc')
+              LOAD_CONST              10 ('pt')
+              BUILD_MAP                3
+
+ 28           LOAD_CONST              11 ('intl')
+              LOAD_CONST               5 ('delim')
+              LOAD_CONST              12 (',')
+              LOAD_CONST               7 ('bom')
+              LOAD_CONST              13 (False)
+              LOAD_CONST               9 ('loc')
+              LOAD_CONST              14 ('en')
+              BUILD_MAP                3
+
+ 26           BUILD_MAP                2
+              STORE_NAME               5 (PROFILES)
+
+ 30           LOAD_CONST               4 ('excel-br')
+              STORE_NAME               6 (DEFAULT_PROFILE)
+
+ 32           LOAD_CONST              15 ('')
+              STORE_NAME               7 (EMPTY)
+
+ 42           LOAD_CONST              16 (1000.0)
+              LOAD_CONST              10 ('pt')
+              LOAD_CONST              17 ('\xa0mil')
+              LOAD_CONST              14 ('en')
+              LOAD_CONST              18 ('K')
+              BUILD_MAP                2
+              BUILD_TUPLE              2
+
+ 43           LOAD_CONST              19 (1000000.0)
+              LOAD_CONST              10 ('pt')
+              LOAD_CONST              20 ('\xa0M')
+              LOAD_CONST              14 ('en')
+              LOAD_CONST              21 ('M')
+              BUILD_MAP                2
+              BUILD_TUPLE              2
+
+ 44           LOAD_CONST              22 (1000000000.0)
+              LOAD_CONST              10 ('pt')
+              LOAD_CONST              23 ('\xa0BI')
+              LOAD_CONST              14 ('en')
+              LOAD_CONST              24 ('B')
+              BUILD_MAP                2
+              BUILD_TUPLE              2
+
+ 42           BUILD_LIST               3
+              STORE_NAME               8 (_COMPACT)
+
+ 47           LOAD_CONST              25 (<code object _dec_sep at 0x108225110, file "csv_export.py", line 47>)
+              MAKE_FUNCTION
+              STORE_NAME               9 (_dec_sep)
+
+ 51           LOAD_CONST              26 (<code object _group_sep at 0x108224300, file "csv_export.py", line 51>)
+              MAKE_FUNCTION
+              STORE_NAME              10 (_group_sep)
+
+ 55           LOAD_CONST              27 (<code object _round_half_up at 0xbdef01900, file "csv_export.py", line 55>)
+              MAKE_FUNCTION
+              STORE_NAME              11 (_round_half_up)
+
+ 74           LOAD_CONST              34 ((False,))
+              LOAD_CONST              28 (<code object _num at 0xbdef00280, file "csv_export.py", line 74>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              12 (_num)
+
+ 90           LOAD_CONST              29 (<code object compact_money at 0xbdf6d6d80, file "csv_export.py", line 90>)
+              MAKE_FUNCTION
+              STORE_NAME              13 (compact_money)
+
+114           LOAD_CONST              35 (('£',))
+              LOAD_CONST              30 (<code object fmt_value at 0xbdf6d7100, file "csv_export.py", line 114>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              14 (fmt_value)
+
+142           LOAD_CONST              31 (<code object _is_number at 0x107fe7930, file "csv_export.py", line 142>)
+              MAKE_FUNCTION
+              STORE_NAME              15 (_is_number)
+
+148           LOAD_CONST              32 (<code object csv_cell at 0x107feef10, file "csv_export.py", line 148>)
+              MAKE_FUNCTION
+              STORE_NAME              16 (csv_cell)
+
+162           LOAD_CONST              33 (<code object csv_line at 0x1081b3750, file "csv_export.py", line 162>)
+              MAKE_FUNCTION
+              STORE_NAME              17 (csv_line)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _dec_sep at 0x108225110, file "csv_export.py", line 47>:
+ 47           RESUME                   0
+
+ 48           LOAD_FAST_BORROW         0 (loc)
+              LOAD_CONST               0 ('pt')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_CONST               1 (',')
+              RETURN_VALUE
+      L1:     LOAD_CONST               2 ('.')
+              RETURN_VALUE
+
+Disassembly of <code object _group_sep at 0x108224300, file "csv_export.py", line 51>:
+ 51           RESUME                   0
+
+ 52           LOAD_FAST_BORROW         0 (loc)
+              LOAD_CONST               0 ('pt')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_CONST               1 ('.')
+              RETURN_VALUE
+      L1:     LOAD_CONST               2 (',')
+              RETURN_VALUE
+
+Disassembly of <code object _round_half_up at 0xbdef01900, file "csv_export.py", line 55>:
+ 55           RESUME                   0
+
+ 60           LOAD_SMALL_INT          10
+              LOAD_FAST_BORROW         1 (places)
+              BINARY_OP                8 (**)
+              STORE_FAST               2 (scale)
+
+ 61           LOAD_FAST_BORROW_LOAD_FAST_BORROW 2 (x, scale)
+              BINARY_OP                5 (*)
+              STORE_FAST               3 (y)
+
+ 62           LOAD_GLOBAL              0 (math)
+              LOAD_ATTR                2 (floor)
+              PUSH_NULL
+              LOAD_FAST_BORROW         3 (y)
+              CALL                     1
+              STORE_FAST               4 (n)
+
+ 63           LOAD_FAST_BORROW_LOAD_FAST_BORROW 52 (y, n)
+              BINARY_OP               10 (-)
+              STORE_FAST               5 (frac)
+
+ 64           LOAD_GLOBAL              5 (abs + NULL)
+              LOAD_FAST_BORROW         5 (frac)
+              LOAD_CONST               1 (0.5)
+              BINARY_OP               10 (-)
+              CALL                     1
+              LOAD_CONST               2 (1e-09)
+              COMPARE_OP              18 (bool(<))
+              POP_JUMP_IF_FALSE       92 (to L2)
+              NOT_TAKEN
+
+ 68           LOAD_GLOBAL              7 (Decimal + NULL)
+              LOAD_FAST_BORROW         0 (x)
+              CALL                     1
+              LOAD_FAST_BORROW         2 (scale)
+              BINARY_OP                5 (*)
+              STORE_FAST               6 (d)
+
+ 69           LOAD_GLOBAL              9 (int + NULL)
+              LOAD_FAST_BORROW         6 (d)
+              LOAD_ATTR               11 (to_integral_value + NULL|self)
+              LOAD_GLOBAL             12 (ROUND_FLOOR)
+              LOAD_CONST               3 (('rounding',))
+              CALL_KW                  1
+              CALL                     1
+              STORE_FAST               4 (n)
+
+ 70           LOAD_FAST_BORROW_LOAD_FAST_BORROW 100 (d, n)
+              BINARY_OP               10 (-)
+              LOAD_GLOBAL             14 (_HALF)
+              COMPARE_OP             188 (bool(>=))
+              POP_JUMP_IF_FALSE       17 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         4 (n)
+              LOAD_SMALL_INT           1
+              BINARY_OP                0 (+)
+              LOAD_FAST_BORROW         2 (scale)
+              BINARY_OP               11 (/)
+              RETURN_VALUE
+      L1:     LOAD_FAST                4 (n)
+              LOAD_FAST_BORROW         2 (scale)
+              BINARY_OP               11 (/)
+              RETURN_VALUE
+
+ 71   L2:     LOAD_FAST_BORROW         5 (frac)
+              LOAD_CONST               1 (0.5)
+              COMPARE_OP             148 (bool(>))
+              POP_JUMP_IF_FALSE       17 (to L3)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         4 (n)
+              LOAD_SMALL_INT           1
+              BINARY_OP                0 (+)
+              LOAD_FAST_BORROW         2 (scale)
+              BINARY_OP               11 (/)
+              RETURN_VALUE
+      L3:     LOAD_FAST                4 (n)
+              LOAD_FAST_BORROW         2 (scale)
+              BINARY_OP               11 (/)
+              RETURN_VALUE
+
+Disassembly of <code object _num at 0xbdef00280, file "csv_export.py", line 74>:
+ 74           RESUME                   0
+
+ 77           LOAD_FAST_BORROW         1 (places)
+              LOAD_SMALL_INT           0
+              COMPARE_OP               2 (<)
+              STORE_FAST               4 (trim)
+
+ 78           LOAD_GLOBAL              1 (abs + NULL)
+              LOAD_FAST_BORROW         1 (places)
+              CALL                     1
+              STORE_FAST               1 (places)
+
+ 79           LOAD_GLOBAL              3 (_round_half_up + NULL)
+              LOAD_GLOBAL              5 (float + NULL)
+              LOAD_FAST_BORROW         0 (x)
+              CALL                     1
+              LOAD_FAST_BORROW         1 (places)
+              CALL                     2
+              STORE_FAST               5 (d)
+
+ 80           LOAD_FAST_BORROW         5 (d)
+              LOAD_SMALL_INT           0
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+
+ 81           LOAD_CONST               1 (0.0)
+              STORE_FAST               5 (d)
+
+ 82   L1:     LOAD_FAST_BORROW         3 (grouping)
+              TO_BOOL
+              POP_JUMP_IF_FALSE        9 (to L2)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         5 (d)
+              LOAD_CONST               2 (',.')
+              LOAD_FAST_BORROW         1 (places)
+              FORMAT_SIMPLE
+              LOAD_CONST               3 ('f')
+              BUILD_STRING             3
+              FORMAT_WITH_SPEC
+              JUMP_FORWARD             7 (to L3)
+      L2:     LOAD_FAST_BORROW         5 (d)
+              LOAD_CONST               4 ('.')
+              LOAD_FAST_BORROW         1 (places)
+              FORMAT_SIMPLE
+              LOAD_CONST               3 ('f')
+              BUILD_STRING             3
+              FORMAT_WITH_SPEC
+      L3:     STORE_FAST               6 (s)
+
+ 83           LOAD_FAST_BORROW         4 (trim)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       40 (to L4)
+              NOT_TAKEN
+              LOAD_CONST               4 ('.')
+              LOAD_FAST_BORROW         6 (s)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_FALSE       33 (to L4)
+              NOT_TAKEN
+
+ 84           LOAD_FAST_BORROW         6 (s)
+              LOAD_ATTR                7 (rstrip + NULL|self)
+              LOAD_CONST               5 ('0')
+              CALL                     1
+              LOAD_ATTR                7 (rstrip + NULL|self)
+              LOAD_CONST               4 ('.')
+              CALL                     1
+              STORE_FAST               6 (s)
+
+ 87   L4:     LOAD_FAST_BORROW         6 (s)
+              LOAD_ATTR                9 (replace + NULL|self)
+              LOAD_CONST               6 (',')
+              LOAD_CONST               7 ('\x00')
+              CALL                     2
+              LOAD_ATTR                9 (replace + NULL|self)
+              LOAD_CONST               4 ('.')
+              LOAD_GLOBAL             11 (_dec_sep + NULL)
+              LOAD_FAST_BORROW         2 (loc)
+              CALL                     1
+              CALL                     2
+              LOAD_ATTR                9 (replace + NULL|self)
+              LOAD_CONST               7 ('\x00')
+              LOAD_GLOBAL             13 (_group_sep + NULL)
+              LOAD_FAST_BORROW         2 (loc)
+              CALL                     1
+              CALL                     2
+              RETURN_VALUE
+
+Disassembly of <code object compact_money at 0xbdf6d6d80, file "csv_export.py", line 90>:
+  90            RESUME                   0
+
+  92            NOP
+
+  93    L1:     LOAD_GLOBAL              1 (float + NULL)
+                LOAD_FAST_BORROW         0 (v)
+                CALL                     1
+                STORE_FAST               0 (v)
+
+  96    L2:     LOAD_FAST_LOAD_FAST      0 (v, v)
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_TRUE        35 (to L3)
+                NOT_TAKEN
+                LOAD_FAST                0 (v)
+                LOAD_GLOBAL              1 (float + NULL)
+                LOAD_CONST               0 ('inf')
+                CALL                     1
+                LOAD_GLOBAL              1 (float + NULL)
+                LOAD_CONST               1 ('-inf')
+                CALL                     1
+                BUILD_TUPLE              2
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_TRUE         8 (to L3)
+                NOT_TAKEN
+                LOAD_FAST                0 (v)
+                LOAD_SMALL_INT           0
+                COMPARE_OP              58 (bool(<=))
+                POP_JUMP_IF_FALSE        7 (to L4)
+                NOT_TAKEN
+
+  97    L3:     LOAD_GLOBAL              6 (EMPTY)
+                RETURN_VALUE
+
+  98    L4:     LOAD_CONST               4 (-1)
+                STORE_FAST               3 (pick)
+
+  99            LOAD_GLOBAL              9 (enumerate + NULL)
+                LOAD_GLOBAL             10 (_COMPACT)
+                CALL                     1
+                GET_ITER
+        L5:     FOR_ITER                28 (to L7)
+                UNPACK_SEQUENCE          2
+                STORE_FAST               4 (i)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   86 (scale, _)
+
+ 100            LOAD_GLOBAL             13 (abs + NULL)
+                LOAD_FAST                0 (v)
+                CALL                     1
+                LOAD_FAST                5 (scale)
+                COMPARE_OP             188 (bool(>=))
+                POP_JUMP_IF_TRUE         3 (to L6)
+                NOT_TAKEN
+                JUMP_BACKWARD           26 (to L5)
+
+ 101    L6:     LOAD_FAST                4 (i)
+                STORE_FAST               3 (pick)
+                JUMP_BACKWARD           30 (to L5)
+
+  99    L7:     END_FOR
+                POP_ITER
+
+ 102            LOAD_FAST                3 (pick)
+                LOAD_SMALL_INT           0
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE       19 (to L8)
+                NOT_TAKEN
+
+ 103            LOAD_FAST                2 (symbol)
+                FORMAT_SIMPLE
+                LOAD_CONST               2 (' ')
+                LOAD_GLOBAL             15 (_num + NULL)
+                LOAD_FAST                0 (v)
+                LOAD_CONST               4 (-1)
+                LOAD_FAST                1 (loc)
+                CALL                     3
+                FORMAT_SIMPLE
+                BUILD_STRING             3
+                RETURN_VALUE
+
+ 104    L8:     LOAD_GLOBAL             10 (_COMPACT)
+                LOAD_FAST                3 (pick)
+                BINARY_OP               26 ([])
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   87 (scale, suffix)
+
+ 105            LOAD_GLOBAL             17 (_round_half_up + NULL)
+                LOAD_FAST_LOAD_FAST      5 (v, scale)
+                BINARY_OP               11 (/)
+                LOAD_SMALL_INT           1
+                CALL                     2
+                STORE_FAST               8 (n)
+
+ 108            LOAD_FAST                8 (n)
+                LOAD_CONST               3 (1000)
+                COMPARE_OP             188 (bool(>=))
+                POP_JUMP_IF_FALSE       68 (to L9)
+                NOT_TAKEN
+                LOAD_FAST                3 (pick)
+                LOAD_SMALL_INT           1
+                BINARY_OP                0 (+)
+                LOAD_GLOBAL             19 (len + NULL)
+                LOAD_GLOBAL             10 (_COMPACT)
+                CALL                     1
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE       41 (to L9)
+                NOT_TAKEN
+
+ 109            LOAD_GLOBAL             10 (_COMPACT)
+                LOAD_FAST                3 (pick)
+                LOAD_SMALL_INT           1
+                BINARY_OP                0 (+)
+                BINARY_OP               26 ([])
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   87 (scale, suffix)
+
+ 110            LOAD_GLOBAL             17 (_round_half_up + NULL)
+                LOAD_FAST_LOAD_FAST      5 (v, scale)
+                BINARY_OP               11 (/)
+                LOAD_SMALL_INT           1
+                CALL                     2
+                STORE_FAST               8 (n)
+
+ 111    L9:     LOAD_FAST                2 (symbol)
+                FORMAT_SIMPLE
+                LOAD_CONST               2 (' ')
+                LOAD_GLOBAL             15 (_num + NULL)
+                LOAD_FAST                8 (n)
+                LOAD_CONST               4 (-1)
+                LOAD_FAST                1 (loc)
+                CALL                     3
+                FORMAT_SIMPLE
+                LOAD_FAST_LOAD_FAST    113 (suffix, loc)
+                BINARY_OP               26 ([])
+                FORMAT_SIMPLE
+                BUILD_STRING             4
+                RETURN_VALUE
+
+  --   L10:     PUSH_EXC_INFO
+
+  94            LOAD_GLOBAL              2 (TypeError)
+                LOAD_GLOBAL              4 (ValueError)
+                BUILD_TUPLE              2
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       10 (to L12)
+                NOT_TAKEN
+                POP_TOP
+
+  95            LOAD_GLOBAL              6 (EMPTY)
+                SWAP                     2
+       L11:     POP_EXCEPT
+                RETURN_VALUE
+
+  94   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L10 [0]
+  L10 to L11 -> L13 [1] lasti
+  L12 to L13 -> L13 [1] lasti
+
+Disassembly of <code object fmt_value at 0xbdf6d7100, file "csv_export.py", line 114>:
+ 114            RESUME                   0
+
+ 117            LOAD_FAST_BORROW         1 (fmt)
+                LOAD_CONST              12 (('txt', 'pos'))
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_FALSE       22 (to L2)
+                NOT_TAKEN
+
+ 118            LOAD_FAST_BORROW         0 (v)
+                POP_JUMP_IF_NOT_NONE     7 (to L1)
+                NOT_TAKEN
+                LOAD_GLOBAL              0 (EMPTY)
+                RETURN_VALUE
+        L1:     LOAD_GLOBAL              3 (str + NULL)
+                LOAD_FAST_BORROW         0 (v)
+                CALL                     1
+                RETURN_VALUE
+
+ 119    L2:     LOAD_FAST_BORROW         0 (v)
+                POP_JUMP_IF_NOT_NONE     7 (to L3)
+                NOT_TAKEN
+
+ 120            LOAD_GLOBAL              0 (EMPTY)
+                RETURN_VALUE
+
+ 121    L3:     NOP
+
+ 122    L4:     LOAD_GLOBAL              5 (float + NULL)
+                LOAD_FAST_BORROW         0 (v)
+                CALL                     1
+                STORE_FAST               0 (v)
+
+ 125    L5:     LOAD_FAST_LOAD_FAST      0 (v, v)
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_TRUE        28 (to L6)
+                NOT_TAKEN
+                LOAD_FAST                0 (v)
+                LOAD_GLOBAL              5 (float + NULL)
+                LOAD_CONST               1 ('inf')
+                CALL                     1
+                LOAD_GLOBAL              5 (float + NULL)
+                LOAD_CONST               2 ('-inf')
+                CALL                     1
+                BUILD_TUPLE              2
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_FALSE        7 (to L7)
+                NOT_TAKEN
+
+ 126    L6:     LOAD_GLOBAL              0 (EMPTY)
+                RETURN_VALUE
+
+ 127    L7:     LOAD_FAST                1 (fmt)
+                LOAD_CONST               3 ('int')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       16 (to L8)
+                NOT_TAKEN
+
+ 128            LOAD_GLOBAL             11 (_num + NULL)
+                LOAD_FAST                0 (v)
+                LOAD_SMALL_INT           0
+                LOAD_FAST                2 (loc)
+                LOAD_CONST               4 (True)
+                LOAD_CONST               5 (('grouping',))
+                CALL_KW                  4
+                RETURN_VALUE
+
+ 129    L8:     LOAD_FAST                1 (fmt)
+                LOAD_CONST               6 ('dec')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       14 (to L9)
+                NOT_TAKEN
+
+ 130            LOAD_GLOBAL             11 (_num + NULL)
+                LOAD_FAST                0 (v)
+                LOAD_SMALL_INT           2
+                LOAD_FAST                2 (loc)
+                CALL                     3
+                RETURN_VALUE
+
+ 131    L9:     LOAD_FAST                1 (fmt)
+                LOAD_CONST               7 ('dec1')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       14 (to L10)
+                NOT_TAKEN
+
+ 132            LOAD_GLOBAL             11 (_num + NULL)
+                LOAD_FAST                0 (v)
+                LOAD_SMALL_INT           1
+                LOAD_FAST                2 (loc)
+                CALL                     3
+                RETURN_VALUE
+
+ 133   L10:     LOAD_FAST                1 (fmt)
+                LOAD_CONST               8 ('rating')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       28 (to L12)
+                NOT_TAKEN
+
+ 134            LOAD_FAST                0 (v)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       14 (to L11)
+                NOT_TAKEN
+                LOAD_GLOBAL             11 (_num + NULL)
+                LOAD_FAST                0 (v)
+                LOAD_SMALL_INT           2
+                LOAD_FAST                2 (loc)
+                CALL                     3
+                RETURN_VALUE
+       L11:     LOAD_GLOBAL              0 (EMPTY)
+                RETURN_VALUE
+
+ 135   L12:     LOAD_FAST                1 (fmt)
+                LOAD_CONST               9 ('pct')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       28 (to L13)
+                NOT_TAKEN
+
+ 136            LOAD_GLOBAL             11 (_num + NULL)
+                LOAD_FAST                0 (v)
+                LOAD_SMALL_INT         100
+                BINARY_OP                5 (*)
+                LOAD_SMALL_INT           1
+                LOAD_FAST                2 (loc)
+                CALL                     3
+                LOAD_CONST              10 ('%')
+                BINARY_OP                0 (+)
+                RETURN_VALUE
+
+ 137   L13:     LOAD_FAST                1 (fmt)
+                LOAD_CONST              11 ('money')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       13 (to L14)
+                NOT_TAKEN
+
+ 138            LOAD_GLOBAL             13 (compact_money + NULL)
+                LOAD_FAST_LOAD_FAST      2 (v, loc)
+                LOAD_FAST                3 (symbol)
+                CALL                     3
+                RETURN_VALUE
+
+ 139   L14:     LOAD_GLOBAL             11 (_num + NULL)
+                LOAD_FAST                0 (v)
+                LOAD_SMALL_INT           2
+                LOAD_FAST                2 (loc)
+                CALL                     3
+                RETURN_VALUE
+
+  --   L15:     PUSH_EXC_INFO
+
+ 123            LOAD_GLOBAL              6 (TypeError)
+                LOAD_GLOBAL              8 (ValueError)
+                BUILD_TUPLE              2
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       15 (to L17)
+                NOT_TAKEN
+                POP_TOP
+
+ 124            LOAD_GLOBAL              3 (str + NULL)
+                LOAD_FAST                0 (v)
+                CALL                     1
+                SWAP                     2
+       L16:     POP_EXCEPT
+                RETURN_VALUE
+
+ 123   L17:     RERAISE                  0
+
+  --   L18:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L4 to L5 -> L15 [0]
+  L15 to L16 -> L18 [1] lasti
+  L17 to L18 -> L18 [1] lasti
+
+Disassembly of <code object _is_number at 0x107fe7930, file "csv_export.py", line 142>:
+142           RESUME                   0
+
+144           LOAD_FAST_BORROW         0 (s)
+              LOAD_ATTR                1 (lstrip + NULL|self)
+              LOAD_CONST               0 ('-')
+              CALL                     1
+              LOAD_ATTR                3 (replace + NULL|self)
+              LOAD_CONST               1 ('.')
+              LOAD_CONST               2 ('')
+              CALL                     2
+              LOAD_ATTR                3 (replace + NULL|self)
+              LOAD_CONST               3 (',')
+              LOAD_CONST               2 ('')
+              CALL                     2
+              LOAD_ATTR                3 (replace + NULL|self)
+              LOAD_CONST               4 ('%')
+              LOAD_CONST               2 ('')
+              CALL                     2
+              STORE_FAST               1 (body)
+
+145           LOAD_FAST_BORROW         1 (body)
+              LOAD_ATTR                5 (isdigit + NULL|self)
+              CALL                     0
+              RETURN_VALUE
+
+Disassembly of <code object csv_cell at 0x107feef10, file "csv_export.py", line 148>:
+148           RESUME                   0
+
+152           LOAD_FAST_BORROW         0 (value)
+              POP_JUMP_IF_NOT_NONE     3 (to L1)
+              NOT_TAKEN
+              LOAD_CONST               1 ('')
+              JUMP_FORWARD            10 (to L2)
+      L1:     LOAD_GLOBAL              1 (str + NULL)
+              LOAD_FAST_BORROW         0 (value)
+              CALL                     1
+      L2:     STORE_FAST               2 (s)
+
+153           LOAD_FAST_BORROW         2 (s)
+              LOAD_CONST               2 (slice(None, 1, None))
+              BINARY_OP               26 ([])
+              LOAD_CONST               9 (('=', '+', '@', '\t', '\r'))
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_TRUE        32 (to L3)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         2 (s)
+              LOAD_CONST               2 (slice(None, 1, None))
+              BINARY_OP               26 ([])
+              LOAD_CONST               4 ('-')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE       27 (to L4)
+              NOT_TAKEN
+              LOAD_GLOBAL              3 (_is_number + NULL)
+              LOAD_FAST_BORROW         2 (s)
+              CALL                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        10 (to L4)
+              NOT_TAKEN
+
+156   L3:     LOAD_CONST               5 ("'")
+              LOAD_FAST_BORROW         2 (s)
+              BINARY_OP                0 (+)
+              STORE_FAST               2 (s)
+
+157   L4:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (delim, s)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_TRUE        22 (to L5)
+              NOT_TAKEN
+              LOAD_CONST               6 ('"')
+              LOAD_FAST_BORROW         2 (s)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_TRUE        15 (to L5)
+              NOT_TAKEN
+              LOAD_CONST               7 ('\n')
+              LOAD_FAST_BORROW         2 (s)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_TRUE         8 (to L5)
+              NOT_TAKEN
+              LOAD_CONST               3 ('\r')
+              LOAD_FAST_BORROW         2 (s)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_FALSE       33 (to L6)
+              NOT_TAKEN
+
+158   L5:     LOAD_CONST               6 ('"')
+              LOAD_FAST_BORROW         2 (s)
+              LOAD_ATTR                5 (replace + NULL|self)
+              LOAD_CONST               6 ('"')
+              LOAD_CONST               8 ('""')
+              CALL                     2
+              BINARY_OP                0 (+)
+              LOAD_CONST               6 ('"')
+              BINARY_OP                0 (+)
+              STORE_FAST               2 (s)
+
+159   L6:     LOAD_FAST_BORROW         2 (s)
+              RETURN_VALUE
+
+Disassembly of <code object csv_line at 0x1081b3750, file "csv_export.py", line 162>:
+  --           MAKE_CELL                1 (delim)
+
+ 162           RESUME                   0
+
+ 163           LOAD_DEREF               1 (delim)
+               LOAD_ATTR                1 (join + NULL|self)
+               LOAD_FAST_BORROW         1 (delim)
+               BUILD_TUPLE              1
+               LOAD_CONST               0 (<code object <genexpr> at 0x108232450, file "csv_export.py", line 163>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               LOAD_FAST_BORROW         0 (values)
+               GET_ITER
+               CALL                     0
+               CALL                     1
+               LOAD_CONST               1 ('\r\n')
+               BINARY_OP                0 (+)
+               RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x108232450, file "csv_export.py", line 163>:
+  --           COPY_FREE_VARS           1
+
+ 163           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                17 (to L3)
+               STORE_FAST               1 (v)
+               LOAD_GLOBAL              1 (csv_cell + NULL)
+               LOAD_FAST_BORROW         1 (v)
+               LOAD_DEREF               2 (delim)
+               CALL                     2
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           19 (to L2)
+       L3:     END_FOR
+               POP_ITER
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L4:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L4 [0] lasti

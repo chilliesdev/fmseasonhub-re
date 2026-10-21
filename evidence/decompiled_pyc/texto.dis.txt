@@ -1,0 +1,148 @@
+# Module: texto
+# Filename: texto.py
+
+  0           RESUME                   0
+
+ 11           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (unicodedata)
+              STORE_NAME               0 (unicodedata)
+
+ 26           LOAD_CONST               2 ('ø')
+              LOAD_CONST               3 ('o')
+              LOAD_CONST               4 ('ı')
+              LOAD_CONST               5 ('i')
+              LOAD_CONST               6 ('ł')
+              LOAD_CONST               7 ('l')
+              LOAD_CONST               8 ('đ')
+              LOAD_CONST               9 ('d')
+              LOAD_CONST              10 ('ð')
+              LOAD_CONST               9 ('d')
+              LOAD_CONST              11 ('þ')
+              LOAD_CONST              12 ('th')
+
+ 27           LOAD_CONST              13 ('ə')
+              LOAD_CONST              14 ('e')
+              LOAD_CONST              15 ('ħ')
+              LOAD_CONST              16 ('h')
+              LOAD_CONST              17 ('ŋ')
+              LOAD_CONST              18 ('n')
+              LOAD_CONST              19 ('ß')
+              LOAD_CONST              20 ('ss')
+              LOAD_CONST              21 ('æ')
+              LOAD_CONST              22 ('ae')
+              LOAD_CONST              23 ('œ')
+              LOAD_CONST              24 ('oe')
+
+ 25           BUILD_MAP               12
+              STORE_NAME               1 (_TEIMOSAS)
+
+ 31           LOAD_CONST              25 (<code object sem_acento at 0xbdef00280, file "texto.py", line 31>)
+              MAKE_FUNCTION
+              STORE_NAME               2 (sem_acento)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object sem_acento at 0xbdef00280, file "texto.py", line 31>:
+ 31           RESUME                   0
+
+ 38           LOAD_FAST_BORROW         0 (s)
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+
+ 39           LOAD_CONST               0 ('')
+              RETURN_VALUE
+
+ 42   L1:     LOAD_GLOBAL              0 (unicodedata)
+              LOAD_ATTR                2 (normalize)
+              PUSH_NULL
+              LOAD_CONST               1 ('NFD')
+              LOAD_GLOBAL              5 (str + NULL)
+              LOAD_FAST_BORROW         0 (s)
+              CALL                     1
+              LOAD_ATTR                7 (strip + NULL|self)
+              CALL                     0
+              CALL                     2
+              STORE_FAST               1 (nfd)
+
+ 43           LOAD_CONST               0 ('')
+              LOAD_ATTR                9 (join + NULL|self)
+              LOAD_CONST               2 (<code object <genexpr> at 0x108107af0, file "texto.py", line 43>)
+              MAKE_FUNCTION
+              LOAD_FAST_BORROW         1 (nfd)
+              GET_ITER
+              CALL                     0
+              CALL                     1
+              LOAD_ATTR               11 (lower + NULL|self)
+              CALL                     0
+              STORE_FAST               2 (base)
+
+ 44           LOAD_FAST_BORROW         2 (base)
+              LOAD_ATTR               13 (isascii + NULL|self)
+              CALL                     0
+              TO_BOOL
+              POP_JUMP_IF_FALSE        3 (to L2)
+              NOT_TAKEN
+
+ 45           LOAD_FAST_BORROW         2 (base)
+              RETURN_VALUE
+
+ 46   L2:     LOAD_GLOBAL             14 (_TEIMOSAS)
+              LOAD_ATTR               17 (items + NULL|self)
+              CALL                     0
+              GET_ITER
+      L3:     FOR_ITER                30 (to L5)
+              UNPACK_SEQUENCE          2
+              STORE_FAST_STORE_FAST   52 (de, para)
+
+ 47           LOAD_FAST_BORROW_LOAD_FAST_BORROW 50 (de, base)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_TRUE         3 (to L4)
+              NOT_TAKEN
+              JUMP_BACKWARD           13 (to L3)
+
+ 48   L4:     LOAD_FAST_BORROW         2 (base)
+              LOAD_ATTR               19 (replace + NULL|self)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 52 (de, para)
+              CALL                     2
+              STORE_FAST               2 (base)
+              JUMP_BACKWARD           32 (to L3)
+
+ 46   L5:     END_FOR
+              POP_ITER
+
+ 49           LOAD_FAST_BORROW         2 (base)
+              RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x108107af0, file "texto.py", line 43>:
+  43           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                37 (to L5)
+               STORE_FAST               1 (c)
+               LOAD_GLOBAL              0 (unicodedata)
+               LOAD_ATTR                2 (combining)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (c)
+               CALL                     1
+               TO_BOOL
+       L3:     POP_JUMP_IF_FALSE        3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           33 (to L2)
+       L4:     LOAD_FAST_BORROW         1 (c)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           39 (to L2)
+       L5:     END_FOR
+               POP_ITER
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L6:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L6 [0] lasti
+  L4 to L6 -> L6 [0] lasti

@@ -1,0 +1,1681 @@
+# Module: merge_temporadas
+# Filename: merge_temporadas.py
+
+  0           RESUME                   0
+
+ 15           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (datetime)
+              STORE_NAME               0 (datetime)
+
+ 17           LOAD_SMALL_INT           1
+              LOAD_SMALL_INT           2
+              LOAD_SMALL_INT           3
+              SWAP                     3
+              STORE_NAME               1 (COMPLETA)
+              STORE_NAME               2 (COMPLETA_DOIS_CLUBES)
+              STORE_NAME               3 (EM_ANDAMENTO)
+
+ 18           LOAD_CONST               2 (365)
+              STORE_NAME               4 (JANELA_DA_CORRECAO)
+
+ 19           LOAD_CONST               3 (300)
+              STORE_NAME               5 (JANELA_DA_TEMPORADA)
+
+ 20           LOAD_CONST               4 ('full')
+              LOAD_CONST               5 ('fim_de_temporada')
+              SWAP                     2
+              STORE_NAME               6 (SCOPE_SALVA)
+              STORE_NAME               7 (SCOPE_CORRECAO)
+
+ 22           LOAD_CONST              13 (('minutes_since_last_goal', 'minutes_since_last_conceded'))
+              STORE_NAME               8 (CAMPOS_DO_ULTIMO)
+
+ 25           LOAD_CONST               6 (<code object _data at 0x1081f0ae0, file "merge_temporadas.py", line 25>)
+              MAKE_FUNCTION
+              STORE_NAME               9 (_data)
+
+ 29           LOAD_CONST               7 (<code object ano_da_temporada at 0x108107230, file "merge_temporadas.py", line 29>)
+              MAKE_FUNCTION
+              STORE_NAME              10 (ano_da_temporada)
+
+ 34           LOAD_CONST               8 (<code object rotulo at 0x1081b2670, file "merge_temporadas.py", line 34>)
+              MAKE_FUNCTION
+              STORE_NAME              11 (rotulo)
+
+ 39           LOAD_CONST              14 ((None,))
+              LOAD_CONST               9 (<code object origens at 0xbdf719e00, file "merge_temporadas.py", line 39>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              12 (origens)
+
+112           LOAD_CONST              10 (<code object numeros at 0xbdf6ef000, file "merge_temporadas.py", line 112>)
+              MAKE_FUNCTION
+              STORE_NAME              13 (numeros)
+
+148           LOAD_CONST              11 (<code object do_jogador at 0xbdf6ef600, file "merge_temporadas.py", line 148>)
+              MAKE_FUNCTION
+              STORE_NAME              14 (do_jogador)
+
+176           LOAD_CONST              15 ((400,))
+              LOAD_CONST              12 (<code object aplicar_em_linhas at 0xbdeefe700, file "merge_temporadas.py", line 176>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              15 (aplicar_em_linhas)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _data at 0x1081f0ae0, file "merge_temporadas.py", line 25>:
+ 25           RESUME                   0
+
+ 26           LOAD_GLOBAL              0 (datetime)
+              LOAD_ATTR                2 (date)
+              LOAD_ATTR                5 (fromisoformat + NULL|self)
+              LOAD_GLOBAL              7 (str + NULL)
+              LOAD_FAST_BORROW         0 (texto)
+              CALL                     1
+              LOAD_CONST               0 (slice(None, 10, None))
+              BINARY_OP               26 ([])
+              CALL                     1
+              RETURN_VALUE
+
+Disassembly of <code object ano_da_temporada at 0x108107230, file "merge_temporadas.py", line 29>:
+ 29           RESUME                   0
+
+ 31           LOAD_FAST_BORROW         0 (data)
+              LOAD_ATTR                0 (month)
+              LOAD_SMALL_INT           7
+              COMPARE_OP              58 (bool(<=))
+              POP_JUMP_IF_FALSE       20 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         0 (data)
+              LOAD_ATTR                2 (year)
+              LOAD_SMALL_INT           1
+              BINARY_OP               10 (-)
+              RETURN_VALUE
+      L1:     LOAD_FAST_BORROW         0 (data)
+              LOAD_ATTR                2 (year)
+              RETURN_VALUE
+
+Disassembly of <code object rotulo at 0x1081b2670, file "merge_temporadas.py", line 34>:
+ 34           RESUME                   0
+
+ 36           LOAD_CONST               0 ('%02d/%02d')
+              LOAD_FAST_BORROW         0 (ano)
+              LOAD_SMALL_INT         100
+              BINARY_OP                6 (%)
+              LOAD_FAST_BORROW         0 (ano)
+              LOAD_SMALL_INT           1
+              BINARY_OP                0 (+)
+              LOAD_SMALL_INT         100
+              BINARY_OP                6 (%)
+              BUILD_TUPLE              2
+              BINARY_OP                6 (%)
+              RETURN_VALUE
+
+Disassembly of <code object origens at 0xbdf719e00, file "merge_temporadas.py", line 39>:
+  39            RESUME                   0
+
+  43            LOAD_FAST_BORROW         2 (so_uid)
+                POP_JUMP_IF_NONE         6 (to L1)
+                NOT_TAKEN
+                LOAD_CONST               1 (' AND p.uid=?')
+                LOAD_FAST_BORROW         2 (so_uid)
+                BUILD_TUPLE              1
+                BUILD_TUPLE              2
+                JUMP_FORWARD             1 (to L2)
+        L1:     LOAD_CONST              17 (('', ()))
+        L2:     UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   52 (filtro, arg)
+
+  44            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                1 (execute + NULL|self)
+                LOAD_CONST               2 ('SELECT carreira_id, game_date, scope FROM snapshots WHERE id=?')
+                LOAD_FAST_BORROW         1 (sid)
+                BUILD_TUPLE              1
+                CALL                     2
+                LOAD_ATTR                3 (fetchone + NULL|self)
+                CALL                     0
+                STORE_FAST               5 (s)
+
+  45            LOAD_FAST_BORROW         5 (s)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       49 (to L3)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         5 (s)
+                LOAD_SMALL_INT           2
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              4 (SCOPE_SALVA)
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_TRUE        31 (to L3)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         5 (s)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                TO_BOOL
+                POP_JUMP_IF_FALSE       16 (to L3)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         5 (s)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L4)
+                NOT_TAKEN
+
+  46    L3:     BUILD_MAP                0
+                RETURN_VALUE
+
+  47    L4:     LOAD_FAST_BORROW         5 (s)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              7 (_data + NULL)
+                LOAD_FAST_BORROW         5 (s)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                CALL                     1
+                STORE_FAST_STORE_FAST  118 (data_s, carreira)
+
+  48            LOAD_FAST_BORROW         7 (data_s)
+                LOAD_GLOBAL              8 (datetime)
+                LOAD_ATTR               10 (timedelta)
+                PUSH_NULL
+                LOAD_GLOBAL             12 (JANELA_DA_CORRECAO)
+                LOAD_CONST               3 (('days',))
+                CALL_KW                  1
+                BINARY_OP               10 (-)
+                STORE_FAST               8 (desde)
+
+  49            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                1 (execute + NULL|self)
+
+  50            LOAD_CONST               4 ('SELECT id, game_date FROM snapshots WHERE carreira_id=? AND scope=? AND game_date IS NOT NULL ORDER BY game_date DESC, id DESC')
+
+  51            LOAD_FAST_BORROW         6 (carreira)
+                LOAD_GLOBAL             14 (SCOPE_CORRECAO)
+                BUILD_TUPLE              2
+
+  49            CALL                     2
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      9 (r)
+                SWAP                     2
+        L5:     BUILD_LIST               0
+                SWAP                     2
+        L6:     FOR_ITER                67 (to L12)
+                STORE_FAST               9 (r)
+
+  52            LOAD_FAST_BORROW         8 (desde)
+                LOAD_GLOBAL              7 (_data + NULL)
+                LOAD_FAST_BORROW         9 (r)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                CALL                     1
+                SWAP                     2
+                COPY                     2
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE       10 (to L9)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         7 (data_s)
+                COMPARE_OP              58 (bool(<=))
+
+  49    L7:     POP_JUMP_IF_TRUE         3 (to L8)
+                NOT_TAKEN
+                JUMP_BACKWARD           36 (to L6)
+
+  52    L8:     JUMP_FORWARD             3 (to L11)
+        L9:     POP_TOP
+
+  49   L10:     JUMP_BACKWARD           40 (to L6)
+       L11:     LOAD_FAST_BORROW         9 (r)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              7 (_data + NULL)
+                LOAD_FAST_BORROW         9 (r)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                CALL                     1
+                BUILD_TUPLE              2
+                LIST_APPEND              2
+                JUMP_BACKWARD           69 (to L6)
+       L12:     END_FOR
+                POP_ITER
+       L13:     STORE_FAST              10 (correcoes)
+                STORE_FAST               9 (r)
+
+  53            LOAD_FAST_BORROW        10 (correcoes)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L14)
+                NOT_TAKEN
+
+  54            BUILD_MAP                0
+                RETURN_VALUE
+
+  55   L14:     LOAD_FAST_BORROW        10 (correcoes)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     11 (f)
+                LOAD_FAST_AND_CLEAR     12 (_d)
+                SWAP                     3
+       L15:     BUILD_LIST               0
+                SWAP                     2
+       L16:     FOR_ITER                 7 (to L17)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST  188 (f, _d)
+                LOAD_FAST_BORROW        11 (f)
+                LIST_APPEND              2
+                JUMP_BACKWARD            9 (to L16)
+       L17:     END_FOR
+                POP_ITER
+       L18:     STORE_FAST              13 (ids)
+                STORE_FAST              11 (f)
+                STORE_FAST              12 (_d)
+
+  56            LOAD_CONST               5 (',')
+                LOAD_ATTR               17 (join + NULL|self)
+                LOAD_CONST               6 ('?')
+                LOAD_GLOBAL             19 (len + NULL)
+                LOAD_FAST_BORROW        13 (ids)
+                CALL                     1
+                BINARY_OP                5 (*)
+                CALL                     1
+                STORE_FAST              14 (marca)
+
+  57            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                1 (execute + NULL|self)
+
+  58            LOAD_CONST               7 ('SELECT DISTINCT comp_uid FROM snapshot_ligas WHERE lida=1 AND snapshot_id IN (')
+                LOAD_FAST_BORROW        14 (marca)
+                FORMAT_SIMPLE
+                LOAD_CONST               8 (')')
+                BUILD_STRING             3
+                LOAD_FAST_BORROW        13 (ids)
+
+  57            CALL                     2
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      9 (r)
+                SWAP                     2
+       L19:     BUILD_SET                0
+                SWAP                     2
+       L20:     FOR_ITER                11 (to L21)
+                STORE_FAST_LOAD_FAST   153 (r, r)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                SET_ADD                  2
+                JUMP_BACKWARD           13 (to L20)
+       L21:     END_FOR
+                POP_ITER
+       L22:     STORE_FAST              15 (ligas_lidas)
+                STORE_FAST               9 (r)
+
+  61            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                1 (execute + NULL|self)
+
+  62            LOAD_CONST               9 ('SELECT p.uid, cl.league_uid FROM players p JOIN club_leagues cl ON cl.snapshot_id=p.snapshot_id AND cl.club_uid=p.club_id WHERE p.snapshot_id=?')
+
+  63            LOAD_FAST_BORROW         3 (filtro)
+
+  62            BINARY_OP                0 (+)
+
+  63            LOAD_FAST_BORROW         1 (sid)
+                BUILD_TUPLE              1
+                LOAD_FAST_BORROW         4 (arg)
+                BINARY_OP                0 (+)
+
+  61            CALL                     2
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      9 (r)
+                SWAP                     2
+       L23:     BUILD_SET                0
+                SWAP                     2
+       L24:     FOR_ITER                28 (to L27)
+                STORE_FAST               9 (r)
+
+  64            LOAD_FAST_BORROW         9 (r)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW        15 (ligas_lidas)
+                CONTAINS_OP              0 (in)
+
+  61   L25:     POP_JUMP_IF_TRUE         3 (to L26)
+                NOT_TAKEN
+                JUMP_BACKWARD           19 (to L24)
+       L26:     LOAD_FAST_BORROW         9 (r)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                SET_ADD                  2
+                JUMP_BACKWARD           30 (to L24)
+       L27:     END_FOR
+                POP_ITER
+       L28:     STORE_FAST              16 (alvo)
+                STORE_FAST               9 (r)
+
+  65            LOAD_FAST_BORROW        16 (alvo)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L29)
+                NOT_TAKEN
+
+  66            BUILD_MAP                0
+                RETURN_VALUE
+
+  69   L29:     BUILD_MAP                0
+                STORE_FAST              17 (em_f)
+
+  70            LOAD_FAST_BORROW        10 (correcoes)
+                GET_ITER
+       L30:     FOR_ITER                75 (to L35)
+                UNPACK_SEQUENCE          2
+                STORE_FAST              11 (f)
+                STORE_FAST              18 (data_f)
+
+  71            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                1 (execute + NULL|self)
+                LOAD_CONST              10 ('SELECT uid, club_id FROM players p WHERE snapshot_id=?')
+                LOAD_FAST_BORROW         3 (filtro)
+                BINARY_OP                0 (+)
+                LOAD_FAST_BORROW        11 (f)
+                BUILD_TUPLE              1
+                LOAD_FAST_BORROW         4 (arg)
+                BINARY_OP                0 (+)
+                CALL                     2
+                GET_ITER
+       L31:     FOR_ITER                32 (to L34)
+                UNPACK_SEQUENCE          2
+                STORE_FAST              19 (uid)
+                STORE_FAST              20 (clube)
+
+  72            LOAD_FAST_BORROW        19 (uid)
+                LOAD_FAST_BORROW        16 (alvo)
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_TRUE         3 (to L32)
+                NOT_TAKEN
+                JUMP_BACKWARD           15 (to L31)
+       L32:     LOAD_FAST_BORROW        19 (uid)
+                LOAD_FAST_BORROW        17 (em_f)
+                CONTAINS_OP              1 (not in)
+                POP_JUMP_IF_TRUE         3 (to L33)
+                NOT_TAKEN
+                JUMP_BACKWARD           24 (to L31)
+
+  73   L33:     LOAD_FAST_BORROW        11 (f)
+                LOAD_FAST_BORROW        18 (data_f)
+                LOAD_FAST_BORROW        20 (clube)
+                BUILD_TUPLE              3
+                LOAD_FAST_BORROW        17 (em_f)
+                LOAD_FAST_BORROW        19 (uid)
+                STORE_SUBSCR
+                JUMP_BACKWARD           34 (to L31)
+
+  71   L34:     END_FOR
+                POP_ITER
+                JUMP_BACKWARD           77 (to L30)
+
+  70   L35:     END_FOR
+                POP_ITER
+
+  76            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                1 (execute + NULL|self)
+
+  77            LOAD_CONST              11 ('SELECT id, game_date FROM snapshots WHERE carreira_id=? AND scope=? AND game_date IS NOT NULL ORDER BY game_date DESC')
+
+  78            LOAD_FAST_BORROW         6 (carreira)
+                LOAD_GLOBAL              4 (SCOPE_SALVA)
+                BUILD_TUPLE              2
+
+  76            CALL                     2
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      9 (r)
+                SWAP                     2
+       L36:     BUILD_LIST               0
+                SWAP                     2
+       L37:     FOR_ITER                29 (to L38)
+                STORE_FAST_LOAD_FAST   153 (r, r)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              7 (_data + NULL)
+                LOAD_FAST_BORROW         9 (r)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                CALL                     1
+                BUILD_TUPLE              2
+                LIST_APPEND              2
+                JUMP_BACKWARD           31 (to L37)
+       L38:     END_FOR
+                POP_ITER
+       L39:     STORE_FAST              21 (salvas)
+                STORE_FAST               9 (r)
+
+  79            BUILD_MAP                0
+                STORE_FAST              22 (s0_de)
+
+  80            LOAD_FAST_BORROW        10 (correcoes)
+                GET_ITER
+       L40:     FOR_ITER               103 (to L52)
+                UNPACK_SEQUENCE          2
+                STORE_FAST              11 (f)
+                STORE_FAST              18 (data_f)
+
+  81            LOAD_FAST_BORROW        21 (salvas)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     23 (x)
+                LOAD_FAST_AND_CLEAR     24 (d)
+                SWAP                     3
+       L41:     BUILD_LIST               0
+                SWAP                     2
+       L42:     FOR_ITER                61 (to L48)
+                UNPACK_SEQUENCE          2
+                STORE_FAST              23 (x)
+                STORE_FAST              24 (d)
+
+  82            LOAD_FAST_BORROW        18 (data_f)
+                LOAD_GLOBAL              8 (datetime)
+                LOAD_ATTR               10 (timedelta)
+                PUSH_NULL
+                LOAD_GLOBAL             20 (JANELA_DA_TEMPORADA)
+                LOAD_CONST               3 (('days',))
+                CALL_KW                  1
+                BINARY_OP               10 (-)
+                LOAD_FAST               24 (d)
+                SWAP                     2
+                COPY                     2
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE       10 (to L45)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        18 (data_f)
+                COMPARE_OP              18 (bool(<))
+
+  81   L43:     POP_JUMP_IF_TRUE         3 (to L44)
+                NOT_TAKEN
+                JUMP_BACKWARD           55 (to L42)
+
+  82   L44:     JUMP_FORWARD             3 (to L47)
+       L45:     POP_TOP
+
+  81   L46:     JUMP_BACKWARD           59 (to L42)
+       L47:     LOAD_FAST_BORROW        23 (x)
+                LIST_APPEND              2
+                JUMP_BACKWARD           63 (to L42)
+       L48:     END_FOR
+                POP_ITER
+       L49:     STORE_FAST              25 (candidatas)
+                STORE_FAST              23 (x)
+                STORE_FAST              24 (d)
+
+  83            LOAD_FAST_BORROW        25 (candidatas)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       10 (to L50)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        25 (candidatas)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                JUMP_FORWARD             1 (to L51)
+       L50:     LOAD_CONST               0 (None)
+       L51:     LOAD_FAST_BORROW        22 (s0_de)
+                LOAD_FAST_BORROW        11 (f)
+                STORE_SUBSCR
+                JUMP_BACKWARD          105 (to L40)
+
+  80   L52:     END_FOR
+                POP_ITER
+
+  84            BUILD_MAP                0
+                STORE_FAST              26 (clube_em_s0)
+
+  85            LOAD_FAST_BORROW        22 (s0_de)
+                LOAD_ATTR               23 (values + NULL|self)
+                CALL                     0
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     23 (x)
+                SWAP                     2
+       L53:     BUILD_SET                0
+                SWAP                     2
+       L54:     FOR_ITER                15 (to L57)
+                STORE_FAST              23 (x)
+                LOAD_FAST_BORROW        23 (x)
+                TO_BOOL
+       L55:     POP_JUMP_IF_TRUE         3 (to L56)
+                NOT_TAKEN
+                JUMP_BACKWARD           13 (to L54)
+       L56:     LOAD_FAST_BORROW        23 (x)
+                SET_ADD                  2
+                JUMP_BACKWARD           17 (to L54)
+       L57:     END_FOR
+                POP_ITER
+       L58:     SWAP                     2
+                STORE_FAST              23 (x)
+                GET_ITER
+       L59:     FOR_ITER                75 (to L66)
+                STORE_FAST              27 (s0)
+
+  86            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                1 (execute + NULL|self)
+
+  87            LOAD_CONST              12 ('SELECT p.uid, p.club_id, COALESCE(st.apps_total, 0) FROM players p LEFT JOIN player_stats st ON st.snapshot_id=p.snapshot_id AND st.uid=p.uid WHERE p.snapshot_id=?')
+
+  89            LOAD_FAST_BORROW         3 (filtro)
+
+  87            BINARY_OP                0 (+)
+
+  89            LOAD_FAST_BORROW        27 (s0)
+                BUILD_TUPLE              1
+                LOAD_FAST_BORROW         4 (arg)
+                BINARY_OP                0 (+)
+
+  86            CALL                     2
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     19 (uid)
+                LOAD_FAST_AND_CLEAR     20 (clube)
+                LOAD_FAST_AND_CLEAR     28 (jogos)
+                SWAP                     4
+       L60:     BUILD_MAP                0
+                SWAP                     2
+       L61:     FOR_ITER                21 (to L64)
+                UNPACK_SEQUENCE          3
+                STORE_FAST              19 (uid)
+                STORE_FAST              20 (clube)
+                STORE_FAST              28 (jogos)
+
+  89            LOAD_FAST_BORROW        19 (uid)
+                LOAD_FAST_BORROW        16 (alvo)
+                CONTAINS_OP              0 (in)
+
+  86   L62:     POP_JUMP_IF_TRUE         3 (to L63)
+                NOT_TAKEN
+                JUMP_BACKWARD           16 (to L61)
+       L63:     LOAD_FAST_BORROW        19 (uid)
+                LOAD_FAST_BORROW        20 (clube)
+                LOAD_FAST_BORROW        28 (jogos)
+                BUILD_TUPLE              2
+                MAP_ADD                  2
+                JUMP_BACKWARD           23 (to L61)
+       L64:     END_FOR
+                POP_ITER
+       L65:     SWAP                     4
+                STORE_FAST              28 (jogos)
+                STORE_FAST              20 (clube)
+                STORE_FAST              19 (uid)
+                LOAD_FAST_BORROW        26 (clube_em_s0)
+                LOAD_FAST_BORROW        27 (s0)
+                STORE_SUBSCR
+                JUMP_BACKWARD           77 (to L59)
+
+  85   L66:     END_FOR
+                POP_ITER
+
+  91            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                1 (execute + NULL|self)
+
+  92            LOAD_CONST              13 ('SELECT uid, COALESCE(apps_total, 0) FROM player_stats p WHERE snapshot_id=?')
+                LOAD_FAST_BORROW         3 (filtro)
+                BINARY_OP                0 (+)
+                LOAD_FAST_BORROW         1 (sid)
+                BUILD_TUPLE              1
+                LOAD_FAST_BORROW         4 (arg)
+                BINARY_OP                0 (+)
+
+  91            CALL                     2
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     19 (uid)
+                LOAD_FAST_AND_CLEAR     28 (jogos)
+                SWAP                     3
+       L67:     BUILD_MAP                0
+                SWAP                     2
+       L68:     FOR_ITER                21 (to L71)
+                UNPACK_SEQUENCE          2
+                STORE_FAST              19 (uid)
+                STORE_FAST              28 (jogos)
+
+  93            LOAD_FAST_BORROW        19 (uid)
+                LOAD_FAST_BORROW        16 (alvo)
+                CONTAINS_OP              0 (in)
+
+  91   L69:     POP_JUMP_IF_TRUE         3 (to L70)
+                NOT_TAKEN
+                JUMP_BACKWARD           15 (to L68)
+       L70:     LOAD_FAST_BORROW        19 (uid)
+                LOAD_FAST_BORROW        28 (jogos)
+                LOAD_SMALL_INT           0
+                COMPARE_OP             132 (>)
+                MAP_ADD                  2
+                JUMP_BACKWARD           23 (to L68)
+       L71:     END_FOR
+                POP_ITER
+       L72:     STORE_FAST              29 (jogou_em_s)
+                STORE_FAST              19 (uid)
+                STORE_FAST              28 (jogos)
+
+  95            BUILD_MAP                0
+                STORE_FAST              30 (saida)
+
+  96            LOAD_FAST_BORROW        16 (alvo)
+                GET_ITER
+       L73:     FOR_ITER               215 (to L79)
+                STORE_FAST              19 (uid)
+
+  97            LOAD_FAST_BORROW        19 (uid)
+                LOAD_FAST_BORROW        17 (em_f)
+                CONTAINS_OP              1 (not in)
+                POP_JUMP_IF_FALSE       41 (to L75)
+                NOT_TAKEN
+
+  98            LOAD_FAST_BORROW        29 (jogou_em_s)
+                LOAD_ATTR               25 (get + NULL|self)
+                LOAD_FAST_BORROW        19 (uid)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       16 (to L74)
+                NOT_TAKEN
+
+  99            LOAD_CONST              14 ('tipo')
+                LOAD_GLOBAL             26 (EM_ANDAMENTO)
+                LOAD_CONST              15 ('ano')
+                LOAD_CONST               0 (None)
+                LOAD_CONST              16 ('fontes')
+                BUILD_LIST               0
+                BUILD_MAP                3
+                LOAD_FAST_BORROW        30 (saida)
+                LOAD_FAST_BORROW        19 (uid)
+                STORE_SUBSCR
+
+ 100   L74:     JUMP_BACKWARD           50 (to L73)
+
+ 101   L75:     LOAD_FAST_BORROW        17 (em_f)
+                LOAD_FAST_BORROW        19 (uid)
+                BINARY_OP               26 ([])
+                UNPACK_SEQUENCE          3
+                STORE_FAST              11 (f)
+                STORE_FAST              18 (data_f)
+                STORE_FAST              31 (clube_f)
+
+ 102            LOAD_CONST              14 ('tipo')
+                LOAD_GLOBAL             28 (COMPLETA)
+                LOAD_CONST              15 ('ano')
+                LOAD_GLOBAL             31 (ano_da_temporada + NULL)
+                LOAD_FAST_BORROW        18 (data_f)
+                CALL                     1
+                LOAD_CONST              16 ('fontes')
+                LOAD_FAST_BORROW        11 (f)
+                LOAD_FAST_BORROW        31 (clube_f)
+                BUILD_TUPLE              2
+                BUILD_LIST               1
+                BUILD_MAP                3
+                STORE_FAST              32 (item)
+
+ 103            LOAD_FAST_BORROW        22 (s0_de)
+                LOAD_ATTR               25 (get + NULL|self)
+                LOAD_FAST_BORROW        11 (f)
+                CALL                     1
+                STORE_FAST              27 (s0)
+
+ 104            LOAD_FAST_BORROW        27 (s0)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       34 (to L76)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        26 (clube_em_s0)
+                LOAD_ATTR               25 (get + NULL|self)
+                LOAD_FAST_BORROW        27 (s0)
+                BUILD_MAP                0
+                CALL                     2
+                LOAD_ATTR               25 (get + NULL|self)
+                LOAD_FAST_BORROW        19 (uid)
+                CALL                     1
+                JUMP_FORWARD             1 (to L77)
+       L76:     LOAD_CONST               0 (None)
+       L77:     STORE_FAST              33 (antes)
+
+ 105            LOAD_FAST_BORROW        33 (antes)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       56 (to L78)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        33 (antes)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW        31 (clube_f)
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       42 (to L78)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        33 (antes)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                LOAD_SMALL_INT           0
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE       28 (to L78)
+                NOT_TAKEN
+
+ 106            LOAD_GLOBAL             32 (COMPLETA_DOIS_CLUBES)
+                LOAD_FAST_BORROW        32 (item)
+                LOAD_CONST              14 ('tipo')
+                STORE_SUBSCR
+
+ 107            LOAD_FAST_BORROW        27 (s0)
+                LOAD_FAST_BORROW        33 (antes)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                BUILD_TUPLE              2
+                LOAD_FAST_BORROW        11 (f)
+                LOAD_FAST_BORROW        31 (clube_f)
+                BUILD_TUPLE              2
+                BUILD_LIST               2
+                LOAD_FAST_BORROW        32 (item)
+                LOAD_CONST              16 ('fontes')
+                STORE_SUBSCR
+
+ 108   L78:     LOAD_FAST_BORROW        32 (item)
+                LOAD_FAST_BORROW        30 (saida)
+                LOAD_FAST_BORROW        19 (uid)
+                STORE_SUBSCR
+                JUMP_BACKWARD          217 (to L73)
+
+  96   L79:     END_FOR
+                POP_ITER
+
+ 109            LOAD_FAST_BORROW        30 (saida)
+                RETURN_VALUE
+
+  --   L80:     SWAP                     2
+                POP_TOP
+
+  49            SWAP                     2
+                STORE_FAST               9 (r)
+                RERAISE                  0
+
+  --   L81:     SWAP                     2
+                POP_TOP
+
+  55            SWAP                     3
+                STORE_FAST              12 (_d)
+                STORE_FAST              11 (f)
+                RERAISE                  0
+
+  --   L82:     SWAP                     2
+                POP_TOP
+
+  57            SWAP                     2
+                STORE_FAST               9 (r)
+                RERAISE                  0
+
+  --   L83:     SWAP                     2
+                POP_TOP
+
+  61            SWAP                     2
+                STORE_FAST               9 (r)
+                RERAISE                  0
+
+  --   L84:     SWAP                     2
+                POP_TOP
+
+  76            SWAP                     2
+                STORE_FAST               9 (r)
+                RERAISE                  0
+
+  --   L85:     SWAP                     2
+                POP_TOP
+
+  81            SWAP                     3
+                STORE_FAST              24 (d)
+                STORE_FAST              23 (x)
+                RERAISE                  0
+
+  --   L86:     SWAP                     2
+                POP_TOP
+
+  85            SWAP                     2
+                STORE_FAST              23 (x)
+                RERAISE                  0
+
+  --   L87:     SWAP                     2
+                POP_TOP
+
+  86            SWAP                     4
+                STORE_FAST              28 (jogos)
+                STORE_FAST              20 (clube)
+                STORE_FAST              19 (uid)
+                RERAISE                  0
+
+  --   L88:     SWAP                     2
+                POP_TOP
+
+  91            SWAP                     3
+                STORE_FAST              28 (jogos)
+                STORE_FAST              19 (uid)
+                RERAISE                  0
+ExceptionTable:
+  L5 to L7 -> L80 [2]
+  L8 to L10 -> L80 [2]
+  L11 to L13 -> L80 [2]
+  L15 to L18 -> L81 [3]
+  L19 to L22 -> L82 [2]
+  L23 to L25 -> L83 [2]
+  L26 to L28 -> L83 [2]
+  L36 to L39 -> L84 [2]
+  L41 to L43 -> L85 [4]
+  L44 to L46 -> L85 [4]
+  L47 to L49 -> L85 [4]
+  L53 to L55 -> L86 [2]
+  L56 to L58 -> L86 [2]
+  L60 to L62 -> L87 [5]
+  L63 to L65 -> L87 [5]
+  L67 to L69 -> L88 [3]
+  L70 to L72 -> L88 [3]
+
+Disassembly of <code object numeros at 0xbdf6ef000, file "merge_temporadas.py", line 112>:
+ 112            RESUME                   0
+
+ 116            BUILD_MAP                0
+                STORE_FAST               3 (por_fonte)
+
+ 117            LOAD_FAST_BORROW         1 (origens_por_uid)
+                LOAD_ATTR                1 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+        L1:     FOR_ITER                64 (to L4)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   69 (uid, o)
+
+ 118            LOAD_FAST_BORROW         5 (o)
+                LOAD_CONST               0 ('fontes')
+                BINARY_OP               26 ([])
+                GET_ITER
+        L2:     FOR_ITER                46 (to L3)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST  103 (fonte, _clube)
+
+ 119            LOAD_FAST_BORROW         3 (por_fonte)
+                LOAD_ATTR                3 (setdefault + NULL|self)
+                LOAD_FAST_BORROW         6 (fonte)
+                LOAD_GLOBAL              5 (set + NULL)
+                CALL                     0
+                CALL                     2
+                LOAD_ATTR                7 (add + NULL|self)
+                LOAD_FAST_BORROW         4 (uid)
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD           48 (to L2)
+
+ 118    L3:     END_FOR
+                POP_ITER
+                JUMP_BACKWARD           66 (to L1)
+
+ 117    L4:     END_FOR
+                POP_ITER
+
+ 120            BUILD_MAP                0
+                STORE_FAST               8 (lidos)
+
+ 121            LOAD_CONST               1 (', ')
+                LOAD_ATTR                9 (join + NULL|self)
+                LOAD_FAST_BORROW         2 (campos)
+                CALL                     1
+                STORE_FAST               9 (sel)
+
+ 122            LOAD_FAST_BORROW         3 (por_fonte)
+                LOAD_ATTR                1 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+        L5:     FOR_ITER               165 (to L13)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST  106 (fonte, uids)
+
+ 123            LOAD_GLOBAL             11 (len + NULL)
+                LOAD_FAST_BORROW        10 (uids)
+                CALL                     1
+                LOAD_CONST               2 (500)
+                COMPARE_OP              58 (bool(<=))
+                POP_JUMP_IF_FALSE       34 (to L6)
+                NOT_TAKEN
+                LOAD_CONST               3 (',')
+                LOAD_ATTR                9 (join + NULL|self)
+                LOAD_CONST               4 ('?')
+                LOAD_GLOBAL             11 (len + NULL)
+                LOAD_FAST_BORROW        10 (uids)
+                CALL                     1
+                BINARY_OP                5 (*)
+                CALL                     1
+                JUMP_FORWARD             1 (to L7)
+        L6:     LOAD_CONST               5 (None)
+        L7:     STORE_FAST              11 (marca)
+
+ 124            LOAD_FAST_BORROW        11 (marca)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       16 (to L8)
+                NOT_TAKEN
+                LOAD_CONST               6 ('SELECT uid, ')
+                LOAD_FAST_BORROW         9 (sel)
+                FORMAT_SIMPLE
+                LOAD_CONST               7 (' FROM player_stats WHERE snapshot_id=? AND uid IN (')
+                LOAD_FAST_BORROW        11 (marca)
+                FORMAT_SIMPLE
+                LOAD_CONST               8 (')')
+                BUILD_STRING             5
+                LOAD_FAST_BORROW         6 (fonte)
+                BUILD_LIST               1
+                LOAD_FAST_BORROW        10 (uids)
+                LIST_EXTEND              1
+                CALL_INTRINSIC_1         6 (INTRINSIC_LIST_TO_TUPLE)
+                BUILD_TUPLE              2
+                JUMP_FORWARD             8 (to L9)
+        L8:     LOAD_CONST               6 ('SELECT uid, ')
+                LOAD_FAST_BORROW         9 (sel)
+                FORMAT_SIMPLE
+                LOAD_CONST               9 (' FROM player_stats WHERE snapshot_id=?')
+                BUILD_STRING             3
+                LOAD_FAST_BORROW         6 (fonte)
+                BUILD_TUPLE              1
+                BUILD_TUPLE              2
+        L9:     STORE_FAST              12 (consulta)
+
+ 125            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR               12 (execute)
+                PUSH_NULL
+                LOAD_FAST_BORROW        12 (consulta)
+                PUSH_NULL
+                CALL_FUNCTION_EX
+                GET_ITER
+       L10:     FOR_ITER                57 (to L12)
+                STORE_FAST              13 (linha)
+
+ 126            LOAD_FAST_BORROW        13 (linha)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW        10 (uids)
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_TRUE         3 (to L11)
+                NOT_TAKEN
+                JUMP_BACKWARD           19 (to L10)
+
+ 127   L11:     LOAD_GLOBAL             15 (dict + NULL)
+                LOAD_GLOBAL             17 (zip + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 45 (campos, linha)
+                LOAD_CONST              10 (slice(1, None, None))
+                BINARY_OP               26 ([])
+                CALL                     2
+                CALL                     1
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 134 (lidos, fonte)
+                LOAD_FAST_BORROW        13 (linha)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                BUILD_TUPLE              2
+                STORE_SUBSCR
+                JUMP_BACKWARD           59 (to L10)
+
+ 125   L12:     END_FOR
+                POP_ITER
+                JUMP_BACKWARD          167 (to L5)
+
+ 122   L13:     END_FOR
+                POP_ITER
+
+ 128            BUILD_MAP                0
+                STORE_FAST              14 (saida)
+
+ 129            LOAD_FAST_BORROW         1 (origens_por_uid)
+                LOAD_ATTR                1 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+       L14:     EXTENDED_ARG             1
+                FOR_ITER               282 (to L42)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   69 (uid, o)
+
+ 130            LOAD_FAST_BORROW         5 (o)
+                LOAD_CONST               0 ('fontes')
+                BINARY_OP               26 ([])
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     15 (f)
+                LOAD_FAST_AND_CLEAR     16 (_c)
+                SWAP                     3
+       L15:     BUILD_LIST               0
+                SWAP                     2
+       L16:     FOR_ITER                26 (to L19)
+                UNPACK_SEQUENCE          2
+                STORE_FAST              15 (f)
+                STORE_FAST              16 (_c)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 244 (f, uid)
+                BUILD_TUPLE              2
+                LOAD_FAST_BORROW         8 (lidos)
+                CONTAINS_OP              0 (in)
+       L17:     POP_JUMP_IF_TRUE         3 (to L18)
+                NOT_TAKEN
+                JUMP_BACKWARD           16 (to L16)
+       L18:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 143 (lidos, f)
+                LOAD_FAST_BORROW         4 (uid)
+                BUILD_TUPLE              2
+                BINARY_OP               26 ([])
+                LIST_APPEND              2
+                JUMP_BACKWARD           28 (to L16)
+       L19:     END_FOR
+                POP_ITER
+       L20:     STORE_FAST              17 (partes)
+                STORE_FAST              15 (f)
+                STORE_FAST              16 (_c)
+
+ 131            LOAD_FAST_BORROW        17 (partes)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L21)
+                NOT_TAKEN
+
+ 132            JUMP_BACKWARD           63 (to L14)
+
+ 133   L21:     BUILD_MAP                0
+                STORE_FAST              18 (soma)
+
+ 134            LOAD_FAST_BORROW         2 (campos)
+                GET_ITER
+       L22:     FOR_ITER               207 (to L41)
+                STORE_FAST              19 (campo)
+
+ 135            LOAD_FAST_BORROW        17 (partes)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     20 (p)
+                SWAP                     2
+       L23:     BUILD_LIST               0
+                SWAP                     2
+       L24:     FOR_ITER                22 (to L28)
+                STORE_FAST              20 (p)
+                LOAD_FAST_BORROW        20 (p)
+                LOAD_FAST_BORROW        19 (campo)
+                BINARY_OP               26 ([])
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L27)
+       L25:     NOT_TAKEN
+       L26:     POP_TOP
+                LOAD_SMALL_INT           0
+       L27:     LIST_APPEND              2
+                JUMP_BACKWARD           24 (to L24)
+       L28:     END_FOR
+                POP_ITER
+       L29:     STORE_FAST              21 (valores)
+                STORE_FAST              20 (p)
+
+ 136            LOAD_FAST_BORROW        19 (campo)
+                LOAD_GLOBAL             18 (CAMPOS_DO_ULTIMO)
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_FALSE       22 (to L30)
+                NOT_TAKEN
+
+ 137            LOAD_FAST_BORROW        17 (partes)
+                LOAD_CONST              14 (-1)
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW        19 (campo)
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW        18 (soma)
+                LOAD_FAST_BORROW        19 (campo)
+                STORE_SUBSCR
+                JUMP_BACKWARD           69 (to L22)
+
+ 138   L30:     LOAD_FAST_BORROW        19 (campo)
+                LOAD_CONST              11 ('avg_rating')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE      118 (to L40)
+                NOT_TAKEN
+
+ 139            LOAD_FAST_BORROW        17 (partes)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     20 (p)
+                SWAP                     2
+       L31:     BUILD_LIST               0
+                SWAP                     2
+       L32:     FOR_ITER                30 (to L36)
+                STORE_FAST              20 (p)
+                LOAD_FAST_BORROW        20 (p)
+                LOAD_ATTR               21 (get + NULL|self)
+                LOAD_CONST              12 ('apps_total')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L35)
+       L33:     NOT_TAKEN
+       L34:     POP_TOP
+                LOAD_SMALL_INT           0
+       L35:     LIST_APPEND              2
+                JUMP_BACKWARD           32 (to L32)
+       L36:     END_FOR
+                POP_ITER
+       L37:     STORE_FAST              22 (jogos)
+                STORE_FAST              20 (p)
+
+ 140            LOAD_GLOBAL             23 (sum + NULL)
+                LOAD_FAST_BORROW        22 (jogos)
+                CALL                     1
+                STORE_FAST              23 (total)
+
+ 141            LOAD_FAST_BORROW        23 (total)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       36 (to L38)
+                NOT_TAKEN
+                LOAD_GLOBAL             23 (sum + NULL)
+                LOAD_CONST              13 (<code object <genexpr> at 0x108232450, file "merge_temporadas.py", line 141>)
+                MAKE_FUNCTION
+                LOAD_GLOBAL             17 (zip + NULL)
+                LOAD_FAST_BORROW        21 (valores)
+                LOAD_FAST_BORROW        22 (jogos)
+                CALL                     2
+                GET_ITER
+                CALL                     0
+                CALL                     1
+                LOAD_FAST_BORROW        23 (total)
+                BINARY_OP               11 (/)
+                JUMP_FORWARD            15 (to L39)
+       L38:     LOAD_FAST_BORROW        17 (partes)
+                LOAD_CONST              14 (-1)
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW        19 (campo)
+                BINARY_OP               26 ([])
+       L39:     LOAD_FAST_BORROW        18 (soma)
+                LOAD_FAST_BORROW        19 (campo)
+                STORE_SUBSCR
+                JUMP_BACKWARD          193 (to L22)
+
+ 143   L40:     LOAD_GLOBAL             23 (sum + NULL)
+                LOAD_FAST_BORROW        21 (valores)
+                CALL                     1
+                LOAD_FAST_BORROW        18 (soma)
+                LOAD_FAST_BORROW        19 (campo)
+                STORE_SUBSCR
+                JUMP_BACKWARD          209 (to L22)
+
+ 134   L41:     END_FOR
+                POP_ITER
+
+ 144            LOAD_FAST_BORROW        18 (soma)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 228 (saida, uid)
+                STORE_SUBSCR
+                EXTENDED_ARG             1
+                JUMP_BACKWARD          285 (to L14)
+
+ 129   L42:     END_FOR
+                POP_ITER
+
+ 145            LOAD_FAST_BORROW        14 (saida)
+                RETURN_VALUE
+
+  --   L43:     SWAP                     2
+                POP_TOP
+
+ 130            SWAP                     3
+                STORE_FAST              16 (_c)
+                STORE_FAST              15 (f)
+                RERAISE                  0
+
+  --   L44:     SWAP                     2
+                POP_TOP
+
+ 135            SWAP                     2
+                STORE_FAST              20 (p)
+                RERAISE                  0
+
+  --   L45:     SWAP                     2
+                POP_TOP
+
+ 139            SWAP                     2
+                STORE_FAST              20 (p)
+                RERAISE                  0
+ExceptionTable:
+  L15 to L17 -> L43 [4]
+  L18 to L20 -> L43 [4]
+  L23 to L25 -> L44 [4]
+  L26 to L29 -> L44 [4]
+  L31 to L33 -> L45 [4]
+  L34 to L37 -> L45 [4]
+
+Disassembly of <code object <genexpr> at 0x108232450, file "merge_temporadas.py", line 141>:
+ 141           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                15 (to L3)
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST   18 (v, j)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (v, j)
+               BINARY_OP                5 (*)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           17 (to L2)
+       L3:     END_FOR
+               POP_ITER
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L4:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L4 [0] lasti
+
+Disassembly of <code object do_jogador at 0xbdf6ef600, file "merge_temporadas.py", line 148>:
+ 148            RESUME                   0
+
+ 152            LOAD_GLOBAL              1 (origens + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (conn, sid)
+                LOAD_FAST_BORROW         2 (uid)
+                LOAD_CONST               0 (('so_uid',))
+                CALL_KW                  3
+                LOAD_ATTR                3 (get + NULL|self)
+                LOAD_FAST_BORROW         2 (uid)
+                CALL                     1
+                STORE_FAST               4 (o)
+
+ 153            LOAD_FAST_BORROW         4 (o)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         5 (to L1)
+                NOT_TAKEN
+
+ 154            LOAD_FAST_BORROW         3 (stats)
+                LOAD_CONST               1 (None)
+                BUILD_TUPLE              2
+                RETURN_VALUE
+
+ 155    L1:     LOAD_FAST_BORROW         4 (o)
+                LOAD_CONST               2 ('tipo')
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              4 (EM_ANDAMENTO)
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       45 (to L3)
+                NOT_TAKEN
+
+ 156            LOAD_FAST                3 (stats)
+                LOAD_CONST               2 ('tipo')
+                LOAD_FAST_BORROW         4 (o)
+                LOAD_CONST               2 ('tipo')
+                BINARY_OP               26 ([])
+                LOAD_CONST               3 ('ano')
+                LOAD_CONST               1 (None)
+                LOAD_CONST               4 ('jogos')
+                LOAD_FAST_BORROW         3 (stats)
+                LOAD_ATTR                3 (get + NULL|self)
+                LOAD_CONST               5 ('apps_total')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L2)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_SMALL_INT           0
+        L2:     LOAD_CONST               6 ('partes')
+                BUILD_LIST               0
+                BUILD_MAP                4
+                BUILD_TUPLE              2
+                RETURN_VALUE
+
+ 157    L3:     LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                7 (execute + NULL|self)
+                LOAD_CONST               7 ('PRAGMA table_info(player_stats)')
+                CALL                     1
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      5 (r)
+                SWAP                     2
+        L4:     BUILD_SET                0
+                SWAP                     2
+        L5:     FOR_ITER                11 (to L6)
+                STORE_FAST_LOAD_FAST    85 (r, r)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                SET_ADD                  2
+                JUMP_BACKWARD           13 (to L5)
+        L6:     END_FOR
+                POP_ITER
+        L7:     STORE_FAST               6 (existentes)
+                STORE_FAST               5 (r)
+
+ 158            LOAD_GLOBAL              9 (numeros + NULL)
+                LOAD_FAST_LOAD_FAST      2 (conn, uid)
+                LOAD_FAST_BORROW         4 (o)
+                BUILD_MAP                1
+                LOAD_FAST_BORROW         3 (stats)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      7 (k)
+                SWAP                     2
+        L8:     BUILD_LIST               0
+                SWAP                     2
+        L9:     FOR_ITER                22 (to L14)
+                STORE_FAST_LOAD_FAST   119 (k, k)
+                LOAD_FAST_BORROW         6 (existentes)
+                CONTAINS_OP              0 (in)
+       L10:     POP_JUMP_IF_TRUE         3 (to L11)
+                NOT_TAKEN
+                JUMP_BACKWARD           11 (to L9)
+       L11:     LOAD_FAST_BORROW         7 (k)
+                LOAD_CONST              16 (('snapshot_id', 'uid'))
+                CONTAINS_OP              1 (not in)
+       L12:     POP_JUMP_IF_TRUE         3 (to L13)
+                NOT_TAKEN
+                JUMP_BACKWARD           20 (to L9)
+       L13:     LOAD_FAST_BORROW         7 (k)
+                LIST_APPEND              2
+                JUMP_BACKWARD           24 (to L9)
+       L14:     END_FOR
+                POP_ITER
+       L15:     SWAP                     2
+                STORE_FAST               7 (k)
+                CALL                     3
+                LOAD_ATTR                3 (get + NULL|self)
+                LOAD_FAST_BORROW         2 (uid)
+                CALL                     1
+                STORE_FAST               8 (v)
+
+ 159            LOAD_FAST_BORROW         8 (v)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         5 (to L16)
+                NOT_TAKEN
+
+ 160            LOAD_FAST_BORROW         3 (stats)
+                LOAD_CONST               1 (None)
+                BUILD_TUPLE              2
+                RETURN_VALUE
+
+ 161   L16:     BUILD_LIST               0
+                STORE_FAST               9 (partes)
+
+ 162            LOAD_FAST_BORROW         4 (o)
+                LOAD_CONST               8 ('fontes')
+                BINARY_OP               26 ([])
+                GET_ITER
+       L17:     FOR_ITER               245 (to L26)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST  171 (fonte, clube)
+
+ 163            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                7 (execute + NULL|self)
+                LOAD_CONST               9 ('SELECT game_date FROM snapshots WHERE id=?')
+                LOAD_FAST_BORROW        10 (fonte)
+                BUILD_TUPLE              1
+                CALL                     2
+                LOAD_ATTR               11 (fetchone + NULL|self)
+                CALL                     0
+                STORE_FAST              12 (data)
+
+ 165            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                7 (execute + NULL|self)
+                LOAD_CONST              10 ('SELECT club_name FROM club_leagues WHERE snapshot_id=? AND club_uid=?')
+
+ 166            LOAD_FAST_BORROW_LOAD_FAST_BORROW 171 (fonte, clube)
+                BUILD_TUPLE              2
+
+ 165            CALL                     2
+
+ 166            LOAD_ATTR               11 (fetchone + NULL|self)
+                CALL                     0
+
+ 165            COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        34 (to L18)
+                NOT_TAKEN
+                POP_TOP
+
+ 167            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                7 (execute + NULL|self)
+                LOAD_CONST              11 ('SELECT club_name FROM player_profile WHERE snapshot_id=? AND uid=?')
+
+ 168            LOAD_FAST_BORROW_LOAD_FAST_BORROW 162 (fonte, uid)
+                BUILD_TUPLE              2
+
+ 167            CALL                     2
+
+ 168            LOAD_ATTR               11 (fetchone + NULL|self)
+                CALL                     0
+
+ 165   L18:     STORE_FAST              13 (nome)
+
+ 169            LOAD_FAST_BORROW         0 (conn)
+                LOAD_ATTR                7 (execute + NULL|self)
+                LOAD_CONST              12 ('SELECT apps_total FROM player_stats WHERE snapshot_id=? AND uid=?')
+
+ 170            LOAD_FAST_BORROW_LOAD_FAST_BORROW 162 (fonte, uid)
+                BUILD_TUPLE              2
+
+ 169            CALL                     2
+
+ 170            LOAD_ATTR               11 (fetchone + NULL|self)
+                CALL                     0
+
+ 169            STORE_FAST              14 (jogos)
+
+ 171            LOAD_FAST                9 (partes)
+                LOAD_ATTR               13 (append + NULL|self)
+                LOAD_CONST              13 ('clube')
+                LOAD_FAST_BORROW        13 (nome)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       10 (to L19)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        13 (nome)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                JUMP_FORWARD             1 (to L20)
+       L19:     LOAD_CONST               1 (None)
+       L20:     LOAD_CONST              14 ('ate')
+                LOAD_FAST_BORROW        12 (data)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       26 (to L21)
+                NOT_TAKEN
+                LOAD_GLOBAL             15 (str + NULL)
+                LOAD_FAST_BORROW        12 (data)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                CALL                     1
+                LOAD_CONST              15 (slice(None, 10, None))
+                BINARY_OP               26 ([])
+                JUMP_FORWARD             1 (to L22)
+       L21:     LOAD_CONST               1 (None)
+
+ 172   L22:     LOAD_CONST               4 ('jogos')
+                LOAD_FAST_BORROW        14 (jogos)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       10 (to L23)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        14 (jogos)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                JUMP_FORWARD             1 (to L24)
+       L23:     LOAD_SMALL_INT           0
+       L24:     COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L25)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_SMALL_INT           0
+
+ 171   L25:     BUILD_MAP                3
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD          247 (to L17)
+
+ 162   L26:     END_FOR
+                POP_ITER
+
+ 173            LOAD_GLOBAL             17 (dict + NULL)
+                LOAD_FAST_BORROW         3 (stats)
+                BUILD_TUPLE              1
+                BUILD_MAP                0
+                LOAD_FAST_BORROW         8 (v)
+                DICT_MERGE               1
+                CALL_FUNCTION_EX
+                LOAD_CONST               2 ('tipo')
+                LOAD_FAST_BORROW         4 (o)
+                LOAD_CONST               2 ('tipo')
+                BINARY_OP               26 ([])
+                LOAD_CONST               3 ('ano')
+                LOAD_FAST_BORROW         4 (o)
+                LOAD_CONST               3 ('ano')
+                BINARY_OP               26 ([])
+                LOAD_CONST               4 ('jogos')
+                LOAD_FAST_BORROW         8 (v)
+                LOAD_ATTR                3 (get + NULL|self)
+                LOAD_CONST               5 ('apps_total')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L27)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_SMALL_INT           0
+       L27:     LOAD_CONST               6 ('partes')
+                LOAD_FAST_BORROW         9 (partes)
+                BUILD_MAP                4
+                BUILD_TUPLE              2
+                RETURN_VALUE
+
+  --   L28:     SWAP                     2
+                POP_TOP
+
+ 157            SWAP                     2
+                STORE_FAST               5 (r)
+                RERAISE                  0
+
+  --   L29:     SWAP                     2
+                POP_TOP
+
+ 158            SWAP                     2
+                STORE_FAST               7 (k)
+                RERAISE                  0
+ExceptionTable:
+  L4 to L7 -> L28 [2]
+  L8 to L10 -> L29 [6]
+  L11 to L12 -> L29 [6]
+  L13 to L15 -> L29 [6]
+
+Disassembly of <code object aplicar_em_linhas at 0xbdeefe700, file "merge_temporadas.py", line 176>:
+ 176            RESUME                   0
+
+ 180            LOAD_FAST_BORROW         2 (linhas)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       17 (to L1)
+                NOT_TAKEN
+                LOAD_GLOBAL              1 (len + NULL)
+                LOAD_FAST_BORROW         2 (linhas)
+                CALL                     1
+                LOAD_FAST_BORROW         3 (limite)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE        3 (to L2)
+                NOT_TAKEN
+
+ 181    L1:     LOAD_FAST_BORROW         2 (linhas)
+                RETURN_VALUE
+
+ 182    L2:     LOAD_FAST_BORROW         2 (linhas)
+                GET_ITER
+        L3:     FOR_ITER               213 (to L17)
+                STORE_FAST               4 (linha)
+
+ 183            LOAD_FAST_BORROW         4 (linha)
+                LOAD_ATTR                3 (setdefault + NULL|self)
+                LOAD_CONST               0 ('temporada_tipo')
+                LOAD_SMALL_INT           0
+                CALL                     2
+                POP_TOP
+
+ 184            LOAD_FAST_BORROW         4 (linha)
+                LOAD_ATTR                5 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      5 (k)
+                LOAD_FAST_AND_CLEAR      6 (v)
+                SWAP                     3
+        L4:     BUILD_MAP                0
+                SWAP                     2
+        L5:     FOR_ITER                32 (to L8)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   86 (k, v)
+                LOAD_FAST_BORROW         5 (k)
+                LOAD_ATTR                7 (startswith + NULL|self)
+                LOAD_CONST               1 ('temporada_')
+                CALL                     1
+                TO_BOOL
+        L6:     POP_JUMP_IF_FALSE        3 (to L7)
+                NOT_TAKEN
+                JUMP_BACKWARD           30 (to L5)
+        L7:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 86 (k, v)
+                MAP_ADD                  2
+                JUMP_BACKWARD           34 (to L5)
+        L8:     END_FOR
+                POP_ITER
+        L9:     STORE_FAST               7 (campos)
+                STORE_FAST               5 (k)
+                STORE_FAST               6 (v)
+
+ 185            LOAD_GLOBAL              9 (do_jogador + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (conn, sid)
+                LOAD_FAST_BORROW         4 (linha)
+                LOAD_CONST               2 ('uid')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         7 (campos)
+                CALL                     4
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST  137 (novos, origem)
+
+ 186            LOAD_FAST_BORROW         9 (origem)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L10)
+                NOT_TAKEN
+
+ 187            JUMP_BACKWARD          113 (to L3)
+
+ 188   L10:     LOAD_FAST                4 (linha)
+                LOAD_ATTR               11 (update + NULL|self)
+                LOAD_FAST_BORROW         8 (novos)
+                LOAD_ATTR                5 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      5 (k)
+                LOAD_FAST_AND_CLEAR      6 (v)
+                SWAP                     3
+       L11:     BUILD_MAP                0
+                SWAP                     2
+       L12:     FOR_ITER                15 (to L15)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   86 (k, v)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 84 (k, linha)
+                CONTAINS_OP              0 (in)
+       L13:     POP_JUMP_IF_TRUE         3 (to L14)
+                NOT_TAKEN
+                JUMP_BACKWARD           13 (to L12)
+       L14:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 86 (k, v)
+                MAP_ADD                  2
+                JUMP_BACKWARD           17 (to L12)
+       L15:     END_FOR
+                POP_ITER
+       L16:     SWAP                     3
+                STORE_FAST               6 (v)
+                STORE_FAST               5 (k)
+                CALL                     1
+                POP_TOP
+
+ 189            LOAD_FAST_BORROW         4 (linha)
+                LOAD_ATTR               11 (update + NULL|self)
+                LOAD_FAST_BORROW         9 (origem)
+                LOAD_CONST               3 ('tipo')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         9 (origem)
+                LOAD_CONST               4 ('ano')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         9 (origem)
+                LOAD_CONST               5 ('jogos')
+                BINARY_OP               26 ([])
+                LOAD_CONST               6 (('temporada_tipo', 'temporada_ano', 'temporada_jogos'))
+                CALL_KW                  3
+                POP_TOP
+                JUMP_BACKWARD          215 (to L3)
+
+ 182   L17:     END_FOR
+                POP_ITER
+
+ 190            LOAD_FAST_BORROW         2 (linhas)
+                RETURN_VALUE
+
+  --   L18:     SWAP                     2
+                POP_TOP
+
+ 184            SWAP                     3
+                STORE_FAST               6 (v)
+                STORE_FAST               5 (k)
+                RERAISE                  0
+
+  --   L19:     SWAP                     2
+                POP_TOP
+
+ 188            SWAP                     3
+                STORE_FAST               6 (v)
+                STORE_FAST               5 (k)
+                RERAISE                  0
+ExceptionTable:
+  L4 to L6 -> L18 [4]
+  L7 to L9 -> L18 [4]
+  L11 to L13 -> L19 [6]
+  L14 to L16 -> L19 [6]

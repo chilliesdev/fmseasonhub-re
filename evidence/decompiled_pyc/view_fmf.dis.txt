@@ -1,0 +1,1656 @@
+# Module: view_fmf
+# Filename: view_fmf.py
+
+  0           RESUME                   0
+
+ 11           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (glob)
+              STORE_NAME               0 (glob)
+
+ 12           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (json)
+              STORE_NAME               1 (json)
+
+ 13           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              2 (os)
+              STORE_NAME               2 (os)
+
+ 14           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              3 (struct)
+              STORE_NAME               3 (struct)
+
+ 16           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              4 (lista_fmf)
+              STORE_NAME               4 (lista_fmf)
+
+ 17           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('ArquivoCorrompido', 'ListaInvalida', 'NaoEhFmf'))
+              IMPORT_NAME              4 (lista_fmf)
+              IMPORT_FROM              5 (ArquivoCorrompido)
+              STORE_NAME               5 (ArquivoCorrompido)
+              IMPORT_FROM              6 (ListaInvalida)
+              STORE_NAME               6 (ListaInvalida)
+              IMPORT_FROM              7 (NaoEhFmf)
+              STORE_NAME               7 (NaoEhFmf)
+              POP_TOP
+
+ 19           LOAD_CONST               3 (b'\x03\x01eiv.')
+              STORE_NAME               8 (MARCA_VIEW)
+
+ 20           LOAD_NAME                9 (len)
+              PUSH_NULL
+              LOAD_NAME                8 (MARCA_VIEW)
+              CALL                     1
+              LOAD_SMALL_INT           2
+              BINARY_OP                0 (+)
+              LOAD_SMALL_INT           4
+              BINARY_OP                0 (+)
+              STORE_NAME              10 (CABECALHO_VIEW)
+
+ 21           LOAD_CONST               4 (400)
+              STORE_NAME              11 (MAXIMO_COLUNAS)
+
+ 24           LOAD_CONST               5 ('PlayerSearchResultsViewCollection')
+              LOAD_CONST               6 ('busca')
+
+ 25           LOAD_CONST               7 ('PlayerSearchShortlistViewCollection')
+              LOAD_CONST               8 ('lista')
+
+ 26           LOAD_CONST               9 ('FirstTeamSquadAndYouthTeamSquadCollection')
+              LOAD_CONST              10 ('plantel')
+
+ 23           BUILD_MAP                3
+              STORE_NAME              12 (TELAS)
+
+ 28           LOAD_CONST              11 ('.slf')
+              LOAD_CONST               8 ('lista')
+              LOAD_CONST              12 ('.view')
+              LOAD_CONST              13 ('view')
+              LOAD_CONST              14 ('.pft')
+              LOAD_CONST              15 ('filtro')
+              LOAD_CONST              16 ('.ssf')
+              LOAD_CONST              17 ('staff')
+              BUILD_MAP                4
+              STORE_NAME              13 (TIPOS_POR_MEMBRO)
+
+ 31           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              18 (<code object NaoEhView at 0x108225d40, file "view_fmf.py", line 31>)
+              MAKE_FUNCTION
+              LOAD_CONST              19 ('NaoEhView')
+              LOAD_NAME                6 (ListaInvalida)
+              CALL                     3
+              STORE_NAME              14 (NaoEhView)
+
+ 35           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              20 (<code object ViewDeTatica at 0x108224f30, file "view_fmf.py", line 35>)
+              MAKE_FUNCTION
+              LOAD_CONST              21 ('ViewDeTatica')
+              LOAD_NAME                6 (ListaInvalida)
+              CALL                     3
+              STORE_NAME              15 (ViewDeTatica)
+
+ 39           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              22 (<code object ViewDeLista at 0x108225020, file "view_fmf.py", line 39>)
+              MAKE_FUNCTION
+              LOAD_CONST              23 ('ViewDeLista')
+              LOAD_NAME                6 (ListaInvalida)
+              CALL                     3
+              STORE_NAME              16 (ViewDeLista)
+
+ 43           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              24 (<code object ViewDeOutraTela at 0x108224300, file "view_fmf.py", line 43>)
+              MAKE_FUNCTION
+              LOAD_CONST              25 ('ViewDeOutraTela')
+              LOAD_NAME                6 (ListaInvalida)
+              CALL                     3
+              STORE_NAME              17 (ViewDeOutraTela)
+
+ 47           LOAD_CONST              26 (<code object _conferir_tamanho at 0x1082522a0, file "view_fmf.py", line 47>)
+              MAKE_FUNCTION
+              STORE_NAME              18 (_conferir_tamanho)
+
+ 52           LOAD_CONST              27 (<code object __annotate__ at 0x1081a7630, file "view_fmf.py", line 52>)
+              MAKE_FUNCTION
+              LOAD_CONST              28 (<code object tipo_do_fmf at 0x107f7e640, file "view_fmf.py", line 52>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              19 (tipo_do_fmf)
+
+ 62           LOAD_CONST              29 (<code object __annotate__ at 0x1081a4c30, file "view_fmf.py", line 62>)
+              MAKE_FUNCTION
+              LOAD_CONST              30 (<code object ler at 0xbdf2bc000, file "view_fmf.py", line 62>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              20 (ler)
+
+ 93           LOAD_CONST              46 (('pos', 'nat', 'club', 'league', 'contract', 'foot', '_age', '_height', '_ca', '_pa', '_value', '_asking', '_wage', '_rating', 'birth', '_lfoot', '_rfoot', '_uid'))
+              STORE_NAME              21 (IDENTIDADE_BASE)
+
+ 98           LOAD_CONST              31 ('base')
+              LOAD_CONST               6 ('busca')
+              LOAD_CONST              32 ('meutime')
+              LOAD_CONST              10 ('plantel')
+              BUILD_MAP                2
+              STORE_NAME              22 (TELA_DO_DESTINO)
+
+101           LOAD_CONST              33 (<code object __annotate__ at 0x1081a7530, file "view_fmf.py", line 101>)
+              MAKE_FUNCTION
+              LOAD_CONST              34 (<code object destino_da_tela at 0x108231130, file "view_fmf.py", line 101>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              23 (destino_da_tela)
+
+108           LOAD_CONST              47 (('base',))
+              LOAD_CONST              35 (<code object __annotate__ at 0x1081b2550, file "view_fmf.py", line 108>)
+              MAKE_FUNCTION
+              LOAD_CONST              36 (<code object revisar at 0xbdf6f0000, file "view_fmf.py", line 108>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              24 (revisar)
+
+155           LOAD_CONST              37 (<code object __annotate__ at 0x1081a7930, file "view_fmf.py", line 155>)
+              MAKE_FUNCTION
+              LOAD_CONST              38 (<code object pastas_views at 0xbdef02300, file "view_fmf.py", line 155>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              25 (pastas_views)
+
+167           LOAD_CONST              39 (<code object _ler_caminho at 0xbdeefcc00, file "view_fmf.py", line 167>)
+              MAKE_FUNCTION
+              STORE_NAME              26 (_ler_caminho)
+
+179           LOAD_CONST              40 (<code object __annotate__ at 0x1081a7a30, file "view_fmf.py", line 179>)
+              MAKE_FUNCTION
+              LOAD_CONST              41 (<code object listar_pasta at 0xbdeefde00, file "view_fmf.py", line 179>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              STORE_NAME              27 (listar_pasta)
+
+198           LOAD_CONST              48 ((None, 'base'))
+              LOAD_CONST              42 (<code object __annotate__ at 0x108232ef0, file "view_fmf.py", line 198>)
+              MAKE_FUNCTION
+              LOAD_CONST              43 (<code object ler_da_pasta at 0xbdef00a00, file "view_fmf.py", line 198>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              28 (ler_da_pasta)
+
+208           LOAD_CONST              47 (('base',))
+              LOAD_CONST              44 (<code object __annotate__ at 0x108231ac0, file "view_fmf.py", line 208>)
+              MAKE_FUNCTION
+              LOAD_CONST              45 (<code object ler_do_caminho at 0x108107230, file "view_fmf.py", line 208>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE  16 (annotate)
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              29 (ler_do_caminho)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object NaoEhView at 0x108225d40, file "view_fmf.py", line 31>:
+ 31           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('NaoEhView')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          31
+              STORE_NAME               3 (__firstlineno__)
+
+ 32           LOAD_CONST               1 (())
+              STORE_NAME               4 (__static_attributes__)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object ViewDeTatica at 0x108224f30, file "view_fmf.py", line 35>:
+ 35           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('ViewDeTatica')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          35
+              STORE_NAME               3 (__firstlineno__)
+
+ 36           LOAD_CONST               1 (())
+              STORE_NAME               4 (__static_attributes__)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object ViewDeLista at 0x108225020, file "view_fmf.py", line 39>:
+ 39           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('ViewDeLista')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          39
+              STORE_NAME               3 (__firstlineno__)
+
+ 40           LOAD_CONST               1 (())
+              STORE_NAME               4 (__static_attributes__)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object ViewDeOutraTela at 0x108224300, file "view_fmf.py", line 43>:
+ 43           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('ViewDeOutraTela')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          43
+              STORE_NAME               3 (__firstlineno__)
+
+ 44           LOAD_CONST               1 (())
+              STORE_NAME               4 (__static_attributes__)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _conferir_tamanho at 0x1082522a0, file "view_fmf.py", line 47>:
+ 47           RESUME                   0
+
+ 48           LOAD_GLOBAL              1 (len + NULL)
+              LOAD_FAST_BORROW         0 (dados)
+              CALL                     1
+              LOAD_GLOBAL              2 (lista_fmf)
+              LOAD_ATTR                4 (TAMANHO_MAXIMO_ARQUIVO)
+              COMPARE_OP             148 (bool(>))
+              POP_JUMP_IF_FALSE       12 (to L1)
+              NOT_TAKEN
+
+ 49           LOAD_GLOBAL              7 (ArquivoCorrompido + NULL)
+              LOAD_CONST               0 ('O arquivo e grande demais para ser uma view (limite de 2 MB).')
+              CALL                     1
+              RAISE_VARARGS            1
+
+ 48   L1:     LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x1081a7630, file "view_fmf.py", line 52>:
+ 52           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('dados')
+              LOAD_GLOBAL              0 (bytes)
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object tipo_do_fmf at 0x107f7e640, file "view_fmf.py", line 52>:
+  --            MAKE_CELL                2 (extensoes)
+
+  52            RESUME                   0
+
+  54            NOP
+
+  55    L1:     LOAD_GLOBAL              1 (_conferir_tamanho + NULL)
+                LOAD_FAST_BORROW         0 (dados)
+                CALL                     1
+                POP_TOP
+
+  56            LOAD_GLOBAL              2 (lista_fmf)
+                LOAD_ATTR                4 (_ler_indice)
+                PUSH_NULL
+                LOAD_FAST_BORROW         0 (dados)
+                CALL                     1
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      1 (m)
+                SWAP                     2
+        L2:     BUILD_SET                0
+                SWAP                     2
+        L3:     FOR_ITER                11 (to L4)
+                STORE_FAST_LOAD_FAST    17 (m, m)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                SET_ADD                  2
+                JUMP_BACKWARD           13 (to L3)
+        L4:     END_FOR
+                POP_ITER
+        L5:     SWAP                     2
+                STORE_FAST               1 (m)
+                STORE_DEREF              2 (extensoes)
+
+  59    L6:     LOAD_GLOBAL              9 (next + NULL)
+                LOAD_FAST                2 (extensoes)
+                BUILD_TUPLE              1
+                LOAD_CONST               2 (<code object <genexpr> at 0x108232450, file "view_fmf.py", line 59>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_GLOBAL             10 (TIPOS_POR_MEMBRO)
+                LOAD_ATTR               13 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+                CALL                     0
+                LOAD_CONST               1 (None)
+                CALL                     2
+                RETURN_VALUE
+
+  --    L7:     SWAP                     2
+                POP_TOP
+
+  56            SWAP                     2
+                STORE_FAST               1 (m)
+                RERAISE                  0
+
+  --    L8:     PUSH_EXC_INFO
+
+  57            LOAD_GLOBAL              6 (ListaInvalida)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L10)
+                NOT_TAKEN
+                POP_TOP
+
+  58    L9:     POP_EXCEPT
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  57   L10:     RERAISE                  0
+
+  --   L11:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L8 [0]
+  L2 to L5 -> L7 [2]
+  L5 to L6 -> L8 [0]
+  L7 to L8 -> L8 [0]
+  L8 to L9 -> L11 [1] lasti
+  L10 to L11 -> L11 [1] lasti
+
+Disassembly of <code object <genexpr> at 0x108232450, file "view_fmf.py", line 59>:
+  --           COPY_FREE_VARS           1
+
+  59           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                18 (to L5)
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST   18 (ext, tipo)
+               LOAD_FAST_BORROW         1 (ext)
+               LOAD_DEREF               3 (extensoes)
+               CONTAINS_OP              0 (in)
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           14 (to L2)
+       L4:     LOAD_FAST_BORROW         2 (tipo)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           20 (to L2)
+       L5:     END_FOR
+               POP_ITER
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L6:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L6 [0] lasti
+  L4 to L6 -> L6 [0] lasti
+
+Disassembly of <code object __annotate__ at 0x1081a4c30, file "view_fmf.py", line 62>:
+ 62           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('dados')
+              LOAD_GLOBAL              0 (bytes)
+              LOAD_CONST               2 ('return')
+              LOAD_GLOBAL              2 (dict)
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object ler at 0xbdf2bc000, file "view_fmf.py", line 62>:
+  62            RESUME                   0
+
+  64            LOAD_GLOBAL              1 (_conferir_tamanho + NULL)
+                LOAD_FAST_BORROW         0 (dados)
+                CALL                     1
+                POP_TOP
+
+  65            LOAD_GLOBAL              2 (lista_fmf)
+                LOAD_ATTR                4 (_ler_indice)
+                PUSH_NULL
+                LOAD_FAST_BORROW         0 (dados)
+                CALL                     1
+                STORE_FAST               1 (membros)
+
+  66            LOAD_FAST_BORROW         1 (membros)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      2 (m)
+                SWAP                     2
+        L1:     BUILD_LIST               0
+                SWAP                     2
+        L2:     FOR_ITER                20 (to L5)
+                STORE_FAST_LOAD_FAST    34 (m, m)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                LOAD_CONST               1 ('.view')
+                COMPARE_OP              88 (bool(==))
+        L3:     POP_JUMP_IF_TRUE         3 (to L4)
+                NOT_TAKEN
+                JUMP_BACKWARD           18 (to L2)
+        L4:     LOAD_FAST_BORROW         2 (m)
+                LIST_APPEND              2
+                JUMP_BACKWARD           22 (to L2)
+        L5:     END_FOR
+                POP_ITER
+        L6:     STORE_FAST               3 (views)
+                STORE_FAST               2 (m)
+
+  67            LOAD_FAST_BORROW         3 (views)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        12 (to L7)
+                NOT_TAKEN
+
+  68            LOAD_GLOBAL              7 (NaoEhView + NULL)
+                LOAD_CONST               2 ('Este arquivo .fmf nao e uma view do FM.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+  69    L7:     LOAD_FAST_BORROW         3 (views)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                UNPACK_SEQUENCE          5
+                POP_TOP
+                STORE_FAST_STORE_FAST   69 (_, deslocamento)
+                STORE_FAST_STORE_FAST  103 (tamanho_arquivo, tamanho_aberto)
+
+  70            LOAD_GLOBAL              2 (lista_fmf)
+                LOAD_ATTR                8 (_abrir_membro)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 5 (dados, deslocamento)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 103 (tamanho_arquivo, tamanho_aberto)
+                CALL                     4
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST  132 (aberto, _)
+
+  71            LOAD_FAST_BORROW         8 (aberto)
+                LOAD_ATTR               11 (startswith + NULL|self)
+                LOAD_GLOBAL             12 (MARCA_VIEW)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       21 (to L8)
+                NOT_TAKEN
+                LOAD_GLOBAL             15 (len + NULL)
+                LOAD_FAST_BORROW         8 (aberto)
+                CALL                     1
+                LOAD_GLOBAL             16 (CABECALHO_VIEW)
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE       12 (to L9)
+                NOT_TAKEN
+
+  72    L8:     LOAD_GLOBAL             19 (ArquivoCorrompido + NULL)
+                LOAD_CONST               3 ('O conteudo da view nao foi reconhecido.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+  73    L9:     LOAD_GLOBAL             20 (struct)
+                LOAD_ATTR               22 (unpack_from)
+                PUSH_NULL
+                LOAD_CONST               4 ('<I')
+                LOAD_FAST_BORROW         8 (aberto)
+                LOAD_GLOBAL             16 (CABECALHO_VIEW)
+                LOAD_SMALL_INT           4
+                BINARY_OP               10 (-)
+                CALL                     3
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                STORE_FAST               9 (tamanho)
+
+  74            LOAD_FAST_BORROW         9 (tamanho)
+                LOAD_GLOBAL             15 (len + NULL)
+                LOAD_FAST_BORROW         8 (aberto)
+                CALL                     1
+                LOAD_GLOBAL             16 (CABECALHO_VIEW)
+                BINARY_OP               10 (-)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE       12 (to L10)
+                NOT_TAKEN
+
+  75            LOAD_GLOBAL             19 (ArquivoCorrompido + NULL)
+                LOAD_CONST               5 ('O arquivo esta incompleto ou corrompido.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+  76   L10:     NOP
+
+  77   L11:     LOAD_GLOBAL             24 (json)
+                LOAD_ATTR               26 (loads)
+                PUSH_NULL
+                LOAD_FAST_BORROW         8 (aberto)
+                LOAD_GLOBAL             16 (CABECALHO_VIEW)
+                LOAD_GLOBAL             16 (CABECALHO_VIEW)
+                LOAD_FAST_BORROW         9 (tamanho)
+                BINARY_OP                0 (+)
+                BINARY_SLICE
+                LOAD_ATTR               29 (decode + NULL|self)
+                LOAD_CONST               6 ('utf-8')
+                CALL                     1
+                CALL                     1
+                STORE_FAST              10 (externo)
+
+  78            LOAD_GLOBAL             24 (json)
+                LOAD_ATTR               26 (loads)
+                PUSH_NULL
+                LOAD_FAST_BORROW        10 (externo)
+                LOAD_CONST               7 ('ViewData')
+                BINARY_OP               26 ([])
+                CALL                     1
+                STORE_FAST              11 (dados_view)
+
+  79            LOAD_FAST_BORROW        11 (dados_view)
+                LOAD_CONST               8 ('m_tableConfig')
+                BINARY_OP               26 ([])
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     12 (c)
+                SWAP                     2
+       L12:     BUILD_LIST               0
+                SWAP                     2
+       L13:     FOR_ITER                21 (to L14)
+                STORE_FAST              12 (c)
+                LOAD_GLOBAL             31 (str + NULL)
+                LOAD_FAST_BORROW        12 (c)
+                LOAD_CONST               9 ('m_columnID')
+                BINARY_OP               26 ([])
+                CALL                     1
+                LIST_APPEND              2
+                JUMP_BACKWARD           23 (to L13)
+       L14:     END_FOR
+                POP_ITER
+       L15:     STORE_FAST              13 (colunas)
+                STORE_FAST              12 (c)
+
+  83   L16:     LOAD_GLOBAL             31 (str + NULL)
+                LOAD_FAST               10 (externo)
+                LOAD_ATTR               41 (get + NULL|self)
+                LOAD_CONST              11 ('ViewSettingsCollectionName')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L17)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST              12 ('')
+       L17:     CALL                     1
+                STORE_FAST              15 (colecao)
+
+  84            LOAD_CONST              13 ('TacticTeamSelection')
+                LOAD_FAST               15 (colecao)
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_FALSE       12 (to L18)
+                NOT_TAKEN
+
+  85            LOAD_GLOBAL             43 (ViewDeTatica + NULL)
+                LOAD_CONST              14 ('Esta view e da tela de tatica do FM, que nao existe no app.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+  86   L18:     LOAD_GLOBAL             15 (len + NULL)
+                LOAD_FAST               13 (colunas)
+                CALL                     1
+                LOAD_GLOBAL             44 (MAXIMO_COLUNAS)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE       12 (to L19)
+                NOT_TAKEN
+
+  87            LOAD_GLOBAL             19 (ArquivoCorrompido + NULL)
+                LOAD_CONST              15 ('A view tem colunas demais.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+  88   L19:     LOAD_CONST              16 ('nome_interno')
+                LOAD_GLOBAL             31 (str + NULL)
+                LOAD_FAST               10 (externo)
+                LOAD_ATTR               41 (get + NULL|self)
+                LOAD_CONST              17 ('SerialisedName')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L20)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST              12 ('')
+       L20:     CALL                     1
+
+  89            LOAD_CONST              18 ('tela')
+                LOAD_GLOBAL             46 (TELAS)
+                LOAD_ATTR               41 (get + NULL|self)
+                LOAD_FAST               15 (colecao)
+                LOAD_CONST              19 ('busca')
+                CALL                     2
+                LOAD_CONST              20 ('colunas')
+                LOAD_FAST               13 (colunas)
+
+  88            BUILD_MAP                3
+                RETURN_VALUE
+
+  --   L21:     SWAP                     2
+                POP_TOP
+
+  66            SWAP                     2
+                STORE_FAST               2 (m)
+                RERAISE                  0
+
+  --   L22:     SWAP                     2
+                POP_TOP
+
+  79            SWAP                     2
+                STORE_FAST              12 (c)
+                RERAISE                  0
+
+  --   L23:     PUSH_EXC_INFO
+
+  81            LOAD_GLOBAL             32 (ValueError)
+                LOAD_GLOBAL             34 (KeyError)
+                LOAD_GLOBAL             36 (TypeError)
+                LOAD_GLOBAL             38 (RecursionError)
+                BUILD_TUPLE              4
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       18 (to L26)
+                NOT_TAKEN
+                STORE_FAST              14 (erro)
+
+  82   L24:     LOAD_GLOBAL             19 (ArquivoCorrompido + NULL)
+                LOAD_CONST               3 ('O conteudo da view nao foi reconhecido.')
+                CALL                     1
+                LOAD_FAST               14 (erro)
+                RAISE_VARARGS            2
+
+  --   L25:     LOAD_CONST              10 (None)
+                STORE_FAST              14 (erro)
+                DELETE_FAST             14 (erro)
+                RERAISE                  1
+
+  81   L26:     RERAISE                  0
+
+  --   L27:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L21 [2]
+  L4 to L6 -> L21 [2]
+  L11 to L12 -> L23 [0]
+  L12 to L15 -> L22 [2]
+  L15 to L16 -> L23 [0]
+  L22 to L23 -> L23 [0]
+  L23 to L24 -> L27 [1] lasti
+  L24 to L25 -> L25 [1] lasti
+  L25 to L27 -> L27 [1] lasti
+
+Disassembly of <code object __annotate__ at 0x1081a7530, file "view_fmf.py", line 101>:
+101           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('tela')
+              LOAD_GLOBAL              0 (str)
+              LOAD_CONST               2 ('return')
+              LOAD_GLOBAL              0 (str)
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object destino_da_tela at 0x108231130, file "view_fmf.py", line 101>:
+101           RESUME                   0
+
+103           LOAD_FAST_BORROW         0 (tela)
+              LOAD_CONST               0 ('lista')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE       12 (to L1)
+              NOT_TAKEN
+
+104           LOAD_GLOBAL              1 (ViewDeLista + NULL)
+              LOAD_CONST               1 ('Views da lista preferencial do FM nao entram no app.')
+              CALL                     1
+              RAISE_VARARGS            1
+
+105   L1:     LOAD_FAST_BORROW         0 (tela)
+              LOAD_CONST               2 ('plantel')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE        3 (to L2)
+              NOT_TAKEN
+              LOAD_CONST               3 ('meutime')
+              RETURN_VALUE
+      L2:     LOAD_CONST               4 ('base')
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x1081b2550, file "view_fmf.py", line 108>:
+108           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('dados')
+              LOAD_GLOBAL              0 (bytes)
+              LOAD_CONST               2 ('nome_arquivo')
+              LOAD_GLOBAL              2 (str)
+              LOAD_CONST               3 ('destino')
+              LOAD_GLOBAL              2 (str)
+              LOAD_CONST               4 ('return')
+              LOAD_GLOBAL              4 (dict)
+              BUILD_MAP                4
+              RETURN_VALUE
+
+Disassembly of <code object revisar at 0xbdf6f0000, file "view_fmf.py", line 108>:
+ 108            RESUME                   0
+
+ 116            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              0 (moneyball)
+                STORE_FAST               3 (mb)
+
+ 117            LOAD_SMALL_INT           0
+                LOAD_CONST               2 (('EQUIVALENCIA', 'EQUIVALENCIA_MEUTIME'))
+                IMPORT_NAME              1 (view_fmf_colunas)
+                IMPORT_FROM              2 (EQUIVALENCIA)
+                STORE_FAST               4 (EQUIVALENCIA)
+                IMPORT_FROM              3 (EQUIVALENCIA_MEUTIME)
+                STORE_FAST               5 (EQUIVALENCIA_MEUTIME)
+                POP_TOP
+
+ 118            LOAD_FAST_BORROW         2 (destino)
+                LOAD_GLOBAL              8 (TELA_DO_DESTINO)
+                CONTAINS_OP              1 (not in)
+                POP_JUMP_IF_FALSE       12 (to L1)
+                NOT_TAKEN
+
+ 119            LOAD_GLOBAL             11 (ListaInvalida + NULL)
+                LOAD_CONST               3 ('Destino desconhecido.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 120    L1:     LOAD_GLOBAL             13 (ler + NULL)
+                LOAD_FAST_BORROW         0 (dados)
+                CALL                     1
+                STORE_FAST               6 (lida)
+
+ 121            LOAD_GLOBAL             15 (destino_da_tela + NULL)
+                LOAD_FAST_BORROW         6 (lida)
+                LOAD_CONST               4 ('tela')
+                BINARY_OP               26 ([])
+                CALL                     1
+                LOAD_FAST_BORROW         2 (destino)
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       25 (to L3)
+                NOT_TAKEN
+
+ 122            LOAD_GLOBAL             17 (ViewDeOutraTela + NULL)
+                LOAD_FAST_BORROW         2 (destino)
+                LOAD_CONST               5 ('base')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE        7 (to L2)
+                NOT_TAKEN
+                LOAD_CONST               6 ('Esta view e de plantel no FM: importe no Meu time.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 123    L2:     LOAD_CONST               7 ('Esta view e da busca de jogadores no FM: importe na Base.')
+
+ 122            CALL                     1
+                RAISE_VARARGS            1
+
+ 124    L3:     LOAD_FAST_BORROW         2 (destino)
+                LOAD_CONST               8 ('meutime')
+                COMPARE_OP              72 (==)
+                STORE_FAST               7 (meutime)
+
+ 125            LOAD_FAST_BORROW         7 (meutime)
+                TO_BOOL
+                POP_JUMP_IF_FALSE        3 (to L4)
+                NOT_TAKEN
+                LOAD_FAST                5 (EQUIVALENCIA_MEUTIME)
+                JUMP_FORWARD             1 (to L5)
+        L4:     LOAD_FAST                4 (EQUIVALENCIA)
+        L5:     STORE_FAST               8 (tabela)
+
+ 126            LOAD_FAST_BORROW         7 (meutime)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       11 (to L6)
+                NOT_TAKEN
+                LOAD_GLOBAL             19 (set + NULL)
+                CALL                     0
+                JUMP_FORWARD            38 (to L11)
+        L6:     LOAD_FAST_BORROW         3 (mb)
+                LOAD_ATTR               21 (group_columns_meta + NULL|self)
+                LOAD_CONST               9 ('all')
+                CALL                     1
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      9 (c)
+                SWAP                     2
+        L7:     BUILD_SET                0
+                SWAP                     2
+        L8:     FOR_ITER                11 (to L9)
+                STORE_FAST_LOAD_FAST   153 (c, c)
+                LOAD_CONST              10 ('key')
+                BINARY_OP               26 ([])
+                SET_ADD                  2
+                JUMP_BACKWARD           13 (to L8)
+        L9:     END_FOR
+                POP_ITER
+       L10:     SWAP                     2
+                STORE_FAST               9 (c)
+       L11:     STORE_FAST              10 (proprias)
+
+ 127            BUILD_LIST               0
+                BUILD_MAP                0
+                LOAD_GLOBAL             19 (set + NULL)
+                CALL                     0
+                STORE_FAST_STORE_FAST  220 (usadas, contagem)
+                STORE_FAST              11 (colunas)
+
+ 128            LOAD_FAST_BORROW         6 (lida)
+                LOAD_CONST              11 ('colunas')
+                BINARY_OP               26 ([])
+                GET_ITER
+       L12:     EXTENDED_ARG             1
+                FOR_ITER               366 (to L28)
+                STORE_FAST              14 (id_fm)
+
+ 129            LOAD_FAST_BORROW         8 (tabela)
+                LOAD_ATTR               23 (get + NULL|self)
+                LOAD_FAST_BORROW        14 (id_fm)
+                CALL                     1
+                STORE_FAST              15 (regra)
+
+ 130            LOAD_FAST_BORROW        15 (regra)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       10 (to L13)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        15 (regra)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                JUMP_FORWARD             1 (to L14)
+       L13:     LOAD_CONST              12 ('desconhecida')
+       L14:     STORE_FAST              16 (estado)
+
+ 131            LOAD_FAST_BORROW        15 (regra)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       17 (to L15)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        16 (estado)
+                LOAD_CONST              27 (('ok', 'nova', 'aprox'))
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_FALSE       10 (to L15)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        15 (regra)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                JUMP_FORWARD             1 (to L16)
+       L15:     LOAD_CONST               1 (None)
+       L16:     STORE_FAST              17 (chave)
+
+ 132            LOAD_FAST_BORROW        15 (regra)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       17 (to L17)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        16 (estado)
+                LOAD_CONST              13 ('aprox')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       10 (to L17)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        15 (regra)
+                LOAD_SMALL_INT           2
+                BINARY_OP               26 ([])
+                JUMP_FORWARD            25 (to L19)
+       L17:     LOAD_FAST_BORROW        15 (regra)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       17 (to L18)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        16 (estado)
+                LOAD_CONST              28 (('sem', 'fm'))
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_FALSE       10 (to L18)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        15 (regra)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                JUMP_FORWARD             1 (to L19)
+       L18:     LOAD_CONST               1 (None)
+       L19:     STORE_FAST              18 (motivo)
+
+ 133            LOAD_FAST_BORROW        16 (estado)
+                LOAD_CONST              14 ('atrib')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       10 (to L20)
+                NOT_TAKEN
+
+ 134            LOAD_FAST_BORROW        15 (regra)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                STORE_FAST              18 (motivo)
+
+ 135   L20:     LOAD_FAST_BORROW         7 (meutime)
+                TO_BOOL
+                UNARY_NOT
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       55 (to L21)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_GLOBAL             25 (bool + NULL)
+                LOAD_FAST_BORROW        17 (chave)
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       36 (to L21)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_FAST_BORROW        17 (chave)
+                LOAD_CONST              15 ('name')
+                COMPARE_OP             103 (!=)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       23 (to L21)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_FAST_BORROW        17 (chave)
+                LOAD_FAST_BORROW        10 (proprias)
+                CONTAINS_OP              1 (not in)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       10 (to L21)
+                NOT_TAKEN
+                POP_TOP
+
+ 136            LOAD_FAST_BORROW        17 (chave)
+                LOAD_GLOBAL             26 (IDENTIDADE_BASE)
+                CONTAINS_OP              1 (not in)
+
+ 135   L21:     STORE_FAST              19 (extra)
+
+ 140            LOAD_FAST_BORROW        15 (regra)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       17 (to L22)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        16 (estado)
+                LOAD_CONST               5 ('base')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       10 (to L22)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        15 (regra)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                JUMP_FORWARD            11 (to L24)
+       L22:     LOAD_FAST_BORROW         7 (meutime)
+                TO_BOOL
+                POP_JUMP_IF_FALSE        3 (to L23)
+                NOT_TAKEN
+                LOAD_CONST               1 (None)
+                JUMP_FORWARD             1 (to L24)
+       L23:     LOAD_FAST               17 (chave)
+       L24:     STORE_FAST              20 (da_base)
+
+ 141            LOAD_FAST_BORROW        20 (da_base)
+                LOAD_FAST_BORROW         3 (mb)
+                LOAD_ATTR               28 (CATALOG_BY_KEY)
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_FALSE       26 (to L25)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         3 (mb)
+                LOAD_ATTR               31 (columns_meta + NULL|self)
+                LOAD_FAST_BORROW        20 (da_base)
+                BUILD_LIST               1
+                CALL                     1
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                JUMP_FORWARD             1 (to L26)
+       L25:     LOAD_CONST               1 (None)
+       L26:     STORE_FAST              21 (coluna)
+
+ 142            LOAD_FAST_BORROW        11 (colunas)
+                LOAD_ATTR               33 (append + NULL|self)
+                LOAD_CONST              16 ('id_fm')
+                LOAD_FAST_BORROW        14 (id_fm)
+                LOAD_CONST              17 ('estado')
+                LOAD_FAST_BORROW        16 (estado)
+                LOAD_CONST              18 ('chave')
+                LOAD_FAST_BORROW        17 (chave)
+                LOAD_CONST              19 ('motivo')
+                LOAD_FAST_BORROW        18 (motivo)
+                LOAD_CONST              20 ('extra')
+                LOAD_FAST_BORROW        19 (extra)
+
+ 143            LOAD_CONST              21 ('coluna')
+                LOAD_FAST_BORROW        21 (coluna)
+
+ 142            BUILD_MAP                6
+                CALL                     1
+                POP_TOP
+
+ 144            LOAD_FAST_BORROW        12 (contagem)
+                LOAD_ATTR               23 (get + NULL|self)
+                LOAD_FAST_BORROW        16 (estado)
+                LOAD_SMALL_INT           0
+                CALL                     2
+                LOAD_SMALL_INT           1
+                BINARY_OP                0 (+)
+                LOAD_FAST_BORROW        12 (contagem)
+                LOAD_FAST_BORROW        16 (estado)
+                STORE_SUBSCR
+
+ 145            LOAD_FAST_BORROW        17 (chave)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         4 (to L27)
+                NOT_TAKEN
+                EXTENDED_ARG             1
+                JUMP_BACKWARD          349 (to L12)
+
+ 146   L27:     LOAD_FAST_BORROW        13 (usadas)
+                LOAD_ATTR               35 (add + NULL|self)
+                LOAD_FAST_BORROW        17 (chave)
+                CALL                     1
+                POP_TOP
+                EXTENDED_ARG             1
+                JUMP_BACKWARD          369 (to L12)
+
+ 128   L28:     END_FOR
+                POP_ITER
+
+ 147            LOAD_FAST_BORROW         7 (meutime)
+                TO_BOOL
+                POP_JUMP_IF_FALSE        3 (to L29)
+                NOT_TAKEN
+                BUILD_LIST               0
+                JUMP_FORWARD            43 (to L36)
+       L29:     BUILD_LIST               0
+                LOAD_GLOBAL             26 (IDENTIDADE_BASE)
+                LIST_EXTEND              1
+                LOAD_GLOBAL             37 (sorted + NULL)
+                LOAD_FAST_BORROW        10 (proprias)
+                CALL                     1
+                LIST_EXTEND              1
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     22 (k)
+                SWAP                     2
+       L30:     BUILD_LIST               0
+                SWAP                     2
+       L31:     FOR_ITER                14 (to L34)
+                STORE_FAST              22 (k)
+                LOAD_FAST_BORROW        22 (k)
+                LOAD_FAST_BORROW        13 (usadas)
+                CONTAINS_OP              1 (not in)
+       L32:     POP_JUMP_IF_TRUE         3 (to L33)
+                NOT_TAKEN
+                JUMP_BACKWARD           12 (to L31)
+       L33:     LOAD_FAST_BORROW        22 (k)
+                LIST_APPEND              2
+                JUMP_BACKWARD           16 (to L31)
+       L34:     END_FOR
+                POP_ITER
+       L35:     SWAP                     2
+                STORE_FAST              22 (k)
+       L36:     STORE_FAST              23 (escondidas)
+
+ 148            LOAD_FAST_BORROW         1 (nome_arquivo)
+                LOAD_ATTR               39 (lower + NULL|self)
+                CALL                     0
+                LOAD_ATTR               41 (endswith + NULL|self)
+                LOAD_CONST              22 ('.fmf')
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE        6 (to L37)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         1 (nome_arquivo)
+                LOAD_CONST               1 (None)
+                LOAD_CONST              29 (-4)
+                BINARY_SLICE
+                JUMP_FORWARD             1 (to L38)
+       L37:     LOAD_FAST                1 (nome_arquivo)
+       L38:     STORE_FAST              24 (nome)
+
+ 149            LOAD_CONST              23 ('nome')
+                LOAD_FAST_BORROW        24 (nome)
+                LOAD_CONST               4 ('tela')
+                LOAD_FAST_BORROW         6 (lida)
+                LOAD_CONST               4 ('tela')
+                BINARY_OP               26 ([])
+                LOAD_CONST              24 ('destino')
+                LOAD_FAST_BORROW         2 (destino)
+                LOAD_CONST              11 ('colunas')
+                LOAD_FAST_BORROW        11 (colunas)
+
+ 150            LOAD_CONST              25 ('escondidas')
+                LOAD_FAST_BORROW        23 (escondidas)
+                LOAD_CONST              26 ('contagem')
+                LOAD_FAST_BORROW        12 (contagem)
+
+ 149            BUILD_MAP                6
+                RETURN_VALUE
+
+  --   L39:     SWAP                     2
+                POP_TOP
+
+ 126            SWAP                     2
+                STORE_FAST               9 (c)
+                RERAISE                  0
+
+  --   L40:     SWAP                     2
+                POP_TOP
+
+ 147            SWAP                     2
+                STORE_FAST              22 (k)
+                RERAISE                  0
+ExceptionTable:
+  L7 to L10 -> L39 [2]
+  L30 to L32 -> L40 [2]
+  L33 to L35 -> L40 [2]
+
+Disassembly of <code object __annotate__ at 0x1081a7930, file "view_fmf.py", line 155>:
+155           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_GLOBAL              0 (list)
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object pastas_views at 0xbdef02300, file "view_fmf.py", line 155>:
+155           RESUME                   0
+
+159           BUILD_LIST               0
+              STORE_FAST               0 (saida)
+
+160           LOAD_GLOBAL              0 (lista_fmf)
+              LOAD_ATTR                2 (pastas_dos_jogos)
+              PUSH_NULL
+              CALL                     0
+              GET_ITER
+      L1:     FOR_ITER               133 (to L3)
+              STORE_FAST               1 (p)
+
+161           LOAD_GLOBAL              4 (os)
+              LOAD_ATTR                6 (path)
+              LOAD_ATTR                9 (join + NULL|self)
+              LOAD_GLOBAL              4 (os)
+              LOAD_ATTR                6 (path)
+              LOAD_ATTR               11 (dirname + NULL|self)
+              LOAD_FAST_BORROW         1 (p)
+              LOAD_CONST               0 ('pasta')
+              BINARY_OP               26 ([])
+              CALL                     1
+              LOAD_CONST               1 ('views')
+              CALL                     2
+              STORE_FAST               2 (pasta)
+
+162           LOAD_GLOBAL              4 (os)
+              LOAD_ATTR                6 (path)
+              LOAD_ATTR               13 (isdir + NULL|self)
+              LOAD_FAST_BORROW         2 (pasta)
+              CALL                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L2)
+              NOT_TAKEN
+              JUMP_BACKWARD          110 (to L1)
+
+163   L2:     LOAD_FAST_BORROW         0 (saida)
+              LOAD_ATTR               15 (append + NULL|self)
+              BUILD_MAP                0
+              LOAD_FAST_BORROW         1 (p)
+              DICT_UPDATE              1
+              LOAD_CONST               0 ('pasta')
+              LOAD_FAST_BORROW         2 (pasta)
+              BUILD_MAP                1
+              DICT_UPDATE              1
+              CALL                     1
+              POP_TOP
+              JUMP_BACKWARD          135 (to L1)
+
+160   L3:     END_FOR
+              POP_ITER
+
+164           LOAD_FAST_BORROW         0 (saida)
+              RETURN_VALUE
+
+Disassembly of <code object _ler_caminho at 0xbdeefcc00, file "view_fmf.py", line 167>:
+ 167            RESUME                   0
+
+ 168            LOAD_GLOBAL              0 (os)
+                LOAD_ATTR                2 (path)
+                LOAD_ATTR                5 (splitext + NULL|self)
+                LOAD_FAST_BORROW         0 (caminho)
+                CALL                     1
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                LOAD_ATTR                7 (lower + NULL|self)
+                CALL                     0
+                LOAD_CONST               1 ('.fmf')
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       12 (to L1)
+                NOT_TAKEN
+
+ 169            LOAD_GLOBAL              9 (NaoEhFmf + NULL)
+                LOAD_CONST               2 ('Este arquivo nao e um .fmf do Football Manager.')
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 170    L1:     NOP
+
+ 171    L2:     LOAD_GLOBAL              0 (os)
+                LOAD_ATTR                2 (path)
+                LOAD_ATTR               11 (getsize + NULL|self)
+                LOAD_FAST_BORROW         0 (caminho)
+                CALL                     1
+                LOAD_GLOBAL             12 (lista_fmf)
+                LOAD_ATTR               14 (TAMANHO_MAXIMO_ARQUIVO)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE       12 (to L3)
+                NOT_TAKEN
+
+ 172            LOAD_GLOBAL             17 (ArquivoCorrompido + NULL)
+                LOAD_CONST               3 ('O arquivo e grande demais para ser uma view (limite de 2 MB).')
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 173    L3:     LOAD_GLOBAL             19 (open + NULL)
+                LOAD_FAST_BORROW         0 (caminho)
+                LOAD_CONST               4 ('rb')
+                CALL                     2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L4:     STORE_FAST               1 (fh)
+
+ 174            LOAD_FAST_BORROW         1 (fh)
+                LOAD_ATTR               21 (read + NULL|self)
+                LOAD_GLOBAL             12 (lista_fmf)
+                LOAD_ATTR               14 (TAMANHO_MAXIMO_ARQUIVO)
+                LOAD_SMALL_INT           1
+                BINARY_OP                0 (+)
+                CALL                     1
+
+ 173    L5:     SWAP                     3
+                SWAP                     2
+                LOAD_CONST               5 (None)
+                LOAD_CONST               5 (None)
+                LOAD_CONST               5 (None)
+                CALL                     3
+                POP_TOP
+        L6:     RETURN_VALUE
+        L7:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L8)
+                NOT_TAKEN
+                RERAISE                  2
+        L8:     POP_TOP
+        L9:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+       L10:     LOAD_CONST               5 (None)
+                RETURN_VALUE
+
+  --   L11:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L12:     PUSH_EXC_INFO
+
+ 175            LOAD_GLOBAL             22 (OSError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       13 (to L13)
+                NOT_TAKEN
+                POP_TOP
+
+ 176            LOAD_GLOBAL             25 (ListaInvalida + NULL)
+                LOAD_CONST               6 ('Nao foi possivel ler o arquivo. Ele ainda existe nesse lugar?')
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 175   L13:     RERAISE                  0
+
+  --   L14:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L2 to L4 -> L12 [0]
+  L4 to L5 -> L7 [2] lasti
+  L5 to L6 -> L12 [0]
+  L7 to L9 -> L11 [4] lasti
+  L9 to L10 -> L12 [0]
+  L11 to L12 -> L12 [0]
+  L12 to L14 -> L14 [1] lasti
+
+Disassembly of <code object __annotate__ at 0x1081a7a30, file "view_fmf.py", line 179>:
+179           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('return')
+              LOAD_GLOBAL              0 (dict)
+              BUILD_MAP                1
+              RETURN_VALUE
+
+Disassembly of <code object listar_pasta at 0xbdeefde00, file "view_fmf.py", line 179>:
+ 179            RESUME                   0
+
+ 182            BUILD_LIST               0
+                STORE_FAST               0 (pastas)
+
+ 183            LOAD_GLOBAL              1 (pastas_views + NULL)
+                CALL                     0
+                GET_ITER
+        L1:     FOR_ITER               191 (to L6)
+                STORE_FAST               1 (p)
+
+ 184            BUILD_LIST               0
+                STORE_FAST               2 (views)
+
+ 185            LOAD_GLOBAL              3 (sorted + NULL)
+                LOAD_GLOBAL              4 (glob)
+                LOAD_ATTR                4 (glob)
+                PUSH_NULL
+                LOAD_GLOBAL              6 (os)
+                LOAD_ATTR                8 (path)
+                LOAD_ATTR               11 (join + NULL|self)
+                LOAD_FAST_BORROW         1 (p)
+                LOAD_CONST               0 ('pasta')
+                BINARY_OP               26 ([])
+                LOAD_CONST               1 ('*.fmf')
+                CALL                     2
+                CALL                     1
+                LOAD_CONST               2 (<code object <lambda> at 0x1081f16c0, file "view_fmf.py", line 185>)
+                MAKE_FUNCTION
+                LOAD_CONST               3 (('key',))
+                CALL_KW                  2
+                GET_ITER
+        L2:     FOR_ITER                88 (to L5)
+                STORE_FAST               3 (caminho)
+
+ 186            LOAD_GLOBAL              6 (os)
+                LOAD_ATTR                8 (path)
+                LOAD_ATTR               13 (basename + NULL|self)
+                LOAD_FAST_BORROW         3 (caminho)
+                CALL                     1
+                STORE_FAST               4 (arquivo)
+
+ 187            NOP
+
+ 188    L3:     LOAD_GLOBAL             15 (ler + NULL)
+                LOAD_GLOBAL             17 (_ler_caminho + NULL)
+                LOAD_FAST_BORROW         3 (caminho)
+                CALL                     1
+                CALL                     1
+                LOAD_CONST               4 ('tela')
+                BINARY_OP               26 ([])
+                STORE_FAST               5 (tela)
+
+ 193    L4:     LOAD_FAST                2 (views)
+                LOAD_ATTR               23 (append + NULL|self)
+                LOAD_CONST               6 ('arquivo')
+                LOAD_FAST                4 (arquivo)
+                LOAD_CONST               7 ('nome')
+                LOAD_FAST                4 (arquivo)
+                LOAD_CONST               8 (None)
+                LOAD_CONST              11 (-4)
+                BINARY_SLICE
+                LOAD_CONST               4 ('tela')
+                LOAD_FAST                5 (tela)
+                BUILD_MAP                3
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD           90 (to L2)
+
+ 185    L5:     END_FOR
+                POP_ITER
+
+ 194            LOAD_FAST_BORROW         0 (pastas)
+                LOAD_ATTR               23 (append + NULL|self)
+                BUILD_MAP                0
+                LOAD_FAST_BORROW         1 (p)
+                DICT_UPDATE              1
+                LOAD_CONST               9 ('views')
+                LOAD_FAST_BORROW         2 (views)
+                BUILD_MAP                1
+                DICT_UPDATE              1
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD          193 (to L1)
+
+ 183    L6:     END_FOR
+                POP_ITER
+
+ 195            LOAD_CONST              10 ('pastas')
+                LOAD_FAST_BORROW         0 (pastas)
+                BUILD_MAP                1
+                RETURN_VALUE
+
+  --    L7:     PUSH_EXC_INFO
+
+ 189            LOAD_GLOBAL             18 (ViewDeTatica)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        6 (to L9)
+                NOT_TAKEN
+                POP_TOP
+
+ 190            LOAD_CONST               5 ('tatica')
+                STORE_FAST               5 (tela)
+        L8:     POP_EXCEPT
+                JUMP_BACKWARD_NO_INTERRUPT 76 (to L4)
+
+ 191    L9:     LOAD_GLOBAL             20 (ListaInvalida)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L13)
+       L10:     NOT_TAKEN
+       L11:     POP_TOP
+
+ 192   L12:     POP_EXCEPT
+                JUMP_BACKWARD          151 (to L2)
+
+ 191   L13:     RERAISE                  0
+
+  --   L14:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L3 to L4 -> L7 [2]
+  L7 to L8 -> L14 [3] lasti
+  L9 to L10 -> L14 [3] lasti
+  L11 to L12 -> L14 [3] lasti
+  L13 to L14 -> L14 [3] lasti
+
+Disassembly of <code object <lambda> at 0x1081f16c0, file "view_fmf.py", line 185>:
+185           RESUME                   0
+              LOAD_GLOBAL              0 (os)
+              LOAD_ATTR                2 (path)
+              LOAD_ATTR                5 (basename + NULL|self)
+              LOAD_FAST_BORROW         0 (c)
+              CALL                     1
+              LOAD_ATTR                7 (lower + NULL|self)
+              CALL                     0
+              RETURN_VALUE
+
+Disassembly of <code object __annotate__ at 0x108232ef0, file "view_fmf.py", line 198>:
+198           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('arquivo')
+              LOAD_GLOBAL              0 (str)
+              LOAD_CONST               2 ('destino')
+              LOAD_GLOBAL              0 (str)
+              LOAD_CONST               3 ('return')
+              LOAD_GLOBAL              2 (dict)
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object ler_da_pasta at 0xbdef00a00, file "view_fmf.py", line 198>:
+  --           MAKE_CELL                1 (jogo)
+
+ 198           RESUME                   0
+
+ 200           LOAD_FAST_BORROW         0 (arquivo)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       51 (to L1)
+               NOT_TAKEN
+               LOAD_GLOBAL              0 (os)
+               LOAD_ATTR                2 (path)
+               LOAD_ATTR                5 (basename + NULL|self)
+               LOAD_FAST_BORROW         0 (arquivo)
+               CALL                     1
+               LOAD_FAST_BORROW         0 (arquivo)
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_TRUE        15 (to L1)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         0 (arquivo)
+               LOAD_CONST               6 (('.', '..'))
+               CONTAINS_OP              0 (in)
+               POP_JUMP_IF_TRUE         8 (to L1)
+               NOT_TAKEN
+               LOAD_CONST               1 ('\\')
+               LOAD_FAST_BORROW         0 (arquivo)
+               CONTAINS_OP              0 (in)
+               POP_JUMP_IF_FALSE       12 (to L2)
+               NOT_TAKEN
+
+ 201   L1:     LOAD_GLOBAL              7 (ListaInvalida + NULL)
+               LOAD_CONST               2 ('Nome de arquivo invalido.')
+               CALL                     1
+               RAISE_VARARGS            1
+
+ 202   L2:     LOAD_GLOBAL              9 (next + NULL)
+               LOAD_FAST_BORROW         1 (jogo)
+               BUILD_TUPLE              1
+               LOAD_CONST               3 (<code object <genexpr> at 0x108107d70, file "view_fmf.py", line 202>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               LOAD_GLOBAL             11 (pastas_views + NULL)
+               CALL                     0
+               GET_ITER
+               CALL                     0
+               LOAD_CONST               4 (None)
+               CALL                     2
+               STORE_FAST               3 (pasta)
+
+ 203           LOAD_FAST_BORROW         3 (pasta)
+               TO_BOOL
+               POP_JUMP_IF_TRUE        12 (to L3)
+               NOT_TAKEN
+
+ 204           LOAD_GLOBAL              7 (ListaInvalida + NULL)
+               LOAD_CONST               5 ('A pasta de views do Football Manager nao foi encontrada neste computador.')
+               CALL                     1
+               RAISE_VARARGS            1
+
+ 205   L3:     LOAD_GLOBAL             13 (revisar + NULL)
+               LOAD_GLOBAL             15 (_ler_caminho + NULL)
+               LOAD_GLOBAL              0 (os)
+               LOAD_ATTR                2 (path)
+               LOAD_ATTR               17 (join + NULL|self)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 48 (pasta, arquivo)
+               CALL                     2
+               CALL                     1
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 2 (arquivo, destino)
+               CALL                     3
+               RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x108107d70, file "view_fmf.py", line 202>:
+  --           COPY_FREE_VARS           1
+
+ 202           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                43 (to L5)
+               STORE_FAST               1 (p)
+               LOAD_DEREF               2 (jogo)
+               POP_JUMP_IF_NONE        26 (to L4)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         1 (p)
+               LOAD_CONST               1 ('jogo')
+               BINARY_OP               26 ([])
+               LOAD_GLOBAL              1 (str + NULL)
+               LOAD_DEREF               2 (jogo)
+               CALL                     1
+               COMPARE_OP              88 (bool(==))
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           32 (to L2)
+       L4:     LOAD_FAST_BORROW         1 (p)
+               LOAD_CONST               2 ('pasta')
+               BINARY_OP               26 ([])
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           45 (to L2)
+       L5:     END_FOR
+               POP_ITER
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L6:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L6 [0] lasti
+  L4 to L6 -> L6 [0] lasti
+
+Disassembly of <code object __annotate__ at 0x108231ac0, file "view_fmf.py", line 208>:
+208           RESUME                   0
+              LOAD_FAST_BORROW         0 (format)
+              LOAD_SMALL_INT           2
+              COMPARE_OP             132 (>)
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_COMMON_CONSTANT     1 (NotImplementedError)
+              RAISE_VARARGS            1
+      L1:     LOAD_CONST               1 ('caminho')
+              LOAD_GLOBAL              0 (str)
+              LOAD_CONST               2 ('destino')
+              LOAD_GLOBAL              0 (str)
+              LOAD_CONST               3 ('return')
+              LOAD_GLOBAL              2 (dict)
+              BUILD_MAP                3
+              RETURN_VALUE
+
+Disassembly of <code object ler_do_caminho at 0x108107230, file "view_fmf.py", line 208>:
+208           RESUME                   0
+
+210           LOAD_GLOBAL              1 (revisar + NULL)
+              LOAD_GLOBAL              3 (_ler_caminho + NULL)
+              LOAD_FAST_BORROW         0 (caminho)
+              CALL                     1
+              LOAD_GLOBAL              4 (os)
+              LOAD_ATTR                6 (path)
+              LOAD_ATTR                9 (basename + NULL|self)
+              LOAD_FAST_BORROW         0 (caminho)
+              CALL                     1
+              LOAD_FAST_BORROW         1 (destino)
+              CALL                     3
+              RETURN_VALUE

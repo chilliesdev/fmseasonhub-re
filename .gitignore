@@ -1,0 +1,19 @@
+# Executables and compiled native binaries
+*.exe
+*.dll
+*.pyd
+*.so
+*.dylib
+*.bin
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Dependency directories
+node_modules/
+
+# OS specific files
+.DS_Store
+Thumbs.db

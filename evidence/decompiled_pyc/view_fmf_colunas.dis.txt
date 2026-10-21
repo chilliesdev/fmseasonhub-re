@@ -1,0 +1,2477 @@
+# Module: view_fmf_colunas
+# Filename: view_fmf_colunas.py
+
+  0           RESUME                   0
+
+ 12           BUILD_MAP                0
+
+ 14           LOAD_CONST               0 ('age')
+              LOAD_CONST             207 (('ok', '_age'))
+
+ 12           MAP_ADD                  1
+
+ 15           LOAD_CONST               1 ('average-rating')
+              LOAD_CONST             208 (('ok', '_rating'))
+
+ 12           MAP_ADD                  1
+
+ 16           LOAD_CONST               2 ('chalkboard-stats-assists-per90')
+              LOAD_CONST             209 (('ok', 'all_assists90'))
+
+ 12           MAP_ADD                  1
+
+ 17           LOAD_CONST               3 ('chalkboard-stats-blocks')
+              LOAD_CONST             210 (('ok', 'all_blocks'))
+
+ 12           MAP_ADD                  1
+
+ 18           LOAD_CONST               4 ('chalkboard-stats-clearances')
+              LOAD_CONST             211 (('ok', 'all_clear'))
+
+ 12           MAP_ADD                  1
+
+ 19           LOAD_CONST               5 ('chalkboard-stats-converstion-rate')
+              LOAD_CONST             212 (('ok', 'b2b_AK'))
+
+ 12           MAP_ADD                  1
+
+ 20           LOAD_CONST               6 ('chalkboard-stats-crosses-attempted')
+              LOAD_CONST             213 (('ok', 'wing_BJ'))
+
+ 12           MAP_ADD                  1
+
+ 21           LOAD_CONST               7 ('chalkboard-stats-crosses-completed')
+              LOAD_CONST             214 (('ok', 'wing_BL'))
+
+ 12           MAP_ADD                  1
+
+ 22           LOAD_CONST               8 ('chalkboard-stats-crosses-completion-ratio')
+              LOAD_CONST             215 (('ok', 'all_crosspct'))
+
+ 12           MAP_ADD                  1
+
+ 23           LOAD_CONST               9 ('chalkboard-stats-distance-covered')
+              LOAD_CONST             216 (('ok', 'all_dist'))
+
+ 12           MAP_ADD                  1
+
+ 24           LOAD_CONST              10 ('chalkboard-stats-dribbles-made')
+              LOAD_CONST             217 (('ok', 'wing_BW'))
+
+ 12           MAP_ADD                  1
+
+ 25           LOAD_CONST              11 ('chalkboard-stats-dribbles-made-per90')
+              LOAD_CONST             218 (('ok', 'wing_BX'))
+
+ 12           MAP_ADD                  1
+
+ 26           LOAD_CONST              12 ('chalkboard-stats-expected-goals-prevented')
+              LOAD_CONST             219 (('ok', 'gk_BG'))
+
+ 12           MAP_ADD                  1
+
+ 27           LOAD_CONST              13 ('chalkboard-stats-expected-goals-prevented-per90')
+              LOAD_CONST             220 (('ok', 'gk_BH'))
+
+ 12           MAP_ADD                  1
+
+ 28           LOAD_CONST              14 ('chalkboard-stats-free-kick-shots')
+              LOAD_CONST             221 (('ok', 'amc_AC'))
+
+ 12           MAP_ADD                  1
+
+ 29           LOAD_CONST              15 ('chalkboard-stats-goals-outside-box')
+              LOAD_CONST             222 (('ok', 'b2b_AM'))
+
+ 12           MAP_ADD                  1
+
+ 30           LOAD_CONST              16 ('chalkboard-stats-headers-attempted')
+              LOAD_CONST             223 (('ok', 'def_AN'))
+
+ 12           MAP_ADD                  1
+              BUILD_MAP                0
+
+ 31           LOAD_CONST              17 ('chalkboard-stats-headers-won')
+              LOAD_CONST             224 (('ok', 'def_AP'))
+
+ 12           MAP_ADD                  1
+
+ 32           LOAD_CONST              18 ('chalkboard-stats-headers-won-ratio')
+              LOAD_CONST             225 (('ok', 'def_AR'))
+
+ 12           MAP_ADD                  1
+
+ 33           LOAD_CONST              19 ('chalkboard-stats-interceptions')
+              LOAD_CONST             226 (('ok', 'all_interc'))
+
+ 12           MAP_ADD                  1
+
+ 34           LOAD_CONST              20 ('chalkboard-stats-interceptions-per90')
+              LOAD_CONST             227 (('ok', 'att_DM'))
+
+ 12           MAP_ADD                  1
+
+ 35           LOAD_CONST              21 ('chalkboard-stats-key-headers-per90')
+              LOAD_CONST             228 (('ok', 'def_AX'))
+
+ 12           MAP_ADD                  1
+
+ 36           LOAD_CONST              22 ('chalkboard-stats-key-passes')
+              LOAD_CONST             229 (('ok', 'all_keypass'))
+
+ 12           MAP_ADD                  1
+
+ 37           LOAD_CONST              23 ('chalkboard-stats-key-passes-per90')
+              LOAD_CONST             230 (('ok', 'gk_AF'))
+
+ 12           MAP_ADD                  1
+
+ 38           LOAD_CONST              24 ('chalkboard-stats-key-tackles')
+              LOAD_CONST             231 (('ok', 'def_BW'))
+
+ 12           MAP_ADD                  1
+
+ 39           LOAD_CONST              25 ('chalkboard-stats-mistakes-leading-to-goal')
+              LOAD_CONST             232 (('ok', 'all_errors'))
+
+ 12           MAP_ADD                  1
+
+ 40           LOAD_CONST              26 ('chalkboard-stats-offsides')
+              LOAD_CONST             233 (('ok', 'att_BL'))
+
+ 12           MAP_ADD                  1
+
+ 41           LOAD_CONST              27 ('chalkboard-stats-pass-completion-ratio')
+              LOAD_CONST             234 (('ok', 'all_passpct'))
+
+ 12           MAP_ADD                  1
+
+ 42           LOAD_CONST              28 ('chalkboard-stats-passes-attempted')
+              LOAD_CONST             235 (('ok', 'gk_R'))
+
+ 12           MAP_ADD                  1
+
+ 43           LOAD_CONST              29 ('chalkboard-stats-passes-attempted-per90')
+              LOAD_CONST             236 (('ok', 'def_CE'))
+
+ 12           MAP_ADD                  1
+
+ 44           LOAD_CONST              30 ('chalkboard-stats-passes-completed')
+              LOAD_CONST             237 (('ok', 'gk_S'))
+
+ 12           MAP_ADD                  1
+
+ 45           LOAD_CONST              31 ('chalkboard-stats-passes-completed-per90')
+              LOAD_CONST             238 (('ok', 'gk_T'))
+
+ 12           MAP_ADD                  1
+
+ 46           LOAD_CONST              32 ('chalkboard-stats-possession-lost-per90')
+              LOAD_CONST             239 (('ok', 'gk_CE'))
+
+ 12           MAP_ADD                  1
+
+ 47           LOAD_CONST              33 ('chalkboard-stats-pressures-attempted')
+              LOAD_CONST             240 (('ok', 'def_BY'))
+
+ 12           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+ 48           LOAD_CONST              34 ('chalkboard-stats-pressures-completed')
+              LOAD_CONST             241 (('ok', 'def_CA'))
+
+ 12           MAP_ADD                  1
+
+ 49           LOAD_CONST              35 ('chalkboard-stats-progressive-passes')
+              LOAD_CONST             242 (('ok', 'gk_AB'))
+
+ 12           MAP_ADD                  1
+
+ 50           LOAD_CONST              36 ('chalkboard-stats-progressive-passes-per90')
+              LOAD_CONST             243 (('ok', 'gk_AC'))
+
+ 12           MAP_ADD                  1
+
+ 51           LOAD_CONST              37 ('chalkboard-stats-saves-held')
+              LOAD_CONST             244 (('ok', 'gk_AG'))
+
+ 12           MAP_ADD                  1
+
+ 52           LOAD_CONST              38 ('chalkboard-stats-saves-parried')
+              LOAD_CONST             245 (('ok', 'gk_AM'))
+
+ 12           MAP_ADD                  1
+
+ 53           LOAD_CONST              39 ('chalkboard-stats-saves-tipped')
+              LOAD_CONST             246 (('ok', 'gk_AJ'))
+
+ 12           MAP_ADD                  1
+
+ 54           LOAD_CONST              40 ('chalkboard-stats-shots')
+              LOAD_CONST             247 (('ok', 'all_shots'))
+
+ 12           MAP_ADD                  1
+
+ 55           LOAD_CONST              41 ('chalkboard-stats-shots-blocked-defending')
+              LOAD_CONST             248 (('ok', 'def_BK'))
+
+ 12           MAP_ADD                  1
+
+ 56           LOAD_CONST              42 ('chalkboard-stats-shots-on-target')
+              LOAD_CONST             249 (('ok', 'b2b_AC'))
+
+ 12           MAP_ADD                  1
+
+ 57           LOAD_CONST              43 ('chalkboard-stats-shots-on-target-per90')
+              LOAD_CONST             250 (('ok', 'b2b_AD'))
+
+ 12           MAP_ADD                  1
+
+ 58           LOAD_CONST              44 ('chalkboard-stats-shots-on-target-ratio')
+              LOAD_CONST             251 (('ok', 'all_sotpct'))
+
+ 12           MAP_ADD                  1
+
+ 59           LOAD_CONST              45 ('chalkboard-stats-shots-outside-box-per90')
+              LOAD_CONST             252 (('ok', 'b2b_AQ'))
+
+ 12           MAP_ADD                  1
+
+ 60           LOAD_CONST              46 ('chalkboard-stats-shots-per90')
+              LOAD_CONST             253 (('ok', 'b2b_Z'))
+
+ 12           MAP_ADD                  1
+
+ 61           LOAD_CONST              47 ('chalkboard-stats-sprints-per90')
+              LOAD_CONST             254 (('ok', 'wing_DF'))
+
+ 12           MAP_ADD                  1
+
+ 62           LOAD_CONST              48 ('chalkboard-stats-tackles-completed')
+              LOAD_CONST             255 (('ok', 'def_BR'))
+
+ 12           MAP_ADD                  1
+
+ 63           LOAD_CONST              49 ('club')
+              EXTENDED_ARG             1
+              LOAD_CONST             256 (('ok', 'club'))
+
+ 12           MAP_ADD                  1
+
+ 64           LOAD_CONST              50 ('club-division')
+              EXTENDED_ARG             1
+              LOAD_CONST             257 (('ok', 'league'))
+
+ 12           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+ 65           LOAD_CONST              51 ('club-player-search')
+              EXTENDED_ARG             1
+              LOAD_CONST             256 (('ok', 'club'))
+
+ 12           MAP_ADD                  1
+
+ 66           LOAD_CONST              52 ('condition')
+              EXTENDED_ARG             1
+              LOAD_CONST             258 (('ok', 'all_fit'))
+
+ 12           MAP_ADD                  1
+
+ 67           LOAD_CONST              53 ('context-contract-weekly-wage')
+              EXTENDED_ARG             1
+              LOAD_CONST             259 (('ok', '_wage'))
+
+ 12           MAP_ADD                  1
+
+ 68           LOAD_CONST              54 ('contract-expiry-date')
+              EXTENDED_ARG             1
+              LOAD_CONST             260 (('ok', 'contract'))
+
+ 12           MAP_ADD                  1
+
+ 69           LOAD_CONST              55 ('expected-assists')
+              EXTENDED_ARG             1
+              LOAD_CONST             261 (('ok', 'all_xa'))
+
+ 12           MAP_ADD                  1
+
+ 70           LOAD_CONST              56 ('expected-assists-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             262 (('ok', 'def_AB'))
+
+ 12           MAP_ADD                  1
+
+ 71           LOAD_CONST              57 ('expected-goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             263 (('ok', 'all_xg'))
+
+ 12           MAP_ADD                  1
+
+ 72           LOAD_CONST              58 ('goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             264 (('ok', 'all_goals'))
+
+ 12           MAP_ADD                  1
+
+ 73           LOAD_CONST              59 ('height')
+              EXTENDED_ARG             1
+              LOAD_CONST             265 (('ok', '_height'))
+
+ 12           MAP_ADD                  1
+
+ 74           LOAD_CONST              60 ('international-caps')
+              EXTENDED_ARG             1
+              LOAD_CONST             266 (('ok', 'all_intlapps'))
+
+ 12           MAP_ADD                  1
+
+ 75           LOAD_CONST              61 ('international-goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             267 (('ok', 'all_intlgoals'))
+
+ 12           MAP_ADD                  1
+
+ 76           LOAD_CONST              62 ('international-youth-caps')
+              EXTENDED_ARG             1
+              LOAD_CONST             268 (('ok', 'all_u21apps'))
+
+ 12           MAP_ADD                  1
+
+ 77           LOAD_CONST              63 ('international-youth-goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             269 (('ok', 'all_u21goals'))
+
+ 12           MAP_ADD                  1
+
+ 78           LOAD_CONST              64 ('morale')
+              EXTENDED_ARG             1
+              LOAD_CONST             270 (('ok', 'all_moral'))
+
+ 12           MAP_ADD                  1
+
+ 79           LOAD_CONST              65 ('morale-icon-only')
+              EXTENDED_ARG             1
+              LOAD_CONST             270 (('ok', 'all_moral'))
+
+ 12           MAP_ADD                  1
+
+ 80           LOAD_CONST              66 ('name')
+              EXTENDED_ARG             1
+              LOAD_CONST             271 (('ok', 'name'))
+
+ 12           MAP_ADD                  1
+
+ 81           LOAD_CONST              67 ('nation')
+              EXTENDED_ARG             1
+              LOAD_CONST             272 (('ok', 'nat'))
+
+ 12           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+ 82           LOAD_CONST              68 ('nation-flag')
+              EXTENDED_ARG             1
+              LOAD_CONST             272 (('ok', 'nat'))
+
+ 12           MAP_ADD                  1
+
+ 83           LOAD_CONST              69 ('nation-small')
+              EXTENDED_ARG             1
+              LOAD_CONST             272 (('ok', 'nat'))
+
+ 12           MAP_ADD                  1
+
+ 84           LOAD_CONST              70 ('nation-small-player-search')
+              EXTENDED_ARG             1
+              LOAD_CONST             272 (('ok', 'nat'))
+
+ 12           MAP_ADD                  1
+
+ 85           LOAD_CONST              71 ('non-penalty-expected-goals-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             273 (('ok', 'def_Z'))
+
+ 12           MAP_ADD                  1
+
+ 86           LOAD_CONST              72 ('overall-assists')
+              EXTENDED_ARG             1
+              LOAD_CONST             274 (('ok', 'all_assists'))
+
+ 12           MAP_ADD                  1
+
+ 87           LOAD_CONST              73 ('overall-goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             264 (('ok', 'all_goals'))
+
+ 12           MAP_ADD                  1
+
+ 88           LOAD_CONST              74 ('overview-position')
+              EXTENDED_ARG             1
+              LOAD_CONST             275 (('ok', 'pos'))
+
+ 12           MAP_ADD                  1
+
+ 89           LOAD_CONST              75 ('portrait-name')
+              EXTENDED_ARG             1
+              LOAD_CONST             271 (('ok', 'name'))
+
+ 12           MAP_ADD                  1
+
+ 90           LOAD_CONST              76 ('position')
+              EXTENDED_ARG             1
+              LOAD_CONST             275 (('ok', 'pos'))
+
+ 12           MAP_ADD                  1
+
+ 91           LOAD_CONST              77 ('positions')
+              EXTENDED_ARG             1
+              LOAD_CONST             275 (('ok', 'pos'))
+
+ 12           MAP_ADD                  1
+
+ 92           LOAD_CONST              78 ('preferred-foot')
+              EXTENDED_ARG             1
+              LOAD_CONST             276 (('ok', 'foot'))
+
+ 12           MAP_ADD                  1
+
+ 93           LOAD_CONST              79 ('sharpness')
+              EXTENDED_ARG             1
+              LOAD_CONST             277 (('ok', 'all_sharp'))
+
+ 12           MAP_ADD                  1
+
+ 94           LOAD_CONST              80 ('stats-career-goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             278 (('ok', 'att_R'))
+
+ 12           MAP_ADD                  1
+
+ 95           LOAD_CONST              81 ('stats-clean-sheets')
+              EXTENDED_ARG             1
+              LOAD_CONST             279 (('ok', 'gk_AQ'))
+
+ 12           MAP_ADD                  1
+
+ 96           LOAD_CONST              82 ('stats-clean-sheets-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             280 (('ok', 'gk_AP'))
+
+ 12           MAP_ADD                  1
+
+ 97           LOAD_CONST              83 ('stats-conceded')
+              EXTENDED_ARG             1
+              LOAD_CONST             281 (('ok', 'gk_BX'))
+
+ 12           MAP_ADD                  1
+
+ 98           LOAD_CONST              84 ('stats-fouls-against')
+              EXTENDED_ARG             1
+              LOAD_CONST             282 (('ok', 'gk_CP'))
+
+ 12           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+ 99           LOAD_CONST              85 ('stats-fouls-made')
+              EXTENDED_ARG             1
+              LOAD_CONST             283 (('ok', 'all_fouls'))
+
+ 12           MAP_ADD                  1
+
+100           LOAD_CONST              86 ('stats-goals-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             284 (('ok', 'all_goals90'))
+
+ 12           MAP_ADD                  1
+
+101           LOAD_CONST              87 ('stats-minutes')
+              EXTENDED_ARG             1
+              LOAD_CONST             285 (('ok', 'all_min'))
+
+ 12           MAP_ADD                  1
+
+102           LOAD_CONST              88 ('stats-overall-appearances')
+              EXTENDED_ARG             1
+              LOAD_CONST             286 (('ok', 'all_apps'))
+
+ 12           MAP_ADD                  1
+
+103           LOAD_CONST              89 ('stats-overall-assists')
+              EXTENDED_ARG             1
+              LOAD_CONST             274 (('ok', 'all_assists'))
+
+ 12           MAP_ADD                  1
+
+104           LOAD_CONST              90 ('stats-penalties')
+              EXTENDED_ARG             1
+              LOAD_CONST             287 (('ok', 'def_AH'))
+
+ 12           MAP_ADD                  1
+
+105           LOAD_CONST              91 ('stats-penalties-faced')
+              EXTENDED_ARG             1
+              LOAD_CONST             288 (('ok', 'gk_BR'))
+
+ 12           MAP_ADD                  1
+
+106           LOAD_CONST              92 ('stats-penalties-saved')
+              EXTENDED_ARG             1
+              LOAD_CONST             289 (('ok', 'gk_BT'))
+
+ 12           MAP_ADD                  1
+
+107           LOAD_CONST              93 ('stats-penalties-scored')
+              EXTENDED_ARG             1
+              LOAD_CONST             290 (('ok', 'def_AI'))
+
+ 12           MAP_ADD                  1
+
+108           LOAD_CONST              94 ('stats-player-of-the-match')
+              EXTENDED_ARG             1
+              LOAD_CONST             291 (('ok', 'gk_O'))
+
+ 12           MAP_ADD                  1
+
+109           LOAD_CONST              95 ('stats-red-cards')
+              EXTENDED_ARG             1
+              LOAD_CONST             292 (('ok', 'all_red'))
+
+ 12           MAP_ADD                  1
+
+110           LOAD_CONST              96 ('transfer-value')
+              EXTENDED_ARG             1
+              LOAD_CONST             293 (('ok', '_value'))
+
+ 12           MAP_ADD                  1
+
+111           LOAD_CONST              97 ('wage')
+              EXTENDED_ARG             1
+              LOAD_CONST             259 (('ok', '_wage'))
+
+ 12           MAP_ADD                  1
+
+112           LOAD_CONST              98 ('world-reputation')
+              EXTENDED_ARG             1
+              LOAD_CONST             294 (('ok', 'all_repworld'))
+
+ 12           MAP_ADD                  1
+
+113           LOAD_CONST              99 ('yellow-cards')
+              EXTENDED_ARG             1
+              LOAD_CONST             295 (('ok', 'all_yellow'))
+
+ 12           MAP_ADD                  1
+
+115           LOAD_CONST             100 ('chalkboard-stats-clear-cut-chances-created')
+              EXTENDED_ARG             1
+              LOAD_CONST             296 (('nova', 'all_ccc'))
+
+ 12           MAP_ADD                  1
+
+116           LOAD_CONST             101 ('chalkboard-stats-expected-goals-per-shot')
+              EXTENDED_ARG             1
+              LOAD_CONST             297 (('nova', 'all_xgshot'))
+
+ 12           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+117           LOAD_CONST             102 ('chalkboard-stats-open-play-crosses-attempted')
+              EXTENDED_ARG             1
+              LOAD_CONST             298 (('nova', 'all_cropatt'))
+
+ 12           MAP_ADD                  1
+
+118           LOAD_CONST             103 ('chalkboard-stats-open-play-crosses-attempted-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             299 (('nova', 'all_cropatt90'))
+
+ 12           MAP_ADD                  1
+
+119           LOAD_CONST             104 ('chalkboard-stats-open-play-crosses-completed')
+              EXTENDED_ARG             1
+              LOAD_CONST             300 (('nova', 'all_cropcmp'))
+
+ 12           MAP_ADD                  1
+
+120           LOAD_CONST             105 ('chalkboard-stats-open-play-crosses-completed-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             301 (('nova', 'all_cropcmp90'))
+
+ 12           MAP_ADD                  1
+
+121           LOAD_CONST             106 ('chalkboard-stats-open-play-crosses-completion-ratio')
+              EXTENDED_ARG             1
+              LOAD_CONST             302 (('nova', 'all_croppct'))
+
+ 12           MAP_ADD                  1
+
+122           LOAD_CONST             107 ('chalkboard-stats-open-play-key-passes-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             303 (('nova', 'all_opkp90'))
+
+ 12           MAP_ADD                  1
+
+123           LOAD_CONST             108 ('chalkboard-stats-tackle-completion-ratio')
+              EXTENDED_ARG             1
+              LOAD_CONST             304 (('nova', 'all_tklpct'))
+
+ 12           MAP_ADD                  1
+
+124           LOAD_CONST             109 ('chalkboard-stats-tackles-attempted')
+              EXTENDED_ARG             1
+              LOAD_CONST             305 (('nova', 'all_tklatt'))
+
+ 12           MAP_ADD                  1
+
+125           LOAD_CONST             110 ('date-of-birth')
+              EXTENDED_ARG             1
+              LOAD_CONST             306 (('nova', 'birth'))
+
+ 12           MAP_ADD                  1
+
+126           LOAD_CONST             111 ('left-foot')
+              EXTENDED_ARG             1
+              LOAD_CONST             307 (('nova', '_lfoot'))
+
+ 12           MAP_ADD                  1
+
+127           LOAD_CONST             112 ('right-foot')
+              EXTENDED_ARG             1
+              LOAD_CONST             308 (('nova', '_rfoot'))
+
+ 12           MAP_ADD                  1
+
+128           LOAD_CONST             113 ('stats-career-appearances')
+              EXTENDED_ARG             1
+              LOAD_CONST             309 (('nova', 'all_careerapps'))
+
+ 12           MAP_ADD                  1
+
+129           LOAD_CONST             114 ('unique-id')
+              EXTENDED_ARG             1
+              LOAD_CONST             310 (('nova', '_uid'))
+
+ 12           MAP_ADD                  1
+
+131           LOAD_CONST             115 ('assistant-opinion-best-position')
+              EXTENDED_ARG             1
+              LOAD_CONST             311 (('aprox', 'pos', 'olheiro'))
+
+ 12           MAP_ADD                  1
+
+132           LOAD_CONST             116 ('assistant-opinion-current-ability')
+              EXTENDED_ARG             1
+              LOAD_CONST             312 (('aprox', '_ca', 'olheiro'))
+
+ 12           MAP_ADD                  1
+
+133           LOAD_CONST             117 ('assistant-opinion-potential-ability')
+              EXTENDED_ARG             1
+              LOAD_CONST             313 (('aprox', '_pa', 'olheiro'))
+
+ 12           MAP_ADD                  1
+
+134           LOAD_CONST             118 ('chalkboard-stats-possession-won-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             314 (('aprox', 'gk_CC', 'nao_conferido'))
+
+ 12           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+135           LOAD_CONST             119 ('chalkboard-stats-save-ratio')
+              EXTENDED_ARG             1
+              LOAD_CONST             315 (('aprox', 'gk_AX', 'nao_conferido'))
+
+ 12           MAP_ADD                  1
+
+136           LOAD_CONST             120 ('current-ability-stars')
+              EXTENDED_ARG             1
+              LOAD_CONST             312 (('aprox', '_ca', 'olheiro'))
+
+ 12           MAP_ADD                  1
+
+137           LOAD_CONST             121 ('potential-ability-stars')
+              EXTENDED_ARG             1
+              LOAD_CONST             313 (('aprox', '_pa', 'olheiro'))
+
+ 12           MAP_ADD                  1
+
+138           LOAD_CONST             122 ('scout-opinion-current-ability')
+              EXTENDED_ARG             1
+              LOAD_CONST             312 (('aprox', '_ca', 'olheiro'))
+
+ 12           MAP_ADD                  1
+
+139           LOAD_CONST             123 ('scouted-best-position')
+              EXTENDED_ARG             1
+              LOAD_CONST             311 (('aprox', 'pos', 'olheiro'))
+
+ 12           MAP_ADD                  1
+
+140           LOAD_CONST             124 ('stats-total-saves-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             316 (('aprox', 'gk_AT', 'nao_conferido'))
+
+ 12           MAP_ADD                  1
+
+142           LOAD_CONST             125 ('attribute-acceleration')
+              EXTENDED_ARG             1
+              LOAD_CONST             317 (('atrib', 'acceleration'))
+
+ 12           MAP_ADD                  1
+
+143           LOAD_CONST             126 ('attribute-aerial-reach')
+              EXTENDED_ARG             1
+              LOAD_CONST             318 (('atrib', 'aerial_reach'))
+
+ 12           MAP_ADD                  1
+
+144           LOAD_CONST             127 ('attribute-aggression')
+              EXTENDED_ARG             1
+              LOAD_CONST             319 (('atrib', 'aggression'))
+
+ 12           MAP_ADD                  1
+
+145           LOAD_CONST             128 ('attribute-agility')
+              EXTENDED_ARG             1
+              LOAD_CONST             320 (('atrib', 'agility'))
+
+ 12           MAP_ADD                  1
+
+146           LOAD_CONST             129 ('attribute-anticipation')
+              EXTENDED_ARG             1
+              LOAD_CONST             321 (('atrib', 'anticipation'))
+
+ 12           MAP_ADD                  1
+
+147           LOAD_CONST             130 ('attribute-balance')
+              EXTENDED_ARG             1
+              LOAD_CONST             322 (('atrib', 'balance'))
+
+ 12           MAP_ADD                  1
+
+148           LOAD_CONST             131 ('attribute-bravery')
+              EXTENDED_ARG             1
+              LOAD_CONST             323 (('atrib', 'bravery'))
+
+ 12           MAP_ADD                  1
+
+149           LOAD_CONST             132 ('attribute-command-of-area')
+              EXTENDED_ARG             1
+              LOAD_CONST             324 (('atrib', 'command_of_area'))
+
+ 12           MAP_ADD                  1
+
+150           LOAD_CONST             133 ('attribute-communication')
+              EXTENDED_ARG             1
+              LOAD_CONST             325 (('atrib', 'communication'))
+
+ 12           MAP_ADD                  1
+
+151           LOAD_CONST             134 ('attribute-composure')
+              EXTENDED_ARG             1
+              LOAD_CONST             326 (('atrib', 'composure'))
+
+ 12           MAP_ADD                  1
+
+152           LOAD_CONST             135 ('attribute-concentration')
+              EXTENDED_ARG             1
+              LOAD_CONST             327 (('atrib', 'concentration'))
+
+ 12           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+153           LOAD_CONST             136 ('attribute-corners')
+              EXTENDED_ARG             1
+              LOAD_CONST             328 (('atrib', 'corners'))
+
+ 12           MAP_ADD                  1
+
+154           LOAD_CONST             137 ('attribute-crossing')
+              EXTENDED_ARG             1
+              LOAD_CONST             329 (('atrib', 'crossing'))
+
+ 12           MAP_ADD                  1
+
+155           LOAD_CONST             138 ('attribute-decisions')
+              EXTENDED_ARG             1
+              LOAD_CONST             330 (('atrib', 'decisions'))
+
+ 12           MAP_ADD                  1
+
+156           LOAD_CONST             139 ('attribute-determination')
+              EXTENDED_ARG             1
+              LOAD_CONST             331 (('atrib', 'determination'))
+
+ 12           MAP_ADD                  1
+
+157           LOAD_CONST             140 ('attribute-dribbling')
+              EXTENDED_ARG             1
+              LOAD_CONST             332 (('atrib', 'dribbling'))
+
+ 12           MAP_ADD                  1
+
+158           LOAD_CONST             141 ('attribute-eccentricity')
+              EXTENDED_ARG             1
+              LOAD_CONST             333 (('atrib', 'eccentricity'))
+
+ 12           MAP_ADD                  1
+
+159           LOAD_CONST             142 ('attribute-finishing')
+              EXTENDED_ARG             1
+              LOAD_CONST             334 (('atrib', 'finishing'))
+
+ 12           MAP_ADD                  1
+
+160           LOAD_CONST             143 ('attribute-first-touch')
+              EXTENDED_ARG             1
+              LOAD_CONST             335 (('atrib', 'first_touch'))
+
+ 12           MAP_ADD                  1
+
+161           LOAD_CONST             144 ('attribute-flair')
+              EXTENDED_ARG             1
+              LOAD_CONST             336 (('atrib', 'flair'))
+
+ 12           MAP_ADD                  1
+
+162           LOAD_CONST             145 ('attribute-free-kicks')
+              EXTENDED_ARG             1
+              LOAD_CONST             337 (('atrib', 'free_kicks'))
+
+ 12           MAP_ADD                  1
+
+163           LOAD_CONST             146 ('attribute-handling')
+              EXTENDED_ARG             1
+              LOAD_CONST             338 (('atrib', 'handling'))
+
+ 12           MAP_ADD                  1
+
+164           LOAD_CONST             147 ('attribute-heading')
+              EXTENDED_ARG             1
+              LOAD_CONST             339 (('atrib', 'heading'))
+
+ 12           MAP_ADD                  1
+
+165           LOAD_CONST             148 ('attribute-jumping-reach')
+              EXTENDED_ARG             1
+              LOAD_CONST             340 (('atrib', 'jumping_reach'))
+
+ 12           MAP_ADD                  1
+
+166           LOAD_CONST             149 ('attribute-kicking')
+              EXTENDED_ARG             1
+              LOAD_CONST             341 (('atrib', 'kicking'))
+
+ 12           MAP_ADD                  1
+
+167           LOAD_CONST             150 ('attribute-leadership')
+              EXTENDED_ARG             1
+              LOAD_CONST             342 (('atrib', 'leadership'))
+
+ 12           MAP_ADD                  1
+
+168           LOAD_CONST             151 ('attribute-long-shots')
+              EXTENDED_ARG             1
+              LOAD_CONST             343 (('atrib', 'long_shots'))
+
+ 12           MAP_ADD                  1
+
+169           LOAD_CONST             152 ('attribute-long-throws')
+              EXTENDED_ARG             1
+              LOAD_CONST             344 (('atrib', 'long_throws'))
+
+ 12           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+170           LOAD_CONST             153 ('attribute-marking')
+              EXTENDED_ARG             1
+              LOAD_CONST             345 (('atrib', 'marking'))
+
+ 12           MAP_ADD                  1
+
+171           LOAD_CONST             154 ('attribute-movement')
+              EXTENDED_ARG             1
+              LOAD_CONST             346 (('atrib', 'off_the_ball'))
+
+ 12           MAP_ADD                  1
+
+172           LOAD_CONST             155 ('attribute-natural-fitness')
+              EXTENDED_ARG             1
+              LOAD_CONST             347 (('atrib', 'natural_fitness'))
+
+ 12           MAP_ADD                  1
+
+173           LOAD_CONST             156 ('attribute-one-on-ones')
+              EXTENDED_ARG             1
+              LOAD_CONST             348 (('atrib', 'one_on_ones'))
+
+ 12           MAP_ADD                  1
+
+174           LOAD_CONST             157 ('attribute-pace')
+              EXTENDED_ARG             1
+              LOAD_CONST             349 (('atrib', 'pace'))
+
+ 12           MAP_ADD                  1
+
+175           LOAD_CONST             158 ('attribute-passing')
+              EXTENDED_ARG             1
+              LOAD_CONST             350 (('atrib', 'passing'))
+
+ 12           MAP_ADD                  1
+
+176           LOAD_CONST             159 ('attribute-penalty-taking')
+              EXTENDED_ARG             1
+              LOAD_CONST             351 (('atrib', 'penalty_taking'))
+
+ 12           MAP_ADD                  1
+
+177           LOAD_CONST             160 ('attribute-positioning')
+              EXTENDED_ARG             1
+              LOAD_CONST             352 (('atrib', 'positioning'))
+
+ 12           MAP_ADD                  1
+
+178           LOAD_CONST             161 ('attribute-punching')
+              EXTENDED_ARG             1
+              LOAD_CONST             353 (('atrib', 'punching'))
+
+ 12           MAP_ADD                  1
+
+179           LOAD_CONST             162 ('attribute-reflexes')
+              EXTENDED_ARG             1
+              LOAD_CONST             354 (('atrib', 'reflexes'))
+
+ 12           MAP_ADD                  1
+
+180           LOAD_CONST             163 ('attribute-rushing-out')
+              EXTENDED_ARG             1
+              LOAD_CONST             355 (('atrib', 'rushing_out'))
+
+ 12           MAP_ADD                  1
+
+181           LOAD_CONST             164 ('attribute-stamina')
+              EXTENDED_ARG             1
+              LOAD_CONST             356 (('atrib', 'stamina'))
+
+ 12           MAP_ADD                  1
+
+182           LOAD_CONST             165 ('attribute-strength')
+              EXTENDED_ARG             1
+              LOAD_CONST             357 (('atrib', 'strength'))
+
+ 12           MAP_ADD                  1
+
+183           LOAD_CONST             166 ('attribute-tackling')
+              EXTENDED_ARG             1
+              LOAD_CONST             358 (('atrib', 'tackling'))
+
+ 12           MAP_ADD                  1
+
+184           LOAD_CONST             167 ('attribute-teamwork')
+              EXTENDED_ARG             1
+              LOAD_CONST             359 (('atrib', 'teamwork'))
+
+ 12           MAP_ADD                  1
+
+185           LOAD_CONST             168 ('attribute-technique')
+              EXTENDED_ARG             1
+              LOAD_CONST             360 (('atrib', 'technique'))
+
+ 12           MAP_ADD                  1
+
+186           LOAD_CONST             169 ('attribute-throwing')
+              EXTENDED_ARG             1
+              LOAD_CONST             361 (('atrib', 'throwing'))
+
+ 12           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+187           LOAD_CONST             170 ('attribute-vision')
+              EXTENDED_ARG             1
+              LOAD_CONST             362 (('atrib', 'vision'))
+
+ 12           MAP_ADD                  1
+
+188           LOAD_CONST             171 ('attribute-work-rate')
+              EXTENDED_ARG             1
+              LOAD_CONST             363 (('atrib', 'work_rate'))
+
+ 12           MAP_ADD                  1
+
+190           LOAD_CONST             172 ('assistant-opinion-best-role')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+191           LOAD_CONST             173 ('based')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+192           LOAD_CONST             174 ('chalkboard-stats-chances-created-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+193           LOAD_CONST             175 ('chalkboard-stats-expected-save-percentage')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+194           LOAD_CONST             176 ('fatigue-icon')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+195           LOAD_CONST             177 ('form')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+196           LOAD_CONST             178 ('home-grown-status')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+197           LOAD_CONST             179 ('ip-role')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+198           LOAD_CONST             180 ('is-eu-national')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+199           LOAD_CONST             181 ('last-club')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+200           LOAD_CONST             182 ('media-description')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+201           LOAD_CONST             183 ('media-handling')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+202           LOAD_CONST             184 ('on-loan-from')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+203           LOAD_CONST             185 ('oop-role')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+204           LOAD_CONST             186 ('personality')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+205           LOAD_CONST             187 ('player-interest')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+206           LOAD_CONST             188 ('recommendation-grade-only')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+207           LOAD_CONST             189 ('recommendation-short-text')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+208           LOAD_CONST             190 ('region-of-birth')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+209           LOAD_CONST             191 ('scouted-best-position-and-role')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+210           LOAD_CONST             192 ('scouted-weakest-area-of-game')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+211           LOAD_CONST             193 ('second-nationality')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+212           LOAD_CONST             194 ('secondary-position')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+213           LOAD_CONST             195 ('shirtnumber')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+214           LOAD_CONST             196 ('tactic-ability')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+215           LOAD_CONST             197 ('tactical-familiarity-bar')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+216           LOAD_CONST             198 ('training-position-role')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+217           LOAD_CONST             199 ('training-rating')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+218           LOAD_CONST             200 ('transfer-status')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+219           LOAD_CONST             201 ('work-permit-required')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+ 12           MAP_ADD                  1
+
+221           LOAD_CONST             202 ('inf')
+              EXTENDED_ARG             1
+              LOAD_CONST             365 (('fm', 'tela_do_fm'))
+
+ 12           MAP_ADD                  1
+
+222           LOAD_CONST             203 ('inf-team')
+              EXTENDED_ARG             1
+              LOAD_CONST             365 (('fm', 'tela_do_fm'))
+
+ 12           MAP_ADD                  1
+              DICT_UPDATE              1
+
+223           LOAD_CONST             204 ('inf-teamselection')
+              EXTENDED_ARG             1
+              LOAD_CONST             365 (('fm', 'tela_do_fm'))
+
+224           LOAD_CONST             205 ('position-dropdown')
+              EXTENDED_ARG             1
+              LOAD_CONST             365 (('fm', 'tela_do_fm'))
+
+ 12           BUILD_MAP                2
+              DICT_UPDATE              1
+              STORE_NAME               0 (EQUIVALENCIA)
+
+230           BUILD_MAP                0
+
+232           LOAD_CONST               0 ('age')
+              EXTENDED_ARG             1
+              LOAD_CONST             366 (('ok', 'age'))
+
+230           MAP_ADD                  1
+
+233           LOAD_CONST               1 ('average-rating')
+              EXTENDED_ARG             1
+              LOAD_CONST             367 (('ok', 'rating'))
+
+230           MAP_ADD                  1
+
+234           LOAD_CONST               2 ('chalkboard-stats-assists-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             368 (('ok', 'ast90'))
+
+230           MAP_ADD                  1
+
+235           LOAD_CONST               9 ('chalkboard-stats-distance-covered')
+              EXTENDED_ARG             1
+              LOAD_CONST             369 (('ok', 'dist'))
+
+230           MAP_ADD                  1
+
+236           LOAD_CONST              10 ('chalkboard-stats-dribbles-made')
+              EXTENDED_ARG             1
+              LOAD_CONST             370 (('ok', 'drb'))
+
+230           MAP_ADD                  1
+
+237           LOAD_CONST              11 ('chalkboard-stats-dribbles-made-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             371 (('ok', 'drb90'))
+
+230           MAP_ADD                  1
+
+238           LOAD_CONST              16 ('chalkboard-stats-headers-attempted')
+              EXTENDED_ARG             1
+              LOAD_CONST             372 (('ok', 'hdrA'))
+
+230           MAP_ADD                  1
+
+239           LOAD_CONST              17 ('chalkboard-stats-headers-won')
+              EXTENDED_ARG             1
+              LOAD_CONST             373 (('ok', 'hdrW'))
+
+230           MAP_ADD                  1
+
+240           LOAD_CONST              18 ('chalkboard-stats-headers-won-ratio')
+              EXTENDED_ARG             1
+              LOAD_CONST             374 (('ok', 'hdrPct'))
+
+230           MAP_ADD                  1
+
+241           LOAD_CONST              22 ('chalkboard-stats-key-passes')
+              EXTENDED_ARG             1
+              LOAD_CONST             375 (('ok', 'keyP'))
+
+230           MAP_ADD                  1
+
+242           LOAD_CONST              23 ('chalkboard-stats-key-passes-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             376 (('ok', 'keyP90'))
+
+230           MAP_ADD                  1
+
+243           LOAD_CONST              25 ('chalkboard-stats-mistakes-leading-to-goal')
+              EXTENDED_ARG             1
+              LOAD_CONST             377 (('ok', 'errs'))
+
+230           MAP_ADD                  1
+
+244           LOAD_CONST             102 ('chalkboard-stats-open-play-crosses-attempted')
+              EXTENDED_ARG             1
+              LOAD_CONST             378 (('ok', 'crA'))
+
+230           MAP_ADD                  1
+
+245           LOAD_CONST             104 ('chalkboard-stats-open-play-crosses-completed')
+              EXTENDED_ARG             1
+              LOAD_CONST             379 (('ok', 'crC'))
+
+230           MAP_ADD                  1
+
+246           LOAD_CONST             106 ('chalkboard-stats-open-play-crosses-completion-ratio')
+              EXTENDED_ARG             1
+              LOAD_CONST             380 (('ok', 'crPct'))
+
+230           MAP_ADD                  1
+
+247           LOAD_CONST              27 ('chalkboard-stats-pass-completion-ratio')
+              EXTENDED_ARG             1
+              LOAD_CONST             381 (('ok', 'passPct'))
+
+230           MAP_ADD                  1
+
+248           LOAD_CONST              28 ('chalkboard-stats-passes-attempted')
+              EXTENDED_ARG             1
+              LOAD_CONST             382 (('ok', 'passA'))
+
+230           MAP_ADD                  1
+              BUILD_MAP                0
+
+249           LOAD_CONST              29 ('chalkboard-stats-passes-attempted-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             383 (('ok', 'passA90'))
+
+230           MAP_ADD                  1
+
+250           LOAD_CONST              31 ('chalkboard-stats-passes-completed-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             384 (('ok', 'passC90'))
+
+230           MAP_ADD                  1
+
+251           LOAD_CONST              32 ('chalkboard-stats-possession-lost-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             385 (('ok', 'lost90'))
+
+230           MAP_ADD                  1
+
+252           LOAD_CONST              48 ('chalkboard-stats-tackles-completed')
+              EXTENDED_ARG             1
+              LOAD_CONST             386 (('ok', 'tckW'))
+
+230           MAP_ADD                  1
+
+253           LOAD_CONST              49 ('club')
+              EXTENDED_ARG             1
+              LOAD_CONST             256 (('ok', 'club'))
+
+230           MAP_ADD                  1
+
+254           LOAD_CONST              50 ('club-division')
+              EXTENDED_ARG             1
+              LOAD_CONST             257 (('ok', 'league'))
+
+230           MAP_ADD                  1
+
+255           LOAD_CONST              51 ('club-player-search')
+              EXTENDED_ARG             1
+              LOAD_CONST             256 (('ok', 'club'))
+
+230           MAP_ADD                  1
+
+256           LOAD_CONST              53 ('context-contract-weekly-wage')
+              EXTENDED_ARG             1
+              LOAD_CONST             387 (('ok', 'wage'))
+
+230           MAP_ADD                  1
+
+257           LOAD_CONST              54 ('contract-expiry-date')
+              EXTENDED_ARG             1
+              LOAD_CONST             260 (('ok', 'contract'))
+
+230           MAP_ADD                  1
+
+258           LOAD_CONST              55 ('expected-assists')
+              EXTENDED_ARG             1
+              LOAD_CONST             388 (('ok', 'xa'))
+
+230           MAP_ADD                  1
+
+259           LOAD_CONST              56 ('expected-assists-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             389 (('ok', 'xa90'))
+
+230           MAP_ADD                  1
+
+260           LOAD_CONST              58 ('goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             390 (('ok', 'goals'))
+
+230           MAP_ADD                  1
+
+261           LOAD_CONST              59 ('height')
+              EXTENDED_ARG             1
+              LOAD_CONST             391 (('ok', 'height'))
+
+230           MAP_ADD                  1
+
+262           LOAD_CONST              66 ('name')
+              EXTENDED_ARG             1
+              LOAD_CONST             271 (('ok', 'name'))
+
+230           MAP_ADD                  1
+
+263           LOAD_CONST              67 ('nation')
+              EXTENDED_ARG             1
+              LOAD_CONST             272 (('ok', 'nat'))
+
+230           MAP_ADD                  1
+
+264           LOAD_CONST              68 ('nation-flag')
+              EXTENDED_ARG             1
+              LOAD_CONST             272 (('ok', 'nat'))
+
+230           MAP_ADD                  1
+
+265           LOAD_CONST              69 ('nation-small')
+              EXTENDED_ARG             1
+              LOAD_CONST             272 (('ok', 'nat'))
+
+230           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+266           LOAD_CONST              70 ('nation-small-player-search')
+              EXTENDED_ARG             1
+              LOAD_CONST             272 (('ok', 'nat'))
+
+230           MAP_ADD                  1
+
+267           LOAD_CONST              72 ('overall-assists')
+              EXTENDED_ARG             1
+              LOAD_CONST             392 (('ok', 'ast'))
+
+230           MAP_ADD                  1
+
+268           LOAD_CONST              73 ('overall-goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             390 (('ok', 'goals'))
+
+230           MAP_ADD                  1
+
+269           LOAD_CONST              74 ('overview-position')
+              EXTENDED_ARG             1
+              LOAD_CONST             275 (('ok', 'pos'))
+
+230           MAP_ADD                  1
+
+270           LOAD_CONST              75 ('portrait-name')
+              EXTENDED_ARG             1
+              LOAD_CONST             271 (('ok', 'name'))
+
+230           MAP_ADD                  1
+
+271           LOAD_CONST              76 ('position')
+              EXTENDED_ARG             1
+              LOAD_CONST             275 (('ok', 'pos'))
+
+230           MAP_ADD                  1
+
+272           LOAD_CONST              77 ('positions')
+              EXTENDED_ARG             1
+              LOAD_CONST             275 (('ok', 'pos'))
+
+230           MAP_ADD                  1
+
+273           LOAD_CONST              78 ('preferred-foot')
+              EXTENDED_ARG             1
+              LOAD_CONST             276 (('ok', 'foot'))
+
+230           MAP_ADD                  1
+
+274           LOAD_CONST              85 ('stats-fouls-made')
+              EXTENDED_ARG             1
+              LOAD_CONST             393 (('ok', 'fouls'))
+
+230           MAP_ADD                  1
+
+275           LOAD_CONST              86 ('stats-goals-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             394 (('ok', 'goals90'))
+
+230           MAP_ADD                  1
+
+276           LOAD_CONST              87 ('stats-minutes')
+              EXTENDED_ARG             1
+              LOAD_CONST             395 (('ok', 'min'))
+
+230           MAP_ADD                  1
+
+277           LOAD_CONST              88 ('stats-overall-appearances')
+              EXTENDED_ARG             1
+              LOAD_CONST             396 (('ok', 'apps'))
+
+230           MAP_ADD                  1
+
+278           LOAD_CONST              89 ('stats-overall-assists')
+              EXTENDED_ARG             1
+              LOAD_CONST             392 (('ok', 'ast'))
+
+230           MAP_ADD                  1
+
+279           LOAD_CONST              96 ('transfer-value')
+              EXTENDED_ARG             1
+              LOAD_CONST             397 (('ok', 'value'))
+
+230           MAP_ADD                  1
+
+280           LOAD_CONST              97 ('wage')
+              EXTENDED_ARG             1
+              LOAD_CONST             387 (('ok', 'wage'))
+
+230           MAP_ADD                  1
+
+282           LOAD_CONST             100 ('chalkboard-stats-clear-cut-chances-created')
+              EXTENDED_ARG             1
+              LOAD_CONST             398 (('nova', 'ccc'))
+
+230           MAP_ADD                  1
+
+283           LOAD_CONST               5 ('chalkboard-stats-converstion-rate')
+              EXTENDED_ARG             1
+              LOAD_CONST             399 (('nova', 'convAll'))
+
+230           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+284           LOAD_CONST               6 ('chalkboard-stats-crosses-attempted')
+              EXTENDED_ARG             1
+              LOAD_CONST             400 (('nova', 'crAll'))
+
+230           MAP_ADD                  1
+
+285           LOAD_CONST               7 ('chalkboard-stats-crosses-completed')
+              EXTENDED_ARG             1
+              LOAD_CONST             401 (('nova', 'crAllC'))
+
+230           MAP_ADD                  1
+
+286           LOAD_CONST               8 ('chalkboard-stats-crosses-completion-ratio')
+              EXTENDED_ARG             1
+              LOAD_CONST             402 (('nova', 'crAllPct'))
+
+230           MAP_ADD                  1
+
+287           LOAD_CONST             101 ('chalkboard-stats-expected-goals-per-shot')
+              EXTENDED_ARG             1
+              LOAD_CONST             403 (('nova', 'xgShot'))
+
+230           MAP_ADD                  1
+
+288           LOAD_CONST              14 ('chalkboard-stats-free-kick-shots')
+              EXTENDED_ARG             1
+              LOAD_CONST             404 (('nova', 'fkShots'))
+
+230           MAP_ADD                  1
+
+289           LOAD_CONST              15 ('chalkboard-stats-goals-outside-box')
+              EXTENDED_ARG             1
+              LOAD_CONST             405 (('nova', 'gob'))
+
+230           MAP_ADD                  1
+
+290           LOAD_CONST              20 ('chalkboard-stats-interceptions-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             406 (('nova', 'int90'))
+
+230           MAP_ADD                  1
+
+291           LOAD_CONST              24 ('chalkboard-stats-key-tackles')
+              EXTENDED_ARG             1
+              LOAD_CONST             407 (('nova', 'tckKey'))
+
+230           MAP_ADD                  1
+
+292           LOAD_CONST             103 ('chalkboard-stats-open-play-crosses-attempted-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             408 (('nova', 'crA90'))
+
+230           MAP_ADD                  1
+
+293           LOAD_CONST             105 ('chalkboard-stats-open-play-crosses-completed-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             409 (('nova', 'crC90'))
+
+230           MAP_ADD                  1
+
+294           LOAD_CONST             107 ('chalkboard-stats-open-play-key-passes-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             410 (('nova', 'opKp90'))
+
+230           MAP_ADD                  1
+
+295           LOAD_CONST              30 ('chalkboard-stats-passes-completed')
+              EXTENDED_ARG             1
+              LOAD_CONST             411 (('nova', 'passC'))
+
+230           MAP_ADD                  1
+
+296           LOAD_CONST              33 ('chalkboard-stats-pressures-attempted')
+              EXTENDED_ARG             1
+              LOAD_CONST             412 (('nova', 'pressA'))
+
+230           MAP_ADD                  1
+
+297           LOAD_CONST              34 ('chalkboard-stats-pressures-completed')
+              EXTENDED_ARG             1
+              LOAD_CONST             413 (('nova', 'pressC'))
+
+230           MAP_ADD                  1
+
+298           LOAD_CONST              35 ('chalkboard-stats-progressive-passes')
+              EXTENDED_ARG             1
+              LOAD_CONST             414 (('nova', 'prog'))
+
+230           MAP_ADD                  1
+
+299           LOAD_CONST              36 ('chalkboard-stats-progressive-passes-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             415 (('nova', 'prog90'))
+
+230           MAP_ADD                  1
+
+300           LOAD_CONST              40 ('chalkboard-stats-shots')
+              EXTENDED_ARG             1
+              LOAD_CONST             416 (('nova', 'shotsAll'))
+
+230           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+301           LOAD_CONST              42 ('chalkboard-stats-shots-on-target')
+              EXTENDED_ARG             1
+              LOAD_CONST             417 (('nova', 'sotAll'))
+
+230           MAP_ADD                  1
+
+302           LOAD_CONST              43 ('chalkboard-stats-shots-on-target-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             418 (('nova', 'sotAll90'))
+
+230           MAP_ADD                  1
+
+303           LOAD_CONST              44 ('chalkboard-stats-shots-on-target-ratio')
+              EXTENDED_ARG             1
+              LOAD_CONST             419 (('nova', 'sotAllPct'))
+
+230           MAP_ADD                  1
+
+304           LOAD_CONST              45 ('chalkboard-stats-shots-outside-box-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             420 (('nova', 'shotsOut90'))
+
+230           MAP_ADD                  1
+
+305           LOAD_CONST              46 ('chalkboard-stats-shots-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             421 (('nova', 'shotsAll90'))
+
+230           MAP_ADD                  1
+
+306           LOAD_CONST             108 ('chalkboard-stats-tackle-completion-ratio')
+              EXTENDED_ARG             1
+              LOAD_CONST             422 (('nova', 'tckRawPct'))
+
+230           MAP_ADD                  1
+
+307           LOAD_CONST             109 ('chalkboard-stats-tackles-attempted')
+              EXTENDED_ARG             1
+              LOAD_CONST             423 (('nova', 'tckRaw'))
+
+230           MAP_ADD                  1
+
+308           LOAD_CONST             110 ('date-of-birth')
+              EXTENDED_ARG             1
+              LOAD_CONST             306 (('nova', 'birth'))
+
+230           MAP_ADD                  1
+
+309           LOAD_CONST              57 ('expected-goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             424 (('nova', 'xg'))
+
+230           MAP_ADD                  1
+
+310           LOAD_CONST              60 ('international-caps')
+              EXTENDED_ARG             1
+              LOAD_CONST             425 (('nova', 'intlApps'))
+
+230           MAP_ADD                  1
+
+311           LOAD_CONST              61 ('international-goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             426 (('nova', 'intlGoals'))
+
+230           MAP_ADD                  1
+
+312           LOAD_CONST              62 ('international-youth-caps')
+              EXTENDED_ARG             1
+              LOAD_CONST             427 (('nova', 'u21Apps'))
+
+230           MAP_ADD                  1
+
+313           LOAD_CONST              63 ('international-youth-goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             428 (('nova', 'u21Goals'))
+
+230           MAP_ADD                  1
+
+314           LOAD_CONST             111 ('left-foot')
+              EXTENDED_ARG             1
+              LOAD_CONST             429 (('nova', 'lfoot'))
+
+230           MAP_ADD                  1
+
+315           LOAD_CONST              64 ('morale')
+              EXTENDED_ARG             1
+              LOAD_CONST             430 (('nova', 'morale'))
+
+230           MAP_ADD                  1
+
+316           LOAD_CONST              65 ('morale-icon-only')
+              EXTENDED_ARG             1
+              LOAD_CONST             430 (('nova', 'morale'))
+
+230           MAP_ADD                  1
+
+317           LOAD_CONST              71 ('non-penalty-expected-goals-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             431 (('nova', 'npxgFm90'))
+
+230           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+318           LOAD_CONST             112 ('right-foot')
+              EXTENDED_ARG             1
+              LOAD_CONST             432 (('nova', 'rfoot'))
+
+230           MAP_ADD                  1
+
+319           LOAD_CONST              84 ('stats-fouls-against')
+              EXTENDED_ARG             1
+              LOAD_CONST             433 (('nova', 'foulsWon'))
+
+230           MAP_ADD                  1
+
+320           LOAD_CONST              90 ('stats-penalties')
+              EXTENDED_ARG             1
+              LOAD_CONST             434 (('nova', 'pens'))
+
+230           MAP_ADD                  1
+
+321           LOAD_CONST              93 ('stats-penalties-scored')
+              EXTENDED_ARG             1
+              LOAD_CONST             435 (('nova', 'pensG'))
+
+230           MAP_ADD                  1
+
+322           LOAD_CONST              95 ('stats-red-cards')
+              EXTENDED_ARG             1
+              LOAD_CONST             436 (('nova', 'red'))
+
+230           MAP_ADD                  1
+
+323           LOAD_CONST             114 ('unique-id')
+              EXTENDED_ARG             1
+              LOAD_CONST             437 (('nova', 'uid'))
+
+230           MAP_ADD                  1
+
+324           LOAD_CONST              99 ('yellow-cards')
+              EXTENDED_ARG             1
+              LOAD_CONST             438 (('nova', 'yellow'))
+
+230           MAP_ADD                  1
+
+326           LOAD_CONST             115 ('assistant-opinion-best-position')
+              EXTENDED_ARG             1
+              LOAD_CONST             311 (('aprox', 'pos', 'olheiro'))
+
+230           MAP_ADD                  1
+
+327           LOAD_CONST             116 ('assistant-opinion-current-ability')
+              EXTENDED_ARG             1
+              LOAD_CONST             439 (('aprox', 'ca', 'olheiro'))
+
+230           MAP_ADD                  1
+
+328           LOAD_CONST             117 ('assistant-opinion-potential-ability')
+              EXTENDED_ARG             1
+              LOAD_CONST             440 (('aprox', 'pa', 'olheiro'))
+
+230           MAP_ADD                  1
+
+329           LOAD_CONST             120 ('current-ability-stars')
+              EXTENDED_ARG             1
+              LOAD_CONST             439 (('aprox', 'ca', 'olheiro'))
+
+230           MAP_ADD                  1
+
+330           LOAD_CONST             121 ('potential-ability-stars')
+              EXTENDED_ARG             1
+              LOAD_CONST             440 (('aprox', 'pa', 'olheiro'))
+
+230           MAP_ADD                  1
+
+331           LOAD_CONST             122 ('scout-opinion-current-ability')
+              EXTENDED_ARG             1
+              LOAD_CONST             439 (('aprox', 'ca', 'olheiro'))
+
+230           MAP_ADD                  1
+
+332           LOAD_CONST             123 ('scouted-best-position')
+              EXTENDED_ARG             1
+              LOAD_CONST             311 (('aprox', 'pos', 'olheiro'))
+
+230           MAP_ADD                  1
+
+334           LOAD_CONST             125 ('attribute-acceleration')
+              EXTENDED_ARG             1
+              LOAD_CONST             317 (('atrib', 'acceleration'))
+
+230           MAP_ADD                  1
+
+335           LOAD_CONST             126 ('attribute-aerial-reach')
+              EXTENDED_ARG             1
+              LOAD_CONST             318 (('atrib', 'aerial_reach'))
+
+230           MAP_ADD                  1
+
+336           LOAD_CONST             127 ('attribute-aggression')
+              EXTENDED_ARG             1
+              LOAD_CONST             319 (('atrib', 'aggression'))
+
+230           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+337           LOAD_CONST             128 ('attribute-agility')
+              EXTENDED_ARG             1
+              LOAD_CONST             320 (('atrib', 'agility'))
+
+230           MAP_ADD                  1
+
+338           LOAD_CONST             129 ('attribute-anticipation')
+              EXTENDED_ARG             1
+              LOAD_CONST             321 (('atrib', 'anticipation'))
+
+230           MAP_ADD                  1
+
+339           LOAD_CONST             130 ('attribute-balance')
+              EXTENDED_ARG             1
+              LOAD_CONST             322 (('atrib', 'balance'))
+
+230           MAP_ADD                  1
+
+340           LOAD_CONST             131 ('attribute-bravery')
+              EXTENDED_ARG             1
+              LOAD_CONST             323 (('atrib', 'bravery'))
+
+230           MAP_ADD                  1
+
+341           LOAD_CONST             132 ('attribute-command-of-area')
+              EXTENDED_ARG             1
+              LOAD_CONST             324 (('atrib', 'command_of_area'))
+
+230           MAP_ADD                  1
+
+342           LOAD_CONST             133 ('attribute-communication')
+              EXTENDED_ARG             1
+              LOAD_CONST             325 (('atrib', 'communication'))
+
+230           MAP_ADD                  1
+
+343           LOAD_CONST             134 ('attribute-composure')
+              EXTENDED_ARG             1
+              LOAD_CONST             326 (('atrib', 'composure'))
+
+230           MAP_ADD                  1
+
+344           LOAD_CONST             135 ('attribute-concentration')
+              EXTENDED_ARG             1
+              LOAD_CONST             327 (('atrib', 'concentration'))
+
+230           MAP_ADD                  1
+
+345           LOAD_CONST             136 ('attribute-corners')
+              EXTENDED_ARG             1
+              LOAD_CONST             328 (('atrib', 'corners'))
+
+230           MAP_ADD                  1
+
+346           LOAD_CONST             137 ('attribute-crossing')
+              EXTENDED_ARG             1
+              LOAD_CONST             329 (('atrib', 'crossing'))
+
+230           MAP_ADD                  1
+
+347           LOAD_CONST             138 ('attribute-decisions')
+              EXTENDED_ARG             1
+              LOAD_CONST             330 (('atrib', 'decisions'))
+
+230           MAP_ADD                  1
+
+348           LOAD_CONST             139 ('attribute-determination')
+              EXTENDED_ARG             1
+              LOAD_CONST             331 (('atrib', 'determination'))
+
+230           MAP_ADD                  1
+
+349           LOAD_CONST             140 ('attribute-dribbling')
+              EXTENDED_ARG             1
+              LOAD_CONST             332 (('atrib', 'dribbling'))
+
+230           MAP_ADD                  1
+
+350           LOAD_CONST             141 ('attribute-eccentricity')
+              EXTENDED_ARG             1
+              LOAD_CONST             333 (('atrib', 'eccentricity'))
+
+230           MAP_ADD                  1
+
+351           LOAD_CONST             142 ('attribute-finishing')
+              EXTENDED_ARG             1
+              LOAD_CONST             334 (('atrib', 'finishing'))
+
+230           MAP_ADD                  1
+
+352           LOAD_CONST             143 ('attribute-first-touch')
+              EXTENDED_ARG             1
+              LOAD_CONST             335 (('atrib', 'first_touch'))
+
+230           MAP_ADD                  1
+
+353           LOAD_CONST             144 ('attribute-flair')
+              EXTENDED_ARG             1
+              LOAD_CONST             336 (('atrib', 'flair'))
+
+230           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+354           LOAD_CONST             145 ('attribute-free-kicks')
+              EXTENDED_ARG             1
+              LOAD_CONST             337 (('atrib', 'free_kicks'))
+
+230           MAP_ADD                  1
+
+355           LOAD_CONST             146 ('attribute-handling')
+              EXTENDED_ARG             1
+              LOAD_CONST             338 (('atrib', 'handling'))
+
+230           MAP_ADD                  1
+
+356           LOAD_CONST             147 ('attribute-heading')
+              EXTENDED_ARG             1
+              LOAD_CONST             339 (('atrib', 'heading'))
+
+230           MAP_ADD                  1
+
+357           LOAD_CONST             148 ('attribute-jumping-reach')
+              EXTENDED_ARG             1
+              LOAD_CONST             340 (('atrib', 'jumping_reach'))
+
+230           MAP_ADD                  1
+
+358           LOAD_CONST             149 ('attribute-kicking')
+              EXTENDED_ARG             1
+              LOAD_CONST             341 (('atrib', 'kicking'))
+
+230           MAP_ADD                  1
+
+359           LOAD_CONST             150 ('attribute-leadership')
+              EXTENDED_ARG             1
+              LOAD_CONST             342 (('atrib', 'leadership'))
+
+230           MAP_ADD                  1
+
+360           LOAD_CONST             151 ('attribute-long-shots')
+              EXTENDED_ARG             1
+              LOAD_CONST             343 (('atrib', 'long_shots'))
+
+230           MAP_ADD                  1
+
+361           LOAD_CONST             152 ('attribute-long-throws')
+              EXTENDED_ARG             1
+              LOAD_CONST             344 (('atrib', 'long_throws'))
+
+230           MAP_ADD                  1
+
+362           LOAD_CONST             153 ('attribute-marking')
+              EXTENDED_ARG             1
+              LOAD_CONST             345 (('atrib', 'marking'))
+
+230           MAP_ADD                  1
+
+363           LOAD_CONST             154 ('attribute-movement')
+              EXTENDED_ARG             1
+              LOAD_CONST             346 (('atrib', 'off_the_ball'))
+
+230           MAP_ADD                  1
+
+364           LOAD_CONST             155 ('attribute-natural-fitness')
+              EXTENDED_ARG             1
+              LOAD_CONST             347 (('atrib', 'natural_fitness'))
+
+230           MAP_ADD                  1
+
+365           LOAD_CONST             156 ('attribute-one-on-ones')
+              EXTENDED_ARG             1
+              LOAD_CONST             348 (('atrib', 'one_on_ones'))
+
+230           MAP_ADD                  1
+
+366           LOAD_CONST             157 ('attribute-pace')
+              EXTENDED_ARG             1
+              LOAD_CONST             349 (('atrib', 'pace'))
+
+230           MAP_ADD                  1
+
+367           LOAD_CONST             158 ('attribute-passing')
+              EXTENDED_ARG             1
+              LOAD_CONST             350 (('atrib', 'passing'))
+
+230           MAP_ADD                  1
+
+368           LOAD_CONST             159 ('attribute-penalty-taking')
+              EXTENDED_ARG             1
+              LOAD_CONST             351 (('atrib', 'penalty_taking'))
+
+230           MAP_ADD                  1
+
+369           LOAD_CONST             160 ('attribute-positioning')
+              EXTENDED_ARG             1
+              LOAD_CONST             352 (('atrib', 'positioning'))
+
+230           MAP_ADD                  1
+
+370           LOAD_CONST             161 ('attribute-punching')
+              EXTENDED_ARG             1
+              LOAD_CONST             353 (('atrib', 'punching'))
+
+230           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+371           LOAD_CONST             162 ('attribute-reflexes')
+              EXTENDED_ARG             1
+              LOAD_CONST             354 (('atrib', 'reflexes'))
+
+230           MAP_ADD                  1
+
+372           LOAD_CONST             163 ('attribute-rushing-out')
+              EXTENDED_ARG             1
+              LOAD_CONST             355 (('atrib', 'rushing_out'))
+
+230           MAP_ADD                  1
+
+373           LOAD_CONST             164 ('attribute-stamina')
+              EXTENDED_ARG             1
+              LOAD_CONST             356 (('atrib', 'stamina'))
+
+230           MAP_ADD                  1
+
+374           LOAD_CONST             165 ('attribute-strength')
+              EXTENDED_ARG             1
+              LOAD_CONST             357 (('atrib', 'strength'))
+
+230           MAP_ADD                  1
+
+375           LOAD_CONST             166 ('attribute-tackling')
+              EXTENDED_ARG             1
+              LOAD_CONST             358 (('atrib', 'tackling'))
+
+230           MAP_ADD                  1
+
+376           LOAD_CONST             167 ('attribute-teamwork')
+              EXTENDED_ARG             1
+              LOAD_CONST             359 (('atrib', 'teamwork'))
+
+230           MAP_ADD                  1
+
+377           LOAD_CONST             168 ('attribute-technique')
+              EXTENDED_ARG             1
+              LOAD_CONST             360 (('atrib', 'technique'))
+
+230           MAP_ADD                  1
+
+378           LOAD_CONST             169 ('attribute-throwing')
+              EXTENDED_ARG             1
+              LOAD_CONST             361 (('atrib', 'throwing'))
+
+230           MAP_ADD                  1
+
+379           LOAD_CONST             170 ('attribute-vision')
+              EXTENDED_ARG             1
+              LOAD_CONST             362 (('atrib', 'vision'))
+
+230           MAP_ADD                  1
+
+380           LOAD_CONST             171 ('attribute-work-rate')
+              EXTENDED_ARG             1
+              LOAD_CONST             363 (('atrib', 'work_rate'))
+
+230           MAP_ADD                  1
+
+382           LOAD_CONST             172 ('assistant-opinion-best-role')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+383           LOAD_CONST             173 ('based')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+384           LOAD_CONST             174 ('chalkboard-stats-chances-created-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+385           LOAD_CONST             175 ('chalkboard-stats-expected-save-percentage')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+386           LOAD_CONST             176 ('fatigue-icon')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+387           LOAD_CONST             177 ('form')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+388           LOAD_CONST             178 ('home-grown-status')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+389           LOAD_CONST             179 ('ip-role')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+390           LOAD_CONST             180 ('is-eu-national')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+391           LOAD_CONST             181 ('last-club')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+392           LOAD_CONST             182 ('media-description')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+393           LOAD_CONST             183 ('media-handling')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+394           LOAD_CONST             184 ('on-loan-from')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+395           LOAD_CONST             185 ('oop-role')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+396           LOAD_CONST             186 ('personality')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+397           LOAD_CONST             187 ('player-interest')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+398           LOAD_CONST             188 ('recommendation-grade-only')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+399           LOAD_CONST             189 ('recommendation-short-text')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+400           LOAD_CONST             190 ('region-of-birth')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+401           LOAD_CONST             191 ('scouted-best-position-and-role')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+402           LOAD_CONST             192 ('scouted-weakest-area-of-game')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+403           LOAD_CONST             193 ('second-nationality')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+404           LOAD_CONST             194 ('secondary-position')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+405           LOAD_CONST             195 ('shirtnumber')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+406           LOAD_CONST             196 ('tactic-ability')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+407           LOAD_CONST             197 ('tactical-familiarity-bar')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+408           LOAD_CONST             198 ('training-position-role')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+409           LOAD_CONST             199 ('training-rating')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+410           LOAD_CONST             200 ('transfer-status')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+411           LOAD_CONST             201 ('work-permit-required')
+              EXTENDED_ARG             1
+              LOAD_CONST             364 (('sem', 'nao_le'))
+
+230           MAP_ADD                  1
+
+413           LOAD_CONST             202 ('inf')
+              EXTENDED_ARG             1
+              LOAD_CONST             365 (('fm', 'tela_do_fm'))
+
+230           MAP_ADD                  1
+
+414           LOAD_CONST             203 ('inf-team')
+              EXTENDED_ARG             1
+              LOAD_CONST             365 (('fm', 'tela_do_fm'))
+
+230           MAP_ADD                  1
+
+415           LOAD_CONST             204 ('inf-teamselection')
+              EXTENDED_ARG             1
+              LOAD_CONST             365 (('fm', 'tela_do_fm'))
+
+230           MAP_ADD                  1
+
+416           LOAD_CONST             205 ('position-dropdown')
+              EXTENDED_ARG             1
+              LOAD_CONST             365 (('fm', 'tela_do_fm'))
+
+230           MAP_ADD                  1
+
+418           LOAD_CONST               3 ('chalkboard-stats-blocks')
+              EXTENDED_ARG             1
+              LOAD_CONST             441 (('base', 'all_blocks'))
+
+230           MAP_ADD                  1
+
+419           LOAD_CONST               4 ('chalkboard-stats-clearances')
+              EXTENDED_ARG             1
+              LOAD_CONST             442 (('base', 'all_clear'))
+
+230           MAP_ADD                  1
+
+420           LOAD_CONST              12 ('chalkboard-stats-expected-goals-prevented')
+              EXTENDED_ARG             1
+              LOAD_CONST             443 (('base', 'gk_BG'))
+
+230           MAP_ADD                  1
+
+421           LOAD_CONST              13 ('chalkboard-stats-expected-goals-prevented-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             444 (('base', 'gk_BH'))
+
+230           MAP_ADD                  1
+
+422           LOAD_CONST              19 ('chalkboard-stats-interceptions')
+              EXTENDED_ARG             1
+              LOAD_CONST             445 (('base', 'all_interc'))
+
+230           MAP_ADD                  1
+
+423           LOAD_CONST              21 ('chalkboard-stats-key-headers-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             446 (('base', 'def_AX'))
+
+230           MAP_ADD                  1
+
+424           LOAD_CONST              26 ('chalkboard-stats-offsides')
+              EXTENDED_ARG             1
+              LOAD_CONST             447 (('base', 'att_BL'))
+
+230           MAP_ADD                  1
+              DICT_UPDATE              1
+              BUILD_MAP                0
+
+425           LOAD_CONST             118 ('chalkboard-stats-possession-won-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             448 (('base', 'gk_CC'))
+
+230           MAP_ADD                  1
+
+426           LOAD_CONST             119 ('chalkboard-stats-save-ratio')
+              EXTENDED_ARG             1
+              LOAD_CONST             449 (('base', 'gk_AX'))
+
+230           MAP_ADD                  1
+
+427           LOAD_CONST              37 ('chalkboard-stats-saves-held')
+              EXTENDED_ARG             1
+              LOAD_CONST             450 (('base', 'gk_AG'))
+
+230           MAP_ADD                  1
+
+428           LOAD_CONST              38 ('chalkboard-stats-saves-parried')
+              EXTENDED_ARG             1
+              LOAD_CONST             451 (('base', 'gk_AM'))
+
+230           MAP_ADD                  1
+
+429           LOAD_CONST              39 ('chalkboard-stats-saves-tipped')
+              EXTENDED_ARG             1
+              LOAD_CONST             452 (('base', 'gk_AJ'))
+
+230           MAP_ADD                  1
+
+430           LOAD_CONST              41 ('chalkboard-stats-shots-blocked-defending')
+              EXTENDED_ARG             1
+              LOAD_CONST             453 (('base', 'def_BK'))
+
+230           MAP_ADD                  1
+
+431           LOAD_CONST              47 ('chalkboard-stats-sprints-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             454 (('base', 'wing_DF'))
+
+230           MAP_ADD                  1
+
+432           LOAD_CONST              52 ('condition')
+              EXTENDED_ARG             1
+              LOAD_CONST             455 (('base', 'all_fit'))
+
+230           MAP_ADD                  1
+
+433           LOAD_CONST              79 ('sharpness')
+              EXTENDED_ARG             1
+              LOAD_CONST             456 (('base', 'all_sharp'))
+
+230           MAP_ADD                  1
+
+434           LOAD_CONST             113 ('stats-career-appearances')
+              EXTENDED_ARG             1
+              LOAD_CONST             457 (('base', 'all_careerapps'))
+
+230           MAP_ADD                  1
+
+435           LOAD_CONST              80 ('stats-career-goals')
+              EXTENDED_ARG             1
+              LOAD_CONST             458 (('base', 'att_R'))
+
+230           MAP_ADD                  1
+
+436           LOAD_CONST              81 ('stats-clean-sheets')
+              EXTENDED_ARG             1
+              LOAD_CONST             459 (('base', 'gk_AQ'))
+
+230           MAP_ADD                  1
+
+437           LOAD_CONST              82 ('stats-clean-sheets-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             460 (('base', 'gk_AP'))
+
+230           MAP_ADD                  1
+
+438           LOAD_CONST              83 ('stats-conceded')
+              EXTENDED_ARG             1
+              LOAD_CONST             461 (('base', 'gk_BX'))
+
+230           MAP_ADD                  1
+
+439           LOAD_CONST              91 ('stats-penalties-faced')
+              EXTENDED_ARG             1
+              LOAD_CONST             462 (('base', 'gk_BR'))
+
+230           MAP_ADD                  1
+
+440           LOAD_CONST              92 ('stats-penalties-saved')
+              EXTENDED_ARG             1
+              LOAD_CONST             463 (('base', 'gk_BT'))
+
+230           MAP_ADD                  1
+
+441           LOAD_CONST              94 ('stats-player-of-the-match')
+              EXTENDED_ARG             1
+              LOAD_CONST             464 (('base', 'gk_O'))
+
+230           MAP_ADD                  1
+              DICT_UPDATE              1
+
+442           LOAD_CONST             124 ('stats-total-saves-per90')
+              EXTENDED_ARG             1
+              LOAD_CONST             465 (('base', 'gk_AT'))
+
+443           LOAD_CONST              98 ('world-reputation')
+              EXTENDED_ARG             1
+              LOAD_CONST             466 (('base', 'all_repworld'))
+
+230           BUILD_MAP                2
+              DICT_UPDATE              1
+              STORE_NAME               1 (EQUIVALENCIA_MEUTIME)
+              LOAD_CONST             206 (None)
+              RETURN_VALUE

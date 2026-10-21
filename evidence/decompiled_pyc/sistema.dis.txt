@@ -1,0 +1,927 @@
+# Module: sistema
+# Filename: sistema.py
+
+  0           RESUME                   0
+
+ 18           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (sys)
+              STORE_NAME               0 (sys)
+
+ 20           LOAD_CONST               1 (None)
+              STORE_GLOBAL             1 (_CACHE)
+
+ 23           LOAD_CONST               2 (<code object _registro at 0x107fd7c40, file "sistema.py", line 23>)
+              MAKE_FUNCTION
+              STORE_NAME               2 (_registro)
+
+ 41           LOAD_CONST               3 (<code object processo_elevado at 0xbdf6f4f00, file "sistema.py", line 41>)
+              MAKE_FUNCTION
+              STORE_NAME               3 (processo_elevado)
+
+ 80           LOAD_CONST               6 ((('HKCU', 'Software\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers'), ('HKLM', 'SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Layers')))
+              STORE_NAME               4 (_CHAVES_LAYERS)
+
+ 86           LOAD_CONST               4 (<code object marcas_compatibilidade at 0xbdf722c00, file "sistema.py", line 86>)
+              MAKE_FUNCTION
+              STORE_NAME               5 (marcas_compatibilidade)
+
+126           LOAD_CONST               5 (<code object nome at 0xbdf2bc000, file "sistema.py", line 126>)
+              MAKE_FUNCTION
+              STORE_NAME               6 (nome)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _registro at 0x107fd7c40, file "sistema.py", line 23>:
+  --            MAKE_CELL                2 (k)
+                MAKE_CELL                3 (winreg)
+
+  23            RESUME                   0
+
+  26            NOP
+
+  27    L1:     LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              0 (winreg)
+                STORE_DEREF              3 (winreg)
+
+  28            LOAD_CONST               2 ('SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion')
+                STORE_FAST               0 (chave)
+
+  29            LOAD_DEREF               3 (winreg)
+                LOAD_ATTR                3 (OpenKey + NULL|self)
+                LOAD_DEREF               3 (winreg)
+                LOAD_ATTR                4 (HKEY_LOCAL_MACHINE)
+                LOAD_FAST_BORROW         0 (chave)
+                CALL                     2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_DEREF              2 (k)
+
+  30            LOAD_FAST_BORROW         2 (k)
+                LOAD_FAST_BORROW         3 (winreg)
+                BUILD_TUPLE              2
+                LOAD_CONST               3 (<code object ler at 0x1081f16c0, file "sistema.py", line 30>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                STORE_FAST               1 (ler)
+
+  35            LOAD_CONST               4 ('produto')
+                LOAD_FAST_BORROW         1 (ler)
+                PUSH_NULL
+                LOAD_CONST               5 ('ProductName')
+                CALL                     1
+                LOAD_CONST               6 ('versao')
+                LOAD_FAST_BORROW         1 (ler)
+                PUSH_NULL
+                LOAD_CONST               7 ('DisplayVersion')
+                CALL                     1
+
+  36            LOAD_CONST               8 ('build')
+                LOAD_FAST_BORROW         1 (ler)
+                PUSH_NULL
+                LOAD_CONST               9 ('CurrentBuildNumber')
+                CALL                     1
+                LOAD_CONST              10 ('ubr')
+                LOAD_FAST_BORROW         1 (ler)
+                PUSH_NULL
+                LOAD_CONST              11 ('UBR')
+                CALL                     1
+
+  35            BUILD_MAP                4
+
+  29    L3:     SWAP                     3
+                SWAP                     2
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+        L4:     RETURN_VALUE
+        L5:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L6)
+                NOT_TAKEN
+                RERAISE                  2
+        L6:     POP_TOP
+        L7:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+        L8:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L10:     PUSH_EXC_INFO
+
+  37            LOAD_GLOBAL              6 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        6 (to L12)
+                NOT_TAKEN
+                POP_TOP
+
+  38            BUILD_MAP                0
+                SWAP                     2
+       L11:     POP_EXCEPT
+                RETURN_VALUE
+
+  37   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L10 [0]
+  L2 to L3 -> L5 [2] lasti
+  L3 to L4 -> L10 [0]
+  L5 to L7 -> L9 [4] lasti
+  L7 to L8 -> L10 [0]
+  L9 to L10 -> L10 [0]
+  L10 to L11 -> L13 [1] lasti
+  L12 to L13 -> L13 [1] lasti
+
+Disassembly of <code object ler at 0x1081f16c0, file "sistema.py", line 30>:
+  --           COPY_FREE_VARS           2
+
+  30           RESUME                   0
+
+  31           NOP
+
+  32   L1:     LOAD_DEREF               2 (winreg)
+               LOAD_ATTR                1 (QueryValueEx + NULL|self)
+               LOAD_DEREF               1 (k)
+               LOAD_FAST_BORROW         0 (nome)
+               CALL                     2
+               LOAD_SMALL_INT           0
+               BINARY_OP               26 ([])
+       L2:     RETURN_VALUE
+
+  --   L3:     PUSH_EXC_INFO
+
+  33           LOAD_GLOBAL              2 (OSError)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        5 (to L5)
+               NOT_TAKEN
+               POP_TOP
+
+  34   L4:     POP_EXCEPT
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  33   L5:     RERAISE                  0
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [0]
+  L3 to L4 -> L6 [1] lasti
+  L5 to L6 -> L6 [1] lasti
+
+Disassembly of <code object processo_elevado at 0xbdf6f4f00, file "sistema.py", line 41>:
+  41            RESUME                   0
+
+  54            LOAD_GLOBAL              0 (sys)
+                LOAD_ATTR                2 (platform)
+                LOAD_CONST               0 ('win32')
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE        3 (to L1)
+                NOT_TAKEN
+
+  55            LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  56    L1:     LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              2 (ctypes)
+                STORE_FAST               1 (ctypes)
+
+  57            LOAD_CONST               2 (4096)
+                LOAD_SMALL_INT           8
+                LOAD_SMALL_INT          20
+                STORE_FAST_STORE_FAST   67 (TokenElevation, TOKEN_QUERY)
+                STORE_FAST               2 (PROCESS_QUERY_LIMITED)
+
+  58            LOAD_FAST_BORROW         1 (ctypes)
+                LOAD_ATTR                6 (windll)
+                LOAD_ATTR                8 (kernel32)
+                LOAD_FAST_BORROW         1 (ctypes)
+                LOAD_ATTR                6 (windll)
+                LOAD_ATTR               10 (advapi32)
+                STORE_FAST_STORE_FAST  101 (adv, k32)
+
+  59            LOAD_FAST_BORROW         5 (k32)
+                LOAD_ATTR               13 (OpenProcess + NULL|self)
+                LOAD_FAST_BORROW         2 (PROCESS_QUERY_LIMITED)
+                LOAD_CONST               3 (False)
+                LOAD_GLOBAL             15 (int + NULL)
+                LOAD_FAST_BORROW         0 (pid)
+                CALL                     1
+                CALL                     3
+                STORE_FAST               7 (h)
+
+  60            LOAD_FAST_BORROW         7 (h)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L2)
+                NOT_TAKEN
+
+  61            LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  62    L2:     NOP
+
+  63    L3:     LOAD_FAST_BORROW         1 (ctypes)
+                LOAD_ATTR               17 (c_void_p + NULL|self)
+                CALL                     0
+                STORE_FAST               8 (tok)
+
+  64            LOAD_FAST_BORROW         6 (adv)
+                LOAD_ATTR               19 (OpenProcessToken + NULL|self)
+                LOAD_FAST_BORROW         1 (ctypes)
+                LOAD_ATTR               17 (c_void_p + NULL|self)
+                LOAD_FAST_BORROW         7 (h)
+                CALL                     1
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 49 (TOKEN_QUERY, ctypes)
+                LOAD_ATTR               21 (byref + NULL|self)
+                LOAD_FAST_BORROW         8 (tok)
+                CALL                     1
+                CALL                     3
+                TO_BOOL
+                POP_JUMP_IF_TRUE        21 (to L5)
+                NOT_TAKEN
+
+  65    L4:     NOP
+
+  75            LOAD_FAST_BORROW         5 (k32)
+                LOAD_ATTR               23 (CloseHandle + NULL|self)
+                LOAD_FAST_BORROW         7 (h)
+                CALL                     1
+                POP_TOP
+                LOAD_CONST               4 (True)
+                RETURN_VALUE
+
+  66    L5:     NOP
+
+  67    L6:     LOAD_FAST_BORROW         1 (ctypes)
+                LOAD_ATTR               25 (c_uint + NULL|self)
+                LOAD_SMALL_INT           0
+                CALL                     1
+                LOAD_FAST_BORROW         1 (ctypes)
+                LOAD_ATTR               25 (c_uint + NULL|self)
+                LOAD_SMALL_INT           0
+                CALL                     1
+                STORE_FAST_STORE_FAST  169 (devolvido, elev)
+
+  68            LOAD_FAST_BORROW         6 (adv)
+                LOAD_ATTR               27 (GetTokenInformation + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 132 (tok, TokenElevation)
+                LOAD_FAST_BORROW         1 (ctypes)
+                LOAD_ATTR               21 (byref + NULL|self)
+                LOAD_FAST_BORROW         9 (elev)
+                CALL                     1
+
+  69            LOAD_FAST_BORROW         1 (ctypes)
+                LOAD_ATTR               29 (sizeof + NULL|self)
+                LOAD_FAST_BORROW         9 (elev)
+                CALL                     1
+                LOAD_FAST_BORROW         1 (ctypes)
+                LOAD_ATTR               21 (byref + NULL|self)
+                LOAD_FAST_BORROW        10 (devolvido)
+                CALL                     1
+
+  68            CALL                     5
+                TO_BOOL
+                POP_JUMP_IF_TRUE        38 (to L10)
+                NOT_TAKEN
+
+  70    L7:     NOP
+
+  73    L8:     LOAD_FAST_BORROW         5 (k32)
+                LOAD_ATTR               23 (CloseHandle + NULL|self)
+                LOAD_FAST_BORROW         8 (tok)
+                CALL                     1
+                POP_TOP
+
+  75    L9:     LOAD_FAST_BORROW         5 (k32)
+                LOAD_ATTR               23 (CloseHandle + NULL|self)
+                LOAD_FAST_BORROW         7 (h)
+                CALL                     1
+                POP_TOP
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  71   L10:     LOAD_GLOBAL             31 (bool + NULL)
+                LOAD_FAST_BORROW         9 (elev)
+                LOAD_ATTR               32 (value)
+                CALL                     1
+
+  73   L11:     LOAD_FAST_BORROW         5 (k32)
+                LOAD_ATTR               23 (CloseHandle + NULL|self)
+                LOAD_FAST_BORROW         8 (tok)
+                CALL                     1
+                POP_TOP
+
+  75   L12:     LOAD_FAST_BORROW         5 (k32)
+                LOAD_ATTR               23 (CloseHandle + NULL|self)
+                LOAD_FAST_BORROW         7 (h)
+                CALL                     1
+                POP_TOP
+                RETURN_VALUE
+
+  --   L13:     PUSH_EXC_INFO
+
+  73            LOAD_FAST                5 (k32)
+                LOAD_ATTR               23 (CloseHandle + NULL|self)
+                LOAD_FAST                8 (tok)
+                CALL                     1
+                POP_TOP
+                RERAISE                  0
+
+  --   L14:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L15:     PUSH_EXC_INFO
+
+  75            LOAD_FAST                5 (k32)
+                LOAD_ATTR               23 (CloseHandle + NULL|self)
+                LOAD_FAST                7 (h)
+                CALL                     1
+                POP_TOP
+                RERAISE                  0
+
+  --   L16:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L3 to L4 -> L15 [0]
+  L6 to L7 -> L13 [0]
+  L8 to L9 -> L15 [0]
+  L10 to L11 -> L13 [0]
+  L11 to L12 -> L15 [0]
+  L13 to L14 -> L14 [1] lasti
+  L14 to L15 -> L15 [0]
+  L15 to L16 -> L16 [1] lasti
+
+Disassembly of <code object marcas_compatibilidade at 0xbdf722c00, file "sistema.py", line 86>:
+  --            MAKE_CELL               10 (nome_)
+
+  86            RESUME                   0
+
+ 100            LOAD_GLOBAL              0 (sys)
+                LOAD_ATTR                2 (platform)
+                LOAD_CONST               0 ('win32')
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE        3 (to L1)
+                NOT_TAKEN
+
+ 101            BUILD_LIST               0
+                RETURN_VALUE
+
+ 102    L1:     NOP
+
+ 103    L2:     LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              2 (winreg)
+                STORE_FAST               1 (winreg)
+
+ 106    L3:     LOAD_GLOBAL              8 (tuple)
+                COPY                     1
+                LOAD_COMMON_CONSTANT     2 (tuple)
+                IS_OP                    0 (is)
+                POP_JUMP_IF_FALSE       20 (to L6)
+                NOT_TAKEN
+                POP_TOP
+                BUILD_LIST               0
+                LOAD_CONST               2 (<code object <genexpr> at 0x1081f0ae0, file "sistema.py", line 106>)
+                MAKE_FUNCTION
+                LOAD_FAST                0 (pedacos)
+                GET_ITER
+                CALL                     0
+        L4:     FOR_ITER                 3 (to L5)
+                LIST_APPEND              2
+                JUMP_BACKWARD            5 (to L4)
+        L5:     END_FOR
+                POP_ITER
+                CALL_INTRINSIC_1         6 (INTRINSIC_LIST_TO_TUPLE)
+                JUMP_FORWARD            13 (to L7)
+        L6:     PUSH_NULL
+                LOAD_CONST               2 (<code object <genexpr> at 0x1081f0ae0, file "sistema.py", line 106>)
+                MAKE_FUNCTION
+                LOAD_FAST                0 (pedacos)
+                GET_ITER
+                CALL                     0
+                CALL                     1
+        L7:     STORE_FAST               0 (pedacos)
+
+ 107            BUILD_LIST               0
+                STORE_FAST               2 (achados)
+
+ 108            LOAD_GLOBAL             10 (_CHAVES_LAYERS)
+                GET_ITER
+        L8:     FOR_ITER               191 (to L27)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   52 (origem, caminho)
+
+ 109            LOAD_FAST                3 (origem)
+                LOAD_CONST               3 ('HKCU')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       13 (to L9)
+                NOT_TAKEN
+                LOAD_FAST                1 (winreg)
+                LOAD_ATTR               12 (HKEY_CURRENT_USER)
+                JUMP_FORWARD            11 (to L10)
+        L9:     LOAD_FAST                1 (winreg)
+                LOAD_ATTR               14 (HKEY_LOCAL_MACHINE)
+       L10:     STORE_FAST               5 (raiz)
+
+ 110            NOP
+
+ 111   L11:     LOAD_FAST                1 (winreg)
+                LOAD_ATTR               17 (OpenKey + NULL|self)
+                LOAD_FAST_LOAD_FAST     84 (raiz, caminho)
+                CALL                     2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+       L12:     STORE_FAST               6 (k)
+
+ 112            LOAD_SMALL_INT           0
+                STORE_FAST               7 (i)
+
+ 113   L13:     NOP
+
+ 114   L14:     NOP
+
+ 115   L15:     LOAD_FAST                1 (winreg)
+                LOAD_ATTR               19 (EnumValue + NULL|self)
+                LOAD_FAST_LOAD_FAST    103 (k, i)
+                CALL                     2
+                UNPACK_SEQUENCE          3
+                STORE_DEREF             10 (nome_)
+                STORE_FAST_STORE_FAST  137 (valor, _)
+
+ 118   L16:     LOAD_FAST                7 (i)
+                LOAD_SMALL_INT           1
+                BINARY_OP               13 (+=)
+                STORE_FAST               7 (i)
+
+ 119            LOAD_GLOBAL             22 (any)
+                COPY                     1
+                LOAD_COMMON_CONSTANT     4 (<built-in function any>)
+                IS_OP                    0 (is)
+                POP_JUMP_IF_FALSE       31 (to L23)
+       L17:     NOT_TAKEN
+       L18:     POP_TOP
+                LOAD_FAST               10 (nome_)
+                BUILD_TUPLE              1
+                LOAD_CONST               5 (<code object <genexpr> at 0x1081b3990, file "sistema.py", line 119>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST                0 (pedacos)
+                GET_ITER
+                CALL                     0
+       L19:     FOR_ITER                12 (to L22)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L21)
+       L20:     NOT_TAKEN
+                JUMP_BACKWARD           11 (to L19)
+       L21:     POP_ITER
+                LOAD_CONST               4 (True)
+                JUMP_FORWARD            20 (to L24)
+       L22:     END_FOR
+                POP_ITER
+                LOAD_CONST               6 (False)
+                JUMP_FORWARD            16 (to L24)
+       L23:     PUSH_NULL
+                LOAD_FAST               10 (nome_)
+                BUILD_TUPLE              1
+                LOAD_CONST               5 (<code object <genexpr> at 0x1081b3990, file "sistema.py", line 119>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST                0 (pedacos)
+                GET_ITER
+                CALL                     0
+                CALL                     1
+       L24:     TO_BOOL
+       L25:     POP_JUMP_IF_TRUE         3 (to L26)
+                NOT_TAKEN
+                JUMP_BACKWARD           97 (to L13)
+
+ 120   L26:     LOAD_FAST                2 (achados)
+                LOAD_ATTR               25 (append + NULL|self)
+                LOAD_FAST                3 (origem)
+                LOAD_DEREF              10 (nome_)
+                LOAD_GLOBAL             27 (str + NULL)
+                LOAD_FAST                8 (valor)
+                CALL                     1
+                BUILD_TUPLE              3
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD          128 (to L13)
+
+ 108   L27:     END_FOR
+                POP_ITER
+
+ 123            LOAD_FAST                2 (achados)
+                RETURN_VALUE
+
+  --   L28:     PUSH_EXC_INFO
+
+ 104            LOAD_GLOBAL              6 (ImportError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        6 (to L30)
+                NOT_TAKEN
+                POP_TOP
+
+ 105            BUILD_LIST               0
+                SWAP                     2
+       L29:     POP_EXCEPT
+                RETURN_VALUE
+
+ 104   L30:     RERAISE                  0
+
+  --   L31:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L32:     PUSH_EXC_INFO
+
+ 116            LOAD_GLOBAL             20 (OSError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        4 (to L34)
+                NOT_TAKEN
+                POP_TOP
+
+ 117   L33:     POP_EXCEPT
+                JUMP_FORWARD             4 (to L36)
+
+ 116   L34:     RERAISE                  0
+
+  --   L35:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+ 111   L36:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+       L37:     JUMP_BACKWARD          243 (to L8)
+       L38:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L39)
+                NOT_TAKEN
+                RERAISE                  2
+       L39:     POP_TOP
+       L40:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+       L41:     EXTENDED_ARG             1
+                JUMP_BACKWARD          261 (to L8)
+
+  --   L42:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L43:     PUSH_EXC_INFO
+
+ 121            LOAD_GLOBAL             20 (OSError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        6 (to L45)
+                NOT_TAKEN
+                POP_TOP
+
+ 122   L44:     POP_EXCEPT
+                EXTENDED_ARG             1
+                JUMP_BACKWARD          279 (to L8)
+
+ 121   L45:     RERAISE                  0
+
+  --   L46:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L2 to L3 -> L28 [0]
+  L11 to L12 -> L43 [1]
+  L12 to L14 -> L38 [3] lasti
+  L15 to L16 -> L32 [3]
+  L16 to L17 -> L38 [3] lasti
+  L18 to L20 -> L38 [3] lasti
+  L21 to L25 -> L38 [3] lasti
+  L26 to L27 -> L38 [3] lasti
+  L28 to L29 -> L31 [1] lasti
+  L30 to L31 -> L31 [1] lasti
+  L32 to L33 -> L35 [4] lasti
+  L33 to L34 -> L38 [3] lasti
+  L34 to L35 -> L35 [4] lasti
+  L35 to L36 -> L38 [3] lasti
+  L36 to L37 -> L43 [1]
+  L38 to L40 -> L42 [5] lasti
+  L40 to L41 -> L43 [1]
+  L42 to L43 -> L43 [1]
+  L43 to L44 -> L46 [2] lasti
+  L45 to L46 -> L46 [2] lasti
+
+Disassembly of <code object <genexpr> at 0x1081f0ae0, file "sistema.py", line 106>:
+ 106           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                30 (to L5)
+               STORE_FAST_LOAD_FAST    17 (p, p)
+               TO_BOOL
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           12 (to L2)
+       L4:     LOAD_FAST_BORROW         1 (p)
+               LOAD_ATTR                1 (lower + NULL|self)
+               CALL                     0
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           32 (to L2)
+       L5:     END_FOR
+               POP_ITER
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L6:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L6 [0] lasti
+  L4 to L6 -> L6 [0] lasti
+
+Disassembly of <code object <genexpr> at 0x1081b3990, file "sistema.py", line 119>:
+  --           COPY_FREE_VARS           1
+
+ 119           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                23 (to L3)
+               STORE_FAST_LOAD_FAST    17 (p, p)
+               LOAD_DEREF               2 (nome_)
+               LOAD_ATTR                1 (lower + NULL|self)
+               CALL                     0
+               CONTAINS_OP              0 (in)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           25 (to L2)
+       L3:     END_FOR
+               POP_ITER
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L4:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L4 [0] lasti
+
+Disassembly of <code object nome at 0xbdf2bc000, file "sistema.py", line 126>:
+ 126            RESUME                   0
+
+ 132            LOAD_GLOBAL              0 (_CACHE)
+                TO_BOOL
+                POP_JUMP_IF_FALSE        7 (to L1)
+                NOT_TAKEN
+
+ 133            LOAD_GLOBAL              0 (_CACHE)
+                RETURN_VALUE
+
+ 134    L1:     LOAD_GLOBAL              2 (sys)
+                LOAD_ATTR                4 (platform)
+                LOAD_CONST               0 ('win32')
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       48 (to L2)
+                NOT_TAKEN
+
+ 135            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              2 (platform)
+                STORE_FAST               0 (platform)
+
+ 136            LOAD_FAST_BORROW         0 (platform)
+                LOAD_ATTR                7 (system + NULL|self)
+                CALL                     0
+                CONVERT_VALUE            1 (str)
+                FORMAT_SIMPLE
+                LOAD_CONST               2 (' ')
+                LOAD_FAST_BORROW         0 (platform)
+                LOAD_ATTR                9 (release + NULL|self)
+                CALL                     0
+                CONVERT_VALUE            1 (str)
+                FORMAT_SIMPLE
+                BUILD_STRING             3
+                STORE_GLOBAL             0 (_CACHE)
+
+ 137            LOAD_GLOBAL              0 (_CACHE)
+                RETURN_VALUE
+
+ 139    L2:     LOAD_GLOBAL             11 (_registro + NULL)
+                CALL                     0
+                STORE_FAST               1 (r)
+
+ 140            NOP
+
+ 141    L3:     LOAD_GLOBAL             13 (int + NULL)
+                LOAD_FAST_BORROW         1 (r)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_CONST               3 ('build')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        32 (to L6)
+        L4:     NOT_TAKEN
+        L5:     POP_TOP
+                LOAD_GLOBAL              2 (sys)
+                LOAD_ATTR               16 (getwindowsversion)
+                PUSH_NULL
+                CALL                     0
+                LOAD_ATTR               18 (build)
+        L6:     CALL                     1
+                STORE_FAST               2 (build)
+
+ 147    L7:     LOAD_FAST_BORROW         1 (r)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_CONST               4 ('produto')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L8)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST               5 ('Windows')
+        L8:     STORE_FAST               3 (produto)
+
+ 148            LOAD_CONST               6 ('')
+                STORE_FAST               4 (edicao)
+
+ 149            LOAD_CONST              17 (('Pro for Workstations', 'Enterprise', 'Education', 'Pro', 'Home', 'Server'))
+                GET_ITER
+        L9:     FOR_ITER                20 (to L11)
+                STORE_FAST               5 (palavra)
+
+ 151            LOAD_FAST_BORROW_LOAD_FAST_BORROW 83 (palavra, produto)
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_TRUE         3 (to L10)
+                NOT_TAKEN
+                JUMP_BACKWARD           11 (to L9)
+
+ 152   L10:     LOAD_CONST               2 (' ')
+                LOAD_FAST_BORROW         5 (palavra)
+                BINARY_OP                0 (+)
+                STORE_FAST               4 (edicao)
+
+ 153            POP_TOP
+                JUMP_FORWARD             2 (to L12)
+
+ 149   L11:     END_FOR
+                POP_ITER
+
+ 155   L12:     LOAD_FAST_BORROW         2 (build)
+                LOAD_CONST               8 (22000)
+                COMPARE_OP             188 (bool(>=))
+                POP_JUMP_IF_FALSE        3 (to L13)
+                NOT_TAKEN
+                LOAD_CONST               9 ('Windows 11')
+                JUMP_FORWARD             1 (to L14)
+       L13:     LOAD_CONST              10 ('Windows 10')
+       L14:     STORE_FAST               6 (familia)
+
+ 156            LOAD_CONST               7 ('Server')
+                LOAD_FAST_BORROW         3 (produto)
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_FALSE       41 (to L15)
+                NOT_TAKEN
+
+ 157            LOAD_FAST_BORROW         3 (produto)
+                LOAD_ATTR               25 (split + NULL|self)
+                LOAD_CONST              11 (',')
+                CALL                     1
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_ATTR               27 (strip + NULL|self)
+                CALL                     0
+                STORE_FAST               6 (familia)
+
+ 158            LOAD_CONST               6 ('')
+                STORE_FAST               4 (edicao)
+
+ 160   L15:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 100 (familia, edicao)
+                BINARY_OP                0 (+)
+                BUILD_LIST               1
+                STORE_FAST               7 (partes)
+
+ 161            LOAD_FAST_BORROW         1 (r)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_CONST              12 ('versao')
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       34 (to L16)
+                NOT_TAKEN
+
+ 162            LOAD_FAST_BORROW         7 (partes)
+                LOAD_ATTR               29 (append + NULL|self)
+                LOAD_GLOBAL             31 (str + NULL)
+                LOAD_FAST_BORROW         1 (r)
+                LOAD_CONST              12 ('versao')
+                BINARY_OP               26 ([])
+                CALL                     1
+                CALL                     1
+                POP_TOP
+
+ 163   L16:     LOAD_GLOBAL             31 (str + NULL)
+                LOAD_FAST_BORROW         2 (build)
+                CALL                     1
+                LOAD_FAST_BORROW         1 (r)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_CONST              13 ('ubr')
+                CALL                     1
+                POP_JUMP_IF_NONE        26 (to L17)
+                NOT_TAKEN
+                LOAD_CONST              14 ('.')
+                LOAD_GLOBAL             31 (str + NULL)
+                LOAD_FAST_BORROW         1 (r)
+                LOAD_CONST              13 ('ubr')
+                BINARY_OP               26 ([])
+                CALL                     1
+                BINARY_OP                0 (+)
+                JUMP_FORWARD             1 (to L18)
+       L17:     LOAD_CONST               6 ('')
+       L18:     BINARY_OP                0 (+)
+                STORE_FAST               8 (completa)
+
+ 164            LOAD_FAST_BORROW         7 (partes)
+                LOAD_ATTR               29 (append + NULL|self)
+                LOAD_CONST              15 ('(build %s)')
+                LOAD_FAST_BORROW         8 (completa)
+                BINARY_OP                6 (%)
+                CALL                     1
+                POP_TOP
+
+ 165            LOAD_FAST                7 (partes)
+                LOAD_ATTR               29 (append + NULL|self)
+                LOAD_CONST              16 ('- %d bits')
+                LOAD_GLOBAL              2 (sys)
+                LOAD_ATTR               32 (maxsize)
+                LOAD_CONST              18 (4294967296)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE        3 (to L19)
+                NOT_TAKEN
+                LOAD_SMALL_INT          64
+                JUMP_FORWARD             1 (to L20)
+       L19:     LOAD_SMALL_INT          32
+       L20:     BINARY_OP                6 (%)
+                CALL                     1
+                POP_TOP
+
+ 166            LOAD_CONST               2 (' ')
+                LOAD_ATTR               35 (join + NULL|self)
+                LOAD_FAST_BORROW         7 (partes)
+                CALL                     1
+                STORE_GLOBAL             0 (_CACHE)
+
+ 167            LOAD_GLOBAL              0 (_CACHE)
+                RETURN_VALUE
+
+  --   L21:     PUSH_EXC_INFO
+
+ 142            LOAD_GLOBAL             20 (TypeError)
+                LOAD_GLOBAL             22 (ValueError)
+                BUILD_TUPLE              2
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       36 (to L23)
+                NOT_TAKEN
+                POP_TOP
+
+ 143            LOAD_GLOBAL              2 (sys)
+                LOAD_ATTR               16 (getwindowsversion)
+                PUSH_NULL
+                CALL                     0
+                LOAD_ATTR               18 (build)
+                STORE_FAST               2 (build)
+       L22:     POP_EXCEPT
+                EXTENDED_ARG             1
+                JUMP_BACKWARD_NO_INTERRUPT 385 (to L7)
+
+ 142   L23:     RERAISE                  0
+
+  --   L24:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L3 to L4 -> L21 [0]
+  L5 to L7 -> L21 [0]
+  L21 to L22 -> L24 [1] lasti
+  L23 to L24 -> L24 [1] lasti

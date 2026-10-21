@@ -1,0 +1,118 @@
+# Module: janela_topo
+# Filename: janela_topo.py
+
+  0           RESUME                   0
+
+ 10           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (ctypes)
+              STORE_NAME               0 (ctypes)
+
+ 11           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('wintypes',))
+              IMPORT_NAME              0 (ctypes)
+              IMPORT_FROM              1 (wintypes)
+              STORE_NAME               1 (wintypes)
+              POP_TOP
+
+ 13           LOAD_CONST               5 (-20)
+              STORE_NAME               2 (GWL_EXSTYLE)
+
+ 14           LOAD_SMALL_INT           8
+              STORE_NAME               3 (WS_EX_TOPMOST)
+
+ 15           LOAD_CONST               6 ((1, 2, 16, 64))
+              UNPACK_SEQUENCE          4
+              STORE_NAME               4 (SWP_NOSIZE)
+              STORE_NAME               5 (SWP_NOMOVE)
+              STORE_NAME               6 (SWP_NOACTIVATE)
+              STORE_NAME               7 (SWP_SHOWWINDOW)
+
+ 18           LOAD_CONST               3 (<code object fixar_no_topo at 0xbdeefdb00, file "janela_topo.py", line 18>)
+              MAKE_FUNCTION
+              STORE_NAME               8 (fixar_no_topo)
+
+ 31           LOAD_CONST               4 (<code object tem_topmost at 0x107fa3b50, file "janela_topo.py", line 31>)
+              MAKE_FUNCTION
+              STORE_NAME               9 (tem_topmost)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object fixar_no_topo at 0xbdeefdb00, file "janela_topo.py", line 18>:
+ 18           RESUME                   0
+
+ 23           LOAD_GLOBAL              0 (ctypes)
+              LOAD_ATTR                2 (WinDLL)
+              PUSH_NULL
+              LOAD_CONST               0 ('user32')
+              CALL                     1
+              STORE_FAST               1 (u)
+
+ 24           LOAD_GLOBAL              4 (wintypes)
+              LOAD_ATTR                6 (HWND)
+              LOAD_GLOBAL              4 (wintypes)
+              LOAD_ATTR                6 (HWND)
+              LOAD_GLOBAL              0 (ctypes)
+              LOAD_ATTR                8 (c_int)
+              LOAD_GLOBAL              0 (ctypes)
+              LOAD_ATTR                8 (c_int)
+
+ 25           LOAD_GLOBAL              0 (ctypes)
+              LOAD_ATTR                8 (c_int)
+              LOAD_GLOBAL              0 (ctypes)
+              LOAD_ATTR                8 (c_int)
+              LOAD_GLOBAL              4 (wintypes)
+              LOAD_ATTR               10 (UINT)
+
+ 24           BUILD_LIST               7
+              LOAD_FAST_BORROW         1 (u)
+              LOAD_ATTR               12 (SetWindowPos)
+              STORE_ATTR               7 (argtypes)
+
+ 26           LOAD_GLOBAL              4 (wintypes)
+              LOAD_ATTR               16 (BOOL)
+              LOAD_FAST_BORROW         1 (u)
+              LOAD_ATTR               12 (SetWindowPos)
+              STORE_ATTR               9 (restype)
+
+ 27           LOAD_GLOBAL             21 (bool + NULL)
+              LOAD_FAST_BORROW         1 (u)
+              LOAD_ATTR               13 (SetWindowPos + NULL|self)
+              LOAD_FAST_BORROW         0 (hwnd)
+              LOAD_GLOBAL              4 (wintypes)
+              LOAD_ATTR                6 (HWND)
+              PUSH_NULL
+              LOAD_CONST               1 (-1)
+              CALL                     1
+              LOAD_SMALL_INT           0
+              LOAD_SMALL_INT           0
+              LOAD_SMALL_INT           0
+              LOAD_SMALL_INT           0
+
+ 28           LOAD_GLOBAL             22 (SWP_NOSIZE)
+              LOAD_GLOBAL             24 (SWP_NOMOVE)
+              BINARY_OP                7 (|)
+              LOAD_GLOBAL             26 (SWP_NOACTIVATE)
+              BINARY_OP                7 (|)
+              LOAD_GLOBAL             28 (SWP_SHOWWINDOW)
+              BINARY_OP                7 (|)
+
+ 27           CALL                     7
+              CALL                     1
+              RETURN_VALUE
+
+Disassembly of <code object tem_topmost at 0x107fa3b50, file "janela_topo.py", line 31>:
+ 31           RESUME                   0
+
+ 32           LOAD_GLOBAL              1 (bool + NULL)
+              LOAD_GLOBAL              2 (ctypes)
+              LOAD_ATTR                4 (windll)
+              LOAD_ATTR                6 (user32)
+              LOAD_ATTR                9 (GetWindowLongW + NULL|self)
+              LOAD_FAST_BORROW         0 (hwnd)
+              LOAD_GLOBAL             10 (GWL_EXSTYLE)
+              CALL                     2
+              LOAD_GLOBAL             12 (WS_EX_TOPMOST)
+              BINARY_OP                1 (&)
+              CALL                     1
+              RETURN_VALUE

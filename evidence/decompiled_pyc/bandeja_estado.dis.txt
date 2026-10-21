@@ -1,0 +1,1305 @@
+# Module: bandeja_estado
+# Filename: bandeja_estado.py
+
+  0           RESUME                   0
+
+  9           LOAD_CONST               0 ('conectado')
+              STORE_NAME               0 (CONECTADO)
+
+ 10           LOAD_CONST               1 ('desconectado')
+              STORE_NAME               1 (DESCONECTADO)
+
+ 11           LOAD_CONST               2 ('perdida')
+              STORE_NAME               2 (PERDIDA)
+
+ 12           LOAD_NAME                0 (CONECTADO)
+              LOAD_NAME                1 (DESCONECTADO)
+              LOAD_NAME                2 (PERDIDA)
+              BUILD_TUPLE              3
+              STORE_NAME               3 (ESTADOS)
+
+ 13           LOAD_CONST               3 ('conexao_perdida')
+              STORE_NAME               4 (AVISO_CONEXAO_PERDIDA)
+
+ 15           LOAD_CONST              18 (('connect', 'refresh'))
+              STORE_NAME               5 (JOBS_DE_LEITURA)
+
+ 18           LOAD_CONST               4 (<code object estado_da_conexao at 0x107fe7930, file "bandeja_estado.py", line 18>)
+              MAKE_FUNCTION
+              STORE_NAME               6 (estado_da_conexao)
+
+ 32           LOAD_CONST               5 ('fechar')
+              LOAD_CONST               6 ('esconder')
+              LOAD_CONST               7 ('perguntar')
+              SWAP                     3
+              STORE_NAME               7 (FECHAR)
+              STORE_NAME               8 (ESCONDER)
+              STORE_NAME               9 (PERGUNTAR)
+
+ 35           LOAD_CONST               8 (<code object decidir_fechamento at 0x108234c00, file "bandeja_estado.py", line 35>)
+              MAKE_FUNCTION
+              STORE_NAME              10 (decidir_fechamento)
+
+ 47           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               9 (<code object Avisador at 0x108232450, file "bandeja_estado.py", line 47>)
+              MAKE_FUNCTION
+              LOAD_CONST              10 ('Avisador')
+              CALL                     2
+              STORE_NAME              11 (Avisador)
+
+ 72           LOAD_CONST              11 (<code object posicao_do_menu at 0x107fcf670, file "bandeja_estado.py", line 72>)
+              MAKE_FUNCTION
+              STORE_NAME              12 (posicao_do_menu)
+
+ 86           LOAD_CONST              12 (<code object posicao_do_painel at 0x107f7e640, file "bandeja_estado.py", line 86>)
+              MAKE_FUNCTION
+              STORE_NAME              13 (posicao_do_painel)
+
+103           LOAD_CONST              13 (<code object plugins_do_menu at 0xbdf0db100, file "bandeja_estado.py", line 103>)
+              MAKE_FUNCTION
+              STORE_NAME              14 (plugins_do_menu)
+
+118           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              14 (<code object MenuAtual at 0x108107230, file "bandeja_estado.py", line 118>)
+              MAKE_FUNCTION
+              LOAD_CONST              15 ('MenuAtual')
+              CALL                     2
+              STORE_NAME              15 (MenuAtual)
+
+203           LOAD_SMALL_INT          15
+              STORE_NAME              16 (ESPERA_PELA_CONEXAO_S)
+
+206           LOAD_CONST              16 (<code object faixa_da_conexao at 0x107fe7c30, file "bandeja_estado.py", line 206>)
+              MAKE_FUNCTION
+              STORE_NAME              17 (faixa_da_conexao)
+              LOAD_CONST              17 (None)
+              RETURN_VALUE
+
+Disassembly of <code object estado_da_conexao at 0x107fe7930, file "bandeja_estado.py", line 18>:
+ 18           RESUME                   0
+
+ 23           LOAD_FAST_BORROW         1 (job_ocupado)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       18 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         2 (job_tipo)
+              LOAD_GLOBAL              0 (JOBS_DE_LEITURA)
+              CONTAINS_OP              0 (in)
+              POP_JUMP_IF_FALSE        7 (to L1)
+              NOT_TAKEN
+
+ 24           LOAD_GLOBAL              2 (CONECTADO)
+              RETURN_VALUE
+
+ 25   L1:     LOAD_FAST_BORROW         0 (pronto)
+              TO_BOOL
+              POP_JUMP_IF_TRUE         7 (to L2)
+              NOT_TAKEN
+
+ 26           LOAD_GLOBAL              4 (DESCONECTADO)
+              RETURN_VALUE
+
+ 27   L2:     LOAD_FAST_BORROW         1 (job_ocupado)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       17 (to L4)
+              NOT_TAKEN
+
+ 28           LOAD_FAST                4 (anterior)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         7 (to L3)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_GLOBAL              2 (CONECTADO)
+      L3:     RETURN_VALUE
+
+ 29   L4:     LOAD_FAST_BORROW         3 (fm_rodando)
+              TO_BOOL
+              POP_JUMP_IF_FALSE        7 (to L5)
+              NOT_TAKEN
+              LOAD_GLOBAL              2 (CONECTADO)
+              RETURN_VALUE
+      L5:     LOAD_GLOBAL              6 (PERDIDA)
+              RETURN_VALUE
+
+Disassembly of <code object decidir_fechamento at 0x108234c00, file "bandeja_estado.py", line 35>:
+ 35           RESUME                   0
+
+ 42           LOAD_FAST_BORROW         0 (liberada)
+              TO_BOOL
+              POP_JUMP_IF_TRUE        24 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         1 (icone_ok)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       16 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         2 (sessao_terminando)
+              TO_BOOL
+              POP_JUMP_IF_TRUE         8 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         3 (modo)
+              LOAD_CONST               0 ('fechar')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE        7 (to L2)
+              NOT_TAKEN
+
+ 43   L1:     LOAD_GLOBAL              0 (FECHAR)
+              RETURN_VALUE
+
+ 44   L2:     LOAD_FAST_BORROW         3 (modo)
+              LOAD_CONST               1 ('bandeja')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE        7 (to L3)
+              NOT_TAKEN
+              LOAD_GLOBAL              2 (ESCONDER)
+              RETURN_VALUE
+      L3:     LOAD_GLOBAL              4 (PERGUNTAR)
+              RETURN_VALUE
+
+Disassembly of <code object Avisador at 0x108232450, file "bandeja_estado.py", line 47>:
+  --           MAKE_CELL                0 (__classdict__)
+
+  47           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('Avisador')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT          47
+               STORE_NAME               3 (__firstlineno__)
+               LOAD_LOCALS
+               STORE_DEREF              0 (__classdict__)
+
+  50           LOAD_CONST               6 ((None,))
+               LOAD_CONST               2 (<code object __init__ at 0x108231ce0, file "bandeja_estado.py", line 50>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               4 (__init__)
+
+  54           LOAD_CONST               3 (<code object mudou_estado at 0x108234810, file "bandeja_estado.py", line 54>)
+               MAKE_FUNCTION
+               STORE_NAME               5 (mudou_estado)
+
+  61           LOAD_CONST               4 (<code object versao_nova at 0x1081f0880, file "bandeja_estado.py", line 61>)
+               MAKE_FUNCTION
+               STORE_NAME               6 (versao_nova)
+               LOAD_CONST               5 (('anterior', 'versao_avisada'))
+               STORE_NAME               7 (__static_attributes__)
+               LOAD_FAST_BORROW         0 (__classdict__)
+               STORE_NAME               8 (__classdictcell__)
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x108231ce0, file "bandeja_estado.py", line 50>:
+ 50           RESUME                   0
+
+ 51           LOAD_CONST               0 (None)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               0 (anterior)
+
+ 52           LOAD_FAST                1 (versao_ja_avisada)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               0 (None)
+      L1:     LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               1 (versao_avisada)
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object mudou_estado at 0x108234810, file "bandeja_estado.py", line 54>:
+ 54           RESUME                   0
+
+ 55           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (anterior)
+              LOAD_FAST_BORROW         1 (novo)
+              SWAP                     2
+              STORE_FAST_LOAD_FAST    48 (antes, self)
+              STORE_ATTR               0 (anterior)
+
+ 57           LOAD_FAST_BORROW         1 (novo)
+              LOAD_GLOBAL              2 (PERDIDA)
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE       26 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         3 (antes)
+              LOAD_GLOBAL              4 (CONECTADO)
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE       15 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         2 (janela_escondida)
+              TO_BOOL
+              POP_JUMP_IF_FALSE        7 (to L1)
+              NOT_TAKEN
+
+ 58           LOAD_GLOBAL              6 (AVISO_CONEXAO_PERDIDA)
+              RETURN_VALUE
+
+ 59   L1:     LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object versao_nova at 0x1081f0880, file "bandeja_estado.py", line 61>:
+ 61           RESUME                   0
+
+ 64           LOAD_FAST_BORROW         1 (versao)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       17 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (versao, self)
+              LOAD_ATTR                0 (versao_avisada)
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE        3 (to L2)
+              NOT_TAKEN
+
+ 65   L1:     LOAD_CONST               0 (False)
+              RETURN_VALUE
+
+ 66   L2:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (versao, self)
+              STORE_ATTR               0 (versao_avisada)
+
+ 67           LOAD_GLOBAL              3 (bool + NULL)
+              LOAD_FAST_BORROW         2 (janela_escondida)
+              CALL                     1
+              RETURN_VALUE
+
+Disassembly of <code object posicao_do_menu at 0x107fcf670, file "bandeja_estado.py", line 72>:
+ 72           RESUME                   0
+
+ 77           LOAD_FAST_BORROW         0 (cursor)
+              UNPACK_SEQUENCE          2
+              STORE_FAST_STORE_FAST   86 (cx, cy)
+
+ 78           LOAD_FAST_BORROW         1 (area)
+              UNPACK_SEQUENCE          4
+              STORE_FAST_STORE_FAST  120 (esquerda, topo)
+              STORE_FAST_STORE_FAST  154 (direita, base)
+
+ 79           LOAD_FAST_BORROW_LOAD_FAST_BORROW 83 (cx, largura)
+              BINARY_OP                0 (+)
+              LOAD_FAST_BORROW         9 (direita)
+              COMPARE_OP              58 (bool(<=))
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+              LOAD_FAST                5 (cx)
+              JUMP_FORWARD             7 (to L2)
+      L1:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 83 (cx, largura)
+              BINARY_OP               10 (-)
+      L2:     STORE_FAST              11 (x)
+
+ 80           LOAD_FAST_BORROW_LOAD_FAST_BORROW 130 (topo, monitor)
+              LOAD_SMALL_INT           1
+              BINARY_OP               26 ([])
+              COMPARE_OP             148 (bool(>))
+              POP_JUMP_IF_FALSE        3 (to L3)
+              NOT_TAKEN
+              LOAD_FAST                6 (cy)
+              JUMP_FORWARD             7 (to L4)
+      L3:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 100 (cy, altura)
+              BINARY_OP               10 (-)
+      L4:     STORE_FAST              12 (y)
+
+ 81           LOAD_GLOBAL              1 (min + NULL)
+              LOAD_GLOBAL              3 (max + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 183 (x, esquerda)
+              CALL                     2
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 147 (direita, largura)
+              BINARY_OP               10 (-)
+              CALL                     2
+              STORE_FAST              11 (x)
+
+ 82           LOAD_GLOBAL              1 (min + NULL)
+              LOAD_GLOBAL              3 (max + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 200 (y, topo)
+              CALL                     2
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 164 (base, altura)
+              BINARY_OP               10 (-)
+              CALL                     2
+              STORE_FAST              12 (y)
+
+ 83           LOAD_FAST_BORROW_LOAD_FAST_BORROW 188 (x, y)
+              BUILD_TUPLE              2
+              RETURN_VALUE
+
+Disassembly of <code object posicao_do_painel at 0x107f7e640, file "bandeja_estado.py", line 86>:
+ 86           RESUME                   0
+
+ 94           LOAD_FAST_BORROW         0 (menu)
+              UNPACK_SEQUENCE          4
+              STORE_FAST_STORE_FAST  103 (x, y)
+              STORE_FAST_STORE_FAST  137 (largura_menu, _)
+
+ 95           LOAD_FAST_BORROW_LOAD_FAST_BORROW 104 (x, largura_menu)
+              BINARY_OP                0 (+)
+              LOAD_FAST_BORROW         4 (folga)
+              BINARY_OP                0 (+)
+              LOAD_FAST_BORROW         2 (largura)
+              BINARY_OP                0 (+)
+              LOAD_FAST_BORROW         5 (area)
+              LOAD_SMALL_INT           2
+              BINARY_OP               26 ([])
+              COMPARE_OP              58 (bool(<=))
+              POP_JUMP_IF_FALSE       18 (to L1)
+              NOT_TAKEN
+
+ 96           LOAD_FAST_BORROW_LOAD_FAST_BORROW 104 (x, largura_menu)
+              BINARY_OP                0 (+)
+              LOAD_FAST_BORROW         4 (folga)
+              BINARY_OP                0 (+)
+              LOAD_CONST               1 ('direita')
+              STORE_FAST_STORE_FAST  186 (lado, px)
+              JUMP_FORWARD            16 (to L2)
+
+ 98   L1:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 100 (x, folga)
+              BINARY_OP               10 (-)
+              LOAD_FAST_BORROW         2 (largura)
+              BINARY_OP               10 (-)
+              LOAD_CONST               2 ('esquerda')
+              STORE_FAST_STORE_FAST  186 (lado, px)
+
+ 99   L2:     LOAD_GLOBAL              1 (min + NULL)
+              LOAD_GLOBAL              3 (max + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 113 (y, topo_da_linha)
+              BINARY_OP                0 (+)
+              LOAD_FAST_BORROW         5 (area)
+              LOAD_SMALL_INT           1
+              BINARY_OP               26 ([])
+              CALL                     2
+              LOAD_FAST_BORROW         5 (area)
+              LOAD_SMALL_INT           3
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         3 (altura)
+              BINARY_OP               10 (-)
+              CALL                     2
+              STORE_FAST              12 (py)
+
+100           LOAD_FAST_BORROW_LOAD_FAST_BORROW 172 (px, py)
+              LOAD_FAST_BORROW        11 (lado)
+              BUILD_TUPLE              3
+              RETURN_VALUE
+
+Disassembly of <code object plugins_do_menu at 0xbdf0db100, file "bandeja_estado.py", line 103>:
+103            RESUME                   0
+
+105            BUILD_LIST               0
+               BUILD_MAP                0
+               STORE_FAST_STORE_FAST   33 (por_id, saida)
+
+106            LOAD_FAST                0 (tela)
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               POP_TOP
+               BUILD_MAP                0
+       L1:     LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               0 ('jogos')
+               CALL                     1
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L2)
+               NOT_TAKEN
+               POP_TOP
+               BUILD_LIST               0
+       L2:     GET_ITER
+       L3:     EXTENDED_ARG             1
+               FOR_ITER               266 (to L10)
+               STORE_FAST               3 (jogo)
+
+107            LOAD_FAST_BORROW         3 (jogo)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               1 ('plugins')
+               CALL                     1
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               POP_TOP
+               BUILD_LIST               0
+       L4:     GET_ITER
+       L5:     FOR_ITER               231 (to L9)
+               STORE_FAST               4 (p)
+
+108            LOAD_FAST_BORROW         4 (p)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               2 ('id')
+               CALL                     1
+               LOAD_FAST_BORROW         2 (por_id)
+               CONTAINS_OP              0 (in)
+               POP_JUMP_IF_FALSE       75 (to L7)
+               NOT_TAKEN
+
+109            LOAD_FAST_BORROW_LOAD_FAST_BORROW 36 (por_id, p)
+               LOAD_CONST               2 ('id')
+               BINARY_OP               26 ([])
+               BINARY_OP               26 ([])
+               LOAD_CONST               3 ('reiniciar')
+               BINARY_OP               26 ([])
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE        27 (to L6)
+               NOT_TAKEN
+               POP_TOP
+               LOAD_GLOBAL              3 (bool + NULL)
+               LOAD_FAST_BORROW         4 (p)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               3 ('reiniciar')
+               CALL                     1
+               CALL                     1
+       L6:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 36 (por_id, p)
+               LOAD_CONST               2 ('id')
+               BINARY_OP               26 ([])
+               BINARY_OP               26 ([])
+               LOAD_CONST               3 ('reiniciar')
+               STORE_SUBSCR
+
+110            JUMP_BACKWARD           99 (to L5)
+
+111    L7:     LOAD_CONST               2 ('id')
+               LOAD_FAST_BORROW         4 (p)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               2 ('id')
+               CALL                     1
+               LOAD_CONST               4 ('nome')
+               LOAD_FAST_BORROW         4 (p)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               4 ('nome')
+               CALL                     1
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE        18 (to L8)
+               NOT_TAKEN
+               POP_TOP
+               LOAD_FAST_BORROW         4 (p)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               2 ('id')
+               CALL                     1
+
+112    L8:     LOAD_CONST               5 ('versao')
+               LOAD_FAST_BORROW         4 (p)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               6 ('instalada')
+               CALL                     1
+               LOAD_CONST               3 ('reiniciar')
+               LOAD_GLOBAL              3 (bool + NULL)
+               LOAD_FAST_BORROW         4 (p)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               3 ('reiniciar')
+               CALL                     1
+               CALL                     1
+
+111            BUILD_MAP                4
+               STORE_FAST               5 (item)
+
+113            LOAD_FAST_BORROW_LOAD_FAST_BORROW 82 (item, por_id)
+               LOAD_FAST_BORROW         5 (item)
+               LOAD_CONST               2 ('id')
+               BINARY_OP               26 ([])
+               STORE_SUBSCR
+
+114            LOAD_FAST_BORROW         1 (saida)
+               LOAD_ATTR                5 (append + NULL|self)
+               LOAD_FAST_BORROW         5 (item)
+               CALL                     1
+               POP_TOP
+               JUMP_BACKWARD          233 (to L5)
+
+107    L9:     END_FOR
+               POP_ITER
+               EXTENDED_ARG             1
+               JUMP_BACKWARD          269 (to L3)
+
+106   L10:     END_FOR
+               POP_ITER
+
+115            LOAD_FAST_BORROW         1 (saida)
+               RETURN_VALUE
+
+Disassembly of <code object MenuAtual at 0x108107230, file "bandeja_estado.py", line 118>:
+  --           MAKE_CELL                0 (__classdict__)
+
+ 118           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('MenuAtual')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT         118
+               STORE_NAME               3 (__firstlineno__)
+               LOAD_LOCALS
+               STORE_DEREF              0 (__classdict__)
+
+ 124           LOAD_CONST               1 (<code object __init__ at 0x108234ff0, file "bandeja_estado.py", line 124>)
+               MAKE_FUNCTION
+               STORE_NAME               4 (__init__)
+
+ 133           LOAD_CONST               2 (<code object _vale at 0x1081b3630, file "bandeja_estado.py", line 133>)
+               MAKE_FUNCTION
+               STORE_NAME               5 (_vale)
+
+ 136           LOAD_CONST               3 (<code object reservar at 0x107fcfbb0, file "bandeja_estado.py", line 136>)
+               MAKE_FUNCTION
+               STORE_NAME               6 (reservar)
+
+ 143           LOAD_CONST               4 (<code object registrar at 0x10822c800, file "bandeja_estado.py", line 143>)
+               MAKE_FUNCTION
+               STORE_NAME               7 (registrar)
+
+ 151           LOAD_CONST               5 (<code object pronto at 0x1081ec390, file "bandeja_estado.py", line 151>)
+               MAKE_FUNCTION
+               STORE_NAME               8 (pronto)
+
+ 159           LOAD_CONST               6 (<code object janela at 0x10822df70, file "bandeja_estado.py", line 159>)
+               MAKE_FUNCTION
+               STORE_NAME               9 (janela)
+
+ 164           LOAD_CONST               7 (<code object desistir at 0x1082a0030, file "bandeja_estado.py", line 164>)
+               MAKE_FUNCTION
+               STORE_NAME              10 (desistir)
+
+ 173           LOAD_CONST               8 (<code object abrir_painel at 0x1081ec6f0, file "bandeja_estado.py", line 173>)
+               MAKE_FUNCTION
+               STORE_NAME              11 (abrir_painel)
+
+ 181           LOAD_CONST               9 (<code object fechar_painel at 0x1081ec8a0, file "bandeja_estado.py", line 181>)
+               MAKE_FUNCTION
+               STORE_NAME              12 (fechar_painel)
+
+ 189           LOAD_CONST              10 (<code object painel_aberto at 0x10822e100, file "bandeja_estado.py", line 189>)
+               MAKE_FUNCTION
+               STORE_NAME              13 (painel_aberto)
+
+ 193           LOAD_CONST              14 ((None,))
+               LOAD_CONST              12 (<code object tirar at 0x107fcfd70, file "bandeja_estado.py", line 193>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME              14 (tirar)
+               LOAD_CONST              13 (('_decidido', '_fechado', '_janela', '_n', '_painel', '_trava'))
+               STORE_NAME              15 (__static_attributes__)
+               LOAD_FAST_BORROW         0 (__classdict__)
+               STORE_NAME              16 (__classdictcell__)
+               LOAD_CONST              11 (None)
+               RETURN_VALUE
+
+Disassembly of <code object __init__ at 0x108234ff0, file "bandeja_estado.py", line 124>:
+124           RESUME                   0
+
+125           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (threading)
+              STORE_FAST               1 (threading)
+
+126           LOAD_FAST_BORROW         1 (threading)
+              LOAD_ATTR                3 (Lock + NULL|self)
+              CALL                     0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               2 (_trava)
+
+127           LOAD_SMALL_INT           0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               3 (_n)
+
+128           LOAD_CONST               1 (None)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               4 (_janela)
+
+129           LOAD_CONST               2 (True)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               5 (_fechado)
+
+130           LOAD_CONST               3 (False)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               6 (_decidido)
+
+131           LOAD_CONST               3 (False)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               7 (_painel)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _vale at 0x1081b3630, file "bandeja_estado.py", line 133>:
+133           RESUME                   0
+
+134           LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (n, self)
+              LOAD_ATTR                0 (_n)
+              COMPARE_OP              72 (==)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_FALSE       18 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                2 (_fechado)
+              TO_BOOL
+              UNARY_NOT
+      L1:     RETURN_VALUE
+
+Disassembly of <code object reservar at 0x107fcfbb0, file "bandeja_estado.py", line 136>:
+ 136           RESUME                   0
+
+ 138           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                0 (_trava)
+               COPY                     1
+               LOAD_SPECIAL             1 (__exit__)
+               SWAP                     2
+               SWAP                     3
+               LOAD_SPECIAL             0 (__enter__)
+               CALL                     0
+       L1:     POP_TOP
+
+ 139           LOAD_FAST_BORROW         0 (self)
+               COPY                     1
+               LOAD_ATTR                2 (_n)
+               LOAD_SMALL_INT           1
+               BINARY_OP               13 (+=)
+               SWAP                     2
+               STORE_ATTR               1 (_n)
+
+ 140           LOAD_CONST               2 ((None, False, False, False))
+               UNPACK_SEQUENCE          4
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR               2 (_janela)
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR               3 (_fechado)
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR               4 (_decidido)
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR               5 (_painel)
+
+ 141           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                2 (_n)
+
+ 138   L2:     SWAP                     3
+               SWAP                     2
+               LOAD_CONST               1 (None)
+               LOAD_CONST               1 (None)
+               LOAD_CONST               1 (None)
+               CALL                     3
+               POP_TOP
+               RETURN_VALUE
+       L3:     PUSH_EXC_INFO
+               WITH_EXCEPT_START
+               TO_BOOL
+               POP_JUMP_IF_TRUE         2 (to L4)
+               NOT_TAKEN
+               RERAISE                  2
+       L4:     POP_TOP
+       L5:     POP_EXCEPT
+               POP_TOP
+               POP_TOP
+               POP_TOP
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [2] lasti
+  L3 to L5 -> L6 [4] lasti
+
+Disassembly of <code object registrar at 0x10822c800, file "bandeja_estado.py", line 143>:
+ 143           RESUME                   0
+
+ 145           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                0 (_trava)
+               COPY                     1
+               LOAD_SPECIAL             1 (__exit__)
+               SWAP                     2
+               SWAP                     3
+               LOAD_SPECIAL             0 (__enter__)
+               CALL                     0
+       L1:     POP_TOP
+
+ 146           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                3 (_vale + NULL|self)
+               LOAD_FAST_BORROW         1 (n)
+               CALL                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE        12 (to L3)
+               NOT_TAKEN
+
+ 147           NOP
+
+ 145   L2:     LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               CALL                     3
+               POP_TOP
+               LOAD_CONST               1 (False)
+               RETURN_VALUE
+
+ 148   L3:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 32 (janela, self)
+               STORE_ATTR               2 (_janela)
+
+ 149           NOP
+
+ 145   L4:     LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               CALL                     3
+               POP_TOP
+               LOAD_CONST               2 (True)
+               RETURN_VALUE
+       L5:     PUSH_EXC_INFO
+               WITH_EXCEPT_START
+               TO_BOOL
+               POP_JUMP_IF_TRUE         2 (to L6)
+               NOT_TAKEN
+               RERAISE                  2
+       L6:     POP_TOP
+       L7:     POP_EXCEPT
+               POP_TOP
+               POP_TOP
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L8:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L5 [2] lasti
+  L3 to L4 -> L5 [2] lasti
+  L5 to L7 -> L8 [4] lasti
+
+Disassembly of <code object pronto at 0x1081ec390, file "bandeja_estado.py", line 151>:
+ 151            RESUME                   0
+
+ 153            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_trava)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L1:     POP_TOP
+
+ 154            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                3 (_vale + NULL|self)
+                LOAD_FAST_BORROW         1 (n)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       19 (to L3)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                4 (_decidido)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       12 (to L5)
+        L2:     NOT_TAKEN
+
+ 155    L3:     NOP
+
+ 153    L4:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+                LOAD_CONST               1 (False)
+                RETURN_VALUE
+
+ 156    L5:     LOAD_CONST               2 (True)
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR               2 (_decidido)
+
+ 157            NOP
+
+ 153    L6:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+                LOAD_CONST               2 (True)
+                RETURN_VALUE
+        L7:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L8)
+                NOT_TAKEN
+                RERAISE                  2
+        L8:     POP_TOP
+        L9:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  --   L10:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L7 [2] lasti
+  L3 to L4 -> L7 [2] lasti
+  L5 to L6 -> L7 [2] lasti
+  L7 to L9 -> L10 [4] lasti
+
+Disassembly of <code object janela at 0x10822df70, file "bandeja_estado.py", line 159>:
+ 159           RESUME                   0
+
+ 161           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                0 (_trava)
+               COPY                     1
+               LOAD_SPECIAL             1 (__exit__)
+               SWAP                     2
+               SWAP                     3
+               LOAD_SPECIAL             0 (__enter__)
+               CALL                     0
+       L1:     POP_TOP
+
+ 162           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                3 (_vale + NULL|self)
+               LOAD_FAST_BORROW         1 (n)
+               CALL                     1
+               TO_BOOL
+               POP_JUMP_IF_FALSE       13 (to L2)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                4 (_janela)
+               JUMP_FORWARD             1 (to L3)
+       L2:     LOAD_CONST               0 (None)
+
+ 161   L3:     SWAP                     3
+               SWAP                     2
+               LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               CALL                     3
+               POP_TOP
+               RETURN_VALUE
+       L4:     PUSH_EXC_INFO
+               WITH_EXCEPT_START
+               TO_BOOL
+               POP_JUMP_IF_TRUE         2 (to L5)
+               NOT_TAKEN
+               RERAISE                  2
+       L5:     POP_TOP
+       L6:     POP_EXCEPT
+               POP_TOP
+               POP_TOP
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L7:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L4 [2] lasti
+  L4 to L6 -> L7 [4] lasti
+
+Disassembly of <code object desistir at 0x1082a0030, file "bandeja_estado.py", line 164>:
+ 164            RESUME                   0
+
+ 166            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_trava)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L1:     POP_TOP
+
+ 167            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                3 (_vale + NULL|self)
+                LOAD_FAST_BORROW         1 (n)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       19 (to L3)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                4 (_decidido)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       13 (to L5)
+        L2:     NOT_TAKEN
+
+ 168    L3:     LOAD_CONST               3 ((False, None))
+
+ 166    L4:     SWAP                     3
+                SWAP                     2
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+                RETURN_VALUE
+
+ 169    L5:     LOAD_CONST               2 (True)
+                LOAD_CONST               2 (True)
+                SWAP                     2
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR               2 (_decidido)
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR               3 (_fechado)
+
+ 170            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                8 (_janela)
+                LOAD_CONST               1 (None)
+                SWAP                     2
+                STORE_FAST_LOAD_FAST    32 (janela, self)
+                STORE_ATTR               4 (_janela)
+
+ 171            LOAD_CONST               2 (True)
+                LOAD_FAST_BORROW         2 (janela)
+                BUILD_TUPLE              2
+
+ 166    L6:     SWAP                     3
+                SWAP                     2
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+                RETURN_VALUE
+        L7:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L8)
+                NOT_TAKEN
+                RERAISE                  2
+        L8:     POP_TOP
+        L9:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --   L10:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L7 [2] lasti
+  L3 to L4 -> L7 [2] lasti
+  L5 to L6 -> L7 [2] lasti
+  L7 to L9 -> L10 [4] lasti
+
+Disassembly of <code object abrir_painel at 0x1081ec6f0, file "bandeja_estado.py", line 173>:
+ 173            RESUME                   0
+
+ 175            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_trava)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L1:     POP_TOP
+
+ 176            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                3 (_vale + NULL|self)
+                LOAD_FAST_BORROW         1 (n)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       19 (to L3)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                4 (_painel)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       12 (to L5)
+        L2:     NOT_TAKEN
+
+ 177    L3:     NOP
+
+ 175    L4:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+                LOAD_CONST               1 (False)
+                RETURN_VALUE
+
+ 178    L5:     LOAD_CONST               2 (True)
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR               2 (_painel)
+
+ 179            NOP
+
+ 175    L6:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+                LOAD_CONST               2 (True)
+                RETURN_VALUE
+        L7:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L8)
+                NOT_TAKEN
+                RERAISE                  2
+        L8:     POP_TOP
+        L9:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  --   L10:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L7 [2] lasti
+  L3 to L4 -> L7 [2] lasti
+  L5 to L6 -> L7 [2] lasti
+  L7 to L9 -> L10 [4] lasti
+
+Disassembly of <code object fechar_painel at 0x1081ec8a0, file "bandeja_estado.py", line 181>:
+ 181            RESUME                   0
+
+ 183            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_trava)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L1:     POP_TOP
+
+ 184            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                3 (_vale + NULL|self)
+                LOAD_FAST_BORROW         1 (n)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       19 (to L3)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                4 (_painel)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        12 (to L5)
+        L2:     NOT_TAKEN
+
+ 185    L3:     NOP
+
+ 183    L4:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+                LOAD_CONST               1 (False)
+                RETURN_VALUE
+
+ 186    L5:     LOAD_CONST               1 (False)
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR               2 (_painel)
+
+ 187            NOP
+
+ 183    L6:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+                LOAD_CONST               2 (True)
+                RETURN_VALUE
+        L7:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L8)
+                NOT_TAKEN
+                RERAISE                  2
+        L8:     POP_TOP
+        L9:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  --   L10:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L7 [2] lasti
+  L3 to L4 -> L7 [2] lasti
+  L5 to L6 -> L7 [2] lasti
+  L7 to L9 -> L10 [4] lasti
+
+Disassembly of <code object painel_aberto at 0x10822e100, file "bandeja_estado.py", line 189>:
+ 189           RESUME                   0
+
+ 190           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                0 (_trava)
+               COPY                     1
+               LOAD_SPECIAL             1 (__exit__)
+               SWAP                     2
+               SWAP                     3
+               LOAD_SPECIAL             0 (__enter__)
+               CALL                     0
+       L1:     POP_TOP
+
+ 191           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                3 (_vale + NULL|self)
+               LOAD_FAST_BORROW         1 (n)
+               CALL                     1
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_FALSE       13 (to L2)
+               NOT_TAKEN
+               POP_TOP
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                4 (_painel)
+
+ 190   L2:     SWAP                     3
+               SWAP                     2
+               LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               CALL                     3
+               POP_TOP
+               RETURN_VALUE
+       L3:     PUSH_EXC_INFO
+               WITH_EXCEPT_START
+               TO_BOOL
+               POP_JUMP_IF_TRUE         2 (to L4)
+               NOT_TAKEN
+               RERAISE                  2
+       L4:     POP_TOP
+       L5:     POP_EXCEPT
+               POP_TOP
+               POP_TOP
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [2] lasti
+  L3 to L5 -> L6 [4] lasti
+
+Disassembly of <code object tirar at 0x107fcfd70, file "bandeja_estado.py", line 193>:
+ 193           RESUME                   0
+
+ 195           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                0 (_trava)
+               COPY                     1
+               LOAD_SPECIAL             1 (__exit__)
+               SWAP                     2
+               SWAP                     3
+               LOAD_SPECIAL             0 (__enter__)
+               CALL                     0
+       L1:     POP_TOP
+
+ 196           LOAD_FAST_BORROW         1 (n)
+               POP_JUMP_IF_NONE        29 (to L3)
+               NOT_TAKEN
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 16 (n, self)
+               LOAD_ATTR                2 (_n)
+               COMPARE_OP             119 (bool(!=))
+               POP_JUMP_IF_FALSE       13 (to L3)
+               NOT_TAKEN
+
+ 197           LOAD_CONST               2 ((False, None))
+
+ 195   L2:     SWAP                     3
+               SWAP                     2
+               LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               CALL                     3
+               POP_TOP
+               RETURN_VALUE
+
+ 198   L3:     LOAD_CONST               1 (True)
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR               2 (_fechado)
+
+ 199           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                6 (_janela)
+               LOAD_CONST               0 (None)
+               SWAP                     2
+               STORE_FAST_LOAD_FAST    32 (janela, self)
+               STORE_ATTR               3 (_janela)
+
+ 200           LOAD_CONST               1 (True)
+               LOAD_FAST_BORROW         2 (janela)
+               BUILD_TUPLE              2
+
+ 195   L4:     SWAP                     3
+               SWAP                     2
+               LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               CALL                     3
+               POP_TOP
+               RETURN_VALUE
+       L5:     PUSH_EXC_INFO
+               WITH_EXCEPT_START
+               TO_BOOL
+               POP_JUMP_IF_TRUE         2 (to L6)
+               NOT_TAKEN
+               RERAISE                  2
+       L6:     POP_TOP
+       L7:     POP_EXCEPT
+               POP_TOP
+               POP_TOP
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L8:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L5 [2] lasti
+  L3 to L4 -> L5 [2] lasti
+  L5 to L7 -> L8 [4] lasti
+
+Disassembly of <code object faixa_da_conexao at 0x107fe7c30, file "bandeja_estado.py", line 206>:
+206           RESUME                   0
+
+211           LOAD_FAST_BORROW         0 (job)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               0 ('kind')
+              CALL                     1
+              LOAD_CONST               1 ('connect')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE       25 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         0 (job)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               2 ('state')
+              CALL                     1
+              LOAD_CONST               3 ('running')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE        3 (to L1)
+              NOT_TAKEN
+
+212           LOAD_CONST               8 (('conectando', True))
+              RETURN_VALUE
+
+213   L1:     LOAD_FAST_BORROW         2 (viu_rodando)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       15 (to L3)
+              NOT_TAKEN
+
+214           LOAD_FAST_BORROW         1 (leitura_pronta)
+              TO_BOOL
+              POP_JUMP_IF_FALSE        3 (to L2)
+              NOT_TAKEN
+              LOAD_CONST               9 (('conectado', True))
+              RETURN_VALUE
+      L2:     LOAD_CONST               6 ('falhou')
+              LOAD_CONST               5 (True)
+              BUILD_TUPLE              2
+              RETURN_VALUE
+
+216   L3:     LOAD_FAST_BORROW         3 (esperando_s)
+              LOAD_GLOBAL              2 (ESPERA_PELA_CONEXAO_S)
+              COMPARE_OP             148 (bool(>))
+              POP_JUMP_IF_FALSE        3 (to L4)
+              NOT_TAKEN
+              LOAD_CONST              10 (('falhou', False))
+              RETURN_VALUE
+      L4:     LOAD_CONST               4 ('conectando')
+              LOAD_CONST               7 (False)
+              BUILD_TUPLE              2
+              RETURN_VALUE

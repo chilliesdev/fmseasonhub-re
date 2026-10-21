@@ -1,0 +1,228 @@
+# Module: janela_dados
+# Filename: janela_dados.py
+
+  0           RESUME                   0
+
+ 11           LOAD_CONST               0 (1161)
+              LOAD_CONST               1 (595)
+              SWAP                     2
+              STORE_NAME               0 (LARGURA)
+              STORE_NAME               1 (ALTURA)
+
+ 12           LOAD_NAME                0 (LARGURA)
+              LOAD_NAME                1 (ALTURA)
+              BINARY_OP               11 (/)
+              STORE_NAME               2 (PROPORCAO)
+
+ 13           LOAD_SMALL_INT          24
+              STORE_NAME               3 (FOLGA_DO_ICONE)
+
+ 14           LOAD_SMALL_INT           8
+              STORE_NAME               4 (FOLGA_DA_BORDA)
+
+ 15           LOAD_CONST               2 (640)
+              STORE_NAME               5 (LARGURA_MINIMA)
+
+ 16           LOAD_CONST               3 (0.9)
+              STORE_NAME               6 (MAXIMO_DA_LARGURA)
+
+ 19           LOAD_CONST               4 (<code object tela_principal at 0x10822e5b0, file "janela_dados.py", line 19>)
+              MAKE_FUNCTION
+              STORE_NAME               7 (tela_principal)
+
+ 30           LOAD_CONST               5 (<code object geometria at 0xbdf6d6680, file "janela_dados.py", line 30>)
+              MAKE_FUNCTION
+              STORE_NAME               8 (geometria)
+              LOAD_CONST               6 (None)
+              RETURN_VALUE
+
+Disassembly of <code object tela_principal at 0x10822e5b0, file "janela_dados.py", line 19>:
+  19           RESUME                   0
+
+  22           NOP
+
+  23   L1:     LOAD_SMALL_INT           0
+               LOAD_CONST               1 (None)
+               IMPORT_NAME              0 (ctypes)
+               STORE_FAST               0 (ctypes)
+
+  24           LOAD_FAST_BORROW         0 (ctypes)
+               LOAD_ATTR                2 (windll)
+               LOAD_ATTR                4 (user32)
+               STORE_FAST               1 (u)
+
+  25           LOAD_SMALL_INT           0
+               LOAD_SMALL_INT           0
+               LOAD_FAST_BORROW         1 (u)
+               LOAD_ATTR                7 (GetSystemMetrics + NULL|self)
+               LOAD_SMALL_INT           0
+               CALL                     1
+               LOAD_FAST_BORROW         1 (u)
+               LOAD_ATTR                7 (GetSystemMetrics + NULL|self)
+               LOAD_SMALL_INT           1
+               CALL                     1
+               BUILD_TUPLE              4
+       L2:     RETURN_VALUE
+
+  --   L3:     PUSH_EXC_INFO
+
+  26           LOAD_GLOBAL              8 (AttributeError)
+               LOAD_GLOBAL             10 (OSError)
+               LOAD_GLOBAL             12 (ImportError)
+               BUILD_TUPLE              3
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        5 (to L5)
+               NOT_TAKEN
+               POP_TOP
+
+  27   L4:     POP_EXCEPT
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  26   L5:     RERAISE                  0
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [0]
+  L3 to L4 -> L6 [1] lasti
+  L5 to L6 -> L6 [1] lasti
+
+Disassembly of <code object geometria at 0xbdf6d6680, file "janela_dados.py", line 30>:
+ 30           RESUME                   0
+
+ 33           LOAD_FAST_BORROW         1 (jogo)
+              UNPACK_SEQUENCE          4
+              STORE_FAST_STORE_FAST   35 (gx, gy)
+              STORE_FAST_STORE_FAST   69 (gw, gh)
+
+ 34           LOAD_FAST_BORROW         4 (gw)
+              LOAD_SMALL_INT           0
+              COMPARE_OP              58 (bool(<=))
+              POP_JUMP_IF_TRUE         8 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         5 (gh)
+              LOAD_SMALL_INT           0
+              COMPARE_OP              58 (bool(<=))
+              POP_JUMP_IF_FALSE        3 (to L2)
+              NOT_TAKEN
+
+ 35   L1:     LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+ 36   L2:     LOAD_GLOBAL              1 (min + NULL)
+              LOAD_GLOBAL              2 (LARGURA)
+              LOAD_GLOBAL              5 (int + NULL)
+              LOAD_FAST_BORROW         4 (gw)
+              LOAD_GLOBAL              6 (MAXIMO_DA_LARGURA)
+              BINARY_OP                5 (*)
+              CALL                     1
+              CALL                     2
+              STORE_FAST               6 (largura)
+
+ 37           LOAD_GLOBAL              9 (round + NULL)
+              LOAD_FAST_BORROW         6 (largura)
+              LOAD_GLOBAL             10 (PROPORCAO)
+              BINARY_OP               11 (/)
+              CALL                     1
+              STORE_FAST               7 (altura)
+
+ 38           LOAD_FAST_BORROW         0 (icone)
+              UNPACK_SEQUENCE          4
+              STORE_FAST_STORE_FAST  137 (ax, ay)
+              STORE_FAST_STORE_FAST  171 (aw, ah)
+
+ 39           LOAD_FAST_BORROW        10 (aw)
+              LOAD_SMALL_INT           0
+              COMPARE_OP             148 (bool(>))
+              POP_JUMP_IF_FALSE       27 (to L3)
+              NOT_TAKEN
+              LOAD_FAST_BORROW        11 (ah)
+              LOAD_SMALL_INT           0
+              COMPARE_OP             148 (bool(>))
+              POP_JUMP_IF_FALSE       20 (to L3)
+              NOT_TAKEN
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 155 (ay, ah)
+              BINARY_OP                0 (+)
+              LOAD_GLOBAL             12 (FOLGA_DO_ICONE)
+              BINARY_OP                0 (+)
+              JUMP_FORWARD            21 (to L4)
+      L3:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 53 (gy, gh)
+              LOAD_FAST_BORROW         7 (altura)
+              BINARY_OP               10 (-)
+              LOAD_SMALL_INT           2
+              BINARY_OP                2 (//)
+              BINARY_OP                0 (+)
+      L4:     STORE_FAST              12 (topo)
+
+ 40           LOAD_FAST_BORROW_LOAD_FAST_BORROW 53 (gy, gh)
+              BINARY_OP                0 (+)
+              LOAD_GLOBAL             14 (FOLGA_DA_BORDA)
+              BINARY_OP               10 (-)
+              STORE_FAST              13 (limite)
+
+ 41           LOAD_FAST_BORROW_LOAD_FAST_BORROW 199 (topo, altura)
+              BINARY_OP                0 (+)
+              LOAD_FAST_BORROW        13 (limite)
+              COMPARE_OP             148 (bool(>))
+              POP_JUMP_IF_FALSE      129 (to L6)
+              NOT_TAKEN
+
+ 42           LOAD_FAST_BORROW_LOAD_FAST_BORROW 220 (limite, topo)
+              BINARY_OP               10 (-)
+              STORE_FAST              14 (disponivel)
+
+ 43           LOAD_FAST_BORROW        14 (disponivel)
+              LOAD_GLOBAL              9 (round + NULL)
+              LOAD_GLOBAL             16 (LARGURA_MINIMA)
+              LOAD_GLOBAL             10 (PROPORCAO)
+              BINARY_OP               11 (/)
+              CALL                     1
+              COMPARE_OP             188 (bool(>=))
+              POP_JUMP_IF_FALSE       59 (to L5)
+              NOT_TAKEN
+
+ 44           LOAD_GLOBAL             19 (max + NULL)
+              LOAD_GLOBAL             16 (LARGURA_MINIMA)
+              LOAD_GLOBAL              5 (int + NULL)
+              LOAD_FAST_BORROW        14 (disponivel)
+              LOAD_GLOBAL             10 (PROPORCAO)
+              BINARY_OP                5 (*)
+              CALL                     1
+              CALL                     2
+              STORE_FAST               6 (largura)
+
+ 45           LOAD_GLOBAL              9 (round + NULL)
+              LOAD_FAST_BORROW         6 (largura)
+              LOAD_GLOBAL             10 (PROPORCAO)
+              BINARY_OP               11 (/)
+              CALL                     1
+              STORE_FAST               7 (altura)
+
+ 46   L5:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 199 (topo, altura)
+              BINARY_OP                0 (+)
+              LOAD_FAST_BORROW        13 (limite)
+              COMPARE_OP             148 (bool(>))
+              POP_JUMP_IF_FALSE       19 (to L6)
+              NOT_TAKEN
+
+ 47           LOAD_GLOBAL             19 (max + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 61 (gy, limite)
+              LOAD_FAST_BORROW         7 (altura)
+              BINARY_OP               10 (-)
+              CALL                     2
+              STORE_FAST              12 (topo)
+
+ 48   L6:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 36 (gx, gw)
+              LOAD_FAST_BORROW         6 (largura)
+              BINARY_OP               10 (-)
+              LOAD_SMALL_INT           2
+              BINARY_OP                2 (//)
+              BINARY_OP                0 (+)
+              LOAD_GLOBAL             19 (max + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 195 (topo, gy)
+              CALL                     2
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 103 (largura, altura)
+              BUILD_TUPLE              4
+              RETURN_VALUE

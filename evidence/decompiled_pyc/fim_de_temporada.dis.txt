@@ -1,0 +1,3119 @@
+# Module: fim_de_temporada
+# Filename: fim_de_temporada.py
+
+  0           RESUME                   0
+
+ 38           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (datetime)
+              STORE_NAME               0 (datetime)
+
+ 40           LOAD_SMALL_INT          14
+              STORE_NAME               1 (ESPERA_MAXIMA)
+
+ 41           LOAD_SMALL_INT           5
+              STORE_NAME               2 (MAX_LEITURAS)
+
+ 42           LOAD_SMALL_INT           8
+              STORE_NAME               3 (MIN_TIMES_LIGA)
+
+ 43           LOAD_CONST              21 ((0, 1, 14))
+              STORE_NAME               4 (CATEGORIAS_DE_LIGA)
+
+ 48           LOAD_CONST               2 (<code object conjunto_da_liga at 0x1081ec1e0, file "fim_de_temporada.py", line 48>)
+              MAKE_FUNCTION
+              STORE_NAME               5 (conjunto_da_liga)
+
+ 56           LOAD_SMALL_INT          30
+              STORE_NAME               6 (TOLERANCIA_DEPOIS_DO_USUARIO)
+
+ 58           LOAD_SMALL_INT          21
+              STORE_NAME               7 (OSCILACAO_DO_CALENDARIO)
+
+ 62           LOAD_SMALL_INT          45
+              STORE_NAME               8 (ESPERA_POR_COPA)
+
+ 63           LOAD_NAME                0 (datetime)
+              LOAD_ATTR               18 (timedelta)
+              PUSH_NULL
+              LOAD_CONST               3 (365)
+              LOAD_CONST               4 (('days',))
+              CALL_KW                  1
+              STORE_NAME              10 (UM_ANO)
+
+ 64           LOAD_NAME                0 (datetime)
+              LOAD_ATTR               18 (timedelta)
+              PUSH_NULL
+              LOAD_SMALL_INT           1
+              LOAD_CONST               4 (('days',))
+              CALL_KW                  1
+              STORE_NAME              11 (UM_DIA)
+
+ 67           LOAD_CONST               5 (<code object temporada_atual at 0x1081adcf0, file "fim_de_temporada.py", line 67>)
+              MAKE_FUNCTION
+              STORE_NAME              12 (temporada_atual)
+
+ 74           LOAD_CONST               6 (<code object liga_principal at 0x107fe7ab0, file "fim_de_temporada.py", line 74>)
+              MAKE_FUNCTION
+              STORE_NAME              13 (liga_principal)
+
+ 81           LOAD_CONST              22 ((None, None))
+              LOAD_CONST               7 (<code object cobertas_pela_temporada_do_usuario at 0xbdf6d6680, file "fim_de_temporada.py", line 81>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              14 (cobertas_pela_temporada_do_usuario)
+
+113           LOAD_CONST               8 (<code object corte_do_save_anterior at 0x107f7e640, file "fim_de_temporada.py", line 113>)
+              MAKE_FUNCTION
+              STORE_NAME              15 (corte_do_save_anterior)
+
+129           LOAD_CONST               9 (<code object estado_das_ligas at 0xbdf6f0000, file "fim_de_temporada.py", line 129>)
+              MAKE_FUNCTION
+              STORE_NAME              16 (estado_das_ligas)
+
+182           LOAD_CONST              10 (<code object ja_lida at 0x107fa3b50, file "fim_de_temporada.py", line 182>)
+              MAKE_FUNCTION
+              STORE_NAME              17 (ja_lida)
+
+195           LOAD_CONST              11 (<code object dona_da_data at 0x108231ac0, file "fim_de_temporada.py", line 195>)
+              MAKE_FUNCTION
+              STORE_NAME              18 (dona_da_data)
+
+201           LOAD_CONST              12 (<code object motivo_da_data at 0x107fcf670, file "fim_de_temporada.py", line 201>)
+              MAKE_FUNCTION
+              STORE_NAME              19 (motivo_da_data)
+
+218           LOAD_CONST              13 (<code object maior_espera at 0x107fe7c30, file "fim_de_temporada.py", line 218>)
+              MAKE_FUNCTION
+              STORE_NAME              20 (maior_espera)
+
+228           LOAD_CONST              23 ((None,))
+              LOAD_CONST              14 (<code object _datas_com_menor_espera at 0xbdf6d6a00, file "fim_de_temporada.py", line 228>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              21 (_datas_com_menor_espera)
+
+259           LOAD_CONST              15 (<code object _leituras_para_esperar_no_maximo at 0x107fef4b0, file "fim_de_temporada.py", line 259>)
+              MAKE_FUNCTION
+              STORE_NAME              22 (_leituras_para_esperar_no_maximo)
+
+271           LOAD_CONST              16 (<code object plano_de_leituras at 0xbdf6ed800, file "fim_de_temporada.py", line 271>)
+              MAKE_FUNCTION
+              STORE_NAME              23 (plano_de_leituras)
+
+317           LOAD_CONST              17 (<code object proxima_leitura at 0x1081ec390, file "fim_de_temporada.py", line 317>)
+              MAKE_FUNCTION
+              STORE_NAME              24 (proxima_leitura)
+
+325           LOAD_CONST              18 (<code object proximos at 0x1082245d0, file "fim_de_temporada.py", line 325>)
+              MAKE_FUNCTION
+              STORE_NAME              25 (proximos)
+
+335           LOAD_SMALL_INT          48
+              STORE_NAME              26 (PARTIDA_TEMPORADA)
+
+337           LOAD_CONST              19 (<code object ler_agenda at 0xbdf0b3000, file "fim_de_temporada.py", line 337>)
+              MAKE_FUNCTION
+              STORE_NAME              27 (ler_agenda)
+
+426           LOAD_CONST              20 (<code object ponteiros_dos_clubes at 0xbdeefe700, file "fim_de_temporada.py", line 426>)
+              MAKE_FUNCTION
+              STORE_NAME              28 (ponteiros_dos_clubes)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object conjunto_da_liga at 0x1081ec1e0, file "fim_de_temporada.py", line 48>:
+  48            RESUME                   0
+
+  51            LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (competicoes, liga_uid)
+                BINARY_OP               26 ([])
+                LOAD_CONST               0 ('times')
+                BINARY_OP               26 ([])
+                STORE_FAST               2 (liga)
+
+  52            LOAD_FAST_BORROW         0 (competicoes)
+                LOAD_ATTR                1 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      3 (uid)
+                LOAD_FAST_AND_CLEAR      4 (c)
+                SWAP                     3
+        L1:     BUILD_SET                0
+                SWAP                     2
+        L2:     FOR_ITER                59 (to L9)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   52 (uid, c)
+
+  53            LOAD_FAST_BORROW_LOAD_FAST_BORROW 49 (uid, liga_uid)
+                COMPARE_OP             119 (bool(!=))
+
+  52    L3:     POP_JUMP_IF_TRUE         3 (to L4)
+                NOT_TAKEN
+                JUMP_BACKWARD           13 (to L2)
+
+  53    L4:     LOAD_FAST_BORROW         4 (c)
+                LOAD_CONST               1 ('categoria')
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              2 (CATEGORIAS_DE_LIGA)
+                CONTAINS_OP              1 (not in)
+
+  52    L5:     POP_JUMP_IF_TRUE         3 (to L6)
+                NOT_TAKEN
+                JUMP_BACKWARD           33 (to L2)
+
+  53    L6:     LOAD_FAST_BORROW         4 (c)
+                LOAD_CONST               0 ('times')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         2 (liga)
+                BINARY_OP                1 (&)
+                TO_BOOL
+
+  52    L7:     POP_JUMP_IF_TRUE         3 (to L8)
+                NOT_TAKEN
+                JUMP_BACKWARD           57 (to L2)
+        L8:     LOAD_FAST_BORROW         3 (uid)
+                SET_ADD                  2
+                JUMP_BACKWARD           61 (to L2)
+        L9:     END_FOR
+                POP_ITER
+       L10:     SWAP                     3
+                STORE_FAST               4 (c)
+                STORE_FAST               3 (uid)
+                RETURN_VALUE
+
+  --   L11:     SWAP                     2
+                POP_TOP
+
+  52            SWAP                     3
+                STORE_FAST               4 (c)
+                STORE_FAST               3 (uid)
+                RERAISE                  0
+ExceptionTable:
+  L1 to L3 -> L11 [3]
+  L4 to L5 -> L11 [3]
+  L6 to L7 -> L11 [3]
+  L8 to L10 -> L11 [3]
+
+Disassembly of <code object temporada_atual at 0x1081adcf0, file "fim_de_temporada.py", line 67>:
+  67           RESUME                   0
+
+  70           LOAD_FAST_BORROW         0 (temporadas)
+               LOAD_ATTR                1 (items + NULL|self)
+               CALL                     0
+               GET_ITER
+               LOAD_FAST_AND_CLEAR      2 (ano)
+               LOAD_FAST_AND_CLEAR      3 (inicio)
+               LOAD_FAST_AND_CLEAR      4 (_fim)
+               SWAP                     4
+       L1:     BUILD_LIST               0
+               SWAP                     2
+       L2:     FOR_ITER                18 (to L5)
+               UNPACK_SEQUENCE          2
+               STORE_FAST               2 (ano)
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST   52 (inicio, _fim)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 49 (inicio, hoje)
+               COMPARE_OP              58 (bool(<=))
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           16 (to L2)
+       L4:     LOAD_FAST_BORROW         2 (ano)
+               LIST_APPEND              2
+               JUMP_BACKWARD           20 (to L2)
+       L5:     END_FOR
+               POP_ITER
+       L6:     STORE_FAST               5 (comecadas)
+               STORE_FAST               3 (inicio)
+               STORE_FAST               2 (ano)
+               STORE_FAST               4 (_fim)
+
+  71           LOAD_FAST_BORROW         5 (comecadas)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       12 (to L7)
+               NOT_TAKEN
+               LOAD_GLOBAL              3 (max + NULL)
+               LOAD_FAST_BORROW         5 (comecadas)
+               CALL                     1
+               RETURN_VALUE
+       L7:     LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L8:     SWAP                     2
+               POP_TOP
+
+  70           SWAP                     4
+               STORE_FAST               4 (_fim)
+               STORE_FAST               3 (inicio)
+               STORE_FAST               2 (ano)
+               RERAISE                  0
+ExceptionTable:
+  L1 to L3 -> L8 [4]
+  L4 to L6 -> L8 [4]
+
+Disassembly of <code object liga_principal at 0x107fe7ab0, file "fim_de_temporada.py", line 74>:
+  74            RESUME                   0
+
+  77            LOAD_FAST_BORROW         0 (estados)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      3 (e)
+                SWAP                     2
+        L1:     BUILD_LIST               0
+                SWAP                     2
+        L2:     FOR_ITER                39 (to L7)
+                STORE_FAST_LOAD_FAST    50 (e, clube_uid)
+        L3:     POP_JUMP_IF_NOT_NONE     3 (to L4)
+                NOT_TAKEN
+                JUMP_BACKWARD            8 (to L2)
+        L4:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 33 (clube_uid, competicoes)
+                LOAD_FAST_BORROW         3 (e)
+                LOAD_CONST               1 ('uid')
+                BINARY_OP               26 ([])
+                BINARY_OP               26 ([])
+                LOAD_CONST               2 ('times')
+                BINARY_OP               26 ([])
+                CONTAINS_OP              0 (in)
+        L5:     POP_JUMP_IF_TRUE         3 (to L6)
+                NOT_TAKEN
+                JUMP_BACKWARD           37 (to L2)
+        L6:     LOAD_FAST_BORROW         3 (e)
+                LIST_APPEND              2
+                JUMP_BACKWARD           41 (to L2)
+        L7:     END_FOR
+                POP_ITER
+        L8:     STORE_FAST               4 (minhas)
+                STORE_FAST               3 (e)
+
+  78            LOAD_FAST_BORROW         4 (minhas)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       15 (to L9)
+                NOT_TAKEN
+                LOAD_GLOBAL              1 (max + NULL)
+                LOAD_FAST_BORROW         4 (minhas)
+                LOAD_CONST               3 (<code object <lambda> at 0x108232ef0, file "fim_de_temporada.py", line 78>)
+                MAKE_FUNCTION
+                LOAD_CONST               4 (('key',))
+                CALL_KW                  2
+                RETURN_VALUE
+        L9:     LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  --   L10:     SWAP                     2
+                POP_TOP
+
+  77            SWAP                     2
+                STORE_FAST               3 (e)
+                RERAISE                  0
+ExceptionTable:
+  L1 to L3 -> L10 [2]
+  L4 to L5 -> L10 [2]
+  L6 to L8 -> L10 [2]
+
+Disassembly of <code object <lambda> at 0x108232ef0, file "fim_de_temporada.py", line 78>:
+ 78           RESUME                   0
+              LOAD_FAST_BORROW         0 (e)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               0 ('reputacao')
+              LOAD_SMALL_INT           0
+              CALL                     2
+              LOAD_FAST_BORROW         0 (e)
+              LOAD_CONST               1 ('ultima_partida')
+              BINARY_OP               26 ([])
+              BUILD_TUPLE              2
+              RETURN_VALUE
+
+Disassembly of <code object cobertas_pela_temporada_do_usuario at 0xbdf6d6680, file "fim_de_temporada.py", line 81>:
+  81            RESUME                   0
+
+  98            LOAD_GLOBAL              1 (liga_principal + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (estados, competicoes)
+                LOAD_FAST_BORROW         2 (clube_uid)
+                CALL                     3
+                STORE_FAST               5 (principal)
+
+  99            LOAD_FAST_BORROW         5 (principal)
+                POP_JUMP_IF_NOT_NONE    13 (to L1)
+                NOT_TAKEN
+
+ 100            LOAD_CONST               0 (None)
+                LOAD_GLOBAL              3 (set + NULL)
+                CALL                     0
+                BUILD_TUPLE              2
+                RETURN_VALUE
+
+ 101    L1:     LOAD_FAST_BORROW         5 (principal)
+                LOAD_CONST               1 ('ultima_partida')
+                BINARY_OP               26 ([])
+                STORE_FAST               6 (fim_do_usuario)
+
+ 102            LOAD_FAST_BORROW         4 (hoje)
+                POP_JUMP_IF_NONE        31 (to L3)
+                NOT_TAKEN
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 100 (fim_do_usuario, hoje)
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE       25 (to L3)
+                NOT_TAKEN
+
+ 103            LOAD_FAST_LOAD_FAST     99 (fim_do_usuario, data_do_save)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        14 (to L2)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_FAST_BORROW         6 (fim_do_usuario)
+                LOAD_GLOBAL              4 (UM_ANO)
+                BINARY_OP                0 (+)
+        L2:     STORE_FAST_STORE_FAST  135 (save, desde)
+                JUMP_FORWARD            49 (to L6)
+
+ 105    L3:     LOAD_FAST_BORROW         5 (principal)
+                LOAD_ATTR                7 (get + NULL|self)
+                LOAD_CONST               2 ('fim_anterior')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        14 (to L4)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_FAST_BORROW         6 (fim_do_usuario)
+                LOAD_GLOBAL              4 (UM_ANO)
+                BINARY_OP               10 (-)
+        L4:     LOAD_FAST                3 (data_do_save)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L5)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_FAST                6 (fim_do_usuario)
+        L5:     STORE_FAST_STORE_FAST  135 (save, desde)
+
+ 106    L6:     LOAD_FAST_BORROW         8 (save)
+                LOAD_GLOBAL              8 (datetime)
+                LOAD_ATTR               10 (timedelta)
+                PUSH_NULL
+                LOAD_GLOBAL             12 (TOLERANCIA_DEPOIS_DO_USUARIO)
+                LOAD_CONST               3 (('days',))
+                CALL_KW                  1
+                BINARY_OP                0 (+)
+                STORE_FAST               9 (limite)
+
+ 107            LOAD_FAST_BORROW         0 (estados)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     10 (e)
+                SWAP                     2
+        L7:     BUILD_SET                0
+                SWAP                     2
+        L8:     FOR_ITER                68 (to L15)
+                STORE_FAST_LOAD_FAST   170 (e, e)
+                LOAD_ATTR                7 (get + NULL|self)
+                LOAD_CONST               4 ('inicio')
+                CALL                     1
+                TO_BOOL
+        L9:     POP_JUMP_IF_TRUE         3 (to L10)
+                NOT_TAKEN
+                JUMP_BACKWARD           27 (to L8)
+       L10:     LOAD_FAST_BORROW        10 (e)
+                LOAD_CONST               4 ('inicio')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         7 (desde)
+                COMPARE_OP             148 (bool(>))
+       L11:     POP_JUMP_IF_TRUE         3 (to L12)
+                NOT_TAKEN
+                JUMP_BACKWARD           43 (to L8)
+       L12:     LOAD_FAST_BORROW        10 (e)
+                LOAD_CONST               5 ('fim')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         9 (limite)
+                COMPARE_OP              58 (bool(<=))
+       L13:     POP_JUMP_IF_TRUE         3 (to L14)
+                NOT_TAKEN
+                JUMP_BACKWARD           59 (to L8)
+       L14:     LOAD_FAST_BORROW        10 (e)
+                LOAD_CONST               6 ('uid')
+                BINARY_OP               26 ([])
+                SET_ADD                  2
+                JUMP_BACKWARD           70 (to L8)
+       L15:     END_FOR
+                POP_ITER
+       L16:     STORE_FAST              11 (cobertas)
+                STORE_FAST              10 (e)
+
+ 108            LOAD_FAST_BORROW         5 (principal)
+                LOAD_ATTR                7 (get + NULL|self)
+                LOAD_CONST               7 ('pais')
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       62 (to L23)
+                NOT_TAKEN
+
+ 109            LOAD_FAST_LOAD_FAST    176 (cobertas, estados)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     10 (e)
+                SWAP                     2
+       L17:     BUILD_SET                0
+                SWAP                     2
+       L18:     FOR_ITER                42 (to L21)
+                STORE_FAST_LOAD_FAST   170 (e, e)
+                LOAD_ATTR                7 (get + NULL|self)
+                LOAD_CONST               7 ('pais')
+                CALL                     1
+                LOAD_FAST_BORROW         5 (principal)
+                LOAD_CONST               7 ('pais')
+                BINARY_OP               26 ([])
+                COMPARE_OP              88 (bool(==))
+       L19:     POP_JUMP_IF_TRUE         3 (to L20)
+                NOT_TAKEN
+                JUMP_BACKWARD           33 (to L18)
+       L20:     LOAD_FAST_BORROW        10 (e)
+                LOAD_CONST               6 ('uid')
+                BINARY_OP               26 ([])
+                SET_ADD                  2
+                JUMP_BACKWARD           44 (to L18)
+       L21:     END_FOR
+                POP_ITER
+       L22:     SWAP                     2
+                STORE_FAST              10 (e)
+                BINARY_OP               20 (|=)
+                STORE_FAST              11 (cobertas)
+
+ 110   L23:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 139 (save, cobertas)
+                BUILD_TUPLE              2
+                RETURN_VALUE
+
+  --   L24:     SWAP                     2
+                POP_TOP
+
+ 107            SWAP                     2
+                STORE_FAST              10 (e)
+                RERAISE                  0
+
+  --   L25:     SWAP                     2
+                POP_TOP
+
+ 109            SWAP                     2
+                STORE_FAST              10 (e)
+                RERAISE                  0
+ExceptionTable:
+  L7 to L9 -> L24 [2]
+  L10 to L11 -> L24 [2]
+  L12 to L13 -> L24 [2]
+  L14 to L16 -> L24 [2]
+  L17 to L19 -> L25 [3]
+  L20 to L22 -> L25 [3]
+
+Disassembly of <code object corte_do_save_anterior at 0x107f7e640, file "fim_de_temporada.py", line 113>:
+113           RESUME                   0
+
+118           LOAD_GLOBAL              1 (liga_principal + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (estados, competicoes)
+              LOAD_FAST_BORROW         2 (clube_uid)
+              CALL                     3
+              STORE_FAST               4 (principal)
+
+119           LOAD_FAST_BORROW         4 (principal)
+              POP_JUMP_IF_NOT_NONE    21 (to L1)
+              NOT_TAKEN
+
+120           LOAD_FAST_BORROW         3 (hoje)
+              LOAD_GLOBAL              2 (UM_ANO)
+              LOAD_SMALL_INT           2
+              BINARY_OP               11 (/)
+              BINARY_OP               10 (-)
+              RETURN_VALUE
+
+121   L1:     LOAD_FAST_BORROW         4 (principal)
+              LOAD_CONST               1 ('ultima_partida')
+              BINARY_OP               26 ([])
+              STORE_FAST               5 (fim_do_usuario)
+
+122           LOAD_FAST_BORROW_LOAD_FAST_BORROW 83 (fim_do_usuario, hoje)
+              COMPARE_OP              18 (bool(<))
+              POP_JUMP_IF_FALSE        4 (to L2)
+              NOT_TAKEN
+
+123           LOAD_FAST                5 (fim_do_usuario)
+              STORE_FAST               6 (anterior)
+              JUMP_FORWARD            38 (to L4)
+
+125   L2:     LOAD_FAST_BORROW         4 (principal)
+              LOAD_ATTR                5 (get + NULL|self)
+              LOAD_CONST               2 ('fim_anterior')
+              CALL                     1
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        14 (to L3)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_FAST_BORROW         5 (fim_do_usuario)
+              LOAD_GLOBAL              2 (UM_ANO)
+              BINARY_OP               10 (-)
+      L3:     STORE_FAST               6 (anterior)
+
+126   L4:     LOAD_FAST_BORROW         6 (anterior)
+              LOAD_GLOBAL              6 (datetime)
+              LOAD_ATTR                8 (timedelta)
+              PUSH_NULL
+              LOAD_GLOBAL             10 (TOLERANCIA_DEPOIS_DO_USUARIO)
+              LOAD_CONST               3 (('days',))
+              CALL_KW                  1
+              BINARY_OP                0 (+)
+              RETURN_VALUE
+
+Disassembly of <code object estado_das_ligas at 0xbdf6f0000, file "fim_de_temporada.py", line 129>:
+  --            MAKE_CELL                0 (competicoes)
+
+ 129            RESUME                   0
+
+ 144            LOAD_GLOBAL              0 (datetime)
+                LOAD_ATTR                2 (timedelta)
+                PUSH_NULL
+                LOAD_GLOBAL              4 (OSCILACAO_DO_CALENDARIO)
+                LOAD_CONST               0 (('days',))
+                CALL_KW                  1
+                STORE_FAST               3 (oscila)
+
+ 145            BUILD_LIST               0
+                STORE_FAST               4 (saida)
+
+ 146            LOAD_DEREF               0 (competicoes)
+                LOAD_ATTR                7 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+        L1:     EXTENDED_ARG             2
+                FOR_ITER               677 (to L26)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   86 (uid, c)
+
+ 147            LOAD_FAST_BORROW         6 (c)
+                LOAD_CONST               1 ('categoria')
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              8 (CATEGORIAS_DE_LIGA)
+                CONTAINS_OP              1 (not in)
+                POP_JUMP_IF_TRUE        28 (to L2)
+                NOT_TAKEN
+                LOAD_GLOBAL             11 (len + NULL)
+                LOAD_FAST_BORROW         6 (c)
+                LOAD_CONST               2 ('times')
+                BINARY_OP               26 ([])
+                CALL                     1
+                LOAD_GLOBAL             12 (MIN_TIMES_LIGA)
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE        3 (to L3)
+                NOT_TAKEN
+
+ 148    L2:     JUMP_BACKWARD           53 (to L1)
+
+ 149    L3:     LOAD_FAST_BORROW         1 (temporadas)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_FAST_BORROW         5 (uid)
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L4)
+                NOT_TAKEN
+                POP_TOP
+                BUILD_MAP                0
+        L4:     STORE_FAST               7 (da_liga)
+
+ 150            LOAD_GLOBAL             17 (temporada_atual + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 114 (da_liga, hoje)
+                CALL                     2
+                STORE_FAST               8 (ano)
+
+ 151            LOAD_FAST_BORROW         8 (ano)
+                POP_JUMP_IF_NOT_NONE     3 (to L5)
+                NOT_TAKEN
+
+ 152            JUMP_BACKWARD           97 (to L1)
+
+ 153    L5:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 120 (da_liga, ano)
+                BINARY_OP               26 ([])
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST  154 (inicio, ultima_propria)
+
+ 154            LOAD_FAST               10 (ultima_propria)
+                BUILD_LIST               0
+                STORE_FAST_STORE_FAST  203 (segurada_por, ultima_partida)
+
+ 155            LOAD_FAST_BORROW        10 (ultima_propria)
+                LOAD_GLOBAL              0 (datetime)
+                LOAD_ATTR                2 (timedelta)
+                PUSH_NULL
+                LOAD_GLOBAL             18 (ESPERA_POR_COPA)
+                LOAD_CONST               0 (('days',))
+                CALL_KW                  1
+                BINARY_OP                0 (+)
+                STORE_FAST              13 (teto)
+
+ 156            LOAD_GLOBAL             21 (conjunto_da_liga + NULL)
+                LOAD_DEREF               0 (competicoes)
+                LOAD_FAST_BORROW         5 (uid)
+                CALL                     2
+                GET_ITER
+        L6:     FOR_ITER               131 (to L17)
+                STORE_FAST              14 (copa)
+
+ 157            LOAD_FAST_BORROW         1 (temporadas)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_FAST_BORROW        14 (copa)
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L7)
+                NOT_TAKEN
+                POP_TOP
+                BUILD_MAP                0
+        L7:     LOAD_ATTR               23 (values + NULL|self)
+                CALL                     0
+                GET_ITER
+        L8:     FOR_ITER                83 (to L16)
+                UNPACK_SEQUENCE          2
+                STORE_FAST              15 (c_inicio)
+                STORE_FAST              16 (c_fim)
+
+ 158            LOAD_FAST_BORROW_LOAD_FAST_BORROW 250 (c_inicio, ultima_propria)
+                COMPARE_OP              58 (bool(<=))
+                POP_JUMP_IF_TRUE         3 (to L9)
+                NOT_TAKEN
+                JUMP_BACKWARD           14 (to L8)
+        L9:     LOAD_FAST_BORROW        16 (c_fim)
+                LOAD_FAST_BORROW         9 (inicio)
+                COMPARE_OP             188 (bool(>=))
+                POP_JUMP_IF_TRUE         3 (to L10)
+                NOT_TAKEN
+                JUMP_BACKWARD           23 (to L8)
+       L10:     LOAD_FAST_BORROW        10 (ultima_propria)
+                LOAD_FAST               16 (c_fim)
+                SWAP                     2
+                COPY                     2
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE       10 (to L12)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        13 (teto)
+                COMPARE_OP              58 (bool(<=))
+                POP_JUMP_IF_TRUE         3 (to L11)
+                NOT_TAKEN
+                JUMP_BACKWARD           40 (to L8)
+       L11:     JUMP_FORWARD             3 (to L13)
+       L12:     POP_TOP
+                JUMP_BACKWARD           44 (to L8)
+
+ 159   L13:     LOAD_FAST_BORROW        16 (c_fim)
+                LOAD_FAST_BORROW        11 (ultima_partida)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE        7 (to L14)
+                NOT_TAKEN
+
+ 160            LOAD_FAST               16 (c_fim)
+                LOAD_FAST_BORROW        14 (copa)
+                BUILD_LIST               1
+                STORE_FAST_STORE_FAST  203 (segurada_por, ultima_partida)
+                JUMP_BACKWARD           57 (to L8)
+
+ 161   L14:     LOAD_FAST_BORROW        16 (c_fim)
+                LOAD_FAST_BORROW        11 (ultima_partida)
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_TRUE         3 (to L15)
+                NOT_TAKEN
+                JUMP_BACKWARD           66 (to L8)
+
+ 162   L15:     LOAD_FAST_BORROW        12 (segurada_por)
+                LOAD_ATTR               25 (append + NULL|self)
+                LOAD_FAST_BORROW        14 (copa)
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD           85 (to L8)
+
+ 157   L16:     END_FOR
+                POP_ITER
+                JUMP_BACKWARD          133 (to L6)
+
+ 156   L17:     END_FOR
+                POP_ITER
+
+ 163            LOAD_FAST_BORROW         7 (da_liga)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_FAST_BORROW         8 (ano)
+                LOAD_SMALL_INT           1
+                BINARY_OP               10 (-)
+                CALL                     1
+                STORE_FAST              17 (anterior)
+
+ 164            LOAD_FAST_BORROW        17 (anterior)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       10 (to L18)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        17 (anterior)
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                JUMP_FORWARD             1 (to L19)
+       L18:     LOAD_CONST               3 (None)
+       L19:     STORE_FAST              18 (fim_anterior)
+
+ 165            LOAD_FAST               11 (ultima_partida)
+                STORE_FAST              19 (fim)
+
+ 166            LOAD_FAST_BORROW        18 (fim_anterior)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       49 (to L20)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        10 (ultima_propria)
+                LOAD_FAST_BORROW        18 (fim_anterior)
+                LOAD_GLOBAL             26 (UM_ANO)
+                BINARY_OP                0 (+)
+                LOAD_FAST_BORROW         3 (oscila)
+                BINARY_OP               10 (-)
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE       24 (to L20)
+                NOT_TAKEN
+
+ 167            LOAD_GLOBAL             29 (max + NULL)
+                LOAD_FAST_BORROW        19 (fim)
+                LOAD_FAST_BORROW        18 (fim_anterior)
+                LOAD_GLOBAL             26 (UM_ANO)
+                BINARY_OP                0 (+)
+                CALL                     2
+                STORE_FAST              19 (fim)
+
+ 168   L20:     LOAD_FAST_BORROW         7 (da_liga)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_FAST_BORROW         8 (ano)
+                LOAD_SMALL_INT           1
+                BINARY_OP                0 (+)
+                CALL                     1
+                STORE_FAST              20 (seguinte)
+
+ 169            LOAD_FAST                4 (saida)
+                LOAD_ATTR               25 (append + NULL|self)
+                BUILD_MAP                0
+                LOAD_CONST               4 ('uid')
+                LOAD_FAST_BORROW         5 (uid)
+                MAP_ADD                  1
+                LOAD_CONST               5 ('nome')
+                LOAD_FAST_BORROW         6 (c)
+                LOAD_CONST               5 ('nome')
+                BINARY_OP               26 ([])
+                MAP_ADD                  1
+
+ 170            LOAD_CONST               2 ('times')
+                LOAD_FAST_BORROW         6 (c)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_CONST               6 ('times_na_temporada')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L21)
+                NOT_TAKEN
+                POP_TOP
+                BUILD_MAP                0
+       L21:     LOAD_ATTR               15 (get + NULL|self)
+                LOAD_FAST_BORROW         8 (ano)
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        19 (to L22)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_GLOBAL             11 (len + NULL)
+                LOAD_FAST_BORROW         6 (c)
+                LOAD_CONST               2 ('times')
+                BINARY_OP               26 ([])
+                CALL                     1
+
+ 169   L22:     MAP_ADD                  1
+
+ 171            LOAD_CONST               7 ('temporada')
+                LOAD_FAST_BORROW         8 (ano)
+
+ 169            MAP_ADD                  1
+
+ 171            LOAD_CONST               8 ('inicio')
+                LOAD_FAST_BORROW         9 (inicio)
+
+ 169            MAP_ADD                  1
+
+ 171            LOAD_CONST               9 ('fim')
+                LOAD_FAST_BORROW        19 (fim)
+
+ 169            MAP_ADD                  1
+
+ 171            LOAD_CONST              10 ('ultima_partida')
+                LOAD_FAST_BORROW        11 (ultima_partida)
+
+ 169            MAP_ADD                  1
+
+ 172            LOAD_CONST              11 ('inicio_da_seguinte')
+                LOAD_FAST_BORROW        20 (seguinte)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       10 (to L23)
+                NOT_TAKEN
+                LOAD_FAST_BORROW        20 (seguinte)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                JUMP_FORWARD            12 (to L24)
+       L23:     LOAD_FAST_BORROW         9 (inicio)
+                LOAD_GLOBAL             26 (UM_ANO)
+                BINARY_OP                0 (+)
+
+ 169   L24:     MAP_ADD                  1
+
+ 173            LOAD_CONST              12 ('fim_anterior')
+                LOAD_FAST_BORROW        18 (fim_anterior)
+
+ 169            MAP_ADD                  1
+
+ 174            LOAD_CONST              13 ('reputacao')
+                LOAD_FAST_BORROW         6 (c)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_CONST              13 ('reputacao')
+                LOAD_SMALL_INT           0
+                CALL                     2
+
+ 169            MAP_ADD                  1
+
+ 174            LOAD_CONST              14 ('pais')
+                LOAD_FAST_BORROW         6 (c)
+                LOAD_ATTR               15 (get + NULL|self)
+                LOAD_CONST              14 ('pais')
+                CALL                     1
+
+ 169            MAP_ADD                  1
+
+ 175            LOAD_CONST              15 ('continua')
+                LOAD_FAST_BORROW        19 (fim)
+                LOAD_FAST_BORROW        11 (ultima_partida)
+                COMPARE_OP             132 (>)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE        6 (to L25)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_FAST_BORROW        19 (fim)
+                LOAD_FAST_BORROW         2 (hoje)
+                COMPARE_OP             172 (>=)
+
+ 169   L25:     MAP_ADD                  1
+
+ 176            LOAD_CONST              16 ('fechada')
+                LOAD_FAST_BORROW        19 (fim)
+                LOAD_FAST_BORROW         2 (hoje)
+                COMPARE_OP               2 (<)
+
+ 169            MAP_ADD                  1
+
+ 176            LOAD_CONST              17 ('dias')
+                LOAD_FAST_BORROW        19 (fim)
+                LOAD_FAST_BORROW         2 (hoje)
+                BINARY_OP               10 (-)
+                LOAD_ATTR               30 (days)
+
+ 169            MAP_ADD                  1
+
+ 177            LOAD_CONST              18 ('segurada_por')
+                LOAD_GLOBAL             33 (sorted + NULL)
+                LOAD_FAST_BORROW        12 (segurada_por)
+                CALL                     1
+
+ 169            MAP_ADD                  1
+
+ 178            LOAD_CONST              19 ('segurada_por_nomes')
+                LOAD_GLOBAL             33 (sorted + NULL)
+                LOAD_FAST_BORROW         0 (competicoes)
+                BUILD_TUPLE              1
+                LOAD_CONST              20 (<code object <genexpr> at 0x1081b2550, file "fim_de_temporada.py", line 178>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST_BORROW        12 (segurada_por)
+                GET_ITER
+                CALL                     0
+                CALL                     1
+
+ 169            MAP_ADD                  1
+                CALL                     1
+                POP_TOP
+                EXTENDED_ARG             2
+                JUMP_BACKWARD          680 (to L1)
+
+ 146   L26:     END_FOR
+                POP_ITER
+
+ 179            LOAD_FAST_BORROW         4 (saida)
+                RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x1081b2550, file "fim_de_temporada.py", line 178>:
+  --           COPY_FREE_VARS           1
+
+ 178           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                21 (to L3)
+               STORE_FAST               1 (u)
+               LOAD_DEREF               2 (competicoes)
+               LOAD_FAST_BORROW         1 (u)
+               BINARY_OP               26 ([])
+               LOAD_CONST               0 ('nome')
+               BINARY_OP               26 ([])
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           23 (to L2)
+       L3:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L4:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L4 [0] lasti
+
+Disassembly of <code object ja_lida at 0x107fa3b50, file "fim_de_temporada.py", line 182>:
+182           RESUME                   0
+
+191           LOAD_GLOBAL              1 (isinstance + NULL)
+              LOAD_FAST_BORROW         1 (ja_feitas)
+              LOAD_GLOBAL              2 (dict)
+              CALL                     2
+              TO_BOOL
+              POP_JUMP_IF_FALSE       25 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         1 (ja_feitas)
+              LOAD_ATTR                5 (get + NULL|self)
+              LOAD_FAST_BORROW         0 (e)
+              LOAD_CONST               0 ('uid')
+              BINARY_OP               26 ([])
+              CALL                     1
+              JUMP_FORWARD             1 (to L2)
+      L1:     LOAD_CONST               1 (None)
+      L2:     STORE_FAST               2 (lida_em)
+
+192           LOAD_FAST_BORROW         2 (lida_em)
+              LOAD_CONST               1 (None)
+              IS_OP                    1 (is not)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_FALSE       12 (to L3)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 32 (lida_em, e)
+              LOAD_CONST               2 ('ultima_partida')
+              BINARY_OP               26 ([])
+              COMPARE_OP             132 (>)
+      L3:     RETURN_VALUE
+
+Disassembly of <code object dona_da_data at 0x108231ac0, file "fim_de_temporada.py", line 195>:
+195           RESUME                   0
+
+198           LOAD_FAST_BORROW         0 (ligas)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       15 (to L1)
+              NOT_TAKEN
+              LOAD_GLOBAL              1 (max + NULL)
+              LOAD_FAST_BORROW         0 (ligas)
+              LOAD_CONST               0 (<code object <lambda> at 0x108232230, file "fim_de_temporada.py", line 198>)
+              MAKE_FUNCTION
+              LOAD_CONST               1 (('key',))
+              CALL_KW                  2
+              RETURN_VALUE
+      L1:     LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x108232230, file "fim_de_temporada.py", line 198>:
+198           RESUME                   0
+              LOAD_FAST_BORROW         0 (e)
+              LOAD_CONST               0 ('fim')
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         0 (e)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               1 ('reputacao')
+              LOAD_SMALL_INT           0
+              CALL                     2
+              BUILD_TUPLE              2
+              RETURN_VALUE
+
+Disassembly of <code object motivo_da_data at 0x107fcf670, file "fim_de_temporada.py", line 201>:
+201           RESUME                   0
+
+208           LOAD_GLOBAL              1 (dona_da_data + NULL)
+              LOAD_FAST_BORROW         0 (ligas)
+              CALL                     1
+              STORE_FAST               1 (liga)
+
+209           LOAD_FAST_BORROW         1 (liga)
+              POP_JUMP_IF_NOT_NONE     3 (to L1)
+              NOT_TAKEN
+
+210           LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+211   L1:     LOAD_FAST_BORROW         1 (liga)
+              LOAD_ATTR                3 (get + NULL|self)
+              LOAD_CONST               1 ('continua')
+              CALL                     1
+              TO_BOOL
+              POP_JUMP_IF_FALSE       14 (to L2)
+              NOT_TAKEN
+
+212           LOAD_CONST               2 ('tipo')
+              LOAD_CONST               3 ('agenda')
+              LOAD_CONST               4 ('liga')
+              LOAD_FAST_BORROW         1 (liga)
+              LOAD_CONST               5 ('nome')
+              BINARY_OP               26 ([])
+              BUILD_MAP                2
+              RETURN_VALUE
+
+213   L2:     LOAD_FAST_BORROW         1 (liga)
+              LOAD_ATTR                3 (get + NULL|self)
+              LOAD_CONST               6 ('segurada_por_nomes')
+              CALL                     1
+              TO_BOOL
+              POP_JUMP_IF_FALSE       30 (to L3)
+              NOT_TAKEN
+
+214           LOAD_CONST               2 ('tipo')
+              LOAD_CONST               7 ('copa')
+              LOAD_CONST               4 ('liga')
+              LOAD_FAST_BORROW         1 (liga)
+              LOAD_CONST               5 ('nome')
+              BINARY_OP               26 ([])
+              LOAD_CONST               7 ('copa')
+              LOAD_FAST_BORROW         1 (liga)
+              LOAD_CONST               6 ('segurada_por_nomes')
+              BINARY_OP               26 ([])
+              LOAD_SMALL_INT           0
+              BINARY_OP               26 ([])
+              BUILD_MAP                3
+              RETURN_VALUE
+
+215   L3:     LOAD_CONST               2 ('tipo')
+              LOAD_CONST               8 ('fim')
+              LOAD_CONST               4 ('liga')
+              LOAD_FAST_BORROW         1 (liga)
+              LOAD_CONST               5 ('nome')
+              BINARY_OP               26 ([])
+              BUILD_MAP                2
+              RETURN_VALUE
+
+Disassembly of <code object maior_espera at 0x107fe7c30, file "fim_de_temporada.py", line 218>:
+218           RESUME                   0
+
+221           LOAD_FAST_BORROW         0 (ligas)
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+
+222           LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+223   L1:     LOAD_GLOBAL              1 (min + NULL)
+              LOAD_FAST_BORROW         0 (ligas)
+              LOAD_CONST               1 (<code object <lambda> at 0x108232560, file "fim_de_temporada.py", line 223>)
+              MAKE_FUNCTION
+              LOAD_CONST               2 (('key',))
+              CALL_KW                  2
+              STORE_FAST               2 (e)
+
+224           LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (data, e)
+              LOAD_CONST               3 ('fim')
+              BINARY_OP               26 ([])
+              BINARY_OP               10 (-)
+              LOAD_ATTR                2 (days)
+              LOAD_SMALL_INT           1
+              BINARY_OP               10 (-)
+              STORE_FAST               3 (dias)
+
+225           LOAD_FAST_BORROW         3 (dias)
+              LOAD_SMALL_INT           0
+              COMPARE_OP             148 (bool(>))
+              POP_JUMP_IF_FALSE       23 (to L2)
+              NOT_TAKEN
+              LOAD_CONST               4 ('liga')
+              LOAD_FAST_BORROW         2 (e)
+              LOAD_CONST               5 ('nome')
+              BINARY_OP               26 ([])
+              LOAD_CONST               6 ('terminou')
+              LOAD_FAST_BORROW         2 (e)
+              LOAD_CONST               3 ('fim')
+              BINARY_OP               26 ([])
+              LOAD_CONST               7 ('dias')
+              LOAD_FAST_BORROW         3 (dias)
+              BUILD_MAP                3
+              RETURN_VALUE
+      L2:     LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object <lambda> at 0x108232560, file "fim_de_temporada.py", line 223>:
+223           RESUME                   0
+              LOAD_FAST_BORROW         0 (x)
+              LOAD_CONST               0 ('fim')
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         0 (x)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               1 ('reputacao')
+              LOAD_SMALL_INT           0
+              CALL                     2
+              UNARY_NEGATIVE
+              BUILD_TUPLE              2
+              RETURN_VALUE
+
+Disassembly of <code object _datas_com_menor_espera at 0xbdf6d6a00, file "fim_de_temporada.py", line 228>:
+  --            MAKE_CELL                0 (ligas)
+                MAKE_CELL                2 (teto)
+                MAKE_CELL                5 (i)
+                MAKE_CELL                7 (espera)
+                MAKE_CELL                8 (k)
+                MAKE_CELL                9 (melhor)
+                MAKE_CELL               10 (prontas)
+
+ 228            RESUME                   0
+
+ 233            LOAD_GLOBAL              1 (sorted + NULL)
+                LOAD_DEREF               0 (ligas)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      3 (e)
+                SWAP                     2
+        L1:     BUILD_SET                0
+                SWAP                     2
+        L2:     FOR_ITER                22 (to L3)
+                STORE_FAST_LOAD_FAST    51 (e, e)
+                LOAD_CONST               0 ('fim')
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              2 (UM_DIA)
+                BINARY_OP                0 (+)
+                SET_ADD                  2
+                JUMP_BACKWARD           24 (to L2)
+        L3:     END_FOR
+                POP_ITER
+        L4:     SWAP                     2
+                STORE_FAST               3 (e)
+                CALL                     1
+                STORE_DEREF             10 (prontas)
+
+ 234            LOAD_GLOBAL              5 (max + NULL)
+                LOAD_SMALL_INT           1
+                LOAD_GLOBAL              7 (min + NULL)
+                LOAD_FAST_BORROW         1 (quantas)
+                LOAD_GLOBAL              9 (len + NULL)
+                LOAD_DEREF              10 (prontas)
+                CALL                     1
+                CALL                     2
+                CALL                     2
+                STORE_FAST               1 (quantas)
+
+ 236            LOAD_FAST_BORROW         0 (ligas)
+                LOAD_FAST_BORROW        10 (prontas)
+                LOAD_FAST_BORROW         2 (teto)
+                BUILD_TUPLE              3
+                LOAD_CONST               1 (<code object espera at 0xbdeefe400, file "fim_de_temporada.py", line 236>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                STORE_DEREF              7 (espera)
+
+ 245            LOAD_GLOBAL              9 (len + NULL)
+                LOAD_DEREF              10 (prontas)
+                CALL                     1
+                STORE_FAST               4 (n)
+
+ 246            LOAD_GLOBAL             11 (range + NULL)
+                LOAD_FAST_BORROW         4 (n)
+                CALL                     1
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      5 (i)
+                SWAP                     2
+        L5:     BUILD_MAP                0
+                SWAP                     2
+        L6:     FOR_ITER                17 (to L7)
+                STORE_FAST               5 (i)
+                LOAD_SMALL_INT           1
+                LOAD_FAST_BORROW         5 (i)
+                BUILD_TUPLE              2
+                LOAD_DEREF               7 (espera)
+                PUSH_NULL
+                LOAD_SMALL_INT           0
+                LOAD_FAST_BORROW         5 (i)
+                CALL                     2
+                LOAD_CONST               2 (None)
+                BUILD_TUPLE              2
+                MAP_ADD                  2
+                JUMP_BACKWARD           19 (to L6)
+        L7:     END_FOR
+                POP_ITER
+        L8:     SWAP                     2
+                STORE_FAST               5 (i)
+                STORE_DEREF              9 (melhor)
+
+ 247            LOAD_GLOBAL             11 (range + NULL)
+                LOAD_SMALL_INT           2
+                LOAD_FAST_BORROW         1 (quantas)
+                LOAD_SMALL_INT           1
+                BINARY_OP                0 (+)
+                CALL                     2
+                GET_ITER
+        L9:     FOR_ITER                78 (to L12)
+                STORE_DEREF              8 (k)
+
+ 248            LOAD_GLOBAL             11 (range + NULL)
+                LOAD_DEREF               8 (k)
+                LOAD_SMALL_INT           1
+                BINARY_OP               10 (-)
+                LOAD_FAST_BORROW         4 (n)
+                CALL                     2
+                GET_ITER
+       L10:     FOR_ITER                52 (to L11)
+                STORE_DEREF              5 (i)
+
+ 249            LOAD_GLOBAL              7 (min + NULL)
+                LOAD_FAST_BORROW         7 (espera)
+                LOAD_FAST_BORROW         5 (i)
+                LOAD_FAST_BORROW         8 (k)
+                LOAD_FAST_BORROW         9 (melhor)
+                BUILD_TUPLE              4
+                LOAD_CONST               3 (<code object <genexpr> at 0x108194190, file "fim_de_temporada.py", line 249>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_GLOBAL             11 (range + NULL)
+                LOAD_DEREF               8 (k)
+                LOAD_SMALL_INT           2
+                BINARY_OP               10 (-)
+                LOAD_DEREF               5 (i)
+                CALL                     2
+                GET_ITER
+                CALL                     0
+
+ 250            LOAD_CONST               4 (<code object <lambda> at 0x108225d40, file "fim_de_temporada.py", line 250>)
+                MAKE_FUNCTION
+
+ 249            LOAD_CONST               5 (('key',))
+                CALL_KW                  2
+                LOAD_DEREF               9 (melhor)
+                LOAD_DEREF               8 (k)
+                LOAD_DEREF               5 (i)
+                BUILD_TUPLE              2
+                STORE_SUBSCR
+                JUMP_BACKWARD           54 (to L10)
+
+ 248   L11:     END_FOR
+                POP_ITER
+                JUMP_BACKWARD           80 (to L9)
+
+ 247   L12:     END_FOR
+                POP_ITER
+
+ 251            BUILD_LIST               0
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 20 (quantas, n)
+                LOAD_SMALL_INT           1
+                BINARY_OP               10 (-)
+                SWAP                     3
+                STORE_FAST               6 (datas)
+                STORE_DEREF              8 (k)
+                STORE_DEREF              5 (i)
+
+ 252   L13:     LOAD_DEREF               5 (i)
+                POP_JUMP_IF_NONE        54 (to L14)
+                NOT_TAKEN
+
+ 253            LOAD_FAST_BORROW         6 (datas)
+                LOAD_ATTR               13 (append + NULL|self)
+                LOAD_DEREF              10 (prontas)
+                LOAD_DEREF               5 (i)
+                BINARY_OP               26 ([])
+                CALL                     1
+                POP_TOP
+
+ 254            LOAD_DEREF               9 (melhor)
+                LOAD_DEREF               8 (k)
+                LOAD_DEREF               5 (i)
+                BUILD_TUPLE              2
+                BINARY_OP               26 ([])
+                LOAD_SMALL_INT           1
+                BINARY_OP               26 ([])
+                STORE_DEREF              5 (i)
+
+ 255            LOAD_DEREF               8 (k)
+                LOAD_SMALL_INT           1
+                BINARY_OP               23 (-=)
+                STORE_DEREF              8 (k)
+                JUMP_BACKWARD           57 (to L13)
+
+ 256   L14:     LOAD_GLOBAL              1 (sorted + NULL)
+                LOAD_FAST_BORROW         6 (datas)
+                CALL                     1
+                RETURN_VALUE
+
+  --   L15:     SWAP                     2
+                POP_TOP
+
+ 233            SWAP                     2
+                STORE_FAST               3 (e)
+                RERAISE                  0
+
+  --   L16:     SWAP                     2
+                POP_TOP
+
+ 246            SWAP                     2
+                STORE_FAST               5 (i)
+                RERAISE                  0
+ExceptionTable:
+  L1 to L4 -> L15 [4]
+  L5 to L8 -> L16 [2]
+
+Disassembly of <code object espera at 0xbdeefe400, file "fim_de_temporada.py", line 236>:
+  --            COPY_FREE_VARS           3
+
+ 236            RESUME                   0
+
+ 238            LOAD_FAST_BORROW         0 (de)
+                LOAD_SMALL_INT           0
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE       17 (to L1)
+                NOT_TAKEN
+                LOAD_DEREF               6 (prontas)
+                LOAD_FAST_BORROW         0 (de)
+                LOAD_SMALL_INT           1
+                BINARY_OP               10 (-)
+                BINARY_OP               26 ([])
+                JUMP_FORWARD            25 (to L2)
+        L1:     LOAD_GLOBAL              0 (datetime)
+                LOAD_ATTR                2 (date)
+                LOAD_ATTR                4 (min)
+        L2:     STORE_FAST               2 (depois_de)
+
+ 240            LOAD_DEREF               5 (ligas)
+                GET_ITER
+
+ 239            LOAD_FAST_AND_CLEAR      3 (e)
+                SWAP                     2
+        L3:     BUILD_LIST               0
+                SWAP                     2
+
+ 240    L4:     FOR_ITER               111 (to L10)
+                STORE_FAST_LOAD_FAST    50 (e, depois_de)
+                LOAD_FAST_BORROW         3 (e)
+                LOAD_CONST               1 ('fim')
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              6 (UM_DIA)
+                BINARY_OP                0 (+)
+                SWAP                     2
+                COPY                     2
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE       17 (to L7)
+                NOT_TAKEN
+                LOAD_DEREF               6 (prontas)
+                LOAD_FAST_BORROW         1 (ate)
+                BINARY_OP               26 ([])
+                COMPARE_OP              58 (bool(<=))
+
+ 239    L5:     POP_JUMP_IF_TRUE         3 (to L6)
+                NOT_TAKEN
+                JUMP_BACKWARD           44 (to L4)
+
+ 240    L6:     JUMP_FORWARD             3 (to L9)
+        L7:     POP_TOP
+
+ 239    L8:     JUMP_BACKWARD           48 (to L4)
+        L9:     LOAD_GLOBAL              9 (max + NULL)
+                LOAD_FAST_BORROW         3 (e)
+                LOAD_CONST               2 ('times')
+                BINARY_OP               26 ([])
+                LOAD_SMALL_INT           1
+                CALL                     2
+                LOAD_DEREF               6 (prontas)
+                LOAD_FAST_BORROW         1 (ate)
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         3 (e)
+                LOAD_CONST               1 ('fim')
+                BINARY_OP               26 ([])
+                BINARY_OP               10 (-)
+                LOAD_GLOBAL              6 (UM_DIA)
+                BINARY_OP               10 (-)
+                LOAD_ATTR               10 (days)
+                BUILD_TUPLE              2
+                LIST_APPEND              2
+                JUMP_BACKWARD          113 (to L4)
+
+ 240   L10:     END_FOR
+                POP_ITER
+
+ 239   L11:     STORE_FAST               4 (esperas)
+                STORE_FAST               3 (e)
+
+ 241            LOAD_DEREF               7 (teto)
+                POP_JUMP_IF_NONE        76 (to L17)
+                NOT_TAKEN
+                LOAD_GLOBAL             12 (any)
+                COPY                     1
+                LOAD_COMMON_CONSTANT     4 (<built-in function any>)
+                IS_OP                    0 (is)
+                POP_JUMP_IF_FALSE       31 (to L15)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_FAST_BORROW         7 (teto)
+                BUILD_TUPLE              1
+                LOAD_CONST               3 (<code object <genexpr> at 0x108232670, file "fim_de_temporada.py", line 241>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST_BORROW         4 (esperas)
+                GET_ITER
+                CALL                     0
+       L12:     FOR_ITER                12 (to L14)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L13)
+                NOT_TAKEN
+                JUMP_BACKWARD           11 (to L12)
+       L13:     POP_ITER
+                LOAD_CONST               4 (True)
+                JUMP_FORWARD            20 (to L16)
+       L14:     END_FOR
+                POP_ITER
+                LOAD_CONST               5 (False)
+                JUMP_FORWARD            16 (to L16)
+       L15:     PUSH_NULL
+                LOAD_FAST_BORROW         7 (teto)
+                BUILD_TUPLE              1
+                LOAD_CONST               3 (<code object <genexpr> at 0x108232670, file "fim_de_temporada.py", line 241>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST_BORROW         4 (esperas)
+                GET_ITER
+                CALL                     0
+                CALL                     1
+       L16:     TO_BOOL
+                POP_JUMP_IF_FALSE       12 (to L17)
+                NOT_TAKEN
+
+ 242            LOAD_GLOBAL             15 (float + NULL)
+                LOAD_CONST               6 ('inf')
+                CALL                     1
+                RETURN_VALUE
+
+ 243   L17:     LOAD_GLOBAL             17 (sum + NULL)
+                LOAD_CONST               7 (<code object <genexpr> at 0x108232890, file "fim_de_temporada.py", line 243>)
+                MAKE_FUNCTION
+                LOAD_FAST_BORROW         4 (esperas)
+                GET_ITER
+                CALL                     0
+                CALL                     1
+                RETURN_VALUE
+
+  --   L18:     SWAP                     2
+                POP_TOP
+
+ 239            SWAP                     2
+                STORE_FAST               3 (e)
+                RERAISE                  0
+ExceptionTable:
+  L3 to L5 -> L18 [2]
+  L6 to L8 -> L18 [2]
+  L9 to L11 -> L18 [2]
+
+Disassembly of <code object <genexpr> at 0x108232670, file "fim_de_temporada.py", line 241>:
+  --           COPY_FREE_VARS           1
+
+ 241           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                12 (to L3)
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST   18 (_clubes, dias)
+               LOAD_FAST_BORROW         2 (dias)
+               LOAD_DEREF               3 (teto)
+               COMPARE_OP             132 (>)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           14 (to L2)
+       L3:     END_FOR
+               POP_ITER
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L4:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L4 [0] lasti
+
+Disassembly of <code object <genexpr> at 0x108232890, file "fim_de_temporada.py", line 243>:
+ 243           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                15 (to L3)
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST   18 (clubes, dias)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (clubes, dias)
+               BINARY_OP                5 (*)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           17 (to L2)
+       L3:     END_FOR
+               POP_ITER
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L4:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L4 [0] lasti
+
+Disassembly of <code object <genexpr> at 0x108194190, file "fim_de_temporada.py", line 249>:
+  --           COPY_FREE_VARS           4
+
+ 249           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                53 (to L3)
+               STORE_FAST               1 (j)
+               LOAD_DEREF               5 (melhor)
+               LOAD_DEREF               4 (k)
+               LOAD_SMALL_INT           1
+               BINARY_OP               10 (-)
+               LOAD_FAST_BORROW         1 (j)
+               BUILD_TUPLE              2
+               BINARY_OP               26 ([])
+               LOAD_SMALL_INT           0
+               BINARY_OP               26 ([])
+               LOAD_DEREF               2 (espera)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (j)
+               LOAD_SMALL_INT           1
+               BINARY_OP                0 (+)
+               LOAD_DEREF               3 (i)
+               CALL                     2
+               BINARY_OP                0 (+)
+               LOAD_FAST_BORROW         1 (j)
+               BUILD_TUPLE              2
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           55 (to L2)
+       L3:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L4:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L4 [0] lasti
+
+Disassembly of <code object <lambda> at 0x108225d40, file "fim_de_temporada.py", line 250>:
+250           RESUME                   0
+              LOAD_FAST_BORROW         0 (x)
+              LOAD_SMALL_INT           0
+              BINARY_OP               26 ([])
+              RETURN_VALUE
+
+Disassembly of <code object _leituras_para_esperar_no_maximo at 0x107fef4b0, file "fim_de_temporada.py", line 259>:
+259           RESUME                   0
+
+262           LOAD_GLOBAL              1 (sorted + NULL)
+              LOAD_CONST               0 (<code object <genexpr> at 0x1081b1e90, file "fim_de_temporada.py", line 262>)
+              MAKE_FUNCTION
+              LOAD_FAST_BORROW         0 (ligas)
+              GET_ITER
+              CALL                     0
+              CALL                     1
+              LOAD_SMALL_INT           0
+              LOAD_SMALL_INT           0
+              STORE_FAST_STORE_FAST   67 (i, n)
+              STORE_FAST               2 (prontas)
+
+263   L1:     LOAD_FAST_BORROW         4 (i)
+              LOAD_GLOBAL              3 (len + NULL)
+              LOAD_FAST_BORROW         2 (prontas)
+              CALL                     1
+              COMPARE_OP              18 (bool(<))
+              POP_JUMP_IF_FALSE       90 (to L5)
+              NOT_TAKEN
+
+264           LOAD_FAST_BORROW_LOAD_FAST_BORROW 36 (prontas, i)
+              BINARY_OP               26 ([])
+              LOAD_GLOBAL              4 (datetime)
+              LOAD_ATTR                6 (timedelta)
+              PUSH_NULL
+              LOAD_FAST_BORROW         1 (dias)
+              LOAD_CONST               1 (('days',))
+              CALL_KW                  1
+              BINARY_OP                0 (+)
+              STORE_FAST               5 (limite)
+
+265           LOAD_FAST_BORROW         3 (n)
+              LOAD_SMALL_INT           1
+              BINARY_OP               13 (+=)
+              STORE_FAST               3 (n)
+
+266   L2:     LOAD_FAST_BORROW         4 (i)
+              LOAD_GLOBAL              3 (len + NULL)
+              LOAD_FAST_BORROW         2 (prontas)
+              CALL                     1
+              COMPARE_OP              18 (bool(<))
+              POP_JUMP_IF_TRUE         3 (to L3)
+              NOT_TAKEN
+              JUMP_BACKWARD           79 (to L1)
+      L3:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 36 (prontas, i)
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         5 (limite)
+              COMPARE_OP              58 (bool(<=))
+              POP_JUMP_IF_TRUE         3 (to L4)
+              NOT_TAKEN
+              JUMP_BACKWARD           94 (to L1)
+
+267   L4:     LOAD_FAST_BORROW         4 (i)
+              LOAD_SMALL_INT           1
+              BINARY_OP               13 (+=)
+              STORE_FAST               4 (i)
+              JUMP_BACKWARD           44 (to L2)
+
+268   L5:     LOAD_FAST_BORROW         3 (n)
+              RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x1081b1e90, file "fim_de_temporada.py", line 262>:
+ 262           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                24 (to L3)
+               STORE_FAST_LOAD_FAST    17 (e, e)
+               LOAD_CONST               0 ('fim')
+               BINARY_OP               26 ([])
+               LOAD_GLOBAL              0 (UM_DIA)
+               BINARY_OP                0 (+)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           26 (to L2)
+       L3:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L4:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L4 [0] lasti
+
+Disassembly of <code object plano_de_leituras at 0xbdf6ed800, file "fim_de_temporada.py", line 271>:
+  --            MAKE_CELL                1 (ja_feitas)
+                MAKE_CELL                2 (hoje)
+                MAKE_CELL                7 (e)
+                MAKE_CELL               14 (falta_ler)
+
+ 271            RESUME                   0
+
+ 281            LOAD_FAST_BORROW         2 (hoje)
+                LOAD_FAST_BORROW         1 (ja_feitas)
+                BUILD_TUPLE              2
+                LOAD_CONST               0 (<code object falta_ler at 0x1081b3510, file "fim_de_temporada.py", line 281>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                STORE_DEREF             14 (falta_ler)
+
+ 285            LOAD_GLOBAL              0 (any)
+                COPY                     1
+                LOAD_COMMON_CONSTANT     4 (<built-in function any>)
+                IS_OP                    0 (is)
+                POP_JUMP_IF_FALSE       31 (to L4)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_FAST_BORROW        14 (falta_ler)
+                BUILD_TUPLE              1
+                LOAD_CONST               1 (<code object <genexpr> at 0x1082329a0, file "fim_de_temporada.py", line 285>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST_BORROW         0 (estados)
+                GET_ITER
+                CALL                     0
+        L1:     FOR_ITER                12 (to L3)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L2)
+                NOT_TAKEN
+                JUMP_BACKWARD           11 (to L1)
+        L2:     POP_ITER
+                LOAD_CONST               2 (True)
+                JUMP_FORWARD            20 (to L5)
+        L3:     END_FOR
+                POP_ITER
+                LOAD_CONST               3 (False)
+                JUMP_FORWARD            16 (to L5)
+        L4:     PUSH_NULL
+                LOAD_FAST_BORROW        14 (falta_ler)
+                BUILD_TUPLE              1
+                LOAD_CONST               1 (<code object <genexpr> at 0x1082329a0, file "fim_de_temporada.py", line 285>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST_BORROW         0 (estados)
+                GET_ITER
+                CALL                     0
+                CALL                     1
+        L5:     TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L6)
+                NOT_TAKEN
+
+ 286            BUILD_LIST               0
+                RETURN_VALUE
+
+ 287    L6:     LOAD_GLOBAL              3 (max + NULL)
+                LOAD_FAST_BORROW         0 (estados)
+                LOAD_CONST               4 (<code object <lambda> at 0x108232ab0, file "fim_de_temporada.py", line 287>)
+                MAKE_FUNCTION
+                LOAD_CONST               5 (('key',))
+                CALL_KW                  2
+                STORE_FAST               3 (principal)
+
+ 288            LOAD_FAST_BORROW         3 (principal)
+                LOAD_CONST               6 ('fim')
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              4 (UM_DIA)
+                BINARY_OP                0 (+)
+                BUILD_LIST               1
+                STORE_FAST               4 (datas_principais)
+
+ 289            LOAD_FAST_BORROW         4 (datas_principais)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_DEREF               2 (hoje)
+                COMPARE_OP              58 (bool(<=))
+                POP_JUMP_IF_FALSE       36 (to L7)
+                NOT_TAKEN
+
+ 292            LOAD_FAST_BORROW         4 (datas_principais)
+                LOAD_ATTR                7 (append + NULL|self)
+                LOAD_FAST_BORROW         4 (datas_principais)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              8 (UM_ANO)
+                BINARY_OP                0 (+)
+                CALL                     1
+                POP_TOP
+
+ 293    L7:     BUILD_MAP                0
+                STORE_FAST               5 (data_da_liga)
+
+ 294            LOAD_FAST_BORROW         4 (datas_principais)
+                GET_ITER
+        L8:     FOR_ITER                82 (to L14)
+                STORE_FAST               6 (data_principal)
+
+ 295            LOAD_FAST_BORROW         0 (estados)
+                GET_ITER
+        L9:     FOR_ITER                73 (to L13)
+                STORE_DEREF              7 (e)
+
+ 296            LOAD_DEREF               7 (e)
+                LOAD_CONST               7 ('uid')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         5 (data_da_liga)
+                CONTAINS_OP              1 (not in)
+                POP_JUMP_IF_TRUE         3 (to L10)
+                NOT_TAKEN
+                JUMP_BACKWARD           19 (to L9)
+       L10:     LOAD_DEREF               7 (e)
+                LOAD_CONST               6 ('fim')
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL              4 (UM_DIA)
+                BINARY_OP                0 (+)
+                LOAD_FAST_BORROW         6 (data_principal)
+                COMPARE_OP              58 (bool(<=))
+                POP_JUMP_IF_TRUE         3 (to L11)
+                NOT_TAKEN
+                JUMP_BACKWARD           46 (to L9)
+
+ 297   L11:     LOAD_DEREF               7 (e)
+                LOAD_CONST               8 ('inicio_da_seguinte')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         6 (data_principal)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_TRUE         3 (to L12)
+                NOT_TAKEN
+                JUMP_BACKWARD           62 (to L9)
+
+ 298   L12:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 101 (data_principal, data_da_liga)
+                LOAD_DEREF               7 (e)
+                LOAD_CONST               7 ('uid')
+                BINARY_OP               26 ([])
+                STORE_SUBSCR
+                JUMP_BACKWARD           75 (to L9)
+
+ 295   L13:     END_FOR
+                POP_ITER
+                JUMP_BACKWARD           84 (to L8)
+
+ 294   L14:     END_FOR
+                POP_ITER
+
+ 299            LOAD_FAST_BORROW         0 (estados)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      7 (e)
+                SWAP                     2
+       L15:     BUILD_LIST               0
+                SWAP                     2
+       L16:     FOR_ITER                20 (to L19)
+                STORE_FAST_LOAD_FAST   119 (e, e)
+                LOAD_CONST               7 ('uid')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         5 (data_da_liga)
+                CONTAINS_OP              1 (not in)
+       L17:     POP_JUMP_IF_TRUE         3 (to L18)
+                NOT_TAKEN
+                JUMP_BACKWARD           18 (to L16)
+       L18:     LOAD_FAST_BORROW         7 (e)
+                LIST_APPEND              2
+                JUMP_BACKWARD           22 (to L16)
+       L19:     END_FOR
+                POP_ITER
+       L20:     STORE_FAST               8 (resto)
+                STORE_FAST               7 (e)
+
+ 300            LOAD_FAST_BORROW         8 (resto)
+                TO_BOOL
+                POP_JUMP_IF_FALSE      114 (to L25)
+                NOT_TAKEN
+
+ 301            LOAD_GLOBAL             11 (_leituras_para_esperar_no_maximo + NULL)
+                LOAD_FAST_BORROW         8 (resto)
+                LOAD_GLOBAL             12 (ESPERA_MAXIMA)
+                CALL                     2
+                STORE_FAST               9 (minimo)
+
+ 303            LOAD_FAST_BORROW         9 (minimo)
+                LOAD_GLOBAL             14 (MAX_LEITURAS)
+                LOAD_SMALL_INT           1
+                BINARY_OP               10 (-)
+                COMPARE_OP              58 (bool(<=))
+                POP_JUMP_IF_FALSE       17 (to L21)
+                NOT_TAKEN
+                LOAD_GLOBAL             17 (_datas_com_menor_espera + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 137 (resto, minimo)
+                LOAD_GLOBAL             12 (ESPERA_MAXIMA)
+                CALL                     3
+                JUMP_FORWARD            22 (to L22)
+
+ 304   L21:     LOAD_GLOBAL             17 (_datas_com_menor_espera + NULL)
+                LOAD_FAST_BORROW         8 (resto)
+                LOAD_GLOBAL             14 (MAX_LEITURAS)
+                LOAD_SMALL_INT           1
+                BINARY_OP               10 (-)
+                CALL                     2
+
+ 303   L22:     STORE_FAST              10 (datas)
+
+ 305            LOAD_FAST_BORROW         8 (resto)
+                GET_ITER
+       L23:     FOR_ITER                34 (to L24)
+                STORE_DEREF              7 (e)
+
+ 306            LOAD_GLOBAL             19 (min + NULL)
+                LOAD_FAST_BORROW         7 (e)
+                BUILD_TUPLE              1
+                LOAD_CONST               9 (<code object <genexpr> at 0x1081f0030, file "fim_de_temporada.py", line 306>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST_BORROW        10 (datas)
+                GET_ITER
+                CALL                     0
+                CALL                     1
+                LOAD_FAST_BORROW         5 (data_da_liga)
+                LOAD_DEREF               7 (e)
+                LOAD_CONST               7 ('uid')
+                BINARY_OP               26 ([])
+                STORE_SUBSCR
+                JUMP_BACKWARD           36 (to L23)
+
+ 305   L24:     END_FOR
+                POP_ITER
+
+ 307   L25:     BUILD_MAP                0
+                STORE_FAST              11 (por_data)
+
+ 308            LOAD_FAST_BORROW         0 (estados)
+                GET_ITER
+       L26:     FOR_ITER                76 (to L28)
+                STORE_DEREF              7 (e)
+
+ 309            LOAD_DEREF              14 (falta_ler)
+                PUSH_NULL
+                LOAD_DEREF               7 (e)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L27)
+                NOT_TAKEN
+                JUMP_BACKWARD           19 (to L26)
+
+ 310   L27:     LOAD_FAST_BORROW        11 (por_data)
+                LOAD_ATTR               21 (setdefault + NULL|self)
+                LOAD_GLOBAL              3 (max + NULL)
+                LOAD_FAST_BORROW         5 (data_da_liga)
+                LOAD_DEREF               7 (e)
+                LOAD_CONST               7 ('uid')
+                BINARY_OP               26 ([])
+                BINARY_OP               26 ([])
+                LOAD_DEREF               2 (hoje)
+                CALL                     2
+                BUILD_LIST               0
+                CALL                     2
+                LOAD_ATTR                7 (append + NULL|self)
+                LOAD_DEREF               7 (e)
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD           78 (to L26)
+
+ 308   L28:     END_FOR
+                POP_ITER
+
+ 314            LOAD_GLOBAL             23 (sorted + NULL)
+                LOAD_FAST_BORROW        11 (por_data)
+                LOAD_ATTR               25 (items + NULL|self)
+                CALL                     0
+                CALL                     1
+                GET_ITER
+
+ 311            LOAD_FAST_AND_CLEAR     12 (d)
+                LOAD_FAST_AND_CLEAR     13 (ligas)
+                SWAP                     3
+       L29:     BUILD_LIST               0
+                SWAP                     2
+
+ 314   L30:     FOR_ITER                41 (to L31)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST  205 (d, ligas)
+
+ 311            LOAD_CONST              10 ('data')
+                LOAD_FAST_BORROW        12 (d)
+
+ 312            LOAD_CONST              11 ('ligas')
+                LOAD_GLOBAL             23 (sorted + NULL)
+                LOAD_FAST_BORROW        13 (ligas)
+                LOAD_CONST              12 (<code object <lambda> at 0x108232bc0, file "fim_de_temporada.py", line 312>)
+                MAKE_FUNCTION
+                LOAD_CONST               5 (('key',))
+                CALL_KW                  2
+
+ 313            LOAD_CONST              13 ('clubes')
+                LOAD_GLOBAL             27 (sum + NULL)
+                LOAD_CONST              14 (<code object <genexpr> at 0x108232cd0, file "fim_de_temporada.py", line 313>)
+                MAKE_FUNCTION
+                LOAD_FAST_BORROW        13 (ligas)
+                GET_ITER
+                CALL                     0
+                CALL                     1
+
+ 311            BUILD_MAP                3
+                LIST_APPEND              2
+                JUMP_BACKWARD           43 (to L30)
+
+ 314   L31:     END_FOR
+                POP_ITER
+
+ 311   L32:     SWAP                     3
+                STORE_FAST              13 (ligas)
+                STORE_FAST              12 (d)
+                RETURN_VALUE
+
+  --   L33:     SWAP                     2
+                POP_TOP
+
+ 299            SWAP                     2
+                STORE_FAST               7 (e)
+                RERAISE                  0
+
+  --   L34:     SWAP                     2
+                POP_TOP
+
+ 311            SWAP                     3
+                STORE_FAST              13 (ligas)
+                STORE_FAST              12 (d)
+                RERAISE                  0
+ExceptionTable:
+  L15 to L17 -> L33 [2]
+  L18 to L20 -> L33 [2]
+  L29 to L32 -> L34 [3]
+
+Disassembly of <code object falta_ler at 0x1081b3510, file "fim_de_temporada.py", line 281>:
+  --           COPY_FREE_VARS           2
+
+ 281           RESUME                   0
+
+ 283           LOAD_GLOBAL              1 (ja_lida + NULL)
+               LOAD_FAST_BORROW         0 (e)
+               LOAD_DEREF               2 (ja_feitas)
+               CALL                     2
+               TO_BOOL
+               UNARY_NOT
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_FALSE       13 (to L1)
+               NOT_TAKEN
+               POP_TOP
+               LOAD_FAST_BORROW         0 (e)
+               LOAD_CONST               0 ('inicio_da_seguinte')
+               BINARY_OP               26 ([])
+               LOAD_DEREF               1 (hoje)
+               COMPARE_OP             132 (>)
+       L1:     RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x1082329a0, file "fim_de_temporada.py", line 285>:
+  --           COPY_FREE_VARS           1
+
+ 285           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                13 (to L3)
+               STORE_FAST               1 (e)
+               LOAD_DEREF               2 (falta_ler)
+               PUSH_NULL
+               LOAD_FAST_BORROW         1 (e)
+               CALL                     1
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           15 (to L2)
+       L3:     END_FOR
+               POP_ITER
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L4:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L4 [0] lasti
+
+Disassembly of <code object <lambda> at 0x108232ab0, file "fim_de_temporada.py", line 287>:
+287           RESUME                   0
+              LOAD_FAST_BORROW         0 (e)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               0 ('reputacao')
+              LOAD_SMALL_INT           0
+              CALL                     2
+              LOAD_FAST_BORROW         0 (e)
+              LOAD_CONST               1 ('fim')
+              BINARY_OP               26 ([])
+              BUILD_TUPLE              2
+              RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x1081f0030, file "fim_de_temporada.py", line 306>:
+  --           COPY_FREE_VARS           1
+
+ 306           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                33 (to L5)
+               STORE_FAST_LOAD_FAST    17 (d, d)
+               LOAD_DEREF               2 (e)
+               LOAD_CONST               0 ('fim')
+               BINARY_OP               26 ([])
+               LOAD_GLOBAL              0 (UM_DIA)
+               BINARY_OP                0 (+)
+               COMPARE_OP             188 (bool(>=))
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           29 (to L2)
+       L4:     LOAD_FAST_BORROW         1 (d)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           35 (to L2)
+       L5:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L6:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L6 [0] lasti
+  L4 to L6 -> L6 [0] lasti
+
+Disassembly of <code object <lambda> at 0x108232bc0, file "fim_de_temporada.py", line 312>:
+312           RESUME                   0
+              LOAD_FAST_BORROW         0 (x)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               0 ('reputacao')
+              LOAD_SMALL_INT           0
+              CALL                     2
+              UNARY_NEGATIVE
+              LOAD_FAST_BORROW         0 (x)
+              LOAD_CONST               1 ('nome')
+              BINARY_OP               26 ([])
+              BUILD_TUPLE              2
+              RETURN_VALUE
+
+Disassembly of <code object <genexpr> at 0x108232cd0, file "fim_de_temporada.py", line 313>:
+ 313           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                13 (to L3)
+               STORE_FAST_LOAD_FAST    17 (x, x)
+               LOAD_CONST               0 ('times')
+               BINARY_OP               26 ([])
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           15 (to L2)
+       L3:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L4:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L4 -> L4 [0] lasti
+
+Disassembly of <code object proxima_leitura at 0x1081ec390, file "fim_de_temporada.py", line 317>:
+ 317            RESUME                   0
+
+ 319            LOAD_GLOBAL              1 (plano_de_leituras + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (estados, ja_feitas)
+                LOAD_FAST_BORROW         2 (hoje)
+                CALL                     3
+                STORE_FAST               3 (plano)
+
+ 320            LOAD_FAST_BORROW         3 (plano)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       22 (to L1)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         3 (plano)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_CONST               1 ('data')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         2 (hoje)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE        3 (to L2)
+                NOT_TAKEN
+
+ 321    L1:     LOAD_CONST               2 (None)
+                RETURN_VALUE
+
+ 322    L2:     LOAD_FAST_BORROW         3 (plano)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_CONST               3 ('ligas')
+                BINARY_OP               26 ([])
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      4 (e)
+                SWAP                     2
+        L3:     BUILD_LIST               0
+                SWAP                     2
+        L4:     FOR_ITER                21 (to L7)
+                STORE_FAST_LOAD_FAST    68 (e, e)
+                LOAD_CONST               4 ('fechada')
+                BINARY_OP               26 ([])
+                TO_BOOL
+        L5:     POP_JUMP_IF_TRUE         3 (to L6)
+                NOT_TAKEN
+                JUMP_BACKWARD           19 (to L4)
+        L6:     LOAD_FAST_BORROW         4 (e)
+                LIST_APPEND              2
+                JUMP_BACKWARD           23 (to L4)
+        L7:     END_FOR
+                POP_ITER
+        L8:     SWAP                     2
+                STORE_FAST               4 (e)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L9)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST               2 (None)
+        L9:     RETURN_VALUE
+
+  --   L10:     SWAP                     2
+                POP_TOP
+
+ 322            SWAP                     2
+                STORE_FAST               4 (e)
+                RERAISE                  0
+ExceptionTable:
+  L3 to L5 -> L10 [2]
+  L6 to L8 -> L10 [2]
+
+Disassembly of <code object proximos at 0x1082245d0, file "fim_de_temporada.py", line 325>:
+325           RESUME                   0
+
+328           LOAD_GLOBAL              1 (plano_de_leituras + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (estados, ja_feitas)
+              LOAD_FAST_BORROW         2 (hoje)
+              CALL                     3
+              RETURN_VALUE
+
+Disassembly of <code object ler_agenda at 0xbdf0b3000, file "fim_de_temporada.py", line 337>:
+ 337            RESUME                   0
+
+ 344            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              0 (struct)
+                STORE_FAST               1 (struct)
+
+ 345            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              1 (fm_reader)
+                STORE_FAST               2 (fr)
+
+ 347            LOAD_FAST_BORROW         2 (fr)
+                LOAD_ATTR                4 (AGENDA_VTABLE_RVA)
+                POP_JUMP_IF_NONE        15 (to L1)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         2 (fr)
+                LOAD_ATTR                6 (VT_COMP_EDITION_RVA)
+                POP_JUMP_IF_NOT_NONE     3 (to L2)
+                NOT_TAKEN
+
+ 348    L1:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+ 349    L2:     LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR                9 (game_date + NULL|self)
+                CALL                     0
+                STORE_FAST               3 (iso)
+
+ 350            LOAD_FAST_BORROW         3 (iso)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L3)
+                NOT_TAKEN
+
+ 351            LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+ 352    L3:     LOAD_GLOBAL             11 (isinstance + NULL)
+                LOAD_FAST_BORROW         3 (iso)
+                LOAD_GLOBAL             12 (datetime)
+                LOAD_ATTR               14 (date)
+                CALL                     2
+                TO_BOOL
+                POP_JUMP_IF_FALSE        3 (to L4)
+                NOT_TAKEN
+                LOAD_FAST                3 (iso)
+                JUMP_FORWARD            30 (to L5)
+        L4:     LOAD_GLOBAL             12 (datetime)
+                LOAD_ATTR               14 (date)
+                LOAD_ATTR               17 (fromisoformat + NULL|self)
+                LOAD_FAST_BORROW         3 (iso)
+                CALL                     1
+        L5:     STORE_FAST               4 (hoje)
+
+ 354            BUILD_MAP                0
+                BUILD_MAP                0
+                BUILD_MAP                0
+                STORE_FAST_STORE_FAST  118 (nacoes, ponteiros)
+                STORE_FAST               5 (competicoes)
+
+ 355            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               19 (enderecos_de_vtable + NULL|self)
+                LOAD_FAST_BORROW         2 (fr)
+                LOAD_ATTR                6 (VT_COMP_EDITION_RVA)
+                CALL                     1
+                GET_ITER
+        L6:     EXTENDED_ARG             2
+                FOR_ITER               758 (to L23)
+                STORE_FAST               8 (e)
+
+ 356            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               21 (q + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 130 (e, fr)
+                LOAD_ATTR               22 (EDITION_COMP_PTR)
+                BINARY_OP                0 (+)
+                CALL                     1
+                STORE_FAST               9 (comp)
+
+ 357            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               25 (is_heap + NULL|self)
+                LOAD_FAST_BORROW         9 (comp)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L7)
+                NOT_TAKEN
+
+ 358            JUMP_BACKWARD           62 (to L6)
+
+ 359    L7:     LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               21 (q + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 130 (e, fr)
+                LOAD_ATTR               26 (EDITION_TEAMS_VEC)
+                BINARY_OP                0 (+)
+                CALL                     1
+                LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               21 (q + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 130 (e, fr)
+                LOAD_ATTR               26 (EDITION_TEAMS_VEC)
+                BINARY_OP                0 (+)
+                LOAD_SMALL_INT           8
+                BINARY_OP                0 (+)
+                CALL                     1
+                STORE_FAST_STORE_FAST  186 (end, beg)
+
+ 360            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               25 (is_heap + NULL|self)
+                LOAD_FAST_BORROW        10 (beg)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       27 (to L8)
+                NOT_TAKEN
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 186 (end, beg)
+                COMPARE_OP             188 (bool(>=))
+                POP_JUMP_IF_FALSE       21 (to L8)
+                NOT_TAKEN
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 186 (end, beg)
+                BINARY_OP               10 (-)
+                LOAD_SMALL_INT           8
+                BINARY_OP                6 (%)
+                LOAD_SMALL_INT           0
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_TRUE         3 (to L9)
+                NOT_TAKEN
+
+ 361    L8:     JUMP_BACKWARD          185 (to L6)
+
+ 362    L9:     LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               29 (fmstr + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 146 (comp, fr)
+                LOAD_ATTR               30 (COMP_NAME_FULL)
+                BINARY_OP                0 (+)
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L10)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST               2 ('?')
+       L10:     STORE_FAST              12 (nome)
+
+ 363            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               33 (u32 + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 146 (comp, fr)
+                LOAD_ATTR               34 (COMP_CATEGORY)
+                BINARY_OP                0 (+)
+                CALL                     1
+                LOAD_SMALL_INT         255
+                BINARY_OP                1 (&)
+                STORE_FAST              13 (categoria)
+
+ 364            LOAD_FAST_BORROW         2 (fr)
+                LOAD_ATTR               37 (comp_kind + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 205 (nome, categoria)
+                CALL                     2
+                TO_BOOL
+                POP_JUMP_IF_FALSE        4 (to L11)
+                NOT_TAKEN
+
+ 365            EXTENDED_ARG             1
+                JUMP_BACKWARD          294 (to L6)
+
+ 366   L11:     LOAD_GLOBAL             39 (min + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 186 (end, beg)
+                BINARY_OP               10 (-)
+                LOAD_SMALL_INT           8
+                BINARY_OP                2 (//)
+                LOAD_CONST               3 (5000)
+                CALL                     2
+                STORE_FAST              14 (n)
+
+ 367            LOAD_FAST_BORROW        14 (n)
+                LOAD_SMALL_INT           0
+                COMPARE_OP              58 (bool(<=))
+                POP_JUMP_IF_FALSE        4 (to L12)
+                NOT_TAKEN
+
+ 368            EXTENDED_ARG             1
+                JUMP_BACKWARD          329 (to L6)
+
+ 369   L12:     LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               33 (u32 + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 146 (comp, fr)
+                LOAD_ATTR               40 (COMP_UID)
+                BINARY_OP                0 (+)
+                CALL                     1
+                STORE_FAST              15 (uid)
+
+ 370            LOAD_FAST_BORROW_LOAD_FAST_BORROW 245 (uid, competicoes)
+                CONTAINS_OP              1 (not in)
+                POP_JUMP_IF_FALSE      246 (to L19)
+                NOT_TAKEN
+
+ 371            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               21 (q + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 146 (comp, fr)
+                LOAD_ATTR               42 (COMP_NATION_PTR)
+                BINARY_OP                0 (+)
+                CALL                     1
+                STORE_FAST              16 (nacao)
+
+ 372            LOAD_FAST_BORROW        16 (nacao)
+                LOAD_FAST_BORROW         7 (nacoes)
+                CONTAINS_OP              1 (not in)
+                POP_JUMP_IF_FALSE       63 (to L15)
+                NOT_TAKEN
+
+ 373            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               25 (is_heap + NULL|self)
+                LOAD_FAST_BORROW        16 (nacao)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       35 (to L13)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               29 (fmstr + NULL|self)
+                LOAD_FAST_BORROW        16 (nacao)
+                LOAD_FAST_BORROW         2 (fr)
+                LOAD_ATTR               44 (NATION_NAME_PTR)
+                BINARY_OP                0 (+)
+                CALL                     1
+                JUMP_FORWARD             1 (to L14)
+       L13:     LOAD_CONST               1 (None)
+       L14:     LOAD_FAST_BORROW         7 (nacoes)
+                LOAD_FAST_BORROW        16 (nacao)
+                STORE_SUBSCR
+
+ 374   L15:     LOAD_FAST_BORROW         2 (fr)
+                LOAD_ATTR               46 (COMP_IS_FEMALE)
+                LOAD_CONST               1 (None)
+                IS_OP                    1 (is not)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       43 (to L16)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_GLOBAL             49 (bool + NULL)
+                LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               51 (u8 + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 146 (comp, fr)
+                LOAD_ATTR               46 (COMP_IS_FEMALE)
+                BINARY_OP                0 (+)
+                CALL                     1
+                CALL                     1
+       L16:     STORE_FAST              17 (feminina)
+
+ 375            LOAD_CONST               4 ('nome')
+                LOAD_FAST               12 (nome)
+                LOAD_CONST               5 ('categoria')
+                LOAD_FAST               13 (categoria)
+                LOAD_CONST               6 ('times')
+                LOAD_GLOBAL             53 (set + NULL)
+                CALL                     0
+
+ 376            LOAD_CONST               7 ('reputacao')
+                LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               33 (u32 + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 146 (comp, fr)
+                LOAD_ATTR               54 (COMP_REPUTATION)
+                BINARY_OP                0 (+)
+                CALL                     1
+
+ 377            LOAD_CONST               8 ('pais')
+                LOAD_FAST_BORROW         7 (nacoes)
+                LOAD_FAST_BORROW        16 (nacao)
+                BINARY_OP               26 ([])
+                TO_BOOL
+                POP_JUMP_IF_FALSE       12 (to L17)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         7 (nacoes)
+                LOAD_FAST_BORROW        16 (nacao)
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW        17 (feminina)
+                BUILD_TUPLE              2
+                JUMP_FORWARD             1 (to L18)
+       L17:     LOAD_CONST               1 (None)
+
+ 375   L18:     BUILD_MAP                5
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 95 (competicoes, uid)
+                STORE_SUBSCR
+
+ 378   L19:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 95 (competicoes, uid)
+                BINARY_OP               26 ([])
+                STORE_FAST              18 (c)
+
+ 379            LOAD_GLOBAL             57 (range + NULL)
+                LOAD_FAST_BORROW        14 (n)
+                CALL                     1
+                GET_ITER
+       L20:     FOR_ITER               122 (to L22)
+                STORE_FAST              19 (i)
+
+ 380            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               21 (q + NULL|self)
+                LOAD_FAST_BORROW        10 (beg)
+                LOAD_SMALL_INT           8
+                LOAD_FAST_BORROW        19 (i)
+                BINARY_OP                5 (*)
+                BINARY_OP                0 (+)
+                CALL                     1
+                STORE_FAST              20 (p)
+
+ 381            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               25 (is_heap + NULL|self)
+                LOAD_FAST_BORROW        20 (p)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L21)
+                NOT_TAKEN
+                JUMP_BACKWARD           59 (to L20)
+
+ 382   L21:     LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               33 (u32 + NULL|self)
+                LOAD_FAST_BORROW        20 (p)
+                LOAD_FAST_BORROW         2 (fr)
+                LOAD_ATTR               58 (TEAM_UID)
+                BINARY_OP                0 (+)
+                CALL                     1
+                STORE_FAST              21 (tuid)
+
+ 383            LOAD_FAST_BORROW        18 (c)
+                LOAD_CONST               6 ('times')
+                BINARY_OP               26 ([])
+                LOAD_ATTR               61 (add + NULL|self)
+                LOAD_FAST_BORROW        21 (tuid)
+                CALL                     1
+                POP_TOP
+
+ 384            LOAD_FAST_BORROW        20 (p)
+                LOAD_FAST_BORROW         6 (ponteiros)
+                LOAD_FAST_BORROW        21 (tuid)
+                STORE_SUBSCR
+                JUMP_BACKWARD          124 (to L20)
+
+ 379   L22:     END_FOR
+                POP_ITER
+                EXTENDED_ARG             2
+                JUMP_BACKWARD          761 (to L6)
+
+ 355   L23:     END_FOR
+                POP_ITER
+
+ 391            LOAD_FAST_BORROW         2 (fr)
+                LOAD_ATTR                4 (AGENDA_VTABLE_RVA)
+                LOAD_FAST_BORROW         2 (fr)
+                LOAD_ATTR               62 (JOGO_VTABLE_RVA)
+                BUILD_TUPLE              2
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     22 (vt)
+                SWAP                     2
+       L24:     BUILD_LIST               0
+                SWAP                     2
+       L25:     FOR_ITER                11 (to L28)
+                STORE_FAST              22 (vt)
+                LOAD_FAST_BORROW        22 (vt)
+       L26:     POP_JUMP_IF_NOT_NONE     3 (to L27)
+                NOT_TAKEN
+                JUMP_BACKWARD            9 (to L25)
+       L27:     LOAD_FAST_BORROW        22 (vt)
+                LIST_APPEND              2
+                JUMP_BACKWARD           13 (to L25)
+       L28:     END_FOR
+                POP_ITER
+       L29:     STORE_FAST              23 (tipos)
+                STORE_FAST              22 (vt)
+
+ 392            LOAD_FAST_BORROW        23 (tipos)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     22 (vt)
+                LOAD_FAST_AND_CLEAR     24 (o)
+                SWAP                     3
+       L30:     BUILD_LIST               0
+                SWAP                     2
+       L31:     FOR_ITER                29 (to L34)
+                STORE_FAST              22 (vt)
+                LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               19 (enderecos_de_vtable + NULL|self)
+                LOAD_FAST_BORROW        22 (vt)
+                CALL                     1
+                GET_ITER
+       L32:     FOR_ITER                 5 (to L33)
+                STORE_FAST              24 (o)
+                LOAD_FAST_BORROW        24 (o)
+                LIST_APPEND              3
+                JUMP_BACKWARD            7 (to L32)
+       L33:     END_FOR
+                POP_ITER
+                JUMP_BACKWARD           31 (to L31)
+       L34:     END_FOR
+                POP_ITER
+       L35:     STORE_FAST              25 (objetos)
+                STORE_FAST              22 (vt)
+                STORE_FAST              24 (o)
+
+ 393            BUILD_MAP                0
+                BUILD_MAP                0
+                BUILD_MAP                0
+                STORE_FAST              28 (times_em_jogo)
+                STORE_FAST              27 (comp_da_etapa)
+                STORE_FAST              26 (temporadas)
+
+ 394            LOAD_FAST_BORROW         5 (competicoes)
+                LOAD_ATTR               65 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     29 (u)
+                LOAD_FAST_AND_CLEAR     18 (c)
+                SWAP                     3
+       L36:     BUILD_SET                0
+                SWAP                     2
+       L37:     FOR_ITER                28 (to L40)
+                UNPACK_SEQUENCE          2
+                STORE_FAST              29 (u)
+                STORE_FAST              18 (c)
+                LOAD_FAST_BORROW        18 (c)
+                LOAD_CONST               5 ('categoria')
+                BINARY_OP               26 ([])
+                LOAD_GLOBAL             66 (CATEGORIAS_DE_LIGA)
+                CONTAINS_OP              0 (in)
+       L38:     POP_JUMP_IF_TRUE         3 (to L39)
+                NOT_TAKEN
+                JUMP_BACKWARD           26 (to L37)
+       L39:     LOAD_FAST_BORROW        29 (u)
+                SET_ADD                  2
+                JUMP_BACKWARD           30 (to L37)
+       L40:     END_FOR
+                POP_ITER
+       L41:     STORE_FAST              30 (ligas)
+                STORE_FAST              29 (u)
+                STORE_FAST              18 (c)
+
+ 395            LOAD_FAST_BORROW        25 (objetos)
+                GET_ITER
+       L42:     EXTENDED_ARG             2
+                FOR_ITER               522 (to L57)
+                STORE_FAST              24 (o)
+
+ 396            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               69 (rb + NULL|self)
+                LOAD_FAST_BORROW        24 (o)
+                LOAD_SMALL_INT          80
+                CALL                     2
+                STORE_FAST              31 (bloco)
+
+ 397            LOAD_FAST_BORROW        31 (bloco)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       17 (to L43)
+                NOT_TAKEN
+                LOAD_GLOBAL             71 (len + NULL)
+                LOAD_FAST_BORROW        31 (bloco)
+                CALL                     1
+                LOAD_SMALL_INT          80
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE        3 (to L44)
+                NOT_TAKEN
+
+ 398   L43:     JUMP_BACKWARD           48 (to L42)
+
+ 399   L44:     LOAD_FAST_BORROW         2 (fr)
+                LOAD_ATTR               73 (decode_fm_date + NULL|self)
+                LOAD_FAST_BORROW         1 (struct)
+                LOAD_ATTR               75 (unpack_from + NULL|self)
+                LOAD_CONST               9 ('<I')
+                LOAD_FAST_BORROW        31 (bloco)
+                LOAD_SMALL_INT          76
+                CALL                     3
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                CALL                     1
+                STORE_FAST              32 (data)
+
+ 400            LOAD_FAST_BORROW         1 (struct)
+                LOAD_ATTR               75 (unpack_from + NULL|self)
+                LOAD_CONST              10 ('<Q')
+                LOAD_FAST_BORROW        31 (bloco)
+                LOAD_SMALL_INT          32
+                CALL                     3
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                STORE_FAST              33 (etapa)
+
+ 401            LOAD_FAST_BORROW         1 (struct)
+                LOAD_ATTR               75 (unpack_from + NULL|self)
+                LOAD_CONST              11 ('<H')
+                LOAD_FAST_BORROW        31 (bloco)
+                LOAD_GLOBAL             76 (PARTIDA_TEMPORADA)
+                CALL                     3
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                STORE_FAST              34 (ano)
+
+ 402            LOAD_FAST_BORROW        32 (data)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       41 (to L46)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               25 (is_heap + NULL|self)
+                LOAD_FAST_BORROW        33 (etapa)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       18 (to L46)
+                NOT_TAKEN
+                LOAD_CONST              12 (1900)
+                LOAD_FAST               34 (ano)
+                SWAP                     2
+                COPY                     2
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_FALSE        8 (to L45)
+                NOT_TAKEN
+                LOAD_CONST              13 (2200)
+                COMPARE_OP              18 (bool(<))
+                POP_JUMP_IF_TRUE         5 (to L47)
+                NOT_TAKEN
+                JUMP_FORWARD             1 (to L46)
+       L45:     POP_TOP
+
+ 403   L46:     JUMP_BACKWARD          195 (to L42)
+
+ 404   L47:     LOAD_FAST_BORROW        33 (etapa)
+                LOAD_FAST_BORROW        27 (comp_da_etapa)
+                CONTAINS_OP              1 (not in)
+                POP_JUMP_IF_FALSE       77 (to L50)
+                NOT_TAKEN
+
+ 405            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               21 (q + NULL|self)
+                LOAD_FAST_BORROW        33 (etapa)
+                LOAD_SMALL_INT          24
+                BINARY_OP                0 (+)
+                CALL                     1
+                STORE_FAST               9 (comp)
+
+ 406            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               25 (is_heap + NULL|self)
+                LOAD_FAST_BORROW         9 (comp)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       25 (to L48)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               33 (u32 + NULL|self)
+                LOAD_FAST_BORROW         9 (comp)
+                LOAD_SMALL_INT          12
+                BINARY_OP                0 (+)
+                CALL                     1
+                JUMP_FORWARD             1 (to L49)
+       L48:     LOAD_CONST               1 (None)
+       L49:     LOAD_FAST_BORROW        27 (comp_da_etapa)
+                LOAD_FAST_BORROW        33 (etapa)
+                STORE_SUBSCR
+
+ 407   L50:     LOAD_FAST_BORROW        27 (comp_da_etapa)
+                LOAD_FAST_BORROW        33 (etapa)
+                BINARY_OP               26 ([])
+                STORE_FAST              15 (uid)
+
+ 408            LOAD_FAST_BORROW_LOAD_FAST_BORROW 245 (uid, competicoes)
+                CONTAINS_OP              1 (not in)
+                POP_JUMP_IF_FALSE        4 (to L51)
+                NOT_TAKEN
+
+ 409            EXTENDED_ARG             1
+                JUMP_BACKWARD          296 (to L42)
+
+ 410   L51:     LOAD_FAST_BORROW        26 (temporadas)
+                LOAD_ATTR               79 (setdefault + NULL|self)
+                LOAD_FAST_BORROW        15 (uid)
+                BUILD_MAP                0
+                CALL                     2
+                STORE_FAST              35 (da_comp)
+
+ 411            LOAD_FAST_BORROW        35 (da_comp)
+                LOAD_ATTR               81 (get + NULL|self)
+                LOAD_FAST_BORROW        34 (ano)
+                LOAD_FAST_BORROW        32 (data)
+                LOAD_FAST_BORROW        32 (data)
+                BUILD_TUPLE              2
+                CALL                     2
+                UNPACK_SEQUENCE          2
+                STORE_FAST              36 (inicio)
+                STORE_FAST              37 (fim)
+
+ 412            LOAD_GLOBAL             39 (min + NULL)
+                LOAD_FAST_BORROW        36 (inicio)
+                LOAD_FAST_BORROW        32 (data)
+                CALL                     2
+                LOAD_GLOBAL             83 (max + NULL)
+                LOAD_FAST_BORROW        37 (fim)
+                LOAD_FAST_BORROW        32 (data)
+                CALL                     2
+                BUILD_TUPLE              2
+                LOAD_FAST_BORROW        35 (da_comp)
+                LOAD_FAST_BORROW        34 (ano)
+                STORE_SUBSCR
+
+ 413            LOAD_FAST_BORROW        15 (uid)
+                LOAD_FAST_BORROW        30 (ligas)
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_TRUE         4 (to L52)
+                NOT_TAKEN
+                EXTENDED_ARG             1
+                JUMP_BACKWARD          374 (to L42)
+
+ 415   L52:     LOAD_FAST_BORROW        28 (times_em_jogo)
+                LOAD_ATTR               79 (setdefault + NULL|self)
+                LOAD_FAST_BORROW        15 (uid)
+                BUILD_MAP                0
+                CALL                     2
+                LOAD_ATTR               79 (setdefault + NULL|self)
+                LOAD_FAST_BORROW        34 (ano)
+                BUILD_MAP                0
+                CALL                     2
+                STORE_FAST              38 (vistos)
+
+ 416            LOAD_CONST              20 ((8, 16))
+                GET_ITER
+       L53:     FOR_ITER               108 (to L56)
+                STORE_FAST              39 (lado)
+
+ 417            LOAD_FAST_BORROW         1 (struct)
+                LOAD_ATTR               75 (unpack_from + NULL|self)
+                LOAD_CONST              10 ('<Q')
+                LOAD_FAST_BORROW        31 (bloco)
+                LOAD_FAST_BORROW        39 (lado)
+                CALL                     3
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                STORE_FAST              40 (t)
+
+ 418            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               25 (is_heap + NULL|self)
+                LOAD_FAST_BORROW        40 (t)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L54)
+                NOT_TAKEN
+                JUMP_BACKWARD           54 (to L53)
+       L54:     LOAD_FAST_BORROW        32 (data)
+                LOAD_FAST_BORROW        38 (vistos)
+                LOAD_ATTR               81 (get + NULL|self)
+                LOAD_FAST_BORROW        40 (t)
+                LOAD_GLOBAL             12 (datetime)
+                LOAD_ATTR               14 (date)
+                LOAD_ATTR               38 (min)
+                CALL                     2
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_TRUE         3 (to L55)
+                NOT_TAKEN
+                JUMP_BACKWARD          103 (to L53)
+
+ 419   L55:     LOAD_FAST_BORROW        32 (data)
+                LOAD_FAST_BORROW        38 (vistos)
+                LOAD_FAST_BORROW        40 (t)
+                STORE_SUBSCR
+                JUMP_BACKWARD          110 (to L53)
+
+ 416   L56:     END_FOR
+                POP_ITER
+                EXTENDED_ARG             2
+                JUMP_BACKWARD          525 (to L42)
+
+ 395   L57:     END_FOR
+                POP_ITER
+
+ 420            LOAD_FAST_BORROW        28 (times_em_jogo)
+                LOAD_ATTR               65 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+       L58:     FOR_ITER                62 (to L63)
+                UNPACK_SEQUENCE          2
+                STORE_FAST              15 (uid)
+                STORE_FAST              41 (por_ano)
+
+ 421            LOAD_FAST_BORROW        41 (por_ano)
+                LOAD_ATTR               65 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     34 (ano)
+                LOAD_FAST_AND_CLEAR     40 (t)
+                SWAP                     3
+       L59:     BUILD_MAP                0
+                SWAP                     2
+       L60:     FOR_ITER                18 (to L61)
+                UNPACK_SEQUENCE          2
+                STORE_FAST              34 (ano)
+                STORE_FAST              40 (t)
+                LOAD_FAST_BORROW        34 (ano)
+                LOAD_GLOBAL             71 (len + NULL)
+                LOAD_FAST_BORROW        40 (t)
+                CALL                     1
+                MAP_ADD                  2
+                JUMP_BACKWARD           20 (to L60)
+       L61:     END_FOR
+                POP_ITER
+       L62:     SWAP                     3
+                STORE_FAST              40 (t)
+                STORE_FAST              34 (ano)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 95 (competicoes, uid)
+                BINARY_OP               26 ([])
+                LOAD_CONST              14 ('times_na_temporada')
+                STORE_SUBSCR
+                JUMP_BACKWARD           64 (to L58)
+
+ 420   L63:     END_FOR
+                POP_ITER
+
+ 422            LOAD_CONST              15 ('hoje')
+                LOAD_FAST_BORROW         4 (hoje)
+                LOAD_CONST              16 ('competicoes')
+                LOAD_FAST_BORROW         5 (competicoes)
+                LOAD_CONST              17 ('temporadas')
+                LOAD_FAST_BORROW        26 (temporadas)
+                LOAD_CONST              18 ('ponteiros')
+                LOAD_FAST_BORROW         6 (ponteiros)
+
+ 423            LOAD_CONST              19 ('times_em_jogo')
+                LOAD_FAST_BORROW        28 (times_em_jogo)
+
+ 422            BUILD_MAP                5
+                RETURN_VALUE
+
+  --   L64:     SWAP                     2
+                POP_TOP
+
+ 391            SWAP                     2
+                STORE_FAST              22 (vt)
+                RERAISE                  0
+
+  --   L65:     SWAP                     2
+                POP_TOP
+
+ 392            SWAP                     3
+                STORE_FAST              24 (o)
+                STORE_FAST              22 (vt)
+                RERAISE                  0
+
+  --   L66:     SWAP                     2
+                POP_TOP
+
+ 394            SWAP                     3
+                STORE_FAST              18 (c)
+                STORE_FAST              29 (u)
+                RERAISE                  0
+
+  --   L67:     SWAP                     2
+                POP_TOP
+
+ 421            SWAP                     3
+                STORE_FAST              40 (t)
+                STORE_FAST              34 (ano)
+                RERAISE                  0
+ExceptionTable:
+  L24 to L26 -> L64 [2]
+  L27 to L29 -> L64 [2]
+  L30 to L35 -> L65 [3]
+  L36 to L38 -> L66 [3]
+  L39 to L41 -> L66 [3]
+  L59 to L62 -> L67 [4]
+
+Disassembly of <code object ponteiros_dos_clubes at 0xbdeefe700, file "fim_de_temporada.py", line 426>:
+ 426            RESUME                   0
+
+ 434            LOAD_FAST_BORROW         0 (agenda)
+                LOAD_ATTR                1 (get + NULL|self)
+                LOAD_CONST               0 ('times_em_jogo')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L1)
+                NOT_TAKEN
+                POP_TOP
+                BUILD_MAP                0
+        L1:     STORE_FAST               2 (em_jogo)
+
+ 435            LOAD_GLOBAL              3 (set + NULL)
+                CALL                     0
+                STORE_FAST               3 (times)
+
+ 436            LOAD_FAST_BORROW         1 (ligas)
+                GET_ITER
+        L2:     FOR_ITER               176 (to L11)
+                STORE_FAST               4 (liga)
+
+ 437            LOAD_FAST_BORROW         2 (em_jogo)
+                LOAD_ATTR                1 (get + NULL|self)
+                LOAD_FAST_BORROW         4 (liga)
+                LOAD_CONST               1 ('uid')
+                BINARY_OP               26 ([])
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L3)
+                NOT_TAKEN
+                POP_TOP
+                BUILD_MAP                0
+        L3:     LOAD_ATTR                1 (get + NULL|self)
+                LOAD_FAST_BORROW         4 (liga)
+                LOAD_ATTR                1 (get + NULL|self)
+                LOAD_CONST               2 ('temporada')
+                CALL                     1
+                CALL                     1
+                STORE_FAST               5 (vistos)
+
+ 438            LOAD_FAST_BORROW         5 (vistos)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       21 (to L4)
+                NOT_TAKEN
+
+ 439            LOAD_FAST_BORROW         3 (times)
+                LOAD_GLOBAL              3 (set + NULL)
+                LOAD_FAST_BORROW         5 (vistos)
+                CALL                     1
+                BINARY_OP               20 (|=)
+                STORE_FAST               3 (times)
+                JUMP_BACKWARD           95 (to L2)
+
+ 441    L4:     LOAD_FAST_LOAD_FAST     48 (times, agenda)
+                LOAD_CONST               3 ('competicoes')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         4 (liga)
+                LOAD_CONST               1 ('uid')
+                BINARY_OP               26 ([])
+                BINARY_OP               26 ([])
+                LOAD_CONST               4 ('times')
+                BINARY_OP               26 ([])
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      6 (u)
+                SWAP                     2
+        L5:     BUILD_SET                0
+                SWAP                     2
+        L6:     FOR_ITER                34 (to L9)
+                STORE_FAST               6 (u)
+
+ 442            LOAD_FAST_BORROW_LOAD_FAST_BORROW 96 (u, agenda)
+                LOAD_CONST               5 ('ponteiros')
+                BINARY_OP               26 ([])
+                CONTAINS_OP              0 (in)
+
+ 441    L7:     POP_JUMP_IF_TRUE         3 (to L8)
+                NOT_TAKEN
+                JUMP_BACKWARD           18 (to L6)
+        L8:     LOAD_FAST_BORROW         0 (agenda)
+                LOAD_CONST               5 ('ponteiros')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         6 (u)
+                BINARY_OP               26 ([])
+                SET_ADD                  2
+                JUMP_BACKWARD           36 (to L6)
+        L9:     END_FOR
+                POP_ITER
+       L10:     SWAP                     2
+                STORE_FAST               6 (u)
+                BINARY_OP               20 (|=)
+                STORE_FAST               3 (times)
+                JUMP_BACKWARD          178 (to L2)
+
+ 436   L11:     END_FOR
+                POP_ITER
+
+ 443            LOAD_GLOBAL              5 (list + NULL)
+                LOAD_FAST_BORROW         3 (times)
+                CALL                     1
+                RETURN_VALUE
+
+  --   L12:     SWAP                     2
+                POP_TOP
+
+ 441            SWAP                     2
+                STORE_FAST               6 (u)
+                RERAISE                  0
+ExceptionTable:
+  L5 to L7 -> L12 [4]
+  L8 to L10 -> L12 [4]

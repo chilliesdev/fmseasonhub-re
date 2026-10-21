@@ -1,0 +1,2296 @@
+# Module: bandeja
+# Filename: bandeja.py
+
+  0           RESUME                   0
+
+ 11           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (ctypes)
+              STORE_NAME               0 (ctypes)
+
+ 12           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (threading)
+              STORE_NAME               1 (threading)
+
+ 13           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('wintypes',))
+              IMPORT_NAME              0 (ctypes)
+              IMPORT_FROM              2 (wintypes)
+              STORE_NAME               2 (wintypes)
+              POP_TOP
+
+ 15           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR                6 (WinDLL)
+              PUSH_NULL
+              LOAD_CONST               3 ('user32')
+              LOAD_CONST               4 (True)
+              LOAD_CONST               5 (('use_last_error',))
+              CALL_KW                  2
+              STORE_NAME               4 (user32)
+
+ 16           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR                6 (WinDLL)
+              PUSH_NULL
+              LOAD_CONST               6 ('shell32')
+              LOAD_CONST               4 (True)
+              LOAD_CONST               5 (('use_last_error',))
+              CALL_KW                  2
+              STORE_NAME               5 (shell32)
+
+ 17           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR                6 (WinDLL)
+              PUSH_NULL
+              LOAD_CONST               7 ('kernel32')
+              LOAD_CONST               4 (True)
+              LOAD_CONST               5 (('use_last_error',))
+              CALL_KW                  2
+              STORE_NAME               6 (kernel32)
+
+ 19           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR               14 (c_ssize_t)
+              STORE_NAME               8 (LRESULT)
+
+ 20           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR               18 (WINFUNCTYPE)
+              PUSH_NULL
+              LOAD_NAME                8 (LRESULT)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               20 (HWND)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               22 (UINT)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               24 (WPARAM)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               26 (LPARAM)
+              CALL                     5
+              STORE_NAME              14 (WNDPROC)
+
+ 22           LOAD_SMALL_INT           0
+              STORE_NAME              15 (WM_NULL)
+
+ 23           LOAD_SMALL_INT           2
+              STORE_NAME              16 (WM_DESTROY)
+
+ 24           LOAD_SMALL_INT          16
+              STORE_NAME              17 (WM_CLOSE)
+
+ 25           LOAD_SMALL_INT          17
+              STORE_NAME              18 (WM_QUERYENDSESSION)
+
+ 26           LOAD_SMALL_INT          22
+              STORE_NAME              19 (WM_ENDSESSION)
+
+ 27           LOAD_CONST               8 (8192)
+              STORE_NAME              20 (SM_SHUTTINGDOWN)
+
+ 28           LOAD_CONST               9 (275)
+              STORE_NAME              21 (WM_TIMER)
+
+ 29           LOAD_SMALL_INT         123
+              STORE_NAME              22 (WM_CONTEXTMENU)
+
+ 30           LOAD_CONST              10 (515)
+              STORE_NAME              23 (WM_LBUTTONDBLCLK)
+
+ 31           LOAD_CONST              11 (1024)
+              STORE_NAME              24 (WM_USER)
+
+ 32           LOAD_CONST              12 (32768)
+              STORE_NAME              25 (WM_APP)
+
+ 33           LOAD_NAME               24 (WM_USER)
+              LOAD_SMALL_INT           0
+              BINARY_OP                0 (+)
+              STORE_NAME              26 (NIN_SELECT)
+
+ 34           LOAD_NAME               24 (WM_USER)
+              LOAD_SMALL_INT           1
+              BINARY_OP                0 (+)
+              STORE_NAME              27 (NIN_KEYSELECT)
+
+ 35           LOAD_NAME               24 (WM_USER)
+              LOAD_SMALL_INT           5
+              BINARY_OP                0 (+)
+              STORE_NAME              28 (NIN_BALLOONUSERCLICK)
+
+ 36           LOAD_CONST              28 ((0, 1, 2, 4))
+              UNPACK_SEQUENCE          4
+              STORE_NAME              29 (NIM_ADD)
+              STORE_NAME              30 (NIM_MODIFY)
+              STORE_NAME              31 (NIM_DELETE)
+              STORE_NAME              32 (NIM_SETVERSION)
+
+ 37           LOAD_CONST              29 ((1, 2, 4, 16, 128))
+              UNPACK_SEQUENCE          5
+              STORE_NAME              33 (NIF_MESSAGE)
+              STORE_NAME              34 (NIF_ICON)
+              STORE_NAME              35 (NIF_TIP)
+              STORE_NAME              36 (NIF_INFO)
+              STORE_NAME              37 (NIF_SHOWTIP)
+
+ 38           LOAD_SMALL_INT           4
+              LOAD_SMALL_INT          32
+              SWAP                     2
+              STORE_NAME              38 (NIIF_USER)
+              STORE_NAME              39 (NIIF_LARGE_ICON)
+
+ 39           LOAD_SMALL_INT           4
+              STORE_NAME              40 (NOTIFYICON_VERSION_4)
+
+ 40           LOAD_SMALL_INT           0
+              LOAD_SMALL_INT           1
+              LOAD_CONST              13 (2048)
+              SWAP                     3
+              STORE_NAME              41 (MF_STRING)
+              STORE_NAME              42 (MF_GRAYED)
+              STORE_NAME              43 (MF_SEPARATOR)
+
+ 41           LOAD_SMALL_INT           2
+              LOAD_SMALL_INT         128
+              LOAD_CONST              14 (256)
+              SWAP                     3
+              STORE_NAME              44 (TPM_RIGHTBUTTON)
+              STORE_NAME              45 (TPM_NONOTIFY)
+              STORE_NAME              46 (TPM_RETURNCMD)
+
+ 42           LOAD_SMALL_INT           1
+              LOAD_SMALL_INT          16
+              SWAP                     2
+              STORE_NAME              47 (IMAGE_ICON)
+              STORE_NAME              48 (LR_LOADFROMFILE)
+
+ 43           LOAD_SMALL_INT          49
+              STORE_NAME              49 (SM_CXSMICON)
+
+ 44           LOAD_SMALL_INT           1
+              STORE_NAME              50 (ID_DO_ICONE)
+
+ 45           LOAD_NAME               25 (WM_APP)
+              LOAD_SMALL_INT           1
+              BINARY_OP                0 (+)
+              STORE_NAME              51 (MENSAGEM_DO_ICONE)
+
+ 46           LOAD_NAME               25 (WM_APP)
+              LOAD_SMALL_INT           2
+              BINARY_OP                0 (+)
+              STORE_NAME              52 (MENSAGEM_MENU_NATIVO)
+
+ 47           LOAD_CONST              15 (1000)
+              STORE_NAME              53 (PRIMEIRO_ITEM)
+
+ 48           LOAD_SMALL_INT           1
+              STORE_NAME              54 (TIMER_DA_NOVA_TENTATIVA)
+
+ 49           LOAD_SMALL_INT          60
+              STORE_NAME              55 (TENTATIVAS_MAXIMAS)
+
+ 52           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              16 (<code object GUID at 0x108195370, file "bandeja.py", line 52>)
+              MAKE_FUNCTION
+              LOAD_CONST              17 ('GUID')
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              112 (Structure)
+              CALL                     3
+              STORE_NAME              57 (GUID)
+
+ 57           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              18 (<code object NOTIFYICONDATAW at 0xbdeefdb00, file "bandeja.py", line 57>)
+              MAKE_FUNCTION
+              LOAD_CONST              19 ('NOTIFYICONDATAW')
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              112 (Structure)
+              CALL                     3
+              STORE_NAME              58 (NOTIFYICONDATAW)
+
+ 66           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              20 (<code object WNDCLASSW at 0x107fef690, file "bandeja.py", line 66>)
+              MAKE_FUNCTION
+              LOAD_CONST              21 ('WNDCLASSW')
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              112 (Structure)
+              CALL                     3
+              STORE_NAME              59 (WNDCLASSW)
+
+ 73           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              22 (<code object POINT at 0x1081b3510, file "bandeja.py", line 73>)
+              MAKE_FUNCTION
+              LOAD_CONST              23 ('POINT')
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              112 (Structure)
+              CALL                     3
+              STORE_NAME              60 (POINT)
+
+ 79           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               20 (HWND)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               22 (UINT)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               24 (WPARAM)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               26 (LPARAM)
+              BUILD_LIST               4
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              122 (DefWindowProcW)
+              STORE_ATTR              62 (argtypes)
+
+ 80           LOAD_NAME                8 (LRESULT)
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              122 (DefWindowProcW)
+              STORE_ATTR              63 (restype)
+
+ 81           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              128 (POINTER)
+              PUSH_NULL
+              LOAD_NAME               59 (WNDCLASSW)
+              CALL                     1
+              BUILD_LIST               1
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              130 (RegisterClassW)
+              STORE_ATTR              62 (argtypes)
+
+ 82           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              132 (ATOM)
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              130 (RegisterClassW)
+              STORE_ATTR              63 (restype)
+
+ 83           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              134 (DWORD)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              136 (LPCWSTR)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              136 (LPCWSTR)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              134 (DWORD)
+
+ 84           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              138 (c_int)
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              138 (c_int)
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              138 (c_int)
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              138 (c_int)
+
+ 85           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               20 (HWND)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              140 (HMENU)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              142 (HINSTANCE)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              144 (LPVOID)
+
+ 83           BUILD_LIST              12
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              146 (CreateWindowExW)
+              STORE_ATTR              62 (argtypes)
+
+ 86           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               20 (HWND)
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              146 (CreateWindowExW)
+              STORE_ATTR              63 (restype)
+
+ 87           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               20 (HWND)
+              BUILD_LIST               1
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              148 (DestroyWindow)
+              STORE_ATTR              62 (argtypes)
+
+ 88           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               20 (HWND)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               22 (UINT)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               24 (WPARAM)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               26 (LPARAM)
+              BUILD_LIST               4
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              150 (PostMessageW)
+              STORE_ATTR              62 (argtypes)
+
+ 89           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              128 (POINTER)
+              PUSH_NULL
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              152 (MSG)
+              CALL                     1
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               20 (HWND)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               22 (UINT)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               22 (UINT)
+              BUILD_LIST               4
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              154 (GetMessageW)
+              STORE_ATTR              62 (argtypes)
+
+ 90           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              128 (POINTER)
+              PUSH_NULL
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              152 (MSG)
+              CALL                     1
+              BUILD_LIST               1
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              156 (TranslateMessage)
+              STORE_ATTR              62 (argtypes)
+
+ 91           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              128 (POINTER)
+              PUSH_NULL
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              152 (MSG)
+              CALL                     1
+              BUILD_LIST               1
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              158 (DispatchMessageW)
+              STORE_ATTR              62 (argtypes)
+
+ 92           LOAD_NAME                8 (LRESULT)
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              158 (DispatchMessageW)
+              STORE_ATTR              63 (restype)
+
+ 93           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              136 (LPCWSTR)
+              BUILD_LIST               1
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              160 (RegisterWindowMessageW)
+              STORE_ATTR              62 (argtypes)
+
+ 94           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               22 (UINT)
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              160 (RegisterWindowMessageW)
+              STORE_ATTR              63 (restype)
+
+ 95           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              142 (HINSTANCE)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              136 (LPCWSTR)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               22 (UINT)
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              138 (c_int)
+
+ 96           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              138 (c_int)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               22 (UINT)
+
+ 95           BUILD_LIST               6
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              162 (LoadImageW)
+              STORE_ATTR              62 (argtypes)
+
+ 97           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              164 (HANDLE)
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              162 (LoadImageW)
+              STORE_ATTR              63 (restype)
+
+ 98           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              166 (HICON)
+              BUILD_LIST               1
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              168 (DestroyIcon)
+              STORE_ATTR              62 (argtypes)
+
+ 99           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              140 (HMENU)
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              170 (CreatePopupMenu)
+              STORE_ATTR              63 (restype)
+
+100           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              140 (HMENU)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               22 (UINT)
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              172 (c_size_t)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              136 (LPCWSTR)
+              BUILD_LIST               4
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              174 (AppendMenuW)
+              STORE_ATTR              62 (argtypes)
+
+101           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              140 (HMENU)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               22 (UINT)
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              138 (c_int)
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              138 (c_int)
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              138 (c_int)
+
+102           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               20 (HWND)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              144 (LPVOID)
+
+101           BUILD_LIST               7
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              176 (TrackPopupMenu)
+              STORE_ATTR              62 (argtypes)
+
+103           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              138 (c_int)
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              176 (TrackPopupMenu)
+              STORE_ATTR              63 (restype)
+
+104           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              140 (HMENU)
+              BUILD_LIST               1
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              178 (DestroyMenu)
+              STORE_ATTR              62 (argtypes)
+
+105           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               20 (HWND)
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              172 (c_size_t)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               22 (UINT)
+              LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              144 (LPVOID)
+              BUILD_LIST               4
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              180 (SetTimer)
+              STORE_ATTR              62 (argtypes)
+
+106           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              172 (c_size_t)
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              180 (SetTimer)
+              STORE_ATTR              63 (restype)
+
+107           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               20 (HWND)
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              172 (c_size_t)
+              BUILD_LIST               2
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              182 (KillTimer)
+              STORE_ATTR              62 (argtypes)
+
+108           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR               20 (HWND)
+              BUILD_LIST               1
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              184 (SetForegroundWindow)
+              STORE_ATTR              62 (argtypes)
+
+109           LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              128 (POINTER)
+              PUSH_NULL
+              LOAD_NAME               60 (POINT)
+              CALL                     1
+              BUILD_LIST               1
+              LOAD_NAME                4 (user32)
+              LOAD_ATTR              186 (GetCursorPos)
+              STORE_ATTR              62 (argtypes)
+
+110           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              134 (DWORD)
+              LOAD_NAME                0 (ctypes)
+              LOAD_ATTR              128 (POINTER)
+              PUSH_NULL
+              LOAD_NAME               58 (NOTIFYICONDATAW)
+              CALL                     1
+              BUILD_LIST               2
+              LOAD_NAME                5 (shell32)
+              LOAD_ATTR              188 (Shell_NotifyIconW)
+              STORE_ATTR              62 (argtypes)
+
+111           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              190 (BOOL)
+              LOAD_NAME                5 (shell32)
+              LOAD_ATTR              188 (Shell_NotifyIconW)
+              STORE_ATTR              63 (restype)
+
+112           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              136 (LPCWSTR)
+              BUILD_LIST               1
+              LOAD_NAME                6 (kernel32)
+              LOAD_ATTR              192 (GetModuleHandleW)
+              STORE_ATTR              62 (argtypes)
+
+113           LOAD_NAME                2 (wintypes)
+              LOAD_ATTR              194 (HMODULE)
+              LOAD_NAME                6 (kernel32)
+              LOAD_ATTR              192 (GetModuleHandleW)
+              STORE_ATTR              63 (restype)
+
+116           LOAD_CONST              24 (<code object _carregar_icone at 0x1081b3750, file "bandeja.py", line 116>)
+              MAKE_FUNCTION
+              STORE_NAME              98 (_carregar_icone)
+
+120           LOAD_CONST              25 (<code object _em_outra_thread at 0x1081f16c0, file "bandeja.py", line 120>)
+              MAKE_FUNCTION
+              STORE_NAME              99 (_em_outra_thread)
+
+126           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST              26 (<code object Bandeja at 0x108234ea0, file "bandeja.py", line 126>)
+              MAKE_FUNCTION
+              LOAD_CONST              27 ('Bandeja')
+              CALL                     2
+              STORE_NAME             100 (Bandeja)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object GUID at 0x108195370, file "bandeja.py", line 52>:
+ 52           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('GUID')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          52
+              STORE_NAME               3 (__firstlineno__)
+
+ 53           LOAD_CONST               1 ('Data1')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               10 (DWORD)
+              BUILD_TUPLE              2
+              LOAD_CONST               2 ('Data2')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               12 (WORD)
+              BUILD_TUPLE              2
+              LOAD_CONST               3 ('Data3')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               12 (WORD)
+              BUILD_TUPLE              2
+
+ 54           LOAD_CONST               4 ('Data4')
+              LOAD_NAME                7 (ctypes)
+              LOAD_ATTR               16 (c_ubyte)
+              LOAD_SMALL_INT           8
+              BINARY_OP                5 (*)
+              BUILD_TUPLE              2
+
+ 53           BUILD_LIST               4
+              STORE_NAME               9 (_fields_)
+              LOAD_CONST               5 (())
+              STORE_NAME              10 (__static_attributes__)
+              LOAD_CONST               6 (None)
+              RETURN_VALUE
+
+Disassembly of <code object NOTIFYICONDATAW at 0xbdeefdb00, file "bandeja.py", line 57>:
+ 57           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('NOTIFYICONDATAW')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          57
+              STORE_NAME               3 (__firstlineno__)
+
+ 58           LOAD_CONST               1 ('cbSize')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               10 (DWORD)
+              BUILD_TUPLE              2
+              LOAD_CONST               2 ('hWnd')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               12 (HWND)
+              BUILD_TUPLE              2
+              LOAD_CONST               3 ('uID')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               14 (UINT)
+              BUILD_TUPLE              2
+
+ 59           LOAD_CONST               4 ('uFlags')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               14 (UINT)
+              BUILD_TUPLE              2
+              LOAD_CONST               5 ('uCallbackMessage')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               14 (UINT)
+              BUILD_TUPLE              2
+              LOAD_CONST               6 ('hIcon')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               16 (HICON)
+              BUILD_TUPLE              2
+
+ 60           LOAD_CONST               7 ('szTip')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               18 (WCHAR)
+              LOAD_SMALL_INT         128
+              BINARY_OP                5 (*)
+              BUILD_TUPLE              2
+              LOAD_CONST               8 ('dwState')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               10 (DWORD)
+              BUILD_TUPLE              2
+              LOAD_CONST               9 ('dwStateMask')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               10 (DWORD)
+              BUILD_TUPLE              2
+
+ 61           LOAD_CONST              10 ('szInfo')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               18 (WCHAR)
+              LOAD_CONST              11 (256)
+              BINARY_OP                5 (*)
+              BUILD_TUPLE              2
+              LOAD_CONST              12 ('uVersion')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               14 (UINT)
+              BUILD_TUPLE              2
+
+ 62           LOAD_CONST              13 ('szInfoTitle')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               18 (WCHAR)
+              LOAD_SMALL_INT          64
+              BINARY_OP                5 (*)
+              BUILD_TUPLE              2
+              LOAD_CONST              14 ('dwInfoFlags')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               10 (DWORD)
+              BUILD_TUPLE              2
+
+ 63           LOAD_CONST              15 ('guidItem')
+              LOAD_NAME               10 (GUID)
+              BUILD_TUPLE              2
+              LOAD_CONST              16 ('hBalloonIcon')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               16 (HICON)
+              BUILD_TUPLE              2
+
+ 58           BUILD_LIST              15
+              STORE_NAME              11 (_fields_)
+              LOAD_CONST              17 (())
+              STORE_NAME              12 (__static_attributes__)
+              LOAD_CONST              18 (None)
+              RETURN_VALUE
+
+Disassembly of <code object WNDCLASSW at 0x107fef690, file "bandeja.py", line 66>:
+ 66           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('WNDCLASSW')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          66
+              STORE_NAME               3 (__firstlineno__)
+
+ 67           LOAD_CONST               1 ('style')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               10 (UINT)
+              BUILD_TUPLE              2
+              LOAD_CONST               2 ('lpfnWndProc')
+              LOAD_NAME                6 (WNDPROC)
+              BUILD_TUPLE              2
+              LOAD_CONST               3 ('cbClsExtra')
+              LOAD_NAME                7 (ctypes)
+              LOAD_ATTR               16 (c_int)
+              BUILD_TUPLE              2
+
+ 68           LOAD_CONST               4 ('cbWndExtra')
+              LOAD_NAME                7 (ctypes)
+              LOAD_ATTR               16 (c_int)
+              BUILD_TUPLE              2
+              LOAD_CONST               5 ('hInstance')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               18 (HINSTANCE)
+              BUILD_TUPLE              2
+              LOAD_CONST               6 ('hIcon')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               20 (HICON)
+              BUILD_TUPLE              2
+
+ 69           LOAD_CONST               7 ('hCursor')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               22 (HANDLE)
+              BUILD_TUPLE              2
+              LOAD_CONST               8 ('hbrBackground')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               24 (HBRUSH)
+              BUILD_TUPLE              2
+
+ 70           LOAD_CONST               9 ('lpszMenuName')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               26 (LPCWSTR)
+              BUILD_TUPLE              2
+              LOAD_CONST              10 ('lpszClassName')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               26 (LPCWSTR)
+              BUILD_TUPLE              2
+
+ 67           BUILD_LIST              10
+              STORE_NAME              14 (_fields_)
+              LOAD_CONST              11 (())
+              STORE_NAME              15 (__static_attributes__)
+              LOAD_CONST              12 (None)
+              RETURN_VALUE
+
+Disassembly of <code object POINT at 0x1081b3510, file "bandeja.py", line 73>:
+ 73           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('POINT')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          73
+              STORE_NAME               3 (__firstlineno__)
+
+ 74           LOAD_CONST               1 ('x')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               10 (LONG)
+              BUILD_TUPLE              2
+              LOAD_CONST               2 ('y')
+              LOAD_NAME                4 (wintypes)
+              LOAD_ATTR               10 (LONG)
+              BUILD_TUPLE              2
+              BUILD_LIST               2
+              STORE_NAME               6 (_fields_)
+              LOAD_CONST               3 (())
+              STORE_NAME               7 (__static_attributes__)
+              LOAD_CONST               4 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _carregar_icone at 0x1081b3750, file "bandeja.py", line 116>:
+116           RESUME                   0
+
+117           LOAD_GLOBAL              0 (user32)
+              LOAD_ATTR                3 (LoadImageW + NULL|self)
+              LOAD_CONST               0 (None)
+              LOAD_FAST_BORROW         0 (caminho)
+              LOAD_GLOBAL              4 (IMAGE_ICON)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 17 (lado, lado)
+              LOAD_GLOBAL              6 (LR_LOADFROMFILE)
+              CALL                     6
+              RETURN_VALUE
+
+Disassembly of <code object _em_outra_thread at 0x1081f16c0, file "bandeja.py", line 120>:
+120           RESUME                   0
+
+121           LOAD_FAST_BORROW         0 (funcao)
+              POP_JUMP_IF_NOT_NONE     3 (to L1)
+              NOT_TAKEN
+
+122           LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+123   L1:     LOAD_GLOBAL              0 (threading)
+              LOAD_ATTR                2 (Thread)
+              PUSH_NULL
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (funcao, args)
+              LOAD_CONST               1 (True)
+              LOAD_CONST               2 (('target', 'args', 'daemon'))
+              CALL_KW                  3
+              LOAD_ATTR                5 (start + NULL|self)
+              CALL                     0
+              POP_TOP
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object Bandeja at 0x108234ea0, file "bandeja.py", line 126>:
+  --           MAKE_CELL                0 (__classdict__)
+
+ 126           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('Bandeja')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT         126
+               STORE_NAME               3 (__firstlineno__)
+               LOAD_LOCALS
+               STORE_DEREF              0 (__classdict__)
+
+ 142           LOAD_CONST              17 ((None, 'FMSH-bandeja', None, 2000, None))
+               LOAD_CONST               2 (<code object __init__ at 0xbdeefde00, file "bandeja.py", line 142>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               4 (__init__)
+
+ 171           LOAD_CONST              18 ((5.0,))
+               LOAD_CONST               3 (<code object iniciar at 0x10822e5b0, file "bandeja.py", line 171>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME               5 (iniciar)
+
+ 177           LOAD_CONST               4 (<code object mudar_estado at 0x107fefa50, file "bandeja.py", line 177>)
+               MAKE_FUNCTION
+               STORE_NAME               6 (mudar_estado)
+
+ 183           LOAD_CONST               5 (<code object notificar at 0xbdeefe100, file "bandeja.py", line 183>)
+               MAKE_FUNCTION
+               STORE_NAME               7 (notificar)
+
+ 194           LOAD_CONST               6 (<code object mostrar_menu_nativo at 0x108195210, file "bandeja.py", line 194>)
+               MAKE_FUNCTION
+               STORE_NAME               8 (mostrar_menu_nativo)
+
+ 200           LOAD_CONST               7 (<code object sessao_terminando at 0x108107c30, file "bandeja.py", line 200>)
+               MAKE_FUNCTION
+               STORE_NAME               9 (sessao_terminando)
+
+ 204           LOAD_CONST               8 (<code object remover at 0xbdef02080, file "bandeja.py", line 204>)
+               MAKE_FUNCTION
+               STORE_NAME              10 (remover)
+
+ 214           LOAD_CONST               9 (<code object _dados at 0x1081adcf0, file "bandeja.py", line 214>)
+               MAKE_FUNCTION
+               STORE_NAME              11 (_dados)
+
+ 222           LOAD_CONST              10 (<code object _enviar at 0xbdef02300, file "bandeja.py", line 222>)
+               MAKE_FUNCTION
+               STORE_NAME              12 (_enviar)
+
+ 229           LOAD_CONST              11 (<code object _adicionar at 0x107fd7c40, file "bandeja.py", line 229>)
+               MAKE_FUNCTION
+               STORE_NAME              13 (_adicionar)
+
+ 237           LOAD_CONST              12 (<code object _laco at 0xbdf718000, file "bandeja.py", line 237>)
+               MAKE_FUNCTION
+               STORE_NAME              14 (_laco)
+
+ 278           LOAD_CONST              13 (<code object _wndproc at 0xbdf6f6300, file "bandeja.py", line 278>)
+               MAKE_FUNCTION
+               STORE_NAME              15 (_wndproc)
+
+ 320           LOAD_CONST              14 (<code object _tentar_adicionar at 0xbdeefe700, file "bandeja.py", line 320>)
+               MAKE_FUNCTION
+               STORE_NAME              16 (_tentar_adicionar)
+
+ 334           LOAD_CONST              19 ((None,))
+               LOAD_CONST              15 (<code object _mostrar_menu at 0xbdf6f6d00, file "bandeja.py", line 334>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   1 (defaults)
+               STORE_NAME              17 (_mostrar_menu)
+               LOAD_CONST              16 (('_abrir_menu', '_ao_aparecer', '_ao_clicar', '_ao_escolher', '_caminho_notificacao', '_caminhos', '_criado', '_dica', '_estado', '_hwnd', '_icone_notificacao', '_icones', '_intervalo_ms', '_montar_menu', '_msg_taskbar_created', '_nome_da_classe', '_ponto_nativo', '_proc', '_pronto', '_sessao_terminando', '_tentativas', '_trava', 'erro'))
+               STORE_NAME              18 (__static_attributes__)
+               LOAD_FAST_BORROW         0 (__classdict__)
+               STORE_NAME              19 (__classdictcell__)
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+Disassembly of <code object __init__ at 0xbdeefde00, file "bandeja.py", line 142>:
+142           RESUME                   0
+
+145           LOAD_GLOBAL              1 (dict + NULL)
+              LOAD_FAST_BORROW         1 (icones)
+              CALL                     1
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               1 (_caminhos)
+
+146           LOAD_FAST_BORROW_LOAD_FAST_BORROW 32 (estado_inicial, self)
+              STORE_ATTR               2 (_estado)
+
+147           LOAD_FAST_BORROW_LOAD_FAST_BORROW 48 (dica, self)
+              STORE_ATTR               3 (_dica)
+
+148           LOAD_FAST_BORROW_LOAD_FAST_BORROW 64 (montar_menu, self)
+              STORE_ATTR               4 (_montar_menu)
+
+149           LOAD_FAST_BORROW_LOAD_FAST_BORROW 80 (ao_clicar, self)
+              STORE_ATTR               5 (_ao_clicar)
+
+150           LOAD_FAST_BORROW_LOAD_FAST_BORROW 96 (ao_escolher, self)
+              STORE_ATTR               6 (_ao_escolher)
+
+151           LOAD_FAST_BORROW_LOAD_FAST_BORROW 112 (icone_da_notificacao, self)
+              STORE_ATTR               7 (_caminho_notificacao)
+
+152           LOAD_FAST_BORROW_LOAD_FAST_BORROW 128 (nome_da_classe, self)
+              STORE_ATTR               8 (_nome_da_classe)
+
+153           LOAD_CONST               0 (None)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               9 (_hwnd)
+
+154           BUILD_MAP                0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              10 (_icones)
+
+155           LOAD_CONST               0 (None)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              11 (_icone_notificacao)
+
+156           LOAD_GLOBAL             24 (threading)
+              LOAD_ATTR               26 (Event)
+              PUSH_NULL
+              CALL                     0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              14 (_pronto)
+
+157           LOAD_CONST               1 (False)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              15 (_criado)
+
+158           LOAD_GLOBAL             24 (threading)
+              LOAD_ATTR               32 (Lock)
+              PUSH_NULL
+              CALL                     0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              17 (_trava)
+
+159           LOAD_GLOBAL             37 (WNDPROC + NULL)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               38 (_wndproc)
+              CALL                     1
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              20 (_proc)
+
+160           LOAD_SMALL_INT           0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              21 (_msg_taskbar_created)
+
+161           LOAD_CONST               1 (False)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              22 (_sessao_terminando)
+
+162           LOAD_FAST_BORROW_LOAD_FAST_BORROW 144 (ao_aparecer, self)
+              STORE_ATTR              23 (_ao_aparecer)
+
+163           LOAD_FAST_BORROW_LOAD_FAST_BORROW 160 (intervalo_de_nova_tentativa_ms, self)
+              STORE_ATTR              24 (_intervalo_ms)
+
+164           LOAD_SMALL_INT           0
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              25 (_tentativas)
+
+165           LOAD_FAST_BORROW_LOAD_FAST_BORROW 176 (abrir_menu, self)
+              STORE_ATTR              26 (_abrir_menu)
+
+166           LOAD_CONST               0 (None)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              27 (_ponto_nativo)
+
+167           LOAD_CONST               0 (None)
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR              28 (erro)
+              LOAD_CONST               0 (None)
+              RETURN_VALUE
+
+Disassembly of <code object iniciar at 0x10822e5b0, file "bandeja.py", line 171>:
+171           RESUME                   0
+
+173           LOAD_GLOBAL              0 (threading)
+              LOAD_ATTR                2 (Thread)
+              PUSH_NULL
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                4 (_laco)
+              LOAD_CONST               0 ('bandeja')
+              LOAD_CONST               1 (True)
+              LOAD_CONST               2 (('target', 'name', 'daemon'))
+              CALL_KW                  3
+              LOAD_ATTR                7 (start + NULL|self)
+              CALL                     0
+              POP_TOP
+
+174           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                8 (_pronto)
+              LOAD_ATTR               11 (wait + NULL|self)
+              LOAD_FAST_BORROW         1 (espera)
+              CALL                     1
+              POP_TOP
+
+175           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               12 (_criado)
+              RETURN_VALUE
+
+Disassembly of <code object mudar_estado at 0x107fefa50, file "bandeja.py", line 177>:
+ 177           RESUME                   0
+
+ 178           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                0 (_trava)
+               COPY                     1
+               LOAD_SPECIAL             1 (__exit__)
+               SWAP                     2
+               SWAP                     3
+               LOAD_SPECIAL             0 (__enter__)
+               CALL                     0
+       L1:     POP_TOP
+
+ 179           LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (estado, dica)
+               SWAP                     2
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR               1 (_estado)
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR               2 (_dica)
+
+ 180           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                6 (_criado)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       49 (to L2)
+               NOT_TAKEN
+
+ 181           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                9 (_enviar + NULL|self)
+               LOAD_GLOBAL             10 (NIM_MODIFY)
+               LOAD_GLOBAL             12 (NIF_ICON)
+               LOAD_GLOBAL             14 (NIF_TIP)
+               BINARY_OP                7 (|)
+               LOAD_GLOBAL             16 (NIF_SHOWTIP)
+               BINARY_OP                7 (|)
+               CALL                     2
+               POP_TOP
+
+ 178   L2:     LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               LOAD_CONST               0 (None)
+               CALL                     3
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+       L3:     PUSH_EXC_INFO
+               WITH_EXCEPT_START
+               TO_BOOL
+               POP_JUMP_IF_TRUE         2 (to L4)
+               NOT_TAKEN
+               RERAISE                  2
+       L4:     POP_TOP
+       L5:     POP_EXCEPT
+               POP_TOP
+               POP_TOP
+               POP_TOP
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [2] lasti
+  L3 to L5 -> L6 [4] lasti
+
+Disassembly of <code object notificar at 0xbdeefe100, file "bandeja.py", line 183>:
+ 183            RESUME                   0
+
+ 184            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_trava)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L1:     POP_TOP
+
+ 185            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                2 (_criado)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        12 (to L3)
+                NOT_TAKEN
+
+ 186            NOP
+
+ 184    L2:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+                LOAD_CONST               1 (False)
+                RETURN_VALUE
+
+ 187    L3:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                5 (_dados + NULL|self)
+                LOAD_GLOBAL              6 (NIF_INFO)
+                CALL                     1
+                STORE_FAST               3 (dados)
+
+ 188            LOAD_FAST_BORROW         1 (titulo)
+                LOAD_CONST               2 (slice(None, 63, None))
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         3 (dados)
+                STORE_ATTR               4 (szInfoTitle)
+
+ 189            LOAD_FAST_BORROW         2 (texto)
+                LOAD_CONST               3 (slice(None, 255, None))
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         3 (dados)
+                STORE_ATTR               5 (szInfo)
+
+ 190            LOAD_GLOBAL             12 (NIIF_USER)
+                LOAD_GLOBAL             14 (NIIF_LARGE_ICON)
+                BINARY_OP                7 (|)
+                LOAD_FAST_BORROW         3 (dados)
+                STORE_ATTR               8 (dwInfoFlags)
+
+ 191            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               18 (_icone_notificacao)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        38 (to L6)
+        L4:     NOT_TAKEN
+        L5:     POP_TOP
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               20 (_icones)
+                LOAD_ATTR               23 (get + NULL|self)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               24 (_estado)
+                CALL                     1
+        L6:     LOAD_FAST_BORROW         3 (dados)
+                STORE_ATTR              13 (hBalloonIcon)
+
+ 192            LOAD_GLOBAL             29 (bool + NULL)
+                LOAD_GLOBAL             30 (shell32)
+                LOAD_ATTR               33 (Shell_NotifyIconW + NULL|self)
+                LOAD_GLOBAL             34 (NIM_MODIFY)
+                LOAD_GLOBAL             36 (ctypes)
+                LOAD_ATTR               38 (byref)
+                PUSH_NULL
+                LOAD_FAST_BORROW         3 (dados)
+                CALL                     1
+                CALL                     2
+                CALL                     1
+
+ 184    L7:     SWAP                     3
+                SWAP                     2
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+                RETURN_VALUE
+        L8:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L9)
+                NOT_TAKEN
+                RERAISE                  2
+        L9:     POP_TOP
+       L10:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  --   L11:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L8 [2] lasti
+  L3 to L4 -> L8 [2] lasti
+  L5 to L7 -> L8 [2] lasti
+  L8 to L10 -> L11 [4] lasti
+
+Disassembly of <code object mostrar_menu_nativo at 0x108195210, file "bandeja.py", line 194>:
+194           RESUME                   0
+
+196           LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (x, y)
+              BUILD_TUPLE              2
+              LOAD_FAST_BORROW         0 (self)
+              STORE_ATTR               0 (_ponto_nativo)
+
+197           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                2 (_hwnd)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       41 (to L1)
+              NOT_TAKEN
+
+198           LOAD_GLOBAL              4 (user32)
+              LOAD_ATTR                7 (PostMessageW + NULL|self)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                2 (_hwnd)
+              LOAD_GLOBAL              8 (MENSAGEM_MENU_NATIVO)
+              LOAD_SMALL_INT           0
+              LOAD_SMALL_INT           0
+              CALL                     4
+              POP_TOP
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+197   L1:     LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object sessao_terminando at 0x108107c30, file "bandeja.py", line 200>:
+200           RESUME                   0
+
+202           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                0 (_sessao_terminando)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        35 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_GLOBAL              3 (bool + NULL)
+              LOAD_GLOBAL              4 (user32)
+              LOAD_ATTR                7 (GetSystemMetrics + NULL|self)
+              LOAD_GLOBAL              8 (SM_SHUTTINGDOWN)
+              CALL                     1
+              CALL                     1
+      L1:     RETURN_VALUE
+
+Disassembly of <code object remover at 0xbdef02080, file "bandeja.py", line 204>:
+ 204           RESUME                   0
+
+ 205           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                0 (_trava)
+               COPY                     1
+               LOAD_SPECIAL             1 (__exit__)
+               SWAP                     2
+               SWAP                     3
+               LOAD_SPECIAL             0 (__enter__)
+               CALL                     0
+       L1:     POP_TOP
+
+ 206           LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR                2 (_criado)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       69 (to L2)
+               NOT_TAKEN
+
+ 207           LOAD_GLOBAL              4 (shell32)
+               LOAD_ATTR                7 (Shell_NotifyIconW + NULL|self)
+               LOAD_GLOBAL              8 (NIM_DELETE)
+               LOAD_GLOBAL             10 (ctypes)
+               LOAD_ATTR               12 (byref)
+               PUSH_NULL
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               15 (_dados + NULL|self)
+               LOAD_SMALL_INT           0
+               CALL                     1
+               CALL                     1
+               CALL                     2
+               POP_TOP
+
+ 208           LOAD_CONST               1 (False)
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR               1 (_criado)
+
+ 205   L2:     LOAD_CONST               2 (None)
+               LOAD_CONST               2 (None)
+               LOAD_CONST               2 (None)
+               CALL                     3
+               POP_TOP
+
+ 209   L3:     LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               16 (_hwnd)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       41 (to L4)
+               NOT_TAKEN
+
+ 210           LOAD_GLOBAL             18 (user32)
+               LOAD_ATTR               21 (PostMessageW + NULL|self)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               16 (_hwnd)
+               LOAD_GLOBAL             22 (WM_CLOSE)
+               LOAD_SMALL_INT           0
+               LOAD_SMALL_INT           0
+               CALL                     4
+               POP_TOP
+               LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+ 209   L4:     LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+ 205   L5:     PUSH_EXC_INFO
+               WITH_EXCEPT_START
+               TO_BOOL
+               POP_JUMP_IF_TRUE         2 (to L6)
+               NOT_TAKEN
+               RERAISE                  2
+       L6:     POP_TOP
+       L7:     POP_EXCEPT
+               POP_TOP
+               POP_TOP
+               POP_TOP
+               JUMP_BACKWARD_NO_INTERRUPT 76 (to L3)
+
+  --   L8:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L5 [2] lasti
+  L5 to L7 -> L8 [4] lasti
+
+Disassembly of <code object _dados at 0x1081adcf0, file "bandeja.py", line 214>:
+214           RESUME                   0
+
+215           LOAD_GLOBAL              1 (NOTIFYICONDATAW + NULL)
+              CALL                     0
+              STORE_FAST               2 (d)
+
+216           LOAD_GLOBAL              2 (ctypes)
+              LOAD_ATTR                4 (sizeof)
+              PUSH_NULL
+              LOAD_GLOBAL              0 (NOTIFYICONDATAW)
+              CALL                     1
+              LOAD_FAST_BORROW         2 (d)
+              STORE_ATTR               3 (cbSize)
+
+217           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                8 (_hwnd)
+              LOAD_FAST_BORROW         2 (d)
+              STORE_ATTR               5 (hWnd)
+
+218           LOAD_GLOBAL             12 (ID_DO_ICONE)
+              LOAD_FAST_BORROW         2 (d)
+              STORE_ATTR               7 (uID)
+
+219           LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (flags, d)
+              STORE_ATTR               8 (uFlags)
+
+220           LOAD_FAST_BORROW         2 (d)
+              RETURN_VALUE
+
+Disassembly of <code object _enviar at 0xbdef02300, file "bandeja.py", line 222>:
+222           RESUME                   0
+
+223           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                1 (_dados + NULL|self)
+              LOAD_FAST_BORROW         2 (flags)
+              CALL                     1
+              STORE_FAST               3 (d)
+
+224           LOAD_GLOBAL              2 (MENSAGEM_DO_ICONE)
+              LOAD_FAST_BORROW         3 (d)
+              STORE_ATTR               2 (uCallbackMessage)
+
+225           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                6 (_icones)
+              LOAD_ATTR                9 (get + NULL|self)
+              LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               10 (_estado)
+              CALL                     1
+              LOAD_FAST_BORROW         3 (d)
+              STORE_ATTR               6 (hIcon)
+
+226           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               14 (_dica)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               0 ('')
+      L1:     LOAD_CONST               1 (slice(None, 127, None))
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         3 (d)
+              STORE_ATTR               8 (szTip)
+
+227           LOAD_GLOBAL             19 (bool + NULL)
+              LOAD_GLOBAL             20 (shell32)
+              LOAD_ATTR               23 (Shell_NotifyIconW + NULL|self)
+              LOAD_FAST_BORROW         1 (acao)
+              LOAD_GLOBAL             24 (ctypes)
+              LOAD_ATTR               26 (byref)
+              PUSH_NULL
+              LOAD_FAST_BORROW         3 (d)
+              CALL                     1
+              CALL                     2
+              CALL                     1
+              RETURN_VALUE
+
+Disassembly of <code object _adicionar at 0x107fd7c40, file "bandeja.py", line 229>:
+229           RESUME                   0
+
+230           LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR                1 (_enviar + NULL|self)
+              LOAD_GLOBAL              2 (NIM_ADD)
+              LOAD_GLOBAL              4 (NIF_MESSAGE)
+              LOAD_GLOBAL              6 (NIF_ICON)
+              BINARY_OP                7 (|)
+              LOAD_GLOBAL              8 (NIF_TIP)
+              BINARY_OP                7 (|)
+              LOAD_GLOBAL             10 (NIF_SHOWTIP)
+              BINARY_OP                7 (|)
+              CALL                     2
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+
+231           LOAD_CONST               0 (False)
+              RETURN_VALUE
+
+232   L1:     LOAD_FAST_BORROW         0 (self)
+              LOAD_ATTR               13 (_dados + NULL|self)
+              LOAD_SMALL_INT           0
+              CALL                     1
+              STORE_FAST               1 (d)
+
+233           LOAD_GLOBAL             14 (NOTIFYICON_VERSION_4)
+              LOAD_FAST_BORROW         1 (d)
+              STORE_ATTR               8 (uVersion)
+
+234           LOAD_GLOBAL             18 (shell32)
+              LOAD_ATTR               21 (Shell_NotifyIconW + NULL|self)
+              LOAD_GLOBAL             22 (NIM_SETVERSION)
+              LOAD_GLOBAL             24 (ctypes)
+              LOAD_ATTR               26 (byref)
+              PUSH_NULL
+              LOAD_FAST_BORROW         1 (d)
+              CALL                     1
+              CALL                     2
+              POP_TOP
+
+235           LOAD_CONST               1 (True)
+              RETURN_VALUE
+
+Disassembly of <code object _laco at 0xbdf718000, file "bandeja.py", line 237>:
+ 237            RESUME                   0
+
+ 238            NOP
+
+ 239    L1:     LOAD_GLOBAL              0 (kernel32)
+                LOAD_ATTR                3 (GetModuleHandleW + NULL|self)
+                LOAD_CONST               0 (None)
+                CALL                     1
+                STORE_FAST               1 (instancia)
+
+ 240            LOAD_GLOBAL              5 (WNDCLASSW + NULL)
+                CALL                     0
+                STORE_FAST               2 (classe)
+
+ 241            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                6 (_proc)
+                LOAD_FAST_BORROW         2 (classe)
+                STORE_ATTR               4 (lpfnWndProc)
+
+ 242            LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (instancia, classe)
+                STORE_ATTR               5 (hInstance)
+
+ 243            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               12 (_nome_da_classe)
+                LOAD_FAST_BORROW         2 (classe)
+                STORE_ATTR               7 (lpszClassName)
+
+ 244            LOAD_GLOBAL             16 (user32)
+                LOAD_ATTR               19 (RegisterClassW + NULL|self)
+                LOAD_GLOBAL             20 (ctypes)
+                LOAD_ATTR               22 (byref)
+                PUSH_NULL
+                LOAD_FAST_BORROW         2 (classe)
+                CALL                     1
+                CALL                     1
+                POP_TOP
+
+ 247            LOAD_GLOBAL             16 (user32)
+                LOAD_ATTR               25 (CreateWindowExW + NULL|self)
+                LOAD_SMALL_INT           0
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               12 (_nome_da_classe)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               12 (_nome_da_classe)
+                LOAD_SMALL_INT           0
+
+ 248            LOAD_SMALL_INT           0
+                LOAD_SMALL_INT           0
+                LOAD_SMALL_INT           0
+                LOAD_SMALL_INT           0
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_FAST_BORROW         1 (instancia)
+                LOAD_CONST               0 (None)
+
+ 247            CALL                    12
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR              13 (_hwnd)
+
+ 249            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               26 (_hwnd)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        63 (to L3)
+                NOT_TAKEN
+
+ 250            LOAD_CONST               1 ('CreateWindowExW falhou (%d)')
+                LOAD_GLOBAL             20 (ctypes)
+                LOAD_ATTR               28 (get_last_error)
+                PUSH_NULL
+                CALL                     0
+                BINARY_OP                6 (%)
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR              15 (erro)
+
+ 251    L2:     NOP
+
+ 269            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               32 (_pronto)
+                LOAD_ATTR               35 (set + NULL|self)
+                CALL                     0
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 252    L3:     LOAD_GLOBAL             16 (user32)
+                LOAD_ATTR               37 (GetSystemMetrics + NULL|self)
+                LOAD_GLOBAL             38 (SM_CXSMICON)
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L6)
+        L4:     NOT_TAKEN
+        L5:     POP_TOP
+                LOAD_SMALL_INT          16
+        L6:     STORE_FAST               3 (lado)
+
+ 253            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               40 (_caminhos)
+                LOAD_ATTR               43 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+        L7:     FOR_ITER                29 (to L8)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   69 (estado, caminho)
+
+ 254            LOAD_GLOBAL             45 (_carregar_icone + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 83 (caminho, lado)
+                CALL                     2
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               46 (_icones)
+                LOAD_FAST_BORROW         4 (estado)
+                STORE_SUBSCR
+                JUMP_BACKWARD           31 (to L7)
+
+ 253    L8:     END_FOR
+                POP_ITER
+
+ 255            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               48 (_caminho_notificacao)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       28 (to L11)
+        L9:     NOT_TAKEN
+
+ 256   L10:     LOAD_GLOBAL             45 (_carregar_icone + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               48 (_caminho_notificacao)
+                LOAD_SMALL_INT          48
+                CALL                     2
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR              25 (_icone_notificacao)
+
+ 257   L11:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               46 (_icones)
+                LOAD_ATTR               53 (get + NULL|self)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               54 (_estado)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        54 (to L15)
+       L12:     NOT_TAKEN
+
+ 258   L13:     LOAD_CONST               2 ('icone do estado %r nao carregou')
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               54 (_estado)
+                BINARY_OP                6 (%)
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR              15 (erro)
+
+ 259   L14:     NOP
+
+ 269            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               32 (_pronto)
+                LOAD_ATTR               35 (set + NULL|self)
+                CALL                     0
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 260   L15:     LOAD_GLOBAL             16 (user32)
+                LOAD_ATTR               57 (RegisterWindowMessageW + NULL|self)
+                LOAD_CONST               3 ('TaskbarCreated')
+                CALL                     1
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR              29 (_msg_taskbar_created)
+
+ 261            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               60 (_trava)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+       L16:     POP_TOP
+
+ 262            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               63 (_adicionar + NULL|self)
+                CALL                     0
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR              32 (_criado)
+
+ 261   L17:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+
+ 263   L18:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               64 (_criado)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        56 (to L21)
+       L19:     NOT_TAKEN
+
+ 266   L20:     LOAD_CONST               4 ('Shell_NotifyIconW(NIM_ADD) recusou; tentando de novo')
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR              15 (erro)
+
+ 267            LOAD_GLOBAL             16 (user32)
+                LOAD_ATTR               67 (SetTimer + NULL|self)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               26 (_hwnd)
+                LOAD_GLOBAL             68 (TIMER_DA_NOVA_TENTATIVA)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               70 (_intervalo_ms)
+                LOAD_CONST               0 (None)
+                CALL                     4
+                POP_TOP
+
+ 269   L21:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               32 (_pronto)
+                LOAD_ATTR               35 (set + NULL|self)
+                CALL                     0
+                POP_TOP
+
+ 270            LOAD_GLOBAL             72 (wintypes)
+                LOAD_ATTR               74 (MSG)
+                PUSH_NULL
+                CALL                     0
+                STORE_FAST               6 (msg)
+
+ 271   L22:     LOAD_GLOBAL             16 (user32)
+                LOAD_ATTR               77 (GetMessageW + NULL|self)
+                LOAD_GLOBAL             20 (ctypes)
+                LOAD_ATTR               22 (byref)
+                PUSH_NULL
+                LOAD_FAST_BORROW         6 (msg)
+                CALL                     1
+                LOAD_CONST               0 (None)
+                LOAD_SMALL_INT           0
+                LOAD_SMALL_INT           0
+                CALL                     4
+                LOAD_SMALL_INT           0
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE       85 (to L23)
+                NOT_TAKEN
+
+ 272            LOAD_GLOBAL             16 (user32)
+                LOAD_ATTR               79 (TranslateMessage + NULL|self)
+                LOAD_GLOBAL             20 (ctypes)
+                LOAD_ATTR               22 (byref)
+                PUSH_NULL
+                LOAD_FAST_BORROW         6 (msg)
+                CALL                     1
+                CALL                     1
+                POP_TOP
+
+ 273            LOAD_GLOBAL             16 (user32)
+                LOAD_ATTR               81 (DispatchMessageW + NULL|self)
+                LOAD_GLOBAL             20 (ctypes)
+                LOAD_ATTR               22 (byref)
+                PUSH_NULL
+                LOAD_FAST_BORROW         6 (msg)
+                CALL                     1
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD          133 (to L22)
+
+ 274   L23:     LOAD_GLOBAL             83 (list + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               46 (_icones)
+                LOAD_ATTR               85 (values + NULL|self)
+                CALL                     0
+                CALL                     1
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               50 (_icone_notificacao)
+                BUILD_LIST               1
+                BINARY_OP                0 (+)
+                GET_ITER
+       L24:     FOR_ITER                34 (to L26)
+                STORE_FAST               7 (icone)
+
+ 275            LOAD_FAST_BORROW         7 (icone)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L25)
+                NOT_TAKEN
+                JUMP_BACKWARD           13 (to L24)
+
+ 276   L25:     LOAD_GLOBAL             16 (user32)
+                LOAD_ATTR               87 (DestroyIcon + NULL|self)
+                LOAD_FAST_BORROW         7 (icone)
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD           36 (to L24)
+
+ 274   L26:     END_FOR
+                POP_ITER
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 261   L27:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L28)
+                NOT_TAKEN
+                RERAISE                  2
+       L28:     POP_TOP
+       L29:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                EXTENDED_ARG             1
+                JUMP_BACKWARD_NO_INTERRUPT 363 (to L18)
+
+  --   L30:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L31:     PUSH_EXC_INFO
+
+ 269            LOAD_FAST                0 (self)
+                LOAD_ATTR               32 (_pronto)
+                LOAD_ATTR               35 (set + NULL|self)
+                CALL                     0
+                POP_TOP
+                RERAISE                  0
+
+  --   L32:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L31 [0]
+  L3 to L4 -> L31 [0]
+  L5 to L9 -> L31 [0]
+  L10 to L12 -> L31 [0]
+  L13 to L14 -> L31 [0]
+  L15 to L16 -> L31 [0]
+  L16 to L17 -> L27 [2] lasti
+  L17 to L19 -> L31 [0]
+  L20 to L21 -> L31 [0]
+  L27 to L29 -> L30 [4] lasti
+  L29 to L31 -> L31 [0]
+  L31 to L32 -> L32 [1] lasti
+
+Disassembly of <code object _wndproc at 0xbdf6f6300, file "bandeja.py", line 278>:
+278            RESUME                   0
+
+279            LOAD_FAST_BORROW         2 (msg)
+               LOAD_GLOBAL              0 (MENSAGEM_DO_ICONE)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE      234 (to L4)
+               NOT_TAKEN
+
+280            LOAD_FAST_BORROW         4 (lparam)
+               LOAD_CONST               0 (65535)
+               BINARY_OP                1 (&)
+               STORE_FAST               5 (evento)
+
+281            LOAD_FAST_BORROW         5 (evento)
+               LOAD_GLOBAL              2 (NIN_SELECT)
+               LOAD_GLOBAL              4 (NIN_KEYSELECT)
+               LOAD_GLOBAL              6 (WM_LBUTTONDBLCLK)
+               LOAD_GLOBAL              8 (NIN_BALLOONUSERCLICK)
+               BUILD_TUPLE              4
+               CONTAINS_OP              0 (in)
+               POP_JUMP_IF_FALSE       24 (to L1)
+               NOT_TAKEN
+
+282            LOAD_GLOBAL             11 (_em_outra_thread + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               12 (_ao_clicar)
+               CALL                     1
+               POP_TOP
+
+293            LOAD_SMALL_INT           0
+               RETURN_VALUE
+
+283    L1:     LOAD_FAST_BORROW         5 (evento)
+               LOAD_GLOBAL             14 (WM_CONTEXTMENU)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE      162 (to L3)
+               NOT_TAKEN
+
+284            LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               16 (_abrir_menu)
+               TO_BOOL
+               POP_JUMP_IF_FALSE      128 (to L2)
+               NOT_TAKEN
+
+285            LOAD_GLOBAL             19 (POINT + NULL)
+               CALL                     0
+               STORE_FAST               6 (ponto)
+
+286            LOAD_GLOBAL             20 (user32)
+               LOAD_ATTR               23 (GetCursorPos + NULL|self)
+               LOAD_GLOBAL             24 (ctypes)
+               LOAD_ATTR               26 (byref)
+               PUSH_NULL
+               LOAD_FAST_BORROW         6 (ponto)
+               CALL                     1
+               CALL                     1
+               POP_TOP
+
+289            LOAD_GLOBAL             20 (user32)
+               LOAD_ATTR               29 (SetForegroundWindow + NULL|self)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               30 (_hwnd)
+               CALL                     1
+               POP_TOP
+
+290            LOAD_GLOBAL             11 (_em_outra_thread + NULL)
+               LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               16 (_abrir_menu)
+               LOAD_FAST_BORROW         6 (ponto)
+               LOAD_ATTR               32 (x)
+               LOAD_FAST_BORROW         6 (ponto)
+               LOAD_ATTR               34 (y)
+               CALL                     3
+               POP_TOP
+
+293            LOAD_SMALL_INT           0
+               RETURN_VALUE
+
+292    L2:     LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               37 (_mostrar_menu + NULL|self)
+               CALL                     0
+               POP_TOP
+
+293    L3:     LOAD_SMALL_INT           0
+               RETURN_VALUE
+
+294    L4:     LOAD_FAST_BORROW         2 (msg)
+               LOAD_GLOBAL             38 (MENSAGEM_MENU_NATIVO)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE       39 (to L5)
+               NOT_TAKEN
+
+295            LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               40 (_ponto_nativo)
+               LOAD_CONST               1 (None)
+               SWAP                     2
+               STORE_FAST_LOAD_FAST    96 (ponto, self)
+               STORE_ATTR              20 (_ponto_nativo)
+
+296            LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               37 (_mostrar_menu + NULL|self)
+               LOAD_FAST_BORROW         6 (ponto)
+               CALL                     1
+               POP_TOP
+
+297            LOAD_SMALL_INT           0
+               RETURN_VALUE
+
+298    L5:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 32 (msg, self)
+               LOAD_ATTR               42 (_msg_taskbar_created)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE       29 (to L6)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         2 (msg)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       21 (to L6)
+               NOT_TAKEN
+
+301            LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               45 (_tentar_adicionar + NULL|self)
+               LOAD_CONST               2 (False)
+               LOAD_CONST               3 (('desistir',))
+               CALL_KW                  1
+               POP_TOP
+
+302            LOAD_SMALL_INT           0
+               RETURN_VALUE
+
+303    L6:     LOAD_FAST_BORROW         2 (msg)
+               LOAD_GLOBAL             46 (WM_TIMER)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE       32 (to L7)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         3 (wparam)
+               LOAD_GLOBAL             48 (TIMER_DA_NOVA_TENTATIVA)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE       21 (to L7)
+               NOT_TAKEN
+
+304            LOAD_FAST_BORROW         0 (self)
+               LOAD_ATTR               45 (_tentar_adicionar + NULL|self)
+               LOAD_CONST               4 (True)
+               LOAD_CONST               3 (('desistir',))
+               CALL_KW                  1
+               POP_TOP
+
+305            LOAD_SMALL_INT           0
+               RETURN_VALUE
+
+306    L7:     LOAD_FAST_BORROW         2 (msg)
+               LOAD_GLOBAL             50 (WM_QUERYENDSESSION)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE       10 (to L8)
+               NOT_TAKEN
+
+307            LOAD_CONST               4 (True)
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR              26 (_sessao_terminando)
+
+308            LOAD_SMALL_INT           1
+               RETURN_VALUE
+
+309    L8:     LOAD_FAST_BORROW         2 (msg)
+               LOAD_GLOBAL             54 (WM_ENDSESSION)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE       19 (to L9)
+               NOT_TAKEN
+
+310            LOAD_GLOBAL             57 (bool + NULL)
+               LOAD_FAST_BORROW         3 (wparam)
+               CALL                     1
+               LOAD_FAST_BORROW         0 (self)
+               STORE_ATTR              26 (_sessao_terminando)
+
+311            LOAD_SMALL_INT           0
+               RETURN_VALUE
+
+312    L9:     LOAD_FAST_BORROW         2 (msg)
+               LOAD_GLOBAL             58 (WM_CLOSE)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE       24 (to L10)
+               NOT_TAKEN
+
+313            LOAD_GLOBAL             20 (user32)
+               LOAD_ATTR               61 (DestroyWindow + NULL|self)
+               LOAD_FAST_BORROW         1 (hwnd)
+               CALL                     1
+               POP_TOP
+
+314            LOAD_SMALL_INT           0
+               RETURN_VALUE
+
+315   L10:     LOAD_FAST_BORROW         2 (msg)
+               LOAD_GLOBAL             62 (WM_DESTROY)
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE       24 (to L11)
+               NOT_TAKEN
+
+316            LOAD_GLOBAL             20 (user32)
+               LOAD_ATTR               65 (PostQuitMessage + NULL|self)
+               LOAD_SMALL_INT           0
+               CALL                     1
+               POP_TOP
+
+317            LOAD_SMALL_INT           0
+               RETURN_VALUE
+
+318   L11:     LOAD_GLOBAL             20 (user32)
+               LOAD_ATTR               67 (DefWindowProcW + NULL|self)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (hwnd, msg)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 52 (wparam, lparam)
+               CALL                     4
+               RETURN_VALUE
+
+Disassembly of <code object _tentar_adicionar at 0xbdeefe700, file "bandeja.py", line 320>:
+ 320            RESUME                   0
+
+ 321            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_trava)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L1:     POP_TOP
+
+ 322            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                2 (_criado)
+                STORE_FAST               2 (ja_estava)
+
+ 323            LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                5 (_adicionar + NULL|self)
+                CALL                     0
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR               1 (_criado)
+
+ 321    L2:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+
+ 324    L3:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                2 (_criado)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       75 (to L5)
+                NOT_TAKEN
+
+ 325            LOAD_GLOBAL              6 (user32)
+                LOAD_ATTR                9 (KillTimer + NULL|self)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               10 (_hwnd)
+                LOAD_GLOBAL             12 (TIMER_DA_NOVA_TENTATIVA)
+                CALL                     2
+                POP_TOP
+
+ 326            LOAD_CONST               0 (None)
+                LOAD_FAST_BORROW         0 (self)
+                STORE_ATTR               7 (erro)
+
+ 327            LOAD_FAST_CHECK          2 (ja_estava)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        22 (to L4)
+                NOT_TAKEN
+
+ 328            LOAD_GLOBAL             17 (_em_outra_thread + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               18 (_ao_aparecer)
+                CALL                     1
+                POP_TOP
+
+ 329    L4:     LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 330    L5:     LOAD_FAST_BORROW         0 (self)
+                COPY                     1
+                LOAD_ATTR               20 (_tentativas)
+                LOAD_SMALL_INT           1
+                BINARY_OP               13 (+=)
+                SWAP                     2
+                STORE_ATTR              10 (_tentativas)
+
+ 331            LOAD_FAST_BORROW         1 (desistir)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       62 (to L7)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               20 (_tentativas)
+                LOAD_GLOBAL             22 (TENTATIVAS_MAXIMAS)
+                COMPARE_OP             188 (bool(>=))
+                POP_JUMP_IF_FALSE       39 (to L6)
+                NOT_TAKEN
+
+ 332            LOAD_GLOBAL              6 (user32)
+                LOAD_ATTR                9 (KillTimer + NULL|self)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               10 (_hwnd)
+                LOAD_GLOBAL             12 (TIMER_DA_NOVA_TENTATIVA)
+                CALL                     2
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 331    L6:     LOAD_CONST               0 (None)
+                RETURN_VALUE
+        L7:     LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 321    L8:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L9)
+                NOT_TAKEN
+                RERAISE                  2
+        L9:     POP_TOP
+       L10:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 204 (to L3)
+
+  --   L11:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L8 [2] lasti
+  L8 to L10 -> L11 [4] lasti
+
+Disassembly of <code object _mostrar_menu at 0xbdf6f6d00, file "bandeja.py", line 334>:
+ 334            RESUME                   0
+
+ 335            NOP
+
+ 336    L1:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                0 (_montar_menu)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       17 (to L4)
+        L2:     NOT_TAKEN
+        L3:     LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR                1 (_montar_menu + NULL|self)
+                CALL                     0
+                JUMP_FORWARD             1 (to L5)
+        L4:     BUILD_LIST               0
+        L5:     STORE_FAST               2 (itens)
+
+ 339    L6:     LOAD_GLOBAL              4 (user32)
+                LOAD_ATTR                7 (CreatePopupMenu + NULL|self)
+                CALL                     0
+                STORE_FAST               3 (menu)
+
+ 340            BUILD_MAP                0
+                STORE_FAST               4 (ids)
+
+ 341            LOAD_GLOBAL              9 (enumerate + NULL)
+                LOAD_FAST_BORROW         2 (itens)
+                CALL                     1
+                GET_ITER
+        L7:     FOR_ITER               135 (to L11)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   86 (i, item)
+
+ 342            LOAD_FAST_BORROW         6 (item)
+                POP_JUMP_IF_NOT_NONE    31 (to L8)
+                NOT_TAKEN
+
+ 343            LOAD_GLOBAL              4 (user32)
+                LOAD_ATTR               11 (AppendMenuW + NULL|self)
+                LOAD_FAST_BORROW         3 (menu)
+                LOAD_GLOBAL             12 (MF_SEPARATOR)
+                LOAD_SMALL_INT           0
+                LOAD_CONST               0 (None)
+                CALL                     4
+                POP_TOP
+
+ 344            JUMP_BACKWARD           39 (to L7)
+
+ 345    L8:     LOAD_GLOBAL             14 (PRIMEIRO_ITEM)
+                LOAD_FAST_BORROW         5 (i)
+                BINARY_OP                0 (+)
+                STORE_FAST               7 (codigo)
+
+ 346            LOAD_FAST_BORROW         6 (item)
+                LOAD_CONST               1 ('id')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 71 (ids, codigo)
+                STORE_SUBSCR
+
+ 347            LOAD_GLOBAL             16 (MF_STRING)
+                LOAD_FAST_BORROW         6 (item)
+                LOAD_ATTR               19 (get + NULL|self)
+                LOAD_CONST               2 ('ativo')
+                LOAD_CONST               3 (True)
+                CALL                     2
+                TO_BOOL
+                POP_JUMP_IF_FALSE        3 (to L9)
+                NOT_TAKEN
+                LOAD_SMALL_INT           0
+                JUMP_FORWARD             5 (to L10)
+        L9:     LOAD_GLOBAL             20 (MF_GRAYED)
+       L10:     BINARY_OP                7 (|)
+                STORE_FAST               8 (flags)
+
+ 348            LOAD_GLOBAL              4 (user32)
+                LOAD_ATTR               11 (AppendMenuW + NULL|self)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 56 (menu, flags)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 118 (codigo, item)
+                LOAD_CONST               4 ('texto')
+                BINARY_OP               26 ([])
+                CALL                     4
+                POP_TOP
+                JUMP_BACKWARD          137 (to L7)
+
+ 341   L11:     END_FOR
+                POP_ITER
+
+ 349            LOAD_GLOBAL             23 (POINT + NULL)
+                CALL                     0
+                STORE_FAST               9 (ponto)
+
+ 350            LOAD_FAST_BORROW         1 (ponto_dado)
+                POP_JUMP_IF_NOT_NONE    43 (to L12)
+                NOT_TAKEN
+
+ 351            LOAD_GLOBAL              4 (user32)
+                LOAD_ATTR               25 (GetCursorPos + NULL|self)
+                LOAD_GLOBAL             26 (ctypes)
+                LOAD_ATTR               28 (byref)
+                PUSH_NULL
+                LOAD_FAST_BORROW         9 (ponto)
+                CALL                     1
+                CALL                     1
+                POP_TOP
+                JUMP_FORWARD            15 (to L13)
+
+ 353   L12:     LOAD_FAST_BORROW         1 (ponto_dado)
+                UNPACK_SEQUENCE          2
+                LOAD_FAST_BORROW         9 (ponto)
+                STORE_ATTR              15 (x)
+                LOAD_FAST_BORROW         9 (ponto)
+                STORE_ATTR              16 (y)
+
+ 356   L13:     LOAD_GLOBAL              4 (user32)
+                LOAD_ATTR               35 (SetForegroundWindow + NULL|self)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               36 (_hwnd)
+                CALL                     1
+                POP_TOP
+
+ 357            LOAD_GLOBAL              4 (user32)
+                LOAD_ATTR               39 (TrackPopupMenu + NULL|self)
+                LOAD_FAST_BORROW         3 (menu)
+                LOAD_GLOBAL             40 (TPM_RIGHTBUTTON)
+                LOAD_GLOBAL             42 (TPM_RETURNCMD)
+                BINARY_OP                7 (|)
+                LOAD_GLOBAL             44 (TPM_NONOTIFY)
+                BINARY_OP                7 (|)
+
+ 358            LOAD_FAST_BORROW         9 (ponto)
+                LOAD_ATTR               30 (x)
+                LOAD_FAST_BORROW         9 (ponto)
+                LOAD_ATTR               32 (y)
+                LOAD_SMALL_INT           0
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               36 (_hwnd)
+                LOAD_CONST               0 (None)
+
+ 357            CALL                     7
+                STORE_FAST              10 (escolhido)
+
+ 359            LOAD_GLOBAL              4 (user32)
+                LOAD_ATTR               47 (PostMessageW + NULL|self)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               36 (_hwnd)
+                LOAD_GLOBAL             48 (WM_NULL)
+                LOAD_SMALL_INT           0
+                LOAD_SMALL_INT           0
+                CALL                     4
+                POP_TOP
+
+ 360            LOAD_GLOBAL              4 (user32)
+                LOAD_ATTR               51 (DestroyMenu + NULL|self)
+                LOAD_FAST_BORROW         3 (menu)
+                CALL                     1
+                POP_TOP
+
+ 361            LOAD_FAST_BORROW_LOAD_FAST_BORROW 164 (escolhido, ids)
+                CONTAINS_OP              0 (in)
+                POP_JUMP_IF_FALSE       31 (to L14)
+                NOT_TAKEN
+
+ 362            LOAD_GLOBAL             53 (_em_outra_thread + NULL)
+                LOAD_FAST_BORROW         0 (self)
+                LOAD_ATTR               54 (_ao_escolher)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 74 (ids, escolhido)
+                BINARY_OP               26 ([])
+                CALL                     2
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+ 361   L14:     LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  --   L15:     PUSH_EXC_INFO
+
+ 337            LOAD_GLOBAL              2 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        7 (to L17)
+                NOT_TAKEN
+                POP_TOP
+
+ 338            BUILD_LIST               0
+                STORE_FAST               2 (itens)
+       L16:     POP_EXCEPT
+                EXTENDED_ARG             1
+                JUMP_BACKWARD_NO_INTERRUPT 470 (to L6)
+
+ 337   L17:     RERAISE                  0
+
+  --   L18:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L15 [0]
+  L3 to L6 -> L15 [0]
+  L15 to L16 -> L18 [1] lasti
+  L17 to L18 -> L18 [1] lasti

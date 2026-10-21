@@ -1,0 +1,1917 @@
+# Module: biblioteca_listas
+# Filename: biblioteca_listas.py
+
+  0           RESUME                   0
+
+ 26           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (os)
+              STORE_NAME               0 (os)
+
+ 27           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (re)
+              STORE_NAME               1 (re)
+
+ 28           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              2 (threading)
+              STORE_NAME               2 (threading)
+
+ 29           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              3 (time)
+              STORE_NAME               3 (time)
+
+ 30           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              4 (unicodedata)
+              STORE_NAME               4 (unicodedata)
+
+ 32           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              5 (biblioteca)
+              STORE_NAME               5 (biblioteca)
+
+ 33           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              6 (paths)
+              STORE_NAME               6 (paths)
+
+ 34           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              7 (version)
+              STORE_NAME               7 (version)
+
+ 37           LOAD_CONST               2 (<code object _sem_identidades at 0x108221b50, file "biblioteca_listas.py", line 37>)
+              MAKE_FUNCTION
+              STORE_NAME               8 (_sem_identidades)
+
+ 43           LOAD_NAME                8 (_sem_identidades)
+              STORE_NAME               9 (identidades)
+
+ 46           LOAD_NAME                8 (_sem_identidades)
+              STORE_NAME              10 (familias)
+
+ 49           LOAD_CONST               3 (<code object jogo_unanime at 0x107fa3b50, file "biblioteca_listas.py", line 49>)
+              MAKE_FUNCTION
+              STORE_NAME              11 (jogo_unanime)
+
+ 54           LOAD_NAME                2 (threading)
+              LOAD_ATTR               24 (RLock)
+              PUSH_NULL
+              CALL                     0
+              STORE_NAME              13 (_TRAVA)
+
+ 56           BUILD_MAP                0
+              STORE_NAME              14 (_escrito)
+
+ 59           LOAD_CONST               4 (<code object _log at 0x107fd7c40, file "biblioteca_listas.py", line 59>)
+              MAKE_FUNCTION
+              STORE_NAME              15 (_log)
+
+ 67           LOAD_CONST               5 (<code object _nome_de_arquivo at 0x107fe7ab0, file "biblioteca_listas.py", line 67>)
+              MAKE_FUNCTION
+              STORE_NAME              16 (_nome_de_arquivo)
+
+ 73           LOAD_CONST               6 (<code object _lsh_por_id at 0xbdf722400, file "biblioteca_listas.py", line 73>)
+              MAKE_FUNCTION
+              STORE_NAME              17 (_lsh_por_id)
+
+ 95           LOAD_CONST               7 (<code object conteudo at 0xbdf6f6300, file "biblioteca_listas.py", line 95>)
+              MAKE_FUNCTION
+              STORE_NAME              18 (conteudo)
+
+117           LOAD_CONST               8 (<code object _gravar at 0xbdef01b80, file "biblioteca_listas.py", line 117>)
+              MAKE_FUNCTION
+              STORE_NAME              19 (_gravar)
+
+127           LOAD_CONST               9 (<code object espelhar_favoritos at 0xbdf0db800, file "biblioteca_listas.py", line 127>)
+              MAKE_FUNCTION
+              STORE_NAME              20 (espelhar_favoritos)
+
+149           LOAD_CONST              10 (<code object espelhar_tudo at 0xbdef02080, file "biblioteca_listas.py", line 149>)
+              MAKE_FUNCTION
+              STORE_NAME              21 (espelhar_tudo)
+
+165           LOAD_CONST              11 (<code object situacao at 0xbdf0dbb80, file "biblioteca_listas.py", line 165>)
+              MAKE_FUNCTION
+              STORE_NAME              22 (situacao)
+
+183           LOAD_CONST              12 (<code object _normal at 0x10822e5b0, file "biblioteca_listas.py", line 183>)
+              MAKE_FUNCTION
+              STORE_NAME              23 (_normal)
+
+187           LOAD_CONST              13 (<code object _confere at 0xbdf6d6680, file "biblioteca_listas.py", line 187>)
+              MAKE_FUNCTION
+              STORE_NAME              24 (_confere)
+
+202           LOAD_CONST              17 ((None, None))
+              LOAD_CONST              14 (<code object carregar at 0x107fef4b0, file "biblioteca_listas.py", line 202>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              25 (carregar)
+
+216           LOAD_CONST              18 ((None,))
+              LOAD_CONST              15 (<code object _carregar_lsh at 0xbdf6f4f00, file "biblioteca_listas.py", line 216>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              26 (_carregar_lsh)
+
+244           LOAD_CONST              18 ((None,))
+              LOAD_CONST              16 (<code object _carregar_fmf at 0xbdf6d6a00, file "biblioteca_listas.py", line 244>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              27 (_carregar_fmf)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _sem_identidades at 0x108221b50, file "biblioteca_listas.py", line 37>:
+ 37           RESUME                   0
+
+ 38           BUILD_MAP                0
+              RETURN_VALUE
+
+Disassembly of <code object jogo_unanime at 0x107fa3b50, file "biblioteca_listas.py", line 49>:
+  49           RESUME                   0
+
+  51           LOAD_FAST_BORROW         0 (uids)
+               GET_ITER
+               LOAD_FAST_AND_CLEAR      2 (u)
+               SWAP                     2
+       L1:     BUILD_SET                0
+               SWAP                     2
+       L2:     FOR_ITER                19 (to L5)
+               STORE_FAST_LOAD_FAST    34 (u, u)
+               LOAD_FAST_BORROW         1 (por_uid)
+               CONTAINS_OP              0 (in)
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           11 (to L2)
+       L4:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (por_uid, u)
+               BINARY_OP               26 ([])
+               SET_ADD                  2
+               JUMP_BACKWARD           21 (to L2)
+       L5:     END_FOR
+               POP_ITER
+       L6:     STORE_FAST               3 (vistos)
+               STORE_FAST               2 (u)
+
+  52           LOAD_GLOBAL              1 (len + NULL)
+               LOAD_FAST_BORROW         3 (vistos)
+               CALL                     1
+               LOAD_SMALL_INT           1
+               COMPARE_OP              88 (bool(==))
+               POP_JUMP_IF_FALSE       17 (to L7)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         3 (vistos)
+               LOAD_ATTR                3 (pop + NULL|self)
+               CALL                     0
+               RETURN_VALUE
+       L7:     LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L8:     SWAP                     2
+               POP_TOP
+
+  51           SWAP                     2
+               STORE_FAST               2 (u)
+               RERAISE                  0
+ExceptionTable:
+  L1 to L3 -> L8 [2]
+  L4 to L6 -> L8 [2]
+
+Disassembly of <code object _log at 0x107fd7c40, file "biblioteca_listas.py", line 59>:
+  59            RESUME                   0
+
+  60            NOP
+
+  61    L1:     LOAD_GLOBAL              1 (open + NULL)
+                LOAD_GLOBAL              2 (paths)
+                LOAD_ATTR                4 (user_data_path)
+                PUSH_NULL
+                LOAD_CONST               0 ('fmsh.log')
+                CALL                     1
+                LOAD_CONST               1 ('a')
+                LOAD_CONST               2 ('utf-8')
+                LOAD_CONST               3 (('encoding',))
+                CALL_KW                  3
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_FAST               1 (fh)
+
+  62            LOAD_FAST_BORROW         1 (fh)
+                LOAD_ATTR                7 (write + NULL|self)
+                LOAD_GLOBAL              8 (time)
+                LOAD_ATTR               10 (strftime)
+                PUSH_NULL
+                LOAD_CONST               4 ('%Y-%m-%d %H:%M:%S')
+                CALL                     1
+                CONVERT_VALUE            1 (str)
+                FORMAT_SIMPLE
+                LOAD_CONST               5 ('  [listas na Biblioteca] ')
+                LOAD_FAST_BORROW         0 (msg)
+                CONVERT_VALUE            1 (str)
+                FORMAT_SIMPLE
+                LOAD_CONST               6 ('\n')
+                BUILD_STRING             4
+                CALL                     1
+                POP_TOP
+
+  61    L3:     LOAD_CONST               7 (None)
+                LOAD_CONST               7 (None)
+                LOAD_CONST               7 (None)
+                CALL                     3
+                POP_TOP
+        L4:     LOAD_CONST               7 (None)
+                RETURN_VALUE
+        L5:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L6)
+                NOT_TAKEN
+                RERAISE                  2
+        L6:     POP_TOP
+        L7:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+        L8:     LOAD_CONST               7 (None)
+                RETURN_VALUE
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L10:     PUSH_EXC_INFO
+
+  63            LOAD_GLOBAL             12 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L12)
+                NOT_TAKEN
+                POP_TOP
+
+  64   L11:     POP_EXCEPT
+                LOAD_CONST               7 (None)
+                RETURN_VALUE
+
+  63   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L10 [0]
+  L2 to L3 -> L5 [2] lasti
+  L3 to L4 -> L10 [0]
+  L5 to L7 -> L9 [4] lasti
+  L7 to L8 -> L10 [0]
+  L9 to L10 -> L10 [0]
+  L10 to L11 -> L13 [1] lasti
+  L12 to L13 -> L13 [1] lasti
+
+Disassembly of <code object _nome_de_arquivo at 0x107fe7ab0, file "biblioteca_listas.py", line 67>:
+ 67           RESUME                   0
+
+ 69           LOAD_GLOBAL              0 (re)
+              LOAD_ATTR                2 (sub)
+              PUSH_NULL
+              LOAD_CONST               0 ('[<>:"/\\\\|?*\\x00-\\x1f]')
+              LOAD_CONST               1 ('-')
+              LOAD_GLOBAL              5 (str + NULL)
+              LOAD_FAST                0 (nome)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               2 ('')
+      L1:     CALL                     1
+              CALL                     3
+              LOAD_ATTR                7 (strip + NULL|self)
+              LOAD_CONST               3 (' .')
+              CALL                     1
+              LOAD_CONST               4 (slice(None, 80, None))
+              BINARY_OP               26 ([])
+              STORE_FAST               1 (limpo)
+
+ 70           LOAD_FAST                1 (limpo)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L2)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               5 ('lista')
+      L2:     FORMAT_SIMPLE
+              LOAD_CONST               6 ('.lsh')
+              BUILD_STRING             2
+              RETURN_VALUE
+
+Disassembly of <code object _lsh_por_id at 0xbdf722400, file "biblioteca_listas.py", line 73>:
+  73            RESUME                   0
+
+  75            LOAD_GLOBAL              0 (paths)
+                LOAD_ATTR                2 (biblioteca_dir)
+                PUSH_NULL
+                CALL                     0
+                STORE_FAST               0 (pasta)
+
+  76            BUILD_MAP                0
+                STORE_FAST               1 (saida)
+
+  77            NOP
+
+  78    L1:     LOAD_GLOBAL              5 (sorted + NULL)
+                LOAD_GLOBAL              6 (os)
+                LOAD_ATTR                8 (listdir)
+                PUSH_NULL
+                LOAD_FAST_BORROW         0 (pasta)
+                CALL                     1
+                CALL                     1
+                STORE_FAST               2 (nomes)
+
+  81    L2:     LOAD_FAST                2 (nomes)
+                GET_ITER
+        L3:     FOR_ITER               219 (to L11)
+                STORE_FAST               3 (nome)
+
+  82            LOAD_GLOBAL              6 (os)
+                LOAD_ATTR               12 (path)
+                LOAD_ATTR               15 (join + NULL|self)
+                LOAD_FAST_LOAD_FAST      3 (pasta, nome)
+                CALL                     2
+                STORE_FAST               4 (caminho)
+
+  83            LOAD_FAST                3 (nome)
+                LOAD_ATTR               17 (lower + NULL|self)
+                CALL                     0
+                LOAD_ATTR               19 (endswith + NULL|self)
+                LOAD_CONST               0 ('.lsh')
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       29 (to L4)
+                NOT_TAKEN
+                LOAD_GLOBAL             20 (biblioteca)
+                LOAD_ATTR               22 (_cabe)
+                PUSH_NULL
+                LOAD_FAST                4 (caminho)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L5)
+                NOT_TAKEN
+
+  84    L4:     JUMP_BACKWARD          101 (to L3)
+
+  85    L5:     NOP
+
+  86    L6:     LOAD_GLOBAL             25 (open + NULL)
+                LOAD_FAST                4 (caminho)
+                LOAD_CONST               1 ('utf-8')
+                LOAD_CONST               2 (('encoding',))
+                CALL_KW                  2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L7:     STORE_FAST               5 (fh)
+
+  87            LOAD_GLOBAL             20 (biblioteca)
+                LOAD_ATTR               26 (ler_texto)
+                PUSH_NULL
+                LOAD_FAST                5 (fh)
+                LOAD_ATTR               29 (read + NULL|self)
+                CALL                     0
+                LOAD_CONST               0 ('.lsh')
+                CALL                     2
+                STORE_FAST               6 (dados)
+
+  86    L8:     LOAD_CONST               3 (None)
+                LOAD_CONST               3 (None)
+                LOAD_CONST               3 (None)
+                CALL                     3
+                POP_TOP
+
+  90    L9:     LOAD_FAST_CHECK          6 (dados)
+                LOAD_ATTR               33 (get + NULL|self)
+                LOAD_CONST               4 ('id')
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L10)
+                NOT_TAKEN
+                JUMP_BACKWARD          194 (to L3)
+
+  91   L10:     LOAD_FAST                1 (saida)
+                LOAD_ATTR               35 (setdefault + NULL|self)
+                LOAD_FAST                6 (dados)
+                LOAD_CONST               4 ('id')
+                BINARY_OP               26 ([])
+                LOAD_FAST                3 (nome)
+                CALL                     2
+                POP_TOP
+                JUMP_BACKWARD          221 (to L3)
+
+  81   L11:     END_FOR
+                POP_ITER
+
+  92            LOAD_FAST                1 (saida)
+                RETURN_VALUE
+
+  --   L12:     PUSH_EXC_INFO
+
+  79            LOAD_GLOBAL             10 (OSError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        6 (to L14)
+                NOT_TAKEN
+                POP_TOP
+
+  80            LOAD_FAST                1 (saida)
+                SWAP                     2
+       L13:     POP_EXCEPT
+                RETURN_VALUE
+
+  79   L14:     RERAISE                  0
+
+  --   L15:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+  86   L16:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L17)
+                NOT_TAKEN
+                RERAISE                  2
+       L17:     POP_TOP
+       L18:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+       L19:     JUMP_BACKWARD_NO_INTERRUPT 91 (to L9)
+
+  --   L20:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L21:     PUSH_EXC_INFO
+
+  88            LOAD_GLOBAL             10 (OSError)
+                LOAD_GLOBAL             20 (biblioteca)
+                LOAD_ATTR               30 (ArquivoInvalido)
+                BUILD_TUPLE              2
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        6 (to L23)
+                NOT_TAKEN
+                POP_TOP
+
+  89   L22:     POP_EXCEPT
+                EXTENDED_ARG             1
+                JUMP_BACKWARD          294 (to L3)
+
+  88   L23:     RERAISE                  0
+
+  --   L24:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L12 [0]
+  L6 to L7 -> L21 [1]
+  L7 to L8 -> L16 [3] lasti
+  L8 to L9 -> L21 [1]
+  L12 to L13 -> L15 [1] lasti
+  L14 to L15 -> L15 [1] lasti
+  L16 to L18 -> L20 [5] lasti
+  L18 to L19 -> L21 [1]
+  L20 to L21 -> L21 [1]
+  L21 to L22 -> L24 [2] lasti
+  L23 to L24 -> L24 [2] lasti
+
+Disassembly of <code object conteudo at 0xbdf6f6300, file "biblioteca_listas.py", line 95>:
+  95            RESUME                   0
+
+  98            LOAD_GLOBAL              1 (len + NULL)
+                LOAD_FAST_BORROW         0 (lista)
+                LOAD_CONST               0 ('uids')
+                BINARY_OP               26 ([])
+                CALL                     1
+                LOAD_GLOBAL              2 (biblioteca)
+                LOAD_ATTR                4 (MAX_JOGADORES)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE       40 (to L1)
+                NOT_TAKEN
+
+  99            LOAD_GLOBAL              7 (ValueError + NULL)
+                LOAD_CONST               1 ("'")
+                LOAD_FAST_BORROW         0 (lista)
+                LOAD_CONST               2 ('nome')
+                BINARY_OP               26 ([])
+                FORMAT_SIMPLE
+                LOAD_CONST               3 ("' tem mais de ")
+                LOAD_GLOBAL              2 (biblioteca)
+                LOAD_ATTR                4 (MAX_JOGADORES)
+                FORMAT_SIMPLE
+                LOAD_CONST               4 (' jogadores')
+                BUILD_STRING             5
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 100    L1:     BUILD_LIST               0
+                STORE_FAST               2 (jogadores)
+
+ 101            LOAD_FAST_BORROW         0 (lista)
+                LOAD_CONST               0 ('uids')
+                BINARY_OP               26 ([])
+                GET_ITER
+        L2:     FOR_ITER               103 (to L10)
+                STORE_FAST               3 (u)
+
+ 102            LOAD_FAST_BORROW         1 (ident)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_FAST_BORROW         3 (u)
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L3)
+                NOT_TAKEN
+                POP_TOP
+                BUILD_MAP                0
+        L3:     LOAD_ATTR               11 (items + NULL|self)
+                CALL                     0
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      4 (k)
+                LOAD_FAST_AND_CLEAR      5 (v)
+                SWAP                     3
+        L4:     BUILD_MAP                0
+                SWAP                     2
+        L5:     FOR_ITER                17 (to L8)
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   69 (k, v)
+                LOAD_FAST_BORROW         5 (v)
+                TO_BOOL
+        L6:     POP_JUMP_IF_TRUE         3 (to L7)
+                NOT_TAKEN
+                JUMP_BACKWARD           15 (to L5)
+        L7:     LOAD_FAST_BORROW_LOAD_FAST_BORROW 69 (k, v)
+                MAP_ADD                  2
+                JUMP_BACKWARD           19 (to L5)
+        L8:     END_FOR
+                POP_ITER
+        L9:     STORE_FAST               6 (quem)
+                STORE_FAST               4 (k)
+                STORE_FAST               5 (v)
+
+ 103            LOAD_FAST_BORROW         2 (jogadores)
+                LOAD_ATTR               13 (append + NULL|self)
+                LOAD_CONST               5 ('uid')
+                LOAD_GLOBAL             15 (int + NULL)
+                LOAD_FAST_BORROW         3 (u)
+                CALL                     1
+                BUILD_MAP                1
+                LOAD_FAST_BORROW         6 (quem)
+                DICT_UPDATE              1
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD          105 (to L2)
+
+ 101   L10:     END_FOR
+                POP_ITER
+
+ 105            LOAD_CONST               6 ('fmsh')
+                LOAD_GLOBAL              2 (biblioteca)
+                LOAD_ATTR               16 (FORMATO)
+                LOAD_CONST               7 ('tipo')
+                LOAD_CONST               8 ('lista')
+                LOAD_CONST               9 ('id')
+                LOAD_FAST_BORROW         0 (lista)
+                LOAD_CONST               9 ('id')
+                BINARY_OP               26 ([])
+                LOAD_CONST               2 ('nome')
+                LOAD_FAST_BORROW         0 (lista)
+                LOAD_CONST               2 ('nome')
+                BINARY_OP               26 ([])
+
+ 106            LOAD_CONST              10 ('criado')
+                LOAD_FAST_BORROW         0 (lista)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST              11 ('criada_em')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L11)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST              12 ('')
+       L11:     LOAD_CONST              13 (slice(None, 10, None))
+                BINARY_OP               26 ([])
+                LOAD_CONST              14 ('atualizado')
+                LOAD_FAST_BORROW         0 (lista)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST              15 ('atualizada_em')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L12)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST              12 ('')
+
+ 107   L12:     LOAD_CONST              16 ('app')
+                LOAD_GLOBAL             18 (version)
+                LOAD_ATTR               20 (VERSION)
+                LOAD_CONST              17 ('jogadores')
+                LOAD_FAST_BORROW         2 (jogadores)
+
+ 104            BUILD_MAP                8
+                STORE_FAST               7 (dados)
+
+ 109            LOAD_GLOBAL             22 (re)
+                LOAD_ATTR               24 (fullmatch)
+                PUSH_NULL
+                LOAD_CONST              18 ('#[0-9a-fA-F]{6}')
+                LOAD_FAST_BORROW         0 (lista)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST              19 ('cor')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L13)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST              12 ('')
+       L13:     CALL                     2
+                TO_BOOL
+                POP_JUMP_IF_FALSE       13 (to L14)
+                NOT_TAKEN
+
+ 110            LOAD_FAST_BORROW         0 (lista)
+                LOAD_CONST              19 ('cor')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         7 (dados)
+                LOAD_CONST              19 ('cor')
+                STORE_SUBSCR
+
+ 111   L14:     LOAD_GLOBAL             27 (jogo_unanime + NULL)
+                LOAD_FAST_BORROW         0 (lista)
+                LOAD_CONST               0 ('uids')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         0 (lista)
+                LOAD_CONST               0 ('uids')
+                BINARY_OP               26 ([])
+                TO_BOOL
+                POP_JUMP_IF_FALSE       19 (to L15)
+                NOT_TAKEN
+                LOAD_GLOBAL             29 (familias + NULL)
+                LOAD_FAST_BORROW         0 (lista)
+                LOAD_CONST               0 ('uids')
+                BINARY_OP               26 ([])
+                CALL                     1
+                JUMP_FORWARD             1 (to L16)
+       L15:     BUILD_MAP                0
+       L16:     CALL                     2
+                STORE_FAST               8 (jogo)
+
+ 112            LOAD_FAST_BORROW         8 (jogo)
+                TO_BOOL
+                POP_JUMP_IF_FALSE        5 (to L17)
+                NOT_TAKEN
+
+ 113            LOAD_FAST_BORROW_LOAD_FAST_BORROW 135 (jogo, dados)
+                LOAD_CONST              20 ('jogo')
+                STORE_SUBSCR
+
+ 114   L17:     LOAD_GLOBAL              2 (biblioteca)
+                LOAD_ATTR               30 (conferir)
+                PUSH_NULL
+                LOAD_FAST_BORROW         7 (dados)
+                LOAD_CONST              21 ('.lsh')
+                CALL                     2
+                RETURN_VALUE
+
+  --   L18:     SWAP                     2
+                POP_TOP
+
+ 102            SWAP                     3
+                STORE_FAST               5 (v)
+                STORE_FAST               4 (k)
+                RERAISE                  0
+ExceptionTable:
+  L4 to L6 -> L18 [4]
+  L7 to L9 -> L18 [4]
+
+Disassembly of <code object _gravar at 0xbdef01b80, file "biblioteca_listas.py", line 117>:
+ 117           RESUME                   0
+
+ 119           LOAD_SMALL_INT           0
+               LOAD_CONST               1 (None)
+               IMPORT_NAME              0 (json)
+               STORE_FAST               2 (json)
+
+ 120           LOAD_GLOBAL              2 (os)
+               LOAD_ATTR                4 (path)
+               LOAD_ATTR                7 (join + NULL|self)
+               LOAD_GLOBAL              8 (paths)
+               LOAD_ATTR               10 (biblioteca_dir)
+               PUSH_NULL
+               CALL                     0
+               LOAD_FAST_BORROW         0 (arquivo)
+               CALL                     2
+               STORE_FAST               3 (destino)
+
+ 121           LOAD_FAST_BORROW         3 (destino)
+               LOAD_CONST               2 ('.tmp')
+               BINARY_OP                0 (+)
+               STORE_FAST               4 (temporario)
+
+ 122           LOAD_GLOBAL             13 (open + NULL)
+               LOAD_FAST_BORROW         4 (temporario)
+               LOAD_CONST               3 ('w')
+               LOAD_CONST               4 ('utf-8')
+               LOAD_CONST               5 (('encoding',))
+               CALL_KW                  3
+               COPY                     1
+               LOAD_SPECIAL             1 (__exit__)
+               SWAP                     2
+               SWAP                     3
+               LOAD_SPECIAL             0 (__enter__)
+               CALL                     0
+       L1:     STORE_FAST               5 (fh)
+
+ 123           LOAD_FAST_BORROW         2 (json)
+               LOAD_ATTR               15 (dump + NULL|self)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 21 (dados, fh)
+               LOAD_CONST               6 (False)
+               LOAD_SMALL_INT           1
+               LOAD_CONST               7 (('ensure_ascii', 'indent'))
+               CALL_KW                  4
+               POP_TOP
+
+ 122   L2:     LOAD_CONST               1 (None)
+               LOAD_CONST               1 (None)
+               LOAD_CONST               1 (None)
+               CALL                     3
+               POP_TOP
+
+ 124   L3:     LOAD_GLOBAL              2 (os)
+               LOAD_ATTR               16 (replace)
+               PUSH_NULL
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 67 (temporario, destino)
+               CALL                     2
+               POP_TOP
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+ 122   L4:     PUSH_EXC_INFO
+               WITH_EXCEPT_START
+               TO_BOOL
+               POP_JUMP_IF_TRUE         2 (to L5)
+               NOT_TAKEN
+               RERAISE                  2
+       L5:     POP_TOP
+       L6:     POP_EXCEPT
+               POP_TOP
+               POP_TOP
+               POP_TOP
+               JUMP_BACKWARD_NO_INTERRUPT 40 (to L3)
+
+  --   L7:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L4 [2] lasti
+  L4 to L6 -> L7 [4] lasti
+
+Disassembly of <code object espelhar_favoritos at 0xbdf0db800, file "biblioteca_listas.py", line 127>:
+ 127            RESUME                   0
+
+ 130            LOAD_GLOBAL              0 (_TRAVA)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L1:     POP_TOP
+
+ 131            LOAD_CONST               0 (None)
+                STORE_FAST               1 (por_id)
+
+ 132            LOAD_FAST_BORROW         0 (listas)
+                GET_ITER
+        L2:     FOR_ITER               248 (to L12)
+                STORE_FAST               2 (lista)
+
+ 133            LOAD_FAST_BORROW         2 (lista)
+                LOAD_CONST               1 ('nome')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         2 (lista)
+                LOAD_ATTR                3 (get + NULL|self)
+                LOAD_CONST               2 ('cor')
+                CALL                     1
+                LOAD_GLOBAL              5 (tuple + NULL)
+                LOAD_FAST_BORROW         2 (lista)
+                LOAD_CONST               3 ('uids')
+                BINARY_OP               26 ([])
+                CALL                     1
+                BUILD_TUPLE              3
+                STORE_FAST               3 (marca)
+
+ 134            LOAD_GLOBAL              6 (_escrito)
+                LOAD_ATTR                3 (get + NULL|self)
+                LOAD_FAST_BORROW         2 (lista)
+                LOAD_CONST               4 ('id')
+                BINARY_OP               26 ([])
+                CALL                     1
+                LOAD_FAST_BORROW         3 (marca)
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE        3 (to L3)
+                NOT_TAKEN
+
+ 135            JUMP_BACKWARD           81 (to L2)
+
+ 137    L3:     NOP
+
+ 138    L4:     LOAD_FAST_BORROW         1 (por_id)
+                POP_JUMP_IF_NOT_NONE    11 (to L5)
+                NOT_TAKEN
+
+ 139            LOAD_GLOBAL              9 (_lsh_por_id + NULL)
+                CALL                     0
+                STORE_FAST               1 (por_id)
+
+ 140    L5:     LOAD_GLOBAL             11 (conteudo + NULL)
+                LOAD_FAST_LOAD_FAST     34 (lista, lista)
+                LOAD_CONST               3 ('uids')
+                BINARY_OP               26 ([])
+                TO_BOOL
+                POP_JUMP_IF_FALSE       19 (to L6)
+                NOT_TAKEN
+                LOAD_GLOBAL             13 (identidades + NULL)
+                LOAD_FAST_BORROW         2 (lista)
+                LOAD_CONST               3 ('uids')
+                BINARY_OP               26 ([])
+                CALL                     1
+                JUMP_FORWARD             1 (to L7)
+        L6:     BUILD_MAP                0
+        L7:     CALL                     2
+                STORE_FAST               4 (dados)
+
+ 141            LOAD_FAST_BORROW         1 (por_id)
+                LOAD_ATTR                3 (get + NULL|self)
+                LOAD_FAST_BORROW         2 (lista)
+                LOAD_CONST               4 ('id')
+                BINARY_OP               26 ([])
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        39 (to L10)
+        L8:     NOT_TAKEN
+        L9:     POP_TOP
+                LOAD_GLOBAL             14 (biblioteca)
+                LOAD_ATTR               16 (nome_livre)
+                PUSH_NULL
+                LOAD_GLOBAL             19 (_nome_de_arquivo + NULL)
+                LOAD_FAST_BORROW         2 (lista)
+                LOAD_CONST               1 ('nome')
+                BINARY_OP               26 ([])
+                CALL                     1
+                CALL                     1
+       L10:     STORE_FAST               5 (arquivo)
+
+ 142            LOAD_GLOBAL             21 (_gravar + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 84 (arquivo, dados)
+                CALL                     2
+                POP_TOP
+
+ 143            LOAD_FAST_BORROW_LOAD_FAST_BORROW 81 (arquivo, por_id)
+                LOAD_FAST_BORROW         2 (lista)
+                LOAD_CONST               4 ('id')
+                BINARY_OP               26 ([])
+                STORE_SUBSCR
+
+ 144            LOAD_FAST_BORROW         3 (marca)
+                LOAD_GLOBAL              6 (_escrito)
+                LOAD_FAST_BORROW         2 (lista)
+                LOAD_CONST               4 ('id')
+                BINARY_OP               26 ([])
+                STORE_SUBSCR
+       L11:     JUMP_BACKWARD          250 (to L2)
+
+ 132   L12:     END_FOR
+                POP_ITER
+
+ 130   L13:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  --   L14:     PUSH_EXC_INFO
+
+ 145            LOAD_GLOBAL             22 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       28 (to L18)
+                NOT_TAKEN
+                STORE_FAST               6 (erro)
+
+ 146   L15:     LOAD_GLOBAL             25 (_log + NULL)
+                LOAD_CONST               5 ('lista de Favoritos fora da Biblioteca: ')
+                LOAD_FAST                6 (erro)
+                CONVERT_VALUE            2 (repr)
+                FORMAT_SIMPLE
+                BUILD_STRING             2
+                CALL                     1
+                POP_TOP
+       L16:     POP_EXCEPT
+                LOAD_CONST               0 (None)
+                STORE_FAST               6 (erro)
+                DELETE_FAST              6 (erro)
+                EXTENDED_ARG             1
+                JUMP_BACKWARD          295 (to L2)
+
+  --   L17:     LOAD_CONST               0 (None)
+                STORE_FAST               6 (erro)
+                DELETE_FAST              6 (erro)
+                RERAISE                  1
+
+ 145   L18:     RERAISE                  0
+
+  --   L19:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+ 130   L20:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L21)
+                NOT_TAKEN
+                RERAISE                  2
+       L21:     POP_TOP
+       L22:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                LOAD_CONST               0 (None)
+                RETURN_VALUE
+
+  --   L23:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L20 [2] lasti
+  L4 to L8 -> L14 [3]
+  L9 to L11 -> L14 [3]
+  L11 to L13 -> L20 [2] lasti
+  L14 to L15 -> L19 [4] lasti
+  L15 to L16 -> L17 [4] lasti
+  L16 to L17 -> L20 [2] lasti
+  L17 to L19 -> L19 [4] lasti
+  L19 to L20 -> L20 [2] lasti
+  L20 to L22 -> L23 [4] lasti
+
+Disassembly of <code object espelhar_tudo at 0xbdef02080, file "biblioteca_listas.py", line 149>:
+ 149            RESUME                   0
+
+ 152            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              0 (favoritos)
+                STORE_FAST               0 (favoritos)
+
+ 153            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              1 (lista_fmf)
+                STORE_FAST               1 (lista_fmf)
+
+ 154            LOAD_GLOBAL              4 (_TRAVA)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L1:     POP_TOP
+
+ 155            LOAD_GLOBAL              6 (_escrito)
+                LOAD_ATTR                9 (clear + NULL|self)
+                CALL                     0
+                POP_TOP
+
+ 154    L2:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+
+ 156    L3:     LOAD_GLOBAL             11 (espelhar_favoritos + NULL)
+                LOAD_FAST_BORROW         0 (favoritos)
+                LOAD_ATTR               13 (listas + NULL|self)
+                CALL                     0
+                CALL                     1
+                POP_TOP
+
+ 157            NOP
+
+ 158    L4:     LOAD_FAST_BORROW         1 (lista_fmf)
+                LOAD_ATTR               15 (espelhar_existentes + NULL|self)
+                CALL                     0
+                POP_TOP
+        L5:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+ 154    L6:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L7)
+                NOT_TAKEN
+                RERAISE                  2
+        L7:     POP_TOP
+        L8:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 60 (to L3)
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L10:     PUSH_EXC_INFO
+
+ 159            LOAD_GLOBAL             16 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       27 (to L14)
+                NOT_TAKEN
+                STORE_FAST               2 (erro)
+
+ 160   L11:     LOAD_GLOBAL             19 (_log + NULL)
+                LOAD_CONST               2 ('falhou ao copiar as listas do FM: ')
+                LOAD_FAST                2 (erro)
+                CONVERT_VALUE            2 (repr)
+                FORMAT_SIMPLE
+                BUILD_STRING             2
+                CALL                     1
+                POP_TOP
+       L12:     POP_EXCEPT
+                LOAD_CONST               1 (None)
+                STORE_FAST               2 (erro)
+                DELETE_FAST              2 (erro)
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --   L13:     LOAD_CONST               1 (None)
+                STORE_FAST               2 (erro)
+                DELETE_FAST              2 (erro)
+                RERAISE                  1
+
+ 159   L14:     RERAISE                  0
+
+  --   L15:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L6 [2] lasti
+  L4 to L5 -> L10 [0]
+  L6 to L8 -> L9 [4] lasti
+  L10 to L11 -> L15 [1] lasti
+  L11 to L12 -> L13 [1] lasti
+  L13 to L15 -> L15 [1] lasti
+
+Disassembly of <code object situacao at 0xbdf0dbb80, file "biblioteca_listas.py", line 165>:
+ 165            RESUME                   0
+
+ 168            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              0 (favoritos)
+                STORE_FAST               1 (favoritos)
+
+ 169            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              1 (lista_fmf)
+                STORE_FAST               2 (lista_fmf)
+
+ 170            LOAD_FAST_BORROW         1 (favoritos)
+                LOAD_ATTR                5 (listas + NULL|self)
+                CALL                     0
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      3 (x)
+                SWAP                     2
+        L1:     BUILD_SET                0
+                SWAP                     2
+        L2:     FOR_ITER                11 (to L3)
+                STORE_FAST_LOAD_FAST    51 (x, x)
+                LOAD_CONST               2 ('id')
+                BINARY_OP               26 ([])
+                SET_ADD                  2
+                JUMP_BACKWARD           13 (to L2)
+        L3:     END_FOR
+                POP_ITER
+        L4:     STORE_FAST               4 (ids_favoritos)
+                STORE_FAST               3 (x)
+
+ 171            LOAD_FAST_BORROW         2 (lista_fmf)
+                LOAD_ATTR                7 (listar + NULL|self)
+                CALL                     0
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      3 (x)
+                SWAP                     2
+        L5:     BUILD_MAP                0
+                SWAP                     2
+        L6:     FOR_ITER                52 (to L9)
+                STORE_FAST_LOAD_FAST    51 (x, x)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST               3 ('arquivo_biblioteca')
+                CALL                     1
+                TO_BOOL
+        L7:     POP_JUMP_IF_TRUE         3 (to L8)
+                NOT_TAKEN
+                JUMP_BACKWARD           27 (to L6)
+        L8:     LOAD_FAST_BORROW         3 (x)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST               3 ('arquivo_biblioteca')
+                CALL                     1
+                LOAD_FAST_BORROW         3 (x)
+                LOAD_CONST               2 ('id')
+                BINARY_OP               26 ([])
+                MAP_ADD                  2
+                JUMP_BACKWARD           54 (to L6)
+        L9:     END_FOR
+                POP_ITER
+       L10:     STORE_FAST               5 (ligadas)
+                STORE_FAST               3 (x)
+
+ 172            LOAD_FAST_BORROW         0 (itens)
+                GET_ITER
+       L11:     FOR_ITER               174 (to L16)
+                STORE_FAST               6 (item)
+
+ 173            LOAD_FAST_BORROW         6 (item)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST               4 ('erro')
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE        3 (to L12)
+                NOT_TAKEN
+
+ 174            JUMP_BACKWARD           28 (to L11)
+
+ 175   L12:     LOAD_FAST_BORROW         6 (item)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST               5 ('tipo')
+                CALL                     1
+                LOAD_CONST               6 ('lista')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE       52 (to L14)
+                NOT_TAKEN
+
+ 176            LOAD_GLOBAL             11 (bool + NULL)
+                LOAD_FAST_BORROW         6 (item)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST               7 ('listaId')
+                CALL                     1
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_FALSE       13 (to L13)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_FAST_BORROW         6 (item)
+                LOAD_CONST               7 ('listaId')
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW         4 (ids_favoritos)
+                CONTAINS_OP              0 (in)
+       L13:     LOAD_FAST_BORROW         6 (item)
+                LOAD_CONST               8 ('carregada')
+                STORE_SUBSCR
+                JUMP_BACKWARD          101 (to L11)
+
+ 177   L14:     LOAD_FAST_BORROW         6 (item)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_CONST               5 ('tipo')
+                CALL                     1
+                LOAD_CONST               9 ('listaFm')
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_TRUE         3 (to L15)
+                NOT_TAKEN
+                JUMP_BACKWARD          125 (to L11)
+
+ 178   L15:     LOAD_FAST_BORROW         5 (ligadas)
+                LOAD_ATTR                9 (get + NULL|self)
+                LOAD_FAST_BORROW         6 (item)
+                LOAD_CONST              10 ('arquivo')
+                BINARY_OP               26 ([])
+                LOAD_CONST              11 ('')
+                CALL                     2
+                LOAD_FAST_BORROW         6 (item)
+                LOAD_CONST               7 ('listaId')
+                STORE_SUBSCR
+
+ 179            LOAD_GLOBAL             11 (bool + NULL)
+                LOAD_FAST_BORROW         6 (item)
+                LOAD_CONST               7 ('listaId')
+                BINARY_OP               26 ([])
+                CALL                     1
+                LOAD_FAST_BORROW         6 (item)
+                LOAD_CONST               8 ('carregada')
+                STORE_SUBSCR
+                JUMP_BACKWARD          176 (to L11)
+
+ 172   L16:     END_FOR
+                POP_ITER
+
+ 180            LOAD_FAST_BORROW         0 (itens)
+                RETURN_VALUE
+
+  --   L17:     SWAP                     2
+                POP_TOP
+
+ 170            SWAP                     2
+                STORE_FAST               3 (x)
+                RERAISE                  0
+
+  --   L18:     SWAP                     2
+                POP_TOP
+
+ 171            SWAP                     2
+                STORE_FAST               3 (x)
+                RERAISE                  0
+ExceptionTable:
+  L1 to L4 -> L17 [2]
+  L5 to L7 -> L18 [2]
+  L8 to L10 -> L18 [2]
+
+Disassembly of <code object _normal at 0x10822e5b0, file "biblioteca_listas.py", line 183>:
+183           RESUME                   0
+
+184           LOAD_GLOBAL              0 (unicodedata)
+              LOAD_ATTR                2 (normalize)
+              PUSH_NULL
+              LOAD_CONST               0 ('NFKD')
+              LOAD_FAST                0 (texto)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               1 ('')
+      L1:     CALL                     2
+              LOAD_ATTR                5 (encode + NULL|self)
+              LOAD_CONST               2 ('ascii')
+              LOAD_CONST               3 ('ignore')
+              CALL                     2
+              LOAD_ATTR                7 (decode + NULL|self)
+              CALL                     0
+              LOAD_ATTR                9 (casefold + NULL|self)
+              CALL                     0
+              LOAD_ATTR               11 (strip + NULL|self)
+              CALL                     0
+              RETURN_VALUE
+
+Disassembly of <code object _confere at 0xbdf6d6680, file "biblioteca_listas.py", line 187>:
+187           RESUME                   0
+
+193           LOAD_FAST_BORROW         0 (do_arquivo)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               0 ('nascimento')
+              CALL                     1
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               1 ('')
+      L1:     LOAD_CONST               2 (slice(None, 10, None))
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         1 (local)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               0 ('nascimento')
+              CALL                     1
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L2)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               1 ('')
+      L2:     LOAD_CONST               2 (slice(None, 10, None))
+              BINARY_OP               26 ([])
+              STORE_FAST_STORE_FAST   50 (n2, n1)
+
+194           LOAD_FAST_BORROW         2 (n1)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       13 (to L3)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         3 (n2)
+              TO_BOOL
+              POP_JUMP_IF_FALSE        5 (to L3)
+              NOT_TAKEN
+
+195           LOAD_FAST_BORROW_LOAD_FAST_BORROW 35 (n1, n2)
+              COMPARE_OP              72 (==)
+              RETURN_VALUE
+
+196   L3:     LOAD_GLOBAL              3 (_normal + NULL)
+              LOAD_FAST_BORROW         0 (do_arquivo)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               3 ('nome')
+              CALL                     1
+              CALL                     1
+              LOAD_ATTR                5 (split + NULL|self)
+              CALL                     0
+              LOAD_GLOBAL              3 (_normal + NULL)
+              LOAD_FAST_BORROW         1 (local)
+              LOAD_ATTR                1 (get + NULL|self)
+              LOAD_CONST               3 ('nome')
+              CALL                     1
+              CALL                     1
+              LOAD_ATTR                5 (split + NULL|self)
+              CALL                     0
+              STORE_FAST_STORE_FAST   84 (b, a)
+
+197           LOAD_FAST_BORROW         4 (a)
+              TO_BOOL
+              POP_JUMP_IF_FALSE        9 (to L4)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         5 (b)
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L5)
+              NOT_TAKEN
+
+198   L4:     LOAD_CONST               4 (True)
+              RETURN_VALUE
+
+199   L5:     LOAD_GLOBAL              7 (set + NULL)
+              LOAD_FAST_BORROW         4 (a)
+              CALL                     1
+              LOAD_GLOBAL              7 (set + NULL)
+              LOAD_FAST_BORROW         5 (b)
+              CALL                     1
+              COMPARE_OP              42 (<=)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        78 (to L6)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_GLOBAL              7 (set + NULL)
+              LOAD_FAST_BORROW         5 (b)
+              CALL                     1
+              LOAD_GLOBAL              7 (set + NULL)
+              LOAD_FAST_BORROW         4 (a)
+              CALL                     1
+              COMPARE_OP              42 (<=)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        47 (to L6)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_FAST_BORROW         4 (a)
+              LOAD_SMALL_INT           0
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         5 (b)
+              LOAD_SMALL_INT           0
+              BINARY_OP               26 ([])
+              COMPARE_OP              72 (==)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_FALSE       20 (to L6)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_FAST_BORROW         4 (a)
+              LOAD_CONST               5 (-1)
+              BINARY_OP               26 ([])
+              LOAD_FAST_BORROW         5 (b)
+              LOAD_CONST               5 (-1)
+              BINARY_OP               26 ([])
+              COMPARE_OP              72 (==)
+      L6:     RETURN_VALUE
+
+Disassembly of <code object carregar at 0x107fef4b0, file "biblioteca_listas.py", line 202>:
+202           RESUME                   0
+
+207           LOAD_GLOBAL              0 (biblioteca)
+              LOAD_ATTR                2 (nome_seguro)
+              PUSH_NULL
+              LOAD_FAST_BORROW         0 (arquivo)
+              CALL                     1
+              STORE_FAST               0 (arquivo)
+
+208           LOAD_GLOBAL              4 (os)
+              LOAD_ATTR                6 (path)
+              LOAD_ATTR                9 (splitext + NULL|self)
+              LOAD_FAST_BORROW         0 (arquivo)
+              CALL                     1
+              LOAD_SMALL_INT           1
+              BINARY_OP               26 ([])
+              LOAD_ATTR               11 (lower + NULL|self)
+              CALL                     0
+              STORE_FAST               3 (ext)
+
+209           LOAD_FAST_BORROW         3 (ext)
+              LOAD_CONST               1 ('.lsh')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE       12 (to L1)
+              NOT_TAKEN
+
+210           LOAD_GLOBAL             13 (_carregar_lsh + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 2 (arquivo, teto_favoritos)
+              CALL                     2
+              RETURN_VALUE
+
+211   L1:     LOAD_FAST_BORROW         3 (ext)
+              LOAD_CONST               2 ('.fmf')
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_FALSE       12 (to L2)
+              NOT_TAKEN
+
+212           LOAD_GLOBAL             15 (_carregar_fmf + NULL)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (arquivo, teto_fm)
+              CALL                     2
+              RETURN_VALUE
+
+213   L2:     LOAD_GLOBAL              0 (biblioteca)
+              LOAD_ATTR               16 (ArquivoInvalido)
+              PUSH_NULL
+              LOAD_CONST               3 ('este arquivo nao e uma lista')
+              CALL                     1
+              RAISE_VARARGS            1
+
+Disassembly of <code object _carregar_lsh at 0xbdf6f4f00, file "biblioteca_listas.py", line 216>:
+  --            MAKE_CELL               14 (id_arquivo)
+
+ 216            RESUME                   0
+
+ 217            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              0 (favoritos)
+                STORE_FAST               2 (favoritos)
+
+ 218            LOAD_GLOBAL              2 (biblioteca)
+                LOAD_ATTR                4 (ler)
+                PUSH_NULL
+                LOAD_FAST_BORROW         0 (arquivo)
+                CALL                     1
+                STORE_FAST               3 (dados)
+
+ 219            LOAD_FAST_BORROW         3 (dados)
+                LOAD_ATTR                7 (get + NULL|self)
+                LOAD_CONST               2 ('id')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L1)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST               3 ('')
+        L1:     STORE_DEREF             14 (id_arquivo)
+
+ 220            LOAD_GLOBAL              9 (next + NULL)
+                LOAD_FAST_BORROW        14 (id_arquivo)
+                BUILD_TUPLE              1
+                LOAD_CONST               4 (<code object <genexpr> at 0x1081f0ae0, file "biblioteca_listas.py", line 220>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST_BORROW         2 (favoritos)
+                LOAD_ATTR               11 (listas + NULL|self)
+                CALL                     0
+                GET_ITER
+                CALL                     0
+                LOAD_CONST               1 (None)
+                CALL                     2
+                STORE_FAST               4 (ja)
+
+ 221            LOAD_FAST_BORROW         4 (ja)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       38 (to L2)
+                NOT_TAKEN
+
+ 222            LOAD_CONST               5 ('destino')
+                LOAD_CONST               6 ('favoritos')
+                LOAD_CONST               2 ('id')
+                LOAD_FAST_BORROW         4 (ja)
+                LOAD_CONST               2 ('id')
+                BINARY_OP               26 ([])
+                LOAD_CONST               7 ('ja_estava')
+                LOAD_CONST               8 (True)
+
+ 223            LOAD_CONST               9 ('importados')
+                LOAD_GLOBAL             13 (len + NULL)
+                LOAD_FAST_BORROW         4 (ja)
+                LOAD_CONST              10 ('uids')
+                BINARY_OP               26 ([])
+                CALL                     1
+                LOAD_CONST              11 ('nao_conferem')
+                BUILD_LIST               0
+                LOAD_CONST              12 ('sem_captura')
+                LOAD_SMALL_INT           0
+
+ 222            BUILD_MAP                6
+                RETURN_VALUE
+
+ 224    L2:     LOAD_FAST_BORROW         3 (dados)
+                LOAD_CONST              13 ('jogadores')
+                BINARY_OP               26 ([])
+                STORE_FAST               5 (jogadores)
+
+ 225            LOAD_FAST_BORROW         5 (jogadores)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       34 (to L7)
+                NOT_TAKEN
+                LOAD_GLOBAL             15 (identidades + NULL)
+                LOAD_FAST_BORROW         5 (jogadores)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      6 (j)
+                SWAP                     2
+        L3:     BUILD_LIST               0
+                SWAP                     2
+        L4:     FOR_ITER                11 (to L5)
+                STORE_FAST_LOAD_FAST   102 (j, j)
+                LOAD_CONST              14 ('uid')
+                BINARY_OP               26 ([])
+                LIST_APPEND              2
+                JUMP_BACKWARD           13 (to L4)
+        L5:     END_FOR
+                POP_ITER
+        L6:     SWAP                     2
+                STORE_FAST               6 (j)
+                CALL                     1
+                JUMP_FORWARD             1 (to L8)
+        L7:     BUILD_MAP                0
+        L8:     STORE_FAST               7 (locais)
+
+ 226            BUILD_LIST               0
+                BUILD_LIST               0
+                LOAD_SMALL_INT           0
+                STORE_FAST_STORE_FAST  169 (sem_captura, nao_conferem)
+                STORE_FAST               8 (aceitos)
+
+ 227            LOAD_FAST_BORROW         5 (jogadores)
+                GET_ITER
+        L9:     FOR_ITER               171 (to L13)
+                STORE_FAST               6 (j)
+
+ 228            LOAD_FAST_BORROW         7 (locais)
+                LOAD_ATTR                7 (get + NULL|self)
+                LOAD_FAST_BORROW         6 (j)
+                LOAD_CONST              14 ('uid')
+                BINARY_OP               26 ([])
+                CALL                     1
+                STORE_FAST              11 (local)
+
+ 229            LOAD_FAST_BORROW        11 (local)
+                TO_BOOL
+                POP_JUMP_IF_TRUE        36 (to L10)
+                NOT_TAKEN
+
+ 230            LOAD_FAST_BORROW        10 (sem_captura)
+                LOAD_SMALL_INT           1
+                BINARY_OP               13 (+=)
+                STORE_FAST              10 (sem_captura)
+
+ 231            LOAD_FAST_BORROW         8 (aceitos)
+                LOAD_ATTR               17 (append + NULL|self)
+                LOAD_FAST_BORROW         6 (j)
+                LOAD_CONST              14 ('uid')
+                BINARY_OP               26 ([])
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD           70 (to L9)
+
+ 232   L10:     LOAD_GLOBAL             19 (_confere + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 107 (j, local)
+                CALL                     2
+                TO_BOOL
+                POP_JUMP_IF_FALSE       27 (to L11)
+                NOT_TAKEN
+
+ 233            LOAD_FAST_BORROW         8 (aceitos)
+                LOAD_ATTR               17 (append + NULL|self)
+                LOAD_FAST_BORROW         6 (j)
+                LOAD_CONST              14 ('uid')
+                BINARY_OP               26 ([])
+                CALL                     1
+                POP_TOP
+                JUMP_BACKWARD          113 (to L9)
+
+ 235   L11:     LOAD_FAST                9 (nao_conferem)
+                LOAD_ATTR               17 (append + NULL|self)
+                LOAD_FAST_BORROW         6 (j)
+                LOAD_ATTR                7 (get + NULL|self)
+                LOAD_CONST              15 ('nome')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        19 (to L12)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_GLOBAL             21 (str + NULL)
+                LOAD_FAST_BORROW         6 (j)
+                LOAD_CONST              14 ('uid')
+                BINARY_OP               26 ([])
+                CALL                     1
+       L12:     CALL                     1
+                POP_TOP
+                JUMP_BACKWARD          173 (to L9)
+
+ 227   L13:     END_FOR
+                POP_ITER
+
+ 238            LOAD_FAST                2 (favoritos)
+                LOAD_ATTR               23 (criar + NULL|self)
+                LOAD_FAST_BORROW         3 (dados)
+                LOAD_ATTR                7 (get + NULL|self)
+                LOAD_CONST              15 ('nome')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        39 (to L14)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_GLOBAL             24 (os)
+                LOAD_ATTR               26 (path)
+                LOAD_ATTR               29 (splitext + NULL|self)
+                LOAD_FAST_BORROW         0 (arquivo)
+                CALL                     1
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+
+ 239   L14:     LOAD_FAST_BORROW         3 (dados)
+                LOAD_ATTR                7 (get + NULL|self)
+                LOAD_CONST              16 ('cor')
+                CALL                     1
+                LOAD_FAST                8 (aceitos)
+                LOAD_DEREF              14 (id_arquivo)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L15)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST               1 (None)
+       L15:     LOAD_FAST_BORROW         1 (teto)
+
+ 238            LOAD_CONST              17 (('id_lista', 'teto'))
+                CALL_KW                  5
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST  205 (lista, _)
+
+ 240            LOAD_CONST               5 ('destino')
+                LOAD_CONST               6 ('favoritos')
+                LOAD_CONST               2 ('id')
+                LOAD_FAST_BORROW        12 (lista)
+                LOAD_CONST               2 ('id')
+                BINARY_OP               26 ([])
+                LOAD_CONST               7 ('ja_estava')
+                LOAD_CONST              18 (False)
+                LOAD_CONST               9 ('importados')
+                LOAD_GLOBAL             13 (len + NULL)
+                LOAD_FAST_BORROW         8 (aceitos)
+                CALL                     1
+
+ 241            LOAD_CONST              11 ('nao_conferem')
+                LOAD_FAST_BORROW         9 (nao_conferem)
+                LOAD_CONST              12 ('sem_captura')
+                LOAD_FAST_BORROW        10 (sem_captura)
+
+ 240            BUILD_MAP                6
+                RETURN_VALUE
+
+  --   L16:     SWAP                     2
+                POP_TOP
+
+ 225            SWAP                     2
+                STORE_FAST               6 (j)
+                RERAISE                  0
+ExceptionTable:
+  L3 to L6 -> L16 [4]
+
+Disassembly of <code object <genexpr> at 0x1081f0ae0, file "biblioteca_listas.py", line 220>:
+  --           COPY_FREE_VARS           1
+
+ 220           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                33 (to L7)
+               STORE_FAST               1 (x)
+               LOAD_DEREF               2 (id_arquivo)
+               TO_BOOL
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           13 (to L2)
+       L4:     LOAD_FAST_BORROW         1 (x)
+               LOAD_CONST               0 ('id')
+               BINARY_OP               26 ([])
+               LOAD_DEREF               2 (id_arquivo)
+               COMPARE_OP              88 (bool(==))
+       L5:     POP_JUMP_IF_TRUE         3 (to L6)
+               NOT_TAKEN
+               JUMP_BACKWARD           29 (to L2)
+       L6:     LOAD_FAST_BORROW         1 (x)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           35 (to L2)
+       L7:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L8:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L8 [0] lasti
+  L4 to L5 -> L8 [0] lasti
+  L6 to L8 -> L8 [0] lasti
+
+Disassembly of <code object _carregar_fmf at 0xbdf6d6a00, file "biblioteca_listas.py", line 244>:
+  --           MAKE_CELL                0 (arquivo)
+
+ 244           RESUME                   0
+
+ 245           LOAD_SMALL_INT           0
+               LOAD_CONST               1 (None)
+               IMPORT_NAME              0 (lista_fmf)
+               STORE_FAST               2 (lista_fmf)
+
+ 246           LOAD_GLOBAL              3 (next + NULL)
+               LOAD_FAST_BORROW         0 (arquivo)
+               BUILD_TUPLE              1
+               LOAD_CONST               2 (<code object <genexpr> at 0x1081f0c10, file "biblioteca_listas.py", line 246>)
+               MAKE_FUNCTION
+               SET_FUNCTION_ATTRIBUTE   8 (closure)
+               LOAD_FAST_BORROW         2 (lista_fmf)
+               LOAD_ATTR                5 (listar + NULL|self)
+               CALL                     0
+               GET_ITER
+               CALL                     0
+               LOAD_CONST               1 (None)
+               CALL                     2
+               STORE_FAST               3 (ligada)
+
+ 247           LOAD_FAST_BORROW         3 (ligada)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       38 (to L1)
+               NOT_TAKEN
+
+ 248           LOAD_CONST               3 ('destino')
+               LOAD_CONST               4 ('lista')
+               LOAD_CONST               5 ('id')
+               LOAD_FAST_BORROW         3 (ligada)
+               LOAD_CONST               5 ('id')
+               BINARY_OP               26 ([])
+               LOAD_CONST               6 ('ja_estava')
+               LOAD_CONST               7 (True)
+
+ 249           LOAD_CONST               8 ('importados')
+               LOAD_GLOBAL              7 (len + NULL)
+               LOAD_FAST_BORROW         3 (ligada)
+               LOAD_CONST               9 ('uids')
+               BINARY_OP               26 ([])
+               CALL                     1
+               LOAD_CONST              10 ('nao_conferem')
+               BUILD_LIST               0
+               LOAD_CONST              11 ('sem_captura')
+               LOAD_SMALL_INT           0
+
+ 248           BUILD_MAP                6
+               RETURN_VALUE
+
+ 250   L1:     LOAD_GLOBAL              8 (os)
+               LOAD_ATTR               10 (path)
+               LOAD_ATTR               13 (join + NULL|self)
+               LOAD_GLOBAL             14 (paths)
+               LOAD_ATTR               16 (biblioteca_dir)
+               PUSH_NULL
+               CALL                     0
+               LOAD_DEREF               0 (arquivo)
+               CALL                     2
+               STORE_FAST               4 (caminho)
+
+ 251           LOAD_GLOBAL              8 (os)
+               LOAD_ATTR               10 (path)
+               LOAD_ATTR               19 (isfile + NULL|self)
+               LOAD_FAST_BORROW         4 (caminho)
+               CALL                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE        23 (to L2)
+               NOT_TAKEN
+
+ 252           LOAD_GLOBAL             20 (biblioteca)
+               LOAD_ATTR               22 (ArquivoInvalido)
+               PUSH_NULL
+               LOAD_CONST              12 ('arquivo nao encontrado')
+               CALL                     1
+               RAISE_VARARGS            1
+
+ 253   L2:     NOP
+
+ 254   L3:     LOAD_FAST_BORROW         2 (lista_fmf)
+               LOAD_ATTR               25 (_ler_arquivo + NULL|self)
+               LOAD_FAST_BORROW         4 (caminho)
+               CALL                     1
+               UNPACK_SEQUENCE          2
+               STORE_FAST_STORE_FAST   86 (dados, modificado)
+
+ 255           LOAD_FAST_BORROW         2 (lista_fmf)
+               LOAD_ATTR               27 (adicionar + NULL|self)
+               LOAD_FAST_BORROW         5 (dados)
+               LOAD_DEREF               0 (arquivo)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 70 (caminho, modificado)
+
+ 256           LOAD_DEREF               0 (arquivo)
+               LOAD_CONST               7 (True)
+               LOAD_FAST_BORROW         1 (teto)
+
+ 255           LOAD_CONST              13 (('origem', 'arquivo_em', 'arquivo_biblioteca', 'sem_substituir', 'teto'))
+               CALL_KW                  7
+               STORE_FAST               7 (nova)
+
+ 259   L4:     LOAD_CONST               3 ('destino')
+               LOAD_CONST               4 ('lista')
+               LOAD_CONST               5 ('id')
+               LOAD_FAST                7 (nova)
+               LOAD_CONST               5 ('id')
+               BINARY_OP               26 ([])
+               LOAD_CONST               6 ('ja_estava')
+               LOAD_CONST              14 (False)
+               LOAD_CONST               8 ('importados')
+               LOAD_GLOBAL              7 (len + NULL)
+               LOAD_FAST                7 (nova)
+               LOAD_CONST               9 ('uids')
+               BINARY_OP               26 ([])
+               CALL                     1
+
+ 260           LOAD_CONST              10 ('nao_conferem')
+               BUILD_LIST               0
+               LOAD_CONST              11 ('sem_captura')
+               LOAD_SMALL_INT           0
+
+ 259           BUILD_MAP                6
+               RETURN_VALUE
+
+  --   L5:     PUSH_EXC_INFO
+
+ 257           LOAD_FAST                2 (lista_fmf)
+               LOAD_ATTR               28 (ListaInvalida)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE       37 (to L8)
+               NOT_TAKEN
+               STORE_FAST               8 (e)
+
+ 258   L6:     LOAD_GLOBAL             20 (biblioteca)
+               LOAD_ATTR               22 (ArquivoInvalido)
+               PUSH_NULL
+               LOAD_GLOBAL             31 (str + NULL)
+               LOAD_FAST                8 (e)
+               CALL                     1
+               CALL                     1
+               RAISE_VARARGS            1
+
+  --   L7:     LOAD_CONST               1 (None)
+               STORE_FAST               8 (e)
+               DELETE_FAST              8 (e)
+               RERAISE                  1
+
+ 257   L8:     RERAISE                  0
+
+  --   L9:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L3 to L4 -> L5 [0]
+  L5 to L6 -> L9 [1] lasti
+  L6 to L7 -> L7 [1] lasti
+  L7 to L9 -> L9 [1] lasti
+
+Disassembly of <code object <genexpr> at 0x1081f0c10, file "biblioteca_listas.py", line 246>:
+  --           COPY_FREE_VARS           1
+
+ 246           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                30 (to L5)
+               STORE_FAST_LOAD_FAST    17 (x, x)
+               LOAD_ATTR                1 (get + NULL|self)
+               LOAD_CONST               0 ('arquivo_biblioteca')
+               CALL                     1
+               LOAD_DEREF               2 (arquivo)
+               COMPARE_OP              88 (bool(==))
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           26 (to L2)
+       L4:     LOAD_FAST_BORROW         1 (x)
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           32 (to L2)
+       L5:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L6:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L6 [0] lasti
+  L4 to L6 -> L6 [0] lasti

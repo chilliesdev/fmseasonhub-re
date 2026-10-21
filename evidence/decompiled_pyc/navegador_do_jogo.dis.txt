@@ -1,0 +1,1543 @@
+# Module: navegador_do_jogo
+# Filename: navegador_do_jogo.py
+
+  0           RESUME                   0
+
+ 18           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (json)
+              STORE_NAME               0 (json)
+
+ 19           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (os)
+              STORE_NAME               1 (os)
+
+ 20           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              2 (subprocess)
+              STORE_NAME               2 (subprocess)
+
+ 21           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              3 (threading)
+              STORE_NAME               3 (threading)
+
+ 22           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              4 (time)
+              STORE_NAME               4 (time)
+
+ 23           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              5 (urllib.request)
+              STORE_NAME               6 (urllib)
+
+ 25           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              7 (paths)
+              STORE_NAME               7 (paths)
+
+ 27           LOAD_CONST              17 (('C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe', 'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe', 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe', 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'))
+              STORE_NAME               8 (_CANDIDATOS)
+
+ 33           LOAD_CONST               2 (15.0)
+              STORE_NAME               9 (_ESPERA_MAXIMA)
+
+ 35           LOAD_CONST               3 (<code object _log at 0x107fd7c40, file "navegador_do_jogo.py", line 35>)
+              MAKE_FUNCTION
+              STORE_NAME              10 (_log)
+
+ 44           LOAD_NAME                3 (threading)
+              LOAD_ATTR               22 (Lock)
+              PUSH_NULL
+              CALL                     0
+              STORE_NAME              12 (_trava)
+
+ 45           LOAD_CONST               1 (None)
+              STORE_GLOBAL            13 (_processo)
+
+ 46           LOAD_CONST               1 (None)
+              STORE_GLOBAL            14 (_porta)
+
+ 47           LOAD_CONST               4 (False)
+              STORE_GLOBAL            15 (_adotado)
+
+ 48           LOAD_CONST               1 (None)
+              STORE_GLOBAL            16 (_job)
+
+ 51           LOAD_CONST               5 (<code object _executavel at 0x107fef4b0, file "navegador_do_jogo.py", line 51>)
+              MAKE_FUNCTION
+              STORE_NAME              17 (_executavel)
+
+ 60           LOAD_CONST              18 ((2.0,))
+              LOAD_CONST               6 (<code object _ler_json at 0x107f7e640, file "navegador_do_jogo.py", line 60>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              18 (_ler_json)
+
+ 65           LOAD_CONST               7 (<code object _vivo at 0x10822c800, file "navegador_do_jogo.py", line 65>)
+              MAKE_FUNCTION
+              STORE_NAME              19 (_vivo)
+
+ 75           LOAD_CONST               8 (<code object _abrir at 0xbdeefdb00, file "navegador_do_jogo.py", line 75>)
+              MAKE_FUNCTION
+              STORE_NAME              20 (_abrir)
+
+ 98           LOAD_BUILD_CLASS
+              PUSH_NULL
+              LOAD_CONST               9 (<code object _PerfilEmUso at 0x108225020, file "navegador_do_jogo.py", line 98>)
+              MAKE_FUNCTION
+              LOAD_CONST              10 ('_PerfilEmUso')
+              LOAD_NAME               21 (RuntimeError)
+              CALL                     3
+              STORE_NAME              22 (_PerfilEmUso)
+
+102           LOAD_SMALL_INT          21
+              STORE_NAME              23 (CODIGO_PERFIL_EM_USO)
+
+105           LOAD_CONST              11 (<code object _lancar at 0xbdf6eea00, file "navegador_do_jogo.py", line 105>)
+              MAKE_FUNCTION
+              STORE_NAME              24 (_lancar)
+
+136           LOAD_NAME               10 (_log)
+              BUILD_TUPLE              1
+              LOAD_CONST              12 (<code object pagina at 0xbdf6d7100, file "navegador_do_jogo.py", line 136>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              25 (pagina)
+
+151           LOAD_CONST              13 (<code object _porta_viva at 0x107feef10, file "navegador_do_jogo.py", line 151>)
+              MAKE_FUNCTION
+              STORE_NAME              26 (_porta_viva)
+
+161           LOAD_CONST              14 (<code object _amarrar_ao_app at 0xbdf6f6d00, file "navegador_do_jogo.py", line 161>)
+              MAKE_FUNCTION
+              STORE_NAME              27 (_amarrar_ao_app)
+
+200           LOAD_CONST              15 (<code object _fechar_orfao at 0x10829c410, file "navegador_do_jogo.py", line 200>)
+              MAKE_FUNCTION
+              STORE_NAME              28 (_fechar_orfao)
+
+213           LOAD_CONST              16 (<code object fechar at 0xbdef02300, file "navegador_do_jogo.py", line 213>)
+              MAKE_FUNCTION
+              STORE_NAME              29 (fechar)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _log at 0x107fd7c40, file "navegador_do_jogo.py", line 35>:
+  35            RESUME                   0
+
+  37            NOP
+
+  38    L1:     LOAD_GLOBAL              1 (open + NULL)
+                LOAD_GLOBAL              2 (paths)
+                LOAD_ATTR                4 (user_data_path)
+                PUSH_NULL
+                LOAD_CONST               0 ('fmsh.log')
+                CALL                     1
+                LOAD_CONST               1 ('a')
+                LOAD_CONST               2 ('utf-8')
+                LOAD_CONST               3 (('encoding',))
+                CALL_KW                  3
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_FAST               1 (f)
+
+  39            LOAD_FAST_BORROW         1 (f)
+                LOAD_ATTR                7 (write + NULL|self)
+                LOAD_GLOBAL              8 (time)
+                LOAD_ATTR               10 (strftime)
+                PUSH_NULL
+                LOAD_CONST               4 ('%Y-%m-%d %H:%M:%S')
+                CALL                     1
+                CONVERT_VALUE            1 (str)
+                FORMAT_SIMPLE
+                LOAD_CONST               5 ('  ')
+                LOAD_FAST_BORROW         0 (texto)
+                CONVERT_VALUE            1 (str)
+                FORMAT_SIMPLE
+                LOAD_CONST               6 ('\n')
+                BUILD_STRING             4
+                CALL                     1
+                POP_TOP
+
+  38    L3:     LOAD_CONST               7 (None)
+                LOAD_CONST               7 (None)
+                LOAD_CONST               7 (None)
+                CALL                     3
+                POP_TOP
+        L4:     LOAD_CONST               7 (None)
+                RETURN_VALUE
+        L5:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L6)
+                NOT_TAKEN
+                RERAISE                  2
+        L6:     POP_TOP
+        L7:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+        L8:     LOAD_CONST               7 (None)
+                RETURN_VALUE
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L10:     PUSH_EXC_INFO
+
+  40            LOAD_GLOBAL             12 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L12)
+                NOT_TAKEN
+                POP_TOP
+
+  41   L11:     POP_EXCEPT
+                LOAD_CONST               7 (None)
+                RETURN_VALUE
+
+  40   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L10 [0]
+  L2 to L3 -> L5 [2] lasti
+  L3 to L4 -> L10 [0]
+  L5 to L7 -> L9 [4] lasti
+  L7 to L8 -> L10 [0]
+  L9 to L10 -> L10 [0]
+  L10 to L11 -> L13 [1] lasti
+  L12 to L13 -> L13 [1] lasti
+
+Disassembly of <code object _executavel at 0x107fef4b0, file "navegador_do_jogo.py", line 51>:
+ 51           RESUME                   0
+
+ 52           LOAD_GLOBAL              0 (os)
+              LOAD_ATTR                2 (environ)
+              LOAD_ATTR                5 (get + NULL|self)
+              LOAD_CONST               0 ('LOCALAPPDATA')
+              LOAD_CONST               1 ('')
+              CALL                     2
+              STORE_FAST               0 (local)
+
+ 53           LOAD_GLOBAL              0 (os)
+              LOAD_ATTR                6 (path)
+              LOAD_ATTR                9 (join + NULL|self)
+              LOAD_FAST_BORROW         0 (local)
+              LOAD_CONST               2 ('Google\\Chrome\\Application\\chrome.exe')
+              CALL                     2
+              BUILD_TUPLE              1
+              STORE_FAST               1 (extras)
+
+ 54           LOAD_GLOBAL             10 (_CANDIDATOS)
+              LOAD_FAST_BORROW         1 (extras)
+              BINARY_OP                0 (+)
+              GET_ITER
+      L1:     FOR_ITER                44 (to L3)
+              STORE_FAST               2 (caminho)
+
+ 55           LOAD_GLOBAL              0 (os)
+              LOAD_ATTR                6 (path)
+              LOAD_ATTR               13 (isfile + NULL|self)
+              LOAD_FAST_BORROW         2 (caminho)
+              CALL                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L2)
+              NOT_TAKEN
+              JUMP_BACKWARD           42 (to L1)
+
+ 56   L2:     LOAD_FAST_BORROW         2 (caminho)
+              SWAP                     2
+              POP_TOP
+              RETURN_VALUE
+
+ 54   L3:     END_FOR
+              POP_ITER
+
+ 57           LOAD_CONST               3 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _ler_json at 0x107f7e640, file "navegador_do_jogo.py", line 60>:
+  60           RESUME                   0
+
+  61           LOAD_GLOBAL              0 (urllib)
+               LOAD_ATTR                2 (request)
+               LOAD_ATTR                5 (urlopen + NULL|self)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (url, tempo)
+               LOAD_CONST               0 (('timeout',))
+               CALL_KW                  2
+               COPY                     1
+               LOAD_SPECIAL             1 (__exit__)
+               SWAP                     2
+               SWAP                     3
+               LOAD_SPECIAL             0 (__enter__)
+               CALL                     0
+       L1:     STORE_FAST               2 (r)
+
+  62           LOAD_GLOBAL              6 (json)
+               LOAD_ATTR                8 (loads)
+               PUSH_NULL
+               LOAD_FAST_BORROW         2 (r)
+               LOAD_ATTR               11 (read + NULL|self)
+               CALL                     0
+               LOAD_ATTR               13 (decode + NULL|self)
+               LOAD_CONST               1 ('utf-8')
+               CALL                     1
+               CALL                     1
+
+  61   L2:     SWAP                     3
+               SWAP                     2
+               LOAD_CONST               2 (None)
+               LOAD_CONST               2 (None)
+               LOAD_CONST               2 (None)
+               CALL                     3
+               POP_TOP
+               RETURN_VALUE
+       L3:     PUSH_EXC_INFO
+               WITH_EXCEPT_START
+               TO_BOOL
+               POP_JUMP_IF_TRUE         2 (to L4)
+               NOT_TAKEN
+               RERAISE                  2
+       L4:     POP_TOP
+       L5:     POP_EXCEPT
+               POP_TOP
+               POP_TOP
+               POP_TOP
+               LOAD_CONST               2 (None)
+               RETURN_VALUE
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [2] lasti
+  L3 to L5 -> L6 [4] lasti
+
+Disassembly of <code object _vivo at 0x10822c800, file "navegador_do_jogo.py", line 65>:
+  65           RESUME                   0
+
+  66           LOAD_GLOBAL              0 (_porta)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       31 (to L1)
+               NOT_TAKEN
+               LOAD_GLOBAL              2 (_processo)
+               POP_JUMP_IF_NONE        25 (to L2)
+               NOT_TAKEN
+               LOAD_GLOBAL              2 (_processo)
+               LOAD_ATTR                5 (poll + NULL|self)
+               CALL                     0
+               POP_JUMP_IF_NONE         3 (to L2)
+               NOT_TAKEN
+
+  67   L1:     LOAD_CONST               1 (False)
+               RETURN_VALUE
+
+  68   L2:     NOP
+
+  69   L3:     LOAD_GLOBAL              7 (_ler_json + NULL)
+               LOAD_CONST               2 ('http://127.0.0.1:%d/json/version')
+               LOAD_GLOBAL              0 (_porta)
+               BINARY_OP                6 (%)
+               LOAD_CONST               3 (1.0)
+               CALL                     2
+               POP_TOP
+
+  70   L4:     LOAD_CONST               4 (True)
+               RETURN_VALUE
+
+  --   L5:     PUSH_EXC_INFO
+
+  71           LOAD_GLOBAL              8 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        5 (to L7)
+               NOT_TAKEN
+               POP_TOP
+
+  72   L6:     POP_EXCEPT
+               LOAD_CONST               1 (False)
+               RETURN_VALUE
+
+  71   L7:     RERAISE                  0
+
+  --   L8:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L3 to L4 -> L5 [0]
+  L5 to L6 -> L8 [1] lasti
+  L7 to L8 -> L8 [1] lasti
+
+Disassembly of <code object _abrir at 0xbdeefdb00, file "navegador_do_jogo.py", line 75>:
+  75           RESUME                   0
+
+  77           LOAD_GLOBAL              1 (_executavel + NULL)
+               CALL                     0
+               STORE_FAST               1 (exe)
+
+  78           LOAD_FAST_BORROW         1 (exe)
+               POP_JUMP_IF_NOT_NONE    12 (to L1)
+               NOT_TAKEN
+
+  79           LOAD_GLOBAL              3 (RuntimeError + NULL)
+               LOAD_CONST               1 ('nem Edge nem Chrome instalados')
+               CALL                     1
+               RAISE_VARARGS            1
+
+  80   L1:     LOAD_GLOBAL              4 (paths)
+               LOAD_ATTR                6 (user_data_path)
+               PUSH_NULL
+               LOAD_CONST               2 ('navegador_do_jogo')
+               CALL                     1
+               STORE_FAST               2 (perfil)
+
+  81           LOAD_GLOBAL              8 (os)
+               LOAD_ATTR               10 (makedirs)
+               PUSH_NULL
+               LOAD_FAST_BORROW         2 (perfil)
+               LOAD_CONST               3 (True)
+               LOAD_CONST               4 (('exist_ok',))
+               CALL_KW                  2
+               POP_TOP
+
+  82           LOAD_GLOBAL              8 (os)
+               LOAD_ATTR               12 (path)
+               LOAD_ATTR               15 (join + NULL|self)
+               LOAD_FAST_BORROW         2 (perfil)
+               LOAD_CONST               5 ('DevToolsActivePort')
+               CALL                     2
+               STORE_FAST               3 (arquivo_da_porta)
+
+  83           LOAD_GLOBAL             17 (_porta_viva + NULL)
+               LOAD_FAST_BORROW         3 (arquivo_da_porta)
+               CALL                     1
+               STORE_FAST               4 (orfao)
+
+  84           LOAD_FAST_BORROW         4 (orfao)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       23 (to L2)
+               NOT_TAKEN
+
+  85           LOAD_FAST_BORROW         4 (orfao)
+               LOAD_CONST               3 (True)
+               SWAP                     2
+               STORE_GLOBAL             9 (_porta)
+               STORE_GLOBAL            10 (_adotado)
+
+  86           LOAD_FAST_BORROW         0 (log)
+               PUSH_NULL
+               LOAD_CONST               6 ('navegador do jogo: reaproveitando o que ficou aberto na porta %d')
+               LOAD_FAST_BORROW         4 (orfao)
+               BINARY_OP                6 (%)
+               CALL                     1
+               POP_TOP
+
+  87           LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  88   L2:     NOP
+
+  89   L3:     LOAD_GLOBAL             23 (_lancar + NULL)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (exe, perfil)
+               LOAD_FAST_BORROW_LOAD_FAST_BORROW 48 (arquivo_da_porta, log)
+               CALL                     4
+               POP_TOP
+       L4:     LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L5:     PUSH_EXC_INFO
+
+  90           LOAD_GLOBAL             24 (_PerfilEmUso)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE       57 (to L7)
+               NOT_TAKEN
+               POP_TOP
+
+  92           LOAD_FAST                0 (log)
+               PUSH_NULL
+               LOAD_CONST               7 ('navegador do jogo: perfil preso por um navegador que sobrou; fechando e tentando de novo')
+               CALL                     1
+               POP_TOP
+
+  93           LOAD_GLOBAL             27 (_fechar_orfao + NULL)
+               CALL                     0
+               POP_TOP
+
+  94           LOAD_GLOBAL             28 (time)
+               LOAD_ATTR               30 (sleep)
+               PUSH_NULL
+               LOAD_CONST               8 (1.0)
+               CALL                     1
+               POP_TOP
+
+  95           LOAD_GLOBAL             23 (_lancar + NULL)
+               LOAD_FAST_LOAD_FAST     18 (exe, perfil)
+               LOAD_FAST_LOAD_FAST     48 (arquivo_da_porta, log)
+               CALL                     4
+               POP_TOP
+       L6:     POP_EXCEPT
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  90   L7:     RERAISE                  0
+
+  --   L8:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L3 to L4 -> L5 [0]
+  L5 to L6 -> L8 [1] lasti
+  L7 to L8 -> L8 [1] lasti
+
+Disassembly of <code object _PerfilEmUso at 0x108225020, file "navegador_do_jogo.py", line 98>:
+ 98           RESUME                   0
+              LOAD_NAME                0 (__name__)
+              STORE_NAME               1 (__module__)
+              LOAD_CONST               0 ('_PerfilEmUso')
+              STORE_NAME               2 (__qualname__)
+              LOAD_SMALL_INT          98
+              STORE_NAME               3 (__firstlineno__)
+
+ 99           LOAD_CONST               1 (())
+              STORE_NAME               4 (__static_attributes__)
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _lancar at 0xbdf6eea00, file "navegador_do_jogo.py", line 105>:
+ 105            RESUME                   0
+
+ 107            NOP
+
+ 108    L1:     LOAD_GLOBAL              0 (os)
+                LOAD_ATTR                2 (remove)
+                PUSH_NULL
+                LOAD_FAST_BORROW         2 (arquivo_da_porta)
+                CALL                     1
+                POP_TOP
+
+ 111    L2:     LOAD_GLOBAL              6 (subprocess)
+                LOAD_ATTR                8 (Popen)
+                PUSH_NULL
+
+ 112            LOAD_FAST_BORROW         0 (exe)
+                LOAD_CONST               0 ('--headless=new')
+                LOAD_CONST               1 ('--remote-debugging-port=0')
+                LOAD_CONST               2 ('--user-data-dir=')
+                LOAD_FAST_BORROW         1 (perfil)
+                BINARY_OP                0 (+)
+
+ 114            LOAD_CONST               3 ('--no-first-run')
+                LOAD_CONST               4 ('--no-default-browser-check')
+                LOAD_CONST               5 ('--hide-scrollbars')
+                LOAD_CONST               6 ('--mute-audio')
+
+ 115            LOAD_CONST               7 ('--disable-extensions')
+                LOAD_CONST               8 ('--disable-component-extensions-with-background-pages')
+
+ 116            LOAD_CONST               9 ('--disable-background-timer-throttling')
+                LOAD_CONST              10 ('--disable-renderer-backgrounding')
+                LOAD_CONST              11 ('about:blank')
+
+ 112            BUILD_LIST              13
+
+ 117            LOAD_GLOBAL              6 (subprocess)
+                LOAD_ATTR               10 (DEVNULL)
+                LOAD_GLOBAL              6 (subprocess)
+                LOAD_ATTR               10 (DEVNULL)
+
+ 118            LOAD_GLOBAL             13 (getattr + NULL)
+                LOAD_GLOBAL              6 (subprocess)
+                LOAD_CONST              12 ('CREATE_NO_WINDOW')
+                LOAD_SMALL_INT           0
+                CALL                     3
+
+ 111            LOAD_CONST              13 (('stdout', 'stderr', 'creationflags'))
+                CALL_KW                  4
+                STORE_GLOBAL             7 (_processo)
+
+ 119            LOAD_GLOBAL             17 (_amarrar_ao_app + NULL)
+                LOAD_GLOBAL             14 (_processo)
+                LOAD_FAST_BORROW         3 (log)
+                CALL                     2
+                POP_TOP
+
+ 120            LOAD_GLOBAL             18 (time)
+                LOAD_ATTR               18 (time)
+                PUSH_NULL
+                CALL                     0
+                STORE_FAST               4 (inicio)
+
+ 121    L3:     LOAD_GLOBAL             18 (time)
+                LOAD_ATTR               18 (time)
+                PUSH_NULL
+                CALL                     0
+                LOAD_FAST_BORROW         4 (inicio)
+                BINARY_OP               10 (-)
+                LOAD_GLOBAL             20 (_ESPERA_MAXIMA)
+                COMPARE_OP              18 (bool(<))
+                EXTENDED_ARG             1
+                POP_JUMP_IF_FALSE      261 (to L12)
+                NOT_TAKEN
+
+ 122            LOAD_GLOBAL             14 (_processo)
+                LOAD_ATTR               23 (poll + NULL|self)
+                CALL                     0
+                POP_JUMP_IF_NONE        67 (to L6)
+                NOT_TAKEN
+
+ 123            LOAD_GLOBAL             14 (_processo)
+                LOAD_ATTR               24 (returncode)
+                LOAD_GLOBAL             26 (CODIGO_PERFIL_EM_USO)
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE        7 (to L4)
+                NOT_TAKEN
+                LOAD_GLOBAL             28 (_PerfilEmUso)
+                JUMP_FORWARD             5 (to L5)
+        L4:     LOAD_GLOBAL             30 (RuntimeError)
+        L5:     STORE_FAST               5 (erro)
+
+ 124            LOAD_FAST_BORROW         5 (erro)
+                PUSH_NULL
+                LOAD_CONST              15 ('o navegador fechou ao abrir (codigo %s)')
+                LOAD_GLOBAL             14 (_processo)
+                LOAD_ATTR               24 (returncode)
+                BINARY_OP                6 (%)
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 125    L6:     NOP
+
+ 126    L7:     LOAD_GLOBAL             33 (open + NULL)
+                LOAD_FAST_BORROW         2 (arquivo_da_porta)
+                LOAD_CONST              16 ('utf-8')
+                LOAD_CONST              17 (('encoding',))
+                CALL_KW                  2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L8:     STORE_FAST               6 (f)
+
+ 127            LOAD_GLOBAL             35 (int + NULL)
+                LOAD_FAST_BORROW         6 (f)
+                LOAD_ATTR               37 (readline + NULL|self)
+                CALL                     0
+                LOAD_ATTR               39 (strip + NULL|self)
+                CALL                     0
+                CALL                     1
+                STORE_GLOBAL            20 (_porta)
+
+ 126    L9:     LOAD_CONST              14 (None)
+                LOAD_CONST              14 (None)
+                LOAD_CONST              14 (None)
+                CALL                     3
+                POP_TOP
+
+ 128   L10:     LOAD_GLOBAL             43 (_ler_json + NULL)
+                LOAD_CONST              18 ('http://127.0.0.1:%d/json/version')
+                LOAD_GLOBAL             40 (_porta)
+                BINARY_OP                6 (%)
+                LOAD_CONST              19 (1.0)
+                CALL                     2
+                POP_TOP
+
+ 129            LOAD_FAST_BORROW         3 (log)
+                PUSH_NULL
+                LOAD_CONST              20 ('navegador do jogo: %s na porta %d (%.1f s)')
+                LOAD_GLOBAL              0 (os)
+                LOAD_ATTR               44 (path)
+                LOAD_ATTR               47 (basename + NULL|self)
+                LOAD_FAST_BORROW         0 (exe)
+                CALL                     1
+                LOAD_GLOBAL             40 (_porta)
+                LOAD_GLOBAL             18 (time)
+                LOAD_ATTR               18 (time)
+                PUSH_NULL
+                CALL                     0
+                LOAD_FAST_BORROW         4 (inicio)
+                BINARY_OP               10 (-)
+                BUILD_TUPLE              3
+                BINARY_OP                6 (%)
+                CALL                     1
+                POP_TOP
+
+ 130   L11:     LOAD_CONST              14 (None)
+                RETURN_VALUE
+
+ 133   L12:     LOAD_GLOBAL             31 (RuntimeError + NULL)
+                LOAD_CONST              22 ('o navegador nao respondeu em %.0f s')
+                LOAD_GLOBAL             20 (_ESPERA_MAXIMA)
+                BINARY_OP                6 (%)
+                CALL                     1
+                RAISE_VARARGS            1
+
+  --   L13:     PUSH_EXC_INFO
+
+ 109            LOAD_GLOBAL              4 (OSError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L15)
+                NOT_TAKEN
+                POP_TOP
+
+ 110   L14:     POP_EXCEPT
+                EXTENDED_ARG             1
+                JUMP_BACKWARD_NO_INTERRUPT 460 (to L2)
+
+ 109   L15:     RERAISE                  0
+
+  --   L16:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+ 126   L17:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L18)
+                NOT_TAKEN
+                RERAISE                  2
+       L18:     POP_TOP
+       L19:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 158 (to L10)
+
+  --   L20:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L21:     PUSH_EXC_INFO
+
+ 131            LOAD_GLOBAL             48 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       28 (to L23)
+                NOT_TAKEN
+                POP_TOP
+
+ 132            LOAD_GLOBAL             18 (time)
+                LOAD_ATTR               50 (sleep)
+                PUSH_NULL
+                LOAD_CONST              21 (0.1)
+                CALL                     1
+                POP_TOP
+       L22:     POP_EXCEPT
+                EXTENDED_ARG             1
+                JUMP_BACKWARD          394 (to L3)
+
+ 131   L23:     RERAISE                  0
+
+  --   L24:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L13 [0]
+  L7 to L8 -> L21 [0]
+  L8 to L9 -> L17 [2] lasti
+  L9 to L11 -> L21 [0]
+  L13 to L14 -> L16 [1] lasti
+  L15 to L16 -> L16 [1] lasti
+  L17 to L19 -> L20 [4] lasti
+  L19 to L21 -> L21 [0]
+  L21 to L22 -> L24 [1] lasti
+  L23 to L24 -> L24 [1] lasti
+
+Disassembly of <code object pagina at 0xbdf6d7100, file "navegador_do_jogo.py", line 136>:
+ 136            RESUME                   0
+
+ 139            LOAD_GLOBAL              0 (_trava)
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L1:     POP_TOP
+
+ 140            LOAD_GLOBAL              3 (_vivo + NULL)
+                CALL                     0
+                TO_BOOL
+                POP_JUMP_IF_TRUE        22 (to L2)
+                NOT_TAKEN
+
+ 141            LOAD_GLOBAL              5 (fechar + NULL)
+                CALL                     0
+                POP_TOP
+
+ 142            LOAD_GLOBAL              7 (_abrir + NULL)
+                LOAD_FAST_BORROW         0 (log)
+                CALL                     1
+                POP_TOP
+
+ 143    L2:     LOAD_GLOBAL              9 (_ler_json + NULL)
+                LOAD_CONST               0 ('http://127.0.0.1:%d/json/list')
+                LOAD_GLOBAL             10 (_porta)
+                BINARY_OP                6 (%)
+                CALL                     1
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      1 (a)
+                SWAP                     2
+        L3:     BUILD_LIST               0
+                SWAP                     2
+        L4:     FOR_ITER                28 (to L7)
+                STORE_FAST_LOAD_FAST    17 (a, a)
+                LOAD_ATTR               13 (get + NULL|self)
+                LOAD_CONST               1 ('type')
+                CALL                     1
+                LOAD_CONST               2 ('page')
+                COMPARE_OP              88 (bool(==))
+        L5:     POP_JUMP_IF_TRUE         3 (to L6)
+                NOT_TAKEN
+                JUMP_BACKWARD           26 (to L4)
+        L6:     LOAD_FAST_BORROW         1 (a)
+                LIST_APPEND              2
+                JUMP_BACKWARD           30 (to L4)
+        L7:     END_FOR
+                POP_ITER
+        L8:     STORE_FAST               2 (abas)
+                STORE_FAST               1 (a)
+
+ 144            LOAD_FAST_BORROW         2 (abas)
+                TO_BOOL
+                POP_JUMP_IF_TRUE       147 (to L11)
+                NOT_TAKEN
+
+ 145            LOAD_GLOBAL             14 (urllib)
+                LOAD_ATTR               16 (request)
+                LOAD_ATTR               19 (Request + NULL|self)
+                LOAD_CONST               3 ('http://127.0.0.1:%d/json/new?about:blank')
+                LOAD_GLOBAL             10 (_porta)
+                BINARY_OP                6 (%)
+                LOAD_CONST               4 ('PUT')
+                LOAD_CONST               5 (('method',))
+                CALL_KW                  2
+                STORE_FAST               3 (req)
+
+ 146            LOAD_GLOBAL             14 (urllib)
+                LOAD_ATTR               16 (request)
+                LOAD_ATTR               21 (urlopen + NULL|self)
+                LOAD_FAST_BORROW         3 (req)
+                LOAD_CONST               6 (2.0)
+                LOAD_CONST               7 (('timeout',))
+                CALL_KW                  2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L9:     STORE_FAST               4 (r)
+
+ 147            LOAD_GLOBAL             22 (json)
+                LOAD_ATTR               24 (loads)
+                PUSH_NULL
+                LOAD_FAST_BORROW         4 (r)
+                LOAD_ATTR               27 (read + NULL|self)
+                CALL                     0
+                LOAD_ATTR               29 (decode + NULL|self)
+                LOAD_CONST               8 ('utf-8')
+                CALL                     1
+                CALL                     1
+                BUILD_LIST               1
+                STORE_FAST               2 (abas)
+
+ 146   L10:     LOAD_CONST               9 (None)
+                LOAD_CONST               9 (None)
+                LOAD_CONST               9 (None)
+                CALL                     3
+                POP_TOP
+
+ 148   L11:     LOAD_FAST_BORROW         2 (abas)
+                LOAD_SMALL_INT           0
+                BINARY_OP               26 ([])
+                LOAD_CONST              10 ('webSocketDebuggerUrl')
+                BINARY_OP               26 ([])
+
+ 139   L12:     SWAP                     3
+                SWAP                     2
+                LOAD_CONST               9 (None)
+                LOAD_CONST               9 (None)
+                LOAD_CONST               9 (None)
+                CALL                     3
+                POP_TOP
+                RETURN_VALUE
+
+  --   L13:     SWAP                     2
+                POP_TOP
+
+ 143            SWAP                     2
+                STORE_FAST               1 (a)
+                RERAISE                  0
+
+ 146   L14:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L15)
+                NOT_TAKEN
+                RERAISE                  2
+       L15:     POP_TOP
+       L16:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 47 (to L11)
+
+  --   L17:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+ 139   L18:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L19)
+                NOT_TAKEN
+                RERAISE                  2
+       L19:     POP_TOP
+       L20:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                LOAD_CONST               9 (None)
+                RETURN_VALUE
+
+  --   L21:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L18 [2] lasti
+  L3 to L5 -> L13 [4]
+  L6 to L8 -> L13 [4]
+  L8 to L9 -> L18 [2] lasti
+  L9 to L10 -> L14 [4] lasti
+  L10 to L12 -> L18 [2] lasti
+  L13 to L14 -> L18 [2] lasti
+  L14 to L16 -> L17 [6] lasti
+  L16 to L18 -> L18 [2] lasti
+  L18 to L20 -> L21 [4] lasti
+
+Disassembly of <code object _porta_viva at 0x107feef10, file "navegador_do_jogo.py", line 151>:
+ 151            RESUME                   0
+
+ 152            NOP
+
+ 153    L1:     LOAD_GLOBAL              1 (open + NULL)
+                LOAD_FAST_BORROW         0 (arquivo_da_porta)
+                LOAD_CONST               0 ('utf-8')
+                LOAD_CONST               1 (('encoding',))
+                CALL_KW                  2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_FAST               1 (f)
+
+ 154            LOAD_GLOBAL              3 (int + NULL)
+                LOAD_FAST_BORROW         1 (f)
+                LOAD_ATTR                5 (readline + NULL|self)
+                CALL                     0
+                LOAD_ATTR                7 (strip + NULL|self)
+                CALL                     0
+                CALL                     1
+                STORE_FAST               2 (porta)
+
+ 153    L3:     LOAD_CONST               2 (None)
+                LOAD_CONST               2 (None)
+                LOAD_CONST               2 (None)
+                CALL                     3
+                POP_TOP
+
+ 155    L4:     LOAD_GLOBAL              9 (_ler_json + NULL)
+                LOAD_CONST               3 ('http://127.0.0.1:%d/json/version')
+                LOAD_FAST_CHECK          2 (porta)
+                BINARY_OP                6 (%)
+                LOAD_CONST               4 (1.0)
+                CALL                     2
+                POP_TOP
+
+ 156            LOAD_FAST_BORROW         2 (porta)
+        L5:     RETURN_VALUE
+
+ 153    L6:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L7)
+                NOT_TAKEN
+                RERAISE                  2
+        L7:     POP_TOP
+        L8:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 37 (to L4)
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L10:     PUSH_EXC_INFO
+
+ 157            LOAD_GLOBAL             10 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L12)
+                NOT_TAKEN
+                POP_TOP
+
+ 158   L11:     POP_EXCEPT
+                LOAD_CONST               2 (None)
+                RETURN_VALUE
+
+ 157   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L10 [0]
+  L2 to L3 -> L6 [2] lasti
+  L3 to L5 -> L10 [0]
+  L6 to L8 -> L9 [4] lasti
+  L8 to L10 -> L10 [0]
+  L10 to L11 -> L13 [1] lasti
+  L12 to L13 -> L13 [1] lasti
+
+Disassembly of <code object _amarrar_ao_app at 0xbdf6f6d00, file "navegador_do_jogo.py", line 161>:
+  --            MAKE_CELL                7 (Contadores)
+                MAKE_CELL                8 (Limites)
+                MAKE_CELL                9 (ctypes)
+                MAKE_CELL               10 (wintypes)
+
+ 161            RESUME                   0
+
+ 165            NOP
+
+ 166    L1:     LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              0 (ctypes)
+                STORE_DEREF              9 (ctypes)
+
+ 167            LOAD_SMALL_INT           0
+                LOAD_CONST               2 (('wintypes',))
+                IMPORT_NAME              0 (ctypes)
+                IMPORT_FROM              1 (wintypes)
+                STORE_DEREF             10 (wintypes)
+                POP_TOP
+
+ 168            LOAD_DEREF               9 (ctypes)
+                LOAD_ATTR                4 (windll)
+                LOAD_ATTR                6 (kernel32)
+                STORE_FAST               2 (k32)
+
+ 169            LOAD_GLOBAL              8 (_job)
+                POP_JUMP_IF_NOT_NONE   250 (to L7)
+        L2:     NOT_TAKEN
+
+ 170    L3:     LOAD_BUILD_CLASS
+                PUSH_NULL
+                LOAD_FAST_BORROW         9 (ctypes)
+                LOAD_FAST_BORROW        10 (wintypes)
+                BUILD_TUPLE              2
+                LOAD_CONST               3 (<code object Limites at 0x10829c220, file "navegador_do_jogo.py", line 170>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_CONST               4 ('Limites')
+                LOAD_DEREF               9 (ctypes)
+                LOAD_ATTR               10 (Structure)
+                CALL                     3
+                STORE_DEREF              8 (Limites)
+
+ 177            LOAD_BUILD_CLASS
+                PUSH_NULL
+                LOAD_FAST_BORROW         9 (ctypes)
+                BUILD_TUPLE              1
+                LOAD_CONST               5 (<code object Contadores at 0x107f9ef50, file "navegador_do_jogo.py", line 177>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_CONST               6 ('Contadores')
+                LOAD_DEREF               9 (ctypes)
+                LOAD_ATTR               10 (Structure)
+                CALL                     3
+                STORE_DEREF              7 (Contadores)
+
+ 182            LOAD_BUILD_CLASS
+                PUSH_NULL
+                LOAD_FAST_BORROW         7 (Contadores)
+                LOAD_FAST_BORROW         8 (Limites)
+                LOAD_FAST_BORROW         9 (ctypes)
+                BUILD_TUPLE              3
+                LOAD_CONST               7 (<code object LimitesEstendidos at 0x1081adb80, file "navegador_do_jogo.py", line 182>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_CONST               8 ('LimitesEstendidos')
+                LOAD_DEREF               9 (ctypes)
+                LOAD_ATTR               10 (Structure)
+                CALL                     3
+                STORE_FAST               3 (LimitesEstendidos)
+
+ 187            LOAD_DEREF              10 (wintypes)
+                LOAD_ATTR               12 (HANDLE)
+                LOAD_FAST_BORROW         2 (k32)
+                LOAD_ATTR               14 (CreateJobObjectW)
+                STORE_ATTR               8 (restype)
+
+ 188            LOAD_FAST_BORROW         2 (k32)
+                LOAD_ATTR               15 (CreateJobObjectW + NULL|self)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     2
+                STORE_FAST               4 (job)
+
+ 189            LOAD_FAST_BORROW         3 (LimitesEstendidos)
+                PUSH_NULL
+                CALL                     0
+                STORE_FAST               5 (info)
+
+ 190            LOAD_CONST               9 (8192)
+                LOAD_FAST_BORROW         5 (info)
+                LOAD_ATTR               18 (BasicLimitInformation)
+                STORE_ATTR              10 (LimitFlags)
+
+ 191            LOAD_FAST_BORROW         2 (k32)
+                LOAD_ATTR               23 (SetInformationJobObject + NULL|self)
+                LOAD_DEREF              10 (wintypes)
+                LOAD_ATTR               13 (HANDLE + NULL|self)
+                LOAD_FAST_BORROW         4 (job)
+                CALL                     1
+                LOAD_SMALL_INT           9
+                LOAD_DEREF               9 (ctypes)
+                LOAD_ATTR               25 (byref + NULL|self)
+                LOAD_FAST_BORROW         5 (info)
+                CALL                     1
+                LOAD_DEREF               9 (ctypes)
+                LOAD_ATTR               27 (sizeof + NULL|self)
+                LOAD_FAST_BORROW         5 (info)
+                CALL                     1
+                CALL                     4
+                TO_BOOL
+                POP_JUMP_IF_TRUE        33 (to L6)
+        L4:     NOT_TAKEN
+
+ 192    L5:     LOAD_GLOBAL             29 (OSError + NULL)
+                LOAD_CONST              10 ('SetInformationJobObject falhou (%d)')
+                LOAD_FAST_BORROW         2 (k32)
+                LOAD_ATTR               31 (GetLastError + NULL|self)
+                CALL                     0
+                BINARY_OP                6 (%)
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 193    L6:     LOAD_FAST_BORROW         4 (job)
+                STORE_GLOBAL             4 (_job)
+
+ 194    L7:     LOAD_FAST_BORROW         2 (k32)
+                LOAD_ATTR               33 (AssignProcessToJobObject + NULL|self)
+                LOAD_DEREF              10 (wintypes)
+                LOAD_ATTR               13 (HANDLE + NULL|self)
+                LOAD_GLOBAL              8 (_job)
+                CALL                     1
+                LOAD_DEREF              10 (wintypes)
+                LOAD_ATTR               13 (HANDLE + NULL|self)
+                LOAD_GLOBAL             35 (int + NULL)
+                LOAD_FAST_BORROW         0 (processo)
+                LOAD_ATTR               36 (_handle)
+                CALL                     1
+                CALL                     1
+                CALL                     2
+                TO_BOOL
+                POP_JUMP_IF_TRUE        33 (to L8)
+                NOT_TAKEN
+
+ 195            LOAD_GLOBAL             29 (OSError + NULL)
+                LOAD_CONST              11 ('AssignProcessToJobObject falhou (%d)')
+                LOAD_FAST_BORROW         2 (k32)
+                LOAD_ATTR               31 (GetLastError + NULL|self)
+                CALL                     0
+                BINARY_OP                6 (%)
+                CALL                     1
+                RAISE_VARARGS            1
+
+ 194    L8:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --    L9:     PUSH_EXC_INFO
+
+ 196            LOAD_GLOBAL             38 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       27 (to L13)
+                NOT_TAKEN
+                STORE_FAST               6 (e)
+
+ 197   L10:     LOAD_FAST                1 (log)
+                PUSH_NULL
+                LOAD_CONST              12 ('navegador do jogo: nao consegui amarrar ao app (%s); ele pode sobrar se o app cair')
+                LOAD_FAST                6 (e)
+                BINARY_OP                6 (%)
+                CALL                     1
+                POP_TOP
+       L11:     POP_EXCEPT
+                LOAD_CONST               1 (None)
+                STORE_FAST               6 (e)
+                DELETE_FAST              6 (e)
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --   L12:     LOAD_CONST               1 (None)
+                STORE_FAST               6 (e)
+                DELETE_FAST              6 (e)
+                RERAISE                  1
+
+ 196   L13:     RERAISE                  0
+
+  --   L14:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L9 [0]
+  L3 to L4 -> L9 [0]
+  L5 to L8 -> L9 [0]
+  L9 to L10 -> L14 [1] lasti
+  L10 to L11 -> L12 [1] lasti
+  L12 to L14 -> L14 [1] lasti
+
+Disassembly of <code object Limites at 0x10829c220, file "navegador_do_jogo.py", line 170>:
+  --           COPY_FREE_VARS           2
+
+ 170           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('_amarrar_ao_app.<locals>.Limites')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT         170
+               STORE_NAME               3 (__firstlineno__)
+
+ 171           LOAD_CONST               1 ('PerProcessUserTimeLimit')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (ctypes)
+               LOAD_ATTR                8 (c_int64)
+               BUILD_TUPLE              2
+               LOAD_CONST               2 ('PerJobUserTimeLimit')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (ctypes)
+               LOAD_ATTR                8 (c_int64)
+               BUILD_TUPLE              2
+
+ 172           LOAD_CONST               3 ('LimitFlags')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  1 (wintypes)
+               LOAD_ATTR               10 (DWORD)
+               BUILD_TUPLE              2
+               LOAD_CONST               4 ('MinimumWorkingSetSize')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (ctypes)
+               LOAD_ATTR               12 (c_size_t)
+               BUILD_TUPLE              2
+
+ 173           LOAD_CONST               5 ('MaximumWorkingSetSize')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (ctypes)
+               LOAD_ATTR               12 (c_size_t)
+               BUILD_TUPLE              2
+               LOAD_CONST               6 ('ActiveProcessLimit')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  1 (wintypes)
+               LOAD_ATTR               10 (DWORD)
+               BUILD_TUPLE              2
+
+ 174           LOAD_CONST               7 ('Affinity')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (ctypes)
+               LOAD_ATTR               12 (c_size_t)
+               BUILD_TUPLE              2
+               LOAD_CONST               8 ('PriorityClass')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  1 (wintypes)
+               LOAD_ATTR               10 (DWORD)
+               BUILD_TUPLE              2
+
+ 175           LOAD_CONST               9 ('SchedulingClass')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  1 (wintypes)
+               LOAD_ATTR               10 (DWORD)
+               BUILD_TUPLE              2
+
+ 171           BUILD_LIST               9
+               STORE_NAME               7 (_fields_)
+               LOAD_CONST              10 (())
+               STORE_NAME               8 (__static_attributes__)
+               LOAD_CONST              11 (None)
+               RETURN_VALUE
+
+Disassembly of <code object Contadores at 0x107f9ef50, file "navegador_do_jogo.py", line 177>:
+  --           COPY_FREE_VARS           1
+
+ 177           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('_amarrar_ao_app.<locals>.Contadores')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT         177
+               STORE_NAME               3 (__firstlineno__)
+
+ 178           LOAD_CONST               1 ('ReadOperationCount')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (ctypes)
+               LOAD_ATTR                8 (c_uint64)
+               BUILD_TUPLE              2
+               LOAD_CONST               2 ('WriteOperationCount')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (ctypes)
+               LOAD_ATTR                8 (c_uint64)
+               BUILD_TUPLE              2
+
+ 179           LOAD_CONST               3 ('OtherOperationCount')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (ctypes)
+               LOAD_ATTR                8 (c_uint64)
+               BUILD_TUPLE              2
+               LOAD_CONST               4 ('ReadTransferCount')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (ctypes)
+               LOAD_ATTR                8 (c_uint64)
+               BUILD_TUPLE              2
+
+ 180           LOAD_CONST               5 ('WriteTransferCount')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (ctypes)
+               LOAD_ATTR                8 (c_uint64)
+               BUILD_TUPLE              2
+               LOAD_CONST               6 ('OtherTransferCount')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (ctypes)
+               LOAD_ATTR                8 (c_uint64)
+               BUILD_TUPLE              2
+
+ 178           BUILD_LIST               6
+               STORE_NAME               5 (_fields_)
+               LOAD_CONST               7 (())
+               STORE_NAME               6 (__static_attributes__)
+               LOAD_CONST               8 (None)
+               RETURN_VALUE
+
+Disassembly of <code object LimitesEstendidos at 0x1081adb80, file "navegador_do_jogo.py", line 182>:
+  --           COPY_FREE_VARS           3
+
+ 182           RESUME                   0
+               LOAD_NAME                0 (__name__)
+               STORE_NAME               1 (__module__)
+               LOAD_CONST               0 ('_amarrar_ao_app.<locals>.LimitesEstendidos')
+               STORE_NAME               2 (__qualname__)
+               LOAD_SMALL_INT         182
+               STORE_NAME               3 (__firstlineno__)
+
+ 183           LOAD_CONST               1 ('BasicLimitInformation')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  1 (Limites)
+               BUILD_TUPLE              2
+               LOAD_CONST               2 ('IoInfo')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  0 (Contadores)
+               BUILD_TUPLE              2
+
+ 184           LOAD_CONST               3 ('ProcessMemoryLimit')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  2 (ctypes)
+               LOAD_ATTR                8 (c_size_t)
+               BUILD_TUPLE              2
+               LOAD_CONST               4 ('JobMemoryLimit')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  2 (ctypes)
+               LOAD_ATTR                8 (c_size_t)
+               BUILD_TUPLE              2
+
+ 185           LOAD_CONST               5 ('PeakProcessMemoryUsed')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  2 (ctypes)
+               LOAD_ATTR                8 (c_size_t)
+               BUILD_TUPLE              2
+               LOAD_CONST               6 ('PeakJobMemoryUsed')
+               LOAD_LOCALS
+               LOAD_FROM_DICT_OR_DEREF  2 (ctypes)
+               LOAD_ATTR                8 (c_size_t)
+               BUILD_TUPLE              2
+
+ 183           BUILD_LIST               6
+               STORE_NAME               5 (_fields_)
+               LOAD_CONST               7 (())
+               STORE_NAME               6 (__static_attributes__)
+               LOAD_CONST               8 (None)
+               RETURN_VALUE
+
+Disassembly of <code object _fechar_orfao at 0x10829c410, file "navegador_do_jogo.py", line 200>:
+ 200           RESUME                   0
+
+ 202           LOAD_GLOBAL              0 (paths)
+               LOAD_ATTR                2 (user_data_path)
+               PUSH_NULL
+               LOAD_CONST               0 ('navegador_do_jogo')
+               CALL                     1
+               LOAD_ATTR                5 (replace + NULL|self)
+               LOAD_CONST               1 ("'")
+               LOAD_CONST               2 ("''")
+               CALL                     2
+               STORE_FAST               0 (perfil)
+
+ 203           LOAD_CONST               3 ("Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like '*%s*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }")
+
+ 204           LOAD_FAST_BORROW         0 (perfil)
+
+ 203           BINARY_OP                6 (%)
+               STORE_FAST               1 (comando)
+
+ 205           NOP
+
+ 206   L1:     LOAD_GLOBAL              6 (subprocess)
+               LOAD_ATTR                8 (run)
+               PUSH_NULL
+               LOAD_CONST               4 ('powershell')
+               LOAD_CONST               5 ('-NoProfile')
+               LOAD_CONST               6 ('-Command')
+               LOAD_FAST_BORROW         1 (comando)
+               BUILD_LIST               4
+               LOAD_SMALL_INT          15
+
+ 207           LOAD_GLOBAL              6 (subprocess)
+               LOAD_ATTR               10 (DEVNULL)
+               LOAD_GLOBAL              6 (subprocess)
+               LOAD_ATTR               10 (DEVNULL)
+
+ 208           LOAD_GLOBAL             13 (getattr + NULL)
+               LOAD_GLOBAL              6 (subprocess)
+               LOAD_CONST               7 ('CREATE_NO_WINDOW')
+               LOAD_SMALL_INT           0
+               CALL                     3
+
+ 206           LOAD_CONST               8 (('timeout', 'stdout', 'stderr', 'creationflags'))
+               CALL_KW                  5
+               POP_TOP
+       L2:     LOAD_CONST               9 (None)
+               RETURN_VALUE
+
+  --   L3:     PUSH_EXC_INFO
+
+ 209           LOAD_GLOBAL             14 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        5 (to L5)
+               NOT_TAKEN
+               POP_TOP
+
+ 210   L4:     POP_EXCEPT
+               LOAD_CONST               9 (None)
+               RETURN_VALUE
+
+ 209   L5:     RERAISE                  0
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [0]
+  L3 to L4 -> L6 [1] lasti
+  L5 to L6 -> L6 [1] lasti
+
+Disassembly of <code object fechar at 0xbdef02300, file "navegador_do_jogo.py", line 213>:
+ 213            RESUME                   0
+
+ 215            LOAD_GLOBAL              0 (_adotado)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       13 (to L1)
+                NOT_TAKEN
+
+ 216            LOAD_GLOBAL              3 (_fechar_orfao + NULL)
+                CALL                     0
+                POP_TOP
+
+ 217            LOAD_CONST               0 (False)
+                STORE_GLOBAL             0 (_adotado)
+
+ 218    L1:     LOAD_GLOBAL              4 (_processo)
+                POP_JUMP_IF_NONE        66 (to L3)
+                NOT_TAKEN
+                LOAD_GLOBAL              4 (_processo)
+                LOAD_ATTR                7 (poll + NULL|self)
+                CALL                     0
+                POP_JUMP_IF_NOT_NONE    44 (to L3)
+                NOT_TAKEN
+
+ 219            NOP
+
+ 220    L2:     LOAD_GLOBAL              4 (_processo)
+                LOAD_ATTR                9 (terminate + NULL|self)
+                CALL                     0
+                POP_TOP
+
+ 221            LOAD_GLOBAL              4 (_processo)
+                LOAD_ATTR               11 (wait + NULL|self)
+                LOAD_SMALL_INT           3
+                LOAD_CONST               2 (('timeout',))
+                CALL_KW                  1
+                POP_TOP
+
+ 227    L3:     LOAD_CONST               1 (None)
+                STORE_GLOBAL             2 (_processo)
+
+ 228            LOAD_CONST               1 (None)
+                STORE_GLOBAL             8 (_porta)
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --    L4:     PUSH_EXC_INFO
+
+ 222            LOAD_GLOBAL             12 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       43 (to L13)
+                NOT_TAKEN
+                POP_TOP
+
+ 223    L5:     NOP
+
+ 224    L6:     LOAD_GLOBAL              4 (_processo)
+                LOAD_ATTR               15 (kill + NULL|self)
+                CALL                     0
+                POP_TOP
+        L7:     POP_EXCEPT
+                JUMP_BACKWARD_NO_INTERRUPT 40 (to L3)
+
+  --    L8:     PUSH_EXC_INFO
+
+ 225            LOAD_GLOBAL             12 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L11)
+                NOT_TAKEN
+                POP_TOP
+
+ 226    L9:     POP_EXCEPT
+       L10:     POP_EXCEPT
+                JUMP_BACKWARD_NO_INTERRUPT 54 (to L3)
+
+ 225   L11:     RERAISE                  0
+
+  --   L12:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+ 222   L13:     RERAISE                  0
+
+  --   L14:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L2 to L3 -> L4 [0]
+  L4 to L5 -> L14 [1] lasti
+  L6 to L7 -> L8 [1]
+  L8 to L9 -> L12 [2] lasti
+  L9 to L10 -> L14 [1] lasti
+  L11 to L12 -> L12 [2] lasti
+  L12 to L14 -> L14 [1] lasti

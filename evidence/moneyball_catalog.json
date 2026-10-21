@@ -1,0 +1,5664 @@
+{
+ "gk": [
+  {
+   "key": "gk_N",
+   "col": "N",
+   "label": "Jogos completos",
+   "expr": "(f['minutes'] / 90.0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_O",
+   "col": "O",
+   "label": "Man of the match",
+   "expr": "f['man_of_the_match']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_P",
+   "col": "P",
+   "label": "Minutos pra ser o homem do jogo",
+   "expr": "_iferror((f['minutes']/r['gk_O']), 5400)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_Q",
+   "col": "Q",
+   "label": "% de vezes que foi eleito o Homem do Jogo",
+   "expr": "_iferror((r['gk_O']*1)/r['gk_N'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_R",
+   "col": "R",
+   "label": "Passes Tentados",
+   "expr": "f['passes_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_S",
+   "col": "S",
+   "label": "Passes completados",
+   "expr": "f['passes_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_T",
+   "col": "T",
+   "label": "Passes C / 90",
+   "expr": "_iferror((r['gk_S']/r['gk_N']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_U",
+   "col": "U",
+   "label": "Passes errados",
+   "expr": "_iferror(r['gk_R']-r['gk_S'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_V",
+   "col": "V",
+   "label": "Passes Errados/90",
+   "expr": "_iferror(r['gk_U']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_W",
+   "col": "W",
+   "label": "% passes errados",
+   "expr": "_iferror(((r['gk_R']-r['gk_S'])*1)/r['gk_R'], 0)",
+   "fmt": "pct",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_X",
+   "col": "X",
+   "label": "% Passes certos",
+   "expr": "_iferror((r['gk_S']*1)/r['gk_R'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_Y",
+   "col": "Y",
+   "label": "Passes certos - errados",
+   "expr": "_iferror(r['gk_S']-r['gk_U'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_Z",
+   "col": "Z",
+   "label": "Passes Curtos",
+   "expr": "f['passes_attempted']-f['passes_progressive']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AA",
+   "col": "AA",
+   "label": "Passes Curtos /90",
+   "expr": "_iferror(r['gk_Z']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AB",
+   "col": "AB",
+   "label": "Passes em progressão",
+   "expr": "f['passes_progressive']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AC",
+   "col": "AC",
+   "label": "Pass Progr /90",
+   "expr": "_iferror(r['gk_AB']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AD",
+   "col": "AD",
+   "label": "% Passes em progressão",
+   "expr": "_iferror(r['gk_AB']/r['gk_Z'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AE",
+   "col": "AE",
+   "label": "Passes Decisivos",
+   "expr": "f['key_passes']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AF",
+   "col": "AF",
+   "label": "Pass D/90",
+   "expr": "_iferror(r['gk_AE']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AG",
+   "col": "AG",
+   "label": "Defesas Seguras",
+   "expr": "f['gk_saves_held']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AH",
+   "col": "AH",
+   "label": "Defesas Seguras /90",
+   "expr": "_iferror(r['gk_AG']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AJ",
+   "col": "AJ",
+   "label": "Defesas Com a Ponta dos Dedos",
+   "expr": "f['gk_saves_tipped']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AK",
+   "col": "AK",
+   "label": "Defesas com a ponta dos dedos /90",
+   "expr": "_iferror(r['gk_AJ']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AM",
+   "col": "AM",
+   "label": "Defesas Desviadas",
+   "expr": "f['gk_saves_parried']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AN",
+   "col": "AN",
+   "label": "Defesas Desviadas /90",
+   "expr": "_iferror(r['gk_AM']/r['gk_T'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AQ",
+   "col": "AQ",
+   "label": "Clean Sheet",
+   "expr": "f['clean_sheets_gk']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AR",
+   "col": "AR",
+   "label": "Clean Sheets/90",
+   "expr": "_iferror(r['gk_AQ']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AS",
+   "col": "AS",
+   "label": "Defesas totais",
+   "expr": "_iferror(f['gk_saves_held']+f['gk_saves_tipped']+f['gk_saves_parried'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AT",
+   "col": "AT",
+   "label": "Defesas totais / Jogo",
+   "expr": "_iferror(r['gk_AS']/r['gk_N'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AU",
+   "col": "AU",
+   "label": "Bolas enfrentadas",
+   "expr": "_iferror((f['gk_saves_tipped']+f['gk_saves_parried']+f['gk_saves_held']+f['goals_conceded_gk']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AV",
+   "col": "AV",
+   "label": "Bolas enf /90",
+   "expr": "_iferror(r['gk_AU']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AW",
+   "col": "AW",
+   "label": "% Defesas Esperadas",
+   "expr": "((1 - f['gk_xg_shots_faced'] / (f['gk_saves_held'] + f['gk_saves_parried'] + f['gk_saves_tipped'] + f['goals_conceded_gk'])) * 100)/100",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AX",
+   "col": "AX",
+   "label": "% de Defesas Realizadas",
+   "expr": "_iferror(r['gk_AS']/r['gk_AU'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AY",
+   "col": "AY",
+   "label": "% Def Dificeis",
+   "expr": "_iferror(((f['gk_saves_tipped']+f['gk_saves_parried']+f['gk_penalties_saved'])*1)/(r['gk_AU']-f['gk_saves_held']), 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BA",
+   "col": "BA",
+   "label": "Diferença Defesas Esperadas - Defesas Feitas",
+   "expr": "r['gk_AW']-r['gk_AX']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BC",
+   "col": "BC",
+   "label": "Índice de Defesas Críticas",
+   "expr": "_iferror((r['gk_AJ']*2+r['gk_AM']*1.5+r['gk_AG']*1)/r['gk_AU'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BD",
+   "col": "BD",
+   "label": "Minutos pra sofrer um gol",
+   "expr": "_iferror(f['minutes']/f['goals_conceded_gk'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BE",
+   "col": "BE",
+   "label": "Bolas enfrentadas pra sofrer um gol",
+   "expr": "_iferror((f['goals_conceded_gk']+f['gk_saves_held']+f['gk_saves_tipped']+f['gk_saves_parried'])/f['goals_conceded_gk'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BF",
+   "col": "BF",
+   "label": "Bolas dificeis enfrentadas pra sofrer 1 gol",
+   "expr": "_iferror((f['goals_conceded_gk']+f['gk_saves_tipped']+f['gk_saves_parried'])/f['goals_conceded_gk'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BG",
+   "col": "BG",
+   "label": "xG Defendidos",
+   "expr": "f['xg_prevented_gk']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BH",
+   "col": "BH",
+   "label": "xG defendidos / 90",
+   "expr": "_iferror(r['gk_BG']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BI",
+   "col": "BI",
+   "label": "xG Defendidos sem pênalti",
+   "expr": "_iferror(r['gk_BG']-(f['gk_penalties_saved']*0.79), -100)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BJ",
+   "col": "BJ",
+   "label": "xG Defendidos sem pênalti /90",
+   "expr": "_iferror(r['gk_BI']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BK",
+   "col": "BK",
+   "label": "xG de Pênaltis Enfrentados",
+   "expr": "f['gk_penalties_faced']*0.79",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BL",
+   "col": "BL",
+   "label": "xG de Pênaltis Enfrentados /90",
+   "expr": "r['gk_BK']/r['gk_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BM",
+   "col": "BM",
+   "label": "xG de Pênaltis Defendidos",
+   "expr": "f['gk_penalties_saved']*0.79",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BN",
+   "col": "BN",
+   "label": "xG de Pênaltis Defendidos /90",
+   "expr": "r['gk_BM']/r['gk_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BO",
+   "col": "BO",
+   "label": "Diferença (Defendidos -  Enfrentados)",
+   "expr": "r['gk_BM']-r['gk_BK']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BP",
+   "col": "BP",
+   "label": "xPG Ratio",
+   "expr": "_iferror(r['gk_BH']/r['gk_AR'], r['gk_BH'])",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BQ",
+   "col": "BQ",
+   "label": "Expected Goals Prevented xGP",
+   "expr": "_iferror(r['gk_BG']/(r['gk_BG']+f['goals_conceded_gk']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BR",
+   "col": "BR",
+   "label": "Pênaltis enfrentados",
+   "expr": "f['gk_penalties_faced']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BS",
+   "col": "BS",
+   "label": "Pen Enf/90",
+   "expr": "_iferror(r['gk_BR']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BT",
+   "col": "BT",
+   "label": "Pênaltis Defendidos",
+   "expr": "f['gk_penalties_saved']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BU",
+   "col": "BU",
+   "label": "Pen Def/90",
+   "expr": "_iferror(r['gk_BT']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BV",
+   "col": "BV",
+   "label": "% Pênaltis defendidos",
+   "expr": "_iferror((f['gk_penalties_saved']*1)/f['gk_penalties_faced'], -0.000000000001)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BW",
+   "col": "BW",
+   "label": "% Gols Sofridos comparado aos outros goleiros",
+   "expr": "_iferror((f['goals_conceded_gk']*1)/np.nansum(f['goals_conceded_gk']), 0)",
+   "fmt": "pct",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_BX",
+   "col": "BX",
+   "label": "Gols Sofridos",
+   "expr": "f['goals_conceded_gk']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_BY",
+   "col": "BY",
+   "label": "Sofridos / jogo",
+   "expr": "_iferror(r['gk_BX']/r['gk_N'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_BZ",
+   "col": "BZ",
+   "label": "Falhas",
+   "expr": "f['errors_leading_to_goal']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_CA",
+   "col": "CA",
+   "label": "Falhas/90",
+   "expr": "_iferror(r['gk_BZ']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_CC",
+   "col": "CC",
+   "label": "Posse Ganha /90",
+   "expr": "f['possession_won']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CE",
+   "col": "CE",
+   "label": "Posse Perdida /90",
+   "expr": "f['possession_lost']",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_CF",
+   "col": "CF",
+   "label": "Tentativas de Saída do gol pra 1v1",
+   "expr": "_iferror((f['presses_attempted']+f['tackles_attempted']+(f['tackles_key']*2.5)+f['yellow_cards']+f['errors_leading_to_goal']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CG",
+   "col": "CG",
+   "label": "Tentativas de saída do gol /90",
+   "expr": "_iferror(r['gk_CF']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CH",
+   "col": "CH",
+   "label": "Saídas do gol com sucesso",
+   "expr": "_iferror((f['presses_completed']+f['tackles_completed']+(f['tackles_key']*2.5)), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CI",
+   "col": "CI",
+   "label": "Saídas do gol com sucesso /90",
+   "expr": "_iferror(r['gk_CH']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CJ",
+   "col": "CJ",
+   "label": "Saídas do gol falhas",
+   "expr": "_iferror((f['presses_attempted']-f['presses_completed'])+(f['tackles_attempted']-f['tackles_completed'])+(f['tackles_key']*2.5)+(f['yellow_cards']), 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_CK",
+   "col": "CK",
+   "label": "Saídas do gol falhas /90",
+   "expr": "_iferror(r['gk_CJ']/r['gk_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_CL",
+   "col": "CL",
+   "label": "% De Acerto nas Saídas do gol",
+   "expr": "_iferror((r['gk_CH']*1)/r['gk_CF'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CM",
+   "col": "CM",
+   "label": "Cartões Amarelos",
+   "expr": "f['yellow_cards']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_CN",
+   "col": "CN",
+   "label": "Cartões Vermelhos",
+   "expr": "f['red_cards']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_CO",
+   "col": "CO",
+   "label": "Total cartões",
+   "expr": "_iferror(r['gk_CM']+r['gk_CN'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_CP",
+   "col": "CP",
+   "label": "Faltas Sofridas",
+   "expr": "f['fouls_won']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_CQ",
+   "col": "CQ",
+   "label": "Faltas cometidas",
+   "expr": "f['fouls_committed']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "gk_CR",
+   "col": "CR",
+   "label": "Ações tentadas",
+   "expr": "_iferror(f['gk_saves_held']+f['goals_conceded_gk']+f['gk_saves_tipped']+f['gk_saves_parried']+f['gk_penalties_faced']+f['passes_attempted']+f['yellow_cards']+(f['possession_lost']*1.33)+(f['clean_sheets_gk']*2)+(f['errors_leading_to_goal']*2.5)+f['tackles_attempted']+f['presses_attempted'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CS",
+   "col": "CS",
+   "label": "Ações com sucesso",
+   "expr": "_iferror(f['gk_saves_held']+f['gk_saves_tipped']+f['gk_saves_parried']+f['gk_penalties_saved']+f['passes_completed']+f['tackles_completed']+f['presses_completed'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CT",
+   "col": "CT",
+   "label": "% Acerto do goleiro",
+   "expr": "_iferror((r['gk_CS']*1)/r['gk_CR'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CU",
+   "col": "CU",
+   "label": "Soma de todas as bolas enfrentadas",
+   "expr": "np.nansum(r['gk_AU'])",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CV",
+   "col": "CV",
+   "label": "Nota média",
+   "expr": "_iferror((f['avg_rating']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AI",
+   "col": "AI",
+   "label": "% Def Seguras",
+   "expr": "_iferror((r['gk_AG']*1)/r['gk_AS'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AL",
+   "col": "AL",
+   "label": "% Def com a ponta dos dedos",
+   "expr": "_iferror((r['gk_AJ']*1)/r['gk_AS'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AO",
+   "col": "AO",
+   "label": "% Def Desviadas",
+   "expr": "_iferror((r['gk_AM']*1)/r['gk_AS'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AP",
+   "col": "AP",
+   "label": "% de jogos sem sofrer gol",
+   "expr": "_iferror((r['gk_AQ']*1)/r['gk_N'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_AZ",
+   "col": "AZ",
+   "label": "Chances de Sofrer um gol/90",
+   "expr": "_iferror((r['gk_BY']*1)/r['gk_AV'], 1)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_BB",
+   "col": "BB",
+   "label": "Índice de Impacto do Goleiro",
+   "expr": "(r['gk_BG']+r['gk_AH']+(1.5*r['gk_AK'])+(1.2*r['gk_AN'])+(2*(f['clean_sheets_gk']/r['gk_N'])+(1.5+r['gk_AX'])+(2*r['gk_AY'])+(5*(r['gk_AS']/r['gk_AU']))+(r['gk_O']/r['gk_N'])*np.sqrt(r['gk_N'])))",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CB",
+   "col": "CB",
+   "label": "Posse Ganha Total",
+   "expr": "_iferror(r['gk_CC']*r['gk_N'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "gk_CD",
+   "col": "CD",
+   "label": "Posse Perdida Total",
+   "expr": "_iferror(r['gk_CE']*r['gk_N'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  }
+ ],
+ "def": [
+  {
+   "key": "def_N",
+   "col": "N",
+   "label": "Jogos completos",
+   "expr": "(f['minutes'] / 90.0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_O",
+   "col": "O",
+   "label": "Jogos Totais",
+   "expr": "f['apps_total']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_P",
+   "col": "P",
+   "label": "Minutos por partida",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_R",
+   "col": "R",
+   "label": "Gols",
+   "expr": "f['goals']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_S",
+   "col": "S",
+   "label": "Assist",
+   "expr": "f['assists']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_T",
+   "col": "T",
+   "label": "Gols+Ast",
+   "expr": "_iferror(f['goals']+f['assists'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_U",
+   "col": "U",
+   "label": "Gols / 90",
+   "expr": "_iferror((r['def_R']/r['def_N']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_V",
+   "col": "V",
+   "label": "Gols + Ast/90",
+   "expr": "_iferror(r['def_T']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_W",
+   "col": "W",
+   "label": "Gols esperados (xG)",
+   "expr": "f['xg']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_X",
+   "col": "X",
+   "label": "xG /90",
+   "expr": "_iferror(r['def_W']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_Y",
+   "col": "Y",
+   "label": "xG (Sem pênaltis)",
+   "expr": "_iferror(r['def_W']-(f['penalties_taken']*0.79), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_Z",
+   "col": "Z",
+   "label": "xG (Sem pênaltis) /90",
+   "expr": "_iferror(r['def_Y']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AA",
+   "col": "AA",
+   "label": "Assistências Esperadas (xA)",
+   "expr": "f['xa']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AB",
+   "col": "AB",
+   "label": "xA /90",
+   "expr": "_iferror(r['def_AA']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AC",
+   "col": "AC",
+   "label": "xA + xG (sem pen)",
+   "expr": "_iferror(r['def_W']+r['def_AA'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AD",
+   "col": "AD",
+   "label": "xA + xG /90",
+   "expr": "_iferror(r['def_AC']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AE",
+   "col": "AE",
+   "label": "Man of the match",
+   "expr": "f['man_of_the_match']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AF",
+   "col": "AF",
+   "label": "Minutos pra ser o homem do jogo",
+   "expr": "_iferror((f['minutes']/f['man_of_the_match']), 5400)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AG",
+   "col": "AG",
+   "label": "% de vezes que foi eleito o Homem do Jogo",
+   "expr": "_iferror((r['def_AE']*1)/r['def_N'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AH",
+   "col": "AH",
+   "label": "Pênaltis batidos",
+   "expr": "f['penalties_taken']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AI",
+   "col": "AI",
+   "label": "Pênaltis marcados",
+   "expr": "f['penalties_scored']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AJ",
+   "col": "AJ",
+   "label": "Pênaltis perdidos",
+   "expr": "_iferror(f['penalties_taken']-f['penalties_scored'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_AK",
+   "col": "AK",
+   "label": "% Conversão de pênalti",
+   "expr": "_iferror((r['def_AI']*1)/r['def_AH'], 0.0000001)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AL",
+   "col": "AL",
+   "label": "Erros que geraram gol adversário",
+   "expr": "f['errors_leading_to_goal']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_AM",
+   "col": "AM",
+   "label": "Erros que originaram gols /90",
+   "expr": "_iferror(r['def_AL']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_AN",
+   "col": "AN",
+   "label": "Cabeceios Disputados (Total)",
+   "expr": "f['headers_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AO",
+   "col": "AO",
+   "label": "Cabeceios Disp /90",
+   "expr": "_iferror(r['def_AN']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AP",
+   "col": "AP",
+   "label": "Cabeceios Ganhos (Total)",
+   "expr": "_iferror(f['headers_won'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AQ",
+   "col": "AQ",
+   "label": "Cabeceios Ganhos /90",
+   "expr": "_iferror(r['def_AP']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AR",
+   "col": "AR",
+   "label": "% Cabeceios Ganhos",
+   "expr": "_iferror((r['def_AP']*1)/r['def_AN'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AS",
+   "col": "AS",
+   "label": "Índice de Dominância Aérea (IDA)",
+   "expr": "_iferror((f['headers_won']/f['headers_attempted'])*np.sqrt(f['headers_won']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AT",
+   "col": "AT",
+   "label": "Cabeceios Perdidos",
+   "expr": "_iferror(r['def_AN']-r['def_AP'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_AU",
+   "col": "AU",
+   "label": "Cabeceios Perdidos /90",
+   "expr": "_iferror(r['def_AT']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_AV",
+   "col": "AV",
+   "label": "% Cabeceios perdidos",
+   "expr": "_iferror((r['def_AT']*1)/r['def_AN'], 0)",
+   "fmt": "pct",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_AX",
+   "col": "AX",
+   "label": "Cabs que evitaram jogada ofensiva /90",
+   "expr": "_iferror(_iferror(f['headers_key'] / (f['minutes'] / 90.0), 0), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AY",
+   "col": "AY",
+   "label": "% dos cabeceios que são ofensivos",
+   "expr": "f['shots']/f['headers_attempted']",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_AZ",
+   "col": "AZ",
+   "label": "Cabeceios Ofensivos (Tentados)",
+   "expr": "_iferror(f['shots']-f['penalties_taken'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BA",
+   "col": "BA",
+   "label": "Cabeceios ofensivos T /90",
+   "expr": "r['def_AZ']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BB",
+   "col": "BB",
+   "label": "Cabeceios Ofensivos que foram no gol",
+   "expr": "_iferror(f['shots_on_target']-f['penalties_taken'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BC",
+   "col": "BC",
+   "label": "Cabs Of. que foram no gol /90",
+   "expr": "_iferror(r['def_BB']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BD",
+   "col": "BD",
+   "label": "% Cabeceios que foram em direção ao gol",
+   "expr": "_iferror(r['def_BB']/r['def_AZ'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BE",
+   "col": "BE",
+   "label": "xG por Remate ou Cabeceio",
+   "expr": "_iferror(r['def_Y']/(f['shots']-f['penalties_taken']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BF",
+   "col": "BF",
+   "label": "xG Esperados SEM PÊNALTI",
+   "expr": "r['def_Y']-(f['penalties_taken']*0.79)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BG",
+   "col": "BG",
+   "label": "Gols não esperados",
+   "expr": "f['goals']-r['def_W']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BH",
+   "col": "BH",
+   "label": "Gols não esperados SEM PÊNALTI",
+   "expr": "_iferror((f['goals']-f['penalties_scored'])-r['def_Y'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BI",
+   "col": "BI",
+   "label": "Interceptações feitas",
+   "expr": "_iferror(f['interceptions']+f['shots_blocked']+f['shots_blocked'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BJ",
+   "col": "BJ",
+   "label": "Interceptações /90",
+   "expr": "_iferror(r['def_BI']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BK",
+   "col": "BK",
+   "label": "Remates bloqueados",
+   "expr": "f['shots_blocked']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BL",
+   "col": "BL",
+   "label": "Remates bloqueados /90",
+   "expr": "_iferror(r['def_BK']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BM",
+   "col": "BM",
+   "label": "Rem Bloqueados, Interceptações  e Bloqueios/90",
+   "expr": "_iferror((f['shots_blocked']+f['shots_blocked']+f['interceptions']+f['tackles_key'])/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BN",
+   "col": "BN",
+   "label": "Alívios",
+   "expr": "f['clearances']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BO",
+   "col": "BO",
+   "label": "Alívios /90",
+   "expr": "_iferror(r['def_BN']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BP",
+   "col": "BP",
+   "label": "Desarmes Tentados",
+   "expr": "f['tackles_attempted']+f['fouls_committed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BQ",
+   "col": "BQ",
+   "label": "Desarmes Tentados /90",
+   "expr": "_iferror(r['def_BP']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BR",
+   "col": "BR",
+   "label": "Desarmes Ganhos",
+   "expr": "f['tackles_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BS",
+   "col": "BS",
+   "label": "Desarmes Ganhos/90",
+   "expr": "_iferror(r['def_BR']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BT",
+   "col": "BT",
+   "label": "Dribles sofridos",
+   "expr": "f['tackles_attempted']-f['tackles_completed']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_BU",
+   "col": "BU",
+   "label": "Dribles sofridos /90",
+   "expr": "_iferror(r['def_BT']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_BV",
+   "col": "BV",
+   "label": "% Des",
+   "expr": "_iferror((r['def_BR']*1)/r['def_BP'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BW",
+   "col": "BW",
+   "label": "Desarmes Decisivos",
+   "expr": "f['tackles_key']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BX",
+   "col": "BX",
+   "label": "Desarmes Decisivos / 90",
+   "expr": "_iferror(r['def_BW']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BY",
+   "col": "BY",
+   "label": "Movimentos de pressão tentados",
+   "expr": "f['presses_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_BZ",
+   "col": "BZ",
+   "label": "Mov Press T/90",
+   "expr": "f['presses_attempted']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CA",
+   "col": "CA",
+   "label": "Movimentos de pressão ganhos",
+   "expr": "f['presses_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CB",
+   "col": "CB",
+   "label": "Mov Press Ganhos /90",
+   "expr": "_iferror(f['presses_completed']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CC",
+   "col": "CC",
+   "label": "% Pressão ganha/90",
+   "expr": "_iferror((r['def_CB']*1)/r['def_BZ'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CD",
+   "col": "CD",
+   "label": "Passes Tentados",
+   "expr": "f['passes_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CE",
+   "col": "CE",
+   "label": "Passes Tentados /90",
+   "expr": "_iferror(r['def_CD']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CF",
+   "col": "CF",
+   "label": "Passes Certos",
+   "expr": "f['passes_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CG",
+   "col": "CG",
+   "label": "Passes Certos /90",
+   "expr": "_iferror(r['def_CF']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CH",
+   "col": "CH",
+   "label": "% Acerto dos passes",
+   "expr": "_iferror((r['def_CF']*1)/r['def_CD'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CI",
+   "col": "CI",
+   "label": "Passes que são curtos",
+   "expr": "f['passes_attempted']-f['passes_progressive']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CJ",
+   "col": "CJ",
+   "label": "Passes curtos certos /90",
+   "expr": "f['passes_completed']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CK",
+   "col": "CK",
+   "label": "Passe que são em progressão",
+   "expr": "f['passes_progressive']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CL",
+   "col": "CL",
+   "label": "Passes em progressão/90",
+   "expr": "r['def_CK']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CM",
+   "col": "CM",
+   "label": "% Passes em progressão em relação aos curtos",
+   "expr": "(r['def_CK']*1)/r['def_CI']",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CN",
+   "col": "CN",
+   "label": "Passes Errados",
+   "expr": "f['passes_attempted']-f['passes_completed']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_CO",
+   "col": "CO",
+   "label": "Passes Errados /90",
+   "expr": "r['def_CN']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_CP",
+   "col": "CP",
+   "label": "% Passes errados",
+   "expr": "(r['def_CN']*1)/f['passes_attempted']",
+   "fmt": "pct",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_CQ",
+   "col": "CQ",
+   "label": "Passes Decisivos",
+   "expr": "f['key_passes']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CR",
+   "col": "CR",
+   "label": "Passes Decisivos /90",
+   "expr": "_iferror(r['def_CQ']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CS",
+   "col": "CS",
+   "label": "xA por Passes Decisivos",
+   "expr": "_iferror((f['xa'])/f['key_passes'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CT",
+   "col": "CT",
+   "label": "Tentativa de criar um gol ou jogada ofensiva",
+   "expr": "_iferror(f['key_passes']+f['clear_cut_chances'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CU",
+   "col": "CU",
+   "label": "Tentativa de criar um gol ou jogada ofensiva/ 90",
+   "expr": "_iferror(r['def_CT']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CV",
+   "col": "CV",
+   "label": "Tentativas (Cabs, Desarmes, Pressão)",
+   "expr": "((f['headers_attempted'])+(f['tackles_attempted'])+(f['presses_attempted']))",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CW",
+   "col": "CW",
+   "label": "Tentativas Cabs, Des, Pres /90",
+   "expr": "r['def_CV']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CX",
+   "col": "CX",
+   "label": "Acertos (Cabs, Des, Pres)",
+   "expr": "((f['headers_won'])+(f['tackles_completed'])+(f['presses_completed']))",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CY",
+   "col": "CY",
+   "label": "Acertos/90",
+   "expr": "r['def_CX']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_CZ",
+   "col": "CZ",
+   "label": "Erros",
+   "expr": "((f['headers_attempted']-f['headers_won'])+(f['tackles_attempted']-f['tackles_completed'])+(f['presses_attempted']-f['presses_completed']))",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_DA",
+   "col": "DA",
+   "label": "Erros /90",
+   "expr": "_iferror(r['def_CZ']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_DB",
+   "col": "DB",
+   "label": "Taxa de acerto",
+   "expr": "_iferror(r['def_CX']/r['def_CV'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_DC",
+   "col": "DC",
+   "label": "Bolas interceptadas",
+   "expr": "(f['shots_blocked']+f['shots_blocked']+f['interceptions']+f['clearances']+(f['tackles_key']*0.5))",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_DD",
+   "col": "DD",
+   "label": "Bolas interceptadas /90",
+   "expr": "r['def_DC']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_DE",
+   "col": "DE",
+   "label": "Bolas roubadas do adversário",
+   "expr": "(f['presses_completed']+f['tackles_completed'])+(f['tackles_key']*0.5)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_DF",
+   "col": "DF",
+   "label": "Bolas roubadas /90",
+   "expr": "r['def_DE']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_DG",
+   "col": "DG",
+   "label": "Bolas disputadas com o adversário",
+   "expr": "_iferror(f['headers_attempted']+f['tackles_attempted']+f['shots_blocked']+f['fouls_committed'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_DH",
+   "col": "DH",
+   "label": "Bolas disputadas /90",
+   "expr": "r['def_DG']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_DI",
+   "col": "DI",
+   "label": "Bolas disputadas e ganhas do adversário",
+   "expr": "_iferror(f['headers_won']+f['tackles_completed']+f['shots_blocked']+f['tackles_key'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_DJ",
+   "col": "DJ",
+   "label": "Bolas disputadas e ganhas /90",
+   "expr": "r['def_DI']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_DK",
+   "col": "DK",
+   "label": "% Bolas disputadas e ganhas",
+   "expr": "_iferror((r['def_DI']*1)/r['def_DG'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "def_DL",
+   "col": "DL",
+   "label": "Bolas disputadas e perdidas com o adversário",
+   "expr": "_iferror((f['headers_attempted']-f['headers_won'])+(f['tackles_attempted']-f['tackles_completed'])+f['shots_blocked'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_DM",
+   "col": "DM",
+   "label": "Bolas disputadas e perdidas /90",
+   "expr": "_iferror(r['def_DL']/r['def_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_DN",
+   "col": "DN",
+   "label": "Faltas cometidas",
+   "expr": "f['fouls_committed']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_DO",
+   "col": "DO",
+   "label": "Faltas cometidas/90",
+   "expr": "r['def_DN']/r['def_N']",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "def_AW",
+   "col": "AW",
+   "label": "Cabeceios que evitaram jogada ofensiva",
+   "expr": "_iferror((r['def_AX']*r['def_N']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  }
+ ],
+ "wing": [
+  {
+   "key": "wing_M",
+   "col": "M",
+   "label": "Jogos completos",
+   "expr": "(f['minutes'] / 90.0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_N",
+   "col": "N",
+   "label": "Jogos Totais",
+   "expr": "f['apps_total']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_O",
+   "col": "O",
+   "label": "Minutos por partida",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_Q",
+   "col": "Q",
+   "label": "Gols",
+   "expr": "f['goals']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_R",
+   "col": "R",
+   "label": "Assist",
+   "expr": "f['assists']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_S",
+   "col": "S",
+   "label": "Gols+Ass",
+   "expr": "_iferror(r['wing_Q']+r['wing_R'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_T",
+   "col": "T",
+   "label": "Gols + A/90",
+   "expr": "_iferror(r['wing_S']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_U",
+   "col": "U",
+   "label": "Man of the match",
+   "expr": "f['man_of_the_match']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_V",
+   "col": "V",
+   "label": "% de vezes que foi eleito o Homem do Jogo",
+   "expr": "_iferror((r['wing_U']*1)/r['wing_M'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_W",
+   "col": "W",
+   "label": "Gols esperados (xG)",
+   "expr": "f['xg']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_X",
+   "col": "X",
+   "label": "xG /90",
+   "expr": "_iferror((r['wing_W']/r['wing_M']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_Y",
+   "col": "Y",
+   "label": "xG (Sem pênaltis)",
+   "expr": "_iferror(((f['xg'])-(f['penalties_taken']*0.79)), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_Z",
+   "col": "Z",
+   "label": "xG (Sem pênaltis) /90",
+   "expr": "_iferror(r['wing_Y']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AA",
+   "col": "AA",
+   "label": "Assistências Esperadas (xA)",
+   "expr": "f['xa']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AB",
+   "col": "AB",
+   "label": "xA /90",
+   "expr": "_iferror(r['wing_AA']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AC",
+   "col": "AC",
+   "label": "xA + xG (sem pen)",
+   "expr": "_iferror(r['wing_Y']+r['wing_AA'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AD",
+   "col": "AD",
+   "label": "xA + xG /90",
+   "expr": "_iferror(r['wing_AC']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AE",
+   "col": "AE",
+   "label": "Pênaltis batidos",
+   "expr": "f['penalties_taken']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AF",
+   "col": "AF",
+   "label": "Pênaltis marcados",
+   "expr": "f['penalties_scored']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AG",
+   "col": "AG",
+   "label": "Pênaltis perdidos",
+   "expr": "_iferror(r['wing_AE']-r['wing_AF'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_AH",
+   "col": "AH",
+   "label": "% Conversão de pênalti",
+   "expr": "_iferror((r['wing_AF']*1)/r['wing_AE'], 0.0000001)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AI",
+   "col": "AI",
+   "label": "Desarmes Tentados",
+   "expr": "f['tackles_attempted']+f['fouls_committed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AJ",
+   "col": "AJ",
+   "label": "Des Tentados / 90",
+   "expr": "_iferror(r['wing_AI']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AK",
+   "col": "AK",
+   "label": "Desarmes ganhos",
+   "expr": "f['tackles_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AL",
+   "col": "AL",
+   "label": "Desarmes Conseguidos / 90",
+   "expr": "_iferror(r['wing_AK']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AM",
+   "col": "AM",
+   "label": "Dribles Sofridos",
+   "expr": "f['tackles_attempted']-f['tackles_completed']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_AN",
+   "col": "AN",
+   "label": "Dribles Sofridos /90",
+   "expr": "_iferror(r['wing_AM']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_AO",
+   "col": "AO",
+   "label": "% Des Ganhos",
+   "expr": "_iferror((r['wing_AK']*1)/r['wing_AI'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AP",
+   "col": "AP",
+   "label": "Faltas cometidas",
+   "expr": "f['fouls_committed']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_AQ",
+   "col": "AQ",
+   "label": "Faltas cometidas /90",
+   "expr": "_iferror(r['wing_AP']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_AR",
+   "col": "AR",
+   "label": "Lances disputados",
+   "expr": "_iferror(f['fouls_committed']+f['presses_attempted']+f['tackles_attempted']+f['shots_blocked'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AS",
+   "col": "AS",
+   "label": "Lances disputados /90",
+   "expr": "_iferror(r['wing_AR']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AT",
+   "col": "AT",
+   "label": "Lances disputados e ganhos sem falta",
+   "expr": "_iferror(f['presses_completed']+f['tackles_completed']+f['tackles_key']+f['shots_blocked'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_AU",
+   "col": "AU",
+   "label": "Lances disputados e ganhos sem falta /90",
+   "expr": "_iferror(r['wing_AT']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_AV",
+   "col": "AV",
+   "label": "% Lances disputados e ganhos",
+   "expr": "_iferror((r['wing_AT']*1)/r['wing_AR'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AW",
+   "col": "AW",
+   "label": "Passes Tentados",
+   "expr": "f['passes_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AX",
+   "col": "AX",
+   "label": "Passe Tentados/ 90",
+   "expr": "_iferror(r['wing_AW']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AY",
+   "col": "AY",
+   "label": "Passes Completados",
+   "expr": "f['passes_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_AZ",
+   "col": "AZ",
+   "label": "Passes completados /90",
+   "expr": "r['wing_AY']/r['wing_M']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BA",
+   "col": "BA",
+   "label": "% Passes Certos",
+   "expr": "r['wing_AY']/r['wing_AW']",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BB",
+   "col": "BB",
+   "label": "Passes errados",
+   "expr": "_iferror((f['passes_attempted']-f['passes_completed'])+(f['crosses_attempted']-f['crosses_completed']), 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_BC",
+   "col": "BC",
+   "label": "Passes errados / 90",
+   "expr": "_iferror((r['wing_BB']/r['wing_M']), 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_BD",
+   "col": "BD",
+   "label": "Um passe errado a cada...",
+   "expr": "_iferror(f['passes_attempted']/(f['passes_attempted']-f['passes_completed']), 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_BE",
+   "col": "BE",
+   "label": "Passes que são curtos",
+   "expr": "f['passes_attempted']-f['passes_progressive']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BF",
+   "col": "BF",
+   "label": "Passes curtos e certos /90",
+   "expr": "_iferror(r['wing_BE']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BG",
+   "col": "BG",
+   "label": "Passe que são em progressão",
+   "expr": "f['passes_progressive']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BH",
+   "col": "BH",
+   "label": "Passes em progressão/90",
+   "expr": "r['wing_BG']/r['wing_M']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BI",
+   "col": "BI",
+   "label": "% Passes em progressão em relação aos curtos",
+   "expr": "_iferror(f['passes_progressive']/r['wing_BE'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BJ",
+   "col": "BJ",
+   "label": "Cruzamentos Tentados",
+   "expr": "f['crosses_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BK",
+   "col": "BK",
+   "label": "Cruzamentos T/90",
+   "expr": "_iferror(r['wing_BJ']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BL",
+   "col": "BL",
+   "label": "Cruzamentos Conseguidos",
+   "expr": "f['crosses_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BM",
+   "col": "BM",
+   "label": "Cruzamentos C/90",
+   "expr": "_iferror(r['wing_BL']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BN",
+   "col": "BN",
+   "label": "Cruzamentos",
+   "expr": "_iferror(r['wing_BL']/r['wing_BJ'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BO",
+   "col": "BO",
+   "label": "Passes Decisivos",
+   "expr": "f['key_passes']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BP",
+   "col": "BP",
+   "label": "Pass Decisivos / 90",
+   "expr": "_iferror(r['wing_BO']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BQ",
+   "col": "BQ",
+   "label": "Minutos pra criar uma chance de perigo",
+   "expr": "_iferror(f['minutes']/(f['clear_cut_chances']+f['key_passes']+f['shots_on_target']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BR",
+   "col": "BR",
+   "label": "Minutos pra fazer um Passe Decisivo",
+   "expr": "_iferror((f['minutes']/f['key_passes']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BS",
+   "col": "BS",
+   "label": "Assistências Esperadas xA",
+   "expr": "_iferror((f['xa']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BT",
+   "col": "BT",
+   "label": "Assistências Desperdiçadas pela Equipe",
+   "expr": "_iferror(r['wing_BS']-f['assists'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_BU",
+   "col": "BU",
+   "label": "Chances criadas",
+   "expr": "_iferror(f['crosses_completed']+f['key_passes']+r['wing_BS']+f['clear_cut_chances'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BV",
+   "col": "BV",
+   "label": "Chances criadas /90",
+   "expr": "_iferror(r['wing_BU']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BW",
+   "col": "BW",
+   "label": "Fintas",
+   "expr": "f['dribbles']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BX",
+   "col": "BX",
+   "label": "Fintas / 90",
+   "expr": "_iferror(r['wing_BW']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BY",
+   "col": "BY",
+   "label": "Desarmes Decisivos",
+   "expr": "f['tackles_key']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_BZ",
+   "col": "BZ",
+   "label": "Desarmes Decisivos /90",
+   "expr": "_iferror(r['wing_BY']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CA",
+   "col": "CA",
+   "label": "Erros que originaram gol",
+   "expr": "f['errors_leading_to_goal']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_CB",
+   "col": "CB",
+   "label": "Erros que geraram gol/90",
+   "expr": "_iferror(r['wing_CA']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_CC",
+   "col": "CC",
+   "label": "Participações do jogador (Fintas, passes, etc)",
+   "expr": "_iferror(f['passes_attempted']+f['dribbles']+f['shots']+f['clear_cut_chances']+f['offsides']+f['key_passes']+r['wing_AI']+f['tackles_key']+f['interceptions']+f['crosses_attempted']+f['penalties_taken']+f['free_kicks_taken']+f['headers_won'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CD",
+   "col": "CD",
+   "label": "Participação / 90",
+   "expr": "_iferror(r['wing_CC']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CE",
+   "col": "CE",
+   "label": "Cabeceios Disputados",
+   "expr": "f['headers_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CF",
+   "col": "CF",
+   "label": "Cabeceios Disp /90",
+   "expr": "r['wing_CE']/r['wing_M']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CG",
+   "col": "CG",
+   "label": "Cabeceios Ganhos",
+   "expr": "f['headers_won']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CH",
+   "col": "CH",
+   "label": "Cabeceios G/90",
+   "expr": "r['wing_CG']/r['wing_M']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CI",
+   "col": "CI",
+   "label": "% Cabeceios ganhos",
+   "expr": "_iferror((f['headers_won']*1)/f['headers_attempted'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CJ",
+   "col": "CJ",
+   "label": "Índice de Dominância Aérea (IDA)",
+   "expr": "_iferror((f['headers_won']/f['headers_attempted'])*np.sqrt(f['headers_won']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CL",
+   "col": "CL",
+   "label": "Cabs que evitaram jogada ofensiva /90",
+   "expr": "_iferror(_iferror(f['headers_key'] / (f['minutes'] / 90.0), 0), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CO",
+   "col": "CO",
+   "label": "Movimentos ofensivos tentados",
+   "expr": "_iferror(f['crosses_attempted']+f['dribbles']+f['shots']+(f['clear_cut_chances']*2)+f['key_passes']+(f['crosses_attempted']-f['crosses_attempted'])+f['passes_progressive']+(f['goals']*3)+(f['assists']*3), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CP",
+   "col": "CP",
+   "label": "Movimentos ofensivos T /90",
+   "expr": "r['wing_CO']/r['wing_M']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CQ",
+   "col": "CQ",
+   "label": "Movimentos ofensivos conseguidos",
+   "expr": "_iferror(f['crosses_completed']+f['dribbles']+f['shots_on_target']+(f['clear_cut_chances']*2)+f['key_passes']+(f['crosses_completed']-f['crosses_completed'])+f['passes_progressive']+(f['goals']*3)+(f['assists']*3), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CR",
+   "col": "CR",
+   "label": "Mov Of / 90",
+   "expr": "_iferror(r['wing_CQ']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CS",
+   "col": "CS",
+   "label": "Movimentos ofensivos com sucesso",
+   "expr": "_iferror((r['wing_CQ']*1)/r['wing_CO'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CT",
+   "col": "CT",
+   "label": "Lances defensivos tentados",
+   "expr": "_iferror((f['errors_leading_to_goal']*3)+(f['yellow_cards']*1.33)+(f['red_cards']*2)+f['headers_attempted']+f['tackles_attempted']+f['interceptions']+f['clearances']+f['shots_blocked']+f['shots_blocked']+f['fouls_committed']+(f['tackles_key']*3), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CU",
+   "col": "CU",
+   "label": "Lances DEF tentados / 90",
+   "expr": "_iferror(r['wing_CT']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CV",
+   "col": "CV",
+   "label": "Lances defensivos conseguidos",
+   "expr": "_iferror(f['headers_won']+f['tackles_completed']+f['interceptions']+f['clearances']+f['shots_blocked']+f['shots_blocked']+(f['tackles_key']*3), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CW",
+   "col": "CW",
+   "label": "Lances DEF conseguidos / 90",
+   "expr": "_iferror(r['wing_CV']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CX",
+   "col": "CX",
+   "label": "Erros Defensivos",
+   "expr": "_iferror((f['errors_leading_to_goal']*3)+(f['yellow_cards']*1.25)+(f['red_cards']*2)+f['fouls_committed']+r['wing_BB'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_CY",
+   "col": "CY",
+   "label": "Erros Defensivos /90",
+   "expr": "_iferror((r['wing_CX']/r['wing_M']), 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_CZ",
+   "col": "CZ",
+   "label": "Eficácia defensiva",
+   "expr": "_iferror(r['wing_CV']/r['wing_CT'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_DA",
+   "col": "DA",
+   "label": "Sucesso (Overall)",
+   "expr": "_iferror(((r['wing_CV']+r['wing_CQ'])*1)/(r['wing_CO']+r['wing_CT']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_DB",
+   "col": "DB",
+   "label": "Distância Percorrida",
+   "expr": "_iferror((f['distance_km']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_DC",
+   "col": "DC",
+   "label": "Dist / 90",
+   "expr": "_iferror(r['wing_DB']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_DD",
+   "col": "DD",
+   "label": "Velocidade Média (em km/h)",
+   "expr": "_iferror(r['wing_DB']/(f['minutes']/60), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_DF",
+   "col": "DF",
+   "label": "Sprints / 90",
+   "expr": "f['sprints']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_DG",
+   "col": "DG",
+   "label": "Posse Desperdiçada",
+   "expr": "_iferror((f['headers_attempted']-f['headers_won'])+(f['passes_attempted']-f['passes_completed'])+(f['crosses_attempted']-f['crosses_completed']), 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_DH",
+   "col": "DH",
+   "label": "Posse Desperdiçada /90",
+   "expr": "_iferror(r['wing_DG']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_DI",
+   "col": "DI",
+   "label": "Posse perdida /90",
+   "expr": "f['possession_lost']",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "wing_DJ",
+   "col": "DJ",
+   "label": "Nota média",
+   "expr": "_iferror((f['avg_rating']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CK",
+   "col": "CK",
+   "label": "Cabeceios que evitaram jogada ofensiva",
+   "expr": "_iferror((r['wing_CL']*r['wing_M']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CM",
+   "col": "CM",
+   "label": "Bolas roubadas",
+   "expr": "_iferror((f['tackles_key']*0.5)+f['tackles_completed']+f['interceptions']+r['wing_CK'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_CN",
+   "col": "CN",
+   "label": "Bolas roubadas / 90",
+   "expr": "_iferror(r['wing_CM']/r['wing_M'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "wing_DE",
+   "col": "DE",
+   "label": "Sprints (Total)",
+   "expr": "_iferror((r['wing_DF']*r['wing_M']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  }
+ ],
+ "dm": [
+  {
+   "key": "dm_N",
+   "col": "N",
+   "label": "Jogos Completos",
+   "expr": "f['minutes']/90",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_O",
+   "col": "O",
+   "label": "Jogos Totais",
+   "expr": "f['apps_total']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_P",
+   "col": "P",
+   "label": "Minutos por partida",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_R",
+   "col": "R",
+   "label": "Gols",
+   "expr": "f['goals']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_S",
+   "col": "S",
+   "label": "Assistências",
+   "expr": "f['assists']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_T",
+   "col": "T",
+   "label": "Gols + Ass",
+   "expr": "_iferror(r['dm_R']+r['dm_S'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_U",
+   "col": "U",
+   "label": "Man of the match",
+   "expr": "f['man_of_the_match']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_V",
+   "col": "V",
+   "label": "% de vezes que foi eleito o Homem do Jogo",
+   "expr": "_iferror((r['dm_U']*1)/r['dm_N'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_W",
+   "col": "W",
+   "label": "Pênaltis batidos",
+   "expr": "f['penalties_taken']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_X",
+   "col": "X",
+   "label": "Pênaltis marcados",
+   "expr": "f['penalties_scored']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_Y",
+   "col": "Y",
+   "label": "Pênaltis perdidos",
+   "expr": "_iferror(r['dm_W']-r['dm_X'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_Z",
+   "col": "Z",
+   "label": "% Conversão de pênalti",
+   "expr": "_iferror((r['dm_X']*1)/r['dm_W'], 0.0000001)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AA",
+   "col": "AA",
+   "label": "Faltas cometidas",
+   "expr": "f['fouls_committed']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AB",
+   "col": "AB",
+   "label": "Faltas/90",
+   "expr": "_iferror(r['dm_AA']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AC",
+   "col": "AC",
+   "label": "Amarelos",
+   "expr": "f['yellow_cards']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AD",
+   "col": "AD",
+   "label": "Vermelhos",
+   "expr": "f['red_cards']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AE",
+   "col": "AE",
+   "label": "Total cartões",
+   "expr": "_iferror(f['yellow_cards']+f['red_cards'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AF",
+   "col": "AF",
+   "label": "Total de Cartões /90",
+   "expr": "r['dm_AE']/r['dm_N']",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AG",
+   "col": "AG",
+   "label": "Faltas pra um cartão AMARELO",
+   "expr": "_iferror(f['fouls_committed']/(f['yellow_cards']), 50)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AH",
+   "col": "AH",
+   "label": "Faltas pra um cartão",
+   "expr": "_iferror(f['fouls_committed']/(f['yellow_cards']+f['red_cards']), 50)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AI",
+   "col": "AI",
+   "label": "Faltas sem cartão",
+   "expr": "r['dm_AA']-(r['dm_AC']+r['dm_AD'])",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AJ",
+   "col": "AJ",
+   "label": "Cartões por falta cometida",
+   "expr": "_iferror((r['dm_AE']*1)/r['dm_AA'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AK",
+   "col": "AK",
+   "label": "Movimentos de pressão tentados",
+   "expr": "f['presses_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AL",
+   "col": "AL",
+   "label": "Mov Press T/90",
+   "expr": "_iferror(r['dm_AK']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AM",
+   "col": "AM",
+   "label": "Movimentos de pressão ganhos",
+   "expr": "f['presses_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AN",
+   "col": "AN",
+   "label": "Mov Press Ganhos /90",
+   "expr": "_iferror(r['dm_AM']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AO",
+   "col": "AO",
+   "label": "% Pressão ganha/90",
+   "expr": "_iferror(r['dm_AM']/r['dm_AK'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AP",
+   "col": "AP",
+   "label": "Bolas disputadas com o adversário",
+   "expr": "_iferror(f['headers_attempted']+f['tackles_attempted']+f['fouls_committed'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AQ",
+   "col": "AQ",
+   "label": "Bolas disputadas com o adversário /90",
+   "expr": "_iferror(r['dm_AP']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AR",
+   "col": "AR",
+   "label": "Bolas disputadas e ganhas",
+   "expr": "_iferror(f['headers_won']+f['tackles_completed']+f['tackles_key'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AS",
+   "col": "AS",
+   "label": "Bolas disputadas e ganhas /90",
+   "expr": "_iferror(r['dm_AR']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AT",
+   "col": "AT",
+   "label": "% Bolas disputadas e ganhas (sem falta)",
+   "expr": "_iferror((r['dm_AR']*1)/r['dm_AP'], 0)",
+   "fmt": "pct",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AU",
+   "col": "AU",
+   "label": "Faltas sem cartão",
+   "expr": "_iferror(f['fouls_committed']-f['yellow_cards']-f['red_cards'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AV",
+   "col": "AV",
+   "label": "%Faltas Sem Cartão",
+   "expr": "_iferror((r['dm_AU']*1)/f['fouls_committed'], 0)",
+   "fmt": "pct",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_AW",
+   "col": "AW",
+   "label": "Passes tentados",
+   "expr": "f['passes_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AX",
+   "col": "AX",
+   "label": "Passes certos",
+   "expr": "f['passes_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AY",
+   "col": "AY",
+   "label": "Pass C / 90",
+   "expr": "_iferror((r['dm_AX']/r['dm_N']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BA",
+   "col": "BA",
+   "label": "Passes errados",
+   "expr": "r['dm_AW']-r['dm_AX']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_BB",
+   "col": "BB",
+   "label": "Passes errados / 90",
+   "expr": "_iferror(r['dm_BA']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_BC",
+   "col": "BC",
+   "label": "% Passes certos",
+   "expr": "_iferror((f['passes_completed']*1)/f['passes_attempted'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BD",
+   "col": "BD",
+   "label": "Passes que são curtos",
+   "expr": "(f['passes_attempted']-f['passes_progressive'])",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BE",
+   "col": "BE",
+   "label": "Passes curtos certos /90",
+   "expr": "_iferror(r['dm_BD']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BF",
+   "col": "BF",
+   "label": "Passes que são em progressão",
+   "expr": "f['passes_progressive']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BG",
+   "col": "BG",
+   "label": "Passes em progressão/90",
+   "expr": "_iferror(r['dm_BF']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BH",
+   "col": "BH",
+   "label": "% Passes em progressão em relação aos curtos",
+   "expr": "_iferror((r['dm_BF']*1)/r['dm_BD'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BI",
+   "col": "BI",
+   "label": "Cabs disputados",
+   "expr": "f['headers_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BJ",
+   "col": "BJ",
+   "label": "Cabs Disputados /90",
+   "expr": "_iferror(r['dm_BI']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BK",
+   "col": "BK",
+   "label": "Cabs ganhos",
+   "expr": "f['headers_won']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BL",
+   "col": "BL",
+   "label": "Cabs ganhos /90",
+   "expr": "_iferror(r['dm_BK']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BM",
+   "col": "BM",
+   "label": "% Cabeceios Ganhos",
+   "expr": "_iferror(f['headers_won']/f['headers_attempted'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BN",
+   "col": "BN",
+   "label": "Índice de Dominância Aérea (IDA)",
+   "expr": "_iferror((f['headers_won']/f['headers_attempted'])*np.sqrt(f['headers_won']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BO",
+   "col": "BO",
+   "label": "Cabs perdidos",
+   "expr": "f['headers_attempted']-f['headers_won']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_BP",
+   "col": "BP",
+   "label": "Cabs perdidos /90",
+   "expr": "_iferror(r['dm_BO']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_BR",
+   "col": "BR",
+   "label": "Cabs que evitaram jogada ofensiva /90",
+   "expr": "_iferror(f['headers_key'] / (f['minutes'] / 90.0), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BS",
+   "col": "BS",
+   "label": "% Cabs ganhos",
+   "expr": "_iferror((r['dm_BK']*1)/r['dm_BI'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BT",
+   "col": "BT",
+   "label": "Desarmes Tentados",
+   "expr": "f['tackles_attempted']+f['fouls_committed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BU",
+   "col": "BU",
+   "label": "Desarmes Tentados/90",
+   "expr": "_iferror(r['dm_BT']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BV",
+   "col": "BV",
+   "label": "Desarmes ganhos",
+   "expr": "f['tackles_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BW",
+   "col": "BW",
+   "label": "Desarmes ganhos/90",
+   "expr": "_iferror(r['dm_BV']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_BX",
+   "col": "BX",
+   "label": "Dribles Sofridos",
+   "expr": "f['tackles_attempted']-f['tackles_completed']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_BY",
+   "col": "BY",
+   "label": "Dribles Sofridos/90",
+   "expr": "_iferror(r['dm_BX']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_BZ",
+   "col": "BZ",
+   "label": "% Des Ganhos",
+   "expr": "_iferror((r['dm_BV']*1)/r['dm_BT'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CA",
+   "col": "CA",
+   "label": "Desarmes Decisivos",
+   "expr": "f['tackles_key']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CB",
+   "col": "CB",
+   "label": "Desarmes Decisivos / 90",
+   "expr": "_iferror(r['dm_CA']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CC",
+   "col": "CC",
+   "label": "Passes decisivos",
+   "expr": "f['key_passes']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CD",
+   "col": "CD",
+   "label": "Passes decisivos / jogos",
+   "expr": "_iferror(r['dm_CC']/r['dm_N'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CE",
+   "col": "CE",
+   "label": "Interceptação + Recuperação de bola",
+   "expr": "_iferror(f['interceptions']+f['shots_blocked']+f['shots_blocked']+f['tackles_key']+(f['possession_won']*r['dm_N']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CF",
+   "col": "CF",
+   "label": "Interceptação + Recuperação de bola/90",
+   "expr": "_iferror(r['dm_CE']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CG",
+   "col": "CG",
+   "label": "Criação / 90",
+   "expr": "_iferror((f['clear_cut_chances']+f['key_passes']+f['assists'])/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CH",
+   "col": "CH",
+   "label": "Soma de todos os desarmes",
+   "expr": "np.nansum(f['tackles_completed'])",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CI",
+   "col": "CI",
+   "label": "% Des em relação a media",
+   "expr": "_iferror((f['tackles_completed']*1)/r['dm_CH'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CJ",
+   "col": "CJ",
+   "label": "Bolas interceptadas",
+   "expr": "f['shots_blocked']+f['interceptions']+f['clearances']+f['shots_blocked']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CK",
+   "col": "CK",
+   "label": "Bolas int/90",
+   "expr": "_iferror(r['dm_CJ']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CL",
+   "col": "CL",
+   "label": "Bolas roubadas",
+   "expr": "f['presses_completed']+f['tackles_completed']+(f['tackles_key']*0.5)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CM",
+   "col": "CM",
+   "label": "Bolas roubadas /90",
+   "expr": "_iferror(r['dm_CL']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CN",
+   "col": "CN",
+   "label": "Posse Ganha/90",
+   "expr": "f['possession_won']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CS",
+   "col": "CS",
+   "label": "Erros Defensivos",
+   "expr": "_iferror((f['errors_leading_to_goal']*3)+(f['yellow_cards']*1.25)+(f['red_cards']*2)+f['fouls_committed']+r['dm_BA'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_CT",
+   "col": "CT",
+   "label": "Erros Defensivos /90",
+   "expr": "r['dm_CS']/r['dm_N']",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_CV",
+   "col": "CV",
+   "label": "Assistências Esperadas xA",
+   "expr": "_iferror(f['xa'], 0)*1",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CW",
+   "col": "CW",
+   "label": "xA por passe decisivo",
+   "expr": "_iferror(r['dm_CV']/f['key_passes'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CX",
+   "col": "CX",
+   "label": "Criação (Jogadas Ofensivas)",
+   "expr": "_iferror(f['key_passes']+f['clear_cut_chances'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CY",
+   "col": "CY",
+   "label": "Criação / 90",
+   "expr": "_iferror(r['dm_CX']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CZ",
+   "col": "CZ",
+   "label": "Distância percorrida",
+   "expr": "_iferror((f['distance_km']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_DA",
+   "col": "DA",
+   "label": "Distância /90",
+   "expr": "_iferror(r['dm_CZ']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_DB",
+   "col": "DB",
+   "label": "Velocidade Média (em km/h)",
+   "expr": "_iferror((((r['dm_CZ']*1000)/(f['minutes']*60))*3600)/1000, 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_DC",
+   "col": "DC",
+   "label": "Índice de Cobertura",
+   "expr": "r['dm_CZ']/(f['tackles_completed']+f['presses_completed']+f['interceptions']+f['shots_blocked']+(f['tackles_key']*1.5))",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_DD",
+   "col": "DD",
+   "label": "Índice de Dominância Física",
+   "expr": "(f['headers_won']+f['tackles_completed'])/r['dm_CZ']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_DE",
+   "col": "DE",
+   "label": "Posse Desperdiçada",
+   "expr": "_iferror((f['passes_attempted']-f['passes_completed'])+(f['headers_attempted']-f['headers_won'])+(f['shots']-f['shots_on_target']), 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_DF",
+   "col": "DF",
+   "label": "Posse Desperdiçada /90",
+   "expr": "_iferror(r['dm_DE']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_DG",
+   "col": "DG",
+   "label": "Posse perdida /90",
+   "expr": "f['possession_lost']",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_DH",
+   "col": "DH",
+   "label": "Nota média",
+   "expr": "_iferror((f['avg_rating']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_AZ",
+   "col": "AZ",
+   "label": "Passes certos  - errados / Jogo",
+   "expr": "_iferror((r['dm_AX']-r['dm_BA'])/(f['minutes']/90), 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "dm_BQ",
+   "col": "BQ",
+   "label": "Cabeceios que evitaram jogada ofensiva",
+   "expr": "_iferror((r['dm_BR']*r['dm_N']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CO",
+   "col": "CO",
+   "label": "Lances defensivos tentados",
+   "expr": "_iferror((f['errors_leading_to_goal']*3)+(f['yellow_cards']*1.5)+(f['red_cards']*2)+f['tackles_attempted']+f['interceptions']+f['clearances']+f['shots_blocked']+f['shots_blocked']+f['fouls_committed']+(r['dm_BQ']*0.5), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CP",
+   "col": "CP",
+   "label": "Lances DEF tentados / 90",
+   "expr": "_iferror(r['dm_CO']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CQ",
+   "col": "CQ",
+   "label": "Lances defensivos conseguidos",
+   "expr": "_iferror(f['tackles_completed']+f['interceptions']+f['tackles_key']+f['clearances']+f['shots_blocked']+f['shots_blocked']+(r['dm_BQ']*0.5), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CR",
+   "col": "CR",
+   "label": "Lances DEF conseguidos / 90",
+   "expr": "_iferror(r['dm_CQ']/r['dm_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "dm_CU",
+   "col": "CU",
+   "label": "Eficácia defensiva",
+   "expr": "_iferror(r['dm_CQ']/r['dm_CO'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  }
+ ],
+ "b2b": [
+  {
+   "key": "b2b_N",
+   "col": "N",
+   "label": "Jogos completos",
+   "expr": "(f['minutes'] / 90.0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_O",
+   "col": "O",
+   "label": "Jogos Totais",
+   "expr": "f['apps_total']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_P",
+   "col": "P",
+   "label": "Minutos por partida",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_R",
+   "col": "R",
+   "label": "Pênaltis batidos",
+   "expr": "f['penalties_taken']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_S",
+   "col": "S",
+   "label": "Pênaltis marcados",
+   "expr": "f['penalties_scored']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_T",
+   "col": "T",
+   "label": "Pênaltis perdidos",
+   "expr": "_iferror(r['b2b_R']-r['b2b_S'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_U",
+   "col": "U",
+   "label": "% Conversão de pênalti",
+   "expr": "_iferror((r['b2b_S']*1)/r['b2b_R'], 0.0000001)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_V",
+   "col": "V",
+   "label": "Gols",
+   "expr": "f['goals']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_W",
+   "col": "W",
+   "label": "Assistências",
+   "expr": "f['assists']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_X",
+   "col": "X",
+   "label": "Gols + Ass",
+   "expr": "_iferror(r['b2b_V']+r['b2b_W'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_Y",
+   "col": "Y",
+   "label": "Finalizações Tentadas",
+   "expr": "f['shots']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_Z",
+   "col": "Z",
+   "label": "Finalizações /90",
+   "expr": "r['b2b_Y']/r['b2b_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AA",
+   "col": "AA",
+   "label": "Finalizações pra fora",
+   "expr": "f['shots']-f['shots_on_target']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AB",
+   "col": "AB",
+   "label": "Fin pra fora /90",
+   "expr": "r['b2b_AA']/r['b2b_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AC",
+   "col": "AC",
+   "label": "Finalizações no Gol",
+   "expr": "f['shots_on_target']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AD",
+   "col": "AD",
+   "label": "Finalizações no gol/90",
+   "expr": "r['b2b_AC']/r['b2b_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AE",
+   "col": "AE",
+   "label": "Finalizações Defendidas",
+   "expr": "f['shots']-f['goals']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AF",
+   "col": "AF",
+   "label": "Finalizações Def /90",
+   "expr": "r['b2b_AE']/r['b2b_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AG",
+   "col": "AG",
+   "label": "% Finalizações que foram em direção gol",
+   "expr": "f['shots_on_target']/f['shots']",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AH",
+   "col": "AH",
+   "label": "Finalizações pra um gol",
+   "expr": "_iferror((f['shots']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), 100)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AI",
+   "col": "AI",
+   "label": "Finalizações certas pra um gol",
+   "expr": "_iferror((f['shots_on_target']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AJ",
+   "col": "AJ",
+   "label": "Finalizações que se converteram em gols",
+   "expr": "_iferror((f['goals']-f['penalties_scored'])/(f['shots']-f['penalties_taken']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AK",
+   "col": "AK",
+   "label": "Taxa de Conversão %",
+   "expr": "f['goals']/f['shots']",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AM",
+   "col": "AM",
+   "label": "Gols de fora da área",
+   "expr": "f['goals_outside_box']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AN",
+   "col": "AN",
+   "label": "Gols de Penaltis",
+   "expr": "f['penalties_scored']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AO",
+   "col": "AO",
+   "label": "Gols de fora da área/90",
+   "expr": "_iferror(r['b2b_AM']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AP",
+   "col": "AP",
+   "label": "Remates de fora da área",
+   "expr": "_iferror(f['shots_outside_box']*r['b2b_N'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AQ",
+   "col": "AQ",
+   "label": "Remates de fora da área/90",
+   "expr": "_iferror(f['shots_outside_box'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AR",
+   "col": "AR",
+   "label": "Conversão dos remates de fora da área",
+   "expr": "_iferror(np.minimum(r['b2b_AO']/r['b2b_AQ'],1), 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AS",
+   "col": "AS",
+   "label": "Gols esperados (xG)",
+   "expr": "f['xg']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AT",
+   "col": "AT",
+   "label": "xG /90",
+   "expr": "_iferror(r['b2b_AS']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AU",
+   "col": "AU",
+   "label": "xG (Sem pênaltis)",
+   "expr": "(r['b2b_AS'])-(f['penalties_taken']*0.79)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AV",
+   "col": "AV",
+   "label": "xG (Sem pênaltis) /90",
+   "expr": "_iferror((r['b2b_AU']/r['b2b_N']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AW",
+   "col": "AW",
+   "label": "Assistências Esperadas (xA)",
+   "expr": "f['xa']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AX",
+   "col": "AX",
+   "label": "xA /90",
+   "expr": "_iferror(r['b2b_AW']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AY",
+   "col": "AY",
+   "label": "xA + xG sem pen",
+   "expr": "r['b2b_AW']+r['b2b_AU']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_AZ",
+   "col": "AZ",
+   "label": "xA + xG /90",
+   "expr": "_iferror(r['b2b_AY']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BA",
+   "col": "BA",
+   "label": "Man of the match",
+   "expr": "f['man_of_the_match']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BB",
+   "col": "BB",
+   "label": "Minutos pra ser o homem do jogo",
+   "expr": "_iferror(f['minutes']/r['b2b_BA'], 5000)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BC",
+   "col": "BC",
+   "label": "% de vezes que foi eleito o Homem do Jogo",
+   "expr": "_iferror((r['b2b_BA']*1)/r['b2b_N'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BD",
+   "col": "BD",
+   "label": "Bolas recuperadas",
+   "expr": "_iferror(f['tackles_completed']+f['interceptions']+f['tackles_key']+(f['possession_won']*r['b2b_N']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BE",
+   "col": "BE",
+   "label": "Bolas recuperadas / 90",
+   "expr": "_iferror(r['b2b_BD']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BF",
+   "col": "BF",
+   "label": "Bolas Interceptadas",
+   "expr": "_iferror(f['clearances']+f['interceptions']+f['shots_blocked']+f['shots_blocked']+(f['tackles_key']*0.5), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BG",
+   "col": "BG",
+   "label": "Bolas Interceptadas /90",
+   "expr": "_iferror(r['b2b_BF']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BH",
+   "col": "BH",
+   "label": "Bolas roubadas",
+   "expr": "_iferror(f['tackles_completed']+f['presses_completed']+(f['tackles_key']*0.5), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BI",
+   "col": "BI",
+   "label": "Bolas roubadas / 90",
+   "expr": "_iferror(r['b2b_BH']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BJ",
+   "col": "BJ",
+   "label": "Desarmes Tentados",
+   "expr": "f['tackles_attempted']+f['fouls_committed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BK",
+   "col": "BK",
+   "label": "Des disputados /90",
+   "expr": "_iferror(r['b2b_BJ']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BL",
+   "col": "BL",
+   "label": "Desarmes Ganhos",
+   "expr": "f['tackles_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BM",
+   "col": "BM",
+   "label": "Desarmes G/90",
+   "expr": "r['b2b_BL']/r['b2b_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BN",
+   "col": "BN",
+   "label": "Dribles Sofridos",
+   "expr": "_iferror(r['b2b_BJ']-r['b2b_BL'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_BO",
+   "col": "BO",
+   "label": "Dribles Sofridos /90",
+   "expr": "r['b2b_BN']/r['b2b_N']",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_BP",
+   "col": "BP",
+   "label": "% Des Ganhos",
+   "expr": "_iferror(r['b2b_BL']/r['b2b_BJ'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BQ",
+   "col": "BQ",
+   "label": "Faltas cometidas",
+   "expr": "f['fouls_committed']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_BR",
+   "col": "BR",
+   "label": "Faltas/90",
+   "expr": "_iferror(r['b2b_BQ']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_BU",
+   "col": "BU",
+   "label": "Movimentos de pressão tentados",
+   "expr": "f['presses_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BV",
+   "col": "BV",
+   "label": "Mov Press T/90",
+   "expr": "_iferror(r['b2b_BU']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BW",
+   "col": "BW",
+   "label": "Movimentos de pressão ganhos",
+   "expr": "f['presses_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BX",
+   "col": "BX",
+   "label": "Mov Press Ganhos /90",
+   "expr": "_iferror(r['b2b_BW']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BY",
+   "col": "BY",
+   "label": "% Pressão ganha/90",
+   "expr": "_iferror((r['b2b_BW']*1)/r['b2b_BU'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BZ",
+   "col": "BZ",
+   "label": "Amarelos",
+   "expr": "f['yellow_cards']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_CA",
+   "col": "CA",
+   "label": "Vermelhos",
+   "expr": "f['red_cards']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_CB",
+   "col": "CB",
+   "label": "Total cartões",
+   "expr": "_iferror(f['yellow_cards']+f['red_cards'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_CC",
+   "col": "CC",
+   "label": "Lances disputados",
+   "expr": "_iferror((r['b2b_BQ']+f['tackles_key']+f['tackles_completed']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CD",
+   "col": "CD",
+   "label": "Lances disputados e ganhos de forma limpa",
+   "expr": "_iferror(r['b2b_CC']-r['b2b_BQ'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CE",
+   "col": "CE",
+   "label": "% Lances disputados e ganhos de forma limpa",
+   "expr": "_iferror((r['b2b_CD']*1)/r['b2b_CC'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CG",
+   "col": "CG",
+   "label": "Desarmes Decisivos",
+   "expr": "f['tackles_key']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CH",
+   "col": "CH",
+   "label": "Desarmes Decisivos / 90",
+   "expr": "_iferror(r['b2b_CG']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CI",
+   "col": "CI",
+   "label": "Cruzamentos Tentados",
+   "expr": "f['crosses_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CJ",
+   "col": "CJ",
+   "label": "Cruzamentos com sucesso",
+   "expr": "f['crosses_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CK",
+   "col": "CK",
+   "label": "% Cruzamentos certos",
+   "expr": "_iferror((r['b2b_CJ']*1)/r['b2b_CI'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CL",
+   "col": "CL",
+   "label": "Passes tentados",
+   "expr": "f['passes_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CM",
+   "col": "CM",
+   "label": "Passes certos",
+   "expr": "f['passes_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CO",
+   "col": "CO",
+   "label": "Passes errados",
+   "expr": "_iferror(r['b2b_CL']-r['b2b_CM'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_CP",
+   "col": "CP",
+   "label": "% Passes certos",
+   "expr": "_iferror(r['b2b_CM']/r['b2b_CL'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CQ",
+   "col": "CQ",
+   "label": "Cabeceios Disputados",
+   "expr": "f['headers_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CR",
+   "col": "CR",
+   "label": "Cabeceios Disputados /90",
+   "expr": "_iferror(r['b2b_CQ']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CS",
+   "col": "CS",
+   "label": "Cabeceios Ganhos",
+   "expr": "f['headers_won']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CT",
+   "col": "CT",
+   "label": "Cabeceios Perdidos",
+   "expr": "_iferror(f['headers_attempted']-f['headers_won'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_CU",
+   "col": "CU",
+   "label": "% Cabs Ganhos",
+   "expr": "_iferror((f['headers_won']*1)/f['headers_attempted'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CV",
+   "col": "CV",
+   "label": "Participação por jogo (passes, fnt, fin, criação, roubadas de bola, etc)",
+   "expr": "_iferror((f['goals']+f['assists']+f['fouls_won']+f['tackles_completed']+f['interceptions']+f['tackles_key']+f['headers_attempted']+f['dribbles']+f['clear_cut_chances']+f['key_passes']+f['passes_attempted'])/r['b2b_N'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CW",
+   "col": "CW",
+   "label": "Lances Tentados (Remate, Passe, Finta, etc)",
+   "expr": "_iferror((r['b2b_AW']+r['b2b_BJ']+r['b2b_CC']+r['b2b_CL']+r['b2b_CQ']+f['shots']+f['presses_attempted']+f['crosses_attempted']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CX",
+   "col": "CX",
+   "label": "Lances Tentados /90",
+   "expr": "_iferror(r['b2b_CW']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CY",
+   "col": "CY",
+   "label": "Lances Conseguidos",
+   "expr": "_iferror((r['b2b_V']*1.5)+(r['b2b_BL']+r['b2b_CD']+r['b2b_CM']+r['b2b_CS']+f['presses_completed']+f['crosses_completed'])+(f['shots_on_target']*0.75)+(f['goals']*0.75), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_CZ",
+   "col": "CZ",
+   "label": "Lances Conseguidos /90",
+   "expr": "_iferror(r['b2b_CY']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DA",
+   "col": "DA",
+   "label": "% Acerto",
+   "expr": "_iferror((r['b2b_CY']*1)/r['b2b_CW'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DB",
+   "col": "DB",
+   "label": "Chances criadas",
+   "expr": "_iferror(f['key_passes']+f['clear_cut_chances']+r['b2b_AW']+f['crosses_completed'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DC",
+   "col": "DC",
+   "label": "Chances criadas / 90",
+   "expr": "_iferror(r['b2b_DB']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DD",
+   "col": "DD",
+   "label": "Passes Decisivos",
+   "expr": "f['key_passes']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DE",
+   "col": "DE",
+   "label": "Pass D /90",
+   "expr": "_iferror(r['b2b_DD']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DF",
+   "col": "DF",
+   "label": "Passes Decisivos pra uma assistência",
+   "expr": "_iferror(f['key_passes']/f['assists'], 25)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DG",
+   "col": "DG",
+   "label": "Pass Decisivos que se converteram em assistências",
+   "expr": "_iferror(f['assists']/f['key_passes'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DH",
+   "col": "DH",
+   "label": "Assistências Claras que a Equipe desperdiçou",
+   "expr": "_iferror(r['b2b_AW']/f['key_passes'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_DI",
+   "col": "DI",
+   "label": "xA / Passe Decisivo",
+   "expr": "_iferror(r['b2b_AW']/f['key_passes'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DJ",
+   "col": "DJ",
+   "label": "Ações no último terço (Finta, Pass D, OGC, etc)",
+   "expr": "_iferror(f['shots']+f['key_passes']+f['clear_cut_chances']+f['dribbles']+f['crosses_completed'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DK",
+   "col": "DK",
+   "label": "Último terço/90",
+   "expr": "_iferror(r['b2b_DJ']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DL",
+   "col": "DL",
+   "label": "Distância",
+   "expr": "_iferror((f['distance_km']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DM",
+   "col": "DM",
+   "label": "Dist / 90",
+   "expr": "_iferror(r['b2b_DL']/r['b2b_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DN",
+   "col": "DN",
+   "label": "Placar de Esforço",
+   "expr": "(r['b2b_DL']/100)*10+(r['b2b_DM']/12)*10+(f['presses_attempted']/100)*10+(f['presses_completed']/50)*10+(f['tackles_completed']*10)+(f['tackles_key']/0.1)*10+(f['errors_leading_to_goal']*-10)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_DO",
+   "col": "DO",
+   "label": "Posse Desperdiçada",
+   "expr": "_iferror((f['shots']-f['shots_on_target'])+(f['passes_attempted']-f['passes_completed']), 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_AL",
+   "col": "AL",
+   "label": "Gols de dentro da área",
+   "expr": "f['goals']-r['b2b_AM']-r['b2b_AN']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "b2b_BS",
+   "col": "BS",
+   "label": "Faltas sem cartão",
+   "expr": "_iferror(r['b2b_BQ']-(r['b2b_BZ']+r['b2b_CA']), 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_BT",
+   "col": "BT",
+   "label": "Cartões por falta cometida",
+   "expr": "_iferror((r['b2b_CB']*1)/r['b2b_BQ'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_CF",
+   "col": "CF",
+   "label": "%Faltas limpas (Sem cartão)",
+   "expr": "_iferror((r['b2b_BS'])/r['b2b_BQ'], 0)",
+   "fmt": "pct",
+   "lowerBetter": true
+  },
+  {
+   "key": "b2b_CN",
+   "col": "CN",
+   "label": "Passes certos  - errados / Jogo",
+   "expr": "_iferror((r['b2b_CM']-r['b2b_CO'])/(f['minutes']/90), 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  }
+ ],
+ "amc": [
+  {
+   "key": "amc_N",
+   "col": "N",
+   "label": "Jogos completos",
+   "expr": "(f['minutes'] / 90.0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_O",
+   "col": "O",
+   "label": "Jogos Totais",
+   "expr": "f['apps_total']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_P",
+   "col": "P",
+   "label": "Minutos por partida",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_R",
+   "col": "R",
+   "label": "Gols",
+   "expr": "f['goals']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_S",
+   "col": "S",
+   "label": "Assist",
+   "expr": "f['assists']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_T",
+   "col": "T",
+   "label": "Gols + Ass",
+   "expr": "r['amc_R']+r['amc_S']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_U",
+   "col": "U",
+   "label": "Man of the match",
+   "expr": "f['man_of_the_match']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_V",
+   "col": "V",
+   "label": "Minutos pra ser o homem do jogo",
+   "expr": "_iferror(f['minutes']/r['amc_U'], 5000)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_W",
+   "col": "W",
+   "label": "% de vezes que foi eleito o Homem do Jogo",
+   "expr": "(r['amc_U']*1)/r['amc_N']",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_X",
+   "col": "X",
+   "label": "Tentativas de  Criar  uma chance em Bola Parada",
+   "expr": "f['crosses_attempted']-f['crosses_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_Y",
+   "col": "Y",
+   "label": "Tentativas/90",
+   "expr": "_iferror(r['amc_X']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_Z",
+   "col": "Z",
+   "label": "Chances Criadas em  Bolas Paradas",
+   "expr": "f['crosses_completed']-f['crosses_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AA",
+   "col": "AA",
+   "label": "Chances C /90",
+   "expr": "_iferror(r['amc_Z']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AB",
+   "col": "AB",
+   "label": "% Aproveitamento das Tentativas de Criar chance em  BP",
+   "expr": "_iferror(r['amc_Z']/r['amc_X'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AC",
+   "col": "AC",
+   "label": "Cobranças de falta (Diretas)",
+   "expr": "f['free_kicks_taken']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "amc_AD",
+   "col": "AD",
+   "label": "Pênaltis batidos",
+   "expr": "f['penalties_taken']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AE",
+   "col": "AE",
+   "label": "Pênaltis marcados",
+   "expr": "f['penalties_scored']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AF",
+   "col": "AF",
+   "label": "Pênaltis perdidos",
+   "expr": "f['penalties_taken']-f['penalties_scored']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "amc_AG",
+   "col": "AG",
+   "label": "% Conversão de pênalti",
+   "expr": "_iferror((f['penalties_scored']*1)/f['penalties_taken'], 0.0000001)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AH",
+   "col": "AH",
+   "label": "Gols",
+   "expr": "f['goals']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AI",
+   "col": "AI",
+   "label": "Assistências",
+   "expr": "f['assists']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AJ",
+   "col": "AJ",
+   "label": "Gols + Ass",
+   "expr": "r['amc_AH']+r['amc_AI']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AK",
+   "col": "AK",
+   "label": "Gols sem pênalti",
+   "expr": "r['amc_AH']-f['penalties_scored']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AL",
+   "col": "AL",
+   "label": "Gols de fora da área",
+   "expr": "f['goals_outside_box']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AM",
+   "col": "AM",
+   "label": "Gols/90",
+   "expr": "_iferror((r['amc_R']/r['amc_N']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AN",
+   "col": "AN",
+   "label": "Ast/90",
+   "expr": "_iferror((r['amc_S']/r['amc_N']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AO",
+   "col": "AO",
+   "label": "Gols+ Assist / 90",
+   "expr": "_iferror((r['amc_R']+r['amc_S'])/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AP",
+   "col": "AP",
+   "label": "xG",
+   "expr": "f['xg']*1",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AQ",
+   "col": "AQ",
+   "label": "xG sem pênaltis",
+   "expr": "_iferror(r['amc_AP']-(f['penalties_taken']*0.79), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AR",
+   "col": "AR",
+   "label": "non Pen xG /90",
+   "expr": "_iferror(r['amc_AQ']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AS",
+   "col": "AS",
+   "label": "Assistências Esperadas xA",
+   "expr": "f['xa']*1",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AT",
+   "col": "AT",
+   "label": "xA /90",
+   "expr": "_iferror(r['amc_AS']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AU",
+   "col": "AU",
+   "label": "xG + xA",
+   "expr": "r['amc_AQ']+r['amc_AS']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AV",
+   "col": "AV",
+   "label": "xG + xA /90",
+   "expr": "_iferror(r['amc_AU']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AW",
+   "col": "AW",
+   "label": "xA Conclusion",
+   "expr": "_iferror(r['amc_AS']/(r['amc_AS']+f['assists']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AX",
+   "col": "AX",
+   "label": "xG Conclusion",
+   "expr": "_iferror(f['goals']/(f['goals']+r['amc_AP']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AY",
+   "col": "AY",
+   "label": "Cruzamentos Tentados",
+   "expr": "f['crosses_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_AZ",
+   "col": "AZ",
+   "label": "Cruzamentos com sucesso",
+   "expr": "f['crosses_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BA",
+   "col": "BA",
+   "label": "% Cruzamentos certos",
+   "expr": "_iferror((r['amc_AZ']*1)/r['amc_AY'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BB",
+   "col": "BB",
+   "label": "Fintas",
+   "expr": "f['dribbles']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BC",
+   "col": "BC",
+   "label": "Fintas /90",
+   "expr": "_iferror(r['amc_BB']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BF",
+   "col": "BF",
+   "label": "Passes Tentados",
+   "expr": "f['passes_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BG",
+   "col": "BG",
+   "label": "Passes Tentados /90",
+   "expr": "_iferror(r['amc_BF']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BH",
+   "col": "BH",
+   "label": "Passes Completados",
+   "expr": "f['passes_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BI",
+   "col": "BI",
+   "label": "Passes Completados /90",
+   "expr": "_iferror(r['amc_BH']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BJ",
+   "col": "BJ",
+   "label": "% Passes Certos",
+   "expr": "r['amc_BH']/r['amc_BF']",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BK",
+   "col": "BK",
+   "label": "Passes Errados",
+   "expr": "f['passes_attempted']-f['passes_completed']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "amc_BL",
+   "col": "BL",
+   "label": "Passes Errados /90",
+   "expr": "_iferror(r['amc_BK']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "amc_BM",
+   "col": "BM",
+   "label": "Passes em progressão",
+   "expr": "f['passes_progressive']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BN",
+   "col": "BN",
+   "label": "Passes em Prog /90",
+   "expr": "_iferror(r['amc_BM']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BO",
+   "col": "BO",
+   "label": "% de Passes que são em progressão",
+   "expr": "f['passes_progressive']/f['passes_attempted']",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BP",
+   "col": "BP",
+   "label": "Passes Decisivos (Total)",
+   "expr": "_iferror(f['key_passes'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BQ",
+   "col": "BQ",
+   "label": "Passes Decisivos /90",
+   "expr": "_iferror(r['amc_BP']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BR",
+   "col": "BR",
+   "label": "Passes Decisivos pra uma assistência",
+   "expr": "_iferror(f['key_passes']/f['assists'], 25)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BS",
+   "col": "BS",
+   "label": "Pass Decisivos que se converteram em assistências",
+   "expr": "_iferror(f['assists']/f['key_passes'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BT",
+   "col": "BT",
+   "label": "Assistências Claras que a Equipe desperdiçou",
+   "expr": "_iferror((r['amc_AS']-f['assists']), 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "amc_BU",
+   "col": "BU",
+   "label": "xA / Passe Decisivo",
+   "expr": "_iferror(r['amc_AS']/f['key_passes'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BV",
+   "col": "BV",
+   "label": "Minutos pra fazer um Passe Decisivo",
+   "expr": "_iferror(f['minutes']/f['key_passes'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BW",
+   "col": "BW",
+   "label": "Minutos pra criar uma chance perigosa",
+   "expr": "_iferror(f['minutes']/((f['clear_cut_chances']-f['penalties_taken'])+f['shots_on_target']+f['key_passes']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BX",
+   "col": "BX",
+   "label": "Gols não esperados",
+   "expr": "_iferror(f['goals']-r['amc_AP'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BY",
+   "col": "BY",
+   "label": "nPen xG (xG=0,79)",
+   "expr": "_iferror(r['amc_BX']-(f['penalties_scored']*0.79), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BZ",
+   "col": "BZ",
+   "label": "Finalizações Tentadas",
+   "expr": "_iferror(f['shots']-f['penalties_taken'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CA",
+   "col": "CA",
+   "label": "Finalizações /90",
+   "expr": "_iferror(r['amc_BZ']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CB",
+   "col": "CB",
+   "label": "Finalizações pra fora",
+   "expr": "f['shots']-f['shots_on_target']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CC",
+   "col": "CC",
+   "label": "Fin pra fora /90",
+   "expr": "r['amc_CB']/r['amc_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CD",
+   "col": "CD",
+   "label": "Finalizações no gol",
+   "expr": "_iferror(f['shots_on_target'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CE",
+   "col": "CE",
+   "label": "Finalizações no gol",
+   "expr": "r['amc_CD']/r['amc_N']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CF",
+   "col": "CF",
+   "label": "Finalizações no gol/90",
+   "expr": "_iferror((f['shots_on_target']-f['penalties_scored'])/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CG",
+   "col": "CG",
+   "label": "% Finalizações que foram no gol",
+   "expr": "_iferror(((f['shots_on_target']-f['penalties_scored'])/(f['shots']-f['penalties_taken'])), 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CH",
+   "col": "CH",
+   "label": "Finalizações pra um gol",
+   "expr": "_iferror(r['amc_BZ']/(f['goals']-f['penalties_scored']), 50)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CI",
+   "col": "CI",
+   "label": "Finalizações certas pra um gol",
+   "expr": "_iferror(f['shots_on_target']/f['goals'], 50)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CJ",
+   "col": "CJ",
+   "label": "Finalizações que se converteram em gols",
+   "expr": "_iferror(r['amc_AK']/r['amc_BZ'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CK",
+   "col": "CK",
+   "label": "Gols dentro da área",
+   "expr": "f['goals']-f['goals_outside_box']-f['penalties_taken']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CL",
+   "col": "CL",
+   "label": "Gols de fora da área",
+   "expr": "f['goals_outside_box']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CM",
+   "col": "CM",
+   "label": "Gols de pênalti",
+   "expr": "f['penalties_taken']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CN",
+   "col": "CN",
+   "label": "Conversão dos chutes de fora da  área",
+   "expr": "_iferror((f['goals_outside_box']/r['amc_N'])/f['shots_outside_box'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CO",
+   "col": "CO",
+   "label": "Faltas sofridas",
+   "expr": "f['possession_lost']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "amc_CP",
+   "col": "CP",
+   "label": "Faltas Sof / jogo",
+   "expr": "_iferror(r['amc_CO']/r['amc_N'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "amc_CQ",
+   "col": "CQ",
+   "label": "Ações com Bola Tentadas",
+   "expr": "_iferror(f['crosses_attempted']+f['shots']+f['dribbles']+f['key_passes'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CR",
+   "col": "CR",
+   "label": "Ações com Bola T/90",
+   "expr": "_iferror(r['amc_CQ']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CS",
+   "col": "CS",
+   "label": "Ações com Bola (Completadas)",
+   "expr": "_iferror(f['crosses_completed']+f['shots_on_target']+f['dribbles']+f['key_passes'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CT",
+   "col": "CT",
+   "label": "Ações com Bola Comp /90",
+   "expr": "_iferror(r['amc_CS']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CU",
+   "col": "CU",
+   "label": "% Sucesso de ações com bola",
+   "expr": "_iferror(r['amc_CS']/r['amc_CQ'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CV",
+   "col": "CV",
+   "label": "Ações que geraram finalizações ao gol",
+   "expr": "_iferror(f['shots_on_target']+r['amc_AS']+(f['clear_cut_chances']-f['penalties_taken'])+f['key_passes']+f['goals_outside_box']+f['crosses_completed']+(f['goals']*0.5)+(f['assists']*0.5), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CW",
+   "col": "CW",
+   "label": "Ações que geraram finalizações ao gol /90",
+   "expr": "_iferror(r['amc_CV']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CX",
+   "col": "CX",
+   "label": "Chances de perigo criadas",
+   "expr": "_iferror((f['key_passes']+(f['clear_cut_chances']-f['penalties_taken'])+r['amc_AS'])+(f['goals']*0.75)+(f['assists']*0.75)+f['shots_on_target']+f['crosses_completed'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CY",
+   "col": "CY",
+   "label": "Chances de perigo criadas /90",
+   "expr": "_iferror(r['amc_CX']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_CZ",
+   "col": "CZ",
+   "label": "Índice de Criação Ofensiva (ICO)",
+   "expr": "(((f['clear_cut_chances']/f['minutes'])*90)*5)+(((r['amc_AT']*4.5)+(((r['amc_AP']/f['minutes'])*90)*3.8)+(((f['key_passes']/f['minutes'])*90)*2.5)+(((f['crosses_completed']/f['minutes'])*90)*1.8)+(((f['passes_progressive']/f['minutes'])*90)*2.2)+(((f['goals']/f['minutes'])*90)*2)+(((f['assists']/f['minutes'])*90)*2.5)))",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DA",
+   "col": "DA",
+   "label": "Participação do jogador a cada 90 minutos (fnt, cabs, pass, finalizaçõs)",
+   "expr": "_iferror((f['passes_attempted']+f['dribbles']+f['crosses_completed']+f['crosses_completed']+f['free_kicks_taken']+f['penalties_scored']+f['presses_completed']+f['shots']+f['clear_cut_chances']+f['key_passes']+f['passes_progressive'])/r['amc_N'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DB",
+   "col": "DB",
+   "label": "Participação em passes / 90",
+   "expr": "_iferror((f['passes_completed']+f['key_passes']+f['clear_cut_chances']+f['passes_progressive'])/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DC",
+   "col": "DC",
+   "label": "Passes em construção de jogada ofensiva",
+   "expr": "_iferror((f['key_passes']+f['passes_progressive']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DD",
+   "col": "DD",
+   "label": "Passes em construção de jog OF /90",
+   "expr": "_iferror(r['amc_DC']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DE",
+   "col": "DE",
+   "label": "Ações no último terço (Fintas, chances criadas, remates)",
+   "expr": "_iferror(f['dribbles']+f['shots']+f['key_passes']+(f['clear_cut_chances']-f['penalties_taken'])+f['passes_progressive']+f['crosses_attempted'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DF",
+   "col": "DF",
+   "label": "Ações no último terço / 90",
+   "expr": "_iferror(r['amc_DE']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DG",
+   "col": "DG",
+   "label": "Tentativas de marcar um gol",
+   "expr": "_iferror(f['key_passes']+f['clear_cut_chances']+f['shots'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DH",
+   "col": "DH",
+   "label": "Tentativas de marcar um gol / 90",
+   "expr": "_iferror(r['amc_DG']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DI",
+   "col": "DI",
+   "label": "Posse Desperdiçada",
+   "expr": "(f['shots']-f['shots_on_target'])+(f['passes_attempted']-f['passes_completed'])+(f['crosses_attempted']-f['crosses_completed'])",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "amc_DJ",
+   "col": "DJ",
+   "label": "Posse Desperdiçada /90",
+   "expr": "_iferror(r['amc_DI']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "amc_DK",
+   "col": "DK",
+   "label": "Posse perdida /90",
+   "expr": "f['possession_lost']",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "amc_DL",
+   "col": "DL",
+   "label": "Distância percorrida (Total)",
+   "expr": "(f['distance_km'])",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DM",
+   "col": "DM",
+   "label": "Dist / 90",
+   "expr": "_iferror(r['amc_DL']/r['amc_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DN",
+   "col": "DN",
+   "label": "Sprints de alta intensidade",
+   "expr": "f['sprints']*r['amc_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_DO",
+   "col": "DO",
+   "label": "Sprints/90",
+   "expr": "f['sprints']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BD",
+   "col": "BD",
+   "label": "Flair Index (Geral)",
+   "expr": "(0.45*(f['clear_cut_chances']))+(0.15*r['amc_BP'])+(0.05*r['amc_BM'])+(0.15*r['amc_BB'])+(0.15*r['amc_AS'])+(r['amc_CO']*0.05)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "amc_BE",
+   "col": "BE",
+   "label": "Flair Index",
+   "expr": "(0.45*(f['clear_cut_chances']/r['amc_N']))+(0.15*r['amc_BQ'])+(0.05*r['amc_BN'])+(0.15*r['amc_BC'])+(0.15*r['amc_AT'])+(r['amc_CP']*0.05)",
+   "fmt": "int",
+   "lowerBetter": false
+  }
+ ],
+ "att": [
+  {
+   "key": "att_N",
+   "col": "N",
+   "label": "Jogos completos",
+   "expr": "(f['minutes'] / 90.0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_O",
+   "col": "O",
+   "label": "Jogos Totais",
+   "expr": "f['apps_total']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_P",
+   "col": "P",
+   "label": "Minutos por partida",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_R",
+   "col": "R",
+   "label": "Gols na carreira",
+   "expr": "f['all_time_goals']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_S",
+   "col": "S",
+   "label": "Média de gols em toda a Carreira",
+   "expr": "_iferror(f['all_time_goals']/f['all_time_appearances'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_T",
+   "col": "T",
+   "label": "Média gols / partida",
+   "expr": "_iferror(f['goals']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_W",
+   "col": "W",
+   "label": "Man of the match",
+   "expr": "f['man_of_the_match']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_X",
+   "col": "X",
+   "label": "Minutos pra ser o homem do jogo",
+   "expr": "_iferror(f['minutes']/r['att_W'], 5000)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_Y",
+   "col": "Y",
+   "label": "% de vezes que foi eleito o Homem do Jogo",
+   "expr": "_iferror(r['att_W']/r['att_N'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_Z",
+   "col": "Z",
+   "label": "Gols",
+   "expr": "f['goals']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AA",
+   "col": "AA",
+   "label": "Assist",
+   "expr": "f['assists']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AB",
+   "col": "AB",
+   "label": "Gols + Ass",
+   "expr": "_iferror(r['att_Z']+r['att_AA'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AC",
+   "col": "AC",
+   "label": "Gols de dentro da área",
+   "expr": "f['goals']-f['penalties_scored']-f['goals_outside_box']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AD",
+   "col": "AD",
+   "label": "Gols de fora da área",
+   "expr": "f['goals_outside_box']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AE",
+   "col": "AE",
+   "label": "Gols de Penaltis",
+   "expr": "f['penalties_scored']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AF",
+   "col": "AF",
+   "label": "Gols Sem Pênalti",
+   "expr": "_iferror(f['goals']-f['penalties_scored'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AG",
+   "col": "AG",
+   "label": "% Gols (sem penalti)",
+   "expr": "_iferror((r['att_Z']-r['att_AE'])/r['att_Z'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AH",
+   "col": "AH",
+   "label": "% Ass",
+   "expr": "_iferror(r['att_AA']/r['att_AB'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AI",
+   "col": "AI",
+   "label": "% Pênaltis",
+   "expr": "_iferror((f['penalties_scored']*1)/r['att_AB'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AJ",
+   "col": "AJ",
+   "label": "Gols /90",
+   "expr": "_iferror(r['att_Z']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AK",
+   "col": "AK",
+   "label": "Assist /90",
+   "expr": "_iferror(r['att_AA']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AL",
+   "col": "AL",
+   "label": "Gols + Assist /90",
+   "expr": "_iferror((f['goals']+f['assists'])/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AM",
+   "col": "AM",
+   "label": "Gols Sem Pênalti /90",
+   "expr": "_iferror(r['att_AF']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AN",
+   "col": "AN",
+   "label": "Gols de dentro da área /90",
+   "expr": "_iferror(r['att_AC']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AO",
+   "col": "AO",
+   "label": "Gols de fora da área /90",
+   "expr": "_iferror(r['att_AD']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AP",
+   "col": "AP",
+   "label": "Chutes de fora da área /90",
+   "expr": "f['shots_outside_box']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AQ",
+   "col": "AQ",
+   "label": "% Conclusão dos chutes de fora da área",
+   "expr": "_iferror((r['att_AO']*1)/r['att_AP'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AR",
+   "col": "AR",
+   "label": "Tentativas de  Criar  uma chance em Bola Parada",
+   "expr": "f['crosses_attempted']-f['crosses_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AS",
+   "col": "AS",
+   "label": "Tentativas/90",
+   "expr": "r['att_AR']/r['att_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AT",
+   "col": "AT",
+   "label": "Chances Criadas em  Bolas Paradas",
+   "expr": "f['crosses_completed']-f['crosses_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AU",
+   "col": "AU",
+   "label": "Chances C /90",
+   "expr": "r['att_AT']/r['att_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AV",
+   "col": "AV",
+   "label": "% Aproveitamento das Tentativas de Criar chance em  BP",
+   "expr": "_iferror(r['att_AT']/r['att_AR'],  0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AW",
+   "col": "AW",
+   "label": "Cobranças de falta (Diretas)",
+   "expr": "f['free_kicks_taken']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "att_AX",
+   "col": "AX",
+   "label": "Pênaltis batidos",
+   "expr": "f['penalties_taken']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AY",
+   "col": "AY",
+   "label": "Pênaltis marcados",
+   "expr": "f['penalties_scored']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_AZ",
+   "col": "AZ",
+   "label": "Pênaltis perdidos",
+   "expr": "_iferror(f['penalties_taken']-f['penalties_scored'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "att_BA",
+   "col": "BA",
+   "label": "Gols de pen/90",
+   "expr": "_iferror(r['att_AY']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BB",
+   "col": "BB",
+   "label": "% Conversão de pênalti",
+   "expr": "_iferror((r['att_AY']*1)/f['penalties_taken'], 0.00001)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BC",
+   "col": "BC",
+   "label": "Cabeceios disputados",
+   "expr": "f['headers_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BD",
+   "col": "BD",
+   "label": "Cabs Disputados /90",
+   "expr": "_iferror(r['att_BC']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BE",
+   "col": "BE",
+   "label": "Ganhos",
+   "expr": "f['headers_won']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BF",
+   "col": "BF",
+   "label": "Ganhos /90",
+   "expr": "_iferror(r['att_BE']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BG",
+   "col": "BG",
+   "label": "Cabs Perdidos",
+   "expr": "_iferror(f['headers_attempted']-f['headers_won'], 0)",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "att_BH",
+   "col": "BH",
+   "label": "Cabs Perdidos /90",
+   "expr": "_iferror(r['att_BG']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "att_BI",
+   "col": "BI",
+   "label": "% Cabs ganhos",
+   "expr": "_iferror(r['att_BE']/r['att_BC'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BJ",
+   "col": "BJ",
+   "label": "% Cabs perdidos",
+   "expr": "_iferror(r['att_BG']/r['att_BC'], 0)",
+   "fmt": "pct",
+   "lowerBetter": true
+  },
+  {
+   "key": "att_BK",
+   "col": "BK",
+   "label": "Índice de Dominância Aérea (IDA)",
+   "expr": "_iferror((r['att_BE']/r['att_BC'])*np.sqrt(r['att_BE']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BL",
+   "col": "BL",
+   "label": "Impedimentos",
+   "expr": "f['offsides']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "att_BM",
+   "col": "BM",
+   "label": "Impedimentos / 90",
+   "expr": "_iferror(f['offsides']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "att_BN",
+   "col": "BN",
+   "label": "Finalizações Tentadas",
+   "expr": "f['shots']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BO",
+   "col": "BO",
+   "label": "Finalizações /90",
+   "expr": "_iferror(r['att_BN']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BP",
+   "col": "BP",
+   "label": "Finalizações pra fora",
+   "expr": "f['shots']-f['shots_on_target']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BQ",
+   "col": "BQ",
+   "label": "Fin pra fora /90",
+   "expr": "r['att_BP']/r['att_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BR",
+   "col": "BR",
+   "label": "Finalizações no Gol",
+   "expr": "f['shots_on_target']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BS",
+   "col": "BS",
+   "label": "Finalizações no gol/90",
+   "expr": "_iferror(r['att_BR']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BT",
+   "col": "BT",
+   "label": "Finalizações Defendidas",
+   "expr": "f['shots_on_target']-f['goals']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BU",
+   "col": "BU",
+   "label": "Finalizações Def /90",
+   "expr": "_iferror(r['att_BT']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BV",
+   "col": "BV",
+   "label": "% Finalizações que foram em direção gol",
+   "expr": "_iferror((f['shots_on_target']*1)/f['shots'], 0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BW",
+   "col": "BW",
+   "label": "Finalizações pra um gol",
+   "expr": "_iferror((f['shots']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), 100)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BX",
+   "col": "BX",
+   "label": "Finalizações certas pra um gol",
+   "expr": "_iferror((f['shots_on_target']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BY",
+   "col": "BY",
+   "label": "Finalização ou Cabeceio pra um gol",
+   "expr": "_iferror((f['shots']+f['headers_attempted']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_BZ",
+   "col": "BZ",
+   "label": "Finalizações que se converteram em gols",
+   "expr": "_iferror((f['goals']-f['penalties_scored'])/(f['shots']-f['penalties_taken']), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CC",
+   "col": "CC",
+   "label": "Gols convertidos /90",
+   "expr": "_iferror(f['goals']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CF",
+   "col": "CF",
+   "label": "Minutos pra tentar uma finalização",
+   "expr": "_iferror(f['minutes']/f['shots'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CG",
+   "col": "CG",
+   "label": "Minutos pra acertar uma finalização no gol",
+   "expr": "_iferror(f['minutes']/f['shots_on_target'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CH",
+   "col": "CH",
+   "label": "Minutos pra MARCAR um gol",
+   "expr": "_iferror(f['minutes']/f['goals'], r['att_N']*90)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CI",
+   "col": "CI",
+   "label": "Minutos pra PARTICIPAR de um gol",
+   "expr": "_iferror(f['minutes']/r['att_AB'], 300)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CL",
+   "col": "CL",
+   "label": "Gols esperados (xG)",
+   "expr": "f['xg']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CM",
+   "col": "CM",
+   "label": "xG /90",
+   "expr": "_iferror(r['att_CL']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CN",
+   "col": "CN",
+   "label": "xG (Sem pênaltis)",
+   "expr": "_iferror(r['att_CL']-(f['penalties_taken']*0.79), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CO",
+   "col": "CO",
+   "label": "xG (Sem pênaltis) /90",
+   "expr": "_iferror((r['att_CN']/r['att_N']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CP",
+   "col": "CP",
+   "label": "Assistências Esperadas (xA)",
+   "expr": "f['xa']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CQ",
+   "col": "CQ",
+   "label": "xA /90",
+   "expr": "_iferror(r['att_CP']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CR",
+   "col": "CR",
+   "label": "xA + xG sem pen",
+   "expr": "_iferror(r['att_CP']+r['att_CN'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CS",
+   "col": "CS",
+   "label": "xA + xG /90",
+   "expr": "_iferror(r['att_CR']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CT",
+   "col": "CT",
+   "label": "xG Conclusion",
+   "expr": "f['goals']/(f['goals']+r['att_CL'])",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CU",
+   "col": "CU",
+   "label": "Passes Decisivos",
+   "expr": "f['key_passes']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CV",
+   "col": "CV",
+   "label": "Pass D /90",
+   "expr": "_iferror(r['att_CU']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CW",
+   "col": "CW",
+   "label": "xA (assistências esperadas)",
+   "expr": "r['att_CP']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CX",
+   "col": "CX",
+   "label": "Chances criadas e não aproveitadas pela equipe / 90",
+   "expr": "_iferror(r['att_CP']-f['assists'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CY",
+   "col": "CY",
+   "label": "Cruzamentos Tentados",
+   "expr": "f['crosses_attempted']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CZ",
+   "col": "CZ",
+   "label": "Cruzamentos T /90",
+   "expr": "r['att_CY']/r['att_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DA",
+   "col": "DA",
+   "label": "Cruzamentos Conseguidos",
+   "expr": "f['crosses_completed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DB",
+   "col": "DB",
+   "label": "Cruzamentos C/90",
+   "expr": "r['att_DA']/r['att_N']",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DC",
+   "col": "DC",
+   "label": "Cruzamentos",
+   "expr": "_iferror(r['att_DA']/r['att_CY'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DD",
+   "col": "DD",
+   "label": "Fintas",
+   "expr": "f['dribbles']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DE",
+   "col": "DE",
+   "label": "Fintas/90",
+   "expr": "_iferror(f['dribbles']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DF",
+   "col": "DF",
+   "label": "Velocidade Média (em km/h)",
+   "expr": "_iferror(f['distance_km']/(f['minutes']/60), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DG",
+   "col": "DG",
+   "label": "Desarme + Pressões Tentadas",
+   "expr": "f['presses_attempted']+f['tackles_attempted']+f['fouls_committed']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DH",
+   "col": "DH",
+   "label": "Des + Pres T /90",
+   "expr": "_iferror(r['att_DG']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DI",
+   "col": "DI",
+   "label": "Desarme + Pressões Concluídas",
+   "expr": "_iferror(f['tackles_completed']+f['presses_completed'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DJ",
+   "col": "DJ",
+   "label": "Des + Pres C /90",
+   "expr": "_iferror(r['att_DI']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DK",
+   "col": "DK",
+   "label": "% Des + Pressões concluídas",
+   "expr": "_iferror((r['att_DI']*1)/r['att_DG'],  0)",
+   "fmt": "pct",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DL",
+   "col": "DL",
+   "label": "Interceptações",
+   "expr": "f['interceptions']",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DM",
+   "col": "DM",
+   "label": "Int/90",
+   "expr": "_iferror(r['att_DL']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_DN",
+   "col": "DN",
+   "label": "Faltas Sofridas",
+   "expr": "f['fouls_won']",
+   "fmt": "int",
+   "lowerBetter": true
+  },
+  {
+   "key": "att_DO",
+   "col": "DO",
+   "label": "Faltas Sof/90",
+   "expr": "_iferror(r['att_DN']/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": true
+  },
+  {
+   "key": "att_U",
+   "col": "U",
+   "label": "Média gols + ass / partida",
+   "expr": "_iferror((r['att_Z']+r['att_AA'])/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_V",
+   "col": "V",
+   "label": "Ass / 90",
+   "expr": "_iferror((r['att_AA'])/r['att_N'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CB",
+   "col": "CB",
+   "label": "xG / Jogo",
+   "expr": "_iferror(r['att_CL']/(r['att_N']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CD",
+   "col": "CD",
+   "label": "Over xG / Under xG per 90",
+   "expr": "_iferror(r['att_CC']-r['att_CB'], 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CE",
+   "col": "CE",
+   "label": "xG / chute",
+   "expr": "_iferror(r['att_CN']/(f['shots']-f['penalties_taken']), 0)",
+   "fmt": "dec",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CJ",
+   "col": "CJ",
+   "label": "Gols não esperados",
+   "expr": "_iferror(f['goals']-r['att_CL'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CK",
+   "col": "CK",
+   "label": "Gols não esperados SEM PÊNALTI",
+   "expr": "_iferror((f['goals']-f['penalties_scored'])-r['att_CN'], 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  },
+  {
+   "key": "att_CA",
+   "col": "CA",
+   "label": "GPI (Goal Probability Index)",
+   "expr": "_iferror(((r['att_AF']/r['att_CN'])*(r['att_CM']+r['att_CQ']))*(r['att_AL']+r['att_CS'])+(0.5*(r['att_CJ']/r['att_N'])), 0)",
+   "fmt": "int",
+   "lowerBetter": false
+  }
+ ]
+}
