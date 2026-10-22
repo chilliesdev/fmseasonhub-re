@@ -9,6 +9,16 @@
 
 ---
 
+## Continuous integration
+
+[macOS CI](.github/workflows/ci.yml) runs on pull requests and pushes to `main`.
+It checks syntax, builds the native bridge and local app bundle, and runs the
+macOS test suite on macOS 15 with Python 3.14. No secrets are required.
+To start a manual run, select **Actions → macOS CI → Run workflow** after the
+workflow reaches `main`. See [macOS setup and test commands](macos/README.md).
+The app bundle needs the runner's Python installation, so CI does not publish it
+as a portable release.
+
 ## Repository Structure & Evidence Index
 
 ```

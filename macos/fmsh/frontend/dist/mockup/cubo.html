@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>FMSH — bancada do carregador</title>
+<style>
+  body{margin:0;min-height:100vh;background:rgb(16,32,46);
+       font:14px/1.5 'Segoe UI',system-ui,Arial,sans-serif;color:rgb(226,232,240)}
+  .veu{position:fixed;inset:0;display:grid;place-items:center;
+       background:rgba(10,20,30,.55);backdrop-filter:blur(3px)}
+  .fundo{position:fixed;inset:0;padding:40px;display:grid;
+         grid-template-columns:repeat(6,1fr);gap:14px;opacity:.9}
+  .fundo div{border-radius:10px;background:rgb(28,50,68);height:90px}
+  .fundo div:nth-child(3n){background:rgb(203,182,104)}
+  .fundo div:nth-child(3n+1){background:rgb(64,90,126)}
+</style>
+</head>
+<body>
+<!-- algo colorido atrás, para o desfoque ter o que borrar -->
+<div class="fundo" id="fundo"></div>
+<div class="veu">
+  <div id="cartao" class="vidro-cartao" style="min-width:320px;border-radius:18px;padding:48px 44px;text-align:center">
+    <div class="flex flex-col items-center" style="display:flex;flex-direction:column;align-items:center">
+      <div class="cubo-palco" id="palco" style="width:72px;height:72px;--cubo-fechado:36px;--cubo-aberto:59.76px">
+        <div class="cubo">
+          <div class="cubo-lado cubo-frente"><div class="cubo-face cubo-face--brand"></div></div>
+          <div class="cubo-lado cubo-tras"><div class="cubo-face cubo-face--brand"></div></div>
+          <div class="cubo-lado cubo-dir"><div class="cubo-face cubo-face--azul"></div></div>
+          <div class="cubo-lado cubo-esq"><div class="cubo-face cubo-face--azul"></div></div>
+          <div class="cubo-lado cubo-topo"><div class="cubo-face cubo-face--azul2"></div></div>
+          <div class="cubo-lado cubo-base"><div class="cubo-face cubo-face--azul2"></div></div>
+          <div class="cubo-nucleo" style="width:24.5px;height:24.5px;left:23.8px;top:23.8px"></div>
+        </div>
+      </div>
+      <div class="cubo-sombra" style="width:72px;margin-top:15.8px"></div>
+      <div style="margin-top:16px;font-size:12px;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:rgb(203,182,104)">Carregando</div>
+    </div>
+  </div>
+</div>
+<script>
+  for (let i=0;i<24;i++) fundo.appendChild(document.createElement("div"));
+  // carrega o CSS COMPILADO do app, para medir o cubo de verdade e não uma cópia
+  fetch("/").then(r=>r.text()).then(html=>{
+    const m = html.match(/assets\/[\w.-]+\.css/);
+    if (!m) return;
+    const l = document.createElement("link");
+    l.rel = "stylesheet"; l.href = "/" + m[0];
+    document.head.appendChild(l);
+  });
+</script>
+</body>
+</html>

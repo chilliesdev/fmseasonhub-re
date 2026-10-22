@@ -1,5 +1,18 @@
 # Local macOS app
 
+The tracked `fmsh/frontend/dist` files are the existing prebuilt runtime assets.
+This repository has no frontend build source. CI uses these files for the web UI
+and app icon; keep them available in a fresh checkout.
+
+From the repository root on macOS, prepare Python 3.14 and the pinned dependencies:
+
+```sh
+python3.14 -m venv macos/.venv
+macos/.venv/bin/python -m pip install -r macos/requirements.txt
+macos/.venv/bin/python -m pip check
+clang -arch arm64 -arch x86_64 -shared -O3 macos/native/libfmsh_bridge.c -o macos/native/libfmsh_bridge.dylib
+```
+
 Build with the prepared `macos/.venv` environment:
 
 ```sh

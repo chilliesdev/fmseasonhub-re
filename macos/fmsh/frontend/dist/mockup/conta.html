@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Bloco da conta — proposta C+B</title>
+<style>
+  @font-face { font-family: Inter; src: url("/fonts/Inter-400-latin.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+  @font-face { font-family: Inter; src: url("/fonts/Inter-600-latin.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+  @font-face { font-family: Inter; src: url("/fonts/Inter-700-latin.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+  @font-face { font-family: "Barlow Condensed"; src: url("/fonts/BarlowCondensed-700-latin.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+  :root {
+    --bg: rgb(16,32,46); --panel: rgb(28,50,68); --panel2: rgb(41,61,78);
+    --border: rgba(255,255,255,.08); --faded: rgb(140,158,176); --fg: rgb(226,232,240);
+    --brand: rgb(203,182,104); --ok: #33c46a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px Inter, system-ui, sans-serif; padding: 28px; }
+  h1 { font: 700 17px "Barlow Condensed", sans-serif; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 4px; }
+  .sub { color: var(--faded); font-size: 12.5px; margin: 0 0 24px; max-width: 880px; line-height: 1.6; }
+
+  .grade { display: flex; gap: 26px; flex-wrap: wrap; align-items: flex-start; }
+  .coluna { width: 268px; }
+  .rotulo { font: 700 11px Inter; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+  .rotulo.hoje { color: var(--faded); }
+  .rotulo.novo { color: var(--brand); }
+  .sidebar { background: var(--panel); border-right: 1px solid var(--border); padding: 10px 8px; border-radius: 10px; }
+  .porque { color: var(--faded); font-size: 11.5px; line-height: 1.65; margin-top: 12px; }
+  .porque b { color: var(--fg); font-weight: 600; }
+
+  .logo { width: 36px; height: 36px; border-radius: 7px; flex: none; background:
+      radial-gradient(circle at 40% 35%, #2a3d52, #101f2c); display: grid; place-items: center;
+      font: 800 11px "Barlow Condensed"; color: var(--brand); letter-spacing: .04em; }
+  .nome-app { font: 700 21px "Barlow Condensed"; text-align: center; margin-top: 10px; letter-spacing: .04em; }
+  .nome-app i { color: var(--brand); font-style: normal; }
+  .pill { border-radius: 999px; padding: 2px 6px; font: 700 9px Inter; text-transform: uppercase;
+          letter-spacing: .04em; background: var(--panel2); color: var(--faded); flex: none; }
+  .chev { color: var(--faded); flex: none; }
+  .crest { width: 18px; height: 18px; border-radius: 4px; flex: none;
+           background: linear-gradient(135deg,#c8102e,#7a0a1c); }
+
+  /* ---- HOJE ---- */
+  .hoje-bloco { display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 9px; cursor: pointer; }
+  .hoje-bloco:hover { background: rgba(255,255,255,.05); }
+  .hoje-bloco .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+
+  /* ---- PROPOSTA: painel da conta (do C) ---- */
+  .conta { display: flex; align-items: center; gap: 10px; padding: 8px 9px; border-radius: 9px;
+           border: 1px solid var(--border); background: var(--bg); cursor: pointer;
+           transition: border-color .12s, background .12s; }
+  .conta:hover { border-color: rgba(203,182,104,.5); background: rgba(255,255,255,.03); }
+  .conta .col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+  .conta .n { font-size: 12.5px; font-weight: 500; }
+  .conta .linha2 { display: flex; align-items: center; gap: 6px; }
+  .conta .origem { font-size: 10px; color: var(--faded); min-width: 0; overflow: hidden;
+                   text-overflow: ellipsis; white-space: nowrap; }
+
+  /* ---- PROPOSTA: cartão da carreira (do B) ---- */
+  .carreira { margin-top: 8px; border: 1px solid rgba(203,182,104,.35); background: rgba(203,182,104,.06);
+              border-radius: 10px; padding: 9px 10px; cursor: pointer; transition: border-color .12s; }
+  .carreira:hover { border-color: var(--brand); }
+  .carreira .top { display: flex; align-items: center; gap: 8px; }
+  .carreira .nome { flex: 1; min-width: 0; font: 700 14px "Barlow Condensed"; letter-spacing: .03em;
+                    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .carreira .meta { margin-top: 5px; font-size: 10.5px; color: var(--faded); display: flex; gap: 6px; align-items: center; }
+  .carreira .troca { margin-top: 7px; border-top: 1px solid var(--border); padding-top: 6px;
+                     font-size: 10.5px; color: var(--brand); display: flex; align-items: center; gap: 5px; }
+  .ponto-ok { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); flex: none; }
+
+  .aberto { margin-top: 8px; border: 1px solid var(--border); background: var(--panel); border-radius: 9px; padding: 5px; }
+  .aberto .tit { font: 700 9.5px Inter; letter-spacing: .1em; text-transform: uppercase; color: var(--faded); padding: 5px 7px 3px; }
+  .aberto .it { display: flex; align-items: center; gap: 7px; padding: 6px 7px; border-radius: 6px; font-size: 12px; }
+  .aberto .it.on { background: rgba(203,182,104,.12); color: var(--brand); }
+  .aberto .it .q { margin-left: auto; font-size: 10px; color: var(--faded); }
+  .nota { font-size: 10.5px; color: var(--faded); text-align: center; margin-top: 6px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<h1>Bloco da conta — proposta (painel do C + carreira do B)</h1>
+<p class="sub">
+  O painel da conta é o do <b>C</b>: ganha moldura para parecer um controle, e <b>sai o nome do time de dentro dele</b>.
+  A carreira é a do <b>B</b>: cartão próprio, dourado, dizendo em palavras que dá para trocar e quantas existem.
+  Assim cada caixa responde uma pergunta só — “quem sou eu no app” e “qual save estou vendo”.
+</p>
+
+<div class="grade">
+
+  <!-- ---------------- HOJE ---------------- -->
+  <div class="coluna">
+    <div class="rotulo hoje">Hoje</div>
+    <div class="sidebar">
+      <div class="hoje-bloco">
+        <div class="logo">FMSH</div>
+        <div class="col">
+          <span style="font-size:12.5px">Sem conta</span>
+          <span style="display:flex;align-items:center;gap:6px">
+            <span class="pill">Grátis</span>
+            <span style="font-size:10px;color:var(--faded)">Ativar acesso</span>
+          </span>
+          <span style="display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(203,182,104,.85)">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M6 4h12v6a6 6 0 0 1-12 0z"/><path d="M9 20h6"/></svg>
+            Sunderland AFC
+          </span>
+        </div>
+        <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="nome-app">FM Season <i>Hub</i></div>
+    </div>
+    <p class="porque">
+      Um bloco só, sem moldura: o único sinal de que é clicável é a setinha de 14px. A carreira aparece
+      como texto, e a existência das outras 4 fica escondida no menu fechado.
+    </p>
+  </div>
+
+  <!-- ---------------- PROPOSTA ---------------- -->
+  <div class="coluna">
+    <div class="rotulo novo">Proposta · C + B</div>
+    <div class="sidebar">
+
+      <!-- painel da conta: do C, sem o nome do time -->
+      <div class="conta">
+        <div class="logo">FMSH</div>
+        <div class="col">
+          <span class="n">Sem conta</span>
+          <span class="linha2">
+            <span class="pill">Grátis</span>
+            <span class="origem">Ativar acesso</span>
+          </span>
+        </div>
+        <svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+
+      <!-- carreira: do B -->
+      <div class="carreira">
+        <div class="top">
+          <span class="crest" style="width:22px;height:22px"></span>
+          <span class="nome">SUNDERLAND AFC</span>
+          <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <div class="meta">
+          <span>1 temporada</span><span>·</span>
+          <span class="ponto-ok"></span><span style="color:var(--ok)">lendo o save</span>
+        </div>
+        <div class="troca">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3 4 7l4 4"/><path d="M4 7h16"/><path d="m16 21 4-4-4-4"/><path d="M20 17H4"/></svg>
+          trocar de carreira (mais 4)
+        </div>
+      </div>
+
+      <div class="nome-app">FM Season <i>Hub</i></div>
+    </div>
+    <p class="porque">
+      Duas caixas, dois assuntos. A conta <b>parece um botão</b> e não fala mais de time.
+      A carreira ganha nome, número de temporadas, estado da leitura e o convite explícito
+      <b>“trocar de carreira (mais 4)”</b> — a função deixa de depender de o usuário abrir um menu para existir.
+    </p>
+  </div>
+
+  <!-- ---------------- MENU ABERTO ---------------- -->
+  <div class="coluna">
+    <div class="rotulo novo">Proposta · carreira aberta</div>
+    <div class="sidebar">
+      <div class="conta">
+        <div class="logo">FMSH</div>
+        <div class="col">
+          <span class="n">Sem conta</span>
+          <span class="linha2">
+            <span class="pill">Grátis</span>
+            <span class="origem">Ativar acesso</span>
+          </span>
+        </div>
+        <svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+
+      <div class="carreira" style="border-color:var(--brand)">
+        <div class="top">
+          <span class="crest" style="width:22px;height:22px"></span>
+          <span class="nome">SUNDERLAND AFC</span>
+          <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transform:rotate(180deg)"><path d="m6 9 6 6 6-6"/></svg>
+        </div>
+        <div class="meta">
+          <span>1 temporada</span><span>·</span>
+          <span class="ponto-ok"></span><span style="color:var(--ok)">lendo o save</span>
+        </div>
+      </div>
+
+      <div class="aberto">
+        <div class="tit">Suas carreiras</div>
+        <div class="it on"><span class="crest"></span>Sunderland AFC<span class="q">1</span></div>
+        <div class="it"><span class="crest" style="background:linear-gradient(135deg,#034694,#01285a)"></span>Chelsea<span class="q">1</span></div>
+        <div class="it"><span class="crest" style="background:linear-gradient(135deg,#7a1f2b,#4a1119)"></span>Alverca<span class="q">1</span></div>
+        <div class="it"><span class="crest" style="background:linear-gradient(135deg,#0a5c36,#063d24)"></span>Avaí FC<span class="q">2</span></div>
+        <div class="it"><span class="crest" style="background:linear-gradient(135deg,#1b62a5,#0d3a66)"></span>FC Schalke 04<span class="q">3</span></div>
+      </div>
+      <div class="nota">(com o FM conectado, a troca vale a partir da próxima abertura)</div>
+
+      <div class="nome-app">FM Season <i>Hub</i></div>
+    </div>
+    <p class="porque">
+      O que acontece ao clicar no cartão: a lista das <b>5 carreiras</b> abre embaixo, com o número de
+      temporadas de cada uma e a ativa em destaque.
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

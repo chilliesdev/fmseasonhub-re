@@ -21,6 +21,9 @@ Thumbs.db
 # Virtual environments and build directories
 .venv/
 dist/
+# Required prebuilt runtime assets; this repository has no frontend build source.
+!macos/fmsh/frontend/dist/
+!macos/fmsh/frontend/dist/**
 build/
 .tmp/
 
