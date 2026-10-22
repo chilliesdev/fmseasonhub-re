@@ -99,6 +99,8 @@ class FmMemory:
                     lib.fmsh_detach.restype = None
                     lib.fmsh_is_attached.argtypes = []
                     lib.fmsh_is_attached.restype = ctypes.c_int
+                    lib.fmsh_get_attached_pid.argtypes = []
+                    lib.fmsh_get_attached_pid.restype = ctypes.c_int
                     lib.fmsh_read.argtypes = [ctypes.c_uint64, ctypes.c_void_p, ctypes.c_size_t]
                     lib.fmsh_read.restype = ctypes.c_size_t
                     lib.fmsh_get_regions.argtypes = [ctypes.POINTER(ctypes.c_uint64), ctypes.POINTER(ctypes.c_uint64), ctypes.c_size_t]
@@ -131,6 +133,11 @@ class FmMemory:
             self._open_game_process_windows(pid)
 
     def _open_game_process_macos(self, target_pid=None):
+        if self._bridge_socket:
+            self._bridge_socket.close()
+            self._bridge_socket = None
+        self.base = 0
+        self.process_id = None
         # Localiza o processo do Football Manager
         if target_pid is None:
             # Procura por "fm" ou "game_plugin" via ps / pgrep
@@ -169,25 +176,47 @@ class FmMemory:
         self.process_id = target_pid
 
         # Tenta conectar via UNIX domain socket se ativo
+        socket_attached = False
         if self._try_socket_connect():
-            self._bridge_socket.sendall(f"ATTACH {target_pid}\n".encode())
-            resp = b""
-            while b"\n" not in resp:
-                c = self._bridge_socket.recv(1)
-                if not c:
-                    break
-                resp += c
-            if b"OK" in resp:
-                _log(f"Conectado ao FM PID {target_pid} via socket bridge")
+            try:
+                self._bridge_socket.sendall(f"ATTACH {target_pid}\n".encode())
+                resp = b""
+                while b"\n" not in resp:
+                    c = self._bridge_socket.recv(1)
+                    if not c:
+                        break
+                    resp += c
+                socket_attached = resp == b"OK\n"
+                if socket_attached:
+                    _log(f"Conectado ao FM PID {target_pid} via socket bridge")
+            except OSError as e:
+                _log(f"Socket ATTACH falhou: {e}")
+            finally:
+                if not socket_attached:
+                    self._bridge_socket.close()
+                    self._bridge_socket = None
 
-        # Tenta conectar via dylib C
-        if self._bridge_dylib:
-            res = self._bridge_dylib.fmsh_attach(target_pid)
-            if res != 0 and not self._bridge_socket:
-                _log(f"task_for_pid falhou com codigo {res}")
+        # Socket in-process ja permite leitura; task_for_pid pode pedir autorizacao.
+        if not socket_attached:
+            self._ensure_native_attached()
 
         # Localiza endereco base de game_plugin no processo
         self._resolve_macos_module_base()
+
+    def _ensure_native_attached(self):
+        """Confirma o alvo nativo antes de enumerar ou ler sem socket."""
+        lib = self._bridge_dylib
+        if not lib or not self.process_id:
+            return False
+        if lib.fmsh_is_attached() and lib.fmsh_get_attached_pid() == self.process_id:
+            return True
+        lib.fmsh_detach()
+        res = lib.fmsh_attach(self.process_id)
+        if res != 0:
+            lib.fmsh_detach()
+            _log(f"task_for_pid falhou com codigo {res}")
+            return False
+        return True
 
     def _resolve_macos_module_base(self):
         """Descobre o endereco base virtual de game_plugin no processo alvo."""
@@ -309,7 +338,7 @@ class FmMemory:
                 _log(f"_try_socket_connect failed: {e}")
 
         # 2. C dylib (Mach VM)
-        if self._bridge_dylib:
+        if self._ensure_native_attached():
             buf = (ctypes.c_uint8 * size)()
             n = self._bridge_dylib.fmsh_read(addr, buf, size)
             if n == size:
@@ -390,7 +419,7 @@ class FmMemory:
     def heap_regions(self, lo=None, hi=None):
         """Enumera regioes de memoria legiveis do processo."""
         regioes = []
-        if self._bridge_dylib:
+        if self._ensure_native_attached():
             max_c = 10000
             addrs = (ctypes.c_uint64 * max_c)()
             sizes = (ctypes.c_uint64 * max_c)()

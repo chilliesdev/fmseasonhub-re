@@ -51,7 +51,23 @@ jobs:
         run: macos/.venv/bin/python macos/build_mac_app.py
 
       - name: Run tests
+        timeout-minutes: 5
         env:
           FMSH_PASTA_DADOS: ${{ runner.temp }}/fmsh-ci-data
           FMSH_PASTA_LOCAL: ${{ runner.temp }}/fmsh-ci-local
-        run: macos/.venv/bin/python -m unittest discover -s macos/tests -v
+        run: |
+          id
+          /usr/sbin/DevToolsSecurity -status
+          macos/.venv/bin/python -u - <<'PY'
+          import faulthandler
+          import unittest
+
+          faulthandler.enable()
+          faulthandler.dump_traceback_later(120, exit=True)
+          try:
+              suite = unittest.defaultTestLoader.discover('macos/tests')
+              result = unittest.TextTestRunner(verbosity=2).run(suite)
+          finally:
+              faulthandler.cancel_dump_traceback_later()
+          raise SystemExit(not result.wasSuccessful())
+          PY
