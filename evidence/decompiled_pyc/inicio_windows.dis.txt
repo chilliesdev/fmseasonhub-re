@@ -1,0 +1,284 @@
+# Module: inicio_windows
+# Filename: inicio_windows.py
+
+  0           RESUME                   0
+
+  8           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (sys)
+              STORE_NAME               0 (sys)
+
+  9           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (winreg)
+              STORE_NAME               1 (winreg)
+
+ 11           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              2 (paths)
+              STORE_NAME               2 (paths)
+
+ 13           LOAD_CONST               2 ('Software\\Microsoft\\Windows\\CurrentVersion\\Run')
+              STORE_NAME               3 (CHAVE)
+
+ 14           LOAD_CONST               3 ('FMSH')
+              STORE_NAME               4 (VALOR)
+
+ 15           LOAD_CONST               4 ('--bandeja')
+              STORE_NAME               5 (ARGUMENTO)
+
+ 18           LOAD_CONST               5 (<code object disponivel at 0x105596560, file "inicio_windows.py", line 18>)
+              MAKE_FUNCTION
+              STORE_NAME               6 (disponivel)
+
+ 22           LOAD_CONST              10 ((None,))
+              LOAD_CONST               6 (<code object comando at 0x105575fb0, file "inicio_windows.py", line 22>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               7 (comando)
+
+ 26           LOAD_NAME                3 (CHAVE)
+              LOAD_NAME                4 (VALOR)
+              BUILD_TUPLE              2
+              LOAD_CONST               7 (<code object ligado at 0x1053f2970, file "inicio_windows.py", line 26>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               8 (ligado)
+
+ 35           LOAD_NAME                3 (CHAVE)
+              LOAD_NAME                4 (VALOR)
+              LOAD_CONST               1 (None)
+              LOAD_CONST               8 (True)
+              BUILD_TUPLE              4
+              LOAD_CONST               9 (<code object mudar at 0x736d92f80, file "inicio_windows.py", line 35>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               9 (mudar)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object disponivel at 0x105596560, file "inicio_windows.py", line 18>:
+ 18           RESUME                   0
+
+ 19           LOAD_GLOBAL              1 (bool + NULL)
+              LOAD_GLOBAL              2 (paths)
+              LOAD_ATTR                4 (FROZEN)
+              CALL                     1
+              RETURN_VALUE
+
+Disassembly of <code object comando at 0x105575fb0, file "inicio_windows.py", line 22>:
+ 22           RESUME                   0
+              LOAD_CONST               0 ('"')
+
+ 23           LOAD_FAST                0 (exe)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        17 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_GLOBAL              0 (sys)
+              LOAD_ATTR                2 (executable)
+      L1:     CONVERT_VALUE            1 (str)
+              FORMAT_SIMPLE
+              LOAD_CONST               1 ('" ')
+              LOAD_GLOBAL              4 (ARGUMENTO)
+              CONVERT_VALUE            1 (str)
+              FORMAT_SIMPLE
+              BUILD_STRING             4
+              RETURN_VALUE
+
+Disassembly of <code object ligado at 0x1053f2970, file "inicio_windows.py", line 26>:
+  26            RESUME                   0
+
+  27            NOP
+
+  28    L1:     LOAD_GLOBAL              0 (winreg)
+                LOAD_ATTR                2 (OpenKey)
+                PUSH_NULL
+                LOAD_GLOBAL              0 (winreg)
+                LOAD_ATTR                4 (HKEY_CURRENT_USER)
+                LOAD_FAST_BORROW         0 (chave)
+                CALL                     2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_FAST               2 (k)
+
+  29            LOAD_GLOBAL              0 (winreg)
+                LOAD_ATTR                6 (QueryValueEx)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 33 (k, valor)
+                CALL                     2
+                UNPACK_SEQUENCE          2
+                STORE_FAST_STORE_FAST   52 (atual, _)
+
+  28    L3:     LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                LOAD_CONST               0 (None)
+                CALL                     3
+                POP_TOP
+
+  32    L4:     LOAD_GLOBAL             10 (ARGUMENTO)
+                LOAD_GLOBAL             13 (str + NULL)
+                LOAD_FAST_CHECK          3 (atual)
+                CALL                     1
+                CONTAINS_OP              0 (in)
+                RETURN_VALUE
+
+  28    L5:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L6)
+                NOT_TAKEN
+                RERAISE                  2
+        L6:     POP_TOP
+        L7:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+        L8:     JUMP_BACKWARD_NO_INTERRUPT 34 (to L4)
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L10:     PUSH_EXC_INFO
+
+  30            LOAD_GLOBAL              8 (OSError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L12)
+                NOT_TAKEN
+                POP_TOP
+
+  31   L11:     POP_EXCEPT
+                LOAD_CONST               1 (False)
+                RETURN_VALUE
+
+  30   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L10 [0]
+  L2 to L3 -> L5 [2] lasti
+  L3 to L4 -> L10 [0]
+  L5 to L7 -> L9 [4] lasti
+  L7 to L8 -> L10 [0]
+  L9 to L10 -> L10 [0]
+  L10 to L11 -> L13 [1] lasti
+  L12 to L13 -> L13 [1] lasti
+
+Disassembly of <code object mudar at 0x736d92f80, file "inicio_windows.py", line 35>:
+  35            RESUME                   0
+
+  36            LOAD_FAST_BORROW         4 (so_no_exe)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       19 (to L1)
+                NOT_TAKEN
+                LOAD_GLOBAL              1 (disponivel + NULL)
+                CALL                     0
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L1)
+                NOT_TAKEN
+
+  37            LOAD_CONST               0 (False)
+                RETURN_VALUE
+
+  38    L1:     LOAD_GLOBAL              2 (winreg)
+                LOAD_ATTR                4 (CreateKey)
+                PUSH_NULL
+                LOAD_GLOBAL              2 (winreg)
+                LOAD_ATTR                6 (HKEY_CURRENT_USER)
+                LOAD_FAST_BORROW         1 (chave)
+                CALL                     2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_FAST               5 (k)
+
+  39            LOAD_FAST_BORROW         0 (ligar)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       50 (to L3)
+                NOT_TAKEN
+
+  40            LOAD_GLOBAL              2 (winreg)
+                LOAD_ATTR                8 (SetValueEx)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 82 (k, valor)
+                LOAD_SMALL_INT           0
+                LOAD_GLOBAL              2 (winreg)
+                LOAD_ATTR               10 (REG_SZ)
+                LOAD_GLOBAL             13 (comando + NULL)
+                LOAD_FAST_BORROW         3 (exe)
+                CALL                     1
+                CALL                     5
+                POP_TOP
+                JUMP_FORWARD            23 (to L5)
+
+  42    L3:     NOP
+
+  43    L4:     LOAD_GLOBAL              2 (winreg)
+                LOAD_ATTR               14 (DeleteValue)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 82 (k, valor)
+                CALL                     2
+                POP_TOP
+
+  38    L5:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+
+  46            LOAD_CONST               2 (True)
+                RETURN_VALUE
+
+  --    L6:     PUSH_EXC_INFO
+
+  44            LOAD_GLOBAL             16 (FileNotFoundError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        4 (to L8)
+                NOT_TAKEN
+                POP_TOP
+
+  45    L7:     POP_EXCEPT
+                JUMP_BACKWARD_NO_INTERRUPT 23 (to L5)
+
+  44    L8:     RERAISE                  0
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+  38   L10:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L11)
+                NOT_TAKEN
+                RERAISE                  2
+       L11:     POP_TOP
+       L12:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+
+  46            LOAD_CONST               2 (True)
+                RETURN_VALUE
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L2 to L3 -> L10 [2] lasti
+  L4 to L5 -> L6 [2]
+  L6 to L7 -> L9 [3] lasti
+  L7 to L8 -> L10 [2] lasti
+  L8 to L9 -> L9 [3] lasti
+  L9 to L10 -> L10 [2] lasti
+  L10 to L12 -> L13 [4] lasti

@@ -1,0 +1,34 @@
+# Module: version
+# Filename: version.py
+
+  0           RESUME                   0
+
+ 19           LOAD_CONST               0 ('0.8.2.1')
+              STORE_NAME               0 (VERSION)
+
+ 27           LOAD_CONST               1 ('')
+              STORE_NAME               1 (CANAL)
+
+ 30           LOAD_CONST               2 (<code object rotulo at 0x10558c960, file "version.py", line 30>)
+              MAKE_FUNCTION
+              STORE_NAME               2 (rotulo)
+              LOAD_CONST               3 (None)
+              RETURN_VALUE
+
+Disassembly of <code object rotulo at 0x10558c960, file "version.py", line 30>:
+ 30           RESUME                   0
+
+ 32           LOAD_GLOBAL              0 (CANAL)
+              TO_BOOL
+              POP_JUMP_IF_FALSE       39 (to L1)
+              NOT_TAKEN
+              LOAD_GLOBAL              2 (VERSION)
+              LOAD_CONST               0 (' ')
+              BINARY_OP                0 (+)
+              LOAD_GLOBAL              0 (CANAL)
+              BINARY_OP                0 (+)
+              LOAD_ATTR                5 (strip + NULL|self)
+              CALL                     0
+              RETURN_VALUE
+      L1:     LOAD_GLOBAL              2 (VERSION)
+              RETURN_VALUE

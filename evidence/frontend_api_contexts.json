@@ -1,0 +1,401 @@
+{
+  "/api/live": [
+    "/resumo-jogadores`,{uids:e,snapshot:t??null}),jogadoresForaDaCaptura:(e,t)=>U(`/api/jogadores-fora-da-captura`,{uids:e,snapshot:t??null}),live:()=>H(`/api/live`),status:()=>H(`/api/status`),job:()=>H(`/api/job`),connect:e=>U(`/api/connect`,e?{game_date:e}:{}),refresh:e=>U(`/api/refresh`,e?{game_date:e}:{}),disconnect:()=>U(`/api/disconnect`),capture:(e,t,n)=>U(`/api/capture`,{name:e,scope:t,game_d"
+  ],
+  "/api/status": [
+    ",snapshot:t??null}),jogadoresForaDaCaptura:(e,t)=>U(`/api/jogadores-fora-da-captura`,{uids:e,snapshot:t??null}),live:()=>H(`/api/live`),status:()=>H(`/api/status`),job:()=>H(`/api/job`),connect:e=>U(`/api/connect`,e?{game_date:e}:{}),refresh:e=>U(`/api/refresh`,e?{game_date:e}:{}),disconnect:()=>U(`/api/disconnect`),capture:(e,t,n)=>U(`/api/capture`,{name:e,scope:t,game_date:n}),summary:()=>H(`/ap"
+  ],
+  "/api/job": [
+    "oresForaDaCaptura:(e,t)=>U(`/api/jogadores-fora-da-captura`,{uids:e,snapshot:t??null}),live:()=>H(`/api/live`),status:()=>H(`/api/status`),job:()=>H(`/api/job`),connect:e=>U(`/api/connect`,e?{game_date:e}:{}),refresh:e=>U(`/api/refresh`,e?{game_date:e}:{}),disconnect:()=>U(`/api/disconnect`),capture:(e,t,n)=>U(`/api/capture`,{name:e,scope:t,game_date:n}),summary:()=>H(`/api/summary`),snapshots:(e="
+  ],
+  "/api/summary": [
+    "`/api/refresh`,e?{game_date:e}:{}),disconnect:()=>U(`/api/disconnect`),capture:(e,t,n)=>U(`/api/capture`,{name:e,scope:t,game_date:n}),summary:()=>H(`/api/summary`),snapshots:(e=!0)=>H(`/api/snapshots${e?``:`?include_live=false`}`),deleteSnapshot:e=>mo(`/api/snapshots/${e}`),players:(e,t={})=>{let n=new URLSearchParams;return t.search&&n.set(`search`,t.search),t.sort&&n.set(`sort`,t.sort),n.set(`l"
+  ],
+  "/api/version": [
+    "tal/mudou`),apoiadores:()=>H(`/api/apoiadores`),moneyballColumns:(e,t)=>H(`/api/moneyball/columns?group=${e}${t?`&snapshot=${t}`:``}`),version:()=>H(`/api/version`),patchNotes:e=>H(`/api/patch-notes?lang=${e===`en`?`en`:`pt`}`),legal:(e,t)=>H(`/api/legal?doc=${e}&lang=${t===`en`?`en`:`pt`}`),aceitarLegal:e=>U(`/api/legal/aceite`,{termos:!0,privacidade:!0,idioma:e}),sair:()=>U(`/api/sair`,{}),carre"
+  ],
+  "/api/currencies": [
+    "sticoResultado:()=>H(`/api/diagnostico/completo`),linkDominios:()=>H(`/api/links/dominios`),abrirUrl:e=>U(`/api/open-link`,{url:e}),currencies:()=>H(`/api/currencies`),searchFields:(e,t)=>H(`/api/search/fields?group=${e}${t?`&snapshot=${t}`:``}`),clubsTree:e=>H(`/api/clubs${e?`?snapshot=${e}`:``}`),youthTree:e=>H(`/api/youth-teams${e?`?snapshot=${e}`:``}`),nomesCurtos:e=>H(`/api/nomes-curtos?snaps"
+  ],
+  "/api/acesso": [
+    "snapshot=${e}`:``}`),youthTree:e=>H(`/api/youth-teams${e?`?snapshot=${e}`:``}`),nomesCurtos:e=>H(`/api/nomes-curtos?snapshot=${e}`),acesso:(e=!1)=>H(`/api/acesso${e?`?revalidar=1`:``}`),resgatarCodigo:e=>U(`/api/acesso/codigo`,{codigo:e}),sairAcesso:()=>U(`/api/acesso/sair`),entrarPatreon:e=>U(`/api/acesso/patreon`,{lang:e}),patreonStatus:()=>H(`/api/acesso/patreon/status`),settings:()=>H(`/api/se",
+    "`?snapshot=${e}`:``}`),nomesCurtos:e=>H(`/api/nomes-curtos?snapshot=${e}`),acesso:(e=!1)=>H(`/api/acesso${e?`?revalidar=1`:``}`),resgatarCodigo:e=>U(`/api/acesso/codigo`,{codigo:e}),sairAcesso:()=>U(`/api/acesso/sair`),entrarPatreon:e=>U(`/api/acesso/patreon`,{lang:e}),patreonStatus:()=>H(`/api/acesso/patreon/status`),settings:()=>H(`/api/settings`),setGraphicsDir:e=>U(`/api/settings/graphics`,{di",
+    "s-curtos?snapshot=${e}`),acesso:(e=!1)=>H(`/api/acesso${e?`?revalidar=1`:``}`),resgatarCodigo:e=>U(`/api/acesso/codigo`,{codigo:e}),sairAcesso:()=>U(`/api/acesso/sair`),entrarPatreon:e=>U(`/api/acesso/patreon`,{lang:e}),patreonStatus:()=>H(`/api/acesso/patreon/status`),settings:()=>H(`/api/settings`),setGraphicsDir:e=>U(`/api/settings/graphics`,{dir:e}),setDbDir:(e,t)=>U(`/api/settings/db_dir`,{di"
+  ],
+  "/api/settings": [
+    "ace||{},!0,!0),at[e]=n.colunas||{},it.add(e),!0}catch{return!1}}function ct(e){localStorage.setItem(nt,e),st(e).then(()=>Ae.changeLanguage(e)),fetch(`/api/settings/idioma`,{method:`POST`,headers:{\"content-type\":`application/json`},body:JSON.stringify({idioma:e})}).catch(()=>{})}async function lt(){try{let e=(await(await fetch(`/api/settings`)).json())?.idioma;return typeof e==`string`&&e?e:null}ca",
+    ":`POST`,headers:{\"content-type\":`application/json`},body:JSON.stringify({idioma:e})}).catch(()=>{})}async function lt(){try{let e=(await(await fetch(`/api/settings`)).json())?.idioma;return typeof e==`string`&&e?e:null}catch{return null}}async function ut(){let e=dt()?null:localStorage.getItem(nt),t=e||await lt()||`pt`;!dt()&&!e&&t!==`pt`&&localStorage.setItem(nt,t),await Ae.use(Ye).init({resource",
+    "RIComponent(e)}/outras-ligas`),setDataAutoSnapshot:(e,t)=>U(`/api/carreiras/${encodeURIComponent(e)}/auto-snapshot`,{data:t}),setFimDeTemporada:e=>U(`/api/settings/fim-de-temporada`,{ligado:e}),setAutoSnapshot:e=>U(`/api/settings/auto-snapshot`,e),nomeAutoSnapshot:e=>H(`/api/settings/auto-snapshot/nome?modelo=${encodeURIComponent(e)}`),setCapturaSom:e=>U(`/api/settings/captura-som`,e),testarCaptur"
+  ],
+  "/api/settings/overall": [
+    "gs/graphics`,{dir:e}),setDbDir:(e,t)=>U(`/api/settings/db_dir`,{dir:e,move:t}),setIdioma:e=>U(`/api/settings/idioma`,{idioma:e}),setOverallModo:e=>U(`/api/settings/overall`,{modo:e}),memoria:()=>H(`/api/memoria`),setMemoria:e=>U(`/api/settings/memoria`,{mb:e}),bandeja:()=>H(`/api/settings/bandeja`),setBandeja:e=>U(`/api/settings/bandeja`,e),respostaAoFechar:(e,t)=>U(`/api/janela/ao-fechar`,{acao:e"
+  ],
+  "/api/memoria": [
+    "ttings/db_dir`,{dir:e,move:t}),setIdioma:e=>U(`/api/settings/idioma`,{idioma:e}),setOverallModo:e=>U(`/api/settings/overall`,{modo:e}),memoria:()=>H(`/api/memoria`),setMemoria:e=>U(`/api/settings/memoria`,{mb:e}),bandeja:()=>H(`/api/settings/bandeja`),setBandeja:e=>U(`/api/settings/bandeja`,e),respostaAoFechar:(e,t)=>U(`/api/janela/ao-fechar`,{acao:e,lembrar:t}),mostrarJanela:()=>U(`/api/janela/mo"
+  ],
+  "/api/settings/memoria": [
+    "etIdioma:e=>U(`/api/settings/idioma`,{idioma:e}),setOverallModo:e=>U(`/api/settings/overall`,{modo:e}),memoria:()=>H(`/api/memoria`),setMemoria:e=>U(`/api/settings/memoria`,{mb:e}),bandeja:()=>H(`/api/settings/bandeja`),setBandeja:e=>U(`/api/settings/bandeja`,e),respostaAoFechar:(e,t)=>U(`/api/janela/ao-fechar`,{acao:e,lembrar:t}),mostrarJanela:()=>U(`/api/janela/mostrar`),menuBandeja:()=>H(`/api/"
+  ],
+  "/api/settings/idioma": [
+    "ace||{},!0,!0),at[e]=n.colunas||{},it.add(e),!0}catch{return!1}}function ct(e){localStorage.setItem(nt,e),st(e).then(()=>Ae.changeLanguage(e)),fetch(`/api/settings/idioma`,{method:`POST`,headers:{\"content-type\":`application/json`},body:JSON.stringify({idioma:e})}).catch(()=>{})}async function lt(){try{let e=(await(await fetch(`/api/settings`)).json())?.idioma;return typeof e==`string`&&e?e:null}ca",
+    "()=>H(`/api/settings`),setGraphicsDir:e=>U(`/api/settings/graphics`,{dir:e}),setDbDir:(e,t)=>U(`/api/settings/db_dir`,{dir:e,move:t}),setIdioma:e=>U(`/api/settings/idioma`,{idioma:e}),setOverallModo:e=>U(`/api/settings/overall`,{modo:e}),memoria:()=>H(`/api/memoria`),setMemoria:e=>U(`/api/settings/memoria`,{mb:e}),bandeja:()=>H(`/api/settings/bandeja`),setBandeja:e=>U(`/api/settings/bandeja`,e),re"
+  ],
+  "/api/janela/mostrar": [
+    "tings/bandeja`),setBandeja:e=>U(`/api/settings/bandeja`,e),respostaAoFechar:(e,t)=>U(`/api/janela/ao-fechar`,{acao:e,lembrar:t}),mostrarJanela:()=>U(`/api/janela/mostrar`),menuBandeja:()=>H(`/api/bandeja/menu`),menuBandejaPronto:(e,t,n)=>U(`/api/bandeja/menu/pronto`,{n:e,largura:t,altura:n}),menuBandejaPainel:(e,t,n,r)=>U(`/api/bandeja/menu/painel`,{n:e,linha:t,largura:n,altura:r}),fecharMenuBande"
+  ],
+  "/api/janela/ao-fechar": [
+    "ria:e=>U(`/api/settings/memoria`,{mb:e}),bandeja:()=>H(`/api/settings/bandeja`),setBandeja:e=>U(`/api/settings/bandeja`,e),respostaAoFechar:(e,t)=>U(`/api/janela/ao-fechar`,{acao:e,lembrar:t}),mostrarJanela:()=>U(`/api/janela/mostrar`),menuBandeja:()=>H(`/api/bandeja/menu`),menuBandejaPronto:(e,t,n)=>U(`/api/bandeja/menu/pronto`,{n:e,largura:t,altura:n}),menuBandejaPainel:(e,t,n,r)=>U(`/api/bandej"
+  ],
+  "/api/settings/bandeja": [
+    "}),setOverallModo:e=>U(`/api/settings/overall`,{modo:e}),memoria:()=>H(`/api/memoria`),setMemoria:e=>U(`/api/settings/memoria`,{mb:e}),bandeja:()=>H(`/api/settings/bandeja`),setBandeja:e=>U(`/api/settings/bandeja`,e),respostaAoFechar:(e,t)=>U(`/api/janela/ao-fechar`,{acao:e,lembrar:t}),mostrarJanela:()=>U(`/api/janela/mostrar`),menuBandeja:()=>H(`/api/bandeja/menu`),menuBandejaPronto:(e,t,n)=>U(`/",
+    "rall`,{modo:e}),memoria:()=>H(`/api/memoria`),setMemoria:e=>U(`/api/settings/memoria`,{mb:e}),bandeja:()=>H(`/api/settings/bandeja`),setBandeja:e=>U(`/api/settings/bandeja`,e),respostaAoFechar:(e,t)=>U(`/api/janela/ao-fechar`,{acao:e,lembrar:t}),mostrarJanela:()=>U(`/api/janela/mostrar`),menuBandeja:()=>H(`/api/bandeja/menu`),menuBandejaPronto:(e,t,n)=>U(`/api/bandeja/menu/pronto`,{n:e,largura:t,a"
+  ],
+  "/api/bandeja/conexao": [
+    "i/jogo/dados/fechar`),capturaDoJogador:e=>H(`/api/jogo/captura-do-jogador?uid=${e}`),capturaAuto:()=>H(`/api/jogo/captura`),conexaoPelaBandeja:()=>H(`/api/bandeja/conexao`),fecharFaixaDaConexao:()=>U(`/api/bandeja/conexao/fechar`),fecharFaixaDaCaptura:()=>U(`/api/jogo/captura/fechar`),salvarAutoSnapshot:()=>U(`/api/jogo/auto-snapshot/salvar`),outrasLigas:e=>H(`/api/carreiras/${encodeURIComponent(e",
+    "ogo/captura-do-jogador?uid=${e}`),capturaAuto:()=>H(`/api/jogo/captura`),conexaoPelaBandeja:()=>H(`/api/bandeja/conexao`),fecharFaixaDaConexao:()=>U(`/api/bandeja/conexao/fechar`),fecharFaixaDaCaptura:()=>U(`/api/jogo/captura/fechar`),salvarAutoSnapshot:()=>U(`/api/jogo/auto-snapshot/salvar`),outrasLigas:e=>H(`/api/carreiras/${encodeURIComponent(e)}/outras-ligas`),setDataAutoSnapshot:(e,t)=>U(`/ap"
+  ],
+  "/api/bandeja/conexao/fechar": [
+    "ogo/captura-do-jogador?uid=${e}`),capturaAuto:()=>H(`/api/jogo/captura`),conexaoPelaBandeja:()=>H(`/api/bandeja/conexao`),fecharFaixaDaConexao:()=>U(`/api/bandeja/conexao/fechar`),fecharFaixaDaCaptura:()=>U(`/api/jogo/captura/fechar`),salvarAutoSnapshot:()=>U(`/api/jogo/auto-snapshot/salvar`),outrasLigas:e=>H(`/api/carreiras/${encodeURIComponent(e)}/outras-ligas`),setDataAutoSnapshot:(e,t)=>U(`/ap"
+  ],
+  "/api/bandeja/menu": [
+    "tings/bandeja`,e),respostaAoFechar:(e,t)=>U(`/api/janela/ao-fechar`,{acao:e,lembrar:t}),mostrarJanela:()=>U(`/api/janela/mostrar`),menuBandeja:()=>H(`/api/bandeja/menu`),menuBandejaPronto:(e,t,n)=>U(`/api/bandeja/menu/pronto`,{n:e,largura:t,altura:n}),menuBandejaPainel:(e,t,n,r)=>U(`/api/bandeja/menu/painel`,{n:e,linha:t,largura:n,altura:r}),fecharMenuBandeja:e=>U(`/api/bandeja/menu/fechar`,{n:e})",
+    "janela/ao-fechar`,{acao:e,lembrar:t}),mostrarJanela:()=>U(`/api/janela/mostrar`),menuBandeja:()=>H(`/api/bandeja/menu`),menuBandejaPronto:(e,t,n)=>U(`/api/bandeja/menu/pronto`,{n:e,largura:t,altura:n}),menuBandejaPainel:(e,t,n,r)=>U(`/api/bandeja/menu/painel`,{n:e,linha:t,largura:n,altura:r}),fecharMenuBandeja:e=>U(`/api/bandeja/menu/fechar`,{n:e}),escolherNaBandeja:(e,t)=>U(`/api/bandeja/escolher",
+    "uBandeja:()=>H(`/api/bandeja/menu`),menuBandejaPronto:(e,t,n)=>U(`/api/bandeja/menu/pronto`,{n:e,largura:t,altura:n}),menuBandejaPainel:(e,t,n,r)=>U(`/api/bandeja/menu/painel`,{n:e,linha:t,largura:n,altura:r}),fecharMenuBandeja:e=>U(`/api/bandeja/menu/fechar`,{n:e}),escolherNaBandeja:(e,t)=>U(`/api/bandeja/escolher`,{n:e,item:t}),onboarding:()=>H(`/api/onboarding`),salvarOnboarding:e=>U(`/api/onbo"
+  ],
+  "/api/bandeja/menu/pronto": [
+    "janela/ao-fechar`,{acao:e,lembrar:t}),mostrarJanela:()=>U(`/api/janela/mostrar`),menuBandeja:()=>H(`/api/bandeja/menu`),menuBandejaPronto:(e,t,n)=>U(`/api/bandeja/menu/pronto`,{n:e,largura:t,altura:n}),menuBandejaPainel:(e,t,n,r)=>U(`/api/bandeja/menu/painel`,{n:e,linha:t,largura:n,altura:r}),fecharMenuBandeja:e=>U(`/api/bandeja/menu/fechar`,{n:e}),escolherNaBandeja:(e,t)=>U(`/api/bandeja/escolher"
+  ],
+  "/api/bandeja/menu/painel": [
+    "uBandeja:()=>H(`/api/bandeja/menu`),menuBandejaPronto:(e,t,n)=>U(`/api/bandeja/menu/pronto`,{n:e,largura:t,altura:n}),menuBandejaPainel:(e,t,n,r)=>U(`/api/bandeja/menu/painel`,{n:e,linha:t,largura:n,altura:r}),fecharMenuBandeja:e=>U(`/api/bandeja/menu/fechar`,{n:e}),escolherNaBandeja:(e,t)=>U(`/api/bandeja/escolher`,{n:e,item:t}),onboarding:()=>H(`/api/onboarding`),salvarOnboarding:e=>U(`/api/onbo"
+  ],
+  "/api/bandeja/menu/fechar": [
+    "pronto`,{n:e,largura:t,altura:n}),menuBandejaPainel:(e,t,n,r)=>U(`/api/bandeja/menu/painel`,{n:e,linha:t,largura:n,altura:r}),fecharMenuBandeja:e=>U(`/api/bandeja/menu/fechar`,{n:e}),escolherNaBandeja:(e,t)=>U(`/api/bandeja/escolher`,{n:e,item:t}),onboarding:()=>H(`/api/onboarding`),salvarOnboarding:e=>U(`/api/onboarding`,e),refazerOnboarding:()=>U(`/api/onboarding/refazer`),escolherPasta:()=>U(`/"
+  ],
+  "/api/bandeja/escolher": [
+    "=>U(`/api/bandeja/menu/painel`,{n:e,linha:t,largura:n,altura:r}),fecharMenuBandeja:e=>U(`/api/bandeja/menu/fechar`,{n:e}),escolherNaBandeja:(e,t)=>U(`/api/bandeja/escolher`,{n:e,item:t}),onboarding:()=>H(`/api/onboarding`),salvarOnboarding:e=>U(`/api/onboarding`,e),refazerOnboarding:()=>U(`/api/onboarding/refazer`),escolherPasta:()=>U(`/api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:"
+  ],
+  "/api/onboarding": [
+    "ltura:r}),fecharMenuBandeja:e=>U(`/api/bandeja/menu/fechar`,{n:e}),escolherNaBandeja:(e,t)=>U(`/api/bandeja/escolher`,{n:e,item:t}),onboarding:()=>H(`/api/onboarding`),salvarOnboarding:e=>U(`/api/onboarding`,e),refazerOnboarding:()=>U(`/api/onboarding/refazer`),escolherPasta:()=>U(`/api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${",
+    "ndeja/menu/fechar`,{n:e}),escolherNaBandeja:(e,t)=>U(`/api/bandeja/escolher`,{n:e,item:t}),onboarding:()=>H(`/api/onboarding`),salvarOnboarding:e=>U(`/api/onboarding`,e),refazerOnboarding:()=>U(`/api/onboarding/refazer`),escolherPasta:()=>U(`/api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${e}`,vo=e=>`/api/flag/${e}`,yo=e=>`/api/cl",
+    "e,t)=>U(`/api/bandeja/escolher`,{n:e,item:t}),onboarding:()=>H(`/api/onboarding`),salvarOnboarding:e=>U(`/api/onboarding`,e),refazerOnboarding:()=>U(`/api/onboarding/refazer`),escolherPasta:()=>U(`/api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${e}`,vo=e=>`/api/flag/${e}`,yo=e=>`/api/club_logo/${e}`,bo=e=>`/api/comp_logo/${e}`,xo="
+  ],
+  "/api/onboarding/refazer": [
+    "e,t)=>U(`/api/bandeja/escolher`,{n:e,item:t}),onboarding:()=>H(`/api/onboarding`),salvarOnboarding:e=>U(`/api/onboarding`,e),refazerOnboarding:()=>U(`/api/onboarding/refazer`),escolherPasta:()=>U(`/api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${e}`,vo=e=>`/api/flag/${e}`,yo=e=>`/api/club_logo/${e}`,bo=e=>`/api/comp_logo/${e}`,xo="
+  ],
+  "/api/dicas": [
+    ",salvarOnboarding:e=>U(`/api/onboarding`,e),refazerOnboarding:()=>U(`/api/onboarding/refazer`),escolherPasta:()=>U(`/api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${e}`,vo=e=>`/api/flag/${e}`,yo=e=>`/api/club_logo/${e}`,bo=e=>`/api/comp_logo/${e}`,xo=(...e)=>e.filter((e,t,n)=>!!e&&e.trim()!==``&&n.indexOf(e)===t).join(` `).trim(),",
+    "rding`,e),refazerOnboarding:()=>U(`/api/onboarding/refazer`),escolherPasta:()=>U(`/api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${e}`,vo=e=>`/api/flag/${e}`,yo=e=>`/api/club_logo/${e}`,bo=e=>`/api/comp_logo/${e}`,xo=(...e)=>e.filter((e,t,n)=>!!e&&e.trim()!==``&&n.indexOf(e)===t).join(` `).trim(),So=e=>e.replace(/([a-z0-9])([A-Z])"
+  ],
+  "/api/dicas/lida": [
+    "rding`,e),refazerOnboarding:()=>U(`/api/onboarding/refazer`),escolherPasta:()=>U(`/api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${e}`,vo=e=>`/api/flag/${e}`,yo=e=>`/api/club_logo/${e}`,bo=e=>`/api/comp_logo/${e}`,xo=(...e)=>e.filter((e,t,n)=>!!e&&e.trim()!==``&&n.indexOf(e)===t).join(` `).trim(),So=e=>e.replace(/([a-z0-9])([A-Z])"
+  ],
+  "/api/dialogo/pasta": [
+    "nboarding:()=>H(`/api/onboarding`),salvarOnboarding:e=>U(`/api/onboarding`,e),refazerOnboarding:()=>U(`/api/onboarding/refazer`),escolherPasta:()=>U(`/api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${e}`,vo=e=>`/api/flag/${e}`,yo=e=>`/api/club_logo/${e}`,bo=e=>`/api/comp_logo/${e}`,xo=(...e)=>e.filter((e,t,n)=>!!e&&e.trim()!==``&&n"
+  ],
+  "/api/legal": [
+    "mns?group=${e}${t?`&snapshot=${t}`:``}`),version:()=>H(`/api/version`),patchNotes:e=>H(`/api/patch-notes?lang=${e===`en`?`en`:`pt`}`),legal:(e,t)=>H(`/api/legal?doc=${e}&lang=${t===`en`?`en`:`pt`}`),aceitarLegal:e=>U(`/api/legal/aceite`,{termos:!0,privacidade:!0,idioma:e}),sair:()=>U(`/api/sair`,{}),carreiras:()=>H(`/api/carreiras`),armazenamento:()=>H(`/api/armazenamento`),ativarCarreira:e=>U(`/a",
+    "`),patchNotes:e=>H(`/api/patch-notes?lang=${e===`en`?`en`:`pt`}`),legal:(e,t)=>H(`/api/legal?doc=${e}&lang=${t===`en`?`en`:`pt`}`),aceitarLegal:e=>U(`/api/legal/aceite`,{termos:!0,privacidade:!0,idioma:e}),sair:()=>U(`/api/sair`,{}),carreiras:()=>H(`/api/carreiras`),armazenamento:()=>H(`/api/armazenamento`),ativarCarreira:e=>U(`/api/carreiras/ativa`,{id:e}),salvarCarreiraPrefs:(e,t)=>po(`/api/carr"
+  ],
+  "/api/legal/aceite": [
+    "`),patchNotes:e=>H(`/api/patch-notes?lang=${e===`en`?`en`:`pt`}`),legal:(e,t)=>H(`/api/legal?doc=${e}&lang=${t===`en`?`en`:`pt`}`),aceitarLegal:e=>U(`/api/legal/aceite`,{termos:!0,privacidade:!0,idioma:e}),sair:()=>U(`/api/sair`,{}),carreiras:()=>H(`/api/carreiras`),armazenamento:()=>H(`/api/armazenamento`),ativarCarreira:e=>U(`/api/carreiras/ativa`,{id:e}),salvarCarreiraPrefs:(e,t)=>po(`/api/carr"
+  ],
+  "/api/sair": [
+    "gal:(e,t)=>H(`/api/legal?doc=${e}&lang=${t===`en`?`en`:`pt`}`),aceitarLegal:e=>U(`/api/legal/aceite`,{termos:!0,privacidade:!0,idioma:e}),sair:()=>U(`/api/sair`,{}),carreiras:()=>H(`/api/carreiras`),armazenamento:()=>H(`/api/armazenamento`),ativarCarreira:e=>U(`/api/carreiras/ativa`,{id:e}),salvarCarreiraPrefs:(e,t)=>po(`/api/carreiras/${encodeURIComponent(e)}`,{method:`PUT`,headers:{\"Content-Type"
+  ],
+  "/api/patch-notes": [
+    "pi/apoiadores`),moneyballColumns:(e,t)=>H(`/api/moneyball/columns?group=${e}${t?`&snapshot=${t}`:``}`),version:()=>H(`/api/version`),patchNotes:e=>H(`/api/patch-notes?lang=${e===`en`?`en`:`pt`}`),legal:(e,t)=>H(`/api/legal?doc=${e}&lang=${t===`en`?`en`:`pt`}`),aceitarLegal:e=>U(`/api/legal/aceite`,{termos:!0,privacidade:!0,idioma:e}),sair:()=>U(`/api/sair`,{}),carreiras:()=>H(`/api/carreiras`),arm"
+  ],
+  "/api/diagnostico": [
+    "s:(e=!1,t=`pt`)=>H(`/api/alertas?lang=${t}${e?`&recarregar=1`:``}`),marcarAlertasLidos:(e=`pt`)=>U(`/api/alertas/lidos?lang=${e}`),diagnostico:()=>H(`/api/diagnostico`),abrirPastaDados:()=>U(`/api/abrir-pasta-dados`),idiomas:()=>H(`/api/idiomas`),abrirPastaIdiomas:()=>U(`/api/idiomas/abrir-pasta`),exportarIdioma:(e,t,n)=>U(`/api/idiomas/exportar`,{codigo:e,nome:n,base:t}),biblioteca:()=>H(`/api/bi",
+    "a:e}),aplicarAtualizacao:()=>U(`/api/atualizacao/aplicar`),dispensarVersao:e=>U(`/api/atualizacao/dispensar`,{versao:e}),abrirPastaDiagnostico:()=>U(`/api/diagnostico/abrir-pasta`,{}),diagnosticoCompleto:e=>U(`/api/diagnostico/completo?lang=${e}`,{}),diagnosticoResultado:()=>H(`/api/diagnostico/completo`),linkDominios:()=>H(`/api/links/dominios`),abrirUrl:e=>U(`/api/open-link`,{url:e}),currencies:",
+    "ispensarVersao:e=>U(`/api/atualizacao/dispensar`,{versao:e}),abrirPastaDiagnostico:()=>U(`/api/diagnostico/abrir-pasta`,{}),diagnosticoCompleto:e=>U(`/api/diagnostico/completo?lang=${e}`,{}),diagnosticoResultado:()=>H(`/api/diagnostico/completo`),linkDominios:()=>H(`/api/links/dominios`),abrirUrl:e=>U(`/api/open-link`,{url:e}),currencies:()=>H(`/api/currencies`),searchFields:(e,t)=>H(`/api/search/"
+  ],
+  "/api/abrir-pasta-dados": [
+    "${e?`&recarregar=1`:``}`),marcarAlertasLidos:(e=`pt`)=>U(`/api/alertas/lidos?lang=${e}`),diagnostico:()=>H(`/api/diagnostico`),abrirPastaDados:()=>U(`/api/abrir-pasta-dados`),idiomas:()=>H(`/api/idiomas`),abrirPastaIdiomas:()=>U(`/api/idiomas/abrir-pasta`),exportarIdioma:(e,t,n)=>U(`/api/idiomas/exportar`,{codigo:e,nome:n,base:t}),biblioteca:()=>H(`/api/biblioteca`),bibliotecaLer:e=>H(`/api/biblio"
+  ],
+  "/api/idiomas": [
+    "localStorage.getItem(nt)||`pt`}var it=new Set,at={};function ot(e){return at[e]||{}}async function st(e){if(it.has(e))return!0;try{let t=await fetch(`/api/idiomas/${encodeURIComponent(e)}`);if(!t.ok)return!1;let n=await t.json();return Ae.addResourceBundle(e,`common`,n.interface||{},!0,!0),at[e]=n.colunas||{},it.add(e),!0}catch{return!1}}function ct(e){localStorage.setItem(nt,e),st(e).then(()=>Ae.",
+    "idos:(e=`pt`)=>U(`/api/alertas/lidos?lang=${e}`),diagnostico:()=>H(`/api/diagnostico`),abrirPastaDados:()=>U(`/api/abrir-pasta-dados`),idiomas:()=>H(`/api/idiomas`),abrirPastaIdiomas:()=>U(`/api/idiomas/abrir-pasta`),exportarIdioma:(e,t,n)=>U(`/api/idiomas/exportar`,{codigo:e,nome:n,base:t}),biblioteca:()=>H(`/api/biblioteca`),bibliotecaLer:e=>H(`/api/biblioteca/${encodeURIComponent(e)}`),bibliote",
+    "g=${e}`),diagnostico:()=>H(`/api/diagnostico`),abrirPastaDados:()=>U(`/api/abrir-pasta-dados`),idiomas:()=>H(`/api/idiomas`),abrirPastaIdiomas:()=>U(`/api/idiomas/abrir-pasta`),exportarIdioma:(e,t,n)=>U(`/api/idiomas/exportar`,{codigo:e,nome:n,base:t}),biblioteca:()=>H(`/api/biblioteca`),bibliotecaLer:e=>H(`/api/biblioteca/${encodeURIComponent(e)}`),bibliotecaGravar:(e,t)=>U(`/api/biblioteca`,{arq"
+  ],
+  "/api/idiomas/abrir-pasta": [
+    "g=${e}`),diagnostico:()=>H(`/api/diagnostico`),abrirPastaDados:()=>U(`/api/abrir-pasta-dados`),idiomas:()=>H(`/api/idiomas`),abrirPastaIdiomas:()=>U(`/api/idiomas/abrir-pasta`),exportarIdioma:(e,t,n)=>U(`/api/idiomas/exportar`,{codigo:e,nome:n,base:t}),biblioteca:()=>H(`/api/biblioteca`),bibliotecaLer:e=>H(`/api/biblioteca/${encodeURIComponent(e)}`),bibliotecaGravar:(e,t)=>U(`/api/biblioteca`,{arq"
+  ],
+  "/api/idiomas/exportar": [
+    "staDados:()=>U(`/api/abrir-pasta-dados`),idiomas:()=>H(`/api/idiomas`),abrirPastaIdiomas:()=>U(`/api/idiomas/abrir-pasta`),exportarIdioma:(e,t,n)=>U(`/api/idiomas/exportar`,{codigo:e,nome:n,base:t}),biblioteca:()=>H(`/api/biblioteca`),bibliotecaLer:e=>H(`/api/biblioteca/${encodeURIComponent(e)}`),bibliotecaGravar:(e,t)=>U(`/api/biblioteca`,{arquivo:e,conteudo:t}),bibliotecaRenomear:(e,t)=>U(`/api/"
+  ],
+  "/api/listas-preferenciais": [
+    "igrarLocal:(e,t)=>U(`/api/favoritos/migrar-local`,{uids:e,nome:t}),favoritosAvisoVisto:()=>U(`/api/favoritos/aviso-visto`),listasPreferenciais:()=>H(`/api/listas-preferenciais`),listasPreferenciaisPasta:()=>H(`/api/listas-preferenciais/pasta`),listaImportarDaPasta:({arquivo:e,jogo:t})=>U(`/api/listas-preferenciais/da-pasta`,{arquivo:e,jogo:t}),listaEscolherArquivo:()=>U(`/api/listas-preferenciais/",
+    "me:t}),favoritosAvisoVisto:()=>U(`/api/favoritos/aviso-visto`),listasPreferenciais:()=>H(`/api/listas-preferenciais`),listasPreferenciaisPasta:()=>H(`/api/listas-preferenciais/pasta`),listaImportarDaPasta:({arquivo:e,jogo:t})=>U(`/api/listas-preferenciais/da-pasta`,{arquivo:e,jogo:t}),listaEscolherArquivo:()=>U(`/api/listas-preferenciais/escolher`),listaEnviarBytes:e=>po(`/api/listas-preferenciais",
+    "is:()=>H(`/api/listas-preferenciais`),listasPreferenciaisPasta:()=>H(`/api/listas-preferenciais/pasta`),listaImportarDaPasta:({arquivo:e,jogo:t})=>U(`/api/listas-preferenciais/da-pasta`,{arquivo:e,jogo:t}),listaEscolherArquivo:()=>U(`/api/listas-preferenciais/escolher`),listaEnviarBytes:e=>po(`/api/listas-preferenciais?arquivo=${encodeURIComponent(e.name)}`,{method:`POST`,body:e}),listaAtualizar:e"
+  ],
+  "/api/views-fm": [
+    "omponent(e)}/bruto`,bibliotecaEnviarFmf:e=>po(`/api/biblioteca-fmf?arquivo=${encodeURIComponent(e.name)}`,{method:`POST`,body:e}),viewsFmPasta:()=>H(`/api/views-fm/pasta`),viewImportarDaPasta:({arquivo:e,jogo:t,destino:n})=>U(`/api/views-fm/da-pasta`,{arquivo:e,jogo:t,destino:n}),viewEscolherArquivo:e=>U(`/api/views-fm/escolher?destino=${e}`),viewEnviarBytes:({arquivo:e,destino:t})=>po(`/api/views",
+    "encodeURIComponent(e.name)}`,{method:`POST`,body:e}),viewsFmPasta:()=>H(`/api/views-fm/pasta`),viewImportarDaPasta:({arquivo:e,jogo:t,destino:n})=>U(`/api/views-fm/da-pasta`,{arquivo:e,jogo:t,destino:n}),viewEscolherArquivo:e=>U(`/api/views-fm/escolher?destino=${e}`),viewEnviarBytes:({arquivo:e,destino:t})=>po(`/api/views-fm?arquivo=${encodeURIComponent(e.name)}&destino=${t}`,{method:`POST`,body:e",
+    "ews-fm/pasta`),viewImportarDaPasta:({arquivo:e,jogo:t,destino:n})=>U(`/api/views-fm/da-pasta`,{arquivo:e,jogo:t,destino:n}),viewEscolherArquivo:e=>U(`/api/views-fm/escolher?destino=${e}`),viewEnviarBytes:({arquivo:e,destino:t})=>po(`/api/views-fm?arquivo=${encodeURIComponent(e.name)}&destino=${t}`,{method:`POST`,body:e}),openLink:e=>U(`/api/open-link`,{key:e}),atualizacao:(e=!1)=>H(`/api/atualizac"
+  ],
+  "/api/resumo-jogadores": [
+    "preferenciais/${encodeURIComponent(e)}/atualizar`),listaRemover:e=>mo(`/api/listas-preferenciais/${encodeURIComponent(e)}`),resumoJogadores:(e,t)=>U(`/api/resumo-jogadores`,{uids:e,snapshot:t??null}),jogadoresForaDaCaptura:(e,t)=>U(`/api/jogadores-fora-da-captura`,{uids:e,snapshot:t??null}),live:()=>H(`/api/live`),status:()=>H(`/api/status`),job:()=>H(`/api/job`),connect:e=>U(`/api/connect`,e?{gam"
+  ],
+  "/api/jogadores-fora-da-captura": [
+    "preferenciais/${encodeURIComponent(e)}`),resumoJogadores:(e,t)=>U(`/api/resumo-jogadores`,{uids:e,snapshot:t??null}),jogadoresForaDaCaptura:(e,t)=>U(`/api/jogadores-fora-da-captura`,{uids:e,snapshot:t??null}),live:()=>H(`/api/live`),status:()=>H(`/api/status`),job:()=>H(`/api/job`),connect:e=>U(`/api/connect`,e?{game_date:e}:{}),refresh:e=>U(`/api/refresh`,e?{game_date:e}:{}),disconnect:()=>U(`/ap"
+  ],
+  "/api/biblioteca": [
+    "s`),abrirPastaIdiomas:()=>U(`/api/idiomas/abrir-pasta`),exportarIdioma:(e,t,n)=>U(`/api/idiomas/exportar`,{codigo:e,nome:n,base:t}),biblioteca:()=>H(`/api/biblioteca`),bibliotecaLer:e=>H(`/api/biblioteca/${encodeURIComponent(e)}`),bibliotecaGravar:(e,t)=>U(`/api/biblioteca`,{arquivo:e,conteudo:t}),bibliotecaRenomear:(e,t)=>U(`/api/biblioteca/${encodeURIComponent(e)}/nome`,{nome:t}),bibliotecaApaga",
+    "mas/abrir-pasta`),exportarIdioma:(e,t,n)=>U(`/api/idiomas/exportar`,{codigo:e,nome:n,base:t}),biblioteca:()=>H(`/api/biblioteca`),bibliotecaLer:e=>H(`/api/biblioteca/${encodeURIComponent(e)}`),bibliotecaGravar:(e,t)=>U(`/api/biblioteca`,{arquivo:e,conteudo:t}),bibliotecaRenomear:(e,t)=>U(`/api/biblioteca/${encodeURIComponent(e)}/nome`,{nome:t}),bibliotecaApagar:e=>mo(`/api/biblioteca/${encodeURICo",
+    "odigo:e,nome:n,base:t}),biblioteca:()=>H(`/api/biblioteca`),bibliotecaLer:e=>H(`/api/biblioteca/${encodeURIComponent(e)}`),bibliotecaGravar:(e,t)=>U(`/api/biblioteca`,{arquivo:e,conteudo:t}),bibliotecaRenomear:(e,t)=>U(`/api/biblioteca/${encodeURIComponent(e)}/nome`,{nome:t}),bibliotecaApagar:e=>mo(`/api/biblioteca/${encodeURIComponent(e)}`),bibliotecaAbrirPasta:()=>U(`/api/biblioteca/abrir-pasta`"
+  ],
+  "/api/diagnostico/completo": [
+    "ispensarVersao:e=>U(`/api/atualizacao/dispensar`,{versao:e}),abrirPastaDiagnostico:()=>U(`/api/diagnostico/abrir-pasta`,{}),diagnosticoCompleto:e=>U(`/api/diagnostico/completo?lang=${e}`,{}),diagnosticoResultado:()=>H(`/api/diagnostico/completo`),linkDominios:()=>H(`/api/links/dominios`),abrirUrl:e=>U(`/api/open-link`,{url:e}),currencies:()=>H(`/api/currencies`),searchFields:(e,t)=>H(`/api/search/",
+    "taDiagnostico:()=>U(`/api/diagnostico/abrir-pasta`,{}),diagnosticoCompleto:e=>U(`/api/diagnostico/completo?lang=${e}`,{}),diagnosticoResultado:()=>H(`/api/diagnostico/completo`),linkDominios:()=>H(`/api/links/dominios`),abrirUrl:e=>U(`/api/open-link`,{url:e}),currencies:()=>H(`/api/currencies`),searchFields:(e,t)=>H(`/api/search/fields?group=${e}${t?`&snapshot=${t}`:``}`),clubsTree:e=>H(`/api/club"
+  ],
+  "/api/atualizacao": [
+    "i/views-fm?arquivo=${encodeURIComponent(e.name)}&destino=${t}`,{method:`POST`,body:e}),openLink:e=>U(`/api/open-link`,{key:e}),atualizacao:(e=!1)=>H(`/api/atualizacao${e?`?forcar=1`:``}`),plugins:()=>H(`/api/plugins`),pluginsVerificar:()=>U(`/api/plugins/verificar`),pluginsLigar:(e,t)=>U(`/api/plugins/ligar`,{id:e,ligado:t}),pluginsVoltar:(e,t)=>U(`/api/plugins/voltar`,{pasta:e,id:t}),pluginsOfert",
+    "pluginsAvisarNovos:e=>U(`/api/plugins/avisar-novos`,{ligado:e}),pluginsPastaJogo:e=>U(`/api/plugins/pasta-jogo`,{antiga:e}),aplicarAtualizacao:()=>U(`/api/atualizacao/aplicar`),dispensarVersao:e=>U(`/api/atualizacao/dispensar`,{versao:e}),abrirPastaDiagnostico:()=>U(`/api/diagnostico/abrir-pasta`,{}),diagnosticoCompleto:e=>U(`/api/diagnostico/completo?lang=${e}`,{}),diagnosticoResultado:()=>H(`/ap",
+    "s`,{ligado:e}),pluginsPastaJogo:e=>U(`/api/plugins/pasta-jogo`,{antiga:e}),aplicarAtualizacao:()=>U(`/api/atualizacao/aplicar`),dispensarVersao:e=>U(`/api/atualizacao/dispensar`,{versao:e}),abrirPastaDiagnostico:()=>U(`/api/diagnostico/abrir-pasta`,{}),diagnosticoCompleto:e=>U(`/api/diagnostico/completo?lang=${e}`,{}),diagnosticoResultado:()=>H(`/api/diagnostico/completo`),linkDominios:()=>H(`/api"
+  ],
+  "/api/atualizacao/dispensar": [
+    "s`,{ligado:e}),pluginsPastaJogo:e=>U(`/api/plugins/pasta-jogo`,{antiga:e}),aplicarAtualizacao:()=>U(`/api/atualizacao/aplicar`),dispensarVersao:e=>U(`/api/atualizacao/dispensar`,{versao:e}),abrirPastaDiagnostico:()=>U(`/api/diagnostico/abrir-pasta`,{}),diagnosticoCompleto:e=>U(`/api/diagnostico/completo?lang=${e}`,{}),diagnosticoResultado:()=>H(`/api/diagnostico/completo`),linkDominios:()=>H(`/api"
+  ],
+  "/api/atualizacao/progresso": [],
+  "/api/atualizacao/aplicar": [
+    "pluginsAvisarNovos:e=>U(`/api/plugins/avisar-novos`,{ligado:e}),pluginsPastaJogo:e=>U(`/api/plugins/pasta-jogo`,{antiga:e}),aplicarAtualizacao:()=>U(`/api/atualizacao/aplicar`),dispensarVersao:e=>U(`/api/atualizacao/dispensar`,{versao:e}),abrirPastaDiagnostico:()=>U(`/api/diagnostico/abrir-pasta`,{}),diagnosticoCompleto:e=>U(`/api/diagnostico/completo?lang=${e}`,{}),diagnosticoResultado:()=>H(`/ap"
+  ],
+  "/api/plugins": [
+    "ino=${t}`,{method:`POST`,body:e}),openLink:e=>U(`/api/open-link`,{key:e}),atualizacao:(e=!1)=>H(`/api/atualizacao${e?`?forcar=1`:``}`),plugins:()=>H(`/api/plugins`),pluginsVerificar:()=>U(`/api/plugins/verificar`),pluginsLigar:(e,t)=>U(`/api/plugins/ligar`,{id:e,ligado:t}),pluginsVoltar:(e,t)=>U(`/api/plugins/voltar`,{pasta:e,id:t}),pluginsOferta:()=>H(`/api/plugins/oferta`),pluginsInstalar:e=>U(`",
+    "ink:e=>U(`/api/open-link`,{key:e}),atualizacao:(e=!1)=>H(`/api/atualizacao${e?`?forcar=1`:``}`),plugins:()=>H(`/api/plugins`),pluginsVerificar:()=>U(`/api/plugins/verificar`),pluginsLigar:(e,t)=>U(`/api/plugins/ligar`,{id:e,ligado:t}),pluginsVoltar:(e,t)=>U(`/api/plugins/voltar`,{pasta:e,id:t}),pluginsOferta:()=>H(`/api/plugins/oferta`),pluginsInstalar:e=>U(`/api/plugins/instalar`,{id:e}),pluginsD",
+    "e=!1)=>H(`/api/atualizacao${e?`?forcar=1`:``}`),plugins:()=>H(`/api/plugins`),pluginsVerificar:()=>U(`/api/plugins/verificar`),pluginsLigar:(e,t)=>U(`/api/plugins/ligar`,{id:e,ligado:t}),pluginsVoltar:(e,t)=>U(`/api/plugins/voltar`,{pasta:e,id:t}),pluginsOferta:()=>H(`/api/plugins/oferta`),pluginsInstalar:e=>U(`/api/plugins/instalar`,{id:e}),pluginsDispensar:e=>U(`/api/plugins/dispensar`,{id:e}),p"
+  ],
+  "/api/plugins/verificar": [
+    "ink:e=>U(`/api/open-link`,{key:e}),atualizacao:(e=!1)=>H(`/api/atualizacao${e?`?forcar=1`:``}`),plugins:()=>H(`/api/plugins`),pluginsVerificar:()=>U(`/api/plugins/verificar`),pluginsLigar:(e,t)=>U(`/api/plugins/ligar`,{id:e,ligado:t}),pluginsVoltar:(e,t)=>U(`/api/plugins/voltar`,{pasta:e,id:t}),pluginsOferta:()=>H(`/api/plugins/oferta`),pluginsInstalar:e=>U(`/api/plugins/instalar`,{id:e}),pluginsD"
+  ],
+  "/api/plugins/ligar": [
+    "e=!1)=>H(`/api/atualizacao${e?`?forcar=1`:``}`),plugins:()=>H(`/api/plugins`),pluginsVerificar:()=>U(`/api/plugins/verificar`),pluginsLigar:(e,t)=>U(`/api/plugins/ligar`,{id:e,ligado:t}),pluginsVoltar:(e,t)=>U(`/api/plugins/voltar`,{pasta:e,id:t}),pluginsOferta:()=>H(`/api/plugins/oferta`),pluginsInstalar:e=>U(`/api/plugins/instalar`,{id:e}),pluginsDispensar:e=>U(`/api/plugins/dispensar`,{id:e}),p"
+  ],
+  "/api/plugins/voltar": [
+    "(`/api/plugins`),pluginsVerificar:()=>U(`/api/plugins/verificar`),pluginsLigar:(e,t)=>U(`/api/plugins/ligar`,{id:e,ligado:t}),pluginsVoltar:(e,t)=>U(`/api/plugins/voltar`,{pasta:e,id:t}),pluginsOferta:()=>H(`/api/plugins/oferta`),pluginsInstalar:e=>U(`/api/plugins/instalar`,{id:e}),pluginsDispensar:e=>U(`/api/plugins/dispensar`,{id:e}),pluginsOfertaVista:e=>U(`/api/plugins/oferta-vista`,{ids:e}),p"
+  ],
+  "/api/plugins/oferta": [
+    "ficar`),pluginsLigar:(e,t)=>U(`/api/plugins/ligar`,{id:e,ligado:t}),pluginsVoltar:(e,t)=>U(`/api/plugins/voltar`,{pasta:e,id:t}),pluginsOferta:()=>H(`/api/plugins/oferta`),pluginsInstalar:e=>U(`/api/plugins/instalar`,{id:e}),pluginsDispensar:e=>U(`/api/plugins/dispensar`,{id:e}),pluginsOfertaVista:e=>U(`/api/plugins/oferta-vista`,{ids:e}),pluginsAvisarNovos:e=>U(`/api/plugins/avisar-novos`,{ligado",
+    "plugins/oferta`),pluginsInstalar:e=>U(`/api/plugins/instalar`,{id:e}),pluginsDispensar:e=>U(`/api/plugins/dispensar`,{id:e}),pluginsOfertaVista:e=>U(`/api/plugins/oferta-vista`,{ids:e}),pluginsAvisarNovos:e=>U(`/api/plugins/avisar-novos`,{ligado:e}),pluginsPastaJogo:e=>U(`/api/plugins/pasta-jogo`,{antiga:e}),aplicarAtualizacao:()=>U(`/api/atualizacao/aplicar`),dispensarVersao:e=>U(`/api/atualizaca"
+  ],
+  "/api/plugins/avisar-novos": [
+    ",{id:e}),pluginsDispensar:e=>U(`/api/plugins/dispensar`,{id:e}),pluginsOfertaVista:e=>U(`/api/plugins/oferta-vista`,{ids:e}),pluginsAvisarNovos:e=>U(`/api/plugins/avisar-novos`,{ligado:e}),pluginsPastaJogo:e=>U(`/api/plugins/pasta-jogo`,{antiga:e}),aplicarAtualizacao:()=>U(`/api/atualizacao/aplicar`),dispensarVersao:e=>U(`/api/atualizacao/dispensar`,{versao:e}),abrirPastaDiagnostico:()=>U(`/api/di"
+  ],
+  "/api/plugins/instalar": [
+    "ligar`,{id:e,ligado:t}),pluginsVoltar:(e,t)=>U(`/api/plugins/voltar`,{pasta:e,id:t}),pluginsOferta:()=>H(`/api/plugins/oferta`),pluginsInstalar:e=>U(`/api/plugins/instalar`,{id:e}),pluginsDispensar:e=>U(`/api/plugins/dispensar`,{id:e}),pluginsOfertaVista:e=>U(`/api/plugins/oferta-vista`,{ids:e}),pluginsAvisarNovos:e=>U(`/api/plugins/avisar-novos`,{ligado:e}),pluginsPastaJogo:e=>U(`/api/plugins/pas"
+  ],
+  "/api/plugins/pasta-jogo": [
+    "),pluginsOfertaVista:e=>U(`/api/plugins/oferta-vista`,{ids:e}),pluginsAvisarNovos:e=>U(`/api/plugins/avisar-novos`,{ligado:e}),pluginsPastaJogo:e=>U(`/api/plugins/pasta-jogo`,{antiga:e}),aplicarAtualizacao:()=>U(`/api/atualizacao/aplicar`),dispensarVersao:e=>U(`/api/atualizacao/dispensar`,{versao:e}),abrirPastaDiagnostico:()=>U(`/api/diagnostico/abrir-pasta`,{}),diagnosticoCompleto:e=>U(`/api/diag"
+  ],
+  "/api/plugins/dispensar": [
+    "lugins/voltar`,{pasta:e,id:t}),pluginsOferta:()=>H(`/api/plugins/oferta`),pluginsInstalar:e=>U(`/api/plugins/instalar`,{id:e}),pluginsDispensar:e=>U(`/api/plugins/dispensar`,{id:e}),pluginsOfertaVista:e=>U(`/api/plugins/oferta-vista`,{ids:e}),pluginsAvisarNovos:e=>U(`/api/plugins/avisar-novos`,{ligado:e}),pluginsPastaJogo:e=>U(`/api/plugins/pasta-jogo`,{antiga:e}),aplicarAtualizacao:()=>U(`/api/at"
+  ],
+  "/api/plugins/oferta-vista": [
+    "plugins/oferta`),pluginsInstalar:e=>U(`/api/plugins/instalar`,{id:e}),pluginsDispensar:e=>U(`/api/plugins/dispensar`,{id:e}),pluginsOfertaVista:e=>U(`/api/plugins/oferta-vista`,{ids:e}),pluginsAvisarNovos:e=>U(`/api/plugins/avisar-novos`,{ligado:e}),pluginsPastaJogo:e=>U(`/api/plugins/pasta-jogo`,{antiga:e}),aplicarAtualizacao:()=>U(`/api/atualizacao/aplicar`),dispensarVersao:e=>U(`/api/atualizaca"
+  ],
+  "/api/plugins/foto": [
+    "(`div`,{className:`flex flex-col gap-4 rounded-[0.875rem] border border-brand/45 bg-brand/[0.06] p-4 sm:flex-row`,children:[!c&&(0,z.jsx)(`img`,{src:`/api/plugins/foto?id=${encodeURIComponent(e.id)}`,alt:``,onError:()=>l(!0),className:`aspect-video w-full flex-none rounded-lg border border-border object-cover sm:w-52`}),(0,z.jsxs)(`div`,{className:`min-w-0 flex-1`,children:[(0,z.jsxs)(`div`,{class"
+  ],
+  "/atualizando": [],
+  "/api/links/dominios": [
+    "a`,{}),diagnosticoCompleto:e=>U(`/api/diagnostico/completo?lang=${e}`,{}),diagnosticoResultado:()=>H(`/api/diagnostico/completo`),linkDominios:()=>H(`/api/links/dominios`),abrirUrl:e=>U(`/api/open-link`,{url:e}),currencies:()=>H(`/api/currencies`),searchFields:(e,t)=>H(`/api/search/fields?group=${e}${t?`&snapshot=${t}`:``}`),clubsTree:e=>H(`/api/clubs${e?`?snapshot=${e}`:``}`),youthTree:e=>H(`/api"
+  ],
+  "/api/open-link": [
+    "viewEnviarBytes:({arquivo:e,destino:t})=>po(`/api/views-fm?arquivo=${encodeURIComponent(e.name)}&destino=${t}`,{method:`POST`,body:e}),openLink:e=>U(`/api/open-link`,{key:e}),atualizacao:(e=!1)=>H(`/api/atualizacao${e?`?forcar=1`:``}`),plugins:()=>H(`/api/plugins`),pluginsVerificar:()=>U(`/api/plugins/verificar`),pluginsLigar:(e,t)=>U(`/api/plugins/ligar`,{id:e,ligado:t}),pluginsVoltar:(e,t)=>U(`/",
+    "/diagnostico/completo?lang=${e}`,{}),diagnosticoResultado:()=>H(`/api/diagnostico/completo`),linkDominios:()=>H(`/api/links/dominios`),abrirUrl:e=>U(`/api/open-link`,{url:e}),currencies:()=>H(`/api/currencies`),searchFields:(e,t)=>H(`/api/search/fields?group=${e}${t?`&snapshot=${t}`:``}`),clubsTree:e=>H(`/api/clubs${e?`?snapshot=${e}`:``}`),youthTree:e=>H(`/api/youth-teams${e?`?snapshot=${e}`:``}`"
+  ],
+  "/api/armazenamento": [
+    "Legal:e=>U(`/api/legal/aceite`,{termos:!0,privacidade:!0,idioma:e}),sair:()=>U(`/api/sair`,{}),carreiras:()=>H(`/api/carreiras`),armazenamento:()=>H(`/api/armazenamento`),ativarCarreira:e=>U(`/api/carreiras/ativa`,{id:e}),salvarCarreiraPrefs:(e,t)=>po(`/api/carreiras/${encodeURIComponent(e)}`,{method:`PUT`,headers:{\"Content-Type\":`application/json`},body:JSON.stringify(t)}),moverTemporada:(e,t)=>U"
+  ],
+  "/api/carreiras": [
+    "t.team)),t.sex&&n.set(`sex`,t.sex),H(`/api/snapshots/${e}/players?${n}`)},player:(e,t)=>H(`/api/snapshots/${e}/players/${t}`),composicaoAlltime:e=>H(`/api/carreiras/${encodeURIComponent(e)}/alltime`),playerAlltime:(e,t)=>H(`/api/players/${e}/alltime?carreira=${encodeURIComponent(t)}`),playerPercentisAlltime:(e,t,n)=>H(`/api/players/${e}/alltime/percentis?carreira=${encodeURIComponent(t)}&coorte=${",
+    "/conexao/fechar`),fecharFaixaDaCaptura:()=>U(`/api/jogo/captura/fechar`),salvarAutoSnapshot:()=>U(`/api/jogo/auto-snapshot/salvar`),outrasLigas:e=>H(`/api/carreiras/${encodeURIComponent(e)}/outras-ligas`),setDataAutoSnapshot:(e,t)=>U(`/api/carreiras/${encodeURIComponent(e)}/auto-snapshot`,{data:t}),setFimDeTemporada:e=>U(`/api/settings/fim-de-temporada`,{ligado:e}),setAutoSnapshot:e=>U(`/api/setti",
+    "apshot:()=>U(`/api/jogo/auto-snapshot/salvar`),outrasLigas:e=>H(`/api/carreiras/${encodeURIComponent(e)}/outras-ligas`),setDataAutoSnapshot:(e,t)=>U(`/api/carreiras/${encodeURIComponent(e)}/auto-snapshot`,{data:t}),setFimDeTemporada:e=>U(`/api/settings/fim-de-temporada`,{ligado:e}),setAutoSnapshot:e=>U(`/api/settings/auto-snapshot`,e),nomeAutoSnapshot:e=>H(`/api/settings/auto-snapshot/nome?modelo="
+  ],
+  "/api/carreiras/ativa": [
+    "privacidade:!0,idioma:e}),sair:()=>U(`/api/sair`,{}),carreiras:()=>H(`/api/carreiras`),armazenamento:()=>H(`/api/armazenamento`),ativarCarreira:e=>U(`/api/carreiras/ativa`,{id:e}),salvarCarreiraPrefs:(e,t)=>po(`/api/carreiras/${encodeURIComponent(e)}`,{method:`PUT`,headers:{\"Content-Type\":`application/json`},body:JSON.stringify(t)}),moverTemporada:(e,t)=>U(`/api/carreiras/${encodeURIComponent(e)}/"
+  ],
+  "/api/favoritos/listas": [
+    "t.set(`uids`,e.uids.join(`,`)),e.extra?.length&&t.set(`extra`,e.extra.join(`,`)),e.exclude?.length&&t.set(`exclude`,e.exclude.join(`,`)),t}var go=e=>`/api/favoritos/listas/${encodeURIComponent(e)}`,W={favoritosListas:()=>H(`/api/favoritos/listas`),favoritosCriar:(e,t,n)=>U(`/api/favoritos/listas`,{nome:e,cor:t,uids:n}),favoritosEditar:(e,t)=>po(go(e),{method:`PATCH`,headers:{\"Content-Type\":`applic",
+    "(`,`)),e.exclude?.length&&t.set(`exclude`,e.exclude.join(`,`)),t}var go=e=>`/api/favoritos/listas/${encodeURIComponent(e)}`,W={favoritosListas:()=>H(`/api/favoritos/listas`),favoritosCriar:(e,t,n)=>U(`/api/favoritos/listas`,{nome:e,cor:t,uids:n}),favoritosEditar:(e,t)=>po(go(e),{method:`PATCH`,headers:{\"Content-Type\":`application/json`},body:JSON.stringify(t)}),favoritosApagar:e=>mo(go(e)),favorit",
+    ".join(`,`)),t}var go=e=>`/api/favoritos/listas/${encodeURIComponent(e)}`,W={favoritosListas:()=>H(`/api/favoritos/listas`),favoritosCriar:(e,t,n)=>U(`/api/favoritos/listas`,{nome:e,cor:t,uids:n}),favoritosEditar:(e,t)=>po(go(e),{method:`PATCH`,headers:{\"Content-Type\":`application/json`},body:JSON.stringify(t)}),favoritosApagar:e=>mo(go(e)),favoritosMarcar:(e,t,n)=>U(`${go(e)}/jogadores`,{uids:t,ma"
+  ],
+  "/api/favoritos/tirar-de-todas": [
+    "voritosMarcar:(e,t,n)=>U(`${go(e)}/jogadores`,{uids:t,marcar:n}),favoritosDuplicar:(e,t)=>U(`${go(e)}/duplicar`,{nome:t}),favoritosTirarDeTodas:e=>U(`/api/favoritos/tirar-de-todas`,{uids:e}),favoritosMigrarLocal:(e,t)=>U(`/api/favoritos/migrar-local`,{uids:e,nome:t}),favoritosAvisoVisto:()=>U(`/api/favoritos/aviso-visto`),listasPreferenciais:()=>H(`/api/listas-preferenciais`),listasPreferenciaisPa"
+  ],
+  "/api/favoritos/migrar-local": [
+    "osDuplicar:(e,t)=>U(`${go(e)}/duplicar`,{nome:t}),favoritosTirarDeTodas:e=>U(`/api/favoritos/tirar-de-todas`,{uids:e}),favoritosMigrarLocal:(e,t)=>U(`/api/favoritos/migrar-local`,{uids:e,nome:t}),favoritosAvisoVisto:()=>U(`/api/favoritos/aviso-visto`),listasPreferenciais:()=>H(`/api/listas-preferenciais`),listasPreferenciaisPasta:()=>H(`/api/listas-preferenciais/pasta`),listaImportarDaPasta:({arqu"
+  ],
+  "/api/favoritos/aviso-visto": [
+    "=>U(`/api/favoritos/tirar-de-todas`,{uids:e}),favoritosMigrarLocal:(e,t)=>U(`/api/favoritos/migrar-local`,{uids:e,nome:t}),favoritosAvisoVisto:()=>U(`/api/favoritos/aviso-visto`),listasPreferenciais:()=>H(`/api/listas-preferenciais`),listasPreferenciaisPasta:()=>H(`/api/listas-preferenciais/pasta`),listaImportarDaPasta:({arquivo:e,jogo:t})=>U(`/api/listas-preferenciais/da-pasta`,{arquivo:e,jogo:t}"
+  ],
+  "/api/alertas": [
+    "lication/json`},body:JSON.stringify(t)}),moverTemporada:(e,t)=>U(`/api/carreiras/${encodeURIComponent(e)}/temporadas/${t}`),alertas:(e=!1,t=`pt`)=>H(`/api/alertas?lang=${t}${e?`&recarregar=1`:``}`),marcarAlertasLidos:(e=`pt`)=>U(`/api/alertas/lidos?lang=${e}`),diagnostico:()=>H(`/api/diagnostico`),abrirPastaDados:()=>U(`/api/abrir-pasta-dados`),idiomas:()=>H(`/api/idiomas`),abrirPastaIdiomas:()=>U",
+    "/${encodeURIComponent(e)}/temporadas/${t}`),alertas:(e=!1,t=`pt`)=>H(`/api/alertas?lang=${t}${e?`&recarregar=1`:``}`),marcarAlertasLidos:(e=`pt`)=>U(`/api/alertas/lidos?lang=${e}`),diagnostico:()=>H(`/api/diagnostico`),abrirPastaDados:()=>U(`/api/abrir-pasta-dados`),idiomas:()=>H(`/api/idiomas`),abrirPastaIdiomas:()=>U(`/api/idiomas/abrir-pasta`),exportarIdioma:(e,t,n)=>U(`/api/idiomas/exportar`,{"
+  ],
+  "/api/alertas/lidos": [
+    "/${encodeURIComponent(e)}/temporadas/${t}`),alertas:(e=!1,t=`pt`)=>H(`/api/alertas?lang=${t}${e?`&recarregar=1`:``}`),marcarAlertasLidos:(e=`pt`)=>U(`/api/alertas/lidos?lang=${e}`),diagnostico:()=>H(`/api/diagnostico`),abrirPastaDados:()=>U(`/api/abrir-pasta-dados`),idiomas:()=>H(`/api/idiomas`),abrirPastaIdiomas:()=>U(`/api/idiomas/abrir-pasta`),exportarIdioma:(e,t,n)=>U(`/api/idiomas/exportar`,{"
+  ],
+  "/api/acesso/codigo": [
+    "`?snapshot=${e}`:``}`),nomesCurtos:e=>H(`/api/nomes-curtos?snapshot=${e}`),acesso:(e=!1)=>H(`/api/acesso${e?`?revalidar=1`:``}`),resgatarCodigo:e=>U(`/api/acesso/codigo`,{codigo:e}),sairAcesso:()=>U(`/api/acesso/sair`),entrarPatreon:e=>U(`/api/acesso/patreon`,{lang:e}),patreonStatus:()=>H(`/api/acesso/patreon/status`),settings:()=>H(`/api/settings`),setGraphicsDir:e=>U(`/api/settings/graphics`,{di"
+  ],
+  "/api/acesso/sair": [
+    "s-curtos?snapshot=${e}`),acesso:(e=!1)=>H(`/api/acesso${e?`?revalidar=1`:``}`),resgatarCodigo:e=>U(`/api/acesso/codigo`,{codigo:e}),sairAcesso:()=>U(`/api/acesso/sair`),entrarPatreon:e=>U(`/api/acesso/patreon`,{lang:e}),patreonStatus:()=>H(`/api/acesso/patreon/status`),settings:()=>H(`/api/settings`),setGraphicsDir:e=>U(`/api/settings/graphics`,{dir:e}),setDbDir:(e,t)=>U(`/api/settings/db_dir`,{di"
+  ],
+  "/api/acesso/patreon": [
+    ">H(`/api/acesso${e?`?revalidar=1`:``}`),resgatarCodigo:e=>U(`/api/acesso/codigo`,{codigo:e}),sairAcesso:()=>U(`/api/acesso/sair`),entrarPatreon:e=>U(`/api/acesso/patreon`,{lang:e}),patreonStatus:()=>H(`/api/acesso/patreon/status`),settings:()=>H(`/api/settings`),setGraphicsDir:e=>U(`/api/settings/graphics`,{dir:e}),setDbDir:(e,t)=>U(`/api/settings/db_dir`,{dir:e,move:t}),setIdioma:e=>U(`/api/setti",
+    "go:e=>U(`/api/acesso/codigo`,{codigo:e}),sairAcesso:()=>U(`/api/acesso/sair`),entrarPatreon:e=>U(`/api/acesso/patreon`,{lang:e}),patreonStatus:()=>H(`/api/acesso/patreon/status`),settings:()=>H(`/api/settings`),setGraphicsDir:e=>U(`/api/settings/graphics`,{dir:e}),setDbDir:(e,t)=>U(`/api/settings/db_dir`,{dir:e,move:t}),setIdioma:e=>U(`/api/settings/idioma`,{idioma:e}),setOverallModo:e=>U(`/api/se"
+  ],
+  "/patreon/callback": [],
+  "/api/acesso/patreon/status": [
+    "go:e=>U(`/api/acesso/codigo`,{codigo:e}),sairAcesso:()=>U(`/api/acesso/sair`),entrarPatreon:e=>U(`/api/acesso/patreon`,{lang:e}),patreonStatus:()=>H(`/api/acesso/patreon/status`),settings:()=>H(`/api/settings`),setGraphicsDir:e=>U(`/api/settings/graphics`,{dir:e}),setDbDir:(e,t)=>U(`/api/settings/db_dir`,{dir:e,move:t}),setIdioma:e=>U(`/api/settings/idioma`,{idioma:e}),setOverallModo:e=>U(`/api/se"
+  ],
+  "/api/clubs": [
+    "pen-link`,{url:e}),currencies:()=>H(`/api/currencies`),searchFields:(e,t)=>H(`/api/search/fields?group=${e}${t?`&snapshot=${t}`:``}`),clubsTree:e=>H(`/api/clubs${e?`?snapshot=${e}`:``}`),youthTree:e=>H(`/api/youth-teams${e?`?snapshot=${e}`:``}`),nomesCurtos:e=>H(`/api/nomes-curtos?snapshot=${e}`),acesso:(e=!1)=>H(`/api/acesso${e?`?revalidar=1`:``}`),resgatarCodigo:e=>U(`/api/acesso/codigo`,{codigo"
+  ],
+  "/api/nomes-curtos": [
+    "napshot=${t}`:``}`),clubsTree:e=>H(`/api/clubs${e?`?snapshot=${e}`:``}`),youthTree:e=>H(`/api/youth-teams${e?`?snapshot=${e}`:``}`),nomesCurtos:e=>H(`/api/nomes-curtos?snapshot=${e}`),acesso:(e=!1)=>H(`/api/acesso${e?`?revalidar=1`:``}`),resgatarCodigo:e=>U(`/api/acesso/codigo`,{codigo:e}),sairAcesso:()=>U(`/api/acesso/sair`),entrarPatreon:e=>U(`/api/acesso/patreon`,{lang:e}),patreonStatus:()=>H(`"
+  ],
+  "/api/youth-teams": [
+    "),searchFields:(e,t)=>H(`/api/search/fields?group=${e}${t?`&snapshot=${t}`:``}`),clubsTree:e=>H(`/api/clubs${e?`?snapshot=${e}`:``}`),youthTree:e=>H(`/api/youth-teams${e?`?snapshot=${e}`:``}`),nomesCurtos:e=>H(`/api/nomes-curtos?snapshot=${e}`),acesso:(e=!1)=>H(`/api/acesso${e?`?revalidar=1`:``}`),resgatarCodigo:e=>U(`/api/acesso/codigo`,{codigo:e}),sairAcesso:()=>U(`/api/acesso/sair`),entrarPatre"
+  ],
+  "/api/settings/graphics": [
+    "arPatreon:e=>U(`/api/acesso/patreon`,{lang:e}),patreonStatus:()=>H(`/api/acesso/patreon/status`),settings:()=>H(`/api/settings`),setGraphicsDir:e=>U(`/api/settings/graphics`,{dir:e}),setDbDir:(e,t)=>U(`/api/settings/db_dir`,{dir:e,move:t}),setIdioma:e=>U(`/api/settings/idioma`,{idioma:e}),setOverallModo:e=>U(`/api/settings/overall`,{modo:e}),memoria:()=>H(`/api/memoria`),setMemoria:e=>U(`/api/sett"
+  ],
+  "/api/settings/db_dir": [
+    "onStatus:()=>H(`/api/acesso/patreon/status`),settings:()=>H(`/api/settings`),setGraphicsDir:e=>U(`/api/settings/graphics`,{dir:e}),setDbDir:(e,t)=>U(`/api/settings/db_dir`,{dir:e,move:t}),setIdioma:e=>U(`/api/settings/idioma`,{idioma:e}),setOverallModo:e=>U(`/api/settings/overall`,{modo:e}),memoria:()=>H(`/api/memoria`),setMemoria:e=>U(`/api/settings/memoria`,{mb:e}),bandeja:()=>H(`/api/settings/b"
+  ],
+  "/api/portrait/": [
+    "(`/api/onboarding/refazer`),escolherPasta:()=>U(`/api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${e}`,vo=e=>`/api/flag/${e}`,yo=e=>`/api/club_logo/${e}`,bo=e=>`/api/comp_logo/${e}`,xo=(...e)=>e.filter((e,t,n)=>!!e&&e.trim()!==``&&n.indexOf(e)===t).join(` `).trim(),So=e=>e.replace(/([a-z0-9])([A-Z])/g,`$1-$2`).toLowerCase(),Co=e=>e"
+  ],
+  "/api/flag/": [
+    ",escolherPasta:()=>U(`/api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${e}`,vo=e=>`/api/flag/${e}`,yo=e=>`/api/club_logo/${e}`,bo=e=>`/api/comp_logo/${e}`,xo=(...e)=>e.filter((e,t,n)=>!!e&&e.trim()!==``&&n.indexOf(e)===t).join(` `).trim(),So=e=>e.replace(/([a-z0-9])([A-Z])/g,`$1-$2`).toLowerCase(),Co=e=>e.replace(/^([A-Z])|[\\s-_]+("
+  ],
+  "/api/club_logo/": [
+    "api/dialogo/pasta`),dicas:()=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${e}`,vo=e=>`/api/flag/${e}`,yo=e=>`/api/club_logo/${e}`,bo=e=>`/api/comp_logo/${e}`,xo=(...e)=>e.filter((e,t,n)=>!!e&&e.trim()!==``&&n.indexOf(e)===t).join(` `).trim(),So=e=>e.replace(/([a-z0-9])([A-Z])/g,`$1-$2`).toLowerCase(),Co=e=>e.replace(/^([A-Z])|[\\s-_]+(\\w)/g,(e,t,n)=>n?n.toUp"
+  ],
+  "/api/comp_logo/": [
+    "=>H(`/api/dicas`),marcarDicaLida:e=>U(`/api/dicas/lida`,{id:e})},_o=e=>`/api/portrait/${e}`,vo=e=>`/api/flag/${e}`,yo=e=>`/api/club_logo/${e}`,bo=e=>`/api/comp_logo/${e}`,xo=(...e)=>e.filter((e,t,n)=>!!e&&e.trim()!==``&&n.indexOf(e)===t).join(` `).trim(),So=e=>e.replace(/([a-z0-9])([A-Z])/g,`$1-$2`).toLowerCase(),Co=e=>e.replace(/^([A-Z])|[\\s-_]+(\\w)/g,(e,t,n)=>n?n.toUpperCase():t.toLowerCase()),w"
+  ],
+  "/api/connect": [
+    "U(`/api/jogadores-fora-da-captura`,{uids:e,snapshot:t??null}),live:()=>H(`/api/live`),status:()=>H(`/api/status`),job:()=>H(`/api/job`),connect:e=>U(`/api/connect`,e?{game_date:e}:{}),refresh:e=>U(`/api/refresh`,e?{game_date:e}:{}),disconnect:()=>U(`/api/disconnect`),capture:(e,t,n)=>U(`/api/capture`,{name:e,scope:t,game_date:n}),summary:()=>H(`/api/summary`),snapshots:(e=!0)=>H(`/api/snapshots${e"
+  ],
+  "/api/refresh": [
+    "hot:t??null}),live:()=>H(`/api/live`),status:()=>H(`/api/status`),job:()=>H(`/api/job`),connect:e=>U(`/api/connect`,e?{game_date:e}:{}),refresh:e=>U(`/api/refresh`,e?{game_date:e}:{}),disconnect:()=>U(`/api/disconnect`),capture:(e,t,n)=>U(`/api/capture`,{name:e,scope:t,game_date:n}),summary:()=>H(`/api/summary`),snapshots:(e=!0)=>H(`/api/snapshots${e?``:`?include_live=false`}`),deleteSnapshot:e=>m"
+  ],
+  "/api/disconnect": [
+    "/api/status`),job:()=>H(`/api/job`),connect:e=>U(`/api/connect`,e?{game_date:e}:{}),refresh:e=>U(`/api/refresh`,e?{game_date:e}:{}),disconnect:()=>U(`/api/disconnect`),capture:(e,t,n)=>U(`/api/capture`,{name:e,scope:t,game_date:n}),summary:()=>H(`/api/summary`),snapshots:(e=!0)=>H(`/api/snapshots${e?``:`?include_live=false`}`),deleteSnapshot:e=>mo(`/api/snapshots/${e}`),players:(e,t={})=>{let n=ne"
+  ],
+  "/api/capture": [
+    "nnect:e=>U(`/api/connect`,e?{game_date:e}:{}),refresh:e=>U(`/api/refresh`,e?{game_date:e}:{}),disconnect:()=>U(`/api/disconnect`),capture:(e,t,n)=>U(`/api/capture`,{name:e,scope:t,game_date:n}),summary:()=>H(`/api/summary`),snapshots:(e=!0)=>H(`/api/snapshots${e?``:`?include_live=false`}`),deleteSnapshot:e=>mo(`/api/snapshots/${e}`),players:(e,t={})=>{let n=new URLSearchParams;return t.search&&n.s"
+  ],
+  "/api/portal": [
+    "t.filename&&n.set(`filename`,t.filename),`/api/moneyball/export.csv?${n}`},clubProfile:e=>H(`/api/club_profile${e?`?snapshot=${e}`:``}`),portal:e=>H(`/api/portal${e?`?snapshot=${e}`:``}`),portalGarimpos:e=>H(`/api/portal/garimpos${e?`?snapshot=${e}`:``}`),portalMudou:()=>H(`/api/portal/mudou`),apoiadores:()=>H(`/api/apoiadores`),moneyballColumns:(e,t)=>H(`/api/moneyball/columns?group=${e}${t?`&sna",
+    "port.csv?${n}`},clubProfile:e=>H(`/api/club_profile${e?`?snapshot=${e}`:``}`),portal:e=>H(`/api/portal${e?`?snapshot=${e}`:``}`),portalGarimpos:e=>H(`/api/portal/garimpos${e?`?snapshot=${e}`:``}`),portalMudou:()=>H(`/api/portal/mudou`),apoiadores:()=>H(`/api/apoiadores`),moneyballColumns:(e,t)=>H(`/api/moneyball/columns?group=${e}${t?`&snapshot=${t}`:``}`),version:()=>H(`/api/version`),patchNotes:",
+    "${e}`:``}`),portal:e=>H(`/api/portal${e?`?snapshot=${e}`:``}`),portalGarimpos:e=>H(`/api/portal/garimpos${e?`?snapshot=${e}`:``}`),portalMudou:()=>H(`/api/portal/mudou`),apoiadores:()=>H(`/api/apoiadores`),moneyballColumns:(e,t)=>H(`/api/moneyball/columns?group=${e}${t?`&snapshot=${t}`:``}`),version:()=>H(`/api/version`),patchNotes:e=>H(`/api/patch-notes?lang=${e===`en`?`en`:`pt`}`),legal:(e,t)=>H"
+  ],
+  "/api/jogo/auto-snapshot/salvar": [
+    "/conexao`),fecharFaixaDaConexao:()=>U(`/api/bandeja/conexao/fechar`),fecharFaixaDaCaptura:()=>U(`/api/jogo/captura/fechar`),salvarAutoSnapshot:()=>U(`/api/jogo/auto-snapshot/salvar`),outrasLigas:e=>H(`/api/carreiras/${encodeURIComponent(e)}/outras-ligas`),setDataAutoSnapshot:(e,t)=>U(`/api/carreiras/${encodeURIComponent(e)}/auto-snapshot`,{data:t}),setFimDeTemporada:e=>U(`/api/settings/fim-de-temp"
+  ],
+  "/api/settings/fim-de-temporada": [
+    "RIComponent(e)}/outras-ligas`),setDataAutoSnapshot:(e,t)=>U(`/api/carreiras/${encodeURIComponent(e)}/auto-snapshot`,{data:t}),setFimDeTemporada:e=>U(`/api/settings/fim-de-temporada`,{ligado:e}),setAutoSnapshot:e=>U(`/api/settings/auto-snapshot`,e),nomeAutoSnapshot:e=>H(`/api/settings/auto-snapshot/nome?modelo=${encodeURIComponent(e)}`),setCapturaSom:e=>U(`/api/settings/captura-som`,e),testarCaptur"
+  ],
+  "/api/settings/auto-snapshot": [
+    "carreiras/${encodeURIComponent(e)}/auto-snapshot`,{data:t}),setFimDeTemporada:e=>U(`/api/settings/fim-de-temporada`,{ligado:e}),setAutoSnapshot:e=>U(`/api/settings/auto-snapshot`,e),nomeAutoSnapshot:e=>H(`/api/settings/auto-snapshot/nome?modelo=${encodeURIComponent(e)}`),setCapturaSom:e=>U(`/api/settings/captura-som`,e),testarCapturaSom:()=>U(`/api/settings/captura-som/testar`),simularCaptura:(e,t",
+    ":t}),setFimDeTemporada:e=>U(`/api/settings/fim-de-temporada`,{ligado:e}),setAutoSnapshot:e=>U(`/api/settings/auto-snapshot`,e),nomeAutoSnapshot:e=>H(`/api/settings/auto-snapshot/nome?modelo=${encodeURIComponent(e)}`),setCapturaSom:e=>U(`/api/settings/captura-som`,e),testarCapturaSom:()=>U(`/api/settings/captura-som/testar`),simularCaptura:(e,t=`auto`)=>U(`/api/captura/simular?estado=${e}&tipo=${t}"
+  ],
+  "/api/settings/auto-snapshot/nome": [
+    ":t}),setFimDeTemporada:e=>U(`/api/settings/fim-de-temporada`,{ligado:e}),setAutoSnapshot:e=>U(`/api/settings/auto-snapshot`,e),nomeAutoSnapshot:e=>H(`/api/settings/auto-snapshot/nome?modelo=${encodeURIComponent(e)}`),setCapturaSom:e=>U(`/api/settings/captura-som`,e),testarCapturaSom:()=>U(`/api/settings/captura-som/testar`),simularCaptura:(e,t=`auto`)=>U(`/api/captura/simular?estado=${e}&tipo=${t}"
+  ],
+  "/api/settings/captura-som": [
+    "t:e=>U(`/api/settings/auto-snapshot`,e),nomeAutoSnapshot:e=>H(`/api/settings/auto-snapshot/nome?modelo=${encodeURIComponent(e)}`),setCapturaSom:e=>U(`/api/settings/captura-som`,e),testarCapturaSom:()=>U(`/api/settings/captura-som/testar`),simularCaptura:(e,t=`auto`)=>U(`/api/captura/simular?estado=${e}&tipo=${t}`),playerPercentis:(e,t,n,r=`top20`,i)=>H(`/api/snapshots/${e}/players/${t}/percentis?c",
+    "ot:e=>H(`/api/settings/auto-snapshot/nome?modelo=${encodeURIComponent(e)}`),setCapturaSom:e=>U(`/api/settings/captura-som`,e),testarCapturaSom:()=>U(`/api/settings/captura-som/testar`),simularCaptura:(e,t=`auto`)=>U(`/api/captura/simular?estado=${e}&tipo=${t}`),playerPercentis:(e,t,n,r=`top20`,i)=>H(`/api/snapshots/${e}/players/${t}/percentis?coorte=${n}&regua=${r}`+(i==null?``:`&min_minutes=${i}`"
+  ],
+  "/api/captura/simular": [
+    "nt(e)}`),setCapturaSom:e=>U(`/api/settings/captura-som`,e),testarCapturaSom:()=>U(`/api/settings/captura-som/testar`),simularCaptura:(e,t=`auto`)=>U(`/api/captura/simular?estado=${e}&tipo=${t}`),playerPercentis:(e,t,n,r=`top20`,i)=>H(`/api/snapshots/${e}/players/${t}/percentis?coorte=${n}&regua=${r}`+(i==null?``:`&min_minutes=${i}`)),playerAnalise:(e,t,n,r=`top20`,i)=>H(`/api/snapshots/${e}/player"
+  ],
+  "/api/settings/captura-som/testar": [
+    "ot:e=>H(`/api/settings/auto-snapshot/nome?modelo=${encodeURIComponent(e)}`),setCapturaSom:e=>U(`/api/settings/captura-som`,e),testarCapturaSom:()=>U(`/api/settings/captura-som/testar`),simularCaptura:(e,t=`auto`)=>U(`/api/captura/simular?estado=${e}&tipo=${t}`),playerPercentis:(e,t,n,r=`top20`,i)=>H(`/api/snapshots/${e}/players/${t}/percentis?coorte=${n}&regua=${r}`+(i==null?``:`&min_minutes=${i}`"
+  ],
+  "/api/apoiadores": [
+    "e?`?snapshot=${e}`:``}`),portalGarimpos:e=>H(`/api/portal/garimpos${e?`?snapshot=${e}`:``}`),portalMudou:()=>H(`/api/portal/mudou`),apoiadores:()=>H(`/api/apoiadores`),moneyballColumns:(e,t)=>H(`/api/moneyball/columns?group=${e}${t?`&snapshot=${t}`:``}`),version:()=>H(`/api/version`),patchNotes:e=>H(`/api/patch-notes?lang=${e===`en`?`en`:`pt`}`),legal:(e,t)=>H(`/api/legal?doc=${e}&lang=${t===`en`?"
+  ],
+  "/api/portal/garimpos": [
+    "port.csv?${n}`},clubProfile:e=>H(`/api/club_profile${e?`?snapshot=${e}`:``}`),portal:e=>H(`/api/portal${e?`?snapshot=${e}`:``}`),portalGarimpos:e=>H(`/api/portal/garimpos${e?`?snapshot=${e}`:``}`),portalMudou:()=>H(`/api/portal/mudou`),apoiadores:()=>H(`/api/apoiadores`),moneyballColumns:(e,t)=>H(`/api/moneyball/columns?group=${e}${t?`&snapshot=${t}`:``}`),version:()=>H(`/api/version`),patchNotes:"
+  ],
+  "/api/portal/mudou": [
+    "${e}`:``}`),portal:e=>H(`/api/portal${e?`?snapshot=${e}`:``}`),portalGarimpos:e=>H(`/api/portal/garimpos${e?`?snapshot=${e}`:``}`),portalMudou:()=>H(`/api/portal/mudou`),apoiadores:()=>H(`/api/apoiadores`),moneyballColumns:(e,t)=>H(`/api/moneyball/columns?group=${e}${t?`&snapshot=${t}`:``}`),version:()=>H(`/api/version`),patchNotes:e=>H(`/api/patch-notes?lang=${e===`en`?`en`:`pt`}`),legal:(e,t)=>H"
+  ],
+  "/api/myteams": [
+    "arComo:(e,t,n)=>H(`/api/snapshots/${e}/players/${t}/buscar-como?${new URLSearchParams(Object.entries(n).map(([e,t])=>[e,String(t)]))}`),myteams:e=>H(`/api/myteams${e?`?snapshot=${e}`:``}`),moneyball:(e,t)=>{let n=new URLSearchParams({team:String(t)});return e&&n.set(`snapshot`,String(e)),H(`/api/moneyball?${n}`)},moneyballPercentiles:(e,t,n,r)=>{let i=new URLSearchParams({team:String(t),pool:n});r"
+  ],
+  "/api/moneyball": [
+    "s:e=>H(`/api/myteams${e?`?snapshot=${e}`:``}`),moneyball:(e,t)=>{let n=new URLSearchParams({team:String(t)});return e&&n.set(`snapshot`,String(e)),H(`/api/moneyball?${n}`)},moneyballPercentiles:(e,t,n,r)=>{let i=new URLSearchParams({team:String(t),pool:n});return e&&i.set(`snapshot`,String(e)),r&&i.set(`min_minutes`,String(r)),H(`/api/moneyball/percentiles?${i}`)},moneyballBrowse:e=>{let t=ho(e);r",
+    "Percentiles:(e,t,n,r)=>{let i=new URLSearchParams({team:String(t),pool:n});return e&&i.set(`snapshot`,String(e)),r&&i.set(`min_minutes`,String(r)),H(`/api/moneyball/percentiles?${i}`)},moneyballBrowse:e=>{let t=ho(e);return t.set(`offset`,String(e.offset??0)),t.set(`limit`,String(e.limit??100)),e.pct&&t.set(`pct`,`1`),e.pool&&t.set(`pool`,e.pool),e.fora&&t.set(`fora`,`1`),H(`/api/moneyball/browse?",
+    "t(`offset`,String(e.offset??0)),t.set(`limit`,String(e.limit??100)),e.pct&&t.set(`pct`,`1`),e.pool&&t.set(`pool`,e.pool),e.fora&&t.set(`fora`,`1`),H(`/api/moneyball/browse?${t}`)},moneyballExportUrl:(e,t)=>{let n=ho(e);return n.set(`cols`,t.cols.join(`,`)),n.set(`profile`,t.profile),n.set(`lang`,t.lang),t.currency&&n.set(`currency`,String(t.currency)),t.wagePeriod&&t.wagePeriod!==`week`&&n.set(`wa"
+  ],
+  "/api/moneyball/percentiles": [
+    "Percentiles:(e,t,n,r)=>{let i=new URLSearchParams({team:String(t),pool:n});return e&&i.set(`snapshot`,String(e)),r&&i.set(`min_minutes`,String(r)),H(`/api/moneyball/percentiles?${i}`)},moneyballBrowse:e=>{let t=ho(e);return t.set(`offset`,String(e.offset??0)),t.set(`limit`,String(e.limit??100)),e.pct&&t.set(`pct`,`1`),e.pool&&t.set(`pool`,e.pool),e.fora&&t.set(`fora`,`1`),H(`/api/moneyball/browse?"
+  ],
+  "/api/search/fields": [
+    "mpleto`),linkDominios:()=>H(`/api/links/dominios`),abrirUrl:e=>U(`/api/open-link`,{url:e}),currencies:()=>H(`/api/currencies`),searchFields:(e,t)=>H(`/api/search/fields?group=${e}${t?`&snapshot=${t}`:``}`),clubsTree:e=>H(`/api/clubs${e?`?snapshot=${e}`:``}`),youthTree:e=>H(`/api/youth-teams${e?`?snapshot=${e}`:``}`),nomesCurtos:e=>H(`/api/nomes-curtos?snapshot=${e}`),acesso:(e=!1)=>H(`/api/acesso$"
+  ],
+  "/api/moneyball/columns": [
+    "`/api/portal/garimpos${e?`?snapshot=${e}`:``}`),portalMudou:()=>H(`/api/portal/mudou`),apoiadores:()=>H(`/api/apoiadores`),moneyballColumns:(e,t)=>H(`/api/moneyball/columns?group=${e}${t?`&snapshot=${t}`:``}`),version:()=>H(`/api/version`),patchNotes:e=>H(`/api/patch-notes?lang=${e===`en`?`en`:`pt`}`),legal:(e,t)=>H(`/api/legal?doc=${e}&lang=${t===`en`?`en`:`pt`}`),aceitarLegal:e=>U(`/api/legal/ac"
+  ],
+  "/api/buscar-como/config": [
+    "te=${n}&regua=${r}`+(i==null?``:`&min_minutes=${i}`)),buscarComoReceita:(e,t)=>U(`/api/snapshots/${e}/buscar-como-receita`,t),buscarComoConfig:()=>H(`/api/buscar-como/config`),salvarBuscarComoConfig:e=>U(`/api/buscar-como/config`,e),buscarComo:(e,t,n)=>H(`/api/snapshots/${e}/players/${t}/buscar-como?${new URLSearchParams(Object.entries(n).map(([e,t])=>[e,String(t)]))}`),myteams:e=>H(`/api/myteams$",
+    "uscarComoReceita:(e,t)=>U(`/api/snapshots/${e}/buscar-como-receita`,t),buscarComoConfig:()=>H(`/api/buscar-como/config`),salvarBuscarComoConfig:e=>U(`/api/buscar-como/config`,e),buscarComo:(e,t,n)=>H(`/api/snapshots/${e}/players/${t}/buscar-como?${new URLSearchParams(Object.entries(n).map(([e,t])=>[e,String(t)]))}`),myteams:e=>H(`/api/myteams${e?`?snapshot=${e}`:``}`),moneyball:(e,t)=>{let n=new U"
+  ],
+  "/api/moneyball/browse": [
+    "t(`offset`,String(e.offset??0)),t.set(`limit`,String(e.limit??100)),e.pct&&t.set(`pct`,`1`),e.pool&&t.set(`pool`,e.pool),e.fora&&t.set(`fora`,`1`),H(`/api/moneyball/browse?${t}`)},moneyballExportUrl:(e,t)=>{let n=ho(e);return n.set(`cols`,t.cols.join(`,`)),n.set(`profile`,t.profile),n.set(`lang`,t.lang),t.currency&&n.set(`currency`,String(t.currency)),t.wagePeriod&&t.wagePeriod!==`week`&&n.set(`wa"
+  ],
+  "/api/moneyball/export": [
+    "n.set(`currency`,String(t.currency)),t.wagePeriod&&t.wagePeriod!==`week`&&n.set(`wage_period`,t.wagePeriod),t.filename&&n.set(`filename`,t.filename),`/api/moneyball/export.csv?${n}`},clubProfile:e=>H(`/api/club_profile${e?`?snapshot=${e}`:``}`),portal:e=>H(`/api/portal${e?`?snapshot=${e}`:``}`),portalGarimpos:e=>H(`/api/portal/garimpos${e?`?snapshot=${e}`:``}`),portalMudou:()=>H(`/api/portal/mudou"
+  ],
+  "/api/club_profile": [
+    "t.wagePeriod!==`week`&&n.set(`wage_period`,t.wagePeriod),t.filename&&n.set(`filename`,t.filename),`/api/moneyball/export.csv?${n}`},clubProfile:e=>H(`/api/club_profile${e?`?snapshot=${e}`:``}`),portal:e=>H(`/api/portal${e?`?snapshot=${e}`:``}`),portalGarimpos:e=>H(`/api/portal/garimpos${e?`?snapshot=${e}`:``}`),portalMudou:()=>H(`/api/portal/mudou`),apoiadores:()=>H(`/api/apoiadores`),moneyballCol"
+  ],
+  "/api/snapshots": [
+    "isconnect:()=>U(`/api/disconnect`),capture:(e,t,n)=>U(`/api/capture`,{name:e,scope:t,game_date:n}),summary:()=>H(`/api/summary`),snapshots:(e=!0)=>H(`/api/snapshots${e?``:`?include_live=false`}`),deleteSnapshot:e=>mo(`/api/snapshots/${e}`),players:(e,t={})=>{let n=new URLSearchParams;return t.search&&n.set(`search`,t.search),t.sort&&n.set(`sort`,t.sort),n.set(`limit`,String(t.limit??100)),n.set(`o",
+    ",{name:e,scope:t,game_date:n}),summary:()=>H(`/api/summary`),snapshots:(e=!0)=>H(`/api/snapshots${e?``:`?include_live=false`}`),deleteSnapshot:e=>mo(`/api/snapshots/${e}`),players:(e,t={})=>{let n=new URLSearchParams;return t.search&&n.set(`search`,t.search),t.sort&&n.set(`sort`,t.sort),n.set(`limit`,String(t.limit??100)),n.set(`offset`,String(t.offset??0)),t.club&&n.set(`club`,String(t.club)),t.t",
+    "mit??100)),n.set(`offset`,String(t.offset??0)),t.club&&n.set(`club`,String(t.club)),t.team&&n.set(`team`,String(t.team)),t.sex&&n.set(`sex`,t.sex),H(`/api/snapshots/${e}/players?${n}`)},player:(e,t)=>H(`/api/snapshots/${e}/players/${t}`),composicaoAlltime:e=>H(`/api/carreiras/${encodeURIComponent(e)}/alltime`),playerAlltime:(e,t)=>H(`/api/players/${e}/alltime?carreira=${encodeURIComponent(t)}`),pl"
+  ],
+  "/api/players/": [
+    "player:(e,t)=>H(`/api/snapshots/${e}/players/${t}`),composicaoAlltime:e=>H(`/api/carreiras/${encodeURIComponent(e)}/alltime`),playerAlltime:(e,t)=>H(`/api/players/${e}/alltime?carreira=${encodeURIComponent(t)}`),playerPercentisAlltime:(e,t,n)=>H(`/api/players/${e}/alltime/percentis?carreira=${encodeURIComponent(t)}&coorte=${n}`),temporadasDoJogador:e=>H(`/api/players/${e}/temporadas`),pedidoDoJogo",
+    "deURIComponent(e)}/alltime`),playerAlltime:(e,t)=>H(`/api/players/${e}/alltime?carreira=${encodeURIComponent(t)}`),playerPercentisAlltime:(e,t,n)=>H(`/api/players/${e}/alltime/percentis?carreira=${encodeURIComponent(t)}&coorte=${n}`),temporadasDoJogador:e=>H(`/api/players/${e}/temporadas`),pedidoDoJogo:()=>H(`/api/jogo/pedido`),pedirAoAppDoJogo:(e,t,n)=>U(`/api/jogo/abrir-jogador?uid=${e}&acao=${t",
+    ")}`),playerPercentisAlltime:(e,t,n)=>H(`/api/players/${e}/alltime/percentis?carreira=${encodeURIComponent(t)}&coorte=${n}`),temporadasDoJogador:e=>H(`/api/players/${e}/temporadas`),pedidoDoJogo:()=>H(`/api/jogo/pedido`),pedirAoAppDoJogo:(e,t,n)=>U(`/api/jogo/abrir-jogador?uid=${e}&acao=${t}${n==null?``:`&b=${n}`}`),abrirNoJogo:(e,t)=>U(`/api/jogo/abrir-no-jogo?uid=${e}${t==null?``:`&sid=${t}`}`),f"
+  ],
+  "/api/jogo/abrir-jogador": [
+    "ponent(t)}&coorte=${n}`),temporadasDoJogador:e=>H(`/api/players/${e}/temporadas`),pedidoDoJogo:()=>H(`/api/jogo/pedido`),pedirAoAppDoJogo:(e,t,n)=>U(`/api/jogo/abrir-jogador?uid=${e}&acao=${t}${n==null?``:`&b=${n}`}`),abrirNoJogo:(e,t)=>U(`/api/jogo/abrir-no-jogo?uid=${e}${t==null?``:`&sid=${t}`}`),fecharMenuDoJogo:()=>U(`/api/jogo/fechar-menu`),fecharDadosDoJogo:()=>U(`/api/jogo/dados/fechar`),ca"
+  ],
+  "/api/jogo/pedido": [
+    "s/${e}/alltime/percentis?carreira=${encodeURIComponent(t)}&coorte=${n}`),temporadasDoJogador:e=>H(`/api/players/${e}/temporadas`),pedidoDoJogo:()=>H(`/api/jogo/pedido`),pedirAoAppDoJogo:(e,t,n)=>U(`/api/jogo/abrir-jogador?uid=${e}&acao=${t}${n==null?``:`&b=${n}`}`),abrirNoJogo:(e,t)=>U(`/api/jogo/abrir-no-jogo?uid=${e}${t==null?``:`&sid=${t}`}`),fecharMenuDoJogo:()=>U(`/api/jogo/fechar-menu`),fech"
+  ],
+  "/api/jogo/abrir-no-jogo": [
+    "Jogo:()=>H(`/api/jogo/pedido`),pedirAoAppDoJogo:(e,t,n)=>U(`/api/jogo/abrir-jogador?uid=${e}&acao=${t}${n==null?``:`&b=${n}`}`),abrirNoJogo:(e,t)=>U(`/api/jogo/abrir-no-jogo?uid=${e}${t==null?``:`&sid=${t}`}`),fecharMenuDoJogo:()=>U(`/api/jogo/fechar-menu`),fecharDadosDoJogo:()=>U(`/api/jogo/dados/fechar`),capturaDoJogador:e=>H(`/api/jogo/captura-do-jogador?uid=${e}`),capturaAuto:()=>H(`/api/jogo/"
+  ],
+  "/api/jogo/dados": [
+    "NoJogo:(e,t)=>U(`/api/jogo/abrir-no-jogo?uid=${e}${t==null?``:`&sid=${t}`}`),fecharMenuDoJogo:()=>U(`/api/jogo/fechar-menu`),fecharDadosDoJogo:()=>U(`/api/jogo/dados/fechar`),capturaDoJogador:e=>H(`/api/jogo/captura-do-jogador?uid=${e}`),capturaAuto:()=>H(`/api/jogo/captura`),conexaoPelaBandeja:()=>H(`/api/bandeja/conexao`),fecharFaixaDaConexao:()=>U(`/api/bandeja/conexao/fechar`),fecharFaixaDaCap"
+  ],
+  "/api/jogo/navegador": [],
+  "/api/jogo/captura-do-jogador": [
+    "}${t==null?``:`&sid=${t}`}`),fecharMenuDoJogo:()=>U(`/api/jogo/fechar-menu`),fecharDadosDoJogo:()=>U(`/api/jogo/dados/fechar`),capturaDoJogador:e=>H(`/api/jogo/captura-do-jogador?uid=${e}`),capturaAuto:()=>H(`/api/jogo/captura`),conexaoPelaBandeja:()=>H(`/api/bandeja/conexao`),fecharFaixaDaConexao:()=>U(`/api/bandeja/conexao/fechar`),fecharFaixaDaCaptura:()=>U(`/api/jogo/captura/fechar`),salvarAut"
+  ],
+  "/api/jogo/dados/fechar": [
+    "NoJogo:(e,t)=>U(`/api/jogo/abrir-no-jogo?uid=${e}${t==null?``:`&sid=${t}`}`),fecharMenuDoJogo:()=>U(`/api/jogo/fechar-menu`),fecharDadosDoJogo:()=>U(`/api/jogo/dados/fechar`),capturaDoJogador:e=>H(`/api/jogo/captura-do-jogador?uid=${e}`),capturaAuto:()=>H(`/api/jogo/captura`),conexaoPelaBandeja:()=>H(`/api/bandeja/conexao`),fecharFaixaDaConexao:()=>U(`/api/bandeja/conexao/fechar`),fecharFaixaDaCap"
+  ],
+  "/api/jogo/conectar": [],
+  "/api/jogo/fechar-menu": [
+    "uid=${e}&acao=${t}${n==null?``:`&b=${n}`}`),abrirNoJogo:(e,t)=>U(`/api/jogo/abrir-no-jogo?uid=${e}${t==null?``:`&sid=${t}`}`),fecharMenuDoJogo:()=>U(`/api/jogo/fechar-menu`),fecharDadosDoJogo:()=>U(`/api/jogo/dados/fechar`),capturaDoJogador:e=>H(`/api/jogo/captura-do-jogador?uid=${e}`),capturaAuto:()=>H(`/api/jogo/captura`),conexaoPelaBandeja:()=>H(`/api/bandeja/conexao`),fecharFaixaDaConexao:()=>"
+  ],
+  "/api/jogo/captura": [
+    "}${t==null?``:`&sid=${t}`}`),fecharMenuDoJogo:()=>U(`/api/jogo/fechar-menu`),fecharDadosDoJogo:()=>U(`/api/jogo/dados/fechar`),capturaDoJogador:e=>H(`/api/jogo/captura-do-jogador?uid=${e}`),capturaAuto:()=>H(`/api/jogo/captura`),conexaoPelaBandeja:()=>H(`/api/bandeja/conexao`),fecharFaixaDaConexao:()=>U(`/api/bandeja/conexao/fechar`),fecharFaixaDaCaptura:()=>U(`/api/jogo/captura/fechar`),salvarAut",
+    "ogo/fechar-menu`),fecharDadosDoJogo:()=>U(`/api/jogo/dados/fechar`),capturaDoJogador:e=>H(`/api/jogo/captura-do-jogador?uid=${e}`),capturaAuto:()=>H(`/api/jogo/captura`),conexaoPelaBandeja:()=>H(`/api/bandeja/conexao`),fecharFaixaDaConexao:()=>U(`/api/bandeja/conexao/fechar`),fecharFaixaDaCaptura:()=>U(`/api/jogo/captura/fechar`),salvarAutoSnapshot:()=>U(`/api/jogo/auto-snapshot/salvar`),outrasLig",
+    "jogo/captura`),conexaoPelaBandeja:()=>H(`/api/bandeja/conexao`),fecharFaixaDaConexao:()=>U(`/api/bandeja/conexao/fechar`),fecharFaixaDaCaptura:()=>U(`/api/jogo/captura/fechar`),salvarAutoSnapshot:()=>U(`/api/jogo/auto-snapshot/salvar`),outrasLigas:e=>H(`/api/carreiras/${encodeURIComponent(e)}/outras-ligas`),setDataAutoSnapshot:(e,t)=>U(`/api/carreiras/${encodeURIComponent(e)}/auto-snapshot`,{data:"
+  ],
+  "/api/jogo/captura/fechar": [
+    "jogo/captura`),conexaoPelaBandeja:()=>H(`/api/bandeja/conexao`),fecharFaixaDaConexao:()=>U(`/api/bandeja/conexao/fechar`),fecharFaixaDaCaptura:()=>U(`/api/jogo/captura/fechar`),salvarAutoSnapshot:()=>U(`/api/jogo/auto-snapshot/salvar`),outrasLigas:e=>H(`/api/carreiras/${encodeURIComponent(e)}/outras-ligas`),setDataAutoSnapshot:(e,t)=>U(`/api/carreiras/${encodeURIComponent(e)}/auto-snapshot`,{data:"
+  ]
+}

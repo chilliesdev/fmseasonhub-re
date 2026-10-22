@@ -1,0 +1,1853 @@
+====================================================
+ FM SEASON HUB (FMSH) — NOTAS DE VERSÃO
+====================================================
+
+Histórico de mudanças, da versão mais nova para a mais
+antiga. Cada bloco lista o que mudou naquela versão.
+
+Legenda:
+   [NOVO]      recurso que não existia
+   [MUDOU]     comportamento ou visual alterado
+   [CORRIGIDO] bug que existia e foi consertado
+   [INTERNO]   mudança que você não vê na tela, mas
+               que sustenta o resto
+
+
+====================================================
+ v0.8.2.1 — 20/10/2026
+====================================================
+
+OFERTAS
+---------------------------------------------------
+[CORRIGIDO] O selo da pré-venda do FM27 agora
+   aparece sempre, no idioma do app, sem depender
+   do mural de avisos. Ele some sozinho depois do
+   lançamento, em 10/11.
+
+
+====================================================
+ v0.8.2 — 20/10/2026
+====================================================
+
+INSTALADOR
+---------------------------------------------------
+[NOVO] Plugin opcional Easy Training Talks na tela
+   de plugins extras: elogia ou critica o treino do
+   plantel inteiro de uma vez, pelas conversas do
+   próprio jogo.
+
+OFERTAS
+---------------------------------------------------
+[NOVO] Quando houver uma oferta no mural de avisos
+   (hoje, a pré-venda do FM27), ela aparece num selo
+   no canto da tela. O botão abre a loja depois de
+   confirmar o link, e o X esconde o selo por 24
+   horas. Comprar pelo link apoia o FMSH.
+
+NOTIFICAÇÕES
+---------------------------------------------------
+[MUDOU] Com o app em espanhol, francês, alemão ou
+   turco, os avisos e o selo de oferta aparecem em
+   inglês, e não mais em português.
+
+
+====================================================
+ v0.8.1 — 19/10/2026
+====================================================
+
+PLAYER DATA DENTRO DO FM
+---------------------------------------------------
+[CORRIGIDO] Com a Player Data aberta no jogo,
+   conectar o app agora passa os dados para a
+   leitura ao vivo sozinho, sem precisar trocar
+   de jogador. Vale também para Atualizar e
+   desconectar.
+
+
+====================================================
+ v0.8.0 — 19/10/2026
+====================================================
+
+VERSÃO PÚBLICA
+---------------------------------------------------
+[MUDOU] O FMSH sai do alpha: esta é a primeira
+   versão pública. O rótulo "alpha" some da tela.
+
+LISTAS E VIEWS DO FM
+---------------------------------------------------
+[NOVO] Listas do FM (.fmf): a Lista preferencial
+   e os Favoritos com várias listas entram no
+   FMSH pela Biblioteca, com a opção "Só desta
+   carreira".
+[NOVO] Importar view do FM: o botão ao lado de
+   Colunas, na Base e no Meu time, abre uma view
+   salva no jogo. Uma tela de revisão mostra as
+   colunas que entram e por que as outras ficam
+   de fora. Aplicar só põe a view na tela, sem
+   salvar nada.
+[NOVO] Colunas novas: 11 na Base (números crus do
+   FM) e 42 no Meu time.
+[NOVO] Limites do nível Grátis: 1 lista do FM, só
+   para ver (troca as abas de análise; filtros,
+   colunas, busca e exportar ficam nos níveis
+   pagos), e até 3 listas de favoritos. Quem já
+   tinha mais listas continua com todas. Importar
+   view do FM é livre em todos os níveis.
+[MUDOU] Remover uma lista do FM pergunta no visual
+   do app, e não mais numa janela do navegador.
+
+NOMES E VISUAL
+---------------------------------------------------
+[MUDOU] Clubes e competições aparecem pelo nome
+   curto do FM ("Boca Juniors", "Brasileirão"),
+   em todo o app. O nome completo aparece ao
+   passar o mouse. Antes a tabela cortava o nome
+   na primeira palavra ("Club", "Campeonato").
+[MUDOU] Ícones novos em 3D, grafite e ouro. Os
+   botões do topo das colunas e os sinais ao lado
+   do nome do jogador mantêm o desenho de antes.
+
+PERFIL DO JOGADOR
+---------------------------------------------------
+[MUDOU] Visão geral: os 4 cartões do topo agora
+   são fixos para cada posição, em vez de mudar
+   de jogador para jogador.
+
+CONEXÃO E BANDEJA
+---------------------------------------------------
+[MUDOU] Desconectar só desconecta: você continua
+   na tela em que estava.
+[CORRIGIDO] O painel de plugins da bandeja cortava
+   a última linha ("Abrir em Configurações").
+[CORRIGIDO] Gravadores de tela, como o Medal,
+   capturavam o painel escondido da bandeja em
+   vez da janela do app.
+
+
+====================================================
+ v0.7.5 alpha — 13/10/2026
+====================================================
+
+BUSCAR COMO
+---------------------------------------------------
+[NOVO] Buscar como: com o botão direito num jogador
+   (ou no botão "Buscar como…" do perfil), o FMSH
+   acha jogadores parecidos com ele. Há dois tipos
+   de busca, e cada um mede uma coisa diferente.
+[NOVO] Reposição: o que o jogador entrega (gols,
+   assistências, chances criadas e parecidos), em
+   nível parecido e bem mais barato. Aceita quem
+   entrega igual ou mais, com CA de 85% a 115% do
+   dele, valor e salário até 70% e até o dele. A
+   tabela mostra a coluna Economia.
+[NOVO] Estilo de jogo: como o jogador joga (passes,
+   desarmes, faltas, corridas), para cima e para
+   baixo, em qualquer liga, nível ou preço.
+[NOVO] O painel de cada busca deixa ajustar a
+   tolerância, quantas métricas podem ficar fora
+   da faixa, os minutos, o piso e o teto de nível,
+   o valor, a idade, o fim de contrato, as 20
+   maiores ligas e o pé preferido (pelas pegadas).
+[NOVO] O resultado aparece na página Temporadas,
+   com a semelhança, a diferença de cada métrica
+   para a do jogador e a linha dele fixa no topo.
+   O botão Colunas… deixa acrescentar qualquer
+   estatística.
+[NOVO] Perfil médio: com 2 ou 3 jogadores
+   selecionados, a busca usa a média deles.
+[NOVO] Receitas: uma busca pode ser salva na
+   Biblioteca (arquivo .rsh) e aplicada em outra
+   temporada ou compartilhada.
+[NOVO] Em Configurações, a seção Buscar como define
+   com quais restrições o painel abre.
+
+PERFIL DO JOGADOR
+---------------------------------------------------
+[NOVO] A aba Player Data ganhou a aba Goleiro e a
+   Visão geral do goleiro: defesas, gols evitados,
+   jogo com os pés e o que mais importa para quem
+   joga no gol.
+[CORRIGIDO] Jogadores criados pelo jogo no meio do
+   save (newgens) voltam a aparecer com a foto e
+   abrem certo no perfil pelo jogo.
+[NOVO] Abrir no FM: no perfil, na comparação (um
+   botão para cada jogador) e no botão direito
+   das tabelas, abre o jogador no FM aberto.
+   Precisa do plugin FMSH no jogo atualizado.
+[NOVO] A aba Player Data aparece dentro do perfil
+   do jogador no próprio FM, em qualquer skin, com
+   o seletor de temporada (plugin FMSH no jogo).
+[NOVO] Na Player Data dentro do FM dá para marcar o
+   jogador como favorito, e a marca aparece na hora
+   na janela do FMSH.
+[CORRIGIDO] FM24: a aba Player Data passa a mostrar
+   os dados de cada partida (jogo a jogo, papel no
+   time, rendimento por contexto e divisões),
+   também na leitura ao vivo.
+[MUDOU] Quando faltam os dados por partida de um
+   jogador, o aviso diz o motivo: versão do jogo,
+   partidas que o jogo já apagou ou temporada sem
+   jogos.
+[CORRIGIDO] Depois de Eurocopa, Copa América ou
+   CAN, a temporada do jogador volta a contar os
+   jogos do clube, e não os da seleção.
+[MUDOU] No FM24, que não aceita os plugins do
+   FMSH, o botão Abrir no FM não aparece.
+[NOVO] Player Data dentro do FM acompanha a skin:
+   na MrTini, fundo e cartões grafite; na CTRL 26,
+   o degradê dela e cartões escuros; sem skin, o
+   fundo do jogo original.
+[MUDOU] Player Data dentro do FM usa o idioma
+   escolhido no FMSH e troca sem reiniciar.
+[MUDOU] Jogador de liga que o jogo não guarda em
+   detalhe neste save ganha um aviso que diz isso.
+
+TEMPORADAS
+---------------------------------------------------
+[NOVO] Auto snapshot: quando a liga do seu clube e
+   as copas dele terminam, o FMSH salva a temporada
+   sozinho. Liga e desliga em Configurações, com
+   modelo para o nome e a escolha entre avisar ou
+   substituir a mais antiga quando as vagas estão
+   cheias.
+[NOVO] Season Tracker: as ligas de outro calendário
+   são lidas logo depois de terminarem, e a Base
+   mostra, para cada jogador, a temporada completa
+   mais recente dele. Quando o número não é da
+   temporada salva, uma etiqueta ao lado do nome
+   avisa (por exemplo "28/29" ou "2 clubes").
+[NOVO] Em Temporadas arquivadas, os dois blocos
+   (Auto snapshot e Season Tracker) mostram as
+   datas e têm o atalho Configurar.
+[MUDOU] Um aviso por cima do jogo anuncia o Auto
+   snapshot, com som; o Season Tracker mostra só
+   uma pílula pequena, sem som.
+
+BASE DE DADOS
+---------------------------------------------------
+[CORRIGIDO] Um filtro apagado na Base não volta
+   mais sozinho ao reabrir o app, e "Limpar tudo"
+   zera também a contagem de filtros.
+[CORRIGIDO] FM24: o filtro de times de base passa a
+   separar seleções, seleções de base e reservas, e
+   a liga de cada clube deixa de ser uma divisão
+   genérica ("Divisão Inferior") ou eliminatória.
+
+BANDEJA DO WINDOWS
+---------------------------------------------------
+[NOVO] O FMSH pode ficar na bandeja do Windows,
+   perto do relógio: fechar a janela só a esconde,
+   e o Auto snapshot e o Season Tracker continuam
+   salvando. Na primeira vez, o X pergunta o que
+   fazer, com "Lembrar minha escolha".
+[NOVO] O ícone mostra a conexão: bolinha verde,
+   conectado ao FM; apagado, desconectado; bolinha
+   vermelha, a conexão com o FM caiu.
+[NOVO] Clique direito no ícone: menu com a carreira
+   conectada, Conectar ao FM, atalhos para as telas
+   do app, Configurações, os plugins instalados e a
+   atualização (a linha confere ou atualiza).
+[NOVO] Conectar pelo menu da bandeja mostra, por
+   cima da tela, o mesmo aviso do Auto snapshot:
+   conectando, conectado ou o erro.
+[NOVO] Com a janela escondida, o Windows avisa
+   quando a conexão com o FM cai e quando sai
+   versão nova do FMSH.
+[NOVO] Em Configurações › Aplicativo: o que o X
+   faz e "Iniciar com o Windows (na bandeja)",
+   desligado de início.
+[MUDOU] Abrir o FMSH com ele já aberto traz a
+   janela de volta, em vez de abrir outra cópia.
+
+
+====================================================
+ v0.7.3 alpha — 09/10/2026
+====================================================
+
+PLUGINS DO JOGO
+---------------------------------------------------
+[NOVO] Ao abrir, depois de procurar versão nova
+   do FMSH, o app também atualiza os plugins do
+   jogo que você já tem (com o jogo fechado).
+[NOVO] Plugin novo disponível: quem já usa algum
+   plugin do FMSH recebe um aviso quando sai um
+   plugin novo, com foto e descrição. Ele só é
+   instalado se você clicar em Instalar.
+[NOVO] Em Configurações, "Avisar quando houver
+   plugin novo" desliga esse aviso.
+
+
+====================================================
+ v0.7.2 alpha — 08/10/2026
+====================================================
+
+BASE DE DADOS
+---------------------------------------------------
+[MUDOU] O filtro de times de base reconhece mais
+   competições: ligas de base que o jogo grava sem
+   nome entram com um nome pela categoria (ex.:
+   "Liga Sub-20 · Equador 1") e a Copa 2 de Julho
+   passa a contar como base. Vale para leituras
+   novas; temporadas já salvas não mudam.
+[NOVO] Clubes-escola (escolas do Japão, academias
+   da MLS Next e parecidos) aparecem como
+   "Principal (escola)", com o país da competição.
+[NOVO] Com o filtro de base ligado e a idade sem
+   limite, a tela avisa que o filtro é por time,
+   não por idade, e oferece "Aplicar idade até 20".
+
+INSTALAÇÃO E ATUALIZAÇÃO
+---------------------------------------------------
+[NOVO] FMSH no jogo: o instalador põe no FM26 os
+   botões "Player Profile" e "Compare" no perfil
+   do jogador. O primeiro abre o jogador no FMSH;
+   o segundo abre a comparação, já com ele de um
+   lado. Vem marcado na tela FMSH do instalador.
+[NOVO] Kits 3D, plugin opcional: mostra os
+   uniformes em 3D na tela do clube e abre o
+   uniforme completo num boneco 3D.
+[NOVO] Stadiums 3D, plugin opcional: o estádio do
+   clube em 3D na tela do clube. Precisa do mod de
+   estádios CustomStadium, do bassyboy.
+[MUDOU] Os plugins não vêm mais dentro do
+   instalador: ele baixa a versão mais recente de
+   cada um na hora de instalar. Sem internet, o
+   FMSH instala normalmente e os plugins ficam
+   para a próxima vez.
+[CORRIGIDO] A janela da atualização não aparece
+   mais vazia: ela mostra o que está fazendo e só
+   fecha quando o FMSH já está aberto.
+
+
+====================================================
+ v0.7.0 alpha — 25/09/2026
+====================================================
+
+INSTALAÇÃO E ATUALIZAÇÃO
+---------------------------------------------------
+[MUDOU] Esta é uma versão ALPHA, de teste fechado.
+   Antes de instalar, faça uma cópia da pasta
+   Documentos\FM Season Hub — é o jeito seguro de
+   voltar atrás se algo der errado.
+[NOVO] O FMSH agora tem instalador: entra na lista
+   de programas do Windows, com atalho na área de
+   trabalho e no menu Iniciar, sem pedir permissão
+   de administrador.
+[NOVO] Atualização automática: ao abrir, o FMSH
+   procura versão nova e, se houver, se atualiza
+   sozinho e já abre na versão nova. Com o app
+   aberto, o ícone da versão avisa; "Atualizar
+   agora" fecha, atualiza e reabre.
+[NOVO] Plugins opcionais no instalador: TacticalCam
+   e PitchHUD, para o FM26 da Steam, da Epic ou do
+   Xbox. Se o jogo não tiver o BepInEx, o instalador
+   o baixa do site oficial. A atualização automática
+   não mexe nos plugins.
+[NOVO] FMSH - Diagnóstico vem junto, no menu
+   Iniciar: gera um relatório para o suporte quando
+   o app não abre.
+[MUDOU] As temporadas, as cópias prontas e as
+   preferências da janela saíram de Documentos e
+   foram para a pasta do programa (dados). O
+   instalador faz a mudança sozinho. Em Documentos
+   ficam configurações, log, Biblioteca e idiomas.
+[MUDOU] Termos de Uso e Política de Privacidade na
+   versão 1.2. O aceite é feito no instalador, e o
+   app não pede de novo.
+[NOVO] Ao desinstalar, o FMSH pergunta se remove
+   também os plugins e o BepInEx que ele instalou.
+   As temporadas são mantidas.
+
+DESEMPENHO
+---------------------------------------------------
+[MUDOU] Abrir uma temporada salva passou de muitos
+   segundos (minutos, em HD) para menos de 1
+   segundo.
+[MUDOU] O perfil do jogador abre em cerca de 2
+   segundos na primeira vez, e na hora nas
+   seguintes.
+[MUDOU] Conectar ao jogo ficou cerca de duas vezes
+   mais rápido, e a Base já aparece pronta quando a
+   leitura termina.
+[MUDOU] Voltar a uma tela ou a uma temporada que
+   você já abriu é instantâneo, sem a janela de
+   carregamento piscando.
+[NOVO] Configurações > Preferências > Memória do
+   app: quanto de memória o FMSH pode usar para
+   manter temporadas abertas. O padrão é 1 GB; mais
+   memória deixa a troca entre temporadas
+   instantânea.
+[INTERNO] Cada temporada salva ganha uma cópia
+   pronta para abrir rápido, com cerca de 200 MB, na
+   pasta dados\cache do programa. Apagar a temporada
+   apaga a cópia junto. Com o app parado, o FMSH
+   prepara essas cópias sozinho.
+[INTERNO] Ao conectar, a leitura dos jogadores usa
+   vários núcleos do processador ao mesmo tempo — é
+   normal o uso de CPU subir por alguns segundos.
+
+PRÉVIA E CARTÃO RÁPIDO
+---------------------------------------------------
+[NOVO] Prévia: botão direito num jogador > Prévia
+   abre um cartão preso ao rodapé, com o resumo
+   dele. Cabem até 6 abertos; dá para arrastar e
+   minimizar.
+[NOVO] Cartão rápido: parar o mouse 1 segundo sobre
+   um jogador na Base ou no Meu time mostra o resumo
+   dele. Dá para desligar em Configurações.
+
+PERFIL DO JOGADOR
+---------------------------------------------------
+[MUDOU] O botão Exportar do perfil virou Screenshot:
+   salva uma imagem da janela do perfil, sem os
+   botões.
+[NOVO] Overall de 0 a 100 no anel dos cartões e do
+   perfil. Em Configurações você escolhe se ele mede
+   os atributos, o desempenho da temporada ou os
+   dois.
+[NOVO] Forma: a nota de cada partida, num gráfico
+   jogo a jogo. Vale para todos os jogadores, não só
+   para os observados no jogo. Amistosos ficam de
+   fora.
+[NOVO] O pé preferido e o overall entraram no bloco
+   da esquerda do perfil.
+[MUDOU] Os números da temporada viraram cartões no
+   formato placar. No goleiro, "Duelos aéreos %" deu
+   lugar a "Defesas %" e "Jogos sem sofrer %".
+[MUDOU] O acumulado da carreira decide a temporada
+   jogador por jogador. Em save de calendário
+   brasileiro, o jogador de liga europeia deixa de
+   perder metade da temporada ou de somá-la duas
+   vezes.
+[NOVO] Temporada capturada antes de terminar para
+   aquele jogador aparece com o selo "incompleta".
+[NOVO] O Portal avisa, entre 1 e 15 de junho, que as
+   ligas europeias terminaram e que é hora de
+   capturar.
+
+COMPARAR JOGADORES
+---------------------------------------------------
+[NOVO] Comparar jogadores: dois jogadores lado a
+   lado, com os números da temporada, a pizza
+   sobreposta, métrica por métrica e o perfil de
+   personalidade. Abre pela barra lateral, pelo
+   botão direito ou pela aba Comparar do perfil.
+[NOVO] O nome de cada jogador leva ao perfil dele.
+[NOVO] Exportar a comparação como imagem.
+
+MEU TIME
+---------------------------------------------------
+[MUDOU] O filtro avançado é o mesmo da Base, com
+   E/OU e parênteses.
+[NOVO] O Meu time abre sem o FM, com o seletor de
+   temporada, e salva e carrega colunas e filtros.
+
+TELA
+---------------------------------------------------
+[NOVO] O FMSH se ajusta a telas de notebook: em
+   telas menores (ou com o zoom do Windows em 125%
+   ou 150%) tudo diminui na mesma proporção, sem
+   cortar nada.
+[NOVO] As telas de carregamento mostram há quanto
+   tempo estão esperando.
+[NOVO] Faixa de versão alpha no topo e botão
+   Reportar bug, que abre o quadro de bugs e
+   sugestões.
+
+IDIOMAS
+---------------------------------------------------
+[NOVO] Turco.
+[MUDOU] Espanhol, francês e alemão estão completos:
+   as frases novas desta versão entraram nos três.
+
+CORREÇÕES
+---------------------------------------------------
+[CORRIGIDO] Save novo do FM26 com data anterior a
+   2025 dava "nenhum save carregado" com o save
+   aberto.
+[CORRIGIDO] "Atualizar" no mesmo save podia
+   continuar mostrando a Base da leitura anterior.
+[CORRIGIDO] Com um idioma fora de português e
+   inglês, a escolha não era guardada e os
+   documentos legais apareciam em português.
+[CORRIGIDO] A tela de leitura ficava em "Iniciando…"
+   do começo ao fim; agora mostra cada etapa.
+
+
+====================================================
+ v0.6.6 — 11/09/2026
+====================================================
+
+FOOTBALL MANAGER 2024
+---------------------------------------------------
+[NOVO] O FMSH lê saves do Football Manager 2024. Abra
+   o FM24 com o save carregado e conecte como sempre:
+   jogadores, atributos, posições, altura, nacionalidade
+   e totais de carreira vêm todos. Por enquanto só a
+   versão da STEAM — no FM24 do Game Pass/Xbox e da Epic
+   o app não vai encontrar o save. O FM26 continua
+   funcionando nas três lojas.
+[NOVO] As estatísticas de temporada também vêm do FM24
+   — minutos, nota, gols, assistências e o detalhe
+   avançado que alimenta o Moneyball.
+[NOVO] Contrato, finanças do clube e comissão técnica
+   passam a ser lidos no FM24. Antes vinham vazios ou
+   com números sem sentido.
+[NOVO] Cada temporada guarda de qual Football Manager
+   veio, e o ícone do jogo aparece ao lado do estado da
+   conexão, no seletor de temporada, em Salvar Temporada,
+   em Temporadas arquivadas, no perfil do jogador e em
+   cada carreira. Com os dois jogos na mesma tela, o
+   mesmo número significa coisas diferentes.
+[INTERNO] Temporada salva ANTES desta versão fica sem
+   selo se não der para saber a origem com certeza. O
+   FMSH prefere não mostrar nada a carimbar errado.
+
+CORREÇÕES
+---------------------------------------------------
+[CORRIGIDO] Favoritar voltou a funcionar. A estrela não
+   marcava, não gravava no disco e não avisava o
+   servidor — a lista parecia sumir ao fechar o app
+   porque nunca chegou a ser salva. Se você tinha
+   favoritos antes, eles continuam lá.
+[CORRIGIDO] O FMSH voltou a conectar no Football
+   Manager 2026 depois da atualização do jogo. Ele
+   dizia não reconhecer a versão mesmo com o save
+   aberto.
+
+BARRA LATERAL
+---------------------------------------------------
+[MUDOU] O bloco da conta ganhou moldura e destaque ao
+   passar o mouse: dava para clicar nele desde sempre,
+   mas o único sinal disso era uma seta miúda.
+[NOVO] A carreira tem cartão próprio, com escudo, nome,
+   quantas temporadas tem e o convite para trocar de
+   carreira. Quem nunca abriu o menu da conta não sabia
+   que dava para ter mais de uma.
+[MUDOU] O atalho do topo volta a ser sempre "FM Season
+   Hub". Ele virava o nome do clube quando havia save,
+   e um atalho escrito "Sunderland AFC" que leva para a
+   home confundia.
+
+SELETOR DE TEMPORADA
+---------------------------------------------------
+[MUDOU] O botão dos dois seletores (a aba Temporadas e
+   o perfil do jogador) mostra o ícone do jogo, o nome e
+   a data do jogo no fim. Duas temporadas de nome
+   parecido ficavam indistinguíveis sem abrir a lista.
+
+
+====================================================
+ v0.6.5 — 05/09/2026
+====================================================
+
+CINCO IDIOMAS
+---------------------------------------------------
+[NOVO] O FMSH fala francês, espanhol e alemão, além
+   de português e inglês. A tradução é completa: menus,
+   submenus, o seletor de idioma da tela de início, os
+   filtros, os nomes das colunas e as mensagens.
+[NOVO] Cada idioma aparece com a bandeira do país ao
+   lado do nome.
+[NOVO] Os nomes das colunas de estatística vieram do
+   PRÓPRIO Football Manager, e não de tradução nossa —
+   é o mesmo vocabulário que você lê dentro do jogo.
+[NOVO] Os 59 estilos de jogo passaram a aparecer
+   traduzidos. Antes apareciam em inglês em TODOS os
+   idiomas, português incluso.
+[MUDOU] Os nomes dos 47 atributos e os títulos dos
+   grupos entraram nos arquivos de idioma — dá para
+   corrigir qualquer um deles no Bloco de Notas.
+
+O IDIOMA VIROU ARQUIVO
+---------------------------------------------------
+[NOVO] Os textos do FMSH saíram de dentro do programa
+   e viraram ARQUIVOS que você pode abrir e editar.
+   Cada idioma é uma pasta com dois arquivos de texto:
+   um com as frases da tela, outro com os nomes das
+   colunas. Dá para corrigir uma tradução no Bloco de
+   Notas, salvar, reabrir o app e ver o resultado —
+   sem esperar versão nova.
+[NOVO] Configurações > Preferências ganhou a lista de
+   idiomas, com quanto de cada um está traduzido, um
+   botão que gera o arquivo para traduzir e outro que
+   abre a pasta. O arquivo sai com o texto em inglês
+   ao lado de cada frase, para o tradutor saber o que
+   está traduzindo.
+[NOVO] Para instalar um idioma que alguém te mandou,
+   basta copiar a pasta dele para a pasta Idiomas. Ele
+   aparece na lista sozinho.
+[MUDOU] Frase que ainda não foi traduzida aparece em
+   INGLÊS, e não em português. O inglês passou a ser a
+   referência de quem traduz.
+
+FILTRO AVANÇADO
+---------------------------------------------------
+[CORRIGIDO] Vários campos do filtro avançado ficavam
+   em português nos outros idiomas — o pé preferido,
+   o tipo de contrato e mais de 300 nomes de coluna.
+   Agora todos acompanham o idioma escolhido, e todos
+   entram nos arquivos que você pode corrigir.
+
+MOEDA
+---------------------------------------------------
+[CORRIGIDO] Em instalação nova, o seletor de moeda
+   continuava dizendo "conecte ao FM" mesmo depois de
+   conectar e ler o save. A lista das 173 moedas era
+   lida do jogo, mas só chegava à tela ao fechar e
+   reabrir o app.
+
+SALVAR TEMPORADA
+---------------------------------------------------
+[NOVO] A tela mostra as últimas temporadas já salvas
+   desta carreira, com escopo, data do jogo, número de
+   jogadores e tamanho — para você escolher o nome sem
+   precisar sair da tela.
+[NOVO] Aviso quando a captura repete uma que já
+   existe: mesma carreira, mesmo escopo e mesma data
+   do jogo.
+
+PERFIL DO JOGADOR
+---------------------------------------------------
+[CORRIGIDO] A opção "Carreira", que soma todas as
+   temporadas, não aparecia mesmo com duas temporadas
+   salvas. O app decidia se a temporada tinha virado
+   olhando se o número de jogos CAIU — e quem salva
+   sempre no fim da temporada tem as duas capturas com
+   um ano cheio de jogos, então nada caía e as duas
+   contavam como uma só. Agora ele compara os jogos da
+   temporada com os da carreira, que é o que o próprio
+   jogo registra.
+[MUDOU] Quando o acumulado realmente não cabe, a
+   opção aparece desabilitada dizendo por quê, em vez
+   de simplesmente não existir.
+[NOVO] A ficha mostra o quanto o jogador CRESCEU desde
+   a temporada de comparação — "173 cm +4". O FM
+   reestima a altura de jogador jovem a cada temporada,
+   então ela pode subir ou descer.
+[CORRIGIDO] A nacionalidade saía errada no CSV
+   exportado pelo perfil do jogador.
+
+SE ALGO APARECER SEM TEXTO
+---------------------------------------------------
+[MUDOU] A mudança de idioma mexeu em praticamente toda
+   a tela. Se algo aparecer em branco ou com um nome
+   estranho no lugar do texto, é disso que se trata —
+   vale avisar.
+
+O QUE ABRIA EM BRANCO
+---------------------------------------------------
+[CORRIGIDO] Em alguns computadores o FMSH abria a
+   janela com a cor de fundo certa e nada dentro. O
+   Windows dessas máquinas descrevia errado um arquivo
+   interno do programa, e a tela se recusava a montar.
+   O app parou de perguntar isso ao Windows.
+[NOVO] O diagnóstico acusa esse caso numa linha, em
+   vez de deixar a janela vazia sem explicação.
+
+
+====================================================
+ v0.6.4.1 — 03/09/2026
+====================================================
+
+A TELA QUE ABRIA EM BRANCO
+---------------------------------------------------
+[CORRIGIDO] Em alguns computadores o FMSH abria a
+   janela com a cor de fundo certa e absolutamente
+   nada dentro. Não era travamento: o Windows dessas
+   máquinas descrevia errado um dos arquivos internos
+   do programa, e a tela se recusava a montar. O app
+   deixou de perguntar isso ao Windows e passou a
+   dizer por conta própria — nessas máquinas ele volta
+   a abrir normal, e nas outras nada muda.
+[NOVO] O diagnóstico ganhou uma linha que acusa esse
+   problema na hora, em vez de deixar a janela vazia
+   sem explicação.
+
+
+====================================================
+ v0.6.4 — 01/09/2026
+====================================================
+
+EPIC GAMES
+---------------------------------------------------
+[NOVO] O FMSH passa a ler o Football Manager comprado
+   na EPIC GAMES. Antes ele reconhecia só a Steam e o
+   Game Pass; na Epic ele conectava e não achava o save.
+   Agora as três lojas funcionam, e o app descobre
+   sozinho de qual delas o seu jogo veio.
+[MUDOU] Na Epic, duas coisas ficam desligadas por
+   enquanto: o nome do save (a tela mostra o nome do
+   treinador no lugar) e o aviso de quem vai se
+   aposentar. Preferimos desligar a mostrar informação
+   errada — voltam quando estiverem conferidas.
+
+ALERTAS E ATUALIZAÇÃO
+---------------------------------------------------
+[NOVO] Um aviso pode trazer um BOTÃO que leva ao
+   assunto dele. Antes de sair do app, a tela mostra
+   o endereço inteiro para você conferir. O FMSH só
+   abre endereços de lugares conhecidos (Patreon,
+   Discord, X, GitHub, Notion).
+[NOVO] Tipo de aviso NOVA VERSÃO, para quando sair
+   uma atualização.
+[NOVO] O app avisa quando existe versão nova, com uma
+   faixa no Portal e o botão que leva ao download.
+   Ele NÃO baixa nem instala nada sozinho — a
+   atualização continua sendo sua.
+[NOVO] "Depois" some com o aviso daquela versão, e só
+   dela: a próxima volta a avisar.
+
+DIAGNÓSTICO
+---------------------------------------------------
+[NOVO] A tela de Diagnóstico ganhou o DIAGNÓSTICO
+   COMPLETO: o mesmo exame do programa avulso, agora
+   com um clique dentro do app. Ele mede o que a tela
+   não mostrava — processos do jogo, endereços de
+   memória, antivírus, porta e WebView2 — e grava o
+   arquivo que o suporte pede.
+[NOVO] Botão para baixar o diagnóstico avulso, que
+   continua sendo o caminho de quem não consegue
+   abrir o app.
+
+
+====================================================
+ v0.6.3 — 29/08/2026
+====================================================
+
+CONEXÃO COM O JOGO
+---------------------------------------------------
+[CORRIGIDO] Windows 11: o app dizia "nenhum save
+   carregado" com o save aberto na sua frente. Ele
+   descartava os endereços do jogo por estarem fora de
+   uma faixa que tinha sido medida num computador só.
+   Agora a faixa é aprendida na sua máquina.
+[CORRIGIDO] Game Pass instalado numa pasta escolhida por
+   você: o app tratava o jogo como se fosse o da Steam e
+   não lia nada. A origem do jogo passa a ser reconhecida
+   pelo próprio arquivo dele, e confirmada na leitura.
+[MUDOU] Quando a leitura falha, a tela diz o que houve
+   em vez de dizer sempre "nenhum save carregado".
+[NOVO] FMSH-DIAGNÓSTICO: um programa à parte, que
+   funciona mesmo quando o app não abre. Ele mostra o que
+   consegue ler do jogo e grava um arquivo em
+   Documentos\FM Season Hub\diagnostic para você mandar
+   ao suporte.
+
+IDIOMA
+---------------------------------------------------
+[CORRIGIDO] Com o app em inglês, alguns textos ficavam
+   em português: o nome do seu nível, a explicação do
+   salário e as descrições das colunas que aparecem ao
+   parar o mouse no cabeçalho da tabela.
+[CORRIGIDO] Procurar coluna em inglês não achava nada —
+   só funcionava digitando em português.
+[CORRIGIDO] O idioma escolhido voltava sozinho para o
+   português ao reabrir o app.
+[MUDOU] "Presses" virou "Pressures", que é o termo do
+   jogo.
+
+MOEDA E SALÁRIO
+---------------------------------------------------
+[CORRIGIDO] A lista de moedas vinha vazia: não dava para
+   escolher o euro nem trocar de moeda depois de
+   conectar.
+[CORRIGIDO] Escolher salário mensal ou anual continuava
+   mostrando o valor semanal.
+
+GERAL
+---------------------------------------------------
+[INTERNO] Correções de segurança e estabilidade.
+
+
+====================================================
+ v0.6.2 — 28/08/2026
+====================================================
+
+PORTAL REFEITO
+---------------------------------------------------
+[MUDOU] O Portal foi redesenhado e virou a tela de
+   entrada do app: bloco de conexão no topo, a marca com
+   o logo, e o resto organizado em cartões.
+[NOVO] PRÓXIMO PASSO: o app sugere o que fazer agora,
+   conforme o estado do save.
+[NOVO] FILTROS SALVOS: os seus garimpos da Biblioteca a
+   um clique, com os que você criou aparecendo primeiro.
+[NOVO] O QUE MUDOU: oito medidas de uma temporada para a
+   outra — jogadores, idade média, CA médio, folha
+   salarial (na periodicidade que você escolheu),
+   valorização do elenco, revelações, contratos vencendo
+   e a diferença de folha. Os nomes dos jogadores são
+   clicáveis e abrem o perfil; contratos vencendo leva ao
+   Meu time já filtrado.
+[NOVO] Pré-visualização das telas principais e uma linha
+   de comunidade com Discord, Patreon, X e Roadmap.
+[MUDOU] O Portal aparece INTEIRO mesmo sem save
+   conectado — antes ele dependia da leitura ao vivo.
+
+FILTRO DE POSIÇÃO
+---------------------------------------------------
+[NOVO] Botão POSIÇÃO na barra da Base, com as 14
+   posições que o FM26 usa de verdade e os nomes do
+   próprio jogo. Dá para exigir o nível de familiaridade
+   (o padrão traz quem joga ali com desenvoltura).
+[NOVO] Quando a aba de análise aberta não tem nenhuma das
+   posições marcadas, a tela avisa em vez de devolver uma
+   lista vazia sem explicação.
+
+SOBRE E DOCUMENTOS
+---------------------------------------------------
+[NOVO] Tela SOBRE: identificação do app, versão, a
+   declaração de que ele é um projeto independente (sem
+   ligação com a Sports Interactive ou a SEGA) e os
+   atalhos da comunidade.
+[MUDOU] Os Termos de Uso e a Política de Privacidade
+   saíram de Configurações e moram na tela Sobre.
+   Configurações ficou com o atalho.
+[MUDOU] Os documentos subiram para a versão 1.1, então o
+   aceite é pedido mais uma vez ao abrir.
+
+PERFIL DO JOGADOR
+---------------------------------------------------
+[MUDOU] Os quatro medidores ganharam animação: o arco
+   varre de zero até o percentil e o número conta junto.
+   Quem pede menos animação no sistema recebe o resultado
+   direto.
+[MUDOU] O corte de minutos para entrar na comparação
+   subiu de 450 para 900 (dez jogos inteiros). Com cinco
+   jogos, uma partida boa deslocava a média por 90
+   inteira. O número continua escrito no rodapé.
+
+TABELAS
+---------------------------------------------------
+[CORRIGIDO] As sombras que avisam que há conteúdo fora da
+   vista voltaram a aparecer nos quatro lados, agora
+   claras e sem passar por cima das colunas travadas.
+
+DIAGNÓSTICO
+---------------------------------------------------
+[NOVO] PLATAFORMA: a tela diz se o jogo roda pela Steam
+   ou pelo Game Pass / Microsoft Store. São instalações
+   diferentes, e saber qual é resolve metade dos
+   problemas de leitura. Aparece também com o FM fechado,
+   com a data da última vez.
+
+OUTRAS MUDANÇAS
+---------------------------------------------------
+[MUDOU] As duas faixas de beta saíram da tela.
+[INTERNO] Correções de segurança e estabilidade.
+
+
+====================================================
+ v0.6.1 — 22/08/2026
+====================================================
+
+PERFIL DO JOGADOR — QUAL TEMPORADA VOCÊ ESTÁ VENDO
+---------------------------------------------------
+[NOVO] Um seletor de temporada na ponta esquerda do
+   perfil. Dá para olhar o mesmo jogador em qualquer
+   captura salva do save, sem sair da tela: identidade,
+   estatísticas, atributos e os gráficos mudam juntos.
+   A leitura atual aparece marcada como AO VIVO.
+[NOVO] CARREIRA: a última opção da lista soma TODAS as
+   temporadas salvas daquele save. Os gráficos também
+   comparam com o acumulado da base inteira, então dá
+   para ver quem é o artilheiro histórico da sua
+   carreira, e não só o da temporada.
+[NOVO] Os sete cartões do topo (jogos, minutos, gols,
+   assistências, cartões e nota) ganharam SETAS: quanto
+   o número mudou em relação a outra temporada. Verde é
+   melhora e vermelho é piora — levar mais cartões conta
+   como piora, mesmo com a seta para cima.
+[NOVO] Setas também nos ATRIBUTOS, discretas, com a
+   diferença exata na dica ao parar o mouse.
+[NOVO] Você escolhe contra qual temporada as setas
+   comparam. O padrão é temporada contra temporada: a
+   captura mais recente de um ano anterior do jogo.
+[NOVO] O salário em destaque agora diz a periodicidade
+   escolhida (/s, /m ou /a).
+
+O QUE OS GRÁFICOS COMPARAM
+---------------------------------------------------
+[NOVO] Botão MINHA LIGA / 20 MAIORES ao lado do título.
+   O padrão continua sendo as 20 ligas de maior
+   reputação; o outro lado responde "como ele se sairia
+   no meu campeonato?". A pizza e os quatro medidores
+   acompanham; o radar não muda, porque ele mostra
+   atributo, não percentil.
+[NOVO] O rodapé diz qual régua está valendo e avisa
+   quando ela tem poucos jogadores — com trinta no
+   grupo, cada um vale mais de três pontos de percentil.
+[MUDOU] O título do bloco era "Moneyball · por 90
+   minutos", e estava errado desde que a pizza passou a
+   desenhar percentil: o tamanho da fatia é a posição do
+   jogador no grupo, e quatro das doze fatias nem são
+   por 90 — são porcentagens. Agora é "Perfil de
+   desempenho".
+
+BUSCA
+---------------------------------------------------
+[MUDOU] A busca do topo (Ctrl+K) passou a ordenar por
+   REPUTAÇÃO. Procurar "silva" trazia quatro jogadores
+   de ligas menores; agora traz Bernardo Silva, Fábio
+   Silva, António Silva.
+[CORRIGIDO] Achar um jogador nessa busca e clicar não
+   abria o perfil dele: o app trocava de tela e parava
+   ali. Duas causas — o endereço trazia o jogador e
+   ninguém lia, e a busca procurava na temporada mais
+   recente de QUALQUER save, não na carreira aberta.
+
+BARRA DE CIMA
+---------------------------------------------------
+[NOVO] Atalho para salvar a temporada, ao lado do selo
+   de conexão. Só aparece com um save carregado, que é
+   a única situação em que capturar faz sentido.
+
+====================================================
+ v0.6 — 21/08/2026
+====================================================
+
+CONFIGURAÇÃO INICIAL — o guia de primeira execução
+---------------------------------------------------
+[NOVO] Quem abre o FMSH pela primeira vez agora é levado
+   por um guia de OITO etapas até o primeiro resultado
+   útil: uma temporada salva e o Portal aberto. Antes a
+   pessoa caía na tela inicial e tinha que descobrir
+   sozinha que precisava abrir o jogo, conectar, escolher
+   o escopo e nomear a temporada.
+[NOVO] As etapas, na ordem: boas-vindas e idioma · CA e
+   PA · pasta de graphics · como o app organiza as
+   temporadas · conectar ao Football Manager · moeda ·
+   formato do salário · capturar.
+[NOVO] Dá para VOLTAR, PULAR qualquer etapa e fechar o
+   app no meio: o progresso é guardado e você volta de
+   onde parou. Pular não apaga nada do que já foi
+   escolhido.
+[NOVO] A etapa de conexão tem a lista do que conferir e
+   diz o que aconteceu — jogo fechado, save não
+   carregado ou versão sem suporte, cada um com o seu
+   texto e o botão de tentar de novo.
+[NOVO] Na etapa de captura você escolhe o que salvar com
+   o custo escrito na tela: só o elenco (uns 30
+   jogadores, segundos, ~20 KB) ou a base inteira (mais
+   de 200 mil, ~2 minutos, ~160 MB). Há uma terceira
+   porta, "capturar depois", e um aviso quando já existe
+   uma temporada igual daquele save.
+[NOVO] Sem conexão, a etapa de captura oferece conectar
+   ali mesmo em vez de virar um beco.
+[NOVO] "Refazer a configuração inicial", em Configurações
+   > Arquivos e pastas: reabre o guia sem apagar nenhuma
+   preferência.
+[NOVO] Quem já usa o FMSH não vê o guia: quem tem
+   temporada salva entra direto, como sempre.
+
+SALÁRIO POR SEMANA, MÊS OU ANO
+---------------------------------------------------
+[NOVO] O Football Manager guarda salário por SEMANA, e
+   até agora o app mostrava só isso, com um aviso em
+   vermelho. Agora você escolhe entre semanal, mensal e
+   anual, em Configurações > Preferências.
+[MUDOU] A escolha vale em tudo: tabelas, Meu time, perfil
+   do jogador, filtro avançado e o CSV exportado. O
+   cabeçalho diz qual é — "Salário (mensal)" — na tela e
+   no arquivo.
+[MUDOU] A periodicidade pertence ao SAVE, como a moeda:
+   dois saves podem ter escolhas diferentes.
+[INTERNO] O valor guardado e o que viaja para o filtro
+   continuam em libra por semana; mês e ano são conta de
+   exibição (semana × 52/12 e × 52), e isso fica dito na
+   tela.
+
+TELA INICIAL
+---------------------------------------------------
+[MUDOU] Logo maior, com brilho, e o nome escrito abaixo
+   passou a ser "FM SEASON HUB" — antes a mesma marca
+   aparecia três vezes na mesma tela.
+[NOVO] Fundo animado: uma rede de fios que se liga
+   sozinha, acende perto do cursor e manda pulsos
+   dourados pelas ligações. O texto entra palavra por
+   palavra e o clique deixa uma ondulação.
+[MUDOU] A tela ficou mais curta que a anterior mesmo com
+   o logo 60% maior.
+
+CARREGAMENTO E TRANSIÇÃO
+---------------------------------------------------
+[MUDOU] Toda espera do app passou a mostrar o MESMO
+   carregador: um cubo girando com o miolo aceso. Antes
+   eram três desenhos diferentes para o mesmo estado.
+[NOVO] Ao terminar a primeira captura, a tela espera dois
+   segundos no "temporada salva" e faz uma passagem suave
+   até o Portal — o Portal é montado por trás enquanto a
+   tela ainda está coberta, então ele aparece pronto.
+
+MOEDA
+---------------------------------------------------
+[NOVO] Prévia da moeda escolhida, no guia e em
+   Configurações: símbolo, nome e dois exemplos já
+   convertidos (um valor de mercado e um salário). A
+   lista tem 173 moedas com nome em inglês, e só o
+   exemplo responde o que muda na prática.
+
+PASTA DE GRAPHICS
+---------------------------------------------------
+[NOVO] Botão "Escolher pasta…" abre a janela do Windows,
+   no guia e em Configurações. Continua dando para
+   detectar automaticamente ou colar o caminho.
+[NOVO] Pasta que não existe ou que o app não consegue
+   abrir agora diz isso na hora, e nunca trava o resto.
+
+DICAS
+---------------------------------------------------
+[NOVO] Dica curta no Portal explicando o que aquela tela
+   resume, com "entendi, não mostrar de novo" — a
+   primeira de uma série que vai aparecer em cada tela,
+   no lugar de um manual no primeiro uso.
+
+====================================================
+ v0.5.2 — 21/08/2026
+====================================================
+
+PERFIL DO JOGADOR — TELA NOVA
+---------------------------------------------------
+[NOVO] Clicar num jogador abre uma TELA DE PERFIL
+   inteira, no lugar da janelinha de antes: foto,
+   escudo do clube, logo da liga, valor, salário,
+   idade e contrato em destaque, a ficha completa
+   (altura, nascimento, pé, número, reputação,
+   nacionalidade, jogos e gols pela seleção e na
+   carreira), o campinho com as posições que ele joga
+   e os traços de estilo dele.
+[NOVO] Todos os atributos, agrupados como no jogo e
+   com os nomes do próprio Football Manager. Bolas
+   paradas (cantos, faltas, pênaltis e lateral longo)
+   ganharam bloco à parte.
+[NOVO] Atributo colorido por faixa: 15 é amarelo e o
+   verde começa em 16.
+[NOVO] GRÁFICO DE PIZZA com 12 fatias. O tamanho da
+   fatia é o PERCENTIL do jogador naquilo — fatia
+   cheia quer dizer que quase ninguém faz mais. O
+   goleiro tem as oito fatias dele, com gols sofridos
+   e posse perdida invertidos (sofrer pouco é bom).
+[NOVO] Quatro MEDIDORES por posição, escolhidos para
+   não repetir o que a pizza já mostra: o zagueiro por
+   desarmes decisivos, cortes, bloqueios e duelos; o
+   lateral por cruzamentos e chances criadas; o
+   centroavante por xG, gols acima do esperado e
+   conversão; o goleiro por defesas na ponta dos
+   dedos, pênaltis defendidos, falhas e defesas
+   difíceis.
+[NOVO] Métrica que aparece em mais de uma posição
+   ocupa sempre a MESMA casa, então dá para comparar
+   dois jogadores de posições diferentes sem
+   reaprender o lugar de cada número.
+[NOVO] "Placar de Esforço" nos medidores de meio-campo:
+   0 a 100, juntando distância percorrida, desarmes e
+   pressões, com os três pesando igual.
+[NOVO] RADAR DE PERSONALIDADE: os atributos ocultos que
+   o Football Manager guarda e nunca mostra na tela.
+   Quanto mais longe do centro, melhor.
+[NOVO] COM QUEM COMPARAR: oito ícones ao lado da pizza
+   trocam o grupo da comparação — de goleiros a
+   centroavantes, ou todas as posições. O app já abre
+   comparando com os pares do próprio jogador.
+[NOVO] A comparação usa as 20 MAIORES LIGAS do mesmo
+   sexo mais a liga da sua carreira, e só entra quem
+   tem 450 minutos ou mais na temporada. O número de
+   jogadores comparados fica escrito no rodapé.
+[NOVO] Extremo (ponta) é comparado com meias-atacantes,
+   não com centroavantes. Medido no save: os dois não
+   são parecidos em NENHUMA das nove métricas
+   principais — o ponta mediano tirava 36º em gols e o
+   centroavante mediano tirava 33º em passe
+   progressivo, só por causa da posição.
+[NOVO] O centro da pizza mostra contra qual posição
+   você está comparando, com o ícone dela.
+[NOVO] Botão "?" em cada medidor, no radar e na pizza,
+   explicando o que aquele número mede.
+[NOVO] Selo de DADOS ESTIMADOS no jogador que vem de
+   liga que o Football Manager não simula em detalhe —
+   ali a estatística é estimativa do jogo, não jogo a
+   jogo.
+[NOVO] A legenda do percentil diz "42º · MELHOR QUE
+   42 por cento", em vez do antigo "TOP 58 por cento",
+   que se lia ao contrário.
+
+BUSCA
+---------------------------------------------------
+[CORRIGIDO] Procurar por nome sem acento não achava
+   ninguém: "Estevao" devolvia zero e só "Estêvão"
+   funcionava. Agora tanto faz — e vale também para
+   nomes com letras de traço, como Højlund, Łukasz,
+   Đurić e Straße. Corrigido na Base de Dados e no
+   Meu time.
+
+PREFERÊNCIAS
+---------------------------------------------------
+[CORRIGIDO] Fechar e abrir o app apagava tudo que você
+   tinha arrumado: o IDIOMA voltava para o português,
+   e junto iam as colunas escolhidas, a largura delas,
+   os filtros da tela e o resto do estado da Base de
+   Dados. A janela do app subia num perfil temporário e
+   o descartava ao fechar. Agora ela guarda, e o idioma
+   ainda tem uma cópia de segurança fora do navegador.
+
+BIBLIOTECA
+---------------------------------------------------
+[CORRIGIDO] Os filtros prontos que vêm com o app não
+   estavam sendo embarcados: a Biblioteca abria vazia
+   em vez de mostrar Agentes livres, Contrato acabando,
+   Listados para transferência e Jovens promessas.
+
+====================================================
+ v0.5.1 — 18/08/2026
+====================================================
+
+CONTA
+---------------------------------------------------
+[CORRIGIDO] Entrar com o Patreon funcionava — o acesso era
+   gravado — mas a janela continuava mostrando "Sem conta"
+   até o programa ser reaberto. O retorno do login acontece
+   no NAVEGADOR, fora da janela do app, e ela não tinha
+   como saber que tinha acontecido. Só aparecia no .exe: no
+   navegador, trocar de aba atualizava a tela por acidente.
+[NOVO] Ao clicar em "Entrar com Patreon" o app avisa que
+   abriu uma aba no seu navegador e fica esperando. O
+   resultado aparece sozinho, sem fechar nem recarregar
+   nada, e diz qual nível você recebeu.
+[MUDOU] Os avisos desse fluxo ganharam destaque de
+   verdade: título grande na cor do estado, painel
+   tingido e a dica em pílula, no lugar de texto cinza.
+
+
+====================================================
+ v0.5 — 15/08/2026
+====================================================
+
+O apoio no Patreon passa a valer dentro do app: existem
+cinco níveis, e cada um libera mais. Nada do que você já
+salvou é apagado por causa disso.
+
+
+NÍVEIS DE ACESSO
+---------------------------------------------------
+[NOVO] Cinco níveis: Grátis, Supporter, Season Analyst,
+   Moneyball Scout e FMSH Pro. O nível aparece no bloco
+   do topo da barra lateral e na aba Conta.
+[NOVO] ENTRAR COM O PATREON: o app abre o navegador,
+   você autoriza e o nível vem do seu apoio ativo. Quem
+   cancela ou tem o cartão recusado volta ao Grátis.
+[NOVO] Quantas temporadas cada nível guarda POR
+   CARREIRA: Grátis e Supporter 1, Season Analyst 3,
+   Moneyball Scout 10, FMSH Pro sem limite. O limite é
+   por carreira, e não no total — quem joga dois saves
+   não é punido por isso.
+[NOVO] O ELENCO tem limite PRÓPRIO, separado do da base
+   inteira: 3 por carreira no Grátis e no Supporter, e sem
+   limite a partir do Season Analyst. Salvar o elenco nunca
+   consome a vaga de uma temporada cheia. Um elenco ocupa
+   perto de 20 KB; uma temporada cheia, 159 MB.
+[NOVO] Salvar uma temporada além do limite abre uma
+   janela dizendo quantas você tem, quantas o seu nível
+   guarda e qual degrau resolve — com o que ele libera na
+   frente. NADA é apagado. A janela também oferece a saída
+   que não custa nada: apagar uma temporada antiga.
+[NOVO] Favoritos exige Season Analyst; Finanças e
+   Moneyball Assistant exigem Moneyball Scout, que também
+   dá acesso antecipado aos módulos novos.
+[MUDOU] A chave de acesso agora carrega o NÍVEL que foi
+   gerado para ela, em vez de liberar sempre tudo.
+[MUDOU] "Código de acesso" passou a se chamar CHAVE DE
+   ACESSO em todo o app.
+[NOVO] Sair da conta e ver a escada inteira de níveis,
+   tudo na aba Conta.
+
+
+CARREIRAS
+---------------------------------------------------
+[CORRIGIDO] Abrir o FM criava uma carreira VAZIA ao lado
+   da que já tinha as suas temporadas, com o mesmo nome —
+   duas "Avaí FC" na lista, e a ativa sem nada dentro. As
+   temporadas salvas antes desta versão não guardam o
+   identificador do save, então o app não tinha como saber
+   que eram do save aberto. Agora, ao conectar, as
+   temporadas antigas DO MESMO CLUBE passam a pertencer ao
+   save aberto, levando junto a moeda e os favoritos.
+[MUDOU] Se você tem dois saves no mesmo clube, eles vão
+   aparecer juntos depois dessa adoção — o clube é a única
+   pista que as temporadas antigas têm. Use "Mover para
+   outra carreira", em Temporadas arquivadas, para separar.
+
+
+TELAS QUE VOCÊ AINDA NÃO PODE ABRIR
+---------------------------------------------------
+[MUDOU] Recurso travado deixou de ser um item apagado
+   sem explicação: a tela mostra o nome do nível, o que
+   ele libera e um caminho para assinar — sobre um fundo
+   do próprio recurso, desfocado.
+[NOVO] Módulo ainda EM CONSTRUÇÃO tem tela própria, com
+   martelo, separada da tela de "falta nível". São dois
+   motivos diferentes de não poder entrar, e misturá-los
+   faria alguém assinar esperando abrir algo hoje.
+[NOVO] Quem tem acesso antecipado vê, na tela do módulo
+   em construção, que ele será liberado assim que o
+   desenvolvimento começar — antes do lançamento geral.
+[MUDOU] Na barra lateral, item travado mostra CADEADO e
+   item em construção mostra MARTELO, sempre visíveis.
+   Módulo por construir fica esmaecido em qualquer
+   nível, inclusive no FMSH Pro.
+
+
+ALERTAS
+---------------------------------------------------
+[MUDOU] O cartão do aviso ganhou destaque: título maior,
+   o tipo do aviso escrito acima dele (recado, novidade
+   ou alerta) e a data em evidência.
+[CORRIGIDO] Abrir a tela Alertas marcava tudo como lido
+   NA ENTRADA. Um aviso descoberto pela própria tela
+   nascia lido, e o contador da barra lateral nunca
+   chegava a aparecer. Agora marca ao SAIR da tela.
+[MUDOU] Avisos publicados em inglês aparecem traduzidos
+   para quem usa o app nesse idioma.
+
+
+TABELAS — pedidos e correções dos beta testers
+---------------------------------------------------
+[CORRIGIDO] A coluna "Crz%" (% de cruzamentos certos) vinha
+   zerada para todo mundo. Ela estava rotulada só como
+   "Cruzamentos" e tratada como número inteiro, mas a conta
+   é certos ÷ tentados — 0,148 virava 0. Agora aparece como
+   14,8%, com o nome certo.
+[CORRIGIDO] O mapa de calor das colunas "Minutos pra fazer
+   um passe decisivo", "pra marcar um gol" e semelhantes
+   estava invertido: quem demorava MENOS aparecia em
+   vermelho. São 13 colunas. "Minutos pra sofrer um gol",
+   do goleiro, continua como estava — ali demorar mais é
+   que é bom.
+[MUDOU] No "Meu time", a lista abre na ORDEM DE CAMPO
+   (goleiro, defesa, meio, ataque) e a coluna de posição
+   passa a ordenar assim, e não em ordem alfabética. Na
+   Base de Dados nada muda: lá a posição continua
+   alfabética.
+[NOVO] Botão direito no CABEÇALHO de uma coluna abre um
+   menu, na Base de Dados e no Meu time: filtrar por ela,
+   ordenar nos dois sentidos, marcar, travar à esquerda e
+   esconder. "Filtrar" abre o filtro avançado já com a
+   condição daquela coluna criada.
+[MUDOU] Marcar e travar uma coluna só existiam como
+   botõezinhos que apareciam ao passar o mouse no
+   cabeçalho. Continuam lá, e agora também no menu de
+   botão direito, com nome escrito.
+
+
+CONTA E BARRA LATERAL
+---------------------------------------------------
+[MUDOU] O bloco do usuário mostra o nome inteiro numa
+   linha só, com o nível abaixo e a origem do acesso
+   (Patreon ou chave) à direita.
+[CORRIGIDO] Uma chave gerada para um nível intermediário
+   abria como FMSH Pro. O nível gerado agora é o nível
+   entregue.
+
+
+====================================================
+ v0.4 — 14/08/2026 (entrou no app junto com a v0.5)
+====================================================
+
+Tudo abaixo já está pronto e testado no ambiente de
+desenvolvimento, mas AINDA NÃO ENTROU num .exe. Quem
+está com a v0.3.1 não tem nada disto.
+
+
+CARREIRAS — cada save do FM com as suas preferências
+---------------------------------------------------
+[NOVO] Uma CARREIRA é um save do Football Manager. Quem
+   joga vários saves ao mesmo tempo não precisa mais
+   reconfigurar o app a cada troca.
+[NOVO] Moeda, periodicidade do salário e favoritos
+   passam a seguir a carreira: dá para ver R$ no save
+   do Avaí e € no do Schalke, no mesmo computador.
+[NOVO] Com o FM aberto, a carreira é a do save
+   carregado — trocar de save no jogo troca as
+   preferências sozinho.
+[NOVO] O bloco do topo da barra lateral mostra a
+   carreira ativa e o menu troca de carreira. A barra
+   de cima virou "FMSH / <carreira> / <tela>".
+[MUDOU] "Temporadas arquivadas" agora agrupa as
+   temporadas por carreira. Dá para renomear a carreira
+   e mover uma temporada de uma para outra.
+[MUDOU] As temporadas salvas ANTES desta versão foram
+   agrupadas pelo CLUBE, que é a única pista que elas
+   guardam. Dois saves seus no mesmo clube caem juntos —
+   use "Mover para outra carreira" para separar.
+[MUDOU] Sua lista de favoritos atual foi COPIADA para a
+   carreira ativa. A lista antiga não foi apagada.
+[INTERNO] Cada temporada nova guarda o identificador do
+   save (lido da memória do jogo), então as próximas já
+   nascem na carreira certa mesmo com clubes repetidos.
+
+
+ALERTAS, NOTAS DA VERSÃO, DIAGNÓSTICO E PERFIL DO CLUBE
+---------------------------------------------------
+[NOVO] Tela ALERTAS: recados e novidades publicados por
+   nós aparecem aí, sem precisar de programa novo. Sem
+   internet, mostra os últimos avisos que baixou.
+[NOVO] Tela NOTAS DA VERSÃO: este arquivo, dentro do
+   app.
+[NOVO] Tela DIAGNÓSTICO: versão, pastas, tamanho do
+   banco e os erros registrados, com um botão que abre
+   a pasta e outro que copia um resumo para colar no
+   Discord.
+[NOVO] Tela PERFIL DO CLUBE: finanças, público,
+   estrutura e torcida do seu clube.
+[NOVO] Item ROADMAP na barra lateral, abrindo a lista
+   pública do que vem por aí.
+[CORRIGIDO] Saldo NEGATIVO do clube aparecia como "—".
+   Agora aparece em vermelho, com o sinal.
+
+
+CONTA E CONFIGURAÇÕES
+---------------------------------------------------
+[NOVO] Código de acesso: quem recebe um código ativa o
+   nível completo pelas Configurações.
+[MUDOU] As Configurações agora têm três abas: Conta,
+   Preferências e Arquivos e pastas.
+[MUDOU] A barra lateral foi reorganizada: Portal,
+   Alertas, Notas da versão e Roadmap no topo; o grupo
+   "Principal" virou "HUB"; "Base de Dados" virou
+   "Temporadas"; "Temporadas salvas" virou "Temporadas
+   arquivadas".
+[MUDOU] A tela inicial lista as 4 temporadas mais
+   recentes, com um link para ver todas.
+
+
+POSIÇÕES — a coluna agora diz onde o jogador joga
+---------------------------------------------------
+[MUDOU] A coluna Posição mostra TODAS as posições que o
+   jogo lista na ficha do jogador, no formato do próprio
+   FM: "ST, AM (RLC)", "M/AM (LC)", "D (RL)". Antes só
+   aparecia a posição principal.
+
+[MUDOU] A posição PRINCIPAL vem sempre na frente. Isto é
+   uma diferença deliberada em relação ao FM e ao FMST,
+   que usam ordem fixa (defesa → ataque) e escrevem
+   "AM (RLC), ST" mesmo para um atacante. Aqui o primeiro
+   rótulo é sempre o que o jogador realmente é.
+
+[INTERNO] O corte para uma posição aparecer é 17 na escala
+   de 1 a 20 do jogo — o mesmo que o FM usa na ficha.
+   Medido em 60 jogadores contra a familiaridade lida por
+   outro caminho: o corte 17 acerta 60 de 60; o 16 acerta
+   45 e o 18 acerta 48.
+
+[NOVO] A notação completa vale também no MEU TIME e no CSV
+   exportado, não só na Base de Dados. Conferido linha a
+   linha: as 13 primeiras do CSV são idênticas às da tela.
+
+[INTERNO] Esquerda e direita sempre foram dados separados
+   no jogo. Medido no save: 26.903 jogadores só jogam de
+   lateral-esquerdo, 30.081 só de direito e 1.749 dos dois
+   lados. Nas pontas a diferença é bem menor — 9.491 jogam
+   dos dois lados, contra 1.749 dos laterais.
+
+
+BUSCA AVANÇADA — atributos e paridade com o FMST
+---------------------------------------------------
+[NOVO] Aba "Escolher atributos": os 62 atributos separados
+   por categoria e na ordem do FMST — técnicos, bola
+   parada, mentais, físicos, goleiro, ocultos e
+   personalidade. Marque vários e crie a condição para
+   todos de uma vez.
+
+[NOVO] Botões + e − em toda caixa numérica do filtro, não
+   só nos atributos.
+
+[MUDOU] O seletor de posições da LINHA de condição virou
+   fileira de pastilhas, igual ao FMST. O campo desenhado
+   continua no topo do modal — os dois mexem na MESMA
+   condição, então marcar num marca no outro.
+
+[NOVO] A condição de posições aparece como linha na lista,
+   com E/OU e liga/desliga próprios. Antes ela existia só
+   no campo do topo: a busca filtrava por posição e a
+   lista de condições não dizia isso.
+
+[MUDOU] O botão "+ Condição" abre direto o seletor de
+   campo. A condição só nasce depois de você escolher o
+   campo, já com o operador certo — antes ela nascia com
+   um palpite nosso que você tinha que desfazer.
+
+[MUDOU] O seletor de campo ficou no formato do FMST:
+   passar o mouse na categoria já troca a lista, as
+   categorias não rolam mais (o painel cresce até caber
+   todas) e ele abre sempre no canto superior direito do
+   modal.
+
+[MUDOU] As categorias caíram de 18 para 15. "Posição" (1
+   campo) e "Habilidade" (3) foram para "Geral";
+   "Contrato" e "Transferência" viraram "Contrato e
+   valor".
+
+[CORRIGIDO] O seletor de campo mostrava 596 campos na aba
+   Todos, com 122 nomes repetidos — "Jogos completos"
+   aparecia SEIS vezes, idênticas. A planilha tem uma aba
+   por posição e a mesma estatística vive em várias delas.
+   Agora ele lê a mesma lista já curada que o seletor de
+   colunas usa: 596 → 296 na aba Todos, 743 → 388 em
+   Atacantes.
+
+[CORRIGIDO] Escolher posições no filtro avançado estando
+   numa aba de posição APAGAVA o filtro. A busca é
+   guardada por aba, e ela era gravada na aba de origem um
+   instante antes de a análise voltar para "Todos" — o
+   filtro nascia e morria no mesmo clique.
+
+[CORRIGIDO] O primeiro clique no campo de posições criava
+   a condição com limiar 20 enquanto o controle ao lado
+   mostrava 17.
+
+[MUDOU] Marcar posições no filtro leva a análise de volta
+   para "Todos". As duas coisas se contradiziam: a aba
+   corta pela posição principal, então procurar "AM (RL)"
+   dentro de "Atacantes" perdia justamente o meia que joga
+   de ponta.
+
+[NOVO] A caixinha à esquerda de cada linha ganhou legenda
+   ("marcar para agrupar"). Ela não é a mesma coisa que o
+   ✓ verde da linha, que liga e desliga a condição.
+
+
+GOLEIROS
+---------------------------------------------------
+[CORRIGIDO] "Ações tentadas" e "Ações com sucesso"
+   contavam o pênalti DUAS vezes. Num goleiro, o endereço
+   que guarda desarmes guarda pênaltis enfrentados, e a
+   planilha somava o mesmo número com os dois nomes.
+
+[MUDOU] As 7 colunas de "Saída do gol" saíram dos
+   seletores. Elas não medem o que o nome diz e não há
+   como consertar: a conta parte de desarmes (que num
+   goleiro são pênaltis) e de pressões, que só 146 de
+   10.896 goleiros têm. Continuam calculáveis para quem já
+   as usava em alguma vista salva.
+
+
+TEMPORADAS SALVAS
+---------------------------------------------------
+[NOVO] Cada temporada mostra quanto ocupa no disco.
+
+[CORRIGIDO] Excluir uma temporada deixava para trás as
+   tabelas de base — 257.809 linhas órfãs num caso medido
+   (elencos, competições e times de base). Agora a
+   exclusão limpa tudo.
+
+[CORRIGIDO] Excluir não devolvia espaço ao disco. O
+   arquivo agora é compactado depois da exclusão. A
+   primeira vez é demorada (medido: 56s num banco de
+   1,3 GB); da segunda em diante é instantânea.
+
+[NOVO] Tela de espera durante a exclusão, avisando do
+   tempo e do risco de fechar o app no meio.
+
+
+====================================================
+ v0.3.1 — 09/08/2026
+====================================================
+
+BUSCA AVANÇADA (novidade grande)
+---------------------------------
+[NOVO] O botão "Filtros avançados" abre uma tela nova, no
+   formato do FMST: filtros rápidos em cima, lista de
+   condições embaixo, "Aplicar" no rodapé.
+
+[NOVO] CAMPO DE POSIÇÕES desenhado como um campo de
+   futebol — ST em cima, GK embaixo, 14 posições. Duas
+   coisas que o FMST não faz:
+     · a célula tem TRÊS estados, não dois, porque o jogo
+       guarda a familiaridade de 1 a 20 e não um "joga /
+       não joga";
+     · o limiar é ajustável (padrão 15, "Competente").
+       Sem ele, "joga de ST" traria quem tem 3 de 20 ali.
+   Líbero ficou de fora: ZERO dos 376 mil jogadores do
+   save tem essa familiaridade — a célula existiria só
+   para nunca trazer ninguém.
+
+[NOVO] E / OU entre as condições, com UM nível de
+   parênteses. Dá para pedir coisas como
+   "valor ≥ 1 mi E (idade ≤ 21 OU idade ≥ 34)".
+
+[NOVO] Resumo em português acima da lista, com os
+   parênteses escritos. Não é enfeite: não existe
+   precedência de OU, então "A E B OU C" e "A E (B OU C)"
+   são coisas diferentes e olhando só as linhas isso é
+   invisível.
+
+[NOVO] Condição pode ser DESLIGADA sem ser apagada — some
+   do filtro e volta quando você quiser.
+
+[NOVO] Operadores novos: diferente de, não informado,
+   contém / começa com / termina com (texto), e comparar
+   um campo com OUTRO campo (ex.: PA maior que CA).
+
+[NOVO] Busca por campo: são ~680 por aba, então o seletor
+   tem caixa de pesquisa e seções.
+
+[MUDOU] O filtro antigo continua valendo. Ele é lido uma
+   vez para trazer o que você já tinha, e NÃO é apagado.
+
+[CORRIGIDO] Condição sobre uma coluna que não vale naquela
+   posição era aplicada assim mesmo. O jogo guarda
+   "desarmes tentados" e "pênaltis enfrentados" no MESMO
+   lugar da memória, então num goleiro a conta saía com o
+   rótulo errado. Agora a coluna nem é oferecida, e uma
+   condição antiga assim aparece marcada em vermelho em
+   vez de ser aplicada em silêncio.
+
+
+CORREÇÕES
+----------
+[CORRIGIDO] FILTRO DE LIGA/CLUBE sumia com tudo. Marcar
+   duas nações grandes funcionava; marcar a terceira
+   voltava ZERO jogador. Não era o filtro: o endereço que
+   o app monta passava de 64 KB e o servidor recusava o
+   pedido. Medido: 8.171 clubes passavam, 8.187 já
+   falhavam. Agora cabem mais de 50 mil.
+
+[CORRIGIDO] Não dava para ORDENAR de "Jogador" até
+   "Clube". As colunas de texto (jogador, posição,
+   nacionalidade, liga, clube, contrato, pé) clicavam mas
+   ordenavam por MINUTOS, em silêncio. Agora ordenam em
+   ordem alfabética, ignorando acento e maiúscula.
+
+[NOVO] Botão "Remover todos" na tela de Favoritos. Pede
+   confirmação — a lista é a mesma do Meu time.
+
+[CORRIGIDO] Consulta que FALHAVA ficava idêntica a
+   "nenhum jogador encontrado". Era o que escondia o bug
+   do filtro de liga acima. Agora aparece uma faixa
+   avisando.
+
+[CORRIGIDO] Pé preferido não achava ninguém quando
+   procurado por texto: o programa guarda "right" e a tela
+   mostra "Direito". Virou escolha fixa com as 3 opções.
+
+[CORRIGIDO] CA e PA apareciam na busca mesmo com a opção
+   "Mostrar CA / PA" desligada em Configurações.
+
+[CORRIGIDO] A lista de estatísticas do seletor de campo
+   não rolava — só dava para escolher pesquisando.
+
+
+====================================================
+ v0.3 — 06/08/2026
+====================================================
+
+FILTRO DE BASE E SELEÇÕES (a maior novidade desta versão)
+----------------------------------------------------------
+[NOVO] Botão "Base sub-20", ao lado de "Selecionar
+   Liga/Clube". Abre uma árvore no mesmo formato da de
+   ligas:
+
+      País > Competição > Clube > Time Sub-20 / Sub-17 / ...
+
+   Marcar "Sub-20 do Flamengo" traz SÓ o elenco Sub-20 —
+   não o elenco inteiro do clube. O número ao lado de cada
+   clube é a quantidade de JOGADORES, não de times.
+
+[NOVO] Seletor de seleções nacionais dentro de "Ligas e
+   Clubes", mostrando todas. As seleções principais NÃO
+   aparecem mais misturadas no filtro de base.
+
+[MUDOU] Times reserva (B / II / Aspirantes) ficam de fora
+   do filtro de base — é categoria diferente, não base.
+
+[INTERNO] Números do save de referência: 37.173 times ·
+   1.301 competições de base e seleção · 419.563 vínculos
+   jogador-time. O scan ficou ~8,7 s mais lento por causa
+   disso.
+
+[INTERNO] Um jogador pode estar em mais de um elenco ao
+   mesmo tempo (4,8% deles estão: garoto no principal e no
+   Sub-20, ou convocado pelo clube e pela seleção). Por
+   isso o vínculo virou uma tabela própria, em vez de uma
+   coluna que teria de escolher um elenco e mentir sobre o
+   outro.
+
+[CORRIGIDO] A contagem de jogadores de um time contava
+   objetos do elenco em vez de jogadores distintos — 9% dos
+   times mostravam um número e devolviam outro na consulta.
+
+LIMITAÇÃO CONHECIDA: na versão do Game Pass / Microsoft
+   Store, a lista oficial de participantes de cada
+   competição ainda não é lida. O recurso se desliga
+   sozinho ali, em vez de mostrar dado errado.
+
+
+FILTROS DA BASE DE DADOS
+-------------------------
+[NOVO] Pílulas de faixa para MINUTOS, IDADE e NOTA. Cada
+   uma abre um painel com caixa de mínimo, caixa de máximo
+   e barra deslizante. Idade vai de 15 a 50.
+
+[NOVO] Botão "Aplicar" nos painéis de faixa — a página só
+   recarrega quando você confirma, não a cada dígito
+   digitado. "Cancelar" descarta e "Redefinir" limpa sem
+   aplicar.
+
+[MUDOU] Os filtros ficam escondidos atrás do título: clicar
+   no nome abre o painel. A barra fica limpa.
+
+[MUDOU] As pílulas e os "Filtros avançados" agora são a
+   MESMA coisa, sincronizada nos dois sentidos: mexer na
+   pílula aparece no filtro avançado, e vice-versa.
+
+[MUDOU] "Filtros avançados" foi para a ponta esquerda da
+   barra, antes de Minutos.
+
+[CORRIGIDO] "Limpar tudo" não limpava o filtro de base.
+
+
+NOMES DAS COLUNAS — REVISÃO GERAL
+----------------------------------
+Antes, a MESMA coluna era batizada em quatro lugares
+independentes (cabeçalho, menu de colunas, filtro e CSV) —
+e eles não concordavam entre si. Agora cada coluna tem um
+nome só.
+
+[MUDOU] Colunas de identidade padronizadas:
+      "Id"     ->  "Idade"    (a sigla virava "ID" no
+                               cabeçalho e se lia como
+                               "identificador")
+      "Nome"   ->  "Jogador"
+      "Equipe" ->  "Clube"    (com o filtro de base,
+                               "Equipe" sugeria o time
+                               Sub-20, e o dado é o clube)
+      "Nac."   ->  "Nac"
+
+[MUDOU] A coluna "d90" (minutos ÷ 90) passou a se chamar
+   "Jogos completos" — antes era "Jogos", igual à coluna de
+   partidas disputadas, o que confundia as duas.
+
+[NOVO] Coluna "Min/Jogo" — média de minutos por partida, o
+   número que diz se o jogador é titular ou reserva.
+
+[MUDOU] A nota passou a mostrar 2 casas decimais.
+
+[CORRIGIDO] Havia duas colunas de nota ("Nota" e "Nota
+   média") com o mesmo conteúdo. Sobrou uma.
+
+
+NOMES DAS ESTATÍSTICAS MONEYBALL — CURADORIA
+----------------------------------------------
+[MUDOU] O cabeçalho passou a mostrar SIGLA padronizada
+   (xG/90, PasC%, DesCi...). O nome completo continua
+   inteiro no botão "?", no menu de Colunas, no filtro e no
+   CSV exportado — a sigla é só para caber na tela.
+
+[MUDOU] Mesma conta = um nome só. As 703 colunas do motor
+   correspondem a 341 cálculos distintos; rótulos diferentes
+   para a mesma conta foram unificados. De 451 nomes
+   diferentes sobraram 354.
+
+[CORRIGIDO] xG SEM PÊNALTI passou a usar o número que o
+   próprio jogo fornece (npxG), em vez da estimativa
+   "xG menos 0,79 por pênalti" herdada da planilha. A
+   estimativa erra em disputa de pênaltis, que não entra no
+   xG. Exemplo real: um jogador com xG 8,88 tinha npxG 8,88
+   no jogo e 8,09 pela fórmula antiga.
+
+[CORRIGIDO] Coluna que subtraía o pênalti duas vezes:
+   removida.
+
+[MUDOU] Colunas que eram a mesma conta em duas abas
+   diferentes viraram uma só, que aparece nas duas.
+
+VERIFICADO: zero nomes repetidos dentro da mesma aba e zero
+   siglas colidindo.
+
+RESSALVA DECLARADA: sobraram 29 casos de MESMO NOME com
+   CONTA DIFERENTE, deixados de propósito para revisão
+   futura. E 3 pares de goleiro que dão o mesmo número mas
+   NÃO são a mesma estatística (o jogo guarda as duas coisas
+   no mesmo lugar da memória) continuam separados.
+
+
+MEU TIME
+---------
+[MUDOU] Cabeçalho de duas linhas, igual ao da Base de
+   Dados.
+
+[CORRIGIDO] Título e dado desalinhados (Posição e
+   Nacionalidade, por exemplo, tinham o dado à esquerda e o
+   título fora de linha).
+
+[CORRIGIDO] As cores da nota tinham sumido desta tela.
+
+[MUDOU] Os botões de MARCAR e TRAVAR coluna ficam sempre
+   visíveis, não só ao passar o mouse.
+
+
+TABELAS — CORREÇÕES
+--------------------
+[CORRIGIDO] Ao travar uma coluna e marcá-la, a marcação
+   sumia assim que a tabela rolava para o lado. Causa: o
+   navegador não leva a borda junto com a célula travada.
+   Trocado por um traço desenhado dentro da própria célula,
+   que acompanha.
+
+[CORRIGIDO] O heatmap não pintava colunas travadas. Agora
+   pinta, com a cor fechada (opaca) que a coluna travada
+   precisa para esconder o que passa atrás dela.
+
+
+OUTROS
+-------
+[NOVO] Menu de botão direito nas linhas da tabela (Base de
+   Dados, Favoritos e Meu time): abrir perfil, favoritar/
+   desfavoritar, tirar da lista. "Comparar" aparece
+   desabilitado, marcado como "em breve". Se a linha clicada
+   faz parte de uma seleção, a ação vale para a seleção
+   inteira.
+
+[NOVO] Aviso de erro ao conectar. Antes, se o FM estivesse
+   fechado ou sem save carregado, clicar em "Conectar"
+   simplesmente não fazia nada visível.
+
+[CORRIGIDO] GAME PASS / MICROSOFT STORE: o scan da base
+   voltava zero jogador mesmo com a conexão funcionando. O
+   módulo de leitura tinha cópias próprias de três endereços
+   escritos à mão com os valores da Steam — o app trocava os
+   endereços dele, mas essas cópias ficavam congeladas.
+   Resultado: uma tela funcionava e a outra lia zero.
+   Validado ao vivo na build do Game Pass.
+
+
+====================================================
+ v0.2.2 — 03/08/2026
+====================================================
+
+[CORRIGIDO] GAME PASS / MICROSOFT STORE, segunda rodada. O
+   log de um testador mostrou que o app ATÉ ABRIA o
+   processo do jogo, mas o Windows negava a listagem do que
+   há dentro dele (o passo que acha os dados do FM). O app
+   passou a detectar essa negação e a usar um caminho
+   alternativo do Windows para a mesma listagem.
+
+[NOVO] Se mesmo assim não conectar, o arquivo
+   "Documentos\FM Season Hub\fmsh.log" registra tudo o que
+   o Windows mostrou (inclusive de onde o jogo foi
+   instalado) — é o arquivo que fecha o diagnóstico.
+
+
+====================================================
+ v0.2.1 — 01/08/2026
+====================================================
+
+[MUDOU] Primeira tentativa de compatibilidade com Game
+   Pass: o app passou a pedir o acesso MÍNIMO ao processo
+   do jogo (só leitura) em vez de acesso total, que a Store
+   nega.
+
+
+====================================================
+ v0.2 — 01/08/2026
+====================================================
+
+[MUDOU] CADA ABA ABRE COM O QUE IMPORTA. Antes, a aba
+   "Defesa Central" começava mostrando gols, xG e pênaltis
+   — estatística de atacante — e a primeira coluna
+   defensiva só aparecia rolando bem para a direita. Agora
+   cada posição abre com as ~16 colunas que decidem uma
+   contratação ali (zagueiro: desarmes, cortes,
+   interceptações, duelos aéreos). As outras ~90 continuam
+   existindo, no botão "Colunas".
+
+[NOVO] NOTA MÉDIA em todas as posições, com cor fixa (não
+   depende do heatmap): turquesa 9,0+ · verde escuro 8,0+ ·
+   verde 7,5+ · limão 7,0+ · dourado 6,7+ · laranja 6,4+ ·
+   vermelho até 6,3. Traço cinza = não jogou (não é nota
+   zero).
+
+[CORRIGIDO] CA / PA voltaram para as tabelas (tinham
+   sumido). Dá para ordenar e filtrar por elas. Quem
+   prefere jogar sem ver esses números pode desligar em
+   Configurações — aí somem da tabela e do menu de colunas.
+
+[CORRIGIDO] Colunas com nomes repetidos. Havia casos de
+   duas colunas com o MESMO cabeçalho e números diferentes
+   (ex.: "FIN. GOL" aparecia para "Finalizações no gol" e
+   para "Finalizações pra um gol").
+
+[MUDOU] Barra de cabeçalho mais alta, para caber os nomes e
+   os botões.
+
+[MUDOU] O seletor de abas passou a se chamar "Análise" —
+   ele troca o conjunto de estatísticas, não só filtra
+   jogadores.
+
+[NOVO] Botão "Reportar bug" fixo na barra lateral, abrindo
+   o Discord.
+
+
+====================================================
+ v0.1.1 — 01/08/2026
+====================================================
+
+[CORRIGIDO] CA / PA nas tabelas (primeira correção; ver
+   também a v0.2, que estendeu o conserto ao menu de
+   colunas e ao CSV).
+
+[NOVO] Faixas de aviso do beta no topo e no rodapé: prints
+   e vídeos liberados, redistribuição vedada.
+
+[NOVO] Dois botões "Reportar bug" (faixa do topo e rodapé
+   da barra lateral) abrindo o Discord.
+
+
+====================================================
+ v0.1 — primeira versão do teste fechado
+====================================================
+
+[NOVO] Leitura da memória do Football Manager 26 em tempo
+   real, só leitura, sem editar nada no jogo. O save
+   inteiro (~370 mil jogadores) é lido em segundos.
+
+[NOVO] MEU TIME — elenco com ~70 métricas por jogador,
+   filtros, percentil e heatmap.
+
+[NOVO] BASE DE DADOS — o save inteiro dividido em 7
+   posições (Goleiros, Zagueiros, Laterais, Volantes,
+   Meio-Campistas, Meias-Atacantes, Atacantes) mais a aba
+   "Todos". Mais de 700 colunas estatísticas, calculadas a
+   partir dos dados brutos do jogo com as mesmas fórmulas
+   da planilha Moneyball de referência.
+
+[NOVO] FAVORITOS — marque jogadores com estrela em
+   qualquer tela e encontre todos juntos aqui.
+
+[NOVO] Filtro por Liga/Clube, ordenação por qualquer
+   coluna, comparação por percentil, heatmap e exportação
+   para CSV (abre certo no Excel em português).
+
+[NOVO] TEMPORADAS SALVAS — grava um retrato do save para
+   comparar evolução ao longo do tempo, mesmo sem o FM
+   aberto.
+
+[NOVO] Idiomas português e inglês.
+
+[NOVO] O save é lido direto do jogo, na sua máquina, e
+   as temporadas ficam guardadas aí — dá para analisar
+   tudo sem o FM aberto.
+
+
+====================================================
+ SOBRE ESTE ARQUIVO
+====================================================
+
+O projeto não tem histórico de versionamento automático,
+então as versões 0.1 e 0.1.1 foram reconstruídas a partir
+dos arquivos LEIA-ME distribuídos com cada release e do
+plano de trabalho. Elas são menos detalhadas que as
+posteriores de propósito — só entrou o que está registrado,
+sem preencher lacunas com suposição.
+
+Dúvidas, bugs e sugestões: https://discord.gg/C32Kbaqd2h

@@ -1,0 +1,7979 @@
+ta
+ta
+ta
+H/
+f(
+l/
+w'
+p'
+i'
+l)
+_)
+/'
+n-
+:&
+X=
+)-
+d%
+#%
+n+
+l%
+u%
+r&
+L&
+@=
+i#
+0=
+(=
+A#
+<%
+H*
+?%
+W)
+d$
+A(
+A!
+_'
+`!
+W!
+l'
+}'
+c 
+H"
+Q'
+) 
+4"
+X&
+!!
+i$
+k%
+~%
+_%
+\ 
+Z$
+f$
+\$
+V!
+X=
+U!
+P 
+< 
+P=
+`=
+p=
+ =
+8=
+__module__
+__class__
+__name__
+__package__
+__bases__
+__metaclass__
+__abstractmethods__
+__closure__
+__instancecheck__
+__dict__
+__doc__
+__file__
+__path__
+__enter__
+__exit__
+__builtins__
+__all__
+__init__
+__cmp__
+__iter__
+__loader__
+__compiled__
+__nuitka__
+inspect
+compile
+range
+open
+super
+sum
+format
+__import__
+bytearray
+staticmethod
+classmethod
+keys
+get
+name
+globals
+locals
+fromlist
+level
+read
+rb
+lower
+path
+basename
+dirname
+abspath
+isabs
+normpath
+exists
+isdir
+isfile
+listdir
+stat
+lstat
+close
+getattr
+__cached__
+print
+end
+file
+bytes
+__annotations__
+send
+throw
+__spec__
+_initializing
+parent
+types
+ascii
+punycode
+loader
+__classcell__
+as_file
+register
+__class_getitem__
+reconfigure
+encoding
+line_buffering
+__match_args__
+__args__
+__aenter__
+__aexit__
+split
+Unpack
+__qualname__
+fileno
+args
+_cache_por_temporada
+cache
+_CACHES_POR_TEMPORADA
+append
+_pertence
+chave
+zia toda troca de temporada jogar fora os percentis da propria temporada aberta.
+_memoria_do_processo_mb
+ctypes
+wintypes
+_PMC
+k32
+Structure
+__prepare__
+_PMC
+__getitem__
+%s.__prepare__() must return a mapping, not %s
+<metaclass>
+_memoria_do_processo_mb.<locals>._PMC
+__firstlineno__
+_PMC
+__class__
+wintypes
+ctypes
+_memoria_do_processo_mb
+cb
+DWORD
+PageFaultCount
+PeakWorkingSetSize
+c_size_t
+WorkingSetSize
+QuotaPeakPagedPoolUsage
+QuotaPagedPoolUsage
+QuotaPeakNonPagedPoolUsage
+QuotaNonPagedPoolUsage
+PagefileUsage
+PeakPagefileUsage
+_fields_
+__static_attributes__
+__orig_bases__
+sizeof
+WinDLL
+kernel32
+HANDLE
+GetCurrentProcess
+restype
+psapi
+GetProcessMemoryInfo
+POINTER
+argtypes
+byref
+__mro_entries__
+bases
+_memoria_fisica_mb
+ctypes
+wintypes
+_MSE
+_MSE
+_memoria_fisica_mb.<locals>._MSE
+_MSE
+__class__
+wintypes
+ctypes
+_memoria_fisica_mb
+dwLength
+dwMemoryLoad
+ullTotalPhys
+c_ulonglong
+ullAvailPhys
+ullTotalPageFile
+ullAvailPageFile
+ullTotalVirtual
+ullAvailVirtual
+ullAvailExtendedVirtual
+GlobalMemoryStatusEx
+_memoria_max_permitida_mb
+fisica
+_memoria_fisica_mb
+max
+min
+nca abaixo de 1 GB nem acima de 8 GB.
+_teto_memoria_mb
+mb
+settings
+load
+memoria_max_mb
+lueError
+MEMORIA_MIN_MB
+_memoria_max_permitida_mb
+_grupos_na_memoria
+grupos
+cache
+grupos
+add
+update
+_ALLTIME_CACHE
+o soltar so um deles nao devolveria nada.
+_eh_da_leitura_viva
+exceto
+LIVE_SID
+alltime
+rreira leva as chaves das temporadas que junta.
+<genexpr>
+.0
+exceto
+_eh_da_leitura_viva
+exceto
+<genexpr>
+_eh_da_leitura_viva.<locals>.<genexpr>
+_largar_leituras_vivas
+exceto
+_grupos_na_memoria
+_eh_da_leitura_viva
+_soltar_grupo
+_GARIMPOS_CACHE
+pop
+_soltar_grupo
+cache
+_pertence
+cache
+_ULTIMO_USO_UI
+_caber
+vivo
+grupos
+teto
+temporadas
+na_tela
+fila
+_em_preparo
+LIVE
+ready
+_pool_key
+_largar_leituras_vivas
+exceto
+_teto_memoria_mb
+_memoria_do_processo_mb
+_BROWSE_CACHE
+<lambda>
+_caber.<locals>.<lambda>
+<lambda>
+_caber
+key
+default
+sorted
+<lambda>
+_caber
+key
+ando pedido (~1,4 s). Subir o teto e o que deixa isso instantaneo.
+<genexpr>
+.0
+na_tela
+vivo
+_caber
+na_tela
+vivo
+_caber.<locals>.<genexpr>
+_em_preparo
+_PREPARO
+ativo
+_trava_da
+chave
+trava
+_TRAVA_DAS_TRAVAS
+_TRAVAS
+threading
+RLock
+_largar_temporada
+sid
+chave
+cache
+chave
+_MUDOU_CACHE
+proveitado por uma captura nova: a RAM serviria os dados da antiga.
+_host_local
+valor
+host
+count
+rsplit
+strip
+[]
+127.0.0.1
+localhost
+::1
+so_deste_computador
+request
+call_next
+JSONResponse
+caminho
+origem
+urlparse
+sitio
+fastapi.responses
+JSONResponse
+JSONResponse
+_host_local
+request
+headers
+host
+erro
+host_nao_local
+status_code
+url
+startswith
+/api/
+_CONSULTAS_AUTOMATICAS
+time
+monotonic
+_ULTIMA_REQ
+_iniciar_preparador
+method
+_METODOS_QUE_MUDAM
+origin
+urllib.parse
+urlparse
+urlparse
+hostname
+_HOSTS_LOCAIS
+erro
+origem_externa
+erro
+origem_invalida
+sec-fetch-site
+same-origin
+same-site
+none
+call_next
+so_deste_computador
+conn
+db
+connect
+conn_for
+sid
+ready
+HTTPException
+nao ha leitura ao vivo carregada
+connect_live
+O snapshot ao vivo vive na RAM; os permanentes, no arquivo.
+_worker_conn
+init_db
+execute
+PRAGMA journal_mode=WAL
+Conexao propria da thread + WAL (nao bloquear as leituras da UI).
+_open_fm
+FmMemory
+FmReader
+mem
+fm_memory
+FmMemory
+FmMemory
+fm_reader
+FmReader
+FmReader
+_parse_date
+datetime
+date
+fromisoformat
+_job_set
+kw
+JOB
+_fm_version
+load_signatures
+fm_reader
+ver
+load_signatures
+load_signatures
+_VERSAO_ATUAL
+nunciar "FM26" com nada conectado e afirmar o que nao se sabe.
+_ler_ao_vivo
+game_date
+avisar
+arquivo
+scan_base
+mem
+reader
+club
+team
+club_full
+club_short
+mgr
+sess
+gdate
+origem
+dados
+prog
+carreiras
+_cx
+adotadas
+capture_all
+scan_base
+scan_base
+abrindo_fm
+phase
+_open_fm
+manager_club
+human_manager
+lendo_save
+save_session
+game_date
+build
+save
+now
+isoformat
+seconds
+timespec
+fm_origem
+fm_origem_em
+sid
+club
+club_uid
+_club_uid
+manager
+full_name
+read_at
+save_name
+fm_version
+savegame_id
+session_nonce
+_cache_currencies
+cache_browse
+apagar
+reset_live_db
+lendo_base
+AO VIVO
+phase
+sid
+name
+create_snapshot
+LIVE_SAVE_MARK
+LIVE_SCOPE
+name
+save_name
+game_date
+scope
+snapshot_id
+club_uid
+manager
+fm_version
+prog
+_ler_ao_vivo.<locals>.prog
+prog
+done
+total
+fase
+avisar
+_ler_ao_vivo
+avisar
+_parse_date
+progress
+ref_date
+ve foi descarregado durante a leitura
+_mark_teams
+commit
+gravar_live_db
+carreiras
+conn
+adotar_legado
+_log
+carreiras: 
+ temporada(s) antiga(s) adotadas pelo save aberto
+carreiras: nao adotei as temporadas antigas (
+: 
+i por `avisar`, e nao direto para o JOB.
+avisar
+done
+total
+phase
+%s argument after ** must be a mapping, not %s
+kw
+%s got multiple values for keyword argument '%s'
+called
+star_arg_dict
+parar_leitura_viva
+_PROCESSO_DA_LEITURA
+is_alive
+terminate
+_ler_em_processo_separado
+game_date
+arquivo
+multiprocessing
+queue
+leitura_viva
+ctx
+fila
+tipo
+dado
+multiprocessing
+queue
+leitura_viva
+get_context
+spawn
+Queue
+Process
+rodar_no_filho
+target
+args
+daemon
+start
+leitura ao vivo: processo a parte nao subiu (
+fila
+timeout
+Empty
+leitura ao vivo: processo a parte terminou sem resposta (codigo 
+exitcode
+job
+_job_set
+fim
+join
+i quem chama le aqui mesmo, como antes.
+_run_scan_live
+game_date
+arquivo
+dados
+novo_arquivo_ao_vivo
+_ler_em_processo_separado
+_ler_ao_vivo
+usar_live_db
+_iniciar_vigia
+preparando_base
+_preparar_leitura_viva
+leitura ao vivo: Base nao preparada (
+limpar_leituras_ao_vivo
+state
+done
+sid
+arquivo_live_db
+error
+state
+error
+JOB_LOCK
+release
+ra nova nao termina, a anterior continua valendo -- e se ela falhar, tambem.
+_run_capture
+name
+scope
+game_date
+plano
+scan_base
+jogadores_dos_clubes
+jogadores_que_jogaram
+scan_squad
+mem
+reader
+club
+team
+club_full
+club_short
+mgr
+gdate
+sess
+sgid
+arquivo
+sid
+ref
+prog
+uids
+times
+jogadores
+_fr
+clubes
+cortes
+agenda
+scan_base
+jogadores_dos_clubes
+jogadores_que_jogaram
+jogadores_dos_clubes
+jogadores_que_jogaram
+capture
+scan_squad
+scan_squad
+_worker_conn
+savegame_id
+save_name
+ALL
+name
+save_name
+game_date
+scope
+club_uid
+manager
+savegame_id
+save_file
+fm_version
+sid
+name
+squad
+clube/elenco do treinador nao encontrado
+lendo_elenco
+ref_date
+_run_capture.<locals>.prog
+prog
+done
+total
+fase
+_run_capture
+FIM_DE_TEMPORADA_SCOPE
+ligas
+uid
+_fim
+ponteiros_dos_clubes
+agenda
+varrendo
+reader
+u32
+_fr
+TEAM_CLUB_PTR
+CLUB_UID
+inicio
+timedelta
+days
+[fim de temporada] sem quem jogou fora dos elencos (
+jogadores
+progress
+ref_date
+players
+gravar_ligas
+estados
+lidas
+ler_agenda
+estado_das_ligas
+competicoes
+temporadas
+hoje
+[fim de temporada] marca das ligas nao gravada (
+marcando_times
+registrar_tamanho
+full
+_enfileirar_preparo
+s elas e a agenda de onde saem os clubes.
+_cache_currencies
+reader
+cur
+currencies
+currencies
+currencies_read_at
+moedas: 
+ lidas do save
+moedas: a leitura voltou VAZIA -- o seletor vai mostrar so libra. Se isto se repetir, e leitura de ponteiro sendo descartada (ver is_heap em fm_reader).
+moedas: falhei ao ler (
+_start_job
+kind
+target
+args
+acquire
+blocking
+ja existe uma operacao em andamento (
+kind
+running
+iniciando
+kind
+state
+phase
+done
+total
+sid
+name
+error
+Thread
+ o estado do job anterior e acharia que ja terminou.
+_db_size
+path
+getsize
+get_settings
+dbf
+db_file
+graphics_dir
+graphics_dir
+graphics_dir_detected
+graphics
+default_graphics_dir
+portraits
+state
+data_dir
+paths
+data_root
+local_dir
+local_root
+db_dir
+db_dir
+db_path
+db_size
+_db_size
+idioma
+idioma
+overall_modo
+overall_modo
+fim_de_temporada_auto
+fim_de_temporada_auto
+auto_snapshot_ligado
+auto_snapshot_ligado
+auto_snapshot_nome
+auto_snapshot_nome
+{clube} {ano}
+auto_snapshot_vagas
+auto_snapshot_vagas
+captura_som_ligado
+captura_som_ligado
+captura_som_volume
+captura_som_volume
+memoria_max_mb
+memoria_max_permitida_mb
+memoria_fisica_mb
+memoria_em_uso_mb
+set_overall_modo
+body
+ov
+overall
+modo
+MODOS
+modo desconhecido
+Como o overall e calculado. Ver `src/overall.py` para o que cada modo faz.
+estado_da_memoria
+, leve: /api/settings mede o tamanho do banco a cada chamada.
+set_memoria
+body
+mb
+fora da faixa permitida
+_caber
+set_idioma
+body
+idiomas
+idiomas
+disponiveis
+idioma desconhecido
+<genexpr>
+.0
+body
+set_idioma
+codigo
+body
+set_idioma.<locals>.<genexpr>
+estado_da_conexao
+anterior
+fm_rodando
+estado
+status
+fm_running
+bandeja_estado
+estado_da_conexao
+locked
+club
+(estado, clube) para o icone da bandeja. A mesma leitura barata do /api/status.
+janela_mostrar
+AO_MOSTRAR_JANELA
+disponivel
+disponivel
+A 2a copia do app (instancia_unica.py) pede a 1a que apareca.
+janela_ao_fechar
+body
+acao
+bandeja
+fechar
+acao invalida
+lembrar
+ao_fechar
+AO_RESPOSTA_AO_FECHAR
+disponivel
+get_bandeja
+ao_fechar
+ao_fechar
+AO_FECHAR_VALIDOS
+perguntar
+iniciar_com_windows
+inicio_windows
+ligado
+iniciar_disponivel
+icone_ativo
+BANDEJA_ATIVA
+ok
+set_bandeja
+body
+ao_fechar invalido
+mudar
+iniciar com o Windows so no app instalado
+get_bandeja
+iniciar_faixa_da_conexao
+CONEXAO_PELA_BANDEJA
+viu_rodando
+desde
+avisado
+bandeja_conexao
+estado
+momento
+feitos
+total
+lendo
+progresso
+faixa_da_conexao
+viu_rodando
+desde
+conectando
+avisado
+AO_AVISO_DA_CONEXAO
+conectado
+concluida
+falhou
+done
+total
+round
+estado
+clube
+fase
+feitos
+progresso
+bandeja_conexao_fechar
+fechar
+ok
+A faixa pede para sumir (o x, ou o tempo dela acabou).
+_carreira_conectada
+carreiras
+lista
+ativa
+listar
+nome
+club_uid
+clube
+temporadas
+fm_version
+ativa
+A carreira do save aberto, a mesma do cartao da barra lateral.
+<genexpr>
+.0
+_carreira_conectada
+ativa
+_carreira_conectada.<locals>.<genexpr>
+_calcular_plugins_do_menu
+plugins_do_menu
+_plugins_estado
+menu da bandeja: plugins falharam: %s: %s
+plugins_do_menu
+guardada
+renovar
+_PLUGINS_DO_MENU
+lista
+_calcular_plugins_do_menu
+em
+VALIDADE_PLUGINS_DO_MENU
+renovando
+renovar
+plugins_do_menu.<locals>.renovar
+renovar
+guardada
+plugins_do_menu
+guardada
+plugins-do-menu
+target
+name
+daemon
+guardada
+bandeja_menu
+estado
+carreira
+plugins
+nova
+ESTADO_DA_BANDEJA
+estado
+DESCONECTADO
+CONECTADO
+_carreira_conectada
+menu da bandeja: carreira falhou: %s: %s
+atualizacao
+verificar
+so_cache
+tem_nova
+tem_nova
+versao
+versao
+dispensada
+dispensada
+tem_nova
+versao
+dispensada
+clube
+carreira
+version
+VERSION
+plugins
+do (pedido do dono, 14/10): desconectado, o menu mostra so o estado.
+bandeja_menu_pronto
+body
+AO_MENU_PRONTO
+largura
+altura
+bandeja_menu_painel
+body
+AO_MENU_PAINEL
+linha
+lado
+lado
+bandeja_menu_fechar
+body
+AO_FECHAR_MENU
+bandeja_escolher
+body
+item
+ITENS_DA_BANDEJA
+ROTA_DA_BANDEJA
+match
+item invalido
+AO_ESCOLHER_NA_BANDEJA
+_onboarding_bruto
+SETTINGS_PATH
+utf-8
+json
+onboarding
+lueError
+ssistente aparece.
+_ja_usa_o_app
+SELECT 1 FROM snapshots LIMIT 1
+fetchone
+acesso_nivel
+nas -- inclusive para os beta testers.
+get_onboarding
+bloco
+_onboarding_bruto
+DEFAULTS
+onboarding
+_ja_usa_o_app
+concluido
+bloco
+'%s' object is not a mapping
+set_onboarding
+body
+bloco
+model_dump
+items
+Grava SO os campos enviados: cada etapa salva o seu pedaco sem apagar o resto.
+refazer_onboarding
+bloco
+am como estao; refazer o guia nao pode desconfigurar o app de quem ja o usa.
+get_dicas
+lidas
+dicas_lidas
+Ids das dicas contextuais que a pessoa ja dispensou.
+marcar_dica
+body
+lidas
+id
+dialogo_pasta
+webview
+janelas
+escolhido
+pasta
+webview
+windows
+disponivel
+pasta
+create_file_dialog
+FOLDER_DIALOG
+pasta
+erro
+disponivel
+pasta
+ple
+ceita caminho vindo da pagina).
+get_legal
+doc
+lang
+legal
+texto
+legal
+documento
+documento legal nao encontrado
+doc
+lang
+texto
+VERSAO
+aceito
+aceite
+aceite
+post_legal_aceite
+body
+legal
+datetime
+timezone
+datetime
+timezone
+timezone
+termos
+privacidade
+aceite incompleto
+utc
+idioma_do_documento
+termos_aceitos
+privacidade_lida
+post_sair
+webview
+janelas
+AO_SAIR
+destroy
+get_version
+canal
+CANAL
+rotulo
+frozen
+FROZEN
+Versao do app + se esta rodando empacotado (.exe) ou do codigo-fonte.
+patch_notes
+lang
+nomes
+nome
+caminho
+en
+PATCH_NOTES.en.txt
+PATCH_NOTES.txt
+resource_path
+user_data_path
+PATCH_NOTES.txt nao encontrado
+diagnostico
+log
+linhas
+tamanho_log
+dbf
+st
+fmsh.log
+replace
+readlines
+empacotado
+python
+3.14.7
+so
+sistema
+nome
+pasta_dados
+pasta_local
+banco
+caminho
+tamanho
+log
+linhas
+fm_conectado
+fm_origem
+build
+fm_origem
+fm_origem_em
+fm_origem_em
+abrir_pasta_dados
+destino
+subprocess
+startfile
+subprocess
+Popen
+xdg-open
+aberto
+ma pagina qualquer do navegador mexer na maquina.
+listar_idiomas
+idiomas
+idiomas_dir
+Todo idioma encontrado, com quanto de cada um esta traduzido.
+ler_idioma
+codigo
+idiomas
+idioma desconhecido
+interface
+resolver
+colunas
+abrir_pasta_idiomas
+destino
+subprocess
+e aceita caminho do cliente e um jeito de uma pagina qualquer mexer na maquina.
+_cabecalho_idioma
+lang
+titulo
+nome
+codigo
+nome_base
+faltando
+total
+mesma_origem
+nome_reserva
+idiomas
+exemplo
+esq
+dir_
+marca
+larg
+COL_ESQ
+COL_DIR
+duasColunas
+quebra
+saida
+_cabecalho_idioma.<locals>.T
+chave
+trocas
+idiomas
+lang
+_cabecalho_idioma
+idiomas
+lang
+nav.favorites
+Favoritos
+nav.favorites = 
+comoVem
+vazio
+duasColunas
+_cabecalho_idioma.<locals>.duasColunas
+duasColunas
+wbaesquerda
+COL_ESQ
+COL_DIR
+_cabecalho_idioma
+COL_DIR
+COL_ESQ
+Quebra o paragrafo em linhas de comentario, sem cortar palavra.
+quebra
+_cabecalho_idioma.<locals>.quebra
+quebra
+texto
+largura
+linhas
+atual
+palavra
+_cabecalho_idioma
+# ==============================================================
+#  FM SEASON HUB - %s
+#  
+nome
+codigo
+ondeEscrever
+#     
+#                     ^
+#                     
+corrijaAqui
+referenciaMesmo
+comoFica
+nav.favorites =
+                ^
+                ^
+                
+escrevaAqui
+referencia
+regras
+#   . 
+regra1
+regra2
+regraReserva
+regra4
+faltam
+total
+completo
+depois
+arq.
+{{%s}}
+COL_ESQ
+ljust
+COL_DIR
+rstrip
+atual
+exportar_idioma
+body
+idiomas
+codigo
+conhecidos
+nome
+destino
+autor
+saida
+faltam_total
+total_geral
+base_usada
+lang
+arquivo
+chave_titulo
+titulo
+nome_base
+reserva
+linhas
+chave
+ref
+caminho
+fh
+codigo de idioma invalido
+makedirs
+exist_ok
+carregar
+_idioma.autor
+base
+interface
+arq.tituloTela
+colunas
+arq.tituloColunas
+modelo
+base
+arquivo
+conhecidos
+pt
+_cabecalho_idioma
+faltando
+chaves
+mesma_origem
+mesma_origem
+nome_reserva
+_idioma.codigo = %s
+_idioma.nome   = %s
+_idioma.autor  = %s
+autor
+origem
+# %s: %s
+\n
+%s = %s
+escapar
+destino
+.txt
+write
+saida
+arquivo
+faltam_total
+total_geral
+arquivos
+base_usada
+<genexpr>
+.0
+exportar_idioma
+isalnum
+exportar_idioma.<locals>.<genexpr>
+_familias
+uids
+out
+_ultimas_capturas
+re
+(\d+)
+fm_version
+group
+out
+uid -> "24"/"26": o FM da captura mais recente do jogador.
+_saves_capturados
+linhas
+saida
+SELECT savegame_id, fm_version, save_name FROM snapshots WHERE savegame_id IS NOT NULL ORDER BY id
+fetchall
+savegame_id -> (FM "24"/"26", nome do save): de qual jogo e carreira uma lista do FM veio.
+_jogo_da_lista_fm
+save
+formato
+jogo_pasta
+saves
+jogo
+nome
+jogo
+jogo_por
+save_nome
+26
+jogo
+jogo_por
+save_nome
+26
+formato
+jogo
+jogo_por
+save_nome
+m, None: FM24 e anteriores gravam igual (ver lista_fmf.ler).
+_listas_pref
+extras
+lista_fmf
+saves
+com_jogo
+lista_fmf
+_LISTAS_COMPLETADAS
+feito
+completar_sobre_o_jogo
+_saves_capturados
+_listas_pref.<locals>.<lambda>
+<lambda>
+saves
+_listas_pref
+saves
+com_jogo
+s` = listas soltas da mesma resposta (a que acabou de entrar).
+_jogo_da_lista_fm
+save
+formato
+jogo_pasta
+saves
+_teto_de_listas
+chave
+acesso
+acesso
+limites
+nivel
+`max_listas_fm` ou `max_listas_favoritos` do nivel de agora (None = sem limite).
+_limite_de_listas
+_request
+JSONResponse
+acesso
+nivel
+detail
+limite_listas
+escopo
+tipo
+tem
+maximo
+nivel_nome
+sugerido
+nivel_para_listas
+402 no formato da trava de temporadas (`/api/capture`): a tela mostra o aviso.
+_resposta_listas
+nova
+mais
+listas
+extras
+_listas_pref
+listas
+%s argument after * must be an iterable, not %s
+listas_preferenciais_listar
+_resposta_listas
+listas_preferenciais_enviar
+request
+arquivo
+lista_fmf
+limite
+declarado
+corpo
+pedaco
+nova
+TAMANHO_MAXIMO_ARQUIVO
+content-length
+isdigit
+O arquivo e grande demais para ser uma lista (limite de 2 MB).
+stream
+corpo
+adicionar
+_teto_de_listas
+max_listas_fm
+teto
+ListaInvalida
+listas_preferenciais_enviar
+listas_preferenciais_remover
+id_lista
+lista_fmf
+remover
+Lista nao encontrada.
+listas_preferenciais_da_pasta
+lista_fmf
+listar_pasta
+As listas .fmf achadas na pasta `shortlists` do FM (`carregada` = ja esta no app).
+listas_preferenciais_importar_da_pasta
+body
+lista_fmf
+nova
+importar_da_pasta
+Importa uma lista da pasta do FM pelo NOME do arquivo (nome simples, `.fmf`, dentro da pasta).
+listas_preferenciais_escolher_arquivo
+lista_fmf
+webview
+janelas
+pasta
+escolhido
+caminho
+nova
+pasta_listas
+OPEN_DIALOG
+Listas do Football Manager (*.fmf)
+directory
+allow_multiple
+file_types
+disponivel
+cancelado
+importar_do_caminho
+disponivel
+gina. `disponivel: false` -> a tela cai no campo de arquivo + POST de bytes.
+views_fm_da_pasta
+view_fmf
+view_fmf
+As views .fmf achadas na pasta `views` de cada FM deste PC.
+views_fm_importar_da_pasta
+body
+lista_fmf
+view_fmf
+ler_da_pasta
+A review de uma view da pasta do FM, pelo NOME do arquivo.
+views_fm_escolher_arquivo
+destino
+lista_fmf
+view_fmf
+webview
+janelas
+pastas
+escolhido
+caminho
+pastas_views
+Views do Football Manager (*.fmf)
+review
+ler_do_caminho
+Seletor de arquivo do Windows (so no .exe; como `listas-preferenciais/escolher`).
+Corpo = bytes do .fmf (sem multipart); `arquivo` = nome original. Teto ANTES de ler o corpo.
+views_fm_enviar
+request
+arquivo
+destino
+lista_fmf
+view_fmf
+limite
+declarado
+corpo
+pedaco
+O arquivo e grande demais para ser uma view (limite de 2 MB).
+revisar
+view.fmf
+views_fm_enviar
+listas_preferenciais_atualizar
+id_lista
+lista_fmf
+nova
+atualizar
+Le o arquivo de origem de novo. 409 quando a lista nao sabe de onde veio.
+_ultimas_capturas
+uids
+preferida
+carreiras
+colunas
+base
+cid
+linhas
+lote
+cl
+melhor
+da_tela
+da_carreira
+chave
+ativa_id
+SELECT p.snapshot_id AS sid, p.uid, p.full_name, p.position, p.ca, p.pa, pr.age, pr.birth_date, pr.guide_value, pr.wage, pr.contract_end, pr.nationality_code, pr.on_loan, pr.club_name, cl.club_name AS club_short, s.carreira_id, s.save_name, s.fm_version, s.game_date, s.created_at, s.name AS nome_captura FROM players p JOIN snapshots s ON s.id=p.snapshot_id LEFT JOIN player_profile pr ON pr.snapshot_id=p.snapshot_id AND pr.uid=p.uid LEFT JOIN club_leagues cl ON cl.snapshot_id=p.snapshot_id AND cl.club_uid=p.club_id WHERE p.uid IN ({marcas})
+marcas
+ AND 
+SO_TEMPORADAS_DE
+conn_for
+cl
+ AND p.snapshot_id=?
+carreira_id
+na_carreira
+created_at
+melhor
+ sentinela de "nao esta a venda" virando vazio, e `wage`).
+_valor_da_base
+guide_value
+NOT_FOR_SALE
+_ano_do_jogo
+preferida
+data
+game_date
+SELECT game_date FROM snapshots WHERE id=?
+(\d{4})
+resumo_jogadores
+body
+uids
+caps
+jogadores
+ano
+idades
+valores
+salarios
+setores
+com_pa
+maior
+baratos
+barato
+valioso
+ate
+vencendo
+citado
+uids
+snapshot
+values
+_ano_do_jogo
+age
+_valor_da_base
+wage
+gr
+def
+med
+ata
+_SETOR_DA_POSICAO
+position
+setores
+pa
+resumo_jogadores.<locals>.<lambda>
+<lambda>
+resumo_jogadores
+<lambda>
+resumo_jogadores
+<lambda>
+resumo_jogadores
+contract_end
+citado
+resumo_jogadores.<locals>.citado
+citado
+extra
+resumo_jogadores
+qtd
+encontrados
+idade_media
+valor_somado
+salarios_semana
+<lambda>
+resumo_jogadores
+pa
+idades
+<lambda>
+resumo_jogadores
+idade
+destaques
+maior_pa
+barato_145
+valor
+mais_valioso
+contrato_ate
+ano
+emprestados
+nacionalidades
+nationality_code
+ptura conta so em `qtd`.
+<genexpr>
+.0
+resumo_jogadores
+resumo_jogadores.<locals>.<genexpr>
+full_name
+<genexpr>
+.0
+resumo_jogadores
+<genexpr>
+.0
+resumo_jogadores
+<genexpr>
+.0
+resumo_jogadores
+<genexpr>
+.0
+resumo_jogadores
+on_loan
+jogadores_fora_da_captura
+body
+uids
+conn_snap
+dentro
+lote
+fora
+caps
+linhas
+linhas
+sem_dado
+dentro
+conn_snap
+SELECT uid FROM players WHERE snapshot_id=? AND uid IN (%s)
+caps
+posicao
+ca
+club_short
+club_name
+idade
+valor
+dado_de
+nome_captura
+versao_fm
+data_jogo
+sem_dado
+inel de resumo (Lista preferencial e Favoritos) e a lista que ele abre.
+_identidades
+uids
+nascimento
+birth_date
+nacionalidade
+nationality_code
+ra quem recebe conferir que o uid e a mesma pessoa no banco dele.
+_jogo_das_listas_favoritas
+listas
+todos
+por_uid
+_familias
+biblioteca_listas
+jogo_unanime
+por_uid
+id da lista de Favoritos -> "24"/"26" quando todos os jogadores dela vem do mesmo FM.
+biblioteca_listar
+itens
+listas
+por_id
+saves
+item
+ligada
+_LISTAS_ESPELHADAS
+espelhar_tudo
+situacao
+bib
+tipo
+listaFm
+erro
+por_id
+listaId
+save
+formato
+biblioteca_dir
+biblioteca_carregar
+arquivo
+max_listas_favoritos
+teto_fm
+teto_favoritos
+ArquivoInvalido
+ preferencial. Ja carregada: devolve a que existe.
+biblioteca_bruto
+arquivo
+Response
+dados
+tipo
+Response
+Response
+ler_bytes
+endswith
+sh
+application/json
+application/octet-stream
+content
+media_type
+ tela).
+ltipart; teto de tamanho ANTES de ler o corpo inteiro.
+biblioteca_enviar_fmf
+request
+arquivo
+limite
+declarado
+corpo
+pedaco
+lista_fmf
+view_fmf
+nome
+destino
+MAX_BYTES_FMF
+arquivo grande demais
+tipo_do_fmf
+view
+destino_da_tela
+ler
+tela
+gravar_fmf
+biblioteca_enviar_fmf
+biblioteca_ler
+arquivo
+biblioteca_gravar
+body
+gravar
+conteudo
+biblioteca_renomear
+arquivo
+body
+renomear
+biblioteca_apagar
+arquivo
+apagado
+biblioteca_abrir_pasta
+destino
+subprocess
+Abre a pasta da biblioteca no Explorer. Destino FIXO, como o de dados.
+_run_diagnostico
+lang
+core
+rel
+destino
+diagnostico_core
+medindo_ambiente
+Relatorio
+eco
+rodar
+gravando_arquivo
+salvar
+DIAGNOSTICO
+dados
+em
+arquivo
+itens
+texto
+linhas
+state
+done
+total
+diagnostico completo falhou: %s: %s
+ma requisicao comum isso e a tela parada sem explicacao.
+diagnostico_completo
+lang
+_start_job
+diagnostico
+_run_diagnostico
+iniciado
+m arquivo em portugues para quem usa o app em ingles nao ajuda ninguem.
+diagnostico_completo_resultado
+atualizacao_estado
+forcar
+forcar
+checagem de versao falhou: %s: %s
+ tela de quem esta sem internet.
+atualizacao_dispensar
+body
+dispensar
+lar a 0.6.6.
+atualizacao_progresso
+O que a caixinha de atualizacao mostra (fase, porcentagem, versao).
+atualizacao_aplicar
+leitura em andamento
+manifesto_pendente
+sem atualizacao automatica disponivel
+pedir
+de. Conectado ao FM sem leitura pode: ao reabrir, a leitura ao vivo se refaz.
+_plugins_estado
+legal
+plugins_atualizador
+plugins_atualizador
+para_a_tela
+aceito_plugins
+plugins_desligados
+plugins_estado
+plugins: estado falhou: %s: %s
+aceito
+tem_lista
+ultima
+historico
+jogos
+nca chama a rede.
+plugins_verificar
+legal
+plugins_atualizador
+aceite a politica 1.3
+ciclo
+forcar
+aceito
+desligados
+resultado
+atualizados
+reiniciar
+"Verificar agora": um ciclo completo (busca, baixa, troca se o jogo estiver fechado).
+plugins_ligar
+body
+desl
+discard
+Liga ou desliga a atualizacao automatica de UM plugin (padrao: ligado).
+plugins_voltar
+body
+plugins_atualizador
+voltar_versao
+feche o jogo
+lueError
+nada para voltar
+Volta o plugin para a versao de antes da ultima atualizacao (jogo fechado).
+plugins_oferta
+legal
+plugins_atualizador
+avisar
+lista
+vistos
+plugins_avisar_novos
+nao_vistos
+oferta
+plugins_dispensados
+plugins: oferta falhou: %s: %s
+plugins_oferta_vista
+nto quais a janela da abertura ainda nao mostrou. So le; nunca chama a rede.
+plugins_avisar_novos
+body
+plugins_avisar_novos
+plugins_oferta
+"Avisar quando houver plugin novo" (padrao: ligado).
+plugins_instalar
+body
+legal
+plugins_atualizador
+instalar_novo
+plugins: instalar %s falhou: %s: %s
+falhou
+O botao "Instalar" de um plugin novo (jogo fechado).
+plugins_pasta_jogo
+body
+plugins_atualizador
+escolha
+achados
+dialogo_pasta
+sem janela de pasta
+pasta
+cancelado
+definir_pasta_do_jogo
+antiga
+pasta antiga nao registrada
+achados
+ntiga so serve para achar a linha no plugins.ini.
+plugins_dispensar
+body
+dados
+"Nao quero": o plugin sai da oferta (Configuracoes, Notificacoes e a janela).
+plugins_oferta_vista
+body
+vistos
+ids
+A janela da abertura mostrou estes: ela nao volta para eles (o resto da oferta fica).
+plugins_foto
+id
+plugins_atualizador
+Response
+foto
+sem foto
+Cache-Control
+max-age=3600
+content
+media_type
+headers
+pagina_atualizando
+idiomas
+HTMLResponse
+codigo
+textos
+html
+HTMLResponse
+HTMLResponse
+procurando
+baixando
+conferindo
+instalando
+abrindo
+falhou
+plugins
+atualizando.
+src
+web
+atualizando.html
+html
+__TEXTOS__
+dumps
+ensure_ascii
+__IDIOMA__
+Cache-Control
+no-store
+headers
+gina abre antes do app e nao carrega o sistema de idiomas da tela.
+diagnostico_abrir_pasta
+destino
+subprocess
+diagnostic
+ maquina. O destino e sempre a subpasta `diagnostic` da pasta de dados.
+link_dominios
+dominios
+links
+DOMINIOS_PERMITIDOS
+o decide nada. Se os dois discordarem, quem vale e o que abre.
+open_link
+body
+url
+ok
+motivo
+webbrowser
+key
+EXTERNAL_LINKS
+link desconhecido: 
+conferir
+open-link recusado (%s): %r
+webbrowser
+opened
+bridor de qualquer endereco para qualquer pagina do navegador.
+armazenamento
+shutil
+por_snapshot
+linhas
+_carreiras
+nomes
+por_carreira
+cid
+arquivo
+uso
+disco
+shutil
+_tamanho_por_snapshot
+SELECT id, carreira_id FROM snapshots WHERE scope <> ?
+sem-clube
+por_carreira
+por_snapshot
+_tamanho_arquivo
+disk_usage
+livre
+free
+total
+livre
+disco
+armazenamento.<locals>.<lambda>
+<lambda>
+armazenamento
+nomes
+outros
+carreiras_listar
+carreiras
+lista
+ativa
+_favoritos
+prefs
+carreira_ativar
+body
+carreiras
+definir_ativa
+carreiras_listar
+ardada e volta a valer assim que o app desconectar.
+carreira_prefs
+cid
+body
+carreiras
+campos
+gravar_prefs
+s listas globais (ver `favoritos.aplicar_uniao`).
+carreira_mover_temporada
+cid
+sid
+carreiras
+mover_temporada
+grupamento das temporadas antigas nao teve como separar.
+_nomes_das_carreiras
+carreiras
+voritos por carreira usa os nomes e a ordem daqui.
+_favoritos
+favoritos
+favoritos
+_nomes_das_carreiras
+nomes_das_carreiras
+_fav_ou_404
+funcao
+args
+kw
+fav
+ListaNaoExiste
+lista de favoritos nao existe
+star_arg_list
+favoritos_listas
+favoritos_criar
+body
+lista
+estado
+criar
+cor
+favoritos_editar
+id_lista
+body
+_fav_ou_404
+favoritos_editar.<locals>.<lambda>
+<lambda>
+favoritos_editar
+esvaziar
+editar
+favoritos_apagar
+id_lista
+favoritos_apagar.<locals>.<lambda>
+<lambda>
+favoritos_apagar
+favoritos_jogadores
+id_lista
+body
+favoritos_jogadores.<locals>.<lambda>
+<lambda>
+favoritos_jogadores
+marcar
+ que a janela tem pode estar velha. `padrao` = a ultima lista usada.
+favoritos_duplicar
+id_lista
+body
+lista
+estado
+favoritos_duplicar.<locals>.<lambda>
+<lambda>
+favoritos_duplicar
+duplicar
+favoritos_tirar_de_todas
+body
+tirar_de_todas
+favoritos_migrar_local
+body
+lista
+estado
+migrar_local
+m a lista "Favoritos (deste navegador)".
+favoritos_aviso_visto
+aviso_visto
+alertas
+recarregar
+lang
+avisos
+avisos
+forcar
+lang
+alertas_lidos
+lang
+avisos
+marcar_lidos
+lang
+acesso_estado
+revalidar
+acesso
+revalidar
+acesso_codigo
+body
+acesso
+codigo_http
+resgatar
+limite_maquinas
+acesso_sair
+acesso
+sair
+acesso_patreon
+body
+acesso
+webbrowser
+porta
+url
+_IDIOMA_PATREON
+environ
+FMSH_PORTA
+url_entrar
+aberto
+o segue link pra fora.
+patreon_callback
+ticket
+erro
+acesso
+_html
+HTMLResponse
+_pagina_patreon
+erro
+sem_resultado
+escape
+concluir_patreon
+ticket
+_PATREON_ULTIMO
+nivel
+nome
+tier_nome
+tier_nome
+acesso_patreon_status
+_pagina_patreon
+esc
+tx
+erro
+nivel
+nome
+tier
+icone
+titulo
+linha
+rodape
+_PATREON_TXT
+gratis
+<svg viewBox="0 0 52 52" class="marca ruim"><circle cx="26" cy="26" r="24"/><path d="M17 17 L35 35 M35 17 L17 35"/></svg>
+erro_titulo
+erro_rodape
+<svg viewBox="0 0 52 52" class="marca"><circle cx="26" cy="26" r="24"/><path d="M15 27 L23 35 L38 19"/></svg>
+ok_titulo
+ok_titulo_sem_nome
+ok_linha
+tier
+ok_rodape
+<svg viewBox="0 0 52 52" class="marca neutra"><circle cx="26" cy="26" r="24"/><path d="M26 15 L26 29 M26 36 L26 37"/></svg>
+zero_titulo
+zero_titulo_sem_nome
+zero_linha
+zero_rodape
+<div class="selo">
+</div>
+ss="rodape">
+get_currencies
+currencies
+currencies_read_at
+uid
+symbol
+name
+United Kingdom Pound
+arda todo valor monetario (libra) -- as taxas sao a partir dela.
+get_clubs
+snapshot
+sid
+key
+cached
+comps
+clubs
+natl
+my_club
+row
+my_nation
+buckets
+comp
+side
+nation
+leagues
+lg
+rank
+shape
+ordem_natl
+por_nacao
+nacionais
+nome
+ts
+tree
+_resolve_sid
+_CLUBS_CACHE
+SELECT uid, name, nation, reputation, is_female FROM comps WHERE snapshot_id=?
+SELECT club_uid, club_name, league_uid, league_name FROM club_leagues WHERE snapshot_id=? AND club_name IS NOT NULL
+SELECT team_uid, nation, type_label, is_female, n_players FROM youth_teams WHERE snapshot_id=? AND nation IS NOT NULL AND n_players>0
+club_uid
+SELECT club_uid FROM snapshots WHERE id=?
+league_uid
+nation
+male
+female
+comps
+is_female
+female
+male
+nation
+setdefault
+leagueUid
+leagueName
+leagueFull
+league_name
+leagueReputation
+reputation
+clubs
+rank
+get_clubs.<locals>.rank
+rank
+nation
+my_nation
+get_clubs
+my_nation
+shape
+get_clubs.<locals>.shape
+shape
+side
+out
+nation
+lgs
+get_clubs
+rank
+First Team
+_YOUTH_ORDER
+por_nacao
+team_uid
+label
+type_label
+isFemale
+n_players
+get_clubs.<locals>.<lambda>
+<lambda>
+rank
+get_clubs
+rank
+<lambda>
+ordem_natl
+get_clubs
+ordem_natl
+nacionais
+teams
+myNation
+my_nation
+nationals
+bes por nome. Cacheado por (sid, nonce) -- sao ~36k clubes.
+PRIORITY_NATIONS
+index
+get_clubs.<locals>.shape.<locals>.<lambda>
+<lambda>
+rank
+get_clubs
+rank
+<lambda>
+get_clubs
+sort
+<lambda>
+get_clubs
+leagues
+ordem_natl
+<genexpr>
+.0
+get_clubs
+get_clubs.<locals>.<genexpr>
+get_nomes_curtos
+snapshot
+sid
+key
+cached
+clubes
+ligas
+uid
+nome
+saida
+_NOMES_CURTOS_CACHE
+SELECT club_uid, club_name FROM youth_teams WHERE snapshot_id=? AND nation IS NULL AND club_uid IS NOT NULL AND club_name IS NOT NULL
+clubes
+SELECT club_uid, club_name FROM club_leagues WHERE snapshot_id=? AND club_name IS NOT NULL
+SELECT uid, name_short FROM youth_comps WHERE snapshot_id=? AND name_short IS NOT NULL
+SELECT uid, name FROM comps WHERE snapshot_id=? AND name IS NOT NULL
+ fica com o que ja mostrava.
+_ordem_natural
+nome
+Chave que poe "Liga 2" antes de "Liga 10" (no texto puro, o 10 vem primeiro).
+get_youth_teams
+snapshot
+sid
+key
+cached
+ligas
+liga_do_clube
+linhas
+comps_base
+comp_do_time
+ordem
+SEM_COMP
+arv
+selecoes
+time
+escola
+faixas
+cu
+cp
+nation_clube
+cuid
+nation
+lig
+clube
+por_tipo
+saida_clubes
+lgs
+cs
+cl
+vistos
+total
+saida_selecoes
+ts
+arvore
+_YOUTH_CACHE
+SELECT uid, name, nation, reputation FROM comps WHERE snapshot_id=?
+SELECT club_uid, league_uid FROM club_leagues WHERE snapshot_id=?
+SELECT team_uid, club_uid, club_name, nation, type_label, is_female, n_players, escola FROM youth_teams WHERE snapshot_id=? AND n_players>0
+SELECT uid, name, name_short, nation, reputation, age_group, category FROM youth_comps WHERE snapshot_id=? AND kind IN ('clube_base','reservas')
+SELECT team_uid, comp_uid FROM youth_team_comps WHERE snapshot_id=?
+comp_uid
+comp_do_time
+selecoes
+escola
+ordem
+comps_base
+faixas
+_FAIXA_DO_PAINEL
+age_group
+_FAIXA_DA_CATEGORIA
+category
+School
+u20
+u17
+u23
+band
+liga_do_clube
+SEM_COMP
+arv
+name_short
+name
+reputation
+por_tipo
+get_youth_teams.<locals>.por_tipo
+por_tipo
+ts
+principal_primeiro
+chave
+get_youth_teams
+ordem
+get_youth_teams.<locals>.<lambda>
+<lambda>
+get_youth_teams
+cs
+<lambda>
+get_youth_teams
+lgs
+<lambda>
+SEM_COMP
+get_youth_teams
+SEM_COMP
+vistos
+saida_clubes
+saida_selecoes
+be tem que ser o que marcar aquele clube traz.
+<genexpr>
+.0
+faixas
+get_youth_teams
+get_youth_teams.<locals>.<genexpr>
+get_youth_teams.<locals>.por_tipo.<locals>.chave
+chave
+principal_primeiro
+ordem
+get_youth_teams
+ordem
+principal_primeiro
+principal_primeiro
+<genexpr>
+.0
+get_youth_teams
+<genexpr>
+.0
+get_youth_teams
+_ordem_natural
+<genexpr>
+.0
+get_youth_teams
+set_graphics
+body
+st
+dir
+pasta nao encontrada: 
+reindex
+Aponta a pasta do facepack e reindexa. Sincrono: ~5s (medido).
+set_db_dir
+body
+old_path
+probe
+fh
+new_path
+moved
+shutil
+suffix
+src
+ha uma leitura em andamento; tente de novo ao terminar
+nao consegui criar a pasta: 
+.fmsh_write_test
+ok
+remove
+sem permissao de escrita nessa pasta: 
+DB_FILE_NAME
+local_data_path
+normcase
+move
+ja existe um banco nessa pasta; escolha comecar por ele
+-wal
+-shm
+old_path
+new_path
+moved
+portrait
+uid
+_serve_graphic
+portrait_file
+sem foto
+l de regen e de quem nao tem facepack; o front cai no fallback.
+flag
+uid
+nation_flag_file
+sem bandeira
+Bandeira do pais. 404 quando o facepack nao tem -> front cai na sigla.
+club_logo
+uid
+club_logo_file
+sem escudo
+Escudo do clube (mesmo facepack, mapeado por club/<uid>/logo).
+comp_logo
+uid
+comp_logo_file
+sem logo de liga
+Logo da liga/competicao (mesmo facepack, mapeado por comp/<uid>/logo).
+_serve_graphic
+finder
+uid
+msg
+_boot_graphics
+FileResponse
+Cache-Control
+public, max-age=86400
+_boot_graphics
+Usa a pasta salva; se nunca configurou, tenta a padrao do FM.
+_club_uid
+reader
+club_obj
+CLUB_UID
+CLUB_UID
+uid do clube do treinador (o mesmo que o facepack usa pro escudo).
+_mark_teams
+conn
+sid
+reader
+club_obj
+player_team
+n_t
+n_c
+n_l
+n_ft
+save_club
+executemany
+UPDATE players SET team_uid=? WHERE snapshot_id=? AND uid=?
+save_club_leagues
+save_youth
+youth: 
+ times, 
+ competicoes, 
+ ligacoes
+youth: FALHOU (
+save_future_transfers
+transferencias acertadas: 
+transferencias acertadas: FALHOU (
+dores dos times do clube; nao explode nem falha o scan.
+_abrir_para_conectar
+_mem
+reader
+FmUnsupportedBuild
+connected
+error_code
+unsupported_build
+FmElevado
+fm_elevated
+FmAccessDenied
+access_denied
+fm_closed
+save_loaded
+connected
+error_code
+error
+no_save
+o Football Manager esta aberto, mas sem save carregado
+r ao FM e o aviso do plugin (/api/jogo/conectar) barram pelos mesmos motivos.
+connect_fm
+body
+game_date
+reader
+erro
+mgr
+club
+team
+club_full
+club_short
+squad
+_abrir_para_conectar
+roster
+read_failed
+conectado, mas falha ao ler save: 
+_run_scan_live
+manager_name
+squad_size
+scanning
+Le clube/treinador na hora (rapido) e dispara o scan da base pro LIVE.
+refresh_live
+body
+reader
+started
+started
+error_code
+error
+no_save
+o Football Manager esta aberto, mas sem save carregado
+refresh
+started
+Rele a base e substitui o LIVE (reflete reforcos/stats novas).
+job
+live
+_fm_version
+status
+out
+mem
+reader
+sess
+fm_running
+save_changed
+ra de 2 u32: barata o bastante pra rodar em loop.
+disconnect_fm
+operacao em andamento (
+) - aguarde terminar
+drop_live_db
+sid
+ready
+club
+manager
+read_at
+fm_version
+savegame_id
+session_nonce
+idle
+disconnected
+Solta a leitura ao vivo (trocar de save). As temporadas salvas nao mudam.
+capture
+body
+acesso
+carreiras
+limites
+est
+cid
+ja_tem
+scope
+squad
+full
+escopo invalido (use 'squad' ou 'full')
+nome do snapshot obrigatorio
+SELECT COUNT(*) n FROM snapshots WHERE carreira_id=? AND scope=?
+cabe_mais_uma
+limite_temporadas
+teto
+nivel_necessario
+_run_capture
+portal
+snapshot
+base
+sid
+club_uid
+club_name
+out
+cp
+lg
+linha_base
+_portal_base
+live
+manager
+read_at
+total_players
+fim_de_temporada_lendo
+CAPTURA_AUTO
+capturando
+SELECT name, save_name, game_date, club_uid FROM snapshots WHERE id=?
+temporada nao encontrada
+SELECT COUNT(*) n FROM players WHERE snapshot_id=?
+SELECT COUNT(*) n FROM snapshots WHERE 
+SO_TEMPORADAS
+seasons
+SELECT league_uid, league_name FROM club_leagues WHERE snapshot_id=? AND club_uid=?
+pshot_id=? AND p.club_id=?
+avg_age
+avg_ca
+vg_rating DESC LIMIT 3
+highlights
+pshot_id=? AND club_uid=? AND team_type<>0)
+youth
+p DESC LIMIT 3
+prospects
+_expiring
+expiring
+avg_age
+avg_ca
+avg_ca
+_season_info
+season
+pshot_id, club_id) -- sem ele davam 4.4s cada.
+_season_end
+game_date
+year
+month
+year
+proximado em vez de fingir precisao.
+_time_do_usuario_no_jogo
+reader
+_fr
+_club
+team
+_n
+_c
+TEAM_UID
+uid do TIME principal do clube do usuario, lido do jogo, ou None. Recurso extra: sem ele nada fica coberto.
+_ja_salva_desde
+carreira
+data
+ate
+DIAS_PARA_O_AUTO_SNAPSHOT
+SELECT id, name, game_date FROM snapshots WHERE carreira_id=? AND scope='full' AND substr(game_date, 1, 10) >= ? AND substr(game_date, 1, 10) <= ? ORDER BY game_date LIMIT 1
+data
+ janela: uma temporada de anos a frente (save antigo carregado) nao e a desta data.
+_marcar_auto_snapshot_feito
+carreira
+data
+feitos
+auto_snapshot_feitos
+ temporada salva na janela nao conta, ela e que forca), inclusive depois de reiniciar o app.
+_data_do_auto_snapshot
+carreira
+prevista
+hoje
+escolhida
+data
+janela
+auto_snapshot_datas
+ que ja passou nao vale para a temporada seguinte.
+_planejar
+carreira
+hoje
+principal
+data
+editada
+prevista
+_save
+cobertas
+corte
+estados
+auto
+nas_cobertas
+_VIGIA
+base
+liga_principal
+todas
+ultima_partida
+UM_DIA
+UM_ANO
+_data_do_auto_snapshot
+prevista
+cobertas_pela_temporada_do_usuario
+corte_do_save_anterior
+cobertas
+_planejar.<locals>.<lambda>
+<lambda>
+_planejar
+editada
+dias
+days
+liga
+ja_salva
+_ja_salva_desde
+pshot vale na hora, sem reler a agenda. None antes da primeira leitura da agenda.
+<genexpr>
+.0
+cobertas
+_planejar
+_planejar.<locals>.<genexpr>
+reputacao
+_captura_auto_set
+kw
+atualizado_em
+_avisar_captura
+momento
+AO_AVISO_DA_CAPTURA
+_resumo_das_ligas
+plano
+comps
+ordenadas
+_resumo_das_ligas.<locals>.<lambda>
+<lambda>
+comps
+_resumo_das_ligas
+comps
+s menores na frente.
+reputacao
+_nome_da_leitura_de_fim
+plano
+resto
+_resumo_das_ligas
+Fim de temporada 
+, 
+ +
+parece em nenhuma lista).
+_gravar_agenda_do_vigia
+sgid
+carreira
+iso
+auto
+plano_do_ano
+tracker_ligado
+janela
+leituras
+paises
+pais
+entrada
+caminho
+saves
+temporario
+DIAS_DO_AVISO_DO_TRACKER
+pais
+paises
+leituras
+ate
+janela
+PAISES_NA_AGENDA
+data_do_jogo
+atualizado_em
+auto_snapshot
+ligado
+_nome_do_auto_snapshot
+_principal_da_agenda
+ja_salva
+season_tracker
+ARQUIVO_DA_AGENDA
+saves
+.tmp
+dump
+formato
+ensure_ascii
+indent
+[agenda do vigia] nao gravou: 
+tros saves e troca so a deste. Formato: documentacao/09-plugins-no-jogo.md.
+_principal_da_agenda
+_vigiar_fim_de_temporada
+cfg
+tracker_ligado
+mem
+reader
+sgid
+iso
+hoje
+carreira
+agenda
+todas
+estados
+cobertas
+_auto
+ja
+leitura
+plano_do_ano
+abertas
+data_auto
+plano
+nome
+sg:
+_captura_auto_set
+data_jogo
+carreira
+falhou_em
+conferido_em
+conferir_em
+_time_do_usuario_no_jogo
+_planejar
+fins_de_temporada_lidos
+proxima_leitura
+plano_de_leituras
+fechada
+DIAS_SEM_CONFERIR
+carreira
+conferido_em
+conferir_em
+_gravar_agenda_do_vigia
+_auto_snapshot_agora
+_nome_da_leitura_de_fim
+_run_fim_de_temporada
+[fim de temporada] 
+ ligas
+_refazer_merge
+carreira
+desde
+sids
+sid
+SELECT id FROM snapshots WHERE carreira_id=? AND scope='full' AND game_date >= ?
+_largar_temporada
+dam no merge, entao o cache delas (memoria e disco) e refeito na proxima abertura.
+_nome_do_auto_snapshot
+principal
+modelo
+clube
+ano
+inicio
+fim
+today
+inicio
+02d
+{clube}
+{ano}
+no civil e "29/30" em liga que cruza o ano. Sem liga principal (desconectado): um exemplo.
+_abrir_vaga_para_o_auto_snapshot
+carreira
+nome
+acesso
+limites
+ja_tem
+antiga
+SELECT COUNT(*) FROM snapshots WHERE carreira_id=? AND scope='full'
+substituir
+SELECT id, name FROM snapshots WHERE carreira_id=? AND scope='full' ORDER BY COALESCE(game_date, created_at) ASC LIMIT 1
+delete_snapshot
+[auto snapshot] vagas cheias: apagada a mais antiga (
+ja_tem
+SIMULACAO
+nivel_cheio
+auto
+estado
+nome
+sid
+ligas
+tipo
+_avisar_captura
+falhou
+[auto snapshot] 
+: vagas cheias, nao salvo
+ pedir.
+_auto_snapshot_agora
+carreira
+hoje
+iso
+auto
+data
+chave
+feitos
+principal
+nome
+salva
+auto_tentado
+auto_tentado
+editada
+estado
+nome
+sid
+ligas
+tipo
+ja_salva
+: ja salva como 
+ em 
+, nao salva de novo
+_abrir_vaga_para_o_auto_snapshot
+_run_auto_snapshot
+e quando comecou o salvamento ou mostrou o aviso.
+jogo_auto_snapshot_salvar
+carreira
+iso
+hoje
+plano
+auto
+nome
+data_jogo
+carreira
+ok
+erro
+desconectado
+ok
+ocupado
+ok
+erro
+vagas
+: salvo mesmo assim
+o save do jogo. {"ok": true} | {"ok": false, "erro": "desconectado" | "vagas"} | {"ok": false, "ocupado": true}.
+_run_auto_snapshot
+nome
+game_date
+feito
+ok
+state
+sid
+estado
+sid
+_marcar_auto_snapshot_feito
+[auto snapshot] falhou: 
+error
+`feito`: (carreira, data do Auto snapshot) gravada em `auto_snapshot_feitos` quando salva.
+_run_fim_de_temporada
+nome
+game_date
+plano
+ok
+tracker
+_refazer_merge
+[fim de temporada] falhou: 
+_laco_do_vigia
+sleep
+INTERVALO_DO_VIGIA_S
+_vigiar_fim_de_temporada
+[fim de temporada] vigia: 
+_iniciar_vigia
+_FILA_TRAVA
+iniciado
+_laco_do_vigia
+vigia-fim de temporada
+temporadas_de_outras_ligas
+cid
+lidas
+tamanhos
+saida
+ligas
+ja
+proximos
+auto
+cobertas
+iso
+hoje
+estados
+uids_cobertas
+espera
+SELECT id, game_date, n_players FROM snapshots WHERE carreira_id=? AND scope=? ORDER BY game_date DESC, id DESC
+SELECT comp_uid, nome, pais FROM snapshot_ligas WHERE snapshot_id=? AND lida=1 ORDER BY COALESCE(reputacao, 0) DESC, nome
+tamanhos
+proximos
+maior_espera
+motivo
+motivo_da_data
+espera
+terminou
+ acabou de conectar): a tela diz que eles aparecem com o app conectado.
+<genexpr>
+.0
+temporadas_de_outras_ligas
+pais
+temporadas_de_outras_ligas.<locals>.<genexpr>
+<genexpr>
+.0
+temporadas_de_outras_ligas
+set_data_do_auto_snapshot
+cid
+body
+datas
+data invalida (AAAA-MM-DD)
+ais ligas saem completas nele, entao o vigia confere a agenda de novo na proxima volta.
+set_fim_de_temporada
+body
+fim_de_temporada_auto
+set_auto_snapshot
+body
+mudar
+vagas
+avisar
+substituir
+vagas: avisar ou substituir
+auto_snapshot_
+nome_do_auto_snapshot
+modelo
+principal
+i 2029").
+set_captura_som
+body
+mudar
+volume
+da som: mudar aqui vale ja no proximo.
+_captura_simulada
+estado
+tipo
+out
+Season Tracker Premier League, LaLiga +10
+2028-05-28
+nomes
+total
+Premier League
+LaLiga
+simulada
+DURACAO_SIMULADA_S
+simular_captura
+estado
+tipo
+desde
+concluir
+_SITUACOES_SIMULADAS
+situacao desconhecida
+captura de verdade em andamento
+estado
+desde
+tipo
+concluir
+simular_captura.<locals>.concluir
+concluir
+desde
+simular_captura
+desde
+target
+daemon
+nde, com som) ou "tracker" (a pilula do Season Tracker, sem som).
+concluida
+testar_captura_som
+AO_TESTAR_SOM
+`disponivel: false` no navegador (sem o app_main nao ha quem toque).
+_season_info
+game_date
+end
+start_year
+_season_end
+ends
+days_left
+approx
+gregar e perder o detalhe).
+_expiring
+sid
+club_uid
+game_date
+end
+ct_end<=?
+apoiadores_lista
+forcar
+apoiadores
+apoiadores
+Nomes dos creditos. O download e o cache moram em src/apoiadores.py.
+_links_externos
+So as redes com endereco definido -- a tela desenha exatamente esta lista.
+_ultima_temporada
+carreiras
+cid
+linha
+me_date DESC, id DESC LIMIT 1
+ra ao vivo, para a tela continuar util com o FM fechado.
+_portal_base
+ultima
+_ultima_temporada
+_links_externos
+sca em /api/acesso, e repetir viraria duas verdades.
+portal_garimpos
+snapshot
+limite
+so_cache
+biblioteca
+sid
+chave
+frio
+itens
+saida
+item
+arquivo
+ck
+total
+dados
+conds
+sel
+biblioteca
+portal_garimpos.<locals>.<lambda>
+<lambda>
+portal_garimpos
+filtro
+busca
+modificado
+fabrica
+fabrica
+busca
+conds
+_browse_select
+all
+desc
+conds
+snapshot
+group
+sort
+dir
+min_minutes
+sex
+conds
+clubs
+uids
+search
+empty
+portal: garimpo 
+ nao contou
+garimpos
+contado
+_mais_seis_meses
+iso
+mes
+ano
+day
+_elenco_para_diff
+sid
+club_uid
+linhas
+pshot_id=? AND p.club_id=?
+guide_value
+uid -> (CA, fim de contrato, valor de mercado, salario) do elenco no snapshot.
+portal_mudou
+anterior
+vid
+ck
+guardado
+club_uid
+cl
+cv
+vivos
+velhos
+livres
+novos
+chegaram
+sairam
+ca_subiu
+entraram
+valorizacao
+folha
+agora
+antes
+corte_agora
+corte_antes
+uid
+ca
+fim
+_valor
+_salario
+ca_velho
+fim_velho
+ja_estava
+saida
+disponivel
+por_que
+sem_leitura
+disponivel
+por_que
+sem_temporada_salva
+session_nonce
+SELECT uid, club_id FROM players WHERE snapshot_id=?
+club_id
+_elenco_para_diff
+antes
+agora
+_mais_seis_meses
+ca_subiu
+2000
+entraram
+chegaram
+sairam
+valorizacao
+folha
+contrato_janela
+livres
+novos
+clear
+<genexpr>
+.0
+uid
+clube
+velhos
+portal_mudou
+velhos
+portal_mudou.<locals>.<genexpr>
+<genexpr>
+.0
+uid
+antes
+agora
+portal_mudou
+<genexpr>
+.0
+portal_mudou
+_resolve_sid
+snapshot
+sid
+sem leitura ativa nem temporada escolhida
+myteams
+snapshot
+sid
+rows
+SELECT team_uid, team_type, label, min_age, max_age, reputation, n_players FROM teams WHERE snapshot_id=? ORDER BY (team_type<>0), team_type
+Times do clube do usuario (principal + base) pra montar as abas de Meu time.
+moneyball
+snapshot
+team
+sid
+where
+params
+selpos
+rows
+linhas
+mt
+saida
+vals
+p.snapshot_id=?
+ AND p.team_uid=?
+POSICOES
+, p.pa, 
+merge_temporadas
+aplicar_em_linhas
+[merge] meu time 
+fam_
+_texto_posicoes
+POSICAO_LIMIAR_COLUNA
+position
+corte
+principal
+position_full
+team
+players
+ginar (time e pequeno); o front calcula as colunas derivadas.
+<genexpr>
+.0
+moneyball
+pr.pos_
+ AS fam_
+moneyball.<locals>.<genexpr>
+_pool_key
+sid
+nterior (defeito que ja vinha da 0.6.6).
+_pos_array
+meta
+np
+arr
+numpy
+_pos_arr
+asarray
+pos
+_pos_arr
+arr
+_load_pool_raw
+sid
+mb
+key
+cached
+base
+meta
+out
+moneyball
+_POOL_CACHE
+_load_browse_raw
+meta
+_pos_array
+fields
+RAW_FIELDS
+moneyball_percentiles
+snapshot
+team
+pool
+min_minutes
+np
+mb
+sid
+raw
+derived
+mins
+team_mask
+team_uids
+league_uid
+row
+uid_arr
+team_set
+team_idx
+played
+cc
+league_clubs
+pool_base
+lf
+ehfem
+ligas
+clubes
+result
+defaultdict
+groups
+idxs
+mask
+idx_arr
+col_id
+vals
+pv
+pcts
+_load_pool_raw
+pool
+percentiles
+derive
+minutes
+SELECT uid FROM players WHERE snapshot_id=? AND team_uid=?
+league
+pshot_id=? AND p.uid=? LIMIT 1
+array
+int64
+dtype
+size
+SELECT club_uid FROM club_leagues WHERE snapshot_id=? AND league_uid=?
+isin
+top20
+top5
+pshot_id=? AND uid IN (%s)
+_regua_ligas
+top5
+REGUA_TOP_LIGAS
+SELECT club_uid FROM club_leagues WHERE snapshot_id=? AND league_uid IN (%s)
+collections
+defaultdict
+defaultdict
+pool_base
+np
+derived
+percentile_ranks
+idx_arr
+col_id
+ra com quem tem minutos >= min_minutes.
+_preferred_foot
+left
+right
+both
+left
+right
+ando os dois sao fortes; fora isso vale o melhor. Sem dado -> None.
+_texto_posicoes
+valores
+corte
+principal
+blocos
+linha
+membros
+lados
+saida
+dono
+nome
+rotulo
+_LINHAS_POS
+valores
+corte
+blocos
+_ORDEM_LADO
+membros
+ (
+principal
+dono
+<genexpr>
+.0
+membros
+_texto_posicoes
+upper
+_texto_posicoes.<locals>.<genexpr>
+<genexpr>
+.0
+valores
+corte
+_texto_posicoes
+_texto_posicoes.<locals>.<genexpr>.<locals>.<genexpr>
+__init__
+self
+fam
+pos
+_PosicoesSobDemanda
+_fam
+_pos
+_memo
+__len__
+self
+_PosicoesSobDemanda
+__getitem__
+self
+texto
+principal
+_PosicoesSobDemanda
+self
+_pe_preferido_vetor
+esq
+dir_
+np
+sem_dado
+codigo
+igual
+isnan
+nan_to_num
+where
+both
+left
+right
+tolist
+ando os dois pes sao fortes ou empatam acima de zero, senao o melhor pe.
+_browse_do_banco
+sid
+np
+mb
+_profile_fields
+sfields
+sel
+selpos
+cur
+nomes
+posicao_da_coluna
+nome
+pedacos
+lote
+coluna
+vetor
+zeros
+inteiros
+texto
+fields
+altura
+guia
+nao_esta_a_venda
+familiaridades
+principais
+meta
+BROWSE_RAW_FIELDS
+height_cm
+all_time_goals
+all_time_appearances
+all_time_league_goals
+all_time_league_appearances
+sharpness
+fitness
+home_rep
+cur_rep
+world_rep
+morale
+intl_apps
+intl_goals
+u21_apps
+u21_goals
+row_factory
+gue_uid, cl.league_name, 
+pshot_id=?
+description
+posicao_da_coluna
+cur
+fetchmany
+pedacos
+A coluna como vetor de float. NULL vira NaN (e o numpy que converte).
+vetor
+_browse_do_banco.<locals>.vetor
+vetor
+nome
+partes
+saida
+pedacos
+posicao_da_coluna
+np
+_browse_do_banco
+np
+pedacos
+posicao_da_coluna
+Como `vetor`, mas NULL vira 0 -- o que o laco antigo fazia nos `fields`.
+zeros
+_browse_do_banco.<locals>.zeros
+zeros
+nome
+np
+vetor
+_browse_do_banco
+np
+vetor
+inteiros
+_browse_do_banco.<locals>.inteiros
+inteiros
+nome
+tipo
+vazio
+np
+vetor
+_browse_do_banco
+np
+vetor
+_browse_do_banco.<locals>.texto
+texto
+nome
+saida
+pedacos
+posicao_da_coluna
+_browse_do_banco
+pedacos
+posicao_da_coluna
+float64
+height_cm
+nan
+int16
+uid
+nat
+nat_uid
+nationality_uid
+league_name
+league_uid
+club_name
+club_id
+contract
+contract_end
+pos_full
+_PosicoesSobDemanda
+age
+value
+asking
+transfer_value
+nfs
+tflags
+transfer_flags
+onloan
+on_loan
+is_female
+wage
+height
+ca
+rating
+avg_rating
+copy
+foot
+_pe_preferido_vetor
+left_foot
+right_foot
+_texto_ordenavel
+name_norm
+_aplicar_merge
+<genexpr>
+.0
+_browse_do_banco
+s.
+_browse_do_banco.<locals>.<genexpr>
+<genexpr>
+.0
+_browse_do_banco
+concatenate
+copy
+copy
+nan
+astype
+_aplicar_merge
+sid
+fields
+meta
+np
+mt
+origens
+existentes
+campos
+completos
+valores
+posicao
+uid
+campo
+int8
+temporada_tipo
+temporada_ano
+temporada_jogos
+origens
+PRAGMA table_info(player_stats)
+apps_total
+apps_total
+mt
+EM_ANDAMENTO
+numeros
+[merge] temporada 
+rso extra: falhar aqui deixa a temporada salva como estava, nunca derruba a Base.
+_browse_criado_em
+sid
+linha
+SELECT created_at FROM snapshots WHERE id=?
+m por leitura); `None` enquanto nao ha leitura pronta.
+_load_browse_raw
+sid
+reter
+np
+mb
+key
+cached
+_trava_da
+_montar_browse
+_montar_browse
+sid
+key
+reter
+np
+mb
+campos32
+campos64
+criado_em
+out
+meta
+nome
+tipo
+_BROWSE_META_NUM
+_browse_criado_em
+_browse_do_banco
+O corpo de `_load_browse_raw` sem o cache e sem a trava (quem chama cuida dos dois).
+<genexpr>
+.0
+sw
+_u8_alinhado
+sid
+colunas
+apelidos
+cache
+np
+raw
+uids
+nomes
+saida
+criado_em
+guardado
+cx
+linhas
+vals_por_coluna
+vindos
+ordem
+ordenados
+onde
+casou
+destino
+col
+vals
+uint8
+ler_u8
+SELECT uid, 
+ FROM player_profile WHERE snapshot_id=?
+argsort
+clip
+searchsorted
+gravar_u8
+_load_attrs
+sid
+key
+cache
+_ATTR_CACHE
+_montar_attrs
+_montar_attrs
+sid
+key
+colunas
+out
+ATRIBUTOS
+_u8_alinhado
+a.
+atributos
+cache
+O corpo de `_load_attrs` sem o cache e sem a trava (quem chama cuida dos dois).
+_load_positions
+sid
+np
+key
+cached
+fam
+saida
+_POS_CACHE
+tributos -- quem nao usa o campo de posicoes nao paga nada.
+_bits_transferencia
+flags
+np
+tem
+_data_do_jogo
+sid
+sar a data de hoje daria a resposta errada em qualquer save que nao seja de agora.
+_clube_do_usuario
+sid
+uid do clube que o usuario treina naquela temporada, ou None.
+_load_profx
+sid
+np
+key
+cached
+_PROFX_CACHE
+_montar_profx
+_montar_profx
+sid
+key
+np
+raw
+meta
+uids
+numericos
+out
+traits
+linhas
+vindos
+ordem
+ordenados
+onde
+casou
+destino
+nome
+vazio
+vals
+faltou
+meu
+fut
+acertadas
+hoje
+meses
+sem_data
+contratos
+morale
+cur_rep
+home_rep
+world_rep
+contract_type
+transfer_flags
+on_loan
+f.
+int32
+SELECT uid, morale, cur_rep, home_rep, world_rep, contract_type, transfer_flags, on_loan, traits FROM player_profile WHERE snapshot_id=?
+fromiter
+contract_type
+transfer_flags
+nonzero
+traits
+f.traits
+ones
+f.contract_type
+f.transfer_flags
+_bits_transferencia
+f.transfer_listed
+f.loan_listed
+f.on_loan
+_clube_do_usuario
+f.my_club
+SELECT uid FROM future_transfers WHERE snapshot_id=?
+f.has_future_transfer
+_data_do_jogo
+sem_data
+meses
+f.contract_months
+f.no_contract
+f.no_club
+f.not_for_sale
+O corpo de `_load_profx` sem o cache e sem a trava (quem chama cuida dos dois).
+<genexpr>
+.0
+_montar_profx
+_montar_profx.<locals>.<genexpr>
+<genexpr>
+.0
+vazio
+_montar_profx
+vazio
+search_fields
+snapshot
+group
+mb
+sid
+chave
+cache
+opcoes_enum
+campos
+key
+rot_pt
+rot_en
+tipo
+secao
+campo
+unidade
+cols
+col
+pt
+en
+catalogo
+curadas
+apelidos
+ingles
+vistos
+tema
+out
+CATALOG
+grupo invalido: 
+_FIELDS_CACHE
+left
+Esquerdo
+Left
+right
+Direito
+Right
+both
+Ambos
+Both
+code
+labelEn
+f.positions
+e joga
+Plays position
+type
+unit
+section
+geral
+ops
+ps
+ops_for
+pos
+options
+POSICOES_VISIVEIS
+thresholdDefault
+POSICAO_LIMIAR_PADRAO
+_PROFX_FIELDS
+CONTRATO_TIPOS
+campos
+_ID_FIELDS
+_PROFILE_LABELS
+pt
+en
+fmt
+_FMT_ID
+int
+_ID_SECAO
+ATRIBUTO_ROTULOS
+num20
+secao
+num20
+moneyball_columns
+current
+sections
+short
+label_en
+short_en
+column_is_safe_for
+column_theme
+short
+apelidos
+ingles
+shortEn
+tkey
+tkey
+num
+fmt
+int
+_TEMA_SECAO
+derivado
+num
+sectionOrder
+SECOES_ORDEM
+opsByType
+OPS_BY_TYPE
+valueSlots
+VALUE_SLOTS
+<genexpr>
+.0
+search_fields
+columns
+search_fields.<locals>.<genexpr>
+moneyball_columns
+snapshot
+group
+np
+mb
+sid
+ck
+raw
+current
+sections
+fields
+idx
+sample
+cur_vals
+sig
+seen
+seen_general
+seen_general_sig
+por_tema
+derived
+general
+tema
+_sec
+resp
+_COLUMNS_CACHE
+group_columns_meta
+general
+is_general
+arange
+idx
+derive_catalog
+sig
+moneyball_columns.<locals>.sig
+sig
+arr
+np
+moneyball_columns
+np
+visible_columns
+POSITION_GROUPS_ORDER
+sample
+seen_general
+seen_general_sig
+seen
+por_tema
+labelEn
+shortEn
+lowerBetter
+lowerBetter
+from
+sses errados", que numa aba soma os cruzamentos e na outra nao).
+nan
+tobytes
+_texto_ordenavel
+_txt
+sem_acento
+_uids_por_extenso
+uids
+lista_fmf
+achada
+da_lista
+lista:
+favlista:
+uids_da_lista
+rados por virgula: a URL leva so o id, nao centenas de uids. O resto passa igual.
+<genexpr>
+.0
+uids
+_uids_por_extenso
+_uids_por_extenso.<locals>.<genexpr>
+<genexpr>
+.0
+_uids_por_extenso
+<genexpr>
+.0
+_uids_por_extenso
+_browse_select
+snapshot
+group
+sort
+dir
+min_minutes
+sex
+conds
+clubs
+uids
+extra
+exclude
+teams
+max_minutes
+min_age
+max_age
+min_rating
+max_rating
+search
+reter
+np
+mb
+sid
+raw
+fields
+meta
+pos_arr
+mask
+pos_mask
+idade
+ok
+want_fem
+is_fem
+ql
+nomes
+want
+cc
+marca
+no_time
+out
+conds_list
+search_json
+conds_v2
+_exclude_opts
+derived
+extra_keys
+needed
+_pedidas
+_eh_gk
+_k
+_escopo
+_v
+mask_group
+_mascara_percentil
+_mascara_da_condicao
+cond_mask
+avisos
+idx
+total
+ordem_sim
+rk
+col
+curtos
+uids_col
+chaves
+cheios
+vazios
+sort_vals
+unknown
+vals
+_uids_por_extenso
+empty
+n_db
+GROUP_POSITIONS
+mask
+isfinite
+name_norm
+SELECT player_uid FROM player_teams WHERE snapshot_id=? AND team_uid IN (
+player_uid
+loads
+normalize
+group_mask
+field
+vf
+CATALOG_BY_KEY
+needed
+derive_extra
+all
+fav
+GK
+column_scope
+age
+value
+asking
+wage
+height
+ca
+pa
+_rating
+_uid
+_mascara_percentil
+_browse_select.<locals>._mascara_percentil
+_mascara_percentil
+arr
+op
+valor
+pool
+pct
+vals
+ok
+saida
+posicoes
+grupos
+alvo
+base
+ranks
+dentro
+idx_base
+np
+meta
+mask_group
+mb
+_browse_select
+mask_group
+mb
+meta
+np
+ma registra em `warnings` em vez de ignorar calado.
+_mascara_da_condicao
+_browse_select.<locals>._mascara_da_condicao
+_mascara_da_condicao
+cond
+key
+op
+escolhidas
+limiar
+mapa
+px
+alvo
+arr
+a_
+b_
+outro_p
+vf
+attrs
+outro_a
+valido
+outro
+wbamb
+group
+sid
+np
+_mascara_percentil
+derived
+meta
+_browse_select
+_mascara_percentil
+derived
+group
+mb
+meta
+np
+sid
+evaluate
+__sim
+ordem_sim
+stable
+mask_group
+extra_keys
+warnings
+_TEXT_SORT_COLS
+league
+club
+get_nomes_curtos
+curtos
+_browse_select.<locals>.<lambda>
+<lambda>
+chaves
+_browse_select
+chaves
+key
+reverse
+lexsort
+asc
+ pra montar a saida.
+unique
+pct_top
+any
+op
+unsafe_for_group
+_why
+vs
+thr
+_load_positions
+includes
+f.
+_load_profx
+text
+text_mask
+vt
+_BOOL_PROFX
+bool
+is_true
+enum
+is
+unknown_field
+v2
+pct_top
+pct_bottom
+pool
+FIELD_OPS
+num_mask
+f.morale
+f.cur_rep
+f.home_rep
+f.world_rep
+a.
+_load_attrs
+fmt
+pct
+_clube_do_usuario
+sid
+_buscar_como_calcular
+sid
+raw
+idx
+ref
+uid_sexo
+tol
+modo
+fora
+metricas
+min_minutes
+piso_ca
+valor_max
+idade_max
+contrato12
+top20
+fora_do_meu_clube
+limite
+pe
+objetivo
+ca_max
+salario_ate_dele
+nivel
+bc
+np
+tab
+vetor
+params
+datetime
+hoje
+fem
+total_com
+sug
+seguinte
+buscar_como
+_overall_cacheado
+atributo
+tol
+fora
+min_minutes
+piso_ca
+valor_max
+idade_max
+limite
+pe
+objetivo
+ca_max
+salario_ate_dele
+metricas
+ref
+SELECT is_female FROM player_profile WHERE snapshot_id=? AND uid=?
+excluir_clube
+executar
+raw
+total_com
+_buscar_como_calcular.<locals>.total_com
+total_com
+mudou
+bc
+raw
+idx
+params
+_buscar_como_calcular
+bc
+idx
+params
+raw
+tol
+ampliar
+piso_ca
+sem_piso
+melhor
+modo
+reposicao
+fator
+valor_max
+valor_mais
+sugestoes
+ None; `ref` = referencia congelada de uma receita. `uid_sexo` decide a regua das 20 maiores ligas.
+bc
+params
+limite
+<genexpr>
+.0
+tol
+_buscar_como_calcular
+_buscar_como_calcular.<locals>.<genexpr>
+buscar_como
+sid
+uid
+tol
+modo
+fora
+metricas
+min_minutes
+piso_ca
+valor_max
+idade_max
+contrato12
+top20
+fora_do_meu_clube
+limite
+mais
+pe
+objetivo
+ca_max
+salario_ate_dele
+nivel
+np
+raw
+pedidos
+idx
+aachou
+jogador nao esta neste snapshot
+_buscar_como_calcular
+ids` na ordem de semelhanca, para a Base filtrar por `uids` com `sort=__sim`.
+buscar_como_receita
+sid
+body
+raw
+contrato12
+top20
+fora_do_meu_clube
+ roda em qualquer save, sem o jogador existir nele.
+_config_buscar_como
+base
+buscar_como
+buscar_como_config
+_config_buscar_como
+Os padroes com que o painel do "Buscar como" abre (Configuracoes).
+buscar_como_config_salvar
+body
+cfg
+faixa
+melhor
+pct
+tolIdx
+pisoPct
+minMinutos
+moneyball_browse
+snapshot
+group
+sort
+dir
+offset
+limit
+min_minutes
+sex
+conds
+pct
+pool
+clubs
+uids
+extra
+exclude
+teams
+max_minutes
+min_age
+max_age
+min_rating
+max_rating
+search
+fora
+np
+mb
+sel
+sid
+meta
+derived
+idx
+total
+mask_group
+page
+cols
+rows_out
+out
+pcts
+pool_idx
+arr
+pool_vals
+page_vals
+pr
+MAX_PAGINA
+_browse_fora_da_captura
+total_db
+rows
+columns_meta
+_linhas_browse
+_completar_perfil
+page
+pcts
+tra captura pode estar fria no disco, e a tabela normal nao espera por ela.
+_browse_fora_da_captura
+snapshot
+group
+sort
+dir
+min_minutes
+sex
+conds
+clubs
+uids
+extra
+exclude
+teams
+max_minutes
+min_age
+max_age
+min_rating
+max_rating
+search
+np
+mb
+sid
+vazio
+da_lista
+aqui
+ausentes
+caps
+por_captura
+wdaordem
+rows_out
+outra
+sel
+cols
+linhas_fora
+linha
+setdiff1d
+por_captura
+_browse_fora_da_captura.<locals>.<lambda>
+<lambda>
+por_captura
+_browse_fora_da_captura
+caps
+por_captura
+sex
+extra
+exclude
+max_minutes
+min_age
+max_age
+min_rating
+max_rating
+search
+reter
+lista: captura 
+ fora da temporada aberta nao abriu (
+rows_out
+lsar da memoria a que a pessoa esta usando.
+<genexpr>
+.0
+acaps
+_browse_fora_da_captura
+caps
+por_captura
+_browse_fora_da_captura.<locals>.<lambda>.<locals>.<genexpr>
+<genexpr>
+.0
+_browse_fora_da_captura
+_browse_fora_da_captura.<locals>.<genexpr>
+_completar_perfil
+sid
+linhas
+achados
+linha
+_perfil_extra
+birth_date
+left_foot
+right_foot
+nas nao ordenam (para nascimento, a Idade ordena igual).
+_perfil_extra
+sid
+uids
+achados
+inicio
+pedaco
+SELECT uid, birth_date, left_foot, right_foot FROM player_profile WHERE snapshot_id=? AND uid IN (
+{uid: (nascimento, pe esquerdo, pe direito)} direto de `player_profile`.
+_linhas_browse
+meta
+derived
+cols
+page
+np
+listado_venda
+listado_emp
+rows_out
+_v
+vals
+num
+_v
+_linhas_browse.<locals>._v
+_v
+_i
+derived
+np
+_linhas_browse
+derived
+np
+cols
+_linhas_browse.<locals>.<lambda>
+<lambda>
+np
+meta
+_linhas_browse
+meta
+np
+nationality_uid
+transfer_value
+value
+asking_price
+asking
+not_for_sale
+transfer_listed
+loan_listed
+height_m
+height
+vals
+As linhas da tabela da Base para os indices `page` de uma temporada.
+_com_origem
+label
+grupo
+lang
+nome
+_NOME_GRUPO
+_texto_da_temporada
+tipo
+ano
+jogos
+lang
+mt
+rotulo
+partial (
+ game
+parcial (
+ jogo
+COMPLETA
+COMPLETA_DOIS_CLUBES
+ (2 clubs)
+ (2 clubes)
+A etiqueta do merge em texto, para o CSV ("" = a propria temporada salva).
+_currency_for
+uid
+sym
+uid
+symbol
+rate
+nda a taxa pela URL de proposito: a fonte e a mesma do resto do app.
+moneyball_export
+snapshot
+group
+sort
+dir
+min_minutes
+sex
+conds
+clubs
+uids
+cols
+extra
+exclude
+teams
+max_minutes
+min_age
+max_age
+min_rating
+max_rating
+profile
+currency
+lang
+filename
+search
+wage_period
+np
+mb
+StreamingResponse
+prof
+delim
+loc
+rate
+symbol
+fator_salario
+sel
+want
+cat
+_rotulo_catalogo
+header
+_per
+_repetidos
+rows_iter
+meta
+derived
+_text
+CHUNK
+stream
+name
+StreamingResponse
+StreamingResponse
+csv_export
+PROFILES
+DEFAULT_PROFILE
+delim
+loc
+_currency_for
+month
+year
+_DEFAULT_EXPORT_COLS
+temporada
+insert
+extra_keys
+_rotulo_catalogo
+moneyball_export.<locals>._rotulo_catalogo
+_rotulo_catalogo
+cat
+lang
+moneyball_export
+cat
+lang
+_wage
+month
+year
+week
+pt
+en
+mensal
+monthly
+pt
+en
+anual
+yearly
+pt
+en
+semanal
+weekly
+month
+year
+week
+_wage
+header
+_com_origem
+cat
+from
+_text
+moneyball_export.<locals>._text
+_text
+lang
+moneyball_export
+lang
+moneyball_export.<locals>.stream
+stream
+start
+sub
+cols_vals
+src
+buf
+row
+fator
+prof
+header
+delim
+rows_iter
+CHUNK
+want
+cat
+derived
+meta
+lang
+sel
+np
+loc
+rate
+fator_salario
+symbol
+_text
+moneyball_export
+CHUNK
+_text
+cat
+delim
+derived
+fator_salario
+header
+lang
+loc
+meta
+np
+prof
+rate
+rows_iter
+sel
+symbol
+want
+fmsh_
+.csv
+fmsh.csv
+text/csv; charset=utf-8
+Content-Disposition
+attachment; filename="
+media_type
+headers
+1900-01
+_FOOT_LABELS
+prof
+bom
+csv_line
+rows_iter
+CHUNK
+want
+sub
+cols_vals
+_texto_da_temporada
+_PERFIL_DA_PAGINA
+__perfil
+sel
+_PROFILE_FMT
+_value
+__nfs
+row
+fmt_value
+_NOT_FOR_SALE_LABEL
+_value
+_asking
+_wage
+rate
+fator_salario
+money
+symbol
+buf
+<genexpr>
+.0
+ch
+moneyball_export
+-_.
+moneyball_export.<locals>.<genexpr>
+club_profile
+snapshot
+sid
+SELECT * FROM club_profile WHERE snapshot_id=?
+perfil do clube nao capturado nesta temporada
+summary
+snaps
+total_players
+last
+SELECT id, name, scope, created_at, (SELECT COUNT(*) FROM players p WHERE p.snapshot_id=s.id) AS n_players FROM snapshots s WHERE 
+ ORDER BY created_at DESC
+SELECT COUNT(*) c FROM players WHERE snapshot_id IN (SELECT id FROM snapshots WHERE 
+snapshots
+last
+Estatisticas dos snapshots permanentes (LIVE nao conta).
+_bytes_crus_calculados
+sids
+filtro
+cru
+tabela
+colunas
+soma
+media
+sid
+ WHERE snapshot_id IN (%s)
+_TAM_TABELAS
+PRAGMA table_info(
+snapshot_id
+SELECT avg(
+) FROM (SELECT * FROM 
+ LIMIT 2000)
+SELECT snapshot_id, count(*) FROM 
+ GROUP BY snapshot_id
+cru
+media
+<genexpr>
+.0
+_bytes_crus_calculados
+_bytes_crus_calculados.<locals>.<genexpr>
+<genexpr>
+.0
+_bytes_crus_calculados
+coalesce(length(cast(
+ as blob)),0)
+_tamanho_por_snapshot
+os
+guardado
+faltam
+novos
+sid
+total
+arquivo
+fator
+SELECT id, bytes_crus FROM snapshots WHERE bytes_crus IS NOT NULL
+SELECT id FROM snapshots WHERE bytes_crus IS NULL
+_bytes_crus_calculados
+guardado
+UPDATE snapshots SET bytes_crus=? WHERE id=?
+st_size
+_colunas_atributos
+_enfileirar_preparo
+sids
+sid
+_FILA_PREPARO
+_temporada_pronta
+sid
+criado_em
+mb
+esta_pronto
+_colunas_atributos
+_assinatura_overall
+PERC_MIN_MINUTOS
+_preparar_leitura_viva
+, e ele atende um de cada vez.
+_preparar_temporada
+sid
+key
+ja_estava
+inicio
+etapa
+_PreparoAdiado
+anto o preparo corria (ai ela ja esta quente para quem pediu).
+_laco_do_preparador
+shutil
+sid
+linha
+PREPARAR_EM_SEGUNDO_PLANO
+_OCIOSO_S
+SELECT scope, created_at FROM snapshots WHERE id=?
+_temporada_pronta
+_LIVRE_MINIMO
+[preparo] temporada 
+ adiada: pouco espaco no disco
+perf_counter
+_preparar_temporada
+ pronta em 
+.1f
+ s
+ adiada: leitura do FM em andamento
+ falhou: 
+_iniciar_preparador
+linhas
+_PREPARADOR
+SELECT id, scope, created_at FROM snapshots WHERE 
+podar_orfaos
+[preparo] nao consegui listar as temporadas: 
+_laco_do_preparador
+preparador
+o tem tudo no disco, da mais nova para a mais velha. Limpa os orfaos do cache.
+registrar_tamanho
+sid
+crus
+SELECT COUNT(*) FROM players WHERE snapshot_id=?
+UPDATE snapshots SET n_players=?, bytes_crus=? WHERE id=?
+registrar_tamanho falhou para %s: %r
+ depois varrendo o banco.
+_tamanho_arquivo
+os
+_compactar
+os
+shutil
+modo
+caminho
+livre
+preciso
+_log
+isolation_level
+PRAGMA auto_vacuum
+PRAGMA incremental_vacuum
+incremental
+_log
+[banco] VACUUM pulado: 
+ GB livres para um banco de 
+ GB. O espaco fica reutilizavel, mas o arquivo nao encolhe.
+sem_espaco
+PRAGMA auto_vacuum=INCREMENTAL
+VACUUM
+vacuum
+snapshots
+include_live
+rows
+tamanhos
+faltam
+contagens
+sid
+out
+cl_conn
+lg
+ ORDER BY s.created_at DESC
+contagens
+UPDATE snapshots SET n_players=? WHERE id=?
+Leitura atual
+is_live
+size_bytes
+ Base de Dados mostra: treinador, data do jogo, escopo, liga.
+delete_snapshot
+sid
+row
+antes
+table
+metodo
+depois
+ir a leitura ao vivo
+SELECT id, scope, carreira_id, game_date FROM snapshots WHERE id=?
+da
+player_profile
+teams
+club_profile
+club_leagues
+comps
+youth_comps
+youth_teams
+youth_team_comps
+player_teams
+DELETE FROM 
+ WHERE snapshot_id=?
+DELETE FROM snapshots WHERE id=?
+_compactar
+deleted
+size_before
+size_after
+freed
+rquivo (RAM) e nunca e um alvo aqui -- pra sair dela e o botao Desconectar.
+players
+sid
+search
+sort
+limit
+offset
+club
+team
+sex
+allowed_sort
+order
+sort_col
+where
+where_params
+rank_select
+rank_order
+rank_params
+tokens
+tok
+count_params
+total
+sel_params
+rows
+reputation
+goals
+assists
+xa
+minutes
+avg_rating
+pa
+xg
+age
+ca
+full_name
+full_name
+age
+ASC
+DESC
+ca
+pa
+full_name
+p.
+pr.age
+COALESCE(pr.world_rep, 0) DESC, COALESCE(pr.cur_rep, 0)
+WHERE p.snapshot_id = ?
+ AND p.team_uid = ?
+ AND p.club_id = ?
+ AND pr.is_female = 1
+ AND (pr.is_female IS NULL OR pr.is_female = 0)
+0 AS name_rank
+ AND p.search_norm LIKE ?
+where_params
+CASE WHEN 
+ THEN 0 ELSE 1 END AS name_rank
+name_rank ASC, 
+ ORDER BY 
+ LIMIT ? OFFSET ?
+<genexpr>
+.0
+players
+p.display_norm LIKE ?
+players.<locals>.<genexpr>
+_perc_metricas
+np
+p90
+bruto
+razao
+soma90
+campo
+_defesas
+_defesas_pct
+_duelos
+_gk_dificeis
+_disciplina
+p90
+_perc_metricas.<locals>.p90
+p90
+campo
+_perc_metricas
+np
+bruto
+_perc_metricas.<locals>.bruto
+bruto
+campo
+_perc_metricas
+razao
+_perc_metricas.<locals>.razao
+razao
+_perc_metricas
+np
+soma90
+_perc_metricas.<locals>.soma90
+soma90
+campos
+_perc_metricas
+np
+dribbles
+goals
+shots
+headers_won
+presses_attempted
+tackles_completed
+possession_won
+possession_lost
+passes_completed
+passes_progressive
+pizza:
+xa
+npxg
+headers_won
+headers_attempted
+g:aereo
+passes_progressive
+passes_completed
+g:progressao
+passes_completed
+passes_attempted
+g:passes
+tackles_completed
+tackles_attempted
+g:desarmes
+_defesas
+_perc_metricas.<locals>._defesas
+_defesas
+fields
+_perc_metricas
+_defesas_pct
+_perc_metricas.<locals>._defesas_pct
+_defesas_pct
+fields
+den
+_defesas
+np
+_perc_metricas
+_defesas
+np
+g:gk_defesas
+gk_penalties_saved
+gk_penalties_faced
+g:gk_penaltis
+clean_sheets_gk
+apps_total
+g:gk_semgol
+xg_prevented_gk
+g:gk_xgp
+crosses_completed
+crosses_attempted
+i:cruzamentos
+shots_on_target
+shots
+i:finalizacoes
+clearances
+interceptions
+i:cortes90
+interceptions
+i:intercep90
+presses_attempted
+i:pressoes90
+key_passes
+i:passeschave90
+xa
+i:xa90
+dribbles
+i:dribles90
+goals
+i:gols90
+npxg
+i:npxg90
+headers_won
+i:aereos90
+tackles_completed
+i:desarmes90
+_perc_metricas.<locals>.<lambda>
+<lambda>
+p90
+_perc_metricas
+p90
+i:defesas90
+goals_conceded_gk
+i:sofridos90
+possession_won
+i:posseganha90
+possession_lost
+i:possperdida90
+passes_completed
+i:passes90
+shots
+i:chutes90
+goals
+shots
+i:conversao
+shots_on_target
+i:chutesgol90
+xg
+i:xg90
+xg_overperformance
+i:xgover
+i:convfin
+assists
+key_passes
+i:convpasse
+presses_completed
+presses_attempted
+i:pressganhas
+tackles_key
+i:desarmedec90
+clearances
+i:clear90
+blocks
+i:bloqueios90
+distance_km
+i:dist90
+clear_cut_chances
+i:chances90
+_duelos
+_perc_metricas.<locals>._duelos
+_duelos
+fields
+ganhos
+tent
+np
+_perc_metricas
+np
+i:duelos
+gk_saves_tipped
+i:gk_pontadedos90
+errors_leading_to_goal
+i:gk_falhas90
+_gk_dificeis
+_perc_metricas.<locals>._gk_dificeis
+_gk_dificeis
+fields
+dif
+tot
+np
+_perc_metricas
+np
+i:gk_dificeis
+passes_progressive
+r:progressao
+r:distribuicao
+r:aereo
+tackles_completed
+interceptions
+clearances
+blocks
+r:defesa
+shots
+key_passes
+r:ameaca
+_disciplina
+_perc_metricas.<locals>._disciplina
+_disciplina
+fields
+noventa
+faltas
+np
+_perc_metricas
+np
+r:disciplina
+_perc_metricas.<locals>.p90.<locals>.f
+fields
+noventa
+np
+campo
+_perc_metricas
+campo
+np
+maximum
+campo
+_perc_metricas.<locals>.bruto.<locals>.<lambda>
+<lambda>
+fields
+campo
+_perc_metricas
+campo
+_perc_metricas.<locals>.razao.<locals>.f
+fields
+den
+np
+_perc_metricas
+wbanp
+u_perc_metricas.<locals>.soma90.<locals>.f
+fields
+noventa
+tot
+np
+campos
+_perc_metricas
+campos
+np
+<genexpr>
+.0
+fields
+_perc_metricas
+campos
+np
+_perc_metricas.<locals>.soma90.<locals>.f.<locals>.<genexpr>
+gk_saves_held
+gk_saves_parried
+gk_saves_tipped
+goals_conceded_gk
+gk_saves_held
+gk_saves_parried
+tackles_completed
+headers_won
+tackles_attempted
+headers_attempted
+gk_penalties_saved
+fouls_committed
+yellow_cards
+red_cards
+_regua_ligas
+sid
+is_female
+quantas
+so_minha
+minha
+fem
+cond
+ligas
+is_female=1
+(is_female=0 OR is_female IS NULL)
+SELECT uid FROM comps WHERE snapshot_id=? AND 
+_nome_da_liga
+sid
+league_uid
+SELECT league_name FROM club_leagues WHERE snapshot_id=? AND league_uid=? LIMIT 1
+player_percentis
+sid
+uid
+coorte
+min_minutes
+regua
+_percentis_de
+_motivo_sem_partidas
+sid
+uid
+apps
+sqlite3
+arquivo_partidas
+liga
+versao
+linha
+curta
+sqlite3
+arquivo_partidas
+sem_jogos
+SELECT 1 FROM player_match_stats WHERE snapshot_id=? LIMIT 1
+SELECT l.league_uid FROM players p JOIN club_leagues l ON l.snapshot_id=p.snapshot_id AND l.club_uid=p.club_id WHERE p.snapshot_id=? AND p.uid=?
+SELECT 1 FROM team_match_stats WHERE snapshot_id=? AND comp_uid=? LIMIT 1
+liga_sem_partidas
+fora_do_arquivo
+OperationalError
+SELECT fm_version FROM snapshots WHERE id=?
+versao_tem_arquivo
+ao_vivo
+captura_antiga
+ptura_antiga.
+player_analise
+sid
+uid
+coorte
+min_minutes
+regua
+sqlite3
+np
+an
+raw
+idx
+_fem
+_so_minha
+_ligas
+tabela
+pos
+posicao
+base
+campos
+mask_linha
+dados
+mask_gk
+gk
+apps
+minutos
+partidas
+comp_uids
+nomes_comp
+marcas
+linha
+opps
+nomes_times
+todos
+nomes_jog
+ini
+lote
+analise_perfil
+_pool_do_jogador
+coorte
+calcular
+mask_linha
+calcular_goleiro
+similares
+similares
+gk
+dispersao
+dispersao
+goleiro
+CAMPOS
+totais
+partidas_do_jogador
+contexto
+serie
+SELECT comp_uid, MAX(comp_name) FROM player_form WHERE snapshot_id=? AND comp_uid IN (
+) GROUP BY comp_uid
+nomes_comp
+partidas
+_motivo_sem_partidas
+partidas_motivo
+partidas_versao
+forma_basica
+forma
+SELECT team_goals_for_while_in_squad FROM player_stats WHERE snapshot_id=? AND uid=?
+equipe_golos
+SELECT club_uid, club_name FROM club_leagues WHERE snapshot_id=? AND club_uid IN (
+nomes_times
+SELECT p.snapshot_id, cl.club_name FROM players p LEFT JOIN club_leagues cl ON cl.snapshot_id=p.snapshot_id AND cl.club_uid=p.club_id WHERE p.uid=? AND cl.club_name IS NOT NULL
+clubes_por_captura
+SELECT p.uid, p.full_name, COALESCE(cl.club_name, pr.club_name) FROM players p LEFT JOIN player_profile pr ON pr.snapshot_id=p.snapshot_id AND pr.uid=p.uid LEFT JOIN club_leagues cl ON cl.snapshot_id=p.snapshot_id AND cl.club_uid=p.club_id WHERE p.snapshot_id=? AND p.uid IN (
+nomes_jog
+s. Calculo em `analise_perfil.py`; texto de tela fica no front.
+_atributos_do_pool
+sid
+uids
+ov
+attrs
+_overall_do_snapshot
+sid
+coorte
+min_minutes
+regua
+np
+ov
+raw
+uids
+chave_pool
+ehfem
+so_minha
+pct
+pos
+sexo
+quem
+ligas
+tab
+mask
+vals
+mask_gk
+arr
+pool
+estimado
+atributos
+n_atr
+cob_atr
+n_des
+papel
+cob_des
+METRICAS
+ehfem
+so_minha
+so_minha
+_tabela_pool
+chave_pool
+ov
+g:gk_
+quem
+mb_percentis
+distance_km
+_atributos_do_pool
+notas_atributo
+notas_desempenho
+desempenho
+papel
+cobertura_atributo
+cobertura_desempenho
+estimado
+_assinatura_overall
+coorte
+min_minutes
+regua
+hashlib
+mb
+ov
+fontes
+mod
+texto
+hashlib
+fontes
+sha256
+hexdigest
+teError
+PESOS_ATRIBUTO
+PAPEIS
+MINUTOS_MINIMOS
+_perc_metricas
+sort_keys
+default
+encode
+utf-8
+_overall_cacheado
+sid
+chave
+guardado
+_OVERALL_CACHE
+_montar_overall
+_montar_overall
+sid
+chave
+raw
+assinatura
+criado_em
+tab
+do_disco
+guardado
+ler_overall
+_overall_do_snapshot
+gravar_overall
+tab
+O corpo de `_overall_cacheado` sem o cache e sem a trava (quem chama cuida dos dois).
+overall_do_jogador
+sid
+uid
+modo
+np
+ov
+tab
+indice
+atr
+des
+nota
+papel
+motivo
+MODO_PADRAO
+combinar
+poucos_minutos
+nota
+papel_pt
+ROTULO_PAPEL
+papel_en
+sem_desempenho
+mb_percentis
+pool
+valores
+mb
+_tabela_pool
+raw
+chave_pool
+coorte
+min_minutes
+ehfem
+so_minha
+ligas_regua
+np
+mb
+chave
+tabela
+pos
+jogou
+mask
+fn
+partes
+esforco
+arr
+_PERC_CACHE
+COHORT_POSITIONS
+i:dist90
+i:desarmes90
+i:pressoes90
+esforco
+i:esforco
+tabela
+_pool_do_jogador
+raw
+chave_pool
+sid_ref
+uid
+coorte
+min_minutes
+regua
+np
+mb
+achou
+idx
+cx
+linha
+ehfem
+so_minha
+ligas_regua
+tabela
+snapshot sem jogadores
+_percentis_de
+raw
+chave_pool
+sid_ref
+uid
+coorte
+min_minutes
+regua
+np
+mb
+idx
+ehfem
+so_minha
+ligas_regua
+tabela
+pos
+mask_gk
+mask
+vals
+saida
+arr
+pool
+pct
+empate
+estimado
+empate
+regua
+top
+liga_nome
+_nome_da_liga
+feminino
+_capturas_do_jogador
+uid
+sid_live
+cols
+carreira
+CARTOES_PERFIL
+CARTOES_GOLEIRO
+SELECT p.club_id, p.height_cm, 
+, pr.all_time_appearances AS car, pr.all_time_goals AS car_gols FROM players p JOIN player_stats st ON st.snapshot_id=p.snapshot_id AND st.uid=p.uid LEFT JOIN player_profile pr ON pr.snapshot_id=p.snapshot_id AND pr.uid=p.uid WHERE p.snapshot_id=? AND p.uid=?
+b_id, p.height_cm, 
+id = ? AND 
+me_date, s.created_at) DESC
+As capturas de UM banco em que o uid existe, com os numeros dos cartoes.
+<genexpr>
+.0
+_capturas_do_jogador
+st.
+_capturas_do_jogador.<locals>.<genexpr>
+_apps_por_uid
+sid
+uids
+limite
+base
+marcas
+linhas
+SELECT st.uid, st.apps_total, pr.all_time_appearances carreira FROM player_stats st LEFT JOIN player_profile pr   ON pr.snapshot_id=st.snapshot_id AND pr.uid=st.uid 
+WHERE st.snapshot_id=? AND st.uid IN (
+SELECT st.uid, st.apps_total, pr.all_time_appearances carreira FROM player_stats st LEFT JOIN player_profile pr   ON pr.snapshot_id=st.snapshot_id AND pr.uid=st.uid WHERE st.snapshot_id=? AND st.apps_total > 5 AND st.uid % 97 = 0
+ LIMIT 
+_virou_temporada
+sid_antes
+sid_depois
+amostra
+depois
+comuns
+fora
+antes
+agora
+_apps_por_uid
+AMOSTRA_VIRADA
+limite
+uids
+depois
+amostra
+statistics
+median
+JOGOS_FORA_DA_TEMPORADA
+QUEDA_DE_VIRADA
+A captura mais nova comeca uma temporada NOVA? (ver o comentario acima)
+<genexpr>
+.0
+aamostra
+_virou_temporada
+_virou_temporada.<locals>.<genexpr>
+<genexpr>
+.0
+adepois
+_virou_temporada
+_virou_por_jogador
+t_velha
+car_velha
+clube_velho
+t_nova
+car_nova
+clube_novo
+virou_no_save
+np
+confiavel
+sobra
+decide_o_jogador
+FOLGA_VIRADA
+_jogos_que_faltam
+car_velha
+clube_velho
+t_nova
+car_nova
+clube_novo
+np
+bruto
+mesmo
+faltam
+_gols_que_faltam
+faltam
+gols_car_velha
+gols_nova
+gols_car_nova
+np
+bruto
+ando os jogos foram completados (`faltam` > 0): sem isso nao ha confianca.
+_virou_no_save
+bloco_de
+velha
+nova
+dias
+_dias_entre
+DIAS_DE_UMA_TEMPORADA
+tra carreira) cai no limite de um ano.
+_temporadas_por_jogador
+linhas
+bloco_de
+saida
+ref
+temporada
+virou
+faltam
+gols
+temporada
+entra
+faltam
+faltam_gols
+_virou_por_jogador
+car
+_virou_no_save
+bloco_de
+entra
+faltam
+faltam_gols
+_jogos_que_faltam
+_gols_que_faltam
+car_gols
+gols
+_capturas_da_carreira
+cid
+linhas
+saida
+me_date, created_at) ASC
+_capturas_da_carreira.<locals>.<lambda>
+<lambda>
+_capturas_da_carreira
+_dias_entre
+wbada
+dbb
+Dias de JOGO entre duas capturas. `None` quando alguma nao tem data.
+_composicao_alltime
+cid
+_blocos_alltime
+das_por_jogador`).
+_blocos_alltime
+cid
+capturas
+chave
+guardada
+_capturas_da_carreira
+_COMPOSICAO_CACHE
+_blocos_calculados
+<genexpr>
+.0
+_blocos_alltime
+_blocos_alltime.<locals>.<genexpr>
+<genexpr>
+.0
+_blocos_alltime
+_blocos_calculados
+capturas
+blocos
+atual
+anterior
+dias
+virou
+_virou_temporada
+composicao_alltime
+cid
+pshots WHERE carreira_id=? AND 
+_composicao_alltime
+capturas
+tudo
+capturas_base
+cheias
+_com_correcoes
+cid
+uid
+capturas
+mt
+correcoes
+extra
+SELECT s.id, s.game_date FROM snapshots s JOIN players p ON p.snapshot_id=s.id AND p.uid=? WHERE s.carreira_id=? AND s.scope=? AND s.game_date IS NOT NULL
+%s %s
+_ROTULO_CORRECAO
+ano_da_temporada
+_com_correcoes.<locals>.<lambda>
+<lambda>
+_com_correcoes
+em trocou de clube no meio entra em duas partes (merge, decisao do dono de 12/10).
+_stats_alltime
+cid
+uid
+blocos
+bloco_de
+linhas
+cap
+total
+nota_peso
+nota_soma
+usadas
+incompletas
+jogos_extra
+gols_extra
+dec
+jogos
+completos
+_com_correcoes
+pshot_id=? AND st.uid=?
+stats
+goals
+_car
+_car_gols
+_clube
+_temporadas_por_jogador
+usadas
+stats
+gols
+car
+car_gols
+clube
+incompletas
+avg_rating
+nota_soma
+nota_peso
+snapshot_id
+uid
+_ALLTIME_NAO_SOMA
+jogos_extra
+gols_extra
+apps_total
+goals
+player_alltime
+uid
+carreira
+total
+usadas
+incompletas
+completos
+base
+_stats_alltime
+jogador nao esta nesta carreira
+player
+completos
+_sem_merge
+sid
+raw
+np
+pronto
+tipos
+linhas
+pos
+campos
+uid_da_linha
+existentes
+nomes
+linha
+_sem_merge
+temporada_tipo
+ FROM player_stats WHERE snapshot_id=?
+uid_da_linha
+_sem_merge
+ correcao) e a 29/30 sumiria da soma. Lido do banco so para as linhas trocadas e guardado no raw.
+_crus
+sid
+raw
+linhas
+np
+sm
+trocadas
+saida
+arr
+trocadas
+{campo: valores SEM merge} nas `linhas` de um raw (ver `_sem_merge`).
+_correcoes_da_carreira
+cid
+SELECT id, game_date FROM snapshots WHERE carreira_id=? AND scope=? AND game_date IS NOT NULL
+As leituras de fim de temporada (correcoes) da carreira, como capturas para o acumulado.
+_alltime_raw
+cid
+np
+blocos
+comp
+bloco_de
+sids
+datas
+antes
+ultima_salva
+chave
+guardado
+ordem
+base
+meta
+fields
+peso
+nota
+_referencia
+ref
+sid
+outra
+uids_o
+crus_o
+nota_o
+peso_o
+ordena
+alvo
+linha
+existe
+i_o
+r_l
+virou
+arr
+novos
+raw
+carreira sem temporadas
+_correcoes_da_carreira
+sids
+datas
+_alltime_raw.<locals>.<lambda>
+<lambda>
+datas
+_alltime_raw
+datas
+<lambda>
+datas
+_alltime_raw
+datas
+_META_DERIVADO
+_crus
+_referencia
+_alltime_raw.<locals>._referencia
+_referencia
+bruto
+linhas
+sid
+crus
+np
+bloco_de
+_alltime_raw
+bloco_de
+np
+at
+r_l
+peso
+divide
+zeros_like
+out
+where
+<genexpr>
+.0
+bloco
+cap
+_alltime_raw
+_alltime_raw.<locals>.<genexpr>
+<genexpr>
+.0
+_alltime_raw
+all_time_appearances
+player_percentis_alltime
+uid
+carreira
+coorte
+min_minutes
+raw
+comp
+chave
+saida
+_alltime_raw
+Os mesmos percentis do modal, com o pool SOMADO das temporadas da carreira.
+_cartoes
+temporadas_do_jogador.<locals>._cartoes
+_cartoes
+row
+temporadas_do_jogador
+temporadas_do_jogador
+uid
+_cartoes
+saida
+cl
+por_carreira
+cid
+lista
+bloco_de
+linhas
+decisoes
+incompletas
+mt
+novos
+origem
+_capturas_do_jogador
+sid_live
+height_cm
+temporadas_do_jogador.<locals>.<lambda>
+<lambda>
+temporadas_do_jogador
+temporada_incompleta
+do_jogador
+[merge] historico 
+player
+sid
+uid
+prof
+league_uid
+league_name
+lg
+forma
+temporada
+mt
+pos_full
+nota_geral
+SELECT * FROM players WHERE snapshot_id=? AND uid=?
+SELECT * FROM player_stats WHERE snapshot_id=? AND uid=?
+SELECT * FROM player_profile WHERE snapshot_id=? AND uid=?
+SELECT match_date, comp_uid, comp_name, team_uid, rating FROM player_form WHERE snapshot_id=? AND uid=? ORDER BY match_date
+[merge] perfil 
+jogador nao encontrado
+pos_
+overall_do_jogador
+traceback
+print_exc
+identity
+profile
+form
+_captura_do_jogador
+uid
+capturas
+carreira
+temporadas_do_jogador
+ves, e abrir outra carreira mostra outra pessoa (FMSH-8, 10/10).
+jogo_abrir_jogador
+uid
+acao
+_ACOES_DO_JOGO
+acao desconhecida
+escolher
+AO_MENU_DO_JOGO
+_captura_do_jogador
+_PEDIDO_DO_JOGO
+uid
+acao
+em
+AO_PEDIDO_DO_JOGO
+jogo_pedido
+uid
+PEDIDO_DO_JOGO_VALE
+uid
+sid
+acao
+ abrir (`_captura_do_jogador`).
+jogo_abrir_no_jogo
+uid
+sid
+abrir_no_jogo
+savegame_id
+linha
+abrir_no_jogo
+SELECT savegame_id FROM snapshots WHERE id=?
+abrir
+sar (`outro_save`) se o jogo estiver com outro. Contrato: `abrir_no_jogo.py`.
+jogo_dados
+uid
+modo
+ax
+ay
+aw
+ah
+gx
+gy
+gw
+gh
+sid
+janela_dados
+geo
+hover
+fixa
+ok
+motivo
+jogador fora das capturas
+janela_dados
+geometria
+tela_principal
+ok
+motivo
+sem como saber o tamanho da tela
+AO_DADOS_DO_JOGO
+jogo_navegador
+navegador_do_jogo
+navegador_do_jogo
+ws
+pagina
+bre /janela/dados?modo=jogo e pinta os quadros na interface do jogo.
+jogo_captura_do_jogador
+uid
+A captura que a Player Data dentro do FM mostra para este jogador (a mesma regra de jogo_dados).
+jogo_dados_fechar
+O plugin (mouse saiu do icone, clique fora, Esc, outra tela) ou a propria pagina pedem para sumir.
+jogo_conectar
+reader
+erro
+sgid
+resposta
+ok
+ja_conectado
+AO_CONECTAR_PELA_TELA
+connect_fm
+connected
+error_code
+ok
+conectando
+ndo direto daqui, a tela seguia "Desconectado" (bug B-004).
+jogo_fechar_menu
+A pagina do menu (por cima do jogo) pede para sumir: Esc ou clique fora.
+jogo_captura
+out
+total
+_captura_simulada
+estado
+nome
+sid
+data_jogo
+atualizado_em
+ligas
+tipo
+ja_salva
+tualizado_em`). Com `simulada: true` e o "Simular aviso".
+jogo_captura_fechar
+A faixa por cima do jogo pede para sumir (o x, ou o tempo dela acabou).
+spa
+full_path
+target
+index
+api/
+endpoint nao encontrado
+DIST_DIR
+index.html
+n build` em frontend/
+text/html
+cache-control
+no-store, must-revalidate
+<module server>
+origin
+has_location
+os
+sys
+mimetypes
+OPENBLAS_NUM_THREADS
+fastapi
+FastAPI
+HTTPException
+Request
+FastAPI
+Request
+FileResponse
+fastapi.staticfiles
+StaticFiles
+StaticFiles
+pydantic.main
+BaseModel
+uvicorn
+player_search
+fim_de_temporada
+frontend
+dist
+__LIVE__
+_cache_por_temporada
+Lock
+local
+FM Season Hub
+title
+app
+127.0.0.1
+localhost
+[::1]
+::1
+POST
+PUT
+PATCH
+DELETE
+/api/live
+/api/status
+/api/job
+/api/summary
+/api/version
+/api/currencies
+/api/acesso
+middleware
+http
+kind
+state
+phase
+done
+total
+sid
+name
+error
+idle
+sid
+ready
+club
+club_uid
+build
+manager
+read_at
+game_date
+save_name
+savegame_id
+session_nonce
+parar_leitura_viva
+.js
+text/javascript
+.mjs
+text/javascript
+.css
+text/css
+.json
+application/json
+.svg
+image/svg+xml
+.woff2
+font/woff2
+.woff
+font/woff
+.png
+image/png
+.webp
+image/webp
+.ico
+image/x-icon
+_ext
+_tipo
+add_type
+assets
+mount
+/assets
+directory
+assets
+GraphicsBody
+GraphicsBody.__annotate__
+__annotate_func__
+GraphicsBody
+__class__
+DbDirBody
+DbDirBody.__annotate__
+DbDirBody
+__class__
+/api/settings
+get_settings
+OverallModoBody
+OverallModoBody.__annotate__
+post
+/api/settings/overall
+__annotate__
+set_overall_modo
+MemoriaBody
+MemoriaBody.__annotate__
+/api/memoria
+estado_da_memoria
+/api/settings/memoria
+set_memoria
+IdiomaBody
+IdiomaBody.__annotate__
+/api/settings/idioma
+set_idioma
+ok
+perguntar
+bandeja
+fechar
+conectar
+desconectar
+abrir
+sair
+atualizar
+^ir:/[A-Za-z0-9/_\-]*(\?[A-Za-z0-9_=&\-]*)?$
+/api/janela/mostrar
+janela_mostrar
+AoFecharBody
+AoFecharBody.__annotate__
+AoFecharBody
+__class__
+/api/janela/ao-fechar
+janela_ao_fechar
+/api/settings/bandeja
+BandejaBody
+BandejaBody.__annotate__
+BandejaBody
+__class__
+set_bandeja
+viu_rodando
+desde
+avisado
+iniciar_faixa_da_conexao
+/api/bandeja/conexao
+bandeja_conexao
+/api/bandeja/conexao/fechar
+bandeja_conexao_fechar
+lista
+em
+renovando
+/api/bandeja/menu
+bandeja_menu
+MenuProntoBody
+MenuProntoBody.__annotate__
+/api/bandeja/menu/pronto
+bandeja_menu_pronto
+MenuPainelBody
+lados" (x, y, largura, altura) e o tamanho do painel medido pela pagina.
+MenuPainelBody.__annotate__
+/api/bandeja/menu/painel
+bandeja_menu_painel
+MenuFecharBody
+MenuFecharBody.__annotate__
+MenuFecharBody
+__class__
+/api/bandeja/menu/fechar
+bandeja_menu_fechar
+EscolherBody
+EscolherBody.__annotate__
+EscolherBody
+__class__
+/api/bandeja/escolher
+bandeja_escolher
+/api/onboarding
+get_onboarding
+OnboardingBody
+OnboardingBody.__annotate__
+OnboardingBody
+__class__
+etapa
+pulado
+escopo_primeira
+set_onboarding
+/api/onboarding/refazer
+refazer_onboarding
+/api/dicas
+get_dicas
+DicaBody
+DicaBody.__annotate__
+/api/dicas/lida
+marcar_dica
+/api/dialogo/pasta
+/api/legal
+termos
+pt
+get_legal
+AceiteBody
+AceiteBody.__annotate__
+AceiteBody
+__class__
+/api/legal/aceite
+post_legal_aceite
+/api/sair
+post_sair
+/api/version
+get_version
+/api/patch-notes
+patch_notes
+/api/diagnostico
+/api/abrir-pasta-dados
+abrir_pasta_dados
+/api/idiomas
+listar_idiomas
+/api/idiomas/{codigo}
+ler_idioma
+/api/idiomas/abrir-pasta
+abrir_pasta_idiomas
+ExportarIdiomaBody
+ExportarIdiomaBody.__annotate__
+ExportarIdiomaBody
+__class__
+English
+/api/idiomas/exportar
+exportar_idioma
+feito
+exception_handler
+LimiteDeListas
+_limite_de_listas
+/api/listas-preferenciais
+listas_preferenciais_listar
+delete
+/api/listas-preferenciais/{id_lista}
+listas_preferenciais_remover
+/api/listas-preferenciais/pasta
+listas_preferenciais_da_pasta
+ListaDaPastaBody
+ListaDaPastaBody.__annotate__
+ListaDaPastaBody
+__class__
+/api/listas-preferenciais/da-pasta
+listas_preferenciais_importar_da_pasta
+/api/listas-preferenciais/escolher
+listas_preferenciais_escolher_arquivo
+/api/views-fm/pasta
+views_fm_da_pasta
+ViewDaPastaBody
+ViewDaPastaBody.__annotate__
+ViewDaPastaBody
+__class__
+/api/views-fm/da-pasta
+views_fm_importar_da_pasta
+/api/views-fm/escolher
+views_fm_escolher_arquivo
+/api/views-fm
+base
+/api/listas-preferenciais/{id_lista}/atualizar
+listas_preferenciais_atualizar
+gr
+GK
+def
+DC
+SW
+DR
+DL
+WBR
+WBL
+med
+DM
+MC
+MR
+ML
+ata
+AMC
+ST
+AMR
+AML
+_setor
+_posicoes
+_p
+UidsBody
+UidsBody.__annotate__
+UidsBody
+__class__
+/api/resumo-jogadores
+resumo_jogadores
+/api/jogadores-fora-da-captura
+jogadores_fora_da_captura
+BibliotecaBody
+BibliotecaBody.__annotate__
+_modulo_favoritos
+_identidades
+_jogo_das_listas_favoritas
+identidades
+familias
+jogo_das_listas
+espelhar_favoritos
+ouvintes
+/api/biblioteca
+biblioteca_listar
+/api/biblioteca/{arquivo}/carregar
+biblioteca_carregar
+/api/biblioteca/{arquivo}/bruto
+biblioteca_bruto
+/api/biblioteca-fmf
+/api/biblioteca/{arquivo}
+biblioteca_ler
+biblioteca_gravar
+RenomearBody
+RenomearBody.__annotate__
+/api/biblioteca/{arquivo}/nome
+biblioteca_renomear
+biblioteca_apagar
+/api/biblioteca/abrir-pasta
+biblioteca_abrir_pasta
+youtube
+site
+discord
+bugs
+roadmap
+patreon
+https://x.com/FMSeasonHub
+https://discord.gg/C32Kbaqd2h
+https://fmsh.featurebase.app/en
+https://light-principal-549.notion.site/FM-Season-Hub-Roadmap-3b5aa9553628818ca6a1c17483d4be4f?pvs=74
+https://www.patreon.com/16519124/join
+H11_MAX_URL
+h11
+UVICORN_HTTP
+OpenLinkBody
+OpenLinkBody.__annotate__
+OpenLinkBody
+__class__
+em
+arquivo
+itens
+texto
+/api/diagnostico/completo
+diagnostico_completo
+diagnostico_completo_resultado
+DispensarBody
+DispensarBody.__annotate__
+/api/atualizacao
+atualizacao_estado
+/api/atualizacao/dispensar
+atualizacao_dispensar
+/api/atualizacao/progresso
+atualizacao_progresso
+/api/atualizacao/aplicar
+atualizacao_aplicar
+PluginLigarBody
+PluginLigarBody.__annotate__
+PluginVoltarBody
+PluginVoltarBody.__annotate__
+PluginIdBody
+PluginIdBody.__annotate__
+PluginsVistosBody
+PluginsVistosBody.__annotate__
+PluginsAvisarBody
+PluginsAvisarBody.__annotate__
+/api/plugins
+plugins_estado
+/api/plugins/verificar
+plugins_verificar
+/api/plugins/ligar
+plugins_ligar
+/api/plugins/voltar
+plugins_voltar
+/api/plugins/oferta
+/api/plugins/avisar-novos
+plugins_avisar_novos
+/api/plugins/instalar
+plugins_instalar
+PastaJogoBody
+PastaJogoBody.__annotate__
+PastaJogoBody
+__class__
+/api/plugins/pasta-jogo
+plugins_pasta_jogo
+/api/plugins/dispensar
+plugins_dispensar
+/api/plugins/oferta-vista
+plugins_oferta_vista
+/api/plugins/foto
+plugins_foto
+/atualizando
+pagina_atualizando
+/api/diagnostico/abrir-pasta
+diagnostico_abrir_pasta
+/api/links/dominios
+link_dominios
+/api/open-link
+open_link
+/api/armazenamento
+armazenamento
+CarreiraAtivaBody
+CarreiraAtivaBody.__annotate__
+CarreiraPrefsBody
+CarreiraPrefsBody.__annotate__
+CarreiraPrefsBody
+__class__
+moeda
+periodo_salario
+/api/carreiras
+/api/carreiras/ativa
+carreira_ativar
+put
+/api/carreiras/{cid}
+carreira_prefs
+/api/carreiras/{cid}/temporadas/{sid}
+carreira_mover_temporada
+FavListaNovaBody
+FavListaNovaBody.__annotate__
+FavListaNovaBody
+__class__
+FavListaEditarBody
+FavListaEditarBody.__annotate__
+FavListaEditarBody
+__class__
+FavJogadoresBody
+FavJogadoresBody.__annotate__
+FavJogadoresBody
+__class__
+FavDuplicarBody
+FavDuplicarBody.__annotate__
+FavDuplicarBody
+__class__
+FavMigrarLocalBody
+FavMigrarLocalBody.__annotate__
+FavMigrarLocalBody
+__class__
+/api/favoritos/listas
+favoritos_listas
+favoritos_criar
+patch
+/api/favoritos/listas/{id_lista}
+favoritos_editar
+favoritos_apagar
+/api/favoritos/listas/{id_lista}/jogadores
+favoritos_jogadores
+/api/favoritos/listas/{id_lista}/duplicar
+favoritos_duplicar
+/api/favoritos/tirar-de-todas
+favoritos_tirar_de_todas
+/api/favoritos/migrar-local
+favoritos_migrar_local
+/api/favoritos/aviso-visto
+favoritos_aviso_visto
+/api/alertas
+pt
+alertas
+/api/alertas/lidos
+alertas_lidos
+CodigoBody
+CodigoBody.__annotate__
+/api/acesso
+acesso_estado
+/api/acesso/codigo
+acesso_codigo
+/api/acesso/sair
+acesso_sair
+PatreonBody
+PatreonBody.__annotate__
+PatreonBody
+__class__
+/api/acesso/patreon
+acesso_patreon
+/patreon/callback
+patreon_callback
+/api/acesso/patreon/status
+acesso_patreon_status
+pt
+en
+erro_titulo
+erro_rodape
+ok_titulo
+ok_titulo_sem_nome
+ok_linha
+ok_rodape
+zero_titulo
+zero_titulo_sem_nome
+zero_linha
+zero_rodape
+gratis
+sem_codigo
+token_falhou
+identidade_falhou
+limite_maquinas
+sem_resultado
+ticket_invalido
+nao_pedi_isso
+i concluir
+Feche esta aba e tente de novo pelo FMSH.
+Bem-vindo, {nome}!
+Bem-vindo!
+be.
+cabou de assinar, espere um minuto e tente de novo.
+m acesso. Tente de novo.
+so em 2 computadores.
+nciona logo depois de entrar pelo Patreon.
+sado ou expirou. Entre de novo.
+ este computador.
+erro_titulo
+erro_rodape
+ok_titulo
+ok_titulo_sem_nome
+ok_linha
+ok_rodape
+zero_titulo
+zero_titulo_sem_nome
+zero_linha
+zero_rodape
+gratis
+sem_codigo
+token_falhou
+identidade_falhou
+limite_maquinas
+sem_resultado
+ticket_invalido
+nao_pedi_isso
+Could not finish
+Close this tab and try again from FMSH.
+Welcome, {nome}!
+Welcome!
+Your level is now <b>{tier}</b>.
+lready knows.
+Hello, {nome}.
+Hello.
+This Patreon account has <b>no active pledge</b> to the FMSH campaign, so the level stays <b>Free</b>.
+If you just subscribed, wait a minute and try again.
+Free
+Patreon did not return the authorization code.
+Could not exchange the code for access. Try again.
+Patreon did not say who you are. Try again.
+This pledge is already in use on 2 computers.
+This page only works right after signing in with Patreon.
+This response was already used or expired. Sign in again.
+This response does not belong to this computer.
+lang
+pt
+em
+erro
+nivel
+nome
+tier_nome
+/api/currencies
+get_currencies
+England
+Inglaterra
+Germany
+Alemanha
+Italy
+France
+Spain
+Espanha
+/api/clubs
+get_clubs
+/api/nomes-curtos
+U23
+U22
+U21
+U20
+U19
+U19 B
+U18
+U18 B
+U17
+Youth
+u17
+u19
+u21
+u17
+u20
+u23
+u23
+u23
+u20
+u20
+u20
+/api/youth-teams
+get_youth_teams
+/api/settings/graphics
+set_graphics
+/api/settings/db_dir
+set_db_dir
+/api/portrait/{uid}
+portrait
+/api/flag/{uid}
+flag
+/api/club_logo/{uid}
+club_logo
+/api/comp_logo/{uid}
+comp_logo
+ConnectBody
+ConnectBody.__annotate__
+ConnectBody
+__class__
+/api/connect
+/api/refresh
+refresh_live
+/api/job
+/api/live
+/api/status
+/api/disconnect
+disconnect_fm
+CaptureBody
+CaptureBody.__annotate__
+CaptureBody
+__class__
+/api/capture
+/api/portal
+portal
+estado
+sid
+nome
+carreira
+data_jogo
+atualizado_em
+ligas
+tipo
+ja_salva
+iniciado
+carreira
+conferido_em
+conferir_em
+falhou_em
+estados
+cobertas
+base
+auto_tentado
+agenda_do_vigia.json
+/api/jogo/auto-snapshot/salvar
+jogo_auto_snapshot_salvar
+/api/carreiras/{cid}/outras-ligas
+temporadas_de_outras_ligas
+AutoSnapshotDataBody
+AutoSnapshotDataBody.__annotate__
+AutoSnapshotDataBody
+__class__
+/api/carreiras/{cid}/auto-snapshot
+set_data_do_auto_snapshot
+FimDeTemporadaBody
+FimDeTemporadaBody.__annotate__
+/api/settings/fim-de-temporada
+set_fim_de_temporada
+AutoSnapshotBody
+AutoSnapshotBody.__annotate__
+AutoSnapshotBody
+__class__
+/api/settings/auto-snapshot
+set_auto_snapshot
+/api/settings/auto-snapshot/nome
+nome_do_auto_snapshot
+CapturaSomBody
+CapturaSomBody.__annotate__
+CapturaSomBody
+__class__
+/api/settings/captura-som
+set_captura_som
+estado
+desde
+capturando
+concluida
+falhou
+/api/captura/simular
+auto
+simular_captura
+/api/settings/captura-som/testar
+testar_captura_som
+/api/apoiadores
+apoiadores_lista
+/api/portal/garimpos
+portal_garimpos
+/api/portal/mudou
+portal_mudou
+/api/myteams
+myteams
+/api/moneyball
+/api/moneyball/percentiles
+save
+moneyball_percentiles
+_preferred_foot
+GK
+gk
+dl
+dc
+dr
+WB
+wbl
+wbr
+DM
+dm
+ml
+mc
+mr
+AM
+aml
+amc
+amr
+ST
+st
+rlc
+_fam
+_pos
+_memo
+__slots__
+_PosicoesSobDemanda.__init__
+__len__
+_PosicoesSobDemanda.__len__
+_PosicoesSobDemanda.__getitem__
+uid
+int64
+nat_uid
+int64
+league_uid
+int64
+club_uid
+int64
+tflags
+int16
+nfs
+bool
+onloan
+bool
+is_female
+bool
+temporada_tipo
+int8
+temporada_ano
+int64
+temporada_jogos
+int64
+age
+value
+asking
+wage
+height
+ca
+pa
+rating
+attr_tec
+attr_bola_parada
+attr_men
+attr_fis
+attr_gk
+attr_ocultos
+personalidade
+crossing
+dribbling
+finishing
+first_touch
+heading
+long_shots
+marking
+passing
+tackling
+technique
+corners
+free_kicks
+long_throws
+penalty_taking
+aggression
+anticipation
+bravery
+composure
+concentration
+decisions
+determination
+flair
+leadership
+off_the_ball
+positioning
+teamwork
+vision
+work_rate
+acceleration
+agility
+balance
+jumping_reach
+natural_fitness
+pace
+stamina
+strength
+aerial_reach
+command_of_area
+communication
+eccentricity
+handling
+kicking
+one_on_ones
+punching
+reflexes
+rushing_out
+throwing
+left_foot
+right_foot
+dirtiness
+consistency
+important_matches
+injury_proneness
+versatility
+adaptability
+ambition
+loyalty
+pressure
+professionalism
+sportsmanship
+temperament
+controversy
+consistency
+important_matches
+injury_proneness
+versatility
+dirtiness
+left_foot
+right_foot
+adaptability
+ambition
+loyalty
+pressure
+professionalism
+sportsmanship
+temperament
+controversy
+Consistency
+Jogos Importantes
+Important Matches
+Injury Proneness
+Versatilidade
+Versatility
+Jogo Sujo
+Dirtiness
+erdo
+Left Foot
+Right Foot
+Adaptabilidade
+Adaptability
+Ambition
+Lealdade
+Loyalty
+Pressure
+Profissionalismo
+Professionalism
+Desportivismo
+Sportsmanship
+Temperamento
+Temperament
+Controversy
+st
+aml
+amc
+amr
+ml
+mc
+mr
+wbl
+dm
+wbr
+dl
+dc
+dr
+sw
+gk
+f.no_club
+f.no_contract
+f.not_for_sale
+f.transfer_listed
+f.loan_listed
+f.on_loan
+f.my_club
+f.has_future_transfer
+geral
+fisico
+contrato
+ataque
+passe
+defesa
+goleiro
+derivado
+attr_tec
+attr_bola_parada
+attr_men
+attr_fis
+attr_gk
+attr_ocultos
+personalidade
+name
+pos
+nat
+league
+club
+_age
+foot
+_ca
+_pa
+_rating
+_height
+contract
+_wage
+_value
+_asking
+geral
+geral
+geral
+geral
+geral
+geral
+geral
+geral
+geral
+geral
+fisico
+contrato
+contrato
+contrato
+contrato
+finalizacao
+criacao
+defesa
+aereo
+goleiro
+fisico
+disciplina
+geral
+ataque
+passe
+defesa
+defesa
+goleiro
+fisico
+derivado
+geral
+Tempo integral
+Full Time
+Amador
+Amateur
+Juvenil
+Youth
+Sem contrato
+Non-Contract
+Futuro profissional
+Future Professional
+Reserva (EUA)
+Reserve (USA)
+Designated Player (EUA)
+Designated Player (USA)
+Senior Minimum Salary (USA)
+Generation Adidas (EUA)
+Generation Adidas (USA)
+Designated Player
+Designated Player
+Scholarship Player (Australia)
+Guest Player (Australia)
+Mature Age Rookie Player (Australia)
+NWSL Senior
+f.contract_type
+Tipo de contrato
+Contract type
+enum
+contrato
+f.contract_months
+Meses de contrato
+Contract months
+num
+contrato
+f.no_contract
+Sem data de contrato
+No contract date
+bool
+contrato
+f.no_club
+Sem clube (agente livre)
+No club (free agent)
+bool
+contrato
+f.not_for_sale
+Not for sale
+bool
+contrato
+f.transfer_listed
+Transfer listed
+bool
+contrato
+f.loan_listed
+Loan listed
+bool
+contrato
+f.on_loan
+do
+On loan
+bool
+contrato
+f.my_club
+ clube
+In my club
+bool
+contrato
+f.has_future_transfer
+certada
+Arranged transfer
+bool
+contrato
+f.morale
+Moral
+Morale
+num20
+geral
+f.cur_rep
+tual
+Current reputation
+num
+geral
+f.home_rep
+Home reputation
+num
+geral
+f.world_rep
+ndial
+World reputation
+num
+geral
+f.traits
+Traits
+text
+geral
+_age
+_height
+_rating
+_value
+_asking
+_wage
+_ca
+_pa
+int
+dec2
+dec1
+money
+money
+money
+int
+int
+name
+text
+pos
+text
+nat
+text
+league
+text
+club
+text
+contract
+text
+foot
+enum
+_age
+num
+_height
+num
+_ca
+num20
+_pa
+num20
+_rating
+num
+_value
+money
+money
+_asking
+money
+money
+_wage
+money
+wage
+/api/search/fields
+att
+search_fields
+/api/moneyball/columns
+name
+pos
+nat
+league
+club
+contract
+foot
+/api/snapshots/{sid}/players/{uid}/buscar-como
+faixa
+ReceitaBuscarComoBody
+ReceitaBuscarComoBody.__annotate__
+ReceitaBuscarComoBody
+__class__
+faixa
+/api/snapshots/{sid}/buscar-como-receita
+buscar_como_receita
+BuscarComoConfigBody
+BuscarComoConfigBody.__annotate__
+BuscarComoConfigBody
+__class__
+/api/buscar-como/config
+buscar_como_config
+buscar_como_config_salvar
+/api/moneyball/browse
+att
+desc
+filtered
+nnotate__r!
+moneyball_browse
+birth
+_lfoot
+_rfoot
+name
+pos
+nat
+league
+club
+temporada
+_age
+_height
+_value
+_asking
+_wage
+_ca
+_pa
+_rating
+contract
+birth
+_lfoot
+_rfoot
+_uid
+foot
+pt
+en
+Jogador
+Player
+pt
+en
+Position
+pt
+en
+Nacionalidade
+Nationality
+pt
+en
+Liga
+League
+pt
+en
+Clube
+Club
+pt
+en
+Temporada
+Season
+pt
+en
+Idade
+Age
+pt
+en
+Altura
+Height
+pt
+en
+Valor
+Value
+pt
+en
+Pedido
+Asking
+pt
+en
+Wage
+pt
+en
+CA
+CA
+pt
+en
+PA
+PA
+pt
+en
+Nota
+Rating
+pt
+en
+Fim de contrato
+Contract end
+pt
+en
+Nascimento
+Date of birth
+pt
+en
+erdo
+Left foot
+pt
+en
+Right foot
+pt
+en
+Id do jogador
+Player id
+pt
+en
+Preferred foot
+gk
+def
+wing
+dm
+b2b
+amc
+att
+pt
+en
+Goleiros
+Shot-Stoppers
+pt
+en
+Defesa Central
+Centre-Backs
+pt
+en
+Laterais
+Wing-Backs
+pt
+en
+Volantes
+Holding Mids
+pt
+en
+Meio-Campistas
+Central Mids
+pt
+en
+Meias-Atacantes
+Creators
+pt
+en
+Atacantes
+Forwards
+pt
+en
+not for sale
+left
+right
+both
+pt
+en
+Esquerdo
+Left
+pt
+en
+Direito
+Right
+pt
+en
+Ambos
+Both
+_age
+_height
+_value
+_asking
+_wage
+_ca
+_pa
+_rating
+int
+dec
+money
+money
+money
+int
+int
+rating
+name
+pos
+nat
+league
+club
+_age
+/api/moneyball/export.csv
+att
+nnotate__r"
+moneyball_export
+/api/club_profile
+club_profile
+/api/summary
+summary
+players
+player_stats
+player_profile
+club_leagues
+comps
+youth_teams
+player_teams
+youth_comps
+youth_team_comps
+teams
+club_profile
+iniciado
+Comecou uma leitura do FM no meio do preparo: ele para e volta para a fila.
+/api/snapshots
+/api/snapshots/{sid}
+/api/snapshots/{sid}/players
+minutes
+/api/snapshots/{sid}/players/{uid}/percentis
+player_percentis
+/api/snapshots/{sid}/players/{uid}/analise
+player_analise
+top20
+apps_total
+apps_sub
+minutes
+goals
+assists
+yellow_cards
+red_cards
+avg_rating
+goals_conceded_gk
+clean_sheets_gk
+gk_saves_held
+gk_saves_parried
+gk_saves_tipped
+/api/carreiras/{cid}/alltime
+composicao_alltime
+home_rep
+fitness
+morale
+all_time_goals
+u21_goals
+sharpness
+all_time_appearances
+u21_apps
+intl_goals
+cur_rep
+intl_apps
+all_time_league_appearances
+height_cm
+world_rep
+avg_rating
+all_time_league_goals
+Season Tracker
+/api/players/{uid}/alltime
+player_alltime
+pos_full
+_pos_arr
+/api/players/{uid}/alltime/percentis
+player_percentis_alltime
+/api/players/{uid}/temporadas
+/api/snapshots/{sid}/players/{uid}
+uid
+acao
+em
+perfil
+perfil
+comparar
+escolher
+/api/jogo/abrir-jogador
+perfil
+jogo_abrir_jogador
+/api/jogo/pedido
+jogo_pedido
+/api/jogo/abrir-no-jogo
+jogo_abrir_no_jogo
+/api/jogo/dados
+hover
+jogo_dados
+/api/jogo/navegador
+jogo_navegador
+/api/jogo/captura-do-jogador
+jogo_captura_do_jogador
+/api/jogo/dados/fechar
+jogo_dados_fechar
+/api/jogo/conectar
+jogo_conectar
+/api/jogo/fechar-menu
+jogo_fechar_menu
+/api/jogo/captura
+jogo_captura
+/api/jogo/captura/fechar
+jogo_captura_fechar
+/{full_path:path}
+spa
+__main__
+run
+127.0.0.1
+warning
+host
+port
+log_level
+http
+h11_max_incomplete_event_size
+server.py
+jor
+jor release number
+se number
+se number
+selevel
+lpha', 'beta', 'candidate', or 'release'
+ining_dir
+ining binary
+ndalone
+n indicating standalone mode usage
+n indicating onefile mode usage
+cos_bundle_mode
+n indicating macOS app bundle mode usage
+sserts
+n indicating --python-flag=no_asserts usage
+n indicating --python-flag=no_docstrings usage
+nnotations
+n indicating --python-flag=no_annotations usage
+le
+n indicating --module usage
+in
+me of main module at runtime
+l_argv0
+l argv[0] as received by the onefile binary, None otherwise
+me
+ded extension filename in module/package mode, None otherwise
+itka_version__
+tion as a named tuple.
+se
+rned NULL without setting an exception
+rned a result with an exception set
+llable
+nbound compiled_method %s%s must be called with %s instance as first argument (got %s instance instead)
+nnot create '%s' instances
+ld return None, not '%s'
+tching classes that do not inherit from BaseException is not allowed
+rned non-iterator of type '%s'
+ble
+nnot unpack non-iterable %s object
+n iterator
+gh values to unpack (expected %d, got %d)
+ny values to unpack (expected %d, got %d)
+ny values to unpack (expected %d)
+bscriptable
+bscriptable
+t of range
+ence index must be integer, not '%s'
+pport item assignment
+me__
+le
+nknown location
+me
+nction %U at %p>
+me__ must be set to a string object
+alname__ must be set to a string object
+nction's dictionary may not be deleted
+nction's dictionary to a non-dict
+ble in Nuitka
+ble
+nt return value
+nt__ is not writable
+donly attribute
+ults__ must be set to a tuple object
+ults__ must be set to a dict object
+nnotations__ must be set to a dict object
+nnotate__
+nnotate__ must be callable or None
+rams__ must be set to a tuple
+alname__
+ults__
+re__
+ls__
+le__
+ults__
+nnotations__
+iltins__
+rams__
+nt__
+ce__
+nction
+n unexpected keyword argument '%s'
+kes 0 positional arguments but %zd was given
+ltiple values for argument '%s'
+nd 
+nd 
+ired positional argument%s: %s
+l argument%s (and %zd keyword-only argument%s)
+kes %zd positional argument%s but %zd%s were given
+kes from %zd to %zd positional argument%s but %zd%s were given
+ired keyword-only argument%s: %s
+st be strings
+l-only arguments passed as keyword arguments: '%s'
+ss
+ss associated with a method
+nc
+nction (or other callable) implementing a method
+nc__
+nce to which a method is bound; None for unbound method
+ce_ex__
+ce_ex__
+nbound compiled_method %s%s must be called with %s instance as first argument (got nothing instead)
+nction %s at %p>
+nd compiled_method %U of %U>
+rgument must be callable
+nbound methods must have non-NULL im_class
+nnot create compiled_ method from type '%s'
+nnot create method %s
+n't send non-None value to a just-started generator
+n't send non-None value to a just-started coroutine
+n't send non-None value to a just-started async generator
+tor already executing
+tine already executing
+sync generator already executing
+nnot reuse already awaited coroutine
+tor ignored GeneratorExit
+tine ignored GeneratorExit
+sync generator ignored GeneratorExit
+tor object %U at %p>
+nnot 'yield from' a coroutine object in a non-coroutine generator
+tor raised StopIteration
+rgument must be a traceback object
+nce exception may not have a separate value
+st be classes or instances deriving from BaseException, not %s
+ble in Nuitka
+me is not writable in Nuitka
+ttribute 'gi_running' of 'generator' objects is not writable
+me
+nning
+tor
+ble in Nuitka
+tine raised StopIteration
+nnot reuse already awaited compiled_coroutine %S
+tine object %s at %p>
+wait
+me
+nning
+tine
+tine_wrapper object %s at %p>
+tine_wrapper
+wait__() returned a coroutine
+wait__() returned non-iterator of type '%s'
+n't be used in 'await' expression
+tine is being awaited already
+iter_wrapper object of %R at %p>
+iter_wrapper
+pper object for '__aiter__' backwards compatibility.
+sync for' requires an object with __aiter__ method, got %s
+sync for' received an object from __aiter__ that does not implement __anext__: %s
+sync for' received an invalid object from __aiter__: %s
+sync for' requires an iterator with __anext__ method, got %s
+sync for' received an invalid object from __anext__: %s
+g_code is not writable in Nuitka
+g_frame is not writable in Nuitka
+sync generator raised StopIteration
+sync generator raised StopAsyncIteration
+sync_generator object %s at %p>
+send
+throw
+close
+g_await
+g_code
+g_frame
+g_running
+sync_generator
+sync_generator_wrapped_value
+nnot reuse already awaited __anext__()/asend()
+next(): asynchronous generator is already running
+sync_generator_asend of %s at %p>
+sync_generator_asend
+nnot reuse already awaited aclose()/athrow()
+close(): asynchronous generator is already running
+throw(): asynchronous generator is already running
+sync_generator_athrow
+ce is not writable in Nuitka, ignore with '--no-deployment-flag=frame-useless-set-trace'
+ce_lines is not writable in Nuitka
+ce_opcodes is not writable in Nuitka
+ls
+ce
+ce_lines
+ce_opcodes
+me at %p, file %R, line %d, code %S>
+nnot clear an executing frame
+nnot clear a suspended frame
+r(): clear most references held by the frame
+ise RuntimeError('Compiled function bytecode used')
+itka_empty_function
+mes
+ble
+cksize
+t %p: empty>
+t %p: %s object at %p>
+nnot be used to delete values Nuitka
+pitalize
+nt
+ndtabs
+lnum
+lpha
+ce
+pper
+st
+rtition
+ce
+st
+rtition
+rtswith
+pcase
+nslate
+pper
+sefold
+t_map
+scii
+meric
+ble
+ketrans
+ult
+pdate
+lues
+ppend
+ffering
+nhashable type: '%s'
+ttr(): attribute name must be string
+class conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases
+nnot access local variable '%U' where it is not associated with a value
+nnot access free variable '%s' where it is not associated with a value in enclosing scope
+lling %s should have returned an instance of BaseException, not %s
+ximum recursion depth exceeded while normalizing an exception
+nnot recover from MemoryErrors while normalizing exceptions.
+itka_Err_NormalizeException
+nnot recover from the recursive normalization of an exception.
+th
+nknown module name>
+nnot import name %R from %R (%S)
+ls must be a dict
+ckage must be a string
+ckage__ != __spec__.parent
+rent must be a string
+n't resolve package from __spec__ or __package__, falling back on __name__ and __path__
+me__' not in globals
+me__ must be a string
+st be >= 0
+iltins
+ilure of hard import of 'ctypes'"
+ilure of hard import of 'ctypes.wintypes'"
+rces
+ilure of hard import of 'importlib.resources'"
+rces
+th
+ilure of hard import of 'ntpath'"
+ilure of hard import of 'os'"
+ilure of hard import of 'sys'"
+lue after * must be an iterable, not %s
+ mapping
+s no len()
+uses must derive from BaseException (%s does not)
+ctive exception to reraise
+me '%U' is not defined
+st derive from BaseException
+lling %R should have returned an instance of BaseException, not %R
+nnot be interpreted as an integer
+rned non-int (type %s)
+re too large to concat
+rned non-string (type %s)
+nge() arg 3 must not be zero
+d operand type for abs(): '%s'
+llstr>
+le
+s no attribute '%s'
+n't instantiate abstract class %s with abstract method%s %s
+s no attribute '__class__'
+ss__
+s no attributes (assign to %s)
+s only read-only attributes (assign to %s)
+pport the context manager protocol (missed __exit__ method)
+pport the context manager protocol (missed __enter__ method)
+pport the asynchronous context manager protocol (missed __aexit__ method)
+pport the asynchronous context manager protocol (missed __aenter__ method)
+pport the context manager protocol
+ss__
+lue %d}
+tion failed
+tion raised
+nnamed>
+nsupported operand type(s) for +: '%s' and 'int'
+nsupported operand type(s) for +: 'int' and '%s'
+nsupported operand type(s) for +: '%s' and 'str'
+nsupported operand type(s) for +: '%s' and 'list'
+nsupported operand type(s) for +: '%s' and '%s'
+nsupported operand type(s) for &: '%s' and 'int'
+nsupported operand type(s) for &: '%s' and '%s'
+nsupported operand type(s) for |: '%s' and '%s'
+nsupported operand type(s) for //: '%s' and 'int'
+nsupported operand type(s) for %%: '%s' and 'int'
+nsupported operand type(s) for %%: 'str' and 'tuple'
+nsupported operand type(s) for %%: 'str' and '%s'
+n't multiply sequence by non-int of type '%s'
+nnot fit '%s' into an index-sized integer
+nsupported operand type(s) for *: '%s' and 'int'
+nsupported operand type(s) for *: 'int' and '%s'
+nsupported operand type(s) for *: '%s' and 'float'
+nnot fit 'int' into an index-sized integer
+nsupported operand type(s) for *: '%s' and '%s'
+nsupported operand type(s) for -: '%s' and 'int'
+nsupported operand type(s) for -: 'int' and '%s'
+nsupported operand type(s) for -: 'float' and '%s'
+nsupported operand type(s) for -: '%s' and '%s'
+nsupported operand type(s) for /: '%s' and 'int'
+t division by zero
+nsupported operand type(s) for /: '%s' and 'float'
+nsupported operand type(s) for /: '%s' and '%s'
+nce() arg 2 must be a type, a tuple of types, or a union
+nce() argument 2 cannot be an empty union
+nsupported operand type(s) for +=: '%s' and 'int'
+nsupported operand type(s) for +=: '%s' and 'str'
+nsupported operand type(s) for +=: '%s' and 'list'
+nsupported operand type(s) for +=: '%s' and '%s'
+nsupported operand type(s) for &=: '%s' and '%s'
+nsupported operand type(s) for |=: '%s' and '%s'
+nsupported operand type(s) for -=: '%s' and 'int'
+pported between instances of '%s' and '%s'
+pported between instances of '%s' and 'int'
+pported between instances of '%s' and '%s'
+pported between instances of '%s' and 'int'
+pported between instances of 'int' and '%s'
+pported between instances of '%s' and '%s'
+pported between instances of '%s' and 'str'
+pported between instances of '%s' and 'int'
+pported between instances of 'int' and '%s'
+pported between instances of '%s' and '%s'
+pported between instances of '%s' and 'int'
+pported between instances of 'int' and '%s'
+pported between instances of 'tuple' and '%s'
+rrogatepass
+chinery
+llname
+nused
+le
+me
+ta
+tf8
+dLibraryExW '%S' failed with error code %d
+dLibraryExW '%S' failed: %s
+mic module '%s' not initialized properly
+mic module '%s' not initialized properly from def
+itka: import of module '%s' failed unexpectedly despite intended perfect support, please raise a Nuitka issue and compile with an older version of the module in the meantime
+d_module
+ckage
+ckage
+les
+in__
+le_repr
+le '%s' from %R>
+leSpec
+ckage
+te_module
+le
+itka_resource_reader for '%s'>
+rce_path
+rce
+rce
+itka_resource_reader_files for package '%s' file %R>
+d_text
+th
+d_bytes
+d_text
+th
+th__
+bsolute
+s_posix
+s_file
+me
+rent
+ffix
+ffixes
+itka_resource_reader_files
+rce_path
+rce
+rce
+itka_resource_reader
+rce_reader
+ested resource reader for unhandled module %s
+tions
+th_hook
+les
+ta
+le
+d_module
+le_repr
+te_module
+le
+rce_reader
+tions
+th_hook
+itka_module_loader>
+itka_module_loader for '%s'>
+itka_module_loader
+_path
+th_hooks
+itka_distribution_patch
+itka_distribution
+tion
+nnot locate package '%s' associated with metadata
+torstate
+tinestate
+nc
+tine
+torstate
+tinestate
+tine
+memodulename
+ls
+itka_types_patch
+memodulename
+ta$5
+ta
+ta$voltmd
+ta$zzzdbg
+ta
+ta
+ta$2
+ta$3
+ta$4
+ta$6
+ta
+ta
+N'
+N'
+{)
+{)
+{)
+md64.pyd
+ctSequence_InitType
+ct
+ctSequence_New
+lseStruct
+psule_New
+eStruct
+ctSequence_SetItem
+dState_GetCurrent
+seObject_Type
+nction_Type
+teError
+nctionStr
+y_FromObject
+kePendingCalls
+dState_Get
+te
+pleIter_Type
+l_SaveThread
+ntimeError
+ins
+ence_Contains
+rshal_ReadObjectFromString
+isable
+lueError
+seException
+ple_Type
+btype
+leDict
+le_GetDict
+nction_NewWithQualName
+mber_Invert
+ence_Check
+tion
+mber_Negative
+leDef_Init
+mber_Long
+re
+tion
+mber_AsSsize_t
+bclass
+le_Type
+torExit
+l_AcquireThread
+ence_Tuple
+le_GetFilenameObject
+ence_List
+mber_InPlaceOr
+rning
+tor
+tches
+rnEx
+nction_Type
+le
+l_GetFuncName
+leEx
+ence_InPlaceConcat
+re
+mber_FloorDivide
+ndLocalError
+ildValue
+bles
+le_GetName
+rsionError
+le_GetDef
+ple_New
+me_Type
+t_FromDouble
+lues_Type
+mber_Add
+mber_InPlaceLshift
+re
+mber_InPlaceAdd
+t_Type
+le_NewObject
+mber_Subtract
+lloc
+le
+tches
+m_Type
+tFromCause
+llFunctionObjArgs
+rWeakRefs
+rString
+dArgument
+dy
+le_FromDefAndSpec2
+gs
+te_AddModule
+reBool
+y_FromStringAndSize
+le_ExecDef
+l_EvalFrameDefault
+lloc
+ntime
+les
+ct
+ble_Code_NewWithPosOnlyArgs
+rseTupleAndKeywords
+le
+meError
+lloc
+leDef_Type
+ryFunctions
+te_FindModule
+llMethodObjArgs
+ckTuple
+le_GetState
+ceBack_Type
+nge_Type
+talErrorFunc
+sType
+ll
+y_Type
+mber_Float
+rseTuple
+bstring
+l_RestoreThread
+t_FromString
+thNameW
+leFileNameW
+leHandleExA
+stError
+rrentProcessId
+tMessageA
+eryPerformanceCounter
+dLibraryExW
+rrentThreadId
+bleThreadLibraryCalls
+lizeSListHead
+ndler
+bort
+crt_iob_func
+sh
+lloc
+lize_lconv_for_unsigned_char
+re_narrow_argv
+lize_narrow_environment
+lize_onexit_table
+te_onexit_table
+pi-ms-win-crt-runtime-l1-1-0.dll
+pi-ms-win-crt-stdio-l1-1-0.dll
+pi-ms-win-crt-string-l1-1-0.dll
+pi-ms-win-crt-math-l1-1-0.dll
+pi-ms-win-crt-heap-l1-1-0.dll
+pi-ms-win-crt-locale-l1-1-0.dll
+I'
+N'
+N'
+q(
+v(
+{)
+{)

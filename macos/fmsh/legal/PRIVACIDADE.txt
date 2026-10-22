@@ -1,0 +1,345 @@
+FM SEASON HUB — POLÍTICA DE PRIVACIDADE
+Versão 1.3 — vigente a partir da publicação da versão 0.7.2 do Programa
+
+Esta Política descreve as operações de tratamento de dados pessoais realizadas
+pelo FM Season Hub, as finalidades e bases legais correspondentes, os agentes
+envolvidos e os direitos assegurados ao titular. Aplica-se ao programa instalado
+no computador do usuário, ao seu instalador e ao serviço remoto por eles
+consultado.
+
+Controlador: FM Season Hub, projeto independente estabelecido no Brasil.
+Canal de contato para assuntos de privacidade: fmseasonhub@gmail.com
+
+## 1. Definições
+
+- **Titular** — a pessoa natural a quem se referem os dados pessoais tratados.
+- **Tratamento** — toda operação realizada com dados pessoais, nos termos do
+  art. 5º, X, da LGPD.
+- **Controlador** — o FM Season Hub, a quem competem as decisões referentes ao
+  tratamento.
+- **Operador** — quem realiza o tratamento em nome do Controlador.
+- **Programa** — o aplicativo FM Season Hub instalado no dispositivo do titular.
+- **Instalador** — o assistente que instala, atualiza e remove o Programa e,
+  quando escolhidos pelo titular, os plugins para o jogo.
+- **Serviço do FM Season Hub** — o serviço remoto operado pelo Controlador que
+  confere o nível de acesso, publica comunicados e distribui as atualizações do
+  Programa.
+- **Identificador de dispositivo** — o resumo criptográfico definido na
+  cláusula 5.1.
+
+## 2. Dados não submetidos a tratamento pelo Controlador
+
+Os dados extraídos do arquivo de jogo do titular — jogadores, clubes,
+competições, estatísticas, atributos e informações financeiras — **não são
+transmitidos ao Controlador nem a terceiros**, permanecendo exclusivamente no
+dispositivo do titular.
+
+O Programa não realiza coleta de dados de navegação, telemetria, perfilamento
+comportamental ou publicidade. As operações do titular no Programa não são
+registradas fora do dispositivo.
+
+O Programa e o Instalador estabelecem oito modalidades de conexão externa,
+discriminadas na cláusula 5: sete com o Serviço do FM Season Hub e uma com o site
+oficial do projeto BepInEx. Não há qualquer outra comunicação com a rede.
+
+## 3. Dados armazenados no dispositivo do titular
+
+Os dados do titular são mantidos em dois diretórios do próprio dispositivo, sob
+seu controle exclusivo.
+
+No diretório de dados do Programa, %LOCALAPPDATA%\Programs\FM Season Hub\dados:
+
+- a base de dados das temporadas capturadas e as cópias de trabalho dela,
+  refeitas automaticamente quando excluídas;
+- o perfil interno do componente de exibição;
+- as cópias das últimas respostas do Serviço do FM Season Hub (avisos, versão
+  disponível e nomes dos créditos).
+
+No diretório Documentos\FM Season Hub:
+
+- o arquivo de preferências, contendo idioma, moeda, lista de favoritos, chave de
+  acesso quando existente, o identificador de dispositivo definido na
+  cláusula 5.1 e o registro do aceite destes documentos (versão aceita, data e
+  idioma), efetuado no Programa ou no Instalador;
+- o registro de eventos (fmsh.log), destinado a diagnóstico;
+- os filtros, as visões e as traduções criados pelo titular, e os relatórios do
+  programa de diagnóstico;
+- os pacotes de atualização obtidos na forma das cláusulas 5.6 e 5.8, eliminados
+  após a instalação.
+
+Os arquivos do próprio Programa são instalados no diretório
+%LOCALAPPDATA%\Programs\FM Season Hub e não contêm dados pessoais.
+
+A exclusão dos dois diretórios de dados importa a eliminação integral dos dados
+mantidos no dispositivo.
+
+## 4. Cookies e armazenamento local
+
+O Programa **não utiliza cookies de rastreamento, de publicidade ou de análise
+comportamental**, nem cookies de terceiros.
+
+O componente de exibição mantém, no dispositivo do titular, exclusivamente os
+dados necessários à persistência das preferências de interface:
+
+- **armazenamento local** — idioma, moeda, colunas selecionadas, favoritos e
+  preferências de exibição, mantidos até eliminação pelo titular;
+- **perfil do componente de exibição** — estado da janela, mantido até
+  eliminação pelo titular.
+
+Tais dados não são transmitidos ao Controlador nem por ele acessados.
+
+## 5. Dados transmitidos ao Serviço do FM Season Hub
+
+### 5.1 Identificador de dispositivo
+
+Com a finalidade de impedir a circulação irrestrita de chaves de acesso, o
+Programa calcula um identificador do dispositivo e o transmite ao Serviço do FM
+Season Hub juntamente com a chave.
+
+O identificador consiste em resumo criptográfico (SHA-256) obtido a partir do
+identificador de instalação do sistema operacional combinado ao nome de usuário
+local. Transmite-se exclusivamente o resumo, cadeia de 32 caracteres da qual não
+é possível reconstituir o nome de usuário ou qualquer outro dado do dispositivo.
+
+Finalidade: permitir a utilização do mesmo acesso em até dois dispositivos e
+prevenir o compartilhamento indevido.
+
+### 5.2 Chave de acesso
+
+A chave informada pelo titular é transmitida para conferência. O Programa realiza
+reconferência automática periódica destinada a apurar a subsistência do acesso.
+Na ausência de conexão, prevalece o último nível apurado, não havendo supressão
+de acesso por indisponibilidade de rede.
+
+### 5.3 Autenticação junto ao Patreon
+
+Optando o titular pela autenticação junto ao Patreon, aquela plataforma comunica
+ao Controlador, mediante autorização expressa concedida em seu próprio ambiente,
+o nome do titular e os níveis de apoio ativos.
+
+São objeto de tratamento pelo Controlador: o nome do titular, a denominação do
+nível de apoio, o nível correspondente no Programa e o token de renovação
+destinado a permitir a reconferência do apoio sem nova autenticação.
+
+O Controlador não tem acesso a dados de pagamento, de cartão ou de endereço, os
+quais permanecem sob a responsabilidade do Patreon.
+
+### 5.4 Mural de comunicados
+
+O Programa consulta periodicamente a relação de comunicados publicados pelo
+Controlador. Tal requisição não veicula dado pessoal do titular, limitando-se à
+versão do Programa.
+
+### 5.5 Relação de apoiadores exibida nos créditos
+
+O Programa consulta periodicamente a relação de nomes divulgada nos créditos,
+objeto da cláusula 8. Tal requisição não veicula dado pessoal do titular,
+limitando-se à versão do Programa.
+
+### 5.6 Verificação e obtenção de atualizações
+
+O Programa consulta o Serviço do FM Season Hub para saber se há nova versão: ao
+ser aberto e, durante o uso, a cada 12 horas. Havendo nova versão e tendo o
+Programa sido instalado pelo Instalador, o pacote de instalação é obtido do mesmo
+serviço e instalado automaticamente, após a conferência de autenticidade de que
+trata a cláusula 13.
+
+Tais requisições não veiculam dado pessoal do titular, limitando-se à versão do
+Programa. O Controlador mantém apenas contagens somadas por versão e por dia
+(verificações recebidas e pacotes obtidos), sem vínculo com endereço IP,
+identificador de dispositivo ou qualquer outro dado do titular, na forma da
+cláusula 5.9.
+
+### 5.7 Obtenção do BepInEx pelo Instalador
+
+Escolhendo o titular a instalação de plugins em instalação do jogo que não
+disponha do componente BepInEx, o Instalador o obtém diretamente do site oficial
+do projeto BepInEx (builds.bepinex.dev) e confere a integridade do arquivo antes
+de utilizá-lo.
+
+Tal requisição não veicula dado pessoal do titular e não passa pelo Controlador,
+que dela não recebe nem registra qualquer informação. Como em toda comunicação em
+rede, o endereço IP de origem é visível ao responsável pelo site, nos termos da
+política deste.
+
+### 5.8 Verificação e obtenção de atualizações de plugins
+
+Em relação aos plugins instalados pelo Instalador, o Programa consulta o Serviço
+do FM Season Hub para obter a lista de versões disponíveis (catálogo): ao ser
+aberto e, durante o uso, a cada 12 horas. Nessa consulta o Programa informa o
+nome e a versão de cada plugin instalado. Havendo versão nova, compatível com o
+Jogo, o pacote é obtido do mesmo serviço e instalado somente enquanto o Jogo
+estiver fechado, após a conferência de autenticidade de que trata a cláusula 13.
+A versão anterior é guardada no dispositivo para restauração, que ocorre
+automaticamente caso o plugin novo não seja carregado pelo Jogo, ou por
+solicitação do titular.
+
+O Programa jamais instala plugin que o titular não tenha escolhido. O titular
+pode desativar a atualização automática de cada plugin na tela "Plugins do jogo".
+A atualização de plugins só é realizada após o aceite desta versão da Política.
+
+Tais requisições não veiculam dado pessoal do titular nem identificador do
+dispositivo.
+
+### 5.9 Contagens anônimas de uso
+
+Para saber quantas instalações recebem cada versão do Programa e de cada plugin,
+o Serviço do FM Season Hub soma, a cada dia, os pedidos recebidos por versão (por
+exemplo, "versão 0.7.2: 120 verificações"). Não se registra quem fez o pedido:
+nenhum endereço IP, identificador de dispositivo, nome ou lista de plugins por
+dispositivo é gravado, e a contagem não permite saber quantas pessoas distintas
+existem. As contagens servem apenas para acompanhar a adoção de versões e
+planejar lançamentos graduais.
+
+## 6. Dados coletados automaticamente pelo Serviço do FM Season Hub
+
+O Serviço do FM Season Hub é hospedado na infraestrutura da Cloudflare. Como
+decorrência técnica de qualquer comunicação em rede, o endereço IP de origem é
+visível àquela empresa e consta de seus registros de acesso.
+
+O Controlador utiliza o endereço IP para finalidade única e determinada: apurar
+tentativas de chave inválida e obstar tentativas em massa. O respectivo registro
+é eliminado automaticamente após 15 minutos. O endereço IP não é utilizado nas
+requisições de que tratam as cláusulas 5.4 a 5.6, 5.8 e 5.9.
+
+## 7. Compartilhamento com terceiros
+
+- **Cloudflare, Inc.** — hospeda o Serviço do FM Season Hub e os arquivos de
+  atualização, e armazena os registros descritos nesta Política, na qualidade de
+  **Operador**, agindo em nome e por conta do Controlador.
+- **Projeto BepInEx** — mantém o site do qual o Instalador obtém o BepInEx
+  (cláusula 5.7). Não recebe do Controlador dado algum do titular.
+- **Patreon, Inc.** — fonte dos dados de apoio, quando houver autenticação pelo
+  titular. O escopo do compartilhamento é definido na autorização apresentada
+  pela própria plataforma.
+- **Autoridades competentes** — mediante obrigação legal ou regulatória.
+
+O Controlador **não comercializa, não cede e não disponibiliza** dados pessoais a
+terceiros para finalidades comerciais ou publicitárias.
+
+## 8. Divulgação de nomes de apoiadores
+
+O Programa exibe, em sua tela Sobre, a relação de nomes dos apoiadores vinculados
+ao nível de apoio cuja descrição prevê expressamente a menção em créditos.
+
+- **Dado divulgado** — exclusivamente o apelido escolhido pelo titular na
+  plataforma Patreon e, na ausência deste, o nome público ali informado. Não se
+  divulga endereço eletrônico, valor de apoio, data de adesão ou qualquer outro
+  dado.
+- **Base legal** — execução de contrato a pedido do titular (LGPD art. 7º, V;
+  GDPR art. 6(1)(b)): a menção em créditos integra a contrapartida do nível de
+  apoio contratado, não se tratando de consentimento presumido.
+- **Exclusão** — o titular que houver assinalado, no Patreon, a opção de ocultar
+  o próprio apoio fica automaticamente excluído da relação. A exclusão pode ainda
+  ser requerida a qualquer tempo pelo canal indicado na cláusula 16, produzindo
+  efeito em até 6 (seis) horas, prazo do armazenamento temporário de que trata a
+  cláusula 11.
+- **Alcance** — a relação é pública e acessível a qualquer usuário do Programa.
+
+## 9. Transferência internacional
+
+Cloudflare e Patreon são pessoas jurídicas estabelecidas fora do território
+nacional, e os dados descritos nesta Política são tratados em servidores no
+exterior.
+
+A transferência fundamenta-se nas hipóteses do art. 33 da LGPD e, quando
+aplicável, nos mecanismos correspondentes do Capítulo V do GDPR.
+
+## 10. Bases legais do tratamento
+
+- **Execução de contrato** (LGPD art. 7º, V; GDPR art. 6(1)(b)) — conferência do
+  nível de acesso contratado, distribuição das atualizações do Programa e
+  divulgação do nome nos créditos, quando o nível contratado a preveja.
+- **Legítimo interesse** (LGPD art. 7º, IX; GDPR art. 6(1)(f)) — prevenção ao
+  compartilhamento indevido de chaves e a tentativas em massa.
+- **Consentimento** (LGPD art. 7º, I; GDPR art. 6(1)(a)) — autenticação junto ao
+  Patreon.
+
+O consentimento de que trata a última hipótese é facultativo e específico,
+concedido pelo titular no ambiente do Patreon e revogável a qualquer tempo na
+respectiva plataforma.
+
+## 11. Prazos de conservação
+
+- Registro de acesso — nível, nome, token de renovação e identificadores de
+  dispositivo: pelo período de subsistência do acesso. Não há prazo automático de
+  eliminação; os registros são eliminados mediante requerimento do titular ou por
+  ocasião do encerramento do acesso.
+- Nome divulgado nos créditos: enquanto subsistir o apoio no nível
+  correspondente. O armazenamento temporário da relação é renovado a cada
+  6 horas.
+- Contagem de tentativas por endereço IP: 15 minutos.
+- Autorização temporária de autenticação junto ao Patreon: 5 minutos.
+- Contagens somadas por versão e por dia (verificações e pacotes obtidos, do
+  Programa e dos plugins): por prazo indeterminado, por não conterem dado
+  pessoal.
+- Dados mantidos no dispositivo: até eliminação pelo titular; os pacotes de
+  atualização, até a abertura seguinte à respectiva instalação.
+
+## 12. Direitos do titular
+
+Nos termos do art. 18 da LGPD, é assegurado ao titular requerer, a qualquer
+tempo: a confirmação da existência de tratamento; o acesso aos dados; a correção
+de dados incompletos, inexatos ou desatualizados; a anonimização, o bloqueio ou a
+eliminação de dados desnecessários ou tratados em desconformidade; a
+portabilidade; a informação sobre o compartilhamento; e a revogação do
+consentimento.
+
+Ao titular estabelecido na União Europeia são igualmente assegurados os direitos
+de oposição e de limitação do tratamento (GDPR arts. 18 e 21), bem como o de
+apresentar reclamação à autoridade de controle competente.
+
+Os requerimentos devem ser dirigidos a fmseasonhub@gmail.com. O prazo de resposta
+é de até 15 (quinze) dias.
+
+Independentemente de requerimento, o titular dispõe dos seguintes meios diretos:
+
+- a desvinculação da conta no Programa, que suprime o vínculo local;
+- a exclusão dos diretórios Documentos\FM Season Hub e
+  %LOCALAPPDATA%\Programs\FM Season Hub\dados, que elimina integralmente os dados
+  mantidos no dispositivo;
+- a desinstalação do Programa, que remove seus arquivos e, se o titular assim
+  escolher no próprio desinstalador, os plugins instalados pelo Instalador,
+  preservando os dois diretórios de dados;
+- a revogação da autorização concedida ao FM Season Hub nas configurações da
+  conta do Patreon, que interrompe o compartilhamento na origem.
+
+## 13. Segurança
+
+As comunicações com o Serviço do FM Season Hub são realizadas por canal cifrado
+(HTTPS). A chave de acesso e os identificadores de dispositivo são mantidos em
+armazenamento de acesso restrito ao serviço, e o identificador de dispositivo
+subsiste unicamente sob a forma de resumo criptográfico.
+
+Os pacotes de atualização são acompanhados de assinatura digital do Controlador.
+O Programa confere a assinatura e a integridade de cada pacote antes de
+instalá-lo, recusando o que não for conferido.
+
+Não há sistema integralmente seguro. Verificado incidente de segurança que possa
+acarretar risco ou dano relevante ao titular, o Controlador procederá à
+comunicação ao titular e à autoridade competente, nos termos do art. 48 da LGPD.
+
+## 14. Crianças e adolescentes
+
+O Programa não se destina a menores de 13 anos, não havendo coleta consciente de
+dados dessa faixa etária. Os recursos onerosos dependem de conta no Patreon,
+plataforma que estabelece regras próprias de idade mínima.
+
+## 15. Alterações desta Política
+
+Alterada esta Política, a versão indicada no preâmbulo será modificada e o
+Programa solicitará novo aceite na primeira execução posterior à atualização.
+
+Os documentos integram o pacote de instalação; nova versão é recebida mediante
+instalação de nova versão do Programa, inclusive por atualização automática.
+
+## 16. Encarregado e contato
+
+Não há Encarregado formalmente designado. As atribuições previstas no art. 41,
+§ 2º, da LGPD são exercidas diretamente pelo Controlador, pelo canal
+fmseasonhub@gmail.com.
+
+## 17. Vigência
+
+Esta Política vigora a partir da data indicada no preâmbulo e permanece eficaz
+enquanto não substituída por versão posterior.

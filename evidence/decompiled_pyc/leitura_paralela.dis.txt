@@ -1,0 +1,512 @@
+# Module: leitura_paralela
+# Filename: leitura_paralela.py
+
+  0           RESUME                   0
+
+ 18           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (os)
+              STORE_NAME               0 (os)
+
+ 22           LOAD_CONST               2 (2000)
+              STORE_NAME               1 (TAMANHO_DO_LOTE)
+
+ 25           LOAD_SMALL_INT           8
+              STORE_NAME               2 (MAXIMO_DE_PROCESSOS)
+
+ 28           LOAD_CONST               1 (None)
+              STORE_GLOBAL             3 (_leitor)
+
+ 31           LOAD_CONST               3 (<code object quantos_processos at 0x10558c960, file "leitura_paralela.py", line 31>)
+              MAKE_FUNCTION
+              STORE_NAME               4 (quantos_processos)
+
+ 35           LOAD_CONST               4 (<code object _abrir_leitor at 0x1054d8670, file "leitura_paralela.py", line 35>)
+              MAKE_FUNCTION
+              STORE_NAME               5 (_abrir_leitor)
+
+ 47           LOAD_CONST               5 (<code object linhas_do_lote at 0x1053dba50, file "leitura_paralela.py", line 47>)
+              MAKE_FUNCTION
+              STORE_NAME               6 (linhas_do_lote)
+
+ 68           LOAD_CONST               6 (<code object _ler_lote at 0x105553930, file "leitura_paralela.py", line 68>)
+              MAKE_FUNCTION
+              STORE_NAME               7 (_ler_lote)
+
+ 73           LOAD_CONST               8 ((None,))
+              LOAD_CONST               7 (<code object ler_jogadores at 0x736da6800, file "leitura_paralela.py", line 73>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME               8 (ler_jogadores)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object quantos_processos at 0x10558c960, file "leitura_paralela.py", line 31>:
+ 31           RESUME                   0
+
+ 32           LOAD_GLOBAL              1 (max + NULL)
+              LOAD_SMALL_INT           1
+              LOAD_GLOBAL              3 (min + NULL)
+              LOAD_GLOBAL              4 (MAXIMO_DE_PROCESSOS)
+              LOAD_GLOBAL              6 (os)
+              LOAD_ATTR                8 (cpu_count)
+              PUSH_NULL
+              CALL                     0
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_SMALL_INT           2
+      L1:     LOAD_SMALL_INT           2
+              BINARY_OP               10 (-)
+              CALL                     2
+              CALL                     2
+              RETURN_VALUE
+
+Disassembly of <code object _abrir_leitor at 0x1054d8670, file "leitura_paralela.py", line 35>:
+ 35           RESUME                   0
+
+ 40           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('FmMemory',))
+              IMPORT_NAME              0 (fm_memory)
+              IMPORT_FROM              1 (FmMemory)
+              STORE_FAST               2 (FmMemory)
+              POP_TOP
+
+ 41           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('FmReader',))
+              IMPORT_NAME              2 (fm_reader)
+              IMPORT_FROM              3 (FmReader)
+              STORE_FAST               3 (FmReader)
+              POP_TOP
+
+ 42           LOAD_FAST_BORROW         3 (FmReader)
+              PUSH_NULL
+              LOAD_FAST_BORROW         2 (FmMemory)
+              PUSH_NULL
+              CALL                     0
+              CALL                     1
+              STORE_GLOBAL             4 (_leitor)
+
+ 43           LOAD_FAST_BORROW         0 (oficiais)
+              LOAD_GLOBAL              8 (_leitor)
+              STORE_ATTR               5 (_comps_edicao)
+
+ 44           LOAD_FAST_BORROW         1 (comp_idx)
+              LOAD_GLOBAL              8 (_leitor)
+              STORE_ATTR               6 (_comp_idx)
+              LOAD_CONST               3 (None)
+              RETURN_VALUE
+
+Disassembly of <code object linhas_do_lote at 0x1053dba50, file "leitura_paralela.py", line 47>:
+ 47           RESUME                   0
+
+ 50           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (arquivo_partidas)
+              STORE_FAST               4 (arquivo_partidas)
+
+ 51           LOAD_SMALL_INT           0
+              LOAD_CONST               2 (('build_player_rows', '_person_base'))
+              IMPORT_NAME              1 (capture_all)
+              IMPORT_FROM              2 (build_player_rows)
+              STORE_FAST               5 (build_player_rows)
+              IMPORT_FROM              3 (_person_base)
+              STORE_FAST               6 (_person_base)
+              POP_TOP
+
+ 52           LOAD_FAST_BORROW         6 (_person_base)
+              PUSH_NULL
+              CALL                     0
+              STORE_FAST               7 (base_pessoa)
+
+ 53           BUILD_LIST               0
+              STORE_FAST               8 (saida)
+
+ 54           LOAD_FAST_BORROW         1 (lote)
+              GET_ITER
+      L1:     FOR_ITER               109 (to L4)
+              UNPACK_SEQUENCE          2
+              STORE_FAST_STORE_FAST  154 (pe, abias)
+
+ 55           LOAD_FAST_BORROW_LOAD_FAST_BORROW 151 (pe, base_pessoa)
+              BINARY_OP               10 (-)
+              STORE_FAST              11 (obj)
+
+ 56           LOAD_FAST_BORROW         5 (build_player_rows)
+              PUSH_NULL
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 11 (reader, obj)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 35 (sid, ref_date)
+              LOAD_FAST_BORROW        10 (abias)
+              CALL                     5
+              STORE_FAST              12 (rows)
+
+ 57           LOAD_FAST_BORROW        12 (rows)
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L2)
+              NOT_TAKEN
+
+ 58           JUMP_BACKWARD           33 (to L1)
+
+ 59   L2:     LOAD_CONST               1 (None)
+              STORE_FAST              13 (feminino)
+
+ 60           LOAD_FAST_BORROW        10 (abias)
+              TO_BOOL
+              POP_JUMP_IF_TRUE        27 (to L3)
+              NOT_TAKEN
+
+ 63           LOAD_FAST_BORROW         0 (reader)
+              LOAD_ATTR                8 (_memo_pessoa)
+              LOAD_FAST_BORROW        11 (obj)
+              BINARY_OP               26 ([])
+              LOAD_SMALL_INT           1
+              BINARY_OP               26 ([])
+              STORE_FAST              13 (feminino)
+
+ 64   L3:     LOAD_FAST_BORROW         8 (saida)
+              LOAD_ATTR               11 (append + NULL|self)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 196 (rows, arquivo_partidas)
+              LOAD_ATTR               13 (id_interno + NULL|self)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 11 (reader, obj)
+              CALL                     2
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 189 (obj, feminino)
+              BUILD_TUPLE              3
+              BINARY_OP                0 (+)
+              CALL                     1
+              POP_TOP
+              JUMP_BACKWARD          111 (to L1)
+
+ 54   L4:     END_FOR
+              POP_ITER
+
+ 65           LOAD_FAST_BORROW         8 (saida)
+              RETURN_VALUE
+
+Disassembly of <code object _ler_lote at 0x105553930, file "leitura_paralela.py", line 68>:
+ 68           RESUME                   0
+
+ 69           LOAD_FAST_BORROW         0 (args)
+              UNPACK_SEQUENCE          3
+              STORE_FAST_STORE_FAST   18 (lote, sid)
+              STORE_FAST               3 (ref_date)
+
+ 70           LOAD_GLOBAL              1 (linhas_do_lote + NULL)
+              LOAD_GLOBAL              2 (_leitor)
+              LOAD_FAST_BORROW_LOAD_FAST_BORROW 18 (lote, sid)
+              LOAD_FAST_BORROW         3 (ref_date)
+              CALL                     4
+              RETURN_VALUE
+
+Disassembly of <code object ler_jogadores at 0x736da6800, file "leitura_paralela.py", line 73>:
+  73            RETURN_GENERATOR
+                POP_TOP
+        L1:     RESUME                   0
+
+  79            LOAD_GLOBAL              1 (range + NULL)
+                LOAD_SMALL_INT           0
+                LOAD_GLOBAL              3 (len + NULL)
+                LOAD_FAST_BORROW         1 (jogadores)
+                CALL                     1
+                LOAD_GLOBAL              4 (TAMANHO_DO_LOTE)
+                CALL                     3
+                GET_ITER
+
+  78            LOAD_FAST_AND_CLEAR      5 (i)
+                SWAP                     2
+        L2:     BUILD_LIST               0
+                SWAP                     2
+
+  79    L3:     FOR_ITER                18 (to L4)
+                STORE_FAST               5 (i)
+
+  78            LOAD_FAST_BORROW_LOAD_FAST_BORROW 21 (jogadores, i)
+                LOAD_FAST_BORROW         5 (i)
+                LOAD_GLOBAL              4 (TAMANHO_DO_LOTE)
+                BINARY_OP                0 (+)
+                BINARY_SLICE
+                LIST_APPEND              2
+                JUMP_BACKWARD           20 (to L3)
+
+  79    L4:     END_FOR
+                POP_ITER
+
+  78    L5:     STORE_FAST               6 (lotes)
+                STORE_FAST               5 (i)
+
+  80            LOAD_SMALL_INT           0
+                STORE_FAST               7 (feitos)
+
+  81            LOAD_GLOBAL              7 (quantos_processos + NULL)
+                CALL                     0
+                STORE_FAST               8 (n)
+
+  82            LOAD_FAST_BORROW         8 (n)
+                LOAD_SMALL_INT           1
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE      215 (to L17)
+                NOT_TAKEN
+                LOAD_GLOBAL              3 (len + NULL)
+                LOAD_FAST_BORROW         6 (lotes)
+                CALL                     1
+                LOAD_SMALL_INT           1
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE      199 (to L17)
+                NOT_TAKEN
+
+  83            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              4 (multiprocessing)
+                STORE_FAST               9 (multiprocessing)
+
+  84    L6:     NOP
+
+  85    L7:     LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               11 (comps_com_edicao + NULL|self)
+                CALL                     0
+                STORE_FAST              10 (oficiais)
+
+  86            LOAD_FAST_BORROW         0 (reader)
+                LOAD_ATTR               13 (comp_uid_por_indice + NULL|self)
+                CALL                     0
+                STORE_FAST              11 (comp_idx)
+
+  87            LOAD_FAST_BORROW         9 (multiprocessing)
+                LOAD_ATTR               15 (get_context + NULL|self)
+                LOAD_CONST               2 ('spawn')
+                CALL                     1
+                STORE_FAST              12 (ctx)
+
+  88            LOAD_FAST_BORROW        12 (ctx)
+                LOAD_ATTR               17 (Pool + NULL|self)
+                LOAD_FAST_BORROW         8 (n)
+                LOAD_GLOBAL             18 (_abrir_leitor)
+
+  89            LOAD_FAST_BORROW_LOAD_FAST_BORROW 171 (oficiais, comp_idx)
+                BUILD_TUPLE              2
+
+  88            LOAD_CONST               3 (('initializer', 'initargs'))
+                CALL_KW                  3
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+
+  89    L8:     STORE_FAST              13 (pool)
+
+  90            LOAD_FAST               13 (pool)
+                LOAD_ATTR               21 (imap + NULL|self)
+                LOAD_GLOBAL             22 (_ler_lote)
+                LOAD_FAST_BORROW         6 (lotes)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR     14 (l)
+                SWAP                     2
+        L9:     BUILD_LIST               0
+                SWAP                     2
+       L10:     FOR_ITER                 6 (to L11)
+                STORE_FAST_LOAD_FAST   238 (l, l)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 35 (sid, ref_date)
+                BUILD_TUPLE              3
+                LIST_APPEND              2
+                JUMP_BACKWARD            8 (to L10)
+       L11:     END_FOR
+                POP_ITER
+       L12:     SWAP                     2
+                STORE_FAST              14 (l)
+                CALL                     2
+                GET_ITER
+       L13:     FOR_ITER                57 (to L14)
+                STORE_FAST              15 (linhas)
+
+  91            LOAD_GLOBAL             25 (min + NULL)
+                LOAD_GLOBAL              3 (len + NULL)
+                LOAD_FAST_BORROW         1 (jogadores)
+                CALL                     1
+                LOAD_FAST_BORROW         7 (feitos)
+                LOAD_SMALL_INT           1
+                BINARY_OP                0 (+)
+                LOAD_GLOBAL              4 (TAMANHO_DO_LOTE)
+                BINARY_OP                5 (*)
+                CALL                     2
+                STORE_FAST              16 (lido)
+
+  92            LOAD_FAST_BORROW         7 (feitos)
+                LOAD_SMALL_INT           1
+                BINARY_OP               13 (+=)
+                STORE_FAST               7 (feitos)
+
+  93            LOAD_FAST_BORROW        16 (lido)
+                LOAD_FAST_BORROW        15 (linhas)
+                BUILD_TUPLE              2
+                YIELD_VALUE              0
+                RESUME                   1
+                POP_TOP
+                JUMP_BACKWARD           59 (to L13)
+
+  90   L14:     END_FOR
+                POP_ITER
+
+  88   L15:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+
+  94   L16:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  99   L17:     LOAD_GLOBAL              1 (range + NULL)
+                LOAD_FAST_BORROW         7 (feitos)
+                LOAD_GLOBAL              3 (len + NULL)
+                LOAD_FAST_BORROW         6 (lotes)
+                CALL                     1
+                CALL                     2
+                GET_ITER
+       L18:     FOR_ITER                63 (to L19)
+                STORE_FAST               5 (i)
+
+ 100            LOAD_GLOBAL             25 (min + NULL)
+                LOAD_GLOBAL              3 (len + NULL)
+                LOAD_FAST_BORROW         1 (jogadores)
+                CALL                     1
+                LOAD_FAST_BORROW         5 (i)
+                LOAD_SMALL_INT           1
+                BINARY_OP                0 (+)
+                LOAD_GLOBAL              4 (TAMANHO_DO_LOTE)
+                BINARY_OP                5 (*)
+                CALL                     2
+
+ 101            LOAD_GLOBAL             33 (linhas_do_lote + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 6 (reader, lotes)
+                LOAD_FAST_BORROW         5 (i)
+                BINARY_OP               26 ([])
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 35 (sid, ref_date)
+                CALL                     4
+
+ 100            BUILD_TUPLE              2
+                YIELD_VALUE              0
+                RESUME                   5
+                POP_TOP
+                JUMP_BACKWARD           65 (to L18)
+
+  99   L19:     END_FOR
+                POP_ITER
+                LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --   L20:     SWAP                     2
+                POP_TOP
+
+  78            SWAP                     2
+                STORE_FAST               5 (i)
+                RERAISE                  0
+
+  --   L21:     SWAP                     2
+                POP_TOP
+
+  90            SWAP                     2
+                STORE_FAST              14 (l)
+                RERAISE                  0
+
+  88   L22:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L23)
+                NOT_TAKEN
+                RERAISE                  2
+       L23:     POP_TOP
+       L24:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+
+  94   L25:     LOAD_CONST               1 (None)
+                RETURN_VALUE
+
+  --   L26:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L27:     PUSH_EXC_INFO
+
+  95            LOAD_GLOBAL             26 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       78 (to L31)
+                NOT_TAKEN
+                STORE_FAST              17 (e)
+
+  96   L28:     LOAD_FAST                4 (log)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       60 (to L29)
+                NOT_TAKEN
+
+  97            LOAD_FAST                4 (log)
+                PUSH_NULL
+                LOAD_CONST               4 ('leitura em ')
+                LOAD_FAST                8 (n)
+                FORMAT_SIMPLE
+                LOAD_CONST               5 (' processos falhou no lote ')
+                LOAD_FAST                7 (feitos)
+                LOAD_SMALL_INT           1
+                BINARY_OP                0 (+)
+                FORMAT_SIMPLE
+                LOAD_CONST               6 (' de ')
+                LOAD_GLOBAL              3 (len + NULL)
+                LOAD_FAST                6 (lotes)
+                CALL                     1
+                FORMAT_SIMPLE
+                LOAD_CONST               7 (' (')
+
+  98            LOAD_GLOBAL             29 (type + NULL)
+                LOAD_FAST               17 (e)
+                CALL                     1
+                LOAD_ATTR               30 (__name__)
+                FORMAT_SIMPLE
+                LOAD_CONST               8 (': ')
+                LOAD_FAST               17 (e)
+                FORMAT_SIMPLE
+                LOAD_CONST               9 ('); segue num processo so')
+
+  97            BUILD_STRING            11
+                CALL                     1
+                POP_TOP
+
+  --   L29:     POP_EXCEPT
+                LOAD_CONST               1 (None)
+                STORE_FAST              17 (e)
+                DELETE_FAST             17 (e)
+                JUMP_BACKWARD_NO_INTERRUPT 203 (to L17)
+       L30:     LOAD_CONST               1 (None)
+                STORE_FAST              17 (e)
+                DELETE_FAST             17 (e)
+                RERAISE                  1
+
+  95   L31:     RERAISE                  0
+
+  --   L32:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L33:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L33 [0] lasti
+  L2 to L5 -> L20 [2]
+  L5 to L6 -> L33 [0] lasti
+  L7 to L8 -> L27 [0]
+  L8 to L9 -> L22 [2] lasti
+  L9 to L12 -> L21 [7]
+  L12 to L15 -> L22 [2] lasti
+  L15 to L16 -> L27 [0]
+  L16 to L21 -> L33 [0] lasti
+  L21 to L22 -> L22 [2] lasti
+  L22 to L24 -> L26 [4] lasti
+  L24 to L25 -> L27 [0]
+  L25 to L26 -> L33 [0] lasti
+  L26 to L27 -> L27 [0]
+  L27 to L28 -> L32 [1] lasti
+  L28 to L29 -> L30 [1] lasti
+  L29 to L30 -> L33 [0] lasti
+  L30 to L32 -> L32 [1] lasti
+  L32 to L33 -> L33 [0] lasti

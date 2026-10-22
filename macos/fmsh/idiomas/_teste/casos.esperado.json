@@ -1,0 +1,34 @@
+{
+  "dados": {
+    "acentos": "ação, coração, ÷ e %",
+    "aspas": "ele disse \"oi\" e saiu",
+    "barraDupla": "mostra \\n literal",
+    "caminho": "c:\\pasta\\arquivo",
+    "comCerquilha": "valor com # no meio",
+    "comIgual": "a = b = c",
+    "depoisDoErro": "continuou lendo",
+    "duasVariaveis": "{{count}} de {{total}}",
+    "espacos": "com espaco em volta",
+    "quebra": "primeira\nsegunda",
+    "repetida": "segunda",
+    "simples": "valor simples",
+    "variavel": "por {{autor}}"
+  },
+  "problemas": [
+    {
+      "erro": "repetida",
+      "linha": 34,
+      "texto": "repetida"
+    },
+    {
+      "erro": "sem_igual",
+      "linha": 41,
+      "texto": "isto aqui nao tem igual"
+    },
+    {
+      "erro": "sem_chave",
+      "linha": 44,
+      "texto": "= valor sem chave"
+    }
+  ]
+}

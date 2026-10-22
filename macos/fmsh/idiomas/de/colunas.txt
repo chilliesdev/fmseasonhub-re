@@ -1,0 +1,1528 @@
+# ============================================================
+#  FM SEASON HUB - NOMES DAS COLUNAS
+#  idioma: Deutsch (de)
+# ============================================================
+#
+#  COMO PREENCHER
+#
+#   1. Nao mude nada ANTES do sinal de igual. Aquilo e o nome
+#      interno da frase; o app procura por ele.
+#
+#   2. O que estiver entre {{chaves duplas}} o app troca por um
+#      valor na hora (um nome, um numero). Copie igual, sem
+#      traduzir o que esta dentro.
+#
+#   3. Linha que comeca com # e comentario: serve so para voce
+#      ler, e o app ignora.
+#
+#   4. Esqueceu uma linha? Nao quebra nada. Aquela frase aparece
+#      em ingles e o resto continua no seu idioma.
+#
+#   5. Para escrever uma quebra de linha dentro de um texto, use
+#      as duas letras \n.
+#
+#  Depois de salvar, feche e abra o FMSH para ver o resultado.
+#
+
+#  Cada coluna tem um NOME inteiro e uma SIGLA curta. A sigla aparece
+#  no cabecalho da tabela, entao precisa ser curta de verdade.
+#
+#  A chave e sempre a mesma para todos os idiomas -- ela sai do nome
+#  em portugues e nao quer dizer nada; ignore. O que interessa e o
+#  texto original, que vai no comentario acima de cada uma.
+
+#   EN: Success % (completed ÷ attempted)
+%acertoacoescertastentadas.nome = Erfolg (in %)
+%acertoacoescertastentadas.sigla = % Erfo
+
+#   EN: Goalkeeper Accuracy %
+%acertodogoleiro.nome = Torwartquote (in %)
+%acertodogoleiro.sigla = % TW
+
+#   EN: Pass Completion %
+%acertodospasses.nome = Passquote (in %)
+%acertodospasses.sigla = Pas %
+
+#   EN: Set Piece Success %
+%aproveitamentoembolaparada.nome = Standardquote (in %)
+%aproveitamentoembolaparada.sigla = % Std
+
+#   EN: Duels Won %
+%bolasdisputadaseganhas.nome = Gewonnene Zweikämpfe (in %)
+%bolasdisputadaseganhas.sigla = % Gew ZwK
+
+#   EN: Duels Won % (no foul)
+%bolasdisputadaseganhassemfalta.nome = Gewonnene Zweikämpfe ohne Foul (in %)
+%bolasdisputadaseganhassemfalta.sigla = % Gew ZwK 2
+
+#   EN: Headers Won %
+%cabeceiosganhos.nome = Gewonnene Kopfbälle (in %)
+%cabeceiosganhos.sigla = Kopf %
+
+#   EN: Headers Lost %
+%cabeceiosperdidos.nome = Verlorene Kopfbälle (in %)
+%cabeceiosperdidos.sigla = VeK
+
+#   EN: Penalty Conversion %
+%conversaodepenalti.nome = Elfmeterquote (in %)
+%conversaodepenalti.sigla = Elf
+
+#   EN: Crosses Completed %
+%cruzamentoscertos.nome = Angekommene Flanken (in %)
+%cruzamentoscertos.sigla = Fl %
+
+#   EN: Assists Share of Contributions %
+%dasparticipacoesqueforamassistencias.nome = Anteil Torvorlagen an den Beteiligungen (in %)
+%dasparticipacoesqueforamassistencias.sigla = Vor
+
+#   EN: Sweeper Success %
+%deacertonassaidasdogol.nome = Erfolgreiche Herauslauf-Aktionen (in %)
+%deacertonassaidasdogol.sigla = % Erf Heraus
+
+#   EN: Saves Tipped %
+%dedefesascomapontadosdedos.nome = Abgelenkte Schüsse (in %)
+%dedefesascomapontadosdedos.sigla = Sag
+
+#   EN: Saves Parried %
+%dedefesasdesviadas.nome = Parierte Schüsse (in %)
+%dedefesasdesviadas.sigla = Spa
+
+#   EN: Difficult Saves %
+%dedefesasdificeis.nome = Schwierige Paraden (in %)
+%dedefesasdificeis.sigla = % Schw Par
+
+#   EN: Save %
+%dedefesasrealizadas.nome = Paradenquote (in %)
+%dedefesasrealizadas.sigla = Par %
+
+#   EN: Saves Held %
+%dedefesasseguras.nome = Gehaltene Schüsse (in %)
+%dedefesasseguras.sigla = Sgh
+
+#   EN: Tackles + Pressures Completed %
+%dedesarmesepressoesconcluidos.nome = Erfolgreiche Tacklings und Pressings (in %)
+%dedesarmesepressoesconcluidos.sigla = % Erf Tack
+
+#   EN: Tackles Won %
+%dedesarmesganhos.nome = Gewonnene Zweikämpfe (in %)
+%dedesarmesganhos.sigla = Zwk
+
+#   EN: Defensive Efficiency %
+%deeficaciadefensiva.nome = Effizienz in der Defensive (in %)
+%deeficaciadefensiva.sigla = Def
+
+#   EN: Expected Save %
+%defesasesperadas.nome = Erwartete Paraden (in %)
+%defesasesperadas.sigla = xSv %
+
+#   EN: Conversion Rate %
+%definalizacoesqueviraramgol.nome = Chancenverwertung (in %)
+%definalizacoesqueviraramgol.sigla = Verw. %
+
+#   EN: Clean Sheets %
+%dejogossemsofrergol.nome = Zu-Null-Spiele (in %)
+%dejogossemsofrergol.sigla = KK
+
+#   EN: Key Passes to Assists %
+%depassesdecisivosqueviraramassistencia.nome = Entscheidende Pässe zu Torvorlagen (in %)
+%depassesdecisivosqueviraramassistencia.sigla = % Entsch Pas
+
+#   EN: Progressive Passes %
+%depassesquesaoemprogressao.nome = Progressive Pässe (in %)
+%depassesquesaoemprogressao.sigla = % Prog Pass
+
+#   EN: Player of the Match %
+%devezesquefoieleitoohomemdojogo.nome = Spieler des Spiels (in %)
+%devezesquefoieleitoohomemdojogo.sigla = SdS
+
+#   EN: Clean Fouls % (no card)
+%faltaslimpassemcartao.nome = Saubere Fouls ohne Karte (in %)
+%faltaslimpassemcartao.sigla = % Sbr Foul
+
+#   EN: Shots on Target %
+%finalizacoesnogol.nome = Schüsse aufs Tor (in %)
+%finalizacoesnogol.sigla = SaT
+
+#   EN: Shots on Target %
+%finalizacoesqueforamemdirecaogol.nome = Schüsse aufs Tor (in %)
+%finalizacoesqueforamemdirecaogol.sigla = % Sch Aufs
+
+#   EN: Shots on Target %
+%finalizacoesqueforamnogol.nome = Schüsse aufs Tor (in %)
+%finalizacoesqueforamnogol.sigla = % Sch Aufs 2
+
+#   EN: Non-Penalty Goals %
+%golssempenalti.nome = Tore ohne Elfmeter (in %)
+%golssempenalti.sigla = % Tor Elfm
+
+#   EN: Contests Won %
+%lancesdisputadoseganhos.nome = Gewonnene Duelle (in %)
+%lancesdisputadoseganhos.sigla = Kon
+
+#   EN: Clean Contests Won %
+%lancesdisputadoseganhosdeformalimpa.nome = Sauber gewonnene Duelle (in %)
+%lancesdisputadoseganhosdeformalimpa.sigla = Geg
+
+#   EN: Pass Completion %
+%passescertos.nome = Passquote (in %)
+%passescertos.sigla = Pas %
+
+#   EN: Progressive Passes %
+%passesemprogressao.nome = Progressive Pässe (in %)
+%passesemprogressao.sigla = % Prog Pas 2
+
+#   EN: Progressive vs Short Passes %
+%passesemprogressaoemrelacaoaoscurtos.nome = Progressive gegenüber kurzen Pässen (in %)
+%passesemprogressaoemrelacaoaoscurtos.sigla = % Prog Kurz
+
+#   EN: Passes Misplaced %
+%passeserrados.nome = Fehlpässe (in %)
+%passeserrados.sigla = % Fhl
+
+#   EN: Penalties %
+%penaltis.nome = Elfmeter (in %)
+%penaltis.sigla = Elf
+
+#   EN: Penalties Saved %
+%penaltisdefendidos.nome = Abgewehrte Elfmeter (in %)
+%penaltisdefendidos.sigla = % Abge Elfm
+
+#   EN: Pressures Won % /90
+%pressaoganha90.nome = Gewonnene Pressings /90 (in %)
+%pressaoganha90.sigla = % Gew Pre/90
+
+#   EN: On-Ball Actions Success %
+%sucessodeacoescombola.nome = Erfolgreiche Aktionen am Ball (in %)
+%sucessodeacoescombola.sigla = % Erf Akt
+
+#   EN: Actions Won /90
+acertos90.nome = Gewonnene Aktionen /90
+acertos90.sigla = Sieg
+
+#   EN: Actions Won (headers, tackles, pressures)
+acertoscabeceiosdesarmespressao.nome = Gewonnene Aktionen (Kopfbälle, Tacklings, Pressings)
+acertoscabeceiosdesarmespressao.sigla = Gew Akt
+
+#   EN: On-Ball Actions Completed
+acoescombolacompletadas.nome = Erfolgreiche Aktionen am Ball
+acoescombolacompletadas.sigla = Erf Akt
+
+#   EN: On-Ball Actions Completed /90
+acoescombolacompletadas90.nome = Erfolgreiche Aktionen am Ball /90
+acoescombolacompletadas90.sigla = Erf Akt/90
+
+#   EN: On-Ball Actions Attempted
+acoescombolatentadas.nome = Versuchte Aktionen am Ball
+acoescombolatentadas.sigla = Vers Akt
+
+#   EN: On-Ball Actions Attempted /90
+acoescombolatentadas90.nome = Versuchte Aktionen am Ball /90
+acoescombolatentadas90.sigla = Vers Akt/90
+
+#   EN: Successful Actions
+acoescomsucesso.nome = Erfolgreiche Aktionen
+acoescomsucesso.sigla = Erf Akt 2
+
+#   EN: Final Third Actions /90
+acoesnoultimoterco90.nome = Aktionen im letzten Drittel /90
+acoesnoultimoterco90.sigla = Akt Letz/90
+
+#   EN: Final Third Actions (dribbles, chances, shots)
+acoesnoultimotercofintaschancescriadasfinalizacoes.nome = Aktionen im letzten Drittel (Dribblings, Chancen, Schüsse)
+acoesnoultimotercofintaschancescriadasfinalizacoes.sigla = Akt Letz
+
+#   EN: Final Third Actions (dribbles, key passes, big chances)
+acoesnoultimotercofintaspassesdecisivosgrandeschancesetc.nome = Aktionen im letzten Drittel (Dribblings, entscheidende Pässe, Großchancen)
+acoesnoultimotercofintaspassesdecisivosgrandeschancesetc.sigla = Akt Letz 2
+
+#   EN: Actions Leading to Shots on Target
+acoesquegeraramfinalizacoesaogol.nome = Aktionen vor einem Schuss aufs Tor
+acoesquegeraramfinalizacoesaogol.sigla = Akt Vor
+
+#   EN: Actions Leading to Shots on Target /90
+acoesquegeraramfinalizacoesaogol90.nome = Aktionen vor einem Schuss aufs Tor /90
+acoesquegeraramfinalizacoesaogol90.sigla = Akt Vor/90
+
+#   EN: Actions Attempted
+acoestentadas.nome = Versuchte Aktionen
+acoestentadas.sigla = Vers Akt 2
+
+#   EN: Clearances
+alivios.nome = Geklärte Bälle
+alivios.sigla = Klär
+
+#   EN: Clearances /90
+alivios90.nome = Geklärte Bälle /90
+alivios90.sigla = Klär/90
+
+#   EN: Assists /90
+assist90.nome = Torvorlagen /90
+assist90.sigla = Vorl/90
+
+#   EN: Assists
+assistencias.nome = Torvorlagen
+assistencias.sigla = Vorl
+
+#   EN: Team Wasted Assists
+assistenciasdesperdicadaspelaequipe.nome = Vom Team vergebene Torvorlagen
+assistenciasdesperdicadaspelaequipe.sigla = Team Verg
+
+#   EN: Expected Assists (xA)
+assistenciasesperadasxa.nome = Expected Assists (xA)
+assistenciasesperadasxa.sigla = xA
+
+#   EN: Blocks
+bloqueiosfeitos.nome = Geblockt
+bloqueiosfeitos.sigla = Blk
+
+#   EN: Difficult Shots Faced per Goal Conceded
+bolasdificeisenfrentadasprasofrer1gol.nome = Schwierige Schüsse pro Gegentor
+bolasdificeisenfrentadasprasofrer1gol.sigla = Schw Sch
+
+#   EN: Duels /90
+bolasdisputadas90.nome = Zweikämpfe /90
+bolasdisputadas90.sigla = ZwK/90
+
+#   EN: Duels with Opponent
+bolasdisputadascomoadversario.nome = Zweikämpfe mit dem Gegner
+bolasdisputadascomoadversario.sigla = ZwK Geg
+
+#   EN: Duels with Opponent /90
+bolasdisputadascomoadversario90.nome = Zweikämpfe mit dem Gegner /90
+bolasdisputadascomoadversario90.sigla = ZwK Geg/90
+
+#   EN: Duels Won
+bolasdisputadaseganhas.nome = Gewonnene Zweikämpfe
+bolasdisputadaseganhas.sigla = Gew ZwK
+
+#   EN: Duels Won /90
+bolasdisputadaseganhas90.nome = Gewonnene Zweikämpfe /90
+bolasdisputadaseganhas90.sigla = Gew ZwK/90
+
+#   EN: Duels Won vs Opponent
+bolasdisputadaseganhasdoadversario.nome = Gegen den Gegner gewonnene Zweikämpfe
+bolasdisputadaseganhasdoadversario.sigla = Gege Geg
+
+#   EN: Duels Lost /90
+bolasdisputadaseperdidas90.nome = Verlorene Zweikämpfe /90
+bolasdisputadaseperdidas90.sigla = Verl ZwK/90
+
+#   EN: Duels Lost vs Opponent
+bolasdisputadaseperdidascomoadversario.nome = Gegen den Gegner verlorene Zweikämpfe
+bolasdisputadaseperdidascomoadversario.sigla = Gege Geg 2
+
+#   EN: Shots Faced
+bolasenfrentadas.nome = Schüsse aufs Tor
+bolasenfrentadas.sigla = Sch Aufs
+
+#   EN: Shots Faced /90
+bolasenfrentadas90.nome = Schüsse aufs Tor /90
+bolasenfrentadas90.sigla = Sch Aufs/90
+
+#   EN: Shots Faced per Goal Conceded
+bolasenfrentadasprasofrerumgol.nome = Schüsse pro Gegentor
+bolasenfrentadasprasofrerumgol.sigla = Sch GegT
+
+#   EN: Balls Intercepted
+bolasinterceptadas.nome = Abgefangene Bälle
+bolasinterceptadas.sigla = Abf Bäll
+
+#   EN: Balls Intercepted /90
+bolasinterceptadas90.nome = Abgefangene Bälle /90
+bolasinterceptadas90.sigla = Abf Bäll/90
+
+#   EN: Balls Recovered
+bolasrecuperadas.nome = Zurückeroberte Bälle
+bolasrecuperadas.sigla = Empf
+
+#   EN: Balls Recovered /90
+bolasrecuperadas90.nome = Zurückeroberte Bälle /90
+bolasrecuperadas90.sigla = Zurück Bä/90
+
+#   EN: Balls Won
+bolasroubadas.nome = Eroberte Bälle
+bolasroubadas.sigla = Erob Bäll
+
+#   EN: Balls Won /90
+bolasroubadas90.nome = Eroberte Bälle /90
+bolasroubadas90.sigla = Erob Bäll/90
+
+#   EN: Balls Won from Opponent
+bolasroubadasdoadversario.nome = Dem Gegner abgenommene Bälle
+bolasroubadasdoadversario.sigla = Geg Abgen
+
+#   EN: Headers Attempted
+cabeceiosdisputados.nome = Versuchte Kopfbälle
+cabeceiosdisputados.sigla = Kopf V
+
+#   EN: Headers Attempted /90
+cabeceiosdisputados90.nome = Versuchte Kopfbälle /90
+cabeceiosdisputados90.sigla = Vers Kopf/90
+
+#   EN: Headers Won
+cabeceiosganhos.nome = Gewonnene Kopfbälle
+cabeceiosganhos.sigla = Gew Kopf
+
+#   EN: Headers Won /90
+cabeceiosganhos90.nome = Gewonnene Kopfbälle /90
+cabeceiosganhos90.sigla = Kopf G/90
+
+#   EN: Headers Lost
+cabeceiosperdidos.nome = Verlorene Kopfbälle
+cabeceiosperdidos.sigla = Verl Kopf
+
+#   EN: Headers Lost /90
+cabeceiosperdidos90.nome = Verlorene Kopfbälle /90
+cabeceiosperdidos90.sigla = VeK/90
+
+#   EN: Key Headers
+cabeceiosqueevitaramjogadaofensiva.nome = Entscheidende Kopfbälle
+cabeceiosqueevitaramjogadaofensiva.sigla = E Kopf
+
+#   EN: Key Headers /90
+cabeceiosqueevitaramjogadaofensiva90.nome = Entscheidende Kopfbälle /90
+cabeceiosqueevitaramjogadaofensiva90.sigla = Ent Kopf/90
+
+#   EN: Yellow Cards
+cartoesamarelos.nome = Gelbe Karten
+cartoesamarelos.sigla = JK
+
+#   EN: Cards per Foul
+cartoesporfaltacometida.nome = Karten pro Foul
+cartoesporfaltacometida.sigla = Krt Foul
+
+#   EN: Red Cards
+cartoesvermelhos.nome = Rote Karten
+cartoesvermelhos.sigla = Rote Krt
+
+#   EN: Chances Created
+chancescriadas.nome = Erspielte Torchancen
+chancescriadas.sigla = Cha Ers
+
+#   EN: Chances Created /90
+chancescriadas90.nome = Erspielte Torchancen /90
+chancescriadas90.sigla = Ersp Ch/90
+
+#   EN: Clear Cut Chances Created
+chancesdeperigocriadas.nome = Erspielte Großchancen
+chancesdeperigocriadas.sigla = GCh
+
+#   EN: Clear Cut Chances Created /90
+chancesdeperigocriadas90.nome = Erspielte Großchancen /90
+chancesdeperigocriadas90.sigla = Ch/90
+
+#   EN: Chances Conceded /90
+chancesdesofrerumgol90.nome = Zugelassene Chancen /90
+chancesdesofrerumgol90.sigla = Zugel Cha/90
+
+#   EN: Clean Sheets
+cleansheet.nome = Zu-Null-Spiele
+cleansheet.sigla = Null Spl
+
+#   EN: Free Kick Shots
+cobrancasdefaltadiretas.nome = Freistöße
+cobrancasdefaltadiretas.sigla = Frei
+
+#   EN: Condition
+condicaofisica.nome = Kondition
+condicaofisica.sigla = Kond
+
+#   EN: Outside Box Conversion
+conversaodasfinalizacoesdeforadaarea.nome = Verwertung der Schüsse von außerhalb
+conversaodasfinalizacoesdeforadaarea.sigla = Verw Sch
+
+#   EN: Clearances
+cortes.nome = Geklärte Bälle
+cortes.sigla = Klär
+
+#   EN: Creation /90
+criacao90.nome = Kreativleistung /90
+criacao90.sigla = Kreat/90
+
+#   EN: Crosses Completed /90
+cruzamentoscertos90.nome = Angekommene Flanken /90
+cruzamentoscertos90.sigla = Ang Fla/90
+
+#   EN: Crosses Completed
+cruzamentosconseguidos.nome = Angekommene Flanken
+cruzamentosconseguidos.sigla = Fla A
+
+#   EN: Set Piece Crosses Completed
+cruzamentosdebolaparadacertos.nome = Angekommene Standardflanken
+cruzamentosdebolaparadacertos.sigla = Ang Std
+
+#   EN: Set Piece Crosses Attempted
+cruzamentosdebolaparadatentados.nome = Flankenversuche nach Standards
+cruzamentosdebolaparadatentados.sigla = Flank Nach
+
+#   EN: Crosses Attempted
+cruzamentostentados.nome = Flankenversuche
+cruzamentostentados.sigla = Fla V
+
+#   EN: Crosses Attempted /90
+cruzamentostentados90.nome = Flankenversuche /90
+cruzamentostentados90.sigla = Fla V/90
+
+#   EN: Saves Tipped
+defesascomapontadosdedos.nome = Abgelenkte Schüsse
+defesascomapontadosdedos.sigla = Abge Sch
+
+#   EN: Saves Tipped /90
+defesascomapontadosdedos90.nome = Abgelenkte Schüsse /90
+defesascomapontadosdedos90.sigla = Abg Sch/90
+
+#   EN: Saves Parried
+defesasdesviadas.nome = Parierte Schüsse
+defesasdesviadas.sigla = Pari Sch
+
+#   EN: Saves Parried /90
+defesasdesviadas90.nome = Parierte Schüsse /90
+defesasdesviadas90.sigla = Par Sch/90
+
+#   EN: Saves Held
+defesasseguras.nome = Gehaltene Schüsse
+defesasseguras.sigla = Geh Sch
+
+#   EN: Saves Held /90
+defesasseguras90.nome = Gehaltene Schüsse /90
+defesasseguras90.sigla = Geh Sch/90
+
+#   EN: Total Saves
+defesastotais.nome = Paraden gesamt
+defesastotais.sigla = Par Ges 2
+
+#   EN: Total Saves per Game
+defesastotaisjogo.nome = Paraden gesamt pro Spiel
+defesastotaisjogo.sigla = Par Ges
+
+#   EN: Team Losses
+derrotascomelenoelenco.nome = Niederlagen des Teams
+derrotascomelenoelenco.sigla = Nied Team
+
+#   EN: Tackles + Pressures Completed
+desarmepressoesconcluidas.nome = Erfolgreiche Tacklings und Pressings
+desarmepressoesconcluidas.sigla = Erf Tack
+
+#   EN: Tackles + Pressures Attempted
+desarmepressoestentadas.nome = Versuchte Tacklings und Pressings
+desarmepressoestentadas.sigla = Vers Tack
+
+#   EN: Key Tackles
+desarmesdecisivos.nome = Entscheidende Zweikämpfe
+desarmesdecisivos.sigla = Ent Zwk
+
+#   EN: Key Tackles /90
+desarmesdecisivos90.nome = Entscheidende Zweikämpfe /90
+desarmesdecisivos90.sigla = Ent Zwk/90
+
+#   EN: Tackles + Pressures Completed /90
+desarmesepressoesconseguidos90.nome = Erfolgreiche Tacklings und Pressings /90
+desarmesepressoesconseguidos90.sigla = Erf Tack/90
+
+#   EN: Tackles + Pressures Attempted /90
+desarmesepressoestentados90.nome = Versuchte Tacklings und Pressings /90
+desarmesepressoestentados90.sigla = Vers Tack/90
+
+#   EN: Tackles Won
+desarmesganhos.nome = Gewonnene Zweikämpfe
+desarmesganhos.sigla = Zwk G
+
+#   EN: Tackles Won /90
+desarmesganhos90.nome = Gewonnene Zweikämpfe /90
+desarmesganhos90.sigla = Erf Tck/90
+
+#   EN: Tackles Attempted
+desarmestentados.nome = Anzahl an Zweikämpfen
+desarmestentados.sigla = Zwk Z
+
+#   EN: Tackles Attempted /90
+desarmestentados90.nome = Anzahl an Zweikämpfen /90
+desarmestentados90.sigla = Anza ZwK/90
+
+#   EN: Unknown 0x1E
+desconhecida0x1e.nome = Unbekannt 0X1E
+desconhecida0x1e.sigla = Unbek 0x1e
+
+#   EN: Unknown 0x20
+desconhecida0x20.nome = Unbekannt 0X20
+desconhecida0x20.sigla = <20%
+
+#   EN: Unknown 0x22
+desconhecida0x22.nome = Unbekannt 0X22
+desconhecida0x22.sigla = Unbek 0x22
+
+#   EN: Unknown 0x24
+desconhecida0x24.nome = Unbekannt 0X24
+desconhecida0x24.sigla = Unbek 0x24
+
+#   EN: Unknown 0x4E
+desconhecida0x4e.nome = Unbekannt 0X4E
+desconhecida0x4e.sigla = Unbek 0x4e
+
+#   EN: Unknown 0x54
+desconhecida0x54.nome = Unbekannt 0X54
+desconhecida0x54.sigla = Unbek 0x54
+
+#   EN: Unknown 0x56
+desconhecida0x56.nome = Unbekannt 0X56
+desconhecida0x56.sigla = Unbek 0x56
+
+#   EN: Unknown 0x58
+desconhecida0x58.nome = Unbekannt 0X58
+desconhecida0x58.sigla = Unbek 0x58
+
+#   EN: Unknown 0x62
+desconhecida0x62.nome = Unbekannt 0X62
+desconhecida0x62.sigla = Unbek 0x62
+
+#   EN: Unknown 0x78
+desconhecida0x78.nome = Unbekannt 0X78
+desconhecida0x78.sigla = Unbek 0x78
+
+#   EN: Unknown 0x7A
+desconhecida0x7a.nome = Unbekannt 0X7A
+desconhecida0x7a.sigla = Unbek 0x7a
+
+#   EN: Unknown 0x7C
+desconhecida0x7c.nome = Unbekannt 0X7C
+desconhecida0x7c.sigla = Unbek 0x7c
+
+#   EN: Unknown 0x7E
+desconhecida0x7e.nome = Unbekannt 0X7E
+desconhecida0x7e.sigla = Unbek 0x7e
+
+#   EN: Unknown lvl1 0x18
+desconhecidalvl10x18.nome = Unbekannt lvl1 0x18
+desconhecidalvl10x18.sigla = Unbek Lvl1
+
+#   EN: Difference (saved − faced)
+diferencadefendidosenfrentados.nome = Differenz (gehalten − bekommen)
+diferencadefendidosenfrentados.sigla = Diff
+
+#   EN: Expected Saves − Saves Made
+diferencadefesasesperadasdefesasfeitas.nome = Erwartete Paraden − tatsächliche Paraden
+diferencadefesasesperadasdefesasfeitas.sigla = Erw Par
+
+#   EN: Distance /90
+distancia90.nome = Distanz/90 /90
+distancia90.sigla = Lauf/90
+
+#   EN: Distance Covered
+distanciapercorrida.nome = Laufleistung
+distanciapercorrida.sigla = Lauf
+
+#   EN: Dribbled Past
+driblessofridos.nome = Ausgespielt worden
+driblessofridos.sigla = Ausg
+
+#   EN: Dribbled Past /90
+driblessofridos90.nome = Ausgespielt worden /90
+driblessofridos90.sigla = Ausg/90
+
+#   EN: Sub Appearances
+entradasdobanco.nome = Jokereinsätze
+entradasdobanco.sigla = Egw
+
+#   EN: Errors
+erros.nome = Fehler
+erros.sigla = Fhl
+
+#   EN: Errors /90
+erros90.nome = Fehler /90
+erros90.sigla = Fhl/90
+
+#   EN: Defensive Errors
+errosdefensivos.nome = Defensivfehler
+errosdefensivos.sigla = DefFhl
+
+#   EN: Defensive Errors /90
+errosdefensivos90.nome = Defensivfehler /90
+errosdefensivos90.sigla = DefFhl/90
+
+#   EN: Mistakes Leading to Goals
+errosquegeraramgoladversario.nome = Fehler mit Torfolge
+errosquegeraramgoladversario.sigla = T Feh
+
+#   EN: Mistakes Leading to Goals /90
+errosqueoriginaramgols90.nome = Fehler mit Torfolge /90
+errosqueoriginaramgols90.sigla = Feh m. TF/90
+
+#   EN: Expected Goals Prevented (xGP)
+expectedgoalspreventedxgp.nome = Expected Goals Prevented
+expectedgoalspreventedxgp.sigla = xGP
+
+#   EN: Mistakes
+falhas.nome = Fehler
+falhas.sigla = Fhl 2
+
+#   EN: Mistakes /90
+falhas90.nome = Fehler /90
+falhas90.sigla = Fhl/90 2
+
+#   EN: Fouls
+faltascometidas.nome = Fouls
+faltascometidas.sigla = Fls
+
+#   EN: Fouls /90
+faltascometidas90.nome = Fouls/90 /90
+faltascometidas90.sigla = Fls/90
+
+#   EN: Fouls per Card
+faltaspraumcartao.nome = Fouls pro Karte
+faltaspraumcartao.sigla = Foul Krt
+
+#   EN: Fouls per Yellow Card
+faltaspraumcartaoamarelo.nome = Fouls pro Gelber Karte
+faltaspraumcartaoamarelo.sigla = Foul Gelb
+
+#   EN: Fouls without Card
+faltassemcartao.nome = Fouls ohne Karte
+faltassemcartao.sigla = Foul Krt 2
+
+#   EN: Fouls Against
+faltassofridas.nome = Gefoult worden
+faltassofridas.sigla = NM
+
+#   EN: Fouls Against /90
+faltassofridas90.nome = Gefoult worden /90
+faltassofridas90.sigla = Gefo/90
+
+#   EN: Shots or Headers per Goal
+finalizacaooucabeceiopraumgol.nome = Schüsse oder Kopfbälle pro Tor
+finalizacaooucabeceiopraumgol.sigla = Sch Kopf
+
+#   EN: Shots
+finalizacoes.nome = Schüsse
+finalizacoes.sigla = Schs
+
+#   EN: Shots /90
+finalizacoes90.nome = Schüsse /90
+finalizacoes90.sigla = Sch/90 2
+
+#   EN: Shots Blocked Defending
+finalizacoesbloqueadas.nome = Abwehrschüsse geblockt
+finalizacoesbloqueadas.sigla = Abwe Blk
+
+#   EN: Shots Blocked Defending /90
+finalizacoesbloqueadas90.nome = Abwehrschüsse geblockt /90
+finalizacoesbloqueadas90.sigla = Sch gebl/90
+
+#   EN: Shots on Target per Goal
+finalizacoescertaspraumgol.nome = Schüsse aufs Tor pro Tor
+finalizacoescertaspraumgol.sigla = Sch Aufs 2
+
+#   EN: Shots Saved
+finalizacoesdefendidas.nome = Schüsse pariert
+finalizacoesdefendidas.sigla = Sch Pari
+
+#   EN: Shots Saved /90
+finalizacoesdefendidas90.nome = Schüsse pariert /90
+finalizacoesdefendidas90.sigla = Sch Pari/90
+
+#   EN: Shots Outside Box
+finalizacoesdeforadaarea.nome = Schüsse von außerhalb des Strafraums
+finalizacoesdeforadaarea.sigla = Sch Auße
+
+#   EN: Shots Outside Box /90
+finalizacoesdeforadaarea90.nome = Schüsse von außerhalb des Strafraums /90
+finalizacoesdeforadaarea90.sigla = Sch Auße/90
+
+#   EN: Shots on Target
+finalizacoesnogol.nome = Schüsse aufs Tor
+finalizacoesnogol.sigla = Sch Aufs 4
+
+#   EN: Shots on Target /90
+finalizacoesnogol90.nome = Schüsse aufs Tor /90
+finalizacoesnogol90.sigla = Sch Aufs/9 3
+
+#   EN: Shots on Target (non-penalty)
+finalizacoesnogolsempenalti.nome = Schüsse aufs Tor
+finalizacoesnogolsempenalti.sigla = Sch Aufs 3
+
+#   EN: Shots on Target (non-penalty) /90
+finalizacoesnogolsempenalti90.nome = Schüsse aufs Tor /90
+finalizacoesnogolsempenalti90.sigla = Sch Aufs/9 2
+
+#   EN: Shots off Target /90
+finalizacoesparafora90.nome = Schüsse neben das Tor /90
+finalizacoesparafora90.sigla = Sch Nebe/90
+
+#   EN: Shots off Target
+finalizacoesprafora.nome = Schüsse neben das Tor
+finalizacoesprafora.sigla = Sch Nebe
+
+#   EN: Shots per Goal
+finalizacoespraumgol.nome = Schüsse pro Tor
+finalizacoespraumgol.sigla = Sch Tor
+
+#   EN: Shots Converted to Goals
+finalizacoesqueseconverteramemgols.nome = In Tore verwandelte Schüsse
+finalizacoesqueseconverteramemgols.sigla = Tor Verw
+
+#   EN: Shots (non-penalty)
+finalizacoessempenalti.nome = Schüsse
+finalizacoessempenalti.sigla = Sch
+
+#   EN: Shots (non-penalty) /90
+finalizacoessempenalti90.nome = Schüsse /90
+finalizacoessempenalti90.sigla = Sch/90
+
+#   EN: Shots Attempted
+finalizacoestentadas.nome = Schussversuche
+finalizacoestentadas.sigla = Sch 2
+
+#   EN: Dribbles Made
+fintas.nome = Dribblings
+fintas.sigla = Drb
+
+#   EN: Dribbles Made /90
+fintas90.nome = Dribblings /90
+fintas90.sigla = Drb/90
+
+#   EN: Flair Index
+flairindex.nome = Kreativitätsindex
+flairindex.sigla = Flair
+
+#   EN: Flair Index (Overall)
+flairindexgeral.nome = Kreativitätsindex (gesamt)
+flairindexgeral.sigla = KreatInd
+
+#   EN: Goals
+gols.nome = Tore
+gols.sigla = Tore
+
+#   EN: Goals /90
+gols90.nome = Tore /90
+gols90.sigla = Tor/90
+
+#   EN: Expected Goals Overperformance
+golsacimadoesperado.nome = Expected Goals über Erwartung
+golsacimadoesperado.sigla = xG-OP
+
+#   EN: Goals + Assists /90
+golsassist90.nome = Tore + Vorlagen /90
+golsassist90.sigla = Tor Vorl/90
+
+#   EN: Goals + Assists
+golsassistencias.nome = Tore + Vorlagen
+golsassistencias.sigla = Tor Vorl
+
+#   EN: Goals Inside Box
+golsdedentrodaarea.nome = Tore aus dem Strafraum
+golsdedentrodaarea.sigla = Tor Strf
+
+#   EN: Goals Inside Box /90
+golsdedentrodaarea90.nome = Tore aus dem Strafraum /90
+golsdedentrodaarea90.sigla = Tor Strf/90
+
+#   EN: Goals Outside Box
+golsdeforadaarea.nome = Tore von außerhalb des Strafraums
+golsdeforadaarea.sigla = Tor Auße
+
+#   EN: Goals Outside Box /90
+golsdeforadaarea90.nome = Tore von außerhalb des Strafraums /90
+golsdeforadaarea90.sigla = Tor Auße/90
+
+#   EN: Goals Inside Box
+golsdentrodaarea.nome = Tore aus dem Strafraum
+golsdentrodaarea.sigla = Tor Strf 2
+
+#   EN: Penalties Scored /90
+golsdepenalti90.nome = Verwandelte Elfmeter /90
+golsdepenalti90.sigla = Verw Elfm/90
+
+#   EN: Penalties Scored
+golsdepenaltis.nome = Verwandelte Elfmeter
+golsdepenaltis.sigla = Verw Elfm
+
+#   EN: Team Goals
+golsdotimecomelenoelenco.nome = Mannschaftstore
+golsdotimecomelenoelenco.sigla = MTor
+
+#   EN: Expected Goals (xG)
+golsesperadosxg.nome = Expected Goals (xG)
+golsesperadosxg.sigla = xG
+
+#   EN: Career Goals
+golsnacarreira.nome = Karrieretore
+golsnacarreira.sigla = Karr
+
+#   EN: All Time League Goals
+golsnaligacarreira.nome = Tore insgesamt (Liga)
+golsnaligacarreira.sigla = Tor Insg
+
+#   EN: Unexpected Goals
+golsnaoesperados.nome = Unerwartete Tore
+golsnaoesperados.sigla = Unerw Tor
+
+#   EN: Unexpected Goals (non-penalty)
+golsnaoesperadossempenalti.nome = Unerwartete Tore (ohne Elfmeter)
+golsnaoesperadossempenalti.sigla = Unerw Tor 2
+
+#   EN: International Goals
+golspelaselecao.nome = Länderspieltore
+golspelaselecao.sigla = Länd
+
+#   EN: U21 International Goals
+golspelasub21.nome = U21-Länderspieltore
+golspelasub21.sigla = U21 Länd
+
+#   EN: Non-Penalty Goals
+golssempenalti.nome = Tore ohne Elfmeter
+golssempenalti.sigla = Tor Elfm
+
+#   EN: Non-Penalty Goals /90
+golssempenalti90.nome = Tore ohne Elfmeter /90
+golssempenalti90.sigla = Tor Elfm/90
+
+#   EN: Goals Conceded
+golssofridos.nome = Gegentore
+golssofridos.sigla = GegT
+
+#   EN: Team Goals Conceded
+golssofridoscomelenoelenco.nome = Teamgegentore
+golssofridoscomelenoelenco.sigla = Team
+
+#   EN: GPI (Goal Probability Index)
+gpigoalprobabilityindex.nome = TWI (Torwahrscheinlichkeitsindex)
+gpigoalprobabilityindex.sigla = Twi
+
+#   EN: Hat-tricks
+hattricks.nome = Hattricks
+hattricks.sigla = Hattr
+
+#   EN: Offsides
+impedimentos.nome = Abseits
+impedimentos.sigla = Ohn
+
+#   EN: Offsides /90
+impedimentos90.nome = Abseits /90
+impedimentos90.sigla = Abs/90
+
+#   EN: Coverage Index
+indicedecobertura.nome = Absicherungsindex
+indicedecobertura.sigla = AbsInd
+
+#   EN: Attacking Creation Index
+indicedecriacaoofensivaico.nome = Index der Offensivkreativität
+indicedecriacaoofensivaico.sigla = Ind Offe
+
+#   EN: Critical Saves Index
+indicededefesascriticas.nome = Index entscheidender Paraden
+indicededefesascriticas.sigla = Ind Entsch
+
+#   EN: Aerial Dominance Index
+indicededominanciaaereaida.nome = Index der Lufthoheit
+indicededominanciaaereaida.sigla = Ind Luft
+
+#   EN: Physical Dominance Index
+indicededominanciafisica.nome = Index der körperlichen Dominanz
+indicededominanciafisica.sigla = Ind Körp
+
+#   EN: Goalkeeper Impact Index
+indicedeimpactodogoleiro.nome = Wirkungsindex des Torwarts
+indicedeimpactodogoleiro.sigla = WirkInd TW
+
+#   EN: Interceptions + Recoveries
+interceptacaorecuperacaodebola.nome = Abfangen und Zurückerobern
+interceptacaorecuperacaodebola.sigla = Abfa Zurück
+
+#   EN: Interceptions + Recoveries /90
+interceptacaorecuperacaodebola90.nome = Abfangen und Zurückerobern /90
+interceptacaorecuperacaodebola90.sigla = Abfa Zurü/90
+
+#   EN: Interceptions
+interceptacoes.nome = Abgefangene Bälle
+interceptacoes.sigla = Län
+
+#   EN: Interceptions /90
+interceptacoes90.nome = Abgefangene Bälle /90
+interceptacoes90.sigla = AbB/90
+
+#   EN: Interceptions Made
+interceptacoesfeitas.nome = Abgefangene Bälle
+interceptacoesfeitas.sigla = Abf Bäll 2
+
+#   EN: Rated Appearances
+jogoscomnota.nome = Bewertete Einsätze
+jogoscomnota.sigla = Bew Eins
+
+#   EN: Starting Appearances
+jogoscomotitular.nome = Einsätze in Startelf
+jogoscomotitular.sigla = StElf
+
+#   EN: Full Matches
+jogoscompletos.nome = Volle Spiele
+jogoscompletos.sigla = Vollständig
+
+#   EN: All Time League Appearances
+jogosnaligacarreira.nome = Einsätze insgesamt (Liga)
+jogosnaligacarreira.sigla = Eins Insg
+
+#   EN: International Caps
+jogospelaselecao.nome = Länderspiele
+jogospelaselecao.sigla = Länd 2
+
+#   EN: U21 International Apps
+jogospelasub21.nome = U21-Länderspiele
+jogospelasub21.sigla = U21 Länd 2
+
+#   EN: Total Appearances
+jogostotais.nome = Einsätze (gesamt)
+jogostotais.sigla = Eins
+
+#   EN: Actions Completed
+lancesconseguidos.nome = Gelungene Aktionen
+lancesconseguidos.sigla = Gel Akt
+
+#   EN: Actions Completed /90
+lancesconseguidos90.nome = Gelungene Aktionen /90
+lancesconseguidos90.sigla = Gel Akt/90
+
+#   EN: Defensive Actions Completed
+lancesdefensivosconseguidos.nome = Gelungene Defensivaktionen
+lancesdefensivosconseguidos.sigla = Gel DefAkt
+
+#   EN: Defensive Actions Completed /90
+lancesdefensivosconseguidos90.nome = Gelungene Defensivaktionen /90
+lancesdefensivosconseguidos90.sigla = Gel DefAk/90
+
+#   EN: Defensive Actions Attempted
+lancesdefensivostentados.nome = Versuchte Defensivaktionen
+lancesdefensivostentados.sigla = Vers DefAkt
+
+#   EN: Defensive Actions Attempted /90
+lancesdefensivostentados90.nome = Versuchte Defensivaktionen /90
+lancesdefensivostentados90.sigla = Vers DefA/90
+
+#   EN: Contests
+lancesdisputados.nome = Duelle
+lancesdisputados.sigla = Duell
+
+#   EN: Contests /90
+lancesdisputados90.nome = Duelle /90
+lancesdisputados90.sigla = GTor/90
+
+#   EN: Clean Contests Won
+lancesdisputadoseganhosdeformalimpa.nome = Sauber gewonnene Duelle
+lancesdisputadoseganhosdeformalimpa.sigla = Sbr Gew
+
+#   EN: Contests Won without Foul
+lancesdisputadoseganhossemfalta.nome = Ohne Foul gewonnene Duelle
+lancesdisputadoseganhossemfalta.sigla = Foul Gew
+
+#   EN: Contests Won without Foul /90
+lancesdisputadoseganhossemfalta90.nome = Ohne Foul gewonnene Duelle /90
+lancesdisputadoseganhossemfalta90.sigla = Foul Gew/90
+
+#   EN: Actions Attempted /90
+lancestentados90.nome = Versuchte Aktionen /90
+lancestentados90.sigla = Vers Akt/9 2
+
+#   EN: Actions Attempted (shots, passes, dribbles, etc)
+lancestentadosfinalizacaopassefintaetc.nome = Versuchte Aktionen (Schüsse, Pässe, Dribblings usw.)
+lancestentadosfinalizacaopassefintaetc.sigla = Vers Akt 3
+
+#   EN: Player of the Match
+manofthematch.nome = Spieler des Spiels
+manofthematch.sigla = Spl Spl
+
+#   EN: Career Goals per Game
+mediadegolsemtodaacarreira.nome = Tore pro Spiel in der Karriere
+mediadegolsemtodaacarreira.sigla = Tor Spl
+
+#   EN: Minutes
+minutos.nome = Minuten
+minutos.sigla = Min.
+
+#   EN: Minutes per Game
+minutosporpartida.nome = Minuten pro Spiel
+minutosporpartida.sigla = Min/Sp
+
+#   EN: Minutes per Shot on Target
+minutospraacertarumafinalizacaonogol.nome = Minuten pro Schuss aufs Tor
+minutospraacertarumafinalizacaonogol.sigla = Min Sch
+
+#   EN: Minutes per Clear Cut Chance
+minutospracriarumachancedeperigo.nome = Minuten pro Großchance
+minutospracriarumachancedeperigo.sigla = Min Großch
+
+#   EN: Minutes per Clear Cut Chance
+minutospracriarumachanceperigosa.nome = Minuten pro Großchance
+minutospracriarumachanceperigosa.sigla = Min Großch 2
+
+#   EN: Minutes per Key Pass
+minutosprafazerumpassedecisivo.nome = Minuten pro entscheidendem Pass
+minutosprafazerumpassedecisivo.sigla = Min Entsch
+
+#   EN: Minutes per Goal
+minutospramarcarumgol.nome = Minuten pro Tor
+minutospramarcarumgol.sigla = Min Tor
+
+#   EN: Minutes per Goal Contribution
+minutospraparticipardeumgol.nome = Minuten pro Torbeteiligung
+minutospraparticipardeumgol.sigla = Min Torbet
+
+#   EN: Minutes per Player of the Match
+minutospraserohomemdojogo.nome = Minuten pro Spieler des Spiels
+minutospraserohomemdojogo.sigla = Min Spl
+
+#   EN: Minutes per Goal Conceded
+minutosprasofrerumgol.nome = Minuten pro Gegentor
+minutosprasofrerumgol.sigla = Min GegT
+
+#   EN: Minutes per Shot
+minutospratentarumafinalizacao.nome = Minuten pro Schuss
+minutospratentarumafinalizacao.sigla = Min Sch 2
+
+#   EN: Minutes Since Last Goal
+minutossemmarcar.nome = Minuten seit letztem Treffer
+minutossemmarcar.sigla = Min Seit
+
+#   EN: Minutes Since Last Conceded
+minutossemsofrergol.nome = Minuten seit letztem Gegentor
+minutossemsofrergol.sigla = Min Seit 2
+
+#   EN: Morale
+moral.nome = Moral
+moral.sigla = Moral
+
+#   EN: Pressures Completed
+movimentosdepressaoganhos.nome = Erfolgreiche Pressingversuche
+movimentosdepressaoganhos.sigla = PrsErf
+
+#   EN: Pressures Completed /90
+movimentosdepressaoganhos90.nome = Erfolgreiche Pressingversuche /90
+movimentosdepressaoganhos90.sigla = PrsErf/90
+
+#   EN: Pressures Attempted
+movimentosdepressaotentados.nome = Pressingversuche
+movimentosdepressaotentados.sigla = PrsV
+
+#   EN: Pressures Attempted /90
+movimentosdepressaotentados90.nome = Pressingversuche /90
+movimentosdepressaotentados90.sigla = PrsV/90
+
+#   EN: Attacking Actions Successful
+movimentosofensivoscomsucesso.nome = Erfolgreiche Offensivaktionen
+movimentosofensivoscomsucesso.sigla = Erf OffAkt
+
+#   EN: Attacking Actions Completed
+movimentosofensivosconseguidos.nome = Gelungene Offensivaktionen
+movimentosofensivosconseguidos.sigla = Gel OffAkt
+
+#   EN: Attacking Actions Completed /90
+movimentosofensivosconseguidos90.nome = Gelungene Offensivaktionen /90
+movimentosofensivosconseguidos90.sigla = Gel OffAk/90
+
+#   EN: Attacking Actions Attempted
+movimentosofensivostentados.nome = Versuchte Offensivaktionen
+movimentosofensivostentados.sigla = Vers OffAkt
+
+#   EN: Attacking Actions Attempted /90
+movimentosofensivostentados90.nome = Versuchte Offensivaktionen /90
+movimentosofensivostentados90.sigla = Vers OffA/90
+
+#   EN: Over xG / Under xG per 90
+overxgunderxgper90.nome = Abweichung vom xG pro 90
+overxgunderxgper90.sigla = Abw Xg
+
+#   EN: Involvement /90
+participacao90.nome = Einbindung /90
+participacao90.sigla = Einb/90
+
+#   EN: Player Involvement /90 (dribbles, headers, passes, shots)
+participacaodojogadoracada90minutosfntcabspassfinalizacos.nome = Beteiligung des Spielers /90 (Dribblings, Kopfbälle, Pässe, Schüsse)
+participacaodojogadoracada90minutosfntcabspassfinalizacos.sigla = Betlg Spl/90
+
+#   EN: Passing Involvement /90
+participacaoempasses90.nome = Beteiligung am Passspiel /90
+participacaoempasses90.sigla = Betlg Pas/90
+
+#   EN: Involvement per Game (passes, dribbles, shots, chances, ball wins)
+participacaoporjogopassesfntfincriacaoroubadasdebolaetc.nome = Beteiligung pro Spiel (Pässe, Dribblings, Schüsse, Chancen, Balleroberungen)
+participacaoporjogopassesfntfincriacaoroubadasdebolaetc.sigla = Betlg Spl
+
+#   EN: Player Involvement (dribbles, passes, etc)
+participacoesdojogadorfintaspassesetc.nome = Beteiligungen des Spielers (Dribblings, Pässe usw.)
+participacoesdojogadorfintaspassesetc.sigla = Betlg Spl 2
+
+#   EN: Progressive Passes
+passequesaoemprogressao.nome = Progressive Pässe
+passequesaoemprogressao.sigla = Pr Pässe
+
+#   EN: Passes Completed /90
+passescertos90.nome = Angekommene Pässe /90
+passescertos90.sigla = Ang Päss/90
+
+#   EN: Passes Completed − Misplaced
+passescertoserrados.nome = Angekommene − verfehlte Pässe
+passescertoserrados.sigla = Ang Verf
+
+#   EN: Passes Completed − Misplaced per Game
+passescertoserradosjogo.nome = Angekommene − verfehlte Pässe pro Spiel
+passescertoserradosjogo.sigla = Ang Verf 2
+
+#   EN: Passes Completed
+passescompletados.nome = Erfolgreiche Pässe
+passescompletados.sigla = Erf Pass
+
+#   EN: Passes Completed /90
+passescompletados90.nome = Angekommene Pässe /90
+passescompletados90.sigla = Ang Päss/90
+
+#   EN: Short Passes
+passescurtos.nome = Kurzpässe
+passescurtos.sigla = Kurz
+
+#   EN: Short Passes /90
+passescurtos90.nome = Kurzpässe /90
+passescurtos90.sigla = Kurz/90
+
+#   EN: Short Passes Completed /90
+passescurtoscertos90.nome = Angekommene kurze Pässe /90
+passescurtoscertos90.sigla = Ang Kurz/90
+
+#   EN: Key Passes
+passesdecisivos.nome = Entscheidende Pässe
+passesdecisivos.sigla = Ent Päs
+
+#   EN: Key Passes /90
+passesdecisivos90.nome = Entscheidende Pässe /90
+passesdecisivos90.sigla = Entsch Pa/90
+
+#   EN: Open Play Key Passes
+passesdecisivosemjogoaberto.nome = Entscheidende Pässe aus dem Spiel heraus
+passesdecisivosemjogoaberto.sigla = EntP(S)
+
+#   EN: Key Passes per Assist
+passesdecisivospraumaassistencia.nome = Entscheidende Pässe pro Torvorlage
+passesdecisivospraumaassistencia.sigla = Entsch Pass
+
+#   EN: Key Passes (Total)
+passesdecisivostotal.nome = Entscheidende Pässe
+passesdecisivostotal.sigla = Entsch Pas 2
+
+#   EN: Build-Up Passes
+passesemconstrucaodejogadaofensiva.nome = Pässe im Spielaufbau
+passesemconstrucaodejogadaofensiva.sigla = Pass Spl
+
+#   EN: Build-Up Passes /90
+passesemconstrucaodejogadaofensiva90.nome = Pässe im Spielaufbau /90
+passesemconstrucaodejogadaofensiva90.sigla = Pass Spl/90
+
+#   EN: Progressive Passes
+passesemprogressao.nome = Progressive Pässe
+passesemprogressao.sigla = Pr Pässe
+
+#   EN: Progressive Passes /90
+passesemprogressao90.nome = Progressive Pässe /90
+passesemprogressao90.sigla = Pr Pässe/90
+
+#   EN: Passes Misplaced
+passeserrados.nome = Fehlpässe
+passeserrados.sigla = Fhl 3
+
+#   EN: Passes Misplaced /90
+passeserrados90.nome = Fehlpässe /90
+passeserrados90.sigla = Fhl/90 3
+
+#   EN: Short Passes
+passesquesaocurtos.nome = Kurzpässe
+passesquesaocurtos.sigla = Kurz 2
+
+#   EN: Progressive Passes
+passesquesaoemprogressao.nome = Progressive Pässe
+passesquesaoemprogressao.sigla = Pr Pässe
+
+#   EN: Passes Attempted
+passestentados.nome = Gespielte Pässe
+passestentados.sigla = Pas V
+
+#   EN: Passes Attempted /90
+passestentados90.nome = Passversuche /90
+passestentados90.sigla = Pass/90
+
+#   EN: Penalties Taken
+penaltisbatidos.nome = Ausgeführte Elfmeter
+penaltisbatidos.sigla = Elfer
+
+#   EN: Penalties Saved
+penaltisdefendidos.nome = Parierte Elfmeter
+penaltisdefendidos.sigla = Pari Elfm
+
+#   EN: Penalties Saved /90
+penaltisdefendidos90.nome = Abgewehrte Elfmeter /90
+penaltisdefendidos90.sigla = Abge Elfm/90
+
+#   EN: Penalties Faced
+penaltisenfrentados.nome = Elfmeter insgesamt
+penaltisenfrentados.sigla = Elfm Insg
+
+#   EN: Penalties Faced /90
+penaltisenfrentados90.nome = Elfmeter insgesamt /90
+penaltisenfrentados90.sigla = Elfm Insg/90
+
+#   EN: Penalties Missed
+penaltisperdidos.nome = Verschossene Elfmeter
+penaltisperdidos.sigla = Versch Elfm
+
+#   EN: Work Rate Score
+placardeesforco.nome = Laufaufwand-Wertung
+placardeesforco.sigla = Lauf Wert
+
+#   EN: Possession Wasted
+possedesperdicada.nome = Vergeudeter Ballbesitz
+possedesperdicada.sigla = Verg Ballb
+
+#   EN: Possession Wasted /90
+possedesperdicada90.nome = Vergeudeter Ballbesitz /90
+possedesperdicada90.sigla = Verg Ball/90
+
+#   EN: Possession Won /90
+posseganha90.nome = Ballgewinne /90
+posseganha90.sigla = Ball/90
+
+#   EN: Possession Won
+posseganhatotal.nome = Ballgewinne
+posseganhatotal.sigla = Ball
+
+#   EN: Possession Lost /90
+posseperdida90.nome = Ballverluste /90
+posseperdida90.sigla = Ball/90 2
+
+#   EN: Possession Lost
+posseperdidatotal.nome = Ballverluste
+posseperdidatotal.sigla = Ball 2
+
+#   EN: Shots Blocked, Interceptions & Blocks /90
+rembloqueadosinterceptacoesebloqueios90.nome = Geblockte Schüsse, Abfangaktionen und Blocks /90
+rembloqueadosinterceptacoesebloqueios90.sigla = Blk Sch/90
+
+#   EN: Current Reputation
+reputacaoatual.nome = Aktuelle Reputation
+reputacaoatual.sigla = Aktu Repu
+
+#   EN: Home Reputation
+reputacaolocal.nome = Heimatreputation
+reputacaolocal.sigla = Heim
+
+#   EN: World Reputation
+reputacaomundial.nome = Weltreputation
+reputacaomundial.sigla = Welt
+
+#   EN: Match Sharpness
+ritmodejogo.nome = Spielpraxis
+ritmodejogo.sigla = Spielfit
+
+#   EN: Successful Sweeper Actions
+saidasdogolcomsucesso.nome = Erfolgreiches Herauslaufen
+saidasdogolcomsucesso.sigla = Erf Heraus
+
+#   EN: Successful Sweeper Actions /90
+saidasdogolcomsucesso90.nome = Erfolgreiches Herauslaufen /90
+saidasdogolcomsucesso90.sigla = Erf Herau/90
+
+#   EN: Failed Sweeper Actions
+saidasdogolfalhas.nome = Misslungenes Herauslaufen
+saidasdogolfalhas.sigla = Missl Heraus
+
+#   EN: Failed Sweeper Actions /90
+saidasdogolfalhas90.nome = Misslungenes Herauslaufen /90
+saidasdogolfalhas90.sigla = Missl Her/90
+
+#   EN: Goals Conceded per Game
+sofridosjogo.nome = Gegentore pro Spiel
+sofridosjogo.sigla = GegT Spl
+
+#   EN: Sprints /90
+sprints90.nome = Sprints/90 /90
+sprints90.sigla = Spri/90
+
+#   EN: High Intensity Sprints
+sprintsdealtaintensidade.nome = Intensive Sprints
+sprintsdealtaintensidade.sigla = Sprints
+
+#   EN: Success (Overall)
+sucessooverall.nome = Erfolg
+sucessooverall.sigla = Erfo
+
+#   EN: Success Rate
+taxadeacerto.nome = Erfolgsquote
+taxadeacerto.sigla = Erfq
+
+#   EN: Conversion Rate %
+taxadeconversao%.nome = Chancenverwertung (in %)
+taxadeconversao%.sigla = Verw. %
+
+#   EN: Attempts to Create a Goal or Attack
+tentativadecriarumgoloujogadaofensiva.nome = Versuche, ein Tor oder einen Angriff zu kreieren
+tentativadecriarumgoloujogadaofensiva.sigla = Vers Tor
+
+#   EN: Attempts to Create a Goal or Attack /90
+tentativadecriarumgoloujogadaofensiva90.nome = Versuche, ein Tor oder einen Angriff zu kreieren /90
+tentativadecriarumgoloujogadaofensiva90.sigla = Vers Tor/90
+
+#   EN: Attempts /90
+tentativas90.nome = Versuche /90
+tentativas90.sigla = Off
+
+#   EN: Actions Attempted (headers, tackles, pressures)
+tentativascabeceiosdesarmespressao.nome = Versuchte Aktionen (Kopfbälle, Tacklings, Pressings)
+tentativascabeceiosdesarmespressao.sigla = Vers Akt 4
+
+#   EN: Actions Attempted (headers, tackles, pressures) /90
+tentativascabeceiosdesarmespressao90.nome = Versuchte Aktionen (Kopfbälle, Tacklings, Pressings) /90
+tentativascabeceiosdesarmespressao90.sigla = Vers Akt/9 3
+
+#   EN: Goal Attempts
+tentativasdemarcarumgol.nome = Torversuche
+tentativasdemarcarumgol.sigla = Torv
+
+#   EN: Goal Attempts /90
+tentativasdemarcarumgol90.nome = Torversuche /90
+tentativasdemarcarumgol90.sigla = Torv/90
+
+#   EN: Sweeper Attempts /90
+tentativasdesaidadogol90.nome = Versuchtes Herauslaufen /90
+tentativasdesaidadogol90.sigla = Vers Hera/90
+
+#   EN: Sweeper Attempts per 1v1
+tentativasdesaidadogolpra1v1.nome = Versuchtes Herauslaufen pro Eins-gegen-eins
+tentativasdesaidadogolpra1v1.sigla = Vers Heraus
+
+#   EN: Total Cards
+totalcartoes.nome = Karten gesamt
+totalcartoes.sigla = Karten
+
+#   EN: Total Cards /90
+totaldecartoes90.nome = Karten gesamt /90
+totaldecartoes90.sigla = Krt Ges/90
+
+#   EN: Final Third /90
+ultimoterco90.nome = Angriffsdrittel /90
+ultimoterco90.sigla = Angr/90
+
+#   EN: Passes per Misplaced Pass
+umpasseerradoacada.nome = Pässe pro Fehlpass
+umpasseerradoacada.sigla = Pass Fhl
+
+#   EN: Average Speed (km/h)
+velocidademediaemkmh.nome = Durchschnittsgeschwindigkeit (km/h)
+velocidademediaemkmh.sigla = Ø km/h
+
+#   EN: Team Wins
+vitoriascomelenoelenco.nome = Siege des Teams
+vitoriascomelenoelenco.sigla = Siege Team
+
+#   EN: xA /90
+xa90.nome = xA/90 /90
+xa90.sigla = xA/90
+
+#   EN: xA Conclusion
+xaconclusion.nome = xA-Abschluss
+xaconclusion.sigla = Xa Absch
+
+#   EN: xA per Key Pass
+xaporpassesdecisivos.nome = xA pro entscheidendem Pass
+xaporpassesdecisivos.sigla = Xa Entsch
+
+#   EN: xA + xG /90
+xaxg90.nome = xA + xG /90
+xaxg90.sigla = Xa Xg/90
+
+#   EN: xA + xG (non-penalty)
+xaxgsempenaltis.nome = xA + xG (ohne Elfmeter)
+xaxgsempenaltis.sigla = Xa Xg
+
+#   EN: xG /90
+xg90.nome = xG/90 /90
+xg90.sigla = xG/90
+
+#   EN: xG Conclusion
+xgconclusion.nome = xG-Abschluss
+xgconclusion.sigla = Xg Absch
+
+#   EN: xG Saved
+xgdefendidos.nome = Gehaltene xG
+xgdefendidos.sigla = Geh Xg
+
+#   EN: xG Saved /90
+xgdefendidos90.nome = Gehaltene xG /90
+xgdefendidos90.sigla = Geh Xg/90
+
+#   EN: xG Saved (non-penalty)
+xgdefendidossempenalti.nome = Gehaltene xG (ohne Elfmeter)
+xgdefendidossempenalti.sigla = Geh Xg 2
+
+#   EN: xG Saved (non-penalty) /90
+xgdefendidossempenalti90.nome = Gehaltene xG (ohne Elfmeter) /90
+xgdefendidossempenalti90.sigla = Geh Xg/90 2
+
+#   EN: xG from Penalties Saved
+xgdepenaltisdefendidos.nome = xG der gehaltenen Elfmeter
+xgdepenaltisdefendidos.sigla = Xg Geh
+
+#   EN: xG from Penalties Saved /90
+xgdepenaltisdefendidos90.nome = xG der gehaltenen Elfmeter /90
+xgdepenaltisdefendidos90.sigla = Xg Geh/90
+
+#   EN: xG from Penalties Faced
+xgdepenaltisenfrentados.nome = xG der bekommenen Elfmeter
+xgdepenaltisenfrentados.sigla = Xg Bek
+
+#   EN: xG from Penalties Faced /90
+xgdepenaltisenfrentados90.nome = xG der bekommenen Elfmeter /90
+xgdepenaltisenfrentados90.sigla = Xg Bek/90
+
+#   EN: Expected Goals Against
+xgenfrentadogoleiro.nome = Expected Goals (Gegner)
+xgenfrentadogoleiro.sigla = xGA
+
+#   EN: xG per Shot or Header
+xgporfinalizacaooucabeceio.nome = xG pro Schuss oder Kopfball
+xgporfinalizacaooucabeceio.sigla = Xg Sch
+
+#   EN: Non-Penalty xG
+xgsempenaltis.nome = xG ohne Elfmeter
+xgsempenaltis.sigla = xG-ohn11
+
+#   EN: Non-Penalty xG /90
+xgsempenaltis90.nome = xG ohne Elfmeter /90
+xgsempenaltis90.sigla = xG-ohn11/90
+
+#   EN: xG + xA
+xgxa.nome = xG + xA
+xgxa.sigla = Xg Xa
+
+#   EN: xG + xA /90
+xgxa90.nome = xG + xA /90
+xgxa90.sigla = Xg Xa/90
+
+#   EN: xPG Ratio
+xpgratio.nome = xPG-Verhältnis
+xpgratio.sigla = Xpg Verh
+
+# importar view do FM (18/10)
+desarmestentadossemfaltas.nome = Tackling-Versuche (ohne Fouls)
+desarmestentadossemfaltas.sigla = TklV
+%desarmescertos.nome = % erfolgreiche Tacklings
+%desarmescertos.sigla = Tkl%
+chancesclarascriadas.nome = Großchancen kreiert
+chancesclarascriadas.sigla = GCK
+cruzamentosemjogoabertotentados.nome = Flanken aus dem Spiel (Versuche)
+cruzamentosemjogoabertotentados.sigla = FlaSV
+cruzamentosemjogoabertocertos.nome = Flanken aus dem Spiel (angekommen)
+cruzamentosemjogoabertocertos.sigla = FlaSA
+%cruzamentosemjogoabertocertos.nome = % Flanken aus dem Spiel angekommen
+%cruzamentosemjogoabertocertos.sigla = FlaS%
+cruzemjogoabertotentados90.nome = Flanken aus dem Spiel (Versuche) /90
+cruzemjogoabertotentados90.sigla = FlaSV/90
+cruzemjogoabertocertos90.nome = Flanken aus dem Spiel (angekommen) /90
+cruzemjogoabertocertos90.sigla = FlaSA/90
+passesdecisivosemjogoaberto90.nome = Entscheidende Pässe aus dem Spiel /90
+passesdecisivosemjogoaberto90.sigla = EntP(S)/90
+xgporfinalizacao.nome = xG pro Schuss
+xgporfinalizacao.sigla = xG/Sch
+jogosnacarreira.nome = Karriere-Einsätze
+jogosnacarreira.sigla = KarE

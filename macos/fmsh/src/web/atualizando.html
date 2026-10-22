@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="__IDIOMA__">
+<head>
+<meta charset="utf-8">
+<title>FM Season Hub</title>
+<!-- A "caixinha" de atualizacao (ver src/atualizacao.py e app_main.py). Pagina solta, fora
+     do app React: ela abre ANTES da janela principal e precisa ser leve e independente.
+     Os textos chegam prontos do servidor (__TEXTOS__), no idioma que a pessoa escolheu. -->
+<style>
+  :root { --fundo: rgb(16, 32, 46); --painel: rgb(28, 50, 68); --texto: rgb(226, 232, 240);
+          --apagado: rgb(140, 158, 176); --ouro: rgb(203, 182, 104); }
+  html, body { margin: 0; height: 100%; background: var(--fundo); color: var(--texto);
+               font-family: "Segoe UI", system-ui, sans-serif; overflow: hidden;
+               user-select: none; cursor: default; }
+  .caixa { height: 100%; display: flex; flex-direction: column; align-items: center;
+           justify-content: center; gap: 14px; border: 1px solid rgba(203, 182, 104, .35);
+           box-sizing: border-box; }
+  img { width: 76px; height: 76px; }
+  #frase { font-size: 14px; min-height: 20px; text-align: center; padding: 0 20px; }
+  .trilho { width: 240px; height: 4px; border-radius: 2px; background: var(--painel);
+            overflow: hidden; }
+  .barra { height: 100%; width: 30%; background: var(--ouro); border-radius: 2px; }
+  /* sem porcentagem (procurando/instalando): a barra corre de um lado ao outro */
+  .correndo .barra { animation: corre 1.1s ease-in-out infinite; }
+  @keyframes corre { 0% { transform: translateX(-100%); } 100% { transform: translateX(330%); } }
+  .falhou #frase { color: var(--apagado); }
+</style>
+</head>
+<body>
+<div class="caixa correndo" id="caixa">
+  <img src="/logo.png" alt="">
+  <div id="frase"></div>
+  <div class="trilho"><div class="barra" id="barra"></div></div>
+</div>
+<script>
+  const T = __TEXTOS__;
+  const caixa = document.getElementById("caixa");
+  const frase = document.getElementById("frase");
+  const barra = document.getElementById("barra");
+  function preenche(texto, valores) {
+    return texto.replace(/\{\{(\w+)\}\}/g, (_, k) => (k in valores ? valores[k] : ""));
+  }
+  function mostra(e) {
+    const fase = e.fase || "procurando";
+    const valores = { versao: e.versao || "", pct: e.pct || 0 };
+    frase.textContent = preenche(T[fase] || T.procurando, valores);
+    const comPorcentagem = fase === "baixando";
+    caixa.classList.toggle("correndo", !comPorcentagem && fase !== "falhou");
+    caixa.classList.toggle("falhou", fase === "falhou");
+    barra.style.transform = "";
+    barra.style.width = comPorcentagem ? Math.max(2, valores.pct) + "%" : (fase === "falhou" ? "0" : "30%");
+  }
+  async function acompanha() {
+    try {
+      const r = await fetch("/api/atualizacao/progresso", { cache: "no-store" });
+      if (r.ok) mostra(await r.json());
+    } catch (_) { /* o app pode estar fechando para o instalador: sem erro na tela */ }
+    setTimeout(acompanha, 250);
+  }
+  mostra({});
+  acompanha();
+</script>
+</body>
+</html>

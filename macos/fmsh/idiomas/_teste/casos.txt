@@ -1,0 +1,55 @@
+# Casos dificeis do formato de idioma.
+#
+# Este arquivo NAO e um idioma: e a prova de que os dois leitores concordam. O do Python
+# (`src/idiomas.py`) e o do TypeScript (`frontend/src/lib/idiomas.ts`) tem de produzir
+# exatamente o mesmo resultado sobre ele.
+#
+# Regra escrita duas vezes diverge sozinha -- ja aconteceu neste projeto com os RVAs
+# duplicados no `capture_all` e com a normalizacao que virou `src/texto.py`. Este arquivo
+# e a trava.
+#
+# O resultado esperado esta em `casos.esperado.json`.
+
+simples = valor simples
+
+# espaco em volta do igual e do valor deve sumir
+   espacos    =    com espaco em volta
+
+# o valor pode conter o proprio sinal de igual: corta so no PRIMEIRO
+comIgual = a = b = c
+
+# variavel do i18next tem que passar intacta
+variavel = por {{autor}}
+duasVariaveis = {{count}} de {{total}}
+
+# quebra de linha escrita como duas letras
+quebra = primeira\nsegunda
+
+# valor vazio = NAO TRADUZIDO: a chave nem entra, para cair na reserva
+vazio =
+soEspacos =
+
+# chave repetida: vale a ULTIMA, e o problema fica registrado
+repetida = primeira
+repetida = segunda
+
+# acento e simbolo
+acentos = ação, coração, ÷ e %
+aspas = ele disse "oi" e saiu
+
+# linha sem sinal de igual: problema, e nao derruba o resto
+isto aqui nao tem igual
+
+# so o sinal, sem chave
+ = valor sem chave
+
+# comentario no meio do valor NAO e comentario: # so vale no comeco da linha
+comCerquilha = valor com # no meio
+
+depoisDoErro = continuou lendo
+
+# barra dupla: escape do proprio escape. sem isto ninguem escreve as duas letras \n
+# dentro de um texto -- e a REGRA do cabecalho que explica a quebra de linha precisa
+# justamente MOSTRAR essas duas letras
+barraDupla = mostra \\n literal
+caminho = c:\\pasta\\arquivo

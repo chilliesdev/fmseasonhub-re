@@ -1,0 +1,144 @@
+# Module: diagnostico_textos
+# Filename: diagnostico_textos.py
+
+  0           RESUME                   0
+
+ 19           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (idiomas)
+              STORE_NAME               0 (idiomas)
+
+ 21           LOAD_CONST               2 ('lang')
+              LOAD_CONST               3 ('pt')
+              BUILD_MAP                1
+              STORE_NAME               1 (_ATUAL)
+
+ 24           LOAD_CONST               4 (<code object usar at 0x1054d8670, file "diagnostico_textos.py", line 24>)
+              MAKE_FUNCTION
+              STORE_NAME               2 (usar)
+
+ 29           LOAD_CONST               5 (<code object idioma_atual at 0x1054d3960, file "diagnostico_textos.py", line 29>)
+              MAKE_FUNCTION
+              STORE_NAME               3 (idioma_atual)
+
+ 33           LOAD_CONST               6 (<code object T at 0x736d92300, file "diagnostico_textos.py", line 33>)
+              MAKE_FUNCTION
+              STORE_NAME               4 (T)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object usar at 0x1054d8670, file "diagnostico_textos.py", line 24>:
+ 24           RESUME                   0
+
+ 26           LOAD_FAST                0 (lang)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               0 ('pt')
+      L1:     LOAD_ATTR                1 (strip + NULL|self)
+              CALL                     0
+              LOAD_ATTR                3 (lower + NULL|self)
+              CALL                     0
+              LOAD_GLOBAL              4 (_ATUAL)
+              LOAD_CONST               1 ('lang')
+              STORE_SUBSCR
+              LOAD_CONST               2 (None)
+              RETURN_VALUE
+
+Disassembly of <code object idioma_atual at 0x1054d3960, file "diagnostico_textos.py", line 29>:
+ 29           RESUME                   0
+
+ 30           LOAD_GLOBAL              0 (_ATUAL)
+              LOAD_CONST               0 ('lang')
+              BINARY_OP               26 ([])
+              RETURN_VALUE
+
+Disassembly of <code object T at 0x736d92300, file "diagnostico_textos.py", line 33>:
+  33           RESUME                   0
+
+  42           LOAD_FAST_BORROW         0 (texto)
+               TO_BOOL
+               POP_JUMP_IF_FALSE       23 (to L1)
+               NOT_TAKEN
+               LOAD_FAST_BORROW         0 (texto)
+               LOAD_ATTR                1 (strip + NULL|self)
+               CALL                     0
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L2)
+               NOT_TAKEN
+
+  43   L1:     LOAD_FAST_BORROW         0 (texto)
+               RETURN_VALUE
+
+  44   L2:     LOAD_FAST_BORROW         0 (texto)
+               LOAD_ATTR                1 (strip + NULL|self)
+               CALL                     0
+               STORE_FAST               1 (nucleo)
+
+  45           LOAD_FAST_BORROW         0 (texto)
+               LOAD_CONST               0 (None)
+               LOAD_GLOBAL              3 (len + NULL)
+               LOAD_FAST_BORROW         0 (texto)
+               CALL                     1
+               LOAD_GLOBAL              3 (len + NULL)
+               LOAD_FAST_BORROW         0 (texto)
+               LOAD_ATTR                5 (lstrip + NULL|self)
+               CALL                     0
+               CALL                     1
+               BINARY_OP               10 (-)
+               BINARY_SLICE
+               STORE_FAST               2 (esquerda)
+
+  46           LOAD_FAST_BORROW         0 (texto)
+               LOAD_GLOBAL              3 (len + NULL)
+               LOAD_FAST_BORROW         0 (texto)
+               LOAD_ATTR                7 (rstrip + NULL|self)
+               CALL                     0
+               CALL                     1
+               LOAD_CONST               0 (None)
+               BINARY_SLICE
+               STORE_FAST               3 (direita)
+
+  47           NOP
+
+  48   L3:     LOAD_FAST_BORROW         2 (esquerda)
+               LOAD_GLOBAL              8 (idiomas)
+               LOAD_ATTR               10 (texto)
+               PUSH_NULL
+               LOAD_GLOBAL             12 (_ATUAL)
+               LOAD_CONST               1 ('lang')
+               BINARY_OP               26 ([])
+               LOAD_CONST               2 ('relat.')
+               LOAD_FAST_BORROW         1 (nucleo)
+               BINARY_OP                0 (+)
+               LOAD_FAST_BORROW         1 (nucleo)
+               CALL                     3
+               BINARY_OP                0 (+)
+               LOAD_FAST_BORROW         3 (direita)
+               BINARY_OP                0 (+)
+       L4:     RETURN_VALUE
+
+  --   L5:     PUSH_EXC_INFO
+
+  49           LOAD_GLOBAL             14 (Exception)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        6 (to L7)
+               NOT_TAKEN
+               POP_TOP
+
+  51           LOAD_FAST                0 (texto)
+               SWAP                     2
+       L6:     POP_EXCEPT
+               RETURN_VALUE
+
+  49   L7:     RERAISE                  0
+
+  --   L8:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L3 to L4 -> L5 [0]
+  L5 to L6 -> L8 [1] lasti
+  L7 to L8 -> L8 [1] lasti

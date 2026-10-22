@@ -17,3 +17,10 @@ node_modules/
 # OS specific files
 .DS_Store
 Thumbs.db
+
+# Virtual environments and build directories
+.venv/
+dist/
+build/
+.tmp/
+

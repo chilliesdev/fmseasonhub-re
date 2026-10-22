@@ -1,0 +1,343 @@
+FM SEASON HUB — PRIVACY POLICY
+Version 1.3 — in force from the release of version 0.7.2 of the Program
+
+This Policy sets out the personal data processing operations carried out by FM
+Season Hub, the corresponding purposes and legal bases, the parties involved and
+the rights afforded to the data subject. It applies to the program installed on
+the user's computer, to its installer and to the remote service they consult.
+
+Controller: FM Season Hub, an independent project established in Brazil.
+Contact channel for privacy matters: fmseasonhub@gmail.com
+
+## 1. Definitions
+
+- **Data subject** — the natural person to whom the personal data processed
+  relate.
+- **Processing** — any operation carried out with personal data, as defined in
+  art. 5, X of the LGPD and art. 4(2) of the GDPR.
+- **Controller** — FM Season Hub, which determines the purposes and means of
+  processing.
+- **Processor** — a party carrying out processing on the Controller's behalf.
+- **Program** — the FM Season Hub application installed on the data subject's
+  device.
+- **Installer** — the wizard that installs, updates and removes the Program and,
+  where chosen by the data subject, the plugins for the game.
+- **FM Season Hub Service** — the remote service operated by the Controller that
+  confirms the access level, publishes notices and distributes the Program's
+  updates.
+- **Device identifier** — the cryptographic digest defined in clause 5.1.
+
+## 2. Data not processed by the Controller
+
+Data extracted from the data subject's game file — players, clubs, competitions,
+statistics, attributes and financial information — **is not transmitted to the
+Controller or to any third party**, and remains exclusively on the data subject's
+device.
+
+The Program performs no collection of browsing data, telemetry, behavioural
+profiling or advertising. The data subject's operations within the Program are
+not recorded outside the device.
+
+The Program and the Installer establish eight types of external connection, set
+out in clause 5: seven with the FM Season Hub Service and one with the official
+website of the BepInEx project. No other communication with the network takes
+place.
+
+## 3. Data stored on the data subject's device
+
+The data subject's data is held in two directories on the device itself, under
+the data subject's exclusive control.
+
+In the Program's data directory, %LOCALAPPDATA%\Programs\FM Season Hub\dados:
+
+- the database of captured seasons, and working copies of it that are rebuilt
+  automatically when deleted;
+- the internal profile of the display component;
+- copies of the latest responses from the FM Season Hub Service (notices,
+  available version and names in the credits).
+
+In the Documents\FM Season Hub directory:
+
+- the preferences file, containing language, currency, list of favourites, access
+  key where one exists, the device identifier defined in clause 5.1 and the
+  record of acceptance of these documents (version accepted, date and language),
+  given in the Program or in the Installer;
+- the event log (fmsh.log), for diagnostic purposes;
+- the filters, views and translations created by the data subject, and the
+  reports of the diagnostic program;
+- the update packages obtained as set out in clauses 5.6 and 5.8, deleted after
+  installation.
+
+The Program's own files are installed in the
+%LOCALAPPDATA%\Programs\FM Season Hub directory and contain no personal data.
+
+Deleting both data directories results in the complete erasure of the data held
+on the device.
+
+## 4. Cookies and local storage
+
+The Program **uses no tracking, advertising or behavioural analytics cookies**,
+and no third-party cookies.
+
+The display component retains on the data subject's device only the data required
+to persist interface preferences:
+
+- **local storage** — language, currency, selected columns, favourites and
+  display preferences, retained until erased by the data subject;
+- **display component profile** — window state, retained until erased by the data
+  subject.
+
+That data is neither transmitted to nor accessed by the Controller.
+
+## 5. Data transmitted to the FM Season Hub Service
+
+### 5.1 Device identifier
+
+In order to prevent the unrestricted circulation of access keys, the Program
+computes a device identifier and transmits it to the FM Season Hub Service
+together with the key.
+
+The identifier consists of a cryptographic digest (SHA-256) derived from the
+operating system installation identifier combined with the local user name. Only
+the digest is transmitted — a 32-character string from which neither the user
+name nor any other device data can be reconstructed.
+
+Purpose: to allow the same access to be used on up to two devices and to prevent
+improper sharing.
+
+### 5.2 Access key
+
+The key entered by the data subject is transmitted for verification. The Program
+performs periodic automatic re-verification in order to establish whether the
+access remains valid. Where no connection is available, the last verified level
+prevails; access is not withdrawn by reason of network unavailability.
+
+### 5.3 Authentication with Patreon
+
+Where the data subject elects to authenticate with Patreon, that platform
+communicates to the Controller, upon express authorisation given in Patreon's own
+environment, the data subject's name and the active support levels.
+
+The following are processed by the Controller: the data subject's name, the name
+of the support level, the corresponding level within the Program, and the refresh
+token enabling re-verification of support without further authentication.
+
+The Controller has no access to payment, card or address data, which remains the
+responsibility of Patreon.
+
+### 5.4 Notice board
+
+The Program periodically retrieves the list of notices published by the
+Controller. That request carries no personal data of the data subject, and is
+limited to the Program version.
+
+### 5.5 Supporter list shown in the credits
+
+The Program periodically retrieves the list of names published in the credits,
+which is the subject of clause 8. That request carries no personal data of the
+data subject, and is limited to the Program version.
+
+### 5.6 Checking for and obtaining updates
+
+The Program asks the FM Season Hub Service whether a new version exists: upon
+opening and, during use, every 12 hours. Where a new version exists and the
+Program was installed by the Installer, the installation package is obtained from
+the same service and installed automatically, after the authenticity check
+described in clause 13.
+
+Those requests carry no personal data of the data subject, and are limited to the
+Program version. The Controller keeps only counts added up by version and by day
+(checks received and packages obtained), with no link to the IP address, device
+identifier or any other data of the data subject, as set out in clause 5.9.
+
+### 5.7 Obtaining BepInEx through the Installer
+
+Where the data subject chooses to install plugins into a game installation that
+lacks the BepInEx component, the Installer obtains it directly from the official
+website of the BepInEx project (builds.bepinex.dev) and verifies the integrity of
+the file before using it.
+
+That request carries no personal data of the data subject and does not pass
+through the Controller, which neither receives nor records any information about
+it. As with any network communication, the originating IP address is visible to
+the party responsible for that website, under its own policy.
+
+### 5.8 Checking for and obtaining plugin updates
+
+For the plugins installed by the Installer, the Program asks the FM Season Hub
+Service for the list of available versions (the catalogue): upon opening and,
+during use, every 12 hours. In that request the Program reports the name and
+version of each installed plugin. Where a newer version exists that is
+compatible with the Game, the package is obtained from the same service and
+installed only while the Game is closed, after the authenticity check described
+in clause 13. The previous version is kept on the device for restoration, which
+happens automatically if the Game does not load the new plugin, or at the data
+subject's request.
+
+The Program never installs a plugin that the data subject has not chosen. The
+data subject may switch off automatic updating for each plugin on the "Game
+plugins" screen. Plugins are updated only after this version of the Policy has
+been accepted.
+
+Those requests carry no personal data of the data subject and no device
+identifier.
+
+### 5.9 Anonymous usage counts
+
+To know how many installations receive each version of the Program and of each
+plugin, the FM Season Hub Service adds up, each day, the requests received per
+version (for example, "version 0.7.2: 120 checks"). Who made the request is not
+recorded: no IP address, device identifier, name or per-device list of plugins is
+stored, and the count cannot show how many distinct people exist. The counts
+serve only to follow the adoption of versions and to plan gradual releases.
+
+## 6. Data collected automatically by the FM Season Hub Service
+
+The FM Season Hub Service is hosted on Cloudflare infrastructure. As a technical
+consequence of any network communication, the originating IP address is visible
+to that company and appears in its access logs.
+
+The Controller uses the IP address for a single, determined purpose: to count
+invalid key attempts and to prevent bulk guessing. That record is erased
+automatically after 15 minutes. The IP address is not used in the requests
+covered by clauses 5.4 to 5.6, 5.8 and 5.9.
+
+## 7. Sharing with third parties
+
+- **Cloudflare, Inc.** — hosts the FM Season Hub Service and the update files,
+  and stores the records described in this Policy, acting as a **Processor** on
+  the Controller's behalf.
+- **BepInEx project** — maintains the website from which the Installer obtains
+  BepInEx (clause 5.7). It receives no data of the data subject from the
+  Controller.
+- **Patreon, Inc.** — source of support data where the data subject
+  authenticates. The scope of sharing is defined in the authorisation presented
+  by that platform.
+- **Competent authorities** — where a legal or regulatory obligation applies.
+
+The Controller **does not sell, assign or otherwise make available** personal data
+to third parties for commercial or advertising purposes.
+
+## 8. Publication of supporter names
+
+The Program displays, on its About screen, the names of supporters on the tier
+whose description expressly provides for a mention in the credits.
+
+- **Data published** — solely the nickname chosen by the data subject on Patreon
+  and, where none has been set, the public name given there. No email address,
+  pledge amount, join date or any other datum is published.
+- **Legal basis** — performance of a contract at the data subject's request
+  (LGPD art. 7, V; GDPR art. 6(1)(b)): the mention in the credits forms part of
+  the consideration for the contracted tier, and is not presumed consent.
+- **Removal** — a data subject who has ticked, on Patreon, the option to hide
+  their own pledge is automatically excluded from the list. Removal may also be
+  requested at any time through the channel in clause 16, taking effect within
+  6 (six) hours, the temporary storage period dealt with in clause 11.
+- **Scope** — the list is public and accessible to any user of the Program.
+
+## 9. International transfers
+
+Cloudflare and Patreon are legal entities established outside Brazil, and the
+data described in this Policy is processed on servers abroad.
+
+The transfer relies on the grounds set out in art. 33 of the LGPD and, where
+applicable, on the corresponding mechanisms in Chapter V of the GDPR.
+
+## 10. Legal bases for processing
+
+- **Performance of a contract** (LGPD art. 7, V; GDPR art. 6(1)(b)) —
+  verification of the contracted access level, distribution of the Program's
+  updates and publication of the name in the credits, where the contracted tier
+  provides for it.
+- **Legitimate interests** (LGPD art. 7, IX; GDPR art. 6(1)(f)) — prevention of
+  improper key sharing and of bulk guessing.
+- **Consent** (LGPD art. 7, I; GDPR art. 6(1)(a)) — authentication with Patreon.
+
+The consent referred to in the last of these is optional and specific, given by
+the data subject in Patreon's environment and revocable at any time on that
+platform.
+
+## 11. Retention periods
+
+- Access record — level, name, refresh token and device identifiers: for as long
+  as the access subsists. There is no automatic erasure deadline; records are
+  erased upon the data subject's request or upon termination of the access.
+- Name published in the credits: for as long as the support subsists on the
+  corresponding tier. The temporary storage of the list is refreshed every
+  6 hours.
+- Attempt counter per IP address: 15 minutes.
+- Temporary Patreon authentication authorisation: 5 minutes.
+- Counts added up by version and by day (checks and packages obtained, for the
+  Program and the plugins): indefinitely, as they contain no personal data.
+- Data held on the device: until erased by the data subject; update packages,
+  until the Program is next opened after their installation.
+
+## 12. Rights of the data subject
+
+Under art. 18 of the LGPD, the data subject is entitled to request at any time:
+confirmation that processing takes place; access to the data; correction of
+incomplete, inaccurate or outdated data; anonymisation, blocking or erasure of
+data that is unnecessary or processed unlawfully; portability; information as to
+sharing; and withdrawal of consent.
+
+Data subjects established in the European Union are further entitled to object to
+and to restrict processing (GDPR arts. 18 and 21), and to lodge a complaint with
+the competent supervisory authority.
+
+Requests are to be addressed to fmseasonhub@gmail.com. The response period is up
+to 15 (fifteen) days.
+
+Independently of any request, the data subject has the following direct means
+available:
+
+- signing out of the account within the Program, which removes the local link;
+- deleting the Documents\FM Season Hub and
+  %LOCALAPPDATA%\Programs\FM Season Hub\dados directories, which completely
+  erases the data held on the device;
+- uninstalling the Program, which removes its files and, where the data subject
+  so chooses in the uninstaller itself, the plugins installed by the Installer,
+  while keeping both data directories;
+- revoking the authorisation granted to FM Season Hub in the Patreon account
+  settings, which stops the sharing at source.
+
+## 13. Security
+
+Communications with the FM Season Hub Service take place over an encrypted
+channel (HTTPS). The access key and the device identifiers are held in storage
+restricted to the service, and the device identifier subsists solely in the form
+of a cryptographic digest.
+
+Update packages are accompanied by the Controller's digital signature. The
+Program verifies the signature and the integrity of each package before
+installing it, and rejects anything that fails verification.
+
+No system is entirely secure. Should a security incident occur that may give rise
+to relevant risk or harm to the data subject, the Controller will notify the data
+subject and the competent authority as required by art. 48 of the LGPD and
+arts. 33 and 34 of the GDPR.
+
+## 14. Children
+
+The Program is not intended for children under 13, and no data of that age group
+is knowingly collected. Paid features require a Patreon account, a platform which
+sets its own minimum age rules.
+
+## 15. Amendments to this Policy
+
+Where this Policy is amended, the version stated in the preamble will change and
+the Program will request acceptance again on first execution following the
+update.
+
+The documents form part of the installation package; a new version is received by
+installing a new version of the Program, including through automatic updates.
+
+## 16. Data protection officer and contact
+
+No data protection officer has been formally appointed. The functions set out in
+art. 41, § 2 of the LGPD are performed directly by the Controller, through
+fmseasonhub@gmail.com.
+
+## 17. Entry into force
+
+This Policy takes effect on the date stated in the preamble and remains in force
+until replaced by a subsequent version.

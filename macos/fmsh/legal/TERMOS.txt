@@ -1,0 +1,280 @@
+FM SEASON HUB — TERMOS DE USO
+Versão 1.3 — vigente a partir da publicação da versão 0.7.2 do Programa
+
+Estes Termos regem a utilização do programa FM Season Hub e dos plugins
+distribuídos com ele, e constituem contrato entre o Usuário e o Operador. A
+manifestação de aceite no próprio programa ou no seu Instalador importa
+concordância integral com as disposições a seguir. Não havendo concordância, a
+utilização do programa não está autorizada.
+
+## 1. Definições
+
+- **Operador** — FM Season Hub, projeto independente estabelecido no Brasil,
+  titular dos direitos sobre o programa.
+- **Usuário** — a pessoa natural que instala e utiliza o programa.
+- **Programa** — o aplicativo FM Season Hub, em qualquer versão.
+- **Instalador** — o assistente que instala, atualiza e remove o Programa e,
+  quando escolhidos pelo Usuário, os Plugins.
+- **Plugins** — os complementos opcionais para o Jogo distribuídos pelo Operador
+  por meio do Instalador, que funcionam dentro do Jogo durante as partidas.
+- **BepInEx** — o componente de terceiro, de código aberto, que permite ao Jogo
+  carregar os Plugins.
+- **Jogo** — o título Football Manager, de titularidade de terceiro.
+- **Chave de acesso** — o código pessoal que habilita nível de acesso.
+- **Serviço do FM Season Hub** — o serviço remoto operado pelo Operador que
+  confere o nível de acesso, publica comunicados e distribui as atualizações do
+  Programa e dos Plugins.
+
+## 2. Objeto
+
+O Programa realiza a leitura das estatísticas do Jogo enquanto este se encontra
+em execução no dispositivo do Usuário e as armazena em base de dados local, para
+fins de consulta e comparação entre temporadas.
+
+Os Plugins, de instalação facultativa, acrescentam recursos ao Jogo durante as
+partidas, nos termos da cláusula 9.
+
+Contato do Operador: fmseasonhub@gmail.com
+
+## 3. Ausência de vínculo com terceiros
+
+O FM Season Hub **não é afiliado, associado, autorizado, endossado nem
+patrocinado** pela Sports Interactive Limited, pela SEGA Publishing Europe
+Limited ou por sociedades a elas ligadas.
+
+"Football Manager" e as marcas correlatas pertencem aos respectivos titulares,
+sendo mencionadas exclusivamente para identificar o Jogo com o qual o Programa
+opera.
+
+As denominações de clubes, competições, atletas e demais conteúdos exibidos
+provêm da instalação do Jogo mantida pelo próprio Usuário, não havendo
+distribuição de tal conteúdo pelo Operador.
+
+Verificada eventual violação de direitos de terceiro, a comunicação deve ser
+dirigida a fmseasonhub@gmail.com, com identificação do material e do fundamento
+da reclamação.
+
+## 4. Capacidade e idade mínima
+
+O Programa destina-se a maiores de 13 anos. O Usuário com idade entre 13 e 18
+anos deve utilizá-lo com o conhecimento de seu responsável legal.
+
+Os níveis onerosos dependem de conta no Patreon, plataforma que estabelece regras
+próprias de idade mínima e de capacidade para contratar.
+
+## 5. Licença de uso
+
+Observados estes Termos, o Operador concede ao Usuário licença pessoal, não
+exclusiva, intransferível e revogável para instalar e utilizar o Programa e os
+Plugins, gratuita ou onerosa conforme o nível contratado.
+
+É vedado ao Usuário:
+
+- redistribuir, revender, locar, ceder ou publicar o Programa ou os Plugins, no
+  todo ou em parte;
+- compartilhar a Chave de acesso com terceiros;
+- contornar, desativar ou interferir no Serviço do FM Season Hub, inclusive na
+  conferência de autenticidade das atualizações;
+- descompilar, desmontar ou submeter o Programa a engenharia reversa, ressalvadas
+  as hipóteses em que a lei aplicável vede tal restrição;
+- utilizar o Programa ou os Plugins para finalidade ilícita.
+
+O Programa, os Plugins, seu código-fonte e sua identidade visual permanecem de
+titularidade do Operador, ressalvados os componentes de terceiros, que se regem
+por suas próprias licenças. Estes Termos não operam transferência de propriedade.
+
+## 6. Níveis de acesso e contraprestação
+
+O Programa dispõe de nível gratuito e de níveis onerosos. **A contratação e a
+cobrança dos níveis onerosos são realizadas pelo Patreon**, e não pelo Operador.
+
+- A cobrança, a renovação, o cancelamento e eventual restituição observam as
+  regras e os prazos da referida plataforma, perante a qual devem ser tratados.
+- Cessado o apoio, subsiste ao Usuário o nível gratuito, sem eliminação dos dados
+  já armazenados em seu dispositivo.
+- As Chaves de acesso são concedidas a critério do Operador, são pessoais e
+  operam em até 2 (dois) dispositivos.
+
+Os limites de cada nível podem ser alterados em versões futuras. A alteração de
+limite não implica eliminação de temporada já armazenada, restringindo-se a
+impedir novos armazenamentos acima do teto vigente.
+
+## 7. Serviços de terceiros
+
+O funcionamento do Programa depende de serviços de terceiros: o Patreon, quanto
+aos níveis de apoio, e a Cloudflare, quanto à hospedagem do Serviço do FM Season
+Hub e dos arquivos de atualização. O Instalador depende, ainda, do site oficial
+do projeto BepInEx, do qual obtém esse componente quando necessário.
+
+A utilização de tais recursos sujeita o Usuário igualmente aos termos e políticas
+dessas empresas. O Operador não detém controle sobre elas, sobre a
+disponibilidade de seus serviços ou sobre alterações que venham a promover.
+
+## 8. Assunção de risco pelo Usuário
+
+O Programa realiza a leitura da memória do processo do Jogo enquanto este se
+encontra em execução, operação necessária e inerente à sua finalidade.
+
+O Usuário declara ciência de que:
+
+- tal utilização pode conflitar com os termos de licença do próprio Jogo,
+  competindo ao Usuário a respectiva avaliação;
+- programas que realizam leitura de memória podem ser sinalizados por soluções
+  antivírus ou por sistemas de detecção de fraude, circunstância alheia ao
+  controle do Operador;
+- atualizações do Jogo podem tornar o Programa inoperante, temporária ou
+  definitivamente.
+
+O Programa não modifica o Jogo nem os respectivos arquivos de partida salva,
+limitando-se à leitura. Os Plugins observam regime próprio, previsto na
+cláusula 9.
+
+## 9. Plugins
+
+A instalação dos Plugins é facultativa e depende de escolha expressa do Usuário
+no Instalador, que indica em quais instalações do Jogo eles serão colocados.
+
+O Usuário declara ciência de que:
+
+- diversamente do Programa, **os Plugins alteram o funcionamento do Jogo** durante
+  as partidas, sendo carregados pelo BepInEx dentro do próprio Jogo;
+- quando a instalação do Jogo não dispuser do BepInEx, o Instalador o obtém e o
+  coloca na pasta do Jogo. O BepInEx é componente de terceiro, distribuído sob a
+  licença de código aberto que o acompanha, e permanece na pasta do Jogo enquanto
+  outros plugins dele dependerem;
+- atualizações do Jogo podem tornar os Plugins inoperantes ou provocar falhas no
+  Jogo, até que versão compatível seja disponibilizada;
+- a utilização de plugins pode conflitar com os termos de licença do Jogo,
+  competindo ao Usuário a respectiva avaliação;
+- os Plugins podem incorporar trabalho de terceiros, creditado em sua
+  documentação.
+
+A utilização dos Plugins ocorre por conta e risco do Usuário. Os Plugins podem
+ser removidos a qualquer tempo pelo desinstalador do Programa, que, se o
+Usuário assim escolher, remove os Plugins por ele instalados sem afetar os de
+outros autores.
+
+## 10. Atualizações automáticas
+
+Quando instalado pelo Instalador, o Programa verifica, ao ser aberto, a
+existência de nova versão junto ao Serviço do FM Season Hub e, havendo, a obtém e
+a instala automaticamente, abrindo em seguida já atualizado. Durante o uso, o
+Programa apenas sinaliza a existência de nova versão, que somente é instalada por
+comando do Usuário.
+
+Antes de qualquer instalação, o Programa confere a autenticidade do arquivo
+obtido, mediante assinatura digital do Operador e verificação de integridade,
+recusando o que não for conferido.
+
+As atualizações do Programa não alteram os dados armazenados no dispositivo do
+Usuário. Quanto aos Plugins instalados pelo Instalador, o Programa pode obter e
+instalar novas versões somente enquanto o Jogo estiver fechado e após a mesma
+conferência de autenticidade, restaurando a versão anterior se o Plugin novo não
+for carregado pelo Jogo. O Usuário pode desativar a atualização automática de
+cada Plugin no Programa; a atualização de Plugins só é realizada após o aceite
+desta versão dos Termos e da Política de Privacidade.
+
+O aceite destes Termos compreende o recebimento das atualizações na forma desta
+cláusula. O Usuário que não deseje recebê-las pode deixar de utilizar o Programa,
+na forma da cláusula 16.
+
+## 11. Dados e arquivos do Usuário
+
+A base de dados das temporadas permanece no dispositivo do Usuário e a ele
+pertence, incumbindo-lhe a realização de cópias de segurança.
+
+**O Operador não reivindica direito algum sobre os dados de partida salva do
+Usuário ou sobre as temporadas por ele capturadas, tampouco recebe licença de uso
+sobre tais dados.** Referidos dados não são transmitidos ao Operador; as
+informações efetivamente transmitidas estão discriminadas na Política de
+Privacidade.
+
+O tratamento de dados pessoais rege-se pela Política de Privacidade, que integra
+estes Termos para todos os efeitos.
+
+## 12. Disponibilidade
+
+O Programa opera no dispositivo do Usuário e permanece funcional na ausência de
+conexão, prevalecendo o último nível de acesso apurado.
+
+O Serviço do FM Season Hub, inclusive a distribuição de atualizações, é prestado
+em regime de melhor esforço, sem garantia de disponibilidade, sem prazo de
+resposta e sem nível de serviço acordado, podendo ser suspenso, alterado ou
+descontinuado.
+
+## 13. Exclusão de garantias
+
+O Programa e os Plugins são fornecidos **no estado em que se encontram**, sem
+garantia de qualquer espécie, expressa ou implícita, inclusive quanto à adequação
+a finalidade específica, à exatidão dos valores exibidos, à compatibilidade com
+versões do Jogo ou à continuidade de funcionamento.
+
+Os valores exibidos constituem interpretação da memória do Jogo e podem conter
+incorreções, não devendo servir de fundamento único para decisões relevantes.
+
+## 14. Limitação de responsabilidade
+
+Na máxima extensão admitida pela lei aplicável, o Operador não responde por danos
+indiretos, incidentais ou especiais, nem por lucros cessantes, decorrentes da
+utilização ou da impossibilidade de utilização do Programa ou dos Plugins,
+inclusive perda de dados, perda de partida salva, falhas do Jogo ou
+indisponibilidade do Serviço do FM Season Hub.
+
+Nenhuma disposição destes Termos exclui responsabilidade cuja exclusão a lei não
+admita, inclusive as previstas no Código de Defesa do Consumidor. Determinadas
+jurisdições não admitem certas limitações de responsabilidade; em tais casos, as
+limitações aqui previstas não se aplicam ao Usuário.
+
+## 15. Indenização
+
+O Usuário obriga-se a indenizar e a manter o Operador indene de reclamações,
+perdas e despesas decorrentes da utilização do Programa ou dos Plugins em
+desacordo com estes Termos ou com a lei, em especial nas hipóteses de
+redistribuição, compartilhamento de Chave de acesso, uso ilícito ou violação de
+direitos de terceiros.
+
+## 16. Vigência e extinção
+
+Estes Termos vigoram por prazo indeterminado, a partir do aceite.
+
+O Usuário pode extingui-los a qualquer tempo mediante desinstalação do Programa;
+os Plugins instalados pelo Instalador são removidos se o Usuário assim escolher no
+desinstalador.
+
+O Operador pode extinguir ou suspender o acesso em caso de descumprimento destes
+Termos, em especial nas hipóteses de redistribuição, compartilhamento de Chave de
+acesso ou tentativa de contornar o Serviço do FM Season Hub.
+
+## 17. Alterações
+
+Estes Termos podem ser alterados. Efetuada a alteração, a versão indicada no
+preâmbulo será modificada e o Programa solicitará novo aceite na primeira
+execução posterior à atualização.
+
+Os documentos integram o pacote de instalação; nova versão é recebida mediante
+instalação de nova versão do Programa, inclusive por atualização automática. A
+continuidade de uso de versão já instalada importa a subsistência, quanto a ela,
+dos Termos naquela versão aceitos.
+
+## 18. Disposições gerais
+
+- **Independência das cláusulas.** A eventual invalidade de disposição destes
+  Termos não prejudica as demais, que permanecem em pleno vigor.
+- **Não renúncia.** A tolerância quanto ao descumprimento de qualquer cláusula
+  constitui mera liberalidade, não importando renúncia ou novação.
+- **Cessão.** É vedada ao Usuário a cessão destes Termos. O Operador poderá
+  cedê-los em hipótese de sucessão do projeto, mantidas as mesmas condições.
+- **Integralidade.** Estes Termos e a Política de Privacidade constituem o acordo
+  integral entre as partes quanto à utilização do Programa e dos Plugins.
+
+## 19. Lei aplicável e foro
+
+Estes Termos regem-se pelas leis da República Federativa do Brasil.
+
+Fica eleito o foro do domicílio do Usuário para dirimir controvérsias deles
+decorrentes, quando a legislação consumerista assim autorizar; nas demais
+hipóteses, o foro da comarca de domicílio do Operador.
+
+## 20. Contato
+
+fmseasonhub@gmail.com

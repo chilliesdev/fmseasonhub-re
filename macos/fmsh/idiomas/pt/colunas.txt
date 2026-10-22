@@ -1,0 +1,1160 @@
+# ============================================================
+#  FM SEASON HUB - NOMES DAS COLUNAS
+#  idioma: Portugues (Brasil) (pt)
+# ============================================================
+#
+#  COMO PREENCHER
+#
+#   1. Nao mude nada ANTES do sinal de igual. Aquilo e o nome
+#      interno da frase; o app procura por ele.
+#
+#   2. O que estiver entre {{chaves duplas}} o app troca por um
+#      valor na hora (um nome, um numero). Copie igual, sem
+#      traduzir o que esta dentro.
+#
+#   3. Linha que comeca com # e comentario: serve so para voce
+#      ler, e o app ignora.
+#
+#   4. Esqueceu uma linha? Nao quebra nada. Aquela frase aparece
+#      em ingles e o resto continua no seu idioma.
+#
+#   5. Para escrever uma quebra de linha dentro de um texto, use
+#      as duas letras \n.
+#
+#  Depois de salvar, feche e abra o FMSH para ver o resultado.
+#
+
+#  Cada coluna tem um NOME inteiro e uma SIGLA curta. A sigla aparece
+#  no cabecalho da tabela, entao precisa ser curta de verdade.
+#
+#  A chave e sempre a mesma para todos os idiomas -- ela sai do nome
+#  em portugues e nao quer dizer nada; ignore. O que interessa e o
+#  texto original, que vai no comentario acima de cada uma.
+
+%acertoacoescertastentadas.nome = % acerto (ações certas ÷ tentadas)
+%acertoacoescertastentadas.sigla = Ac%
+
+%acertodogoleiro.nome = % Acerto do goleiro
+%acertodogoleiro.sigla = GKAc%
+
+%acertodospasses.nome = % Acerto dos passes
+%acertodospasses.sigla = Pas%
+
+%aproveitamentoembolaparada.nome = % aproveitamento em bola parada
+%aproveitamentoembolaparada.sigla = BPar%
+
+%bolasdisputadaseganhas.nome = % Bolas disputadas e ganhas
+%bolasdisputadaseganhas.sigla = BDi%
+
+%bolasdisputadaseganhassemfalta.nome = % Bolas disputadas e ganhas (sem falta)
+%bolasdisputadaseganhassemfalta.sigla = BDi%
+
+%cabeceiosganhos.nome = % Cabeceios Ganhos
+%cabeceiosganhos.sigla = CabG%
+
+%cabeceiosperdidos.nome = % Cabeceios perdidos
+%cabeceiosperdidos.sigla = CabP%
+
+%conversaodepenalti.nome = % Conversão de pênalti
+%conversaodepenalti.sigla = Conv%Pên
+
+%cruzamentoscertos.nome = % Cruzamentos certos
+%cruzamentoscertos.sigla = Crz%
+
+%dasparticipacoesqueforamassistencias.nome = % das participações que foram assistências
+%dasparticipacoesqueforamassistencias.sigla = Ast%
+
+%deacertonassaidasdogol.nome = % De Acerto nas Saídas do gol
+%deacertonassaidasdogol.sigla = GKSaída%
+
+%dedefesascomapontadosdedos.nome = % de defesas com a ponta dos dedos
+%dedefesascomapontadosdedos.sigla = DefP%
+
+%dedefesasdesviadas.nome = % de defesas desviadas
+%dedefesasdesviadas.sigla = DefDes%
+
+%dedefesasdificeis.nome = % de defesas difíceis
+%dedefesasdificeis.sigla = DefDif%
+
+%dedefesasrealizadas.nome = % de Defesas Realizadas
+%dedefesasrealizadas.sigla = Def%
+
+%dedefesasseguras.nome = % de defesas seguras
+%dedefesasseguras.sigla = DefSeg%
+
+%dedesarmesepressoesconcluidos.nome = % de desarmes e pressões concluídos
+%dedesarmesepressoesconcluidos.sigla = DesPres%
+
+%dedesarmesganhos.nome = % de desarmes ganhos
+%dedesarmesganhos.sigla = DesG%
+
+%deeficaciadefensiva.nome = % de eficácia defensiva
+%deeficaciadefensiva.sigla = EfDef%
+
+%defesasesperadas.nome = % Defesas Esperadas
+%defesasesperadas.sigla = Def%Esp
+
+%definalizacoesqueviraramgol.nome = % de finalizações que viraram gol
+%definalizacoesqueviraramgol.sigla = FinGol%
+
+%dejogossemsofrergol.nome = % de jogos sem sofrer gol
+%dejogossemsofrergol.sigla = %0Gol
+
+%depassesdecisivosqueviraramassistencia.nome = % de passes decisivos que viraram assistência
+%depassesdecisivosqueviraramassistencia.sigla = PDAst%
+
+%depassesquesaoemprogressao.nome = % de Passes que são em progressão
+%depassesquesaoemprogressao.sigla = PasProgr%
+
+%devezesquefoieleitoohomemdojogo.nome = % de vezes que foi eleito o Homem do Jogo
+%devezesquefoieleitoohomemdojogo.sigla = %HomJo
+
+%faltaslimpassemcartao.nome = %Faltas limpas (Sem cartão)
+%faltaslimpassemcartao.sigla = FalLimp%
+
+%finalizacoesnogol.nome = % finalizações no gol
+%finalizacoesnogol.sigla = Ch%
+
+%finalizacoesqueforamemdirecaogol.nome = % Finalizações que foram em direção gol
+%finalizacoesqueforamemdirecaogol.sigla = Ch%
+
+%finalizacoesqueforamnogol.nome = % Finalizações que foram no gol
+%finalizacoesqueforamnogol.sigla = Ch%
+
+%golssempenalti.nome = % Gols (sem penalti)
+%golssempenalti.sigla = G(SP)%
+
+%lancesdisputadoseganhos.nome = % Lances disputados e ganhos
+%lancesdisputadoseganhos.sigla = LcDiG%
+
+%lancesdisputadoseganhosdeformalimpa.nome = % Lances disputados e ganhos de forma limpa
+%lancesdisputadoseganhosdeformalimpa.sigla = LcDiGL%
+
+%passescertos.nome = % Passes certos
+%passescertos.sigla = Pas%
+
+%passesemprogressao.nome = % Passes em progressão
+%passesemprogressao.sigla = PasProgr%
+
+%passesemprogressaoemrelacaoaoscurtos.nome = % Passes em progressão em relação aos curtos
+%passesemprogressaoemrelacaoaoscurtos.sigla = PasProgrCu%
+
+%passeserrados.nome = % passes errados
+%passeserrados.sigla = PasE%
+
+%penaltis.nome = % Pênaltis
+%penaltis.sigla = Pen%
+
+%penaltisdefendidos.nome = % Pênaltis defendidos
+%penaltisdefendidos.sigla = PenD%
+
+%pressaoganha90.nome = % Pressão ganha/90
+%pressaoganha90.sigla = PresG%/90
+
+%sucessodeacoescombola.nome = % Sucesso de ações com bola
+%sucessodeacoescombola.sigla = AcB%
+
+acertos90.nome = Acertos/90
+acertos90.sigla = Ac/90
+
+acertoscabeceiosdesarmespressao.nome = Acertos (cabeceios, desarmes, pressão)
+acertoscabeceiosdesarmespressao.sigla = Ac
+
+acoescombolacompletadas.nome = Ações com Bola (Completadas)
+acoescombolacompletadas.sigla = AcBC
+
+acoescombolacompletadas90.nome = Ações com bola completadas /90
+acoescombolacompletadas90.sigla = AcB/90
+
+acoescombolatentadas.nome = Ações com Bola Tentadas
+acoescombolatentadas.sigla = AcBT
+
+acoescombolatentadas90.nome = Ações com bola tentadas /90
+acoescombolatentadas90.sigla = AcBT/90
+
+acoescomsucesso.nome = Ações com sucesso
+acoescomsucesso.sigla = AcS
+
+acoesnoultimoterco90.nome = Ações no último terço / 90
+acoesnoultimoterco90.sigla = AcTer/90
+
+acoesnoultimotercofintaschancescriadasfinalizacoes.nome = Ações no último terço (fintas, chances criadas, finalizações)
+acoesnoultimotercofintaschancescriadasfinalizacoes.sigla = AcTer
+
+acoesnoultimotercofintaspassesdecisivosgrandeschancesetc.nome = Ações no último terço (fintas, passes decisivos, grandes chances, etc)
+acoesnoultimotercofintaspassesdecisivosgrandeschancesetc.sigla = AcTer
+
+acoesquegeraramfinalizacoesaogol.nome = Ações que geraram finalizações ao gol
+acoesquegeraramfinalizacoesaogol.sigla = AcFinGol
+
+acoesquegeraramfinalizacoesaogol90.nome = Ações que geraram finalizações ao gol /90
+acoesquegeraramfinalizacoesaogol90.sigla = AcFinGol/90
+
+acoestentadas.nome = Ações tentadas
+acoestentadas.sigla = AcT
+
+alivios.nome = Alívios
+alivios.sigla = Alí
+
+alivios90.nome = Alívios /90
+alivios90.sigla = Alí/90
+
+assist90.nome = Assist /90
+assist90.sigla = Ast/90
+
+assistencias.nome = Assistências
+assistencias.sigla = Ast
+
+assistenciasdesperdicadaspelaequipe.nome = Assistências Desperdiçadas pela Equipe
+assistenciasdesperdicadaspelaequipe.sigla = AstDesp
+
+assistenciasesperadasxa.nome = Assistências Esperadas (xA)
+assistenciasesperadasxa.sigla = xA
+
+bloqueiosfeitos.nome = Bloqueios feitos
+bloqueiosfeitos.sigla = Blq
+
+bolasdificeisenfrentadasprasofrer1gol.nome = Bolas difíceis enfrentadas pra sofrer 1 gol
+bolasdificeisenfrentadasprasofrer1gol.sigla = BDifEnf
+
+bolasdisputadas90.nome = Bolas disputadas /90
+bolasdisputadas90.sigla = BDi/90
+
+bolasdisputadascomoadversario.nome = Bolas disputadas com o adversário
+bolasdisputadascomoadversario.sigla = BDiAdv
+
+bolasdisputadascomoadversario90.nome = Bolas disputadas com o adversário /90
+bolasdisputadascomoadversario90.sigla = BDiAdv/90
+
+bolasdisputadaseganhas.nome = Bolas disputadas e ganhas
+bolasdisputadaseganhas.sigla = BDiG
+
+bolasdisputadaseganhas90.nome = Bolas disputadas e ganhas /90
+bolasdisputadaseganhas90.sigla = BDiG/90
+
+bolasdisputadaseganhasdoadversario.nome = Bolas disputadas e ganhas do adversário
+bolasdisputadaseganhasdoadversario.sigla = BDiGAdv
+
+bolasdisputadaseperdidas90.nome = Bolas disputadas e perdidas /90
+bolasdisputadaseperdidas90.sigla = BDiP/90
+
+bolasdisputadaseperdidascomoadversario.nome = Bolas disputadas e perdidas com o adversário
+bolasdisputadaseperdidascomoadversario.sigla = BDiPAdv
+
+bolasenfrentadas.nome = Bolas enfrentadas
+bolasenfrentadas.sigla = BEnf
+
+bolasenfrentadas90.nome = Bolas enfrentadas /90
+bolasenfrentadas90.sigla = BEnf/90
+
+bolasenfrentadasprasofrerumgol.nome = Bolas enfrentadas pra sofrer um gol
+bolasenfrentadasprasofrerumgol.sigla = BEnfGol
+
+bolasinterceptadas.nome = Bolas interceptadas
+bolasinterceptadas.sigla = BInt
+
+bolasinterceptadas90.nome = Bolas Interceptadas /90
+bolasinterceptadas90.sigla = BInt/90
+
+bolasrecuperadas.nome = Bolas recuperadas
+bolasrecuperadas.sigla = BRec
+
+bolasrecuperadas90.nome = Bolas recuperadas / 90
+bolasrecuperadas90.sigla = BRec/90
+
+bolasroubadas.nome = Bolas roubadas
+bolasroubadas.sigla = Rob
+
+bolasroubadas90.nome = Bolas roubadas /90
+bolasroubadas90.sigla = Rob/90
+
+bolasroubadasdoadversario.nome = Bolas roubadas do adversário
+bolasroubadasdoadversario.sigla = RobAdv
+
+cabeceiosdisputados.nome = Cabeceios Disputados
+cabeceiosdisputados.sigla = CabD
+
+cabeceiosdisputados90.nome = Cabeceios Disputados /90
+cabeceiosdisputados90.sigla = CabD/90
+
+cabeceiosganhos.nome = Cabeceios Ganhos
+cabeceiosganhos.sigla = CabG
+
+cabeceiosganhos90.nome = Cabeceios Ganhos /90
+cabeceiosganhos90.sigla = CabG/90
+
+cabeceiosperdidos.nome = Cabeceios Perdidos
+cabeceiosperdidos.sigla = CabP
+
+cabeceiosperdidos90.nome = Cabeceios Perdidos /90
+cabeceiosperdidos90.sigla = CabP/90
+
+cabeceiosqueevitaramjogadaofensiva.nome = Cabeceios que evitaram jogada ofensiva
+cabeceiosqueevitaramjogadaofensiva.sigla = CabEvit
+
+cabeceiosqueevitaramjogadaofensiva90.nome = Cabeceios que evitaram jogada ofensiva /90
+cabeceiosqueevitaramjogadaofensiva90.sigla = CabEvit/90
+
+cartoesamarelos.nome = Cartões Amarelos
+cartoesamarelos.sigla = Am
+
+cartoesporfaltacometida.nome = Cartões por falta cometida
+cartoesporfaltacometida.sigla = AmFal
+
+cartoesvermelhos.nome = Cartões Vermelhos
+cartoesvermelhos.sigla = Ver
+
+chancescriadas.nome = Chances criadas
+chancescriadas.sigla = CC
+
+chancescriadas90.nome = Chances criadas /90
+chancescriadas90.sigla = CC/90
+
+chancesdeperigocriadas.nome = Chances de perigo criadas
+chancesdeperigocriadas.sigla = CCPerigo
+
+chancesdeperigocriadas90.nome = Chances de perigo criadas /90
+chancesdeperigocriadas90.sigla = CCPerigo/90
+
+chancesdesofrerumgol90.nome = Chances de Sofrer um gol/90
+chancesdesofrerumgol90.sigla = ChGol/90
+
+cleansheet.nome = Clean Sheet
+cleansheet.sigla = CS
+
+cobrancasdefaltadiretas.nome = Cobranças de falta (Diretas)
+cobrancasdefaltadiretas.sigla = CobFal
+
+condicaofisica.nome = Condição física
+condicaofisica.sigla = Cond
+
+conversaodasfinalizacoesdeforadaarea.nome = Conversão das finalizações de fora da área
+conversaodasfinalizacoesdeforadaarea.sigla = ConvRem
+
+cortes.nome = Cortes
+cortes.sigla = Cor
+
+criacao90.nome = Criação / 90
+criacao90.sigla = Cri/90
+
+cruzamentoscertos90.nome = Cruzamentos certos /90
+cruzamentoscertos90.sigla = CrzC/90
+
+cruzamentosconseguidos.nome = Cruzamentos Conseguidos
+cruzamentosconseguidos.sigla = CrzC
+
+cruzamentosdebolaparadacertos.nome = Cruzamentos de bola parada (certos)
+cruzamentosdebolaparadacertos.sigla = CrzBPC
+
+cruzamentosdebolaparadatentados.nome = Cruzamentos de bola parada (tentados)
+cruzamentosdebolaparadatentados.sigla = CrzBPT
+
+cruzamentostentados.nome = Cruzamentos Tentados
+cruzamentostentados.sigla = CrzT
+
+cruzamentostentados90.nome = Cruzamentos tentados /90
+cruzamentostentados90.sigla = CrzT/90
+
+defesascomapontadosdedos.nome = Defesas Com a Ponta dos Dedos
+defesascomapontadosdedos.sigla = DefP
+
+defesascomapontadosdedos90.nome = Defesas com a ponta dos dedos /90
+defesascomapontadosdedos90.sigla = DefP/90
+
+defesasdesviadas.nome = Defesas Desviadas
+defesasdesviadas.sigla = DefDes
+
+defesasdesviadas90.nome = Defesas Desviadas /90
+defesasdesviadas90.sigla = DefDes/90
+
+defesasseguras.nome = Defesas Seguras
+defesasseguras.sigla = DefSeg
+
+defesasseguras90.nome = Defesas Seguras /90
+defesasseguras90.sigla = DefSeg/90
+
+defesastotais.nome = Defesas totais
+defesastotais.sigla = DefTtl
+
+defesastotaisjogo.nome = Defesas totais / Jogo
+defesastotaisjogo.sigla = DefTtl/Jo
+
+derrotascomelenoelenco.nome = Derrotas com ele no elenco
+derrotascomelenoelenco.sigla = DTime
+
+desarmepressoesconcluidas.nome = Desarme + Pressões Concluídas
+desarmepressoesconcluidas.sigla = DesPres
+
+desarmepressoestentadas.nome = Desarme + Pressões Tentadas
+desarmepressoestentadas.sigla = DesPresT
+
+desarmesdecisivos.nome = Desarmes Decisivos
+desarmesdecisivos.sigla = DesCi
+
+desarmesdecisivos90.nome = Desarmes Decisivos /90
+desarmesdecisivos90.sigla = DesCi/90
+
+desarmesepressoesconseguidos90.nome = Desarmes e pressões conseguidos /90
+desarmesepressoesconseguidos90.sigla = DesPres/90
+
+desarmesepressoestentados90.nome = Desarmes e pressões tentados /90
+desarmesepressoestentados90.sigla = DesPresT/90
+
+desarmesganhos.nome = Desarmes Ganhos
+desarmesganhos.sigla = DesG
+
+desarmesganhos90.nome = Desarmes Ganhos/90
+desarmesganhos90.sigla = DesG/90
+
+desarmestentados.nome = Desarmes Tentados
+desarmestentados.sigla = DesT
+
+desarmestentados90.nome = Desarmes Tentados /90
+desarmestentados90.sigla = DesT/90
+
+desconhecida0x1e.nome = Desconhecida 0x1E
+desconhecida0x1e.sigla = ?1E
+
+desconhecida0x20.nome = Desconhecida 0x20
+desconhecida0x20.sigla = ?20
+
+desconhecida0x22.nome = Desconhecida 0x22
+desconhecida0x22.sigla = ?22
+
+desconhecida0x24.nome = Desconhecida 0x24
+desconhecida0x24.sigla = ?24
+
+desconhecida0x4e.nome = Desconhecida 0x4E
+desconhecida0x4e.sigla = ?4E
+
+desconhecida0x54.nome = Desconhecida 0x54
+desconhecida0x54.sigla = ?54
+
+desconhecida0x56.nome = Desconhecida 0x56
+desconhecida0x56.sigla = ?56
+
+desconhecida0x58.nome = Desconhecida 0x58
+desconhecida0x58.sigla = ?58
+
+desconhecida0x62.nome = Desconhecida 0x62
+desconhecida0x62.sigla = ?62
+
+desconhecida0x78.nome = Desconhecida 0x78
+desconhecida0x78.sigla = ?78
+
+desconhecida0x7a.nome = Desconhecida 0x7A
+desconhecida0x7a.sigla = ?7A
+
+desconhecida0x7c.nome = Desconhecida 0x7C
+desconhecida0x7c.sigla = ?7C
+
+desconhecida0x7e.nome = Desconhecida 0x7E
+desconhecida0x7e.sigla = ?7E
+
+desconhecidalvl10x18.nome = Desconhecida lvl1 0x18
+desconhecidalvl10x18.sigla = ?L18
+
+diferencadefendidosenfrentados.nome = Diferença (defendidos − enfrentados)
+diferencadefendidosenfrentados.sigla = Dif
+
+diferencadefesasesperadasdefesasfeitas.nome = Diferença Defesas Esperadas - Defesas Feitas
+diferencadefesasesperadasdefesasfeitas.sigla = DifDefEsp
+
+distancia90.nome = Distância /90
+distancia90.sigla = Dist/90
+
+distanciapercorrida.nome = Distância Percorrida
+distanciapercorrida.sigla = Dist
+
+driblessofridos.nome = Dribles sofridos
+driblessofridos.sigla = DribS
+
+driblessofridos90.nome = Dribles sofridos /90
+driblessofridos90.sigla = DribS/90
+
+entradasdobanco.nome = Entradas do banco
+entradasdobanco.sigla = Banco
+
+erros.nome = Erros
+erros.sigla = Err
+
+erros90.nome = Erros /90
+erros90.sigla = Err/90
+
+errosdefensivos.nome = Erros Defensivos
+errosdefensivos.sigla = ErrDef
+
+errosdefensivos90.nome = Erros Defensivos /90
+errosdefensivos90.sigla = ErrDef/90
+
+errosquegeraramgoladversario.nome = Erros que geraram gol adversário
+errosquegeraramgoladversario.sigla = ErrGoladv
+
+errosqueoriginaramgols90.nome = Erros que originaram gols /90
+errosqueoriginaramgols90.sigla = ErrOrig/90
+
+expectedgoalspreventedxgp.nome = Expected Goals Prevented xGP
+expectedgoalspreventedxgp.sigla = xGP
+
+falhas.nome = Falhas
+falhas.sigla = Fal
+
+falhas90.nome = Falhas/90
+falhas90.sigla = Fal/90
+
+faltascometidas.nome = Faltas cometidas
+faltascometidas.sigla = FC
+
+faltascometidas90.nome = Faltas cometidas /90
+faltascometidas90.sigla = FC/90
+
+faltaspraumcartao.nome = Faltas pra um cartão
+faltaspraumcartao.sigla = FalCart
+
+faltaspraumcartaoamarelo.nome = Faltas pra um cartão AMARELO
+faltaspraumcartaoamarelo.sigla = FalCartAm
+
+faltassemcartao.nome = Faltas sem cartão
+faltassemcartao.sigla = FalSC
+
+faltassofridas.nome = Faltas Sofridas
+faltassofridas.sigla = FS
+
+faltassofridas90.nome = Faltas sofridas /90
+faltassofridas90.sigla = FS/90
+
+finalizacaooucabeceiopraumgol.nome = Finalização ou Cabeceio pra um gol
+finalizacaooucabeceiopraumgol.sigla = FinCabGol
+
+finalizacoes.nome = Finalizações
+finalizacoes.sigla = Fin
+
+finalizacoes90.nome = Finalizações /90
+finalizacoes90.sigla = Ch/90
+
+finalizacoesbloqueadas.nome = Finalizações bloqueadas
+finalizacoesbloqueadas.sigla = RemBlq
+
+finalizacoesbloqueadas90.nome = Finalizações bloqueadas /90
+finalizacoesbloqueadas90.sigla = RemBlq/90
+
+finalizacoescertaspraumgol.nome = Finalizações certas pra um gol
+finalizacoescertaspraumgol.sigla = FinGol/G
+
+finalizacoesdefendidas.nome = Finalizações Defendidas
+finalizacoesdefendidas.sigla = FinDef
+
+finalizacoesdefendidas90.nome = Finalizações defendidas /90
+finalizacoesdefendidas90.sigla = FinDef/90
+
+finalizacoesdeforadaarea.nome = Finalizações de fora da área
+finalizacoesdeforadaarea.sigla = RemFora
+
+finalizacoesdeforadaarea90.nome = Finalizações de fora da área /90
+finalizacoesdeforadaarea90.sigla = RemFora/90
+
+finalizacoesnogol.nome = Finalizações no Gol
+finalizacoesnogol.sigla = FinGol
+
+finalizacoesnogol90.nome = Finalizações no gol /90
+finalizacoesnogol90.sigla = FinGol/90
+
+finalizacoesnogolsempenalti.nome = Finalizações no gol (sem pênalti)
+finalizacoesnogolsempenalti.sigla = FinGol(SP)
+
+finalizacoesnogolsempenalti90.nome = Finalizações no gol (sem pênalti) /90
+finalizacoesnogolsempenalti90.sigla = FinGol(SP)/90
+
+finalizacoesparafora90.nome = Finalizações para fora /90
+finalizacoesparafora90.sigla = FinFora/90
+
+finalizacoesprafora.nome = Finalizações pra fora
+finalizacoesprafora.sigla = FinFora
+
+finalizacoespraumgol.nome = Finalizações pra um gol
+finalizacoespraumgol.sigla = Fin/G
+
+finalizacoesqueseconverteramemgols.nome = Finalizações que se converteram em gols
+finalizacoesqueseconverteramemgols.sigla = FinConvGol
+
+finalizacoessempenalti.nome = Finalizações (sem pênalti)
+finalizacoessempenalti.sigla = Fin(SP)
+
+finalizacoessempenalti90.nome = Finalizações (sem pênalti) /90
+finalizacoessempenalti90.sigla = Fin(SP)/90
+
+finalizacoestentadas.nome = Finalizações Tentadas
+finalizacoestentadas.sigla = FinT
+
+fintas.nome = Fintas
+fintas.sigla = Fin
+
+fintas90.nome = Fintas /90
+fintas90.sigla = Fin/90
+
+flairindex.nome = Flair Index
+flairindex.sigla = Flair
+
+flairindexgeral.nome = Flair Index (Geral)
+flairindexgeral.sigla = FlairTtl
+
+gols.nome = Gols
+gols.sigla = G
+
+gols90.nome = Gols/90
+gols90.sigla = G/90
+
+golsacimadoesperado.nome = Gols acima do esperado
+golsacimadoesperado.sigla = xG+/-
+
+golsassist90.nome = Gols + Assist /90
+golsassist90.sigla = G+A/90
+
+golsassistencias.nome = Gols + assistências
+golsassistencias.sigla = G+A
+
+golsdedentrodaarea.nome = Gols de dentro da área
+golsdedentrodaarea.sigla = GDi
+
+golsdedentrodaarea90.nome = Gols de dentro da área /90
+golsdedentrodaarea90.sigla = GDi/90
+
+golsdeforadaarea.nome = Gols de fora da área
+golsdeforadaarea.sigla = GFora
+
+golsdeforadaarea90.nome = Gols de fora da área /90
+golsdeforadaarea90.sigla = GFora/90
+
+golsdentrodaarea.nome = Gols dentro da área
+golsdentrodaarea.sigla = GDi
+
+golsdepenalti90.nome = Gols de pênalti /90
+golsdepenalti90.sigla = GP/90
+
+golsdepenaltis.nome = Gols de pênaltis
+golsdepenaltis.sigla = PenM
+
+golsdotimecomelenoelenco.nome = Gols do time com ele no elenco
+golsdotimecomelenoelenco.sigla = GTime
+
+golsesperadosxg.nome = Gols esperados (xG)
+golsesperadosxg.sigla = xG
+
+golsnacarreira.nome = Gols na carreira
+golsnacarreira.sigla = GCarr
+
+golsnaligacarreira.nome = Gols na liga (carreira)
+golsnaligacarreira.sigla = GLigCarr
+
+golsnaoesperados.nome = Gols não esperados
+golsnaoesperados.sigla = GNEsp
+
+golsnaoesperadossempenalti.nome = Gols não esperados SEM PÊNALTI
+golsnaoesperadossempenalti.sigla = GNEsp(SP)
+
+golspelaselecao.nome = Gols pela seleção
+golspelaselecao.sigla = GSel
+
+golspelasub21.nome = Gols pela sub-21
+golspelasub21.sigla = GS21
+
+golssempenalti.nome = Gols Sem Pênalti
+golssempenalti.sigla = G(SP)
+
+golssempenalti90.nome = Gols Sem Pênalti /90
+golssempenalti90.sigla = G(SP)/90
+
+golssofridos.nome = Gols Sofridos
+golssofridos.sigla = GS
+
+golssofridoscomelenoelenco.nome = Gols sofridos com ele no elenco
+golssofridoscomelenoelenco.sigla = GSTime
+
+gpigoalprobabilityindex.nome = GPI (Goal Probability Index)
+gpigoalprobabilityindex.sigla = GPI
+
+hattricks.nome = Hat-tricks
+hattricks.sigla = HatT
+
+impedimentos.nome = Impedimentos
+impedimentos.sigla = Imp
+
+impedimentos90.nome = Impedimentos / 90
+impedimentos90.sigla = Imp/90
+
+indicedecobertura.nome = Índice de Cobertura
+indicedecobertura.sigla = IdCob
+
+indicedecriacaoofensivaico.nome = Índice de Criação Ofensiva (ICO)
+indicedecriacaoofensivaico.sigla = ICO
+
+indicededefesascriticas.nome = Índice de Defesas Críticas
+indicededefesascriticas.sigla = IdDefCri
+
+indicededominanciaaereaida.nome = Índice de Dominância Aérea (IDA)
+indicededominanciaaereaida.sigla = IDA
+
+indicededominanciafisica.nome = Índice de Dominância Física
+indicededominanciafisica.sigla = IdDomFis
+
+indicedeimpactodogoleiro.nome = Índice de Impacto do Goleiro
+indicedeimpactodogoleiro.sigla = IdImpGK
+
+interceptacaorecuperacaodebola.nome = Interceptação + Recuperação de bola
+interceptacaorecuperacaodebola.sigla = Int+Rec
+
+interceptacaorecuperacaodebola90.nome = Interceptação + Recuperação de bola/90
+interceptacaorecuperacaodebola90.sigla = Int+Rec/90
+
+interceptacoes.nome = Interceptações
+interceptacoes.sigla = Int
+
+interceptacoes90.nome = Interceptações /90
+interceptacoes90.sigla = Int/90
+
+interceptacoesfeitas.nome = Interceptações feitas
+interceptacoesfeitas.sigla = IntF
+
+jogoscomnota.nome = Jogos com nota
+jogoscomnota.sigla = JoNota
+
+jogoscomotitular.nome = Jogos como titular
+jogoscomotitular.sigla = Tit
+
+jogoscompletos.nome = Jogos completos
+jogoscompletos.sigla = JoC
+
+jogosnaligacarreira.nome = Jogos na liga (carreira)
+jogosnaligacarreira.sigla = JoLigCarr
+
+jogospelaselecao.nome = Jogos pela seleção
+jogospelaselecao.sigla = JoSel
+
+jogospelasub21.nome = Jogos pela sub-21
+jogospelasub21.sigla = JoS21
+
+jogostotais.nome = Jogos Totais
+jogostotais.sigla = JoTtl
+
+lancesconseguidos.nome = Lances Conseguidos
+lancesconseguidos.sigla = LcC
+
+lancesconseguidos90.nome = Lances Conseguidos /90
+lancesconseguidos90.sigla = LcC/90
+
+lancesdefensivosconseguidos.nome = Lances defensivos conseguidos
+lancesdefensivosconseguidos.sigla = LcDefC
+
+lancesdefensivosconseguidos90.nome = Lances defensivos conseguidos /90
+lancesdefensivosconseguidos90.sigla = LcDefC/90
+
+lancesdefensivostentados.nome = Lances defensivos tentados
+lancesdefensivostentados.sigla = LcDefT
+
+lancesdefensivostentados90.nome = Lances defensivos tentados /90
+lancesdefensivostentados90.sigla = LcDefT/90
+
+lancesdisputados.nome = Lances disputados
+lancesdisputados.sigla = LcDi
+
+lancesdisputados90.nome = Lances disputados /90
+lancesdisputados90.sigla = LcDi/90
+
+lancesdisputadoseganhosdeformalimpa.nome = Lances disputados e ganhos de forma limpa
+lancesdisputadoseganhosdeformalimpa.sigla = LcDiGL
+
+lancesdisputadoseganhossemfalta.nome = Lances disputados e ganhos sem falta
+lancesdisputadoseganhossemfalta.sigla = LcDiGSF
+
+lancesdisputadoseganhossemfalta90.nome = Lances disputados e ganhos sem falta /90
+lancesdisputadoseganhossemfalta90.sigla = LcDiGSF/90
+
+lancestentados90.nome = Lances Tentados /90
+lancestentados90.sigla = LcT/90
+
+lancestentadosfinalizacaopassefintaetc.nome = Lances tentados (finalização, passe, finta, etc)
+lancestentadosfinalizacaopassefintaetc.sigla = LcT
+
+manofthematch.nome = Man of the match
+manofthematch.sigla = MOTM
+
+mediadegolsemtodaacarreira.nome = Média de gols em toda a Carreira
+mediadegolsemtodaacarreira.sigla = GCarrMéd
+
+minutos.nome = Minutos
+minutos.sigla = Min
+
+minutosporpartida.nome = Minutos por partida
+minutosporpartida.sigla = Min/Jo
+
+minutospraacertarumafinalizacaonogol.nome = Minutos pra acertar uma finalização no gol
+minutospraacertarumafinalizacaonogol.sigla = MinFinGol
+
+minutospracriarumachancedeperigo.nome = Minutos pra criar uma chance de perigo
+minutospracriarumachancedeperigo.sigla = MinCC
+
+minutospracriarumachanceperigosa.nome = Minutos pra criar uma chance perigosa
+minutospracriarumachanceperigosa.sigla = MinCC
+
+minutosprafazerumpassedecisivo.nome = Minutos pra fazer um Passe Decisivo
+minutosprafazerumpassedecisivo.sigla = MinPD
+
+minutospramarcarumgol.nome = Minutos pra MARCAR um gol
+minutospramarcarumgol.sigla = MinG
+
+minutospraparticipardeumgol.nome = Minutos pra PARTICIPAR de um gol
+minutospraparticipardeumgol.sigla = MinPartGol
+
+minutospraserohomemdojogo.nome = Minutos pra ser o homem do jogo
+minutospraserohomemdojogo.sigla = MinHomJo
+
+minutosprasofrerumgol.nome = Minutos pra sofrer um gol
+minutosprasofrerumgol.sigla = MinGS
+
+minutospratentarumafinalizacao.nome = Minutos pra tentar uma finalização
+minutospratentarumafinalizacao.sigla = MinFin
+
+minutossemmarcar.nome = Minutos sem marcar
+minutossemmarcar.sigla = MinSM
+
+minutossemsofrergol.nome = Minutos sem sofrer gol
+minutossemsofrergol.sigla = MinSSG
+
+moral.nome = Moral
+moral.sigla = Moral
+
+movimentosdepressaoganhos.nome = Movimentos de pressão ganhos
+movimentosdepressaoganhos.sigla = PresG
+
+movimentosdepressaoganhos90.nome = Movimentos de pressão ganhos /90
+movimentosdepressaoganhos90.sigla = PresG/90
+
+movimentosdepressaotentados.nome = Movimentos de pressão tentados
+movimentosdepressaotentados.sigla = PresT
+
+movimentosdepressaotentados90.nome = Movimentos de pressão tentados /90
+movimentosdepressaotentados90.sigla = PresT/90
+
+movimentosofensivoscomsucesso.nome = Movimentos ofensivos com sucesso
+movimentosofensivoscomsucesso.sigla = MovOfS
+
+movimentosofensivosconseguidos.nome = Movimentos ofensivos conseguidos
+movimentosofensivosconseguidos.sigla = MovOfC
+
+movimentosofensivosconseguidos90.nome = Movimentos ofensivos conseguidos /90
+movimentosofensivosconseguidos90.sigla = MovOf/90
+
+movimentosofensivostentados.nome = Movimentos ofensivos tentados
+movimentosofensivostentados.sigla = MovOfT
+
+movimentosofensivostentados90.nome = Movimentos ofensivos tentados /90
+movimentosofensivostentados90.sigla = MovOfT/90
+
+overxgunderxgper90.nome = Over xG / Under xG per 90
+overxgunderxgper90.sigla = OxG/UxG/90
+
+participacao90.nome = Participação / 90
+participacao90.sigla = Part/90
+
+participacaodojogadoracada90minutosfntcabspassfinalizacos.nome = Participação do jogador a cada 90 minutos (fnt, cabs, pass, finalizaçõs)
+participacaodojogadoracada90minutosfntcabspassfinalizacos.sigla = Part/90
+
+participacaoempasses90.nome = Participação em passes / 90
+participacaoempasses90.sigla = PartPas/90
+
+participacaoporjogopassesfntfincriacaoroubadasdebolaetc.nome = Participação por jogo (passes, fnt, fin, criação, roubadas de bola, etc)
+participacaoporjogopassesfntfincriacaoroubadasdebolaetc.sigla = Part/Jo
+
+participacoesdojogadorfintaspassesetc.nome = Participações do jogador (Fintas, passes, etc)
+participacoesdojogadorfintaspassesetc.sigla = Part
+
+passequesaoemprogressao.nome = Passe que são em progressão
+passequesaoemprogressao.sigla = PasProgr
+
+passescertos90.nome = Passes certos /90
+passescertos90.sigla = PasC/90
+
+passescertoserrados.nome = Passes certos - errados
+passescertoserrados.sigla = PasC-E
+
+passescertoserradosjogo.nome = Passes certos − errados / jogo
+passescertoserradosjogo.sigla = PasC-E/Jo
+
+passescompletados.nome = Passes completados
+passescompletados.sigla = PasComp
+
+passescompletados90.nome = Passes Completados /90
+passescompletados90.sigla = PasComp/90
+
+passescurtos.nome = Passes Curtos
+passescurtos.sigla = PasCu
+
+passescurtos90.nome = Passes Curtos /90
+passescurtos90.sigla = PasCu/90
+
+passescurtoscertos90.nome = Passes curtos certos /90
+passescurtoscertos90.sigla = PasCuC/90
+
+passesdecisivos.nome = Passes Decisivos
+passesdecisivos.sigla = PD
+
+passesdecisivos90.nome = Passes Decisivos /90
+passesdecisivos90.sigla = PD/90
+
+passesdecisivosemjogoaberto.nome = Passes decisivos em jogo aberto
+passesdecisivosemjogoaberto.sigla = PDJA
+
+passesdecisivospraumaassistencia.nome = Passes Decisivos pra uma assistência
+passesdecisivospraumaassistencia.sigla = PD/Ast
+
+passesdecisivostotal.nome = Passes Decisivos (Total)
+passesdecisivostotal.sigla = PD
+
+passesemconstrucaodejogadaofensiva.nome = Passes em construção de jogada ofensiva
+passesemconstrucaodejogadaofensiva.sigla = PasConstr
+
+passesemconstrucaodejogadaofensiva90.nome = Passes em construção de jogada ofensiva /90
+passesemconstrucaodejogadaofensiva90.sigla = PasConstr/90
+
+passesemprogressao.nome = Passes em progressão
+passesemprogressao.sigla = PasProgr
+
+passesemprogressao90.nome = Passes em progressão /90
+passesemprogressao90.sigla = PasProgr/90
+
+passeserrados.nome = Passes errados
+passeserrados.sigla = PasE
+
+passeserrados90.nome = Passes Errados/90
+passeserrados90.sigla = PasE/90
+
+passesquesaocurtos.nome = Passes que são curtos
+passesquesaocurtos.sigla = PasCu
+
+passesquesaoemprogressao.nome = Passes que são em progressão
+passesquesaoemprogressao.sigla = PasProgr
+
+passestentados.nome = Passes Tentados
+passestentados.sigla = PasT
+
+passestentados90.nome = Passes Tentados /90
+passestentados90.sigla = PasT/90
+
+penaltisbatidos.nome = Pênaltis batidos
+penaltisbatidos.sigla = PenB
+
+penaltisdefendidos.nome = Pênaltis Defendidos
+penaltisdefendidos.sigla = PenD
+
+penaltisdefendidos90.nome = Pênaltis defendidos /90
+penaltisdefendidos90.sigla = PenD/90
+
+penaltisenfrentados.nome = Pênaltis enfrentados
+penaltisenfrentados.sigla = PenEnf
+
+penaltisenfrentados90.nome = Pênaltis enfrentados /90
+penaltisenfrentados90.sigla = PenEnf/90
+
+penaltisperdidos.nome = Pênaltis perdidos
+penaltisperdidos.sigla = PenP
+
+placardeesforco.nome = Placar de Esforço
+placardeesforco.sigla = Esf
+
+possedesperdicada.nome = Posse Desperdiçada
+possedesperdicada.sigla = PosDesp
+
+possedesperdicada90.nome = Posse Desperdiçada /90
+possedesperdicada90.sigla = PosDesp/90
+
+posseganha90.nome = Posse Ganha /90
+posseganha90.sigla = PosG/90
+
+posseganhatotal.nome = Posse Ganha Total
+posseganhatotal.sigla = PosG
+
+posseperdida90.nome = Posse Perdida /90
+posseperdida90.sigla = PosP/90
+
+posseperdidatotal.nome = Posse Perdida Total
+posseperdidatotal.sigla = PosP
+
+rembloqueadosinterceptacoesebloqueios90.nome = Rem. bloqueados, interceptações e bloqueios/90
+rembloqueadosinterceptacoesebloqueios90.sigla = RemBlqInt/90
+
+reputacaoatual.nome = Reputação atual
+reputacaoatual.sigla = RepAtu
+
+reputacaolocal.nome = Reputação local
+reputacaolocal.sigla = RepLoc
+
+reputacaomundial.nome = Reputação mundial
+reputacaomundial.sigla = RepMun
+
+ritmodejogo.nome = Ritmo de jogo
+ritmodejogo.sigla = Ritmo
+
+saidasdogolcomsucesso.nome = Saídas do gol com sucesso
+saidasdogolcomsucesso.sigla = GKSaiC
+
+saidasdogolcomsucesso90.nome = Saídas do gol com sucesso /90
+saidasdogolcomsucesso90.sigla = GKSaiC/90
+
+saidasdogolfalhas.nome = Saídas do gol falhas
+saidasdogolfalhas.sigla = GKSaiF
+
+saidasdogolfalhas90.nome = Saídas do gol falhas /90
+saidasdogolfalhas90.sigla = GKSaiF/90
+
+sofridosjogo.nome = Sofridos / jogo
+sofridosjogo.sigla = GS/Jo
+
+sprints90.nome = Sprints/90
+sprints90.sigla = Spr/90
+
+sprintsdealtaintensidade.nome = Sprints de alta intensidade
+sprintsdealtaintensidade.sigla = SprAlta
+
+sucessooverall.nome = Sucesso (Overall)
+sucessooverall.sigla = Suc
+
+taxadeacerto.nome = Taxa de acerto
+taxadeacerto.sigla = Ac%
+
+taxadeconversao%.nome = Taxa de Conversão %
+taxadeconversao%.sigla = Conv%
+
+tentativadecriarumgoloujogadaofensiva.nome = Tentativa de criar um gol ou jogada ofensiva
+tentativadecriarumgoloujogadaofensiva.sigla = TentCri
+
+tentativadecriarumgoloujogadaofensiva90.nome = Tentativa de criar um gol ou jogada ofensiva /90
+tentativadecriarumgoloujogadaofensiva90.sigla = TentCri/90
+
+tentativas90.nome = Tentativas/90
+tentativas90.sigla = Tent/90
+
+tentativascabeceiosdesarmespressao.nome = Tentativas (cabeceios, desarmes, pressão)
+tentativascabeceiosdesarmespressao.sigla = Tent
+
+tentativascabeceiosdesarmespressao90.nome = Tentativas (cabeceios, desarmes, pressão) /90
+tentativascabeceiosdesarmespressao90.sigla = Tent/90
+
+tentativasdemarcarumgol.nome = Tentativas de marcar um gol
+tentativasdemarcarumgol.sigla = TentG
+
+tentativasdemarcarumgol90.nome = Tentativas de marcar um gol / 90
+tentativasdemarcarumgol90.sigla = TentG/90
+
+tentativasdesaidadogol90.nome = Tentativas de saída do gol /90
+tentativasdesaidadogol90.sigla = GKSaiT/90
+
+tentativasdesaidadogolpra1v1.nome = Tentativas de Saída do gol pra 1v1
+tentativasdesaidadogolpra1v1.sigla = GKSai1v1
+
+totalcartoes.nome = Total cartões
+totalcartoes.sigla = Cart
+
+totaldecartoes90.nome = Total de Cartões /90
+totaldecartoes90.sigla = Cart/90
+
+ultimoterco90.nome = Último terço/90
+ultimoterco90.sigla = AcTer/90
+
+umpasseerradoacada.nome = Um passe errado a cada...
+umpasseerradoacada.sigla = PasPorE
+
+velocidademediaemkmh.nome = Velocidade Média (em km/h)
+velocidademediaemkmh.sigla = Vel
+
+vitoriascomelenoelenco.nome = Vitórias com ele no elenco
+vitoriascomelenoelenco.sigla = VTime
+
+xa90.nome = xA /90
+xa90.sigla = xA/90
+
+xaconclusion.nome = xA Conclusion
+xaconclusion.sigla = xAConcl
+
+xaporpassesdecisivos.nome = xA por Passes Decisivos
+xaporpassesdecisivos.sigla = xA/PD
+
+xaxg90.nome = xA + xG /90
+xaxg90.sigla = xA+xG/90
+
+xaxgsempenaltis.nome = xA + xG (sem pênaltis)
+xaxgsempenaltis.sigla = xA+xG(SP)
+
+xg90.nome = xG /90
+xg90.sigla = xG/90
+
+xgconclusion.nome = xG Conclusion
+xgconclusion.sigla = xGConcl
+
+xgdefendidos.nome = xG Defendidos
+xgdefendidos.sigla = xGD
+
+xgdefendidos90.nome = xG defendidos / 90
+xgdefendidos90.sigla = xGD/90
+
+xgdefendidossempenalti.nome = xG Defendidos sem pênalti
+xgdefendidossempenalti.sigla = xGD(SP)
+
+xgdefendidossempenalti90.nome = xG Defendidos sem pênalti /90
+xgdefendidossempenalti90.sigla = xGD(SP)/90
+
+xgdepenaltisdefendidos.nome = xG de Pênaltis Defendidos
+xgdepenaltisdefendidos.sigla = xGPenD
+
+xgdepenaltisdefendidos90.nome = xG de Pênaltis Defendidos /90
+xgdepenaltisdefendidos90.sigla = xGPenD/90
+
+xgdepenaltisenfrentados.nome = xG de Pênaltis Enfrentados
+xgdepenaltisenfrentados.sigla = xGPenEnf
+
+xgdepenaltisenfrentados90.nome = xG de Pênaltis Enfrentados /90
+xgdepenaltisenfrentados90.sigla = xGPenEnf/90
+
+xgenfrentadogoleiro.nome = xG enfrentado (goleiro)
+xgenfrentadogoleiro.sigla = xGEnf
+
+xgporfinalizacaooucabeceio.nome = xG por finalização ou cabeceio
+xgporfinalizacaooucabeceio.sigla = xG/Rem
+
+xgsempenaltis.nome = xG (Sem pênaltis)
+xgsempenaltis.sigla = xG(SP)
+
+xgsempenaltis90.nome = xG (Sem pênaltis) /90
+xgsempenaltis90.sigla = xG(SP)/90
+
+xgxa.nome = xG + xA
+xgxa.sigla = xG+xA
+
+xgxa90.nome = xG + xA /90
+xgxa90.sigla = xG+xA/90
+
+xpgratio.nome = xPG Ratio
+xpgratio.sigla = xPG
+
+# importar view do FM (18/10)
+desarmestentadossemfaltas.nome = Desarmes tentados (sem faltas)
+desarmestentadossemfaltas.sigla = DesT
+%desarmescertos.nome = % desarmes certos
+%desarmescertos.sigla = Des%
+chancesclarascriadas.nome = Chances claras criadas
+chancesclarascriadas.sigla = CCC
+cruzamentosemjogoabertotentados.nome = Cruzamentos em jogo aberto tentados
+cruzamentosemjogoabertotentados.sigla = CruJA
+cruzamentosemjogoabertocertos.nome = Cruzamentos em jogo aberto certos
+cruzamentosemjogoabertocertos.sigla = CruJAC
+%cruzamentosemjogoabertocertos.nome = % cruzamentos em jogo aberto certos
+%cruzamentosemjogoabertocertos.sigla = CruJA%
+cruzemjogoabertotentados90.nome = Cruz. em jogo aberto tentados /90
+cruzemjogoabertotentados90.sigla = CruJA/90
+cruzemjogoabertocertos90.nome = Cruz. em jogo aberto certos /90
+cruzemjogoabertocertos90.sigla = CruJAC/90
+passesdecisivosemjogoaberto90.nome = Passes decisivos em jogo aberto /90
+passesdecisivosemjogoaberto90.sigla = PDJA/90
+xgporfinalizacao.nome = xG por finalização
+xgporfinalizacao.sigla = xG/Fin
+jogosnacarreira.nome = Jogos na carreira
+jogosnacarreira.sigla = JCar

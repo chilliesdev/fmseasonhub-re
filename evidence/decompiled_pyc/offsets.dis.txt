@@ -1,0 +1,160 @@
+# Module: offsets
+# Filename: offsets.py
+
+  0           RESUME                   0
+
+  9           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (copy)
+              STORE_NAME               0 (copy)
+
+ 10           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (json)
+              STORE_NAME               1 (json)
+
+ 12           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              2 (paths)
+              STORE_NAME               2 (paths)
+
+ 14           BUILD_MAP                0
+              STORE_NAME               3 (_cache)
+
+ 17           LOAD_CONST               2 (<code object _ler at 0x736dd1900, file "offsets.py", line 17>)
+              MAKE_FUNCTION
+              STORE_NAME               4 (_ler)
+
+ 29           LOAD_CONST               3 (<code object assinaturas at 0x10559ca80, file "offsets.py", line 29>)
+              MAKE_FUNCTION
+              STORE_NAME               5 (assinaturas)
+
+ 33           LOAD_CONST               4 (<code object mapa_de_tracos at 0x10559cb70, file "offsets.py", line 33>)
+              MAKE_FUNCTION
+              STORE_NAME               6 (mapa_de_tracos)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _ler at 0x736dd1900, file "offsets.py", line 17>:
+  17            RESUME                   0
+
+  18            LOAD_FAST_BORROW         1 (nome)
+                LOAD_GLOBAL              0 (_cache)
+                CONTAINS_OP              1 (not in)
+                POP_JUMP_IF_FALSE       24 (to L2)
+                NOT_TAKEN
+
+  19            NOP
+
+  20    L1:     LOAD_SMALL_INT           0
+                LOAD_CONST               1 (None)
+                IMPORT_NAME              1 (offsets_embutidos)
+                STORE_FAST               2 (offsets_embutidos)
+
+  21            LOAD_GLOBAL              5 (getattr + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 33 (offsets_embutidos, nome)
+                CALL                     2
+                LOAD_GLOBAL              0 (_cache)
+                LOAD_FAST_BORROW         1 (nome)
+                STORE_SUBSCR
+
+  26    L2:     LOAD_GLOBAL             18 (copy)
+                LOAD_ATTR               20 (deepcopy)
+                PUSH_NULL
+                LOAD_GLOBAL              0 (_cache)
+                LOAD_FAST_BORROW         1 (nome)
+                BINARY_OP               26 ([])
+                CALL                     1
+                RETURN_VALUE
+
+  --    L3:     PUSH_EXC_INFO
+
+  22            LOAD_GLOBAL              6 (ImportError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE      105 (to L12)
+                NOT_TAKEN
+                POP_TOP
+
+  23            LOAD_GLOBAL              9 (open + NULL)
+                LOAD_GLOBAL             10 (paths)
+                LOAD_ATTR               12 (resource_path)
+                PUSH_NULL
+                LOAD_CONST               2 ('signatures')
+                LOAD_FAST                0 (arquivo)
+                CALL                     2
+                LOAD_CONST               3 ('utf-8')
+                LOAD_CONST               4 (('encoding',))
+                CALL_KW                  2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L4:     STORE_FAST               3 (f)
+
+  24            LOAD_GLOBAL             14 (json)
+                LOAD_ATTR               16 (load)
+                PUSH_NULL
+                LOAD_FAST                3 (f)
+                CALL                     1
+                LOAD_GLOBAL              0 (_cache)
+                LOAD_FAST                1 (nome)
+                STORE_SUBSCR
+
+  23    L5:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+        L6:     POP_EXCEPT
+                JUMP_BACKWARD          127 (to L2)
+        L7:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L8)
+                NOT_TAKEN
+                RERAISE                  2
+        L8:     POP_TOP
+        L9:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+       L10:     POP_EXCEPT
+                JUMP_BACKWARD_NO_INTERRUPT 144 (to L2)
+
+  --   L11:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+
+  22   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [0]
+  L3 to L4 -> L13 [1] lasti
+  L4 to L5 -> L7 [3] lasti
+  L5 to L6 -> L13 [1] lasti
+  L7 to L9 -> L11 [5] lasti
+  L9 to L10 -> L13 [1] lasti
+  L11 to L13 -> L13 [1] lasti
+
+Disassembly of <code object assinaturas at 0x10559ca80, file "offsets.py", line 29>:
+ 29           RESUME                   0
+
+ 30           LOAD_GLOBAL              1 (_ler + NULL)
+              LOAD_CONST               0 ('fm_signatures.json')
+              LOAD_CONST               1 ('ASSINATURAS')
+              CALL                     2
+              RETURN_VALUE
+
+Disassembly of <code object mapa_de_tracos at 0x10559cb70, file "offsets.py", line 33>:
+ 33           RESUME                   0
+
+ 34           LOAD_GLOBAL              1 (_ler + NULL)
+              LOAD_CONST               0 ('trait_map.json')
+              LOAD_CONST               1 ('TRACOS')
+              CALL                     2
+              RETURN_VALUE

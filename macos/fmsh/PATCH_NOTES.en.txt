@@ -1,0 +1,1855 @@
+====================================================
+ FM SEASON HUB (FMSH) — RELEASE NOTES
+====================================================
+
+Change history, newest version first. Each block lists
+what changed in that version.
+
+Key:
+   [NOVO]      feature that did not exist before
+   [MUDOU]     behaviour or look changed
+   [CORRIGIDO] bug that existed and was fixed
+   [INTERNO]   change you don't see on screen, but that
+               holds the rest up
+
+
+====================================================
+ v0.8.2.1 — 20 Oct 2026
+====================================================
+
+DEALS
+---------------------------------------------------
+[CORRIGIDO] The FM27 pre-order badge now always
+   shows, in the app's language, without depending
+   on the notice board. It goes away on its own
+   after the launch on 10 Nov.
+
+
+====================================================
+ v0.8.2 — 20 Oct 2026
+====================================================
+
+INSTALLER
+---------------------------------------------------
+[NOVO] Optional Easy Training Talks plugin on the
+   extra plugins screen: praises or criticises the
+   whole squad's training in one go, through the
+   game's own conversations.
+
+DEALS
+---------------------------------------------------
+[NOVO] When there is a deal on the notice board
+   (right now, the FM27 pre-order), it shows up as a
+   badge in the corner of the screen. The button
+   opens the store after you confirm the link, and
+   the X hides the badge for 24 hours. Buying
+   through the link supports FMSH.
+
+NOTIFICATIONS
+---------------------------------------------------
+[MUDOU] With the app in Spanish, French, German or
+   Turkish, notices and the deal badge now show in
+   English instead of Portuguese.
+
+
+====================================================
+ v0.8.1 — 19 Oct 2026
+====================================================
+
+PLAYER DATA INSIDE FM
+---------------------------------------------------
+[CORRIGIDO] With Player Data open in the game,
+   connecting the app now switches it to the live
+   reading on its own, without changing players.
+   The same goes for Refresh and disconnecting.
+
+
+====================================================
+ v0.8.0 — 19 Oct 2026
+====================================================
+
+PUBLIC RELEASE
+---------------------------------------------------
+[MUDOU] FMSH leaves alpha: this is the first public
+   version. The "alpha" label is gone.
+
+FM LISTS AND VIEWS
+---------------------------------------------------
+[NOVO] FM lists (.fmf): the Shortlist and Favourites
+   with several lists come into FMSH through the
+   Library, with a "This career only" option.
+[NOVO] Import FM view: the button next to Columns,
+   in the Database and My Team, opens a view saved
+   in the game. A review screen shows which columns
+   come in and why the others are left out. Applying
+   only puts the view on screen, saving nothing.
+[NOVO] New columns: 11 in the Database (raw FM
+   numbers) and 42 in My Team.
+[NOVO] Free tier limits: 1 FM list, view only (it
+   switches the analysis tabs; filters, columns,
+   search and export are on the paid tiers), and
+   up to 3 favourite lists. If you already had more
+   lists, you keep them all. Import FM view is free
+   on every tier.
+[MUDOU] Removing an FM list asks in the app's own
+   look, no longer in a browser window.
+
+NAMES AND LOOK
+---------------------------------------------------
+[MUDOU] Clubs and competitions show the FM short
+   name ("Boca Juniors", "Brasileirão") across the
+   app. The full name shows on hover. Before, the
+   table cut the name at the first word ("Club").
+[MUDOU] New 3D icons in graphite and gold. The
+   buttons at the top of the columns and the signs
+   next to the player's name keep the old drawing.
+
+PLAYER PROFILE
+---------------------------------------------------
+[MUDOU] Overview: the 4 cards at the top are now
+   fixed for each position instead of changing
+   from player to player.
+
+CONNECTION AND TRAY
+---------------------------------------------------
+[MUDOU] Disconnect only disconnects: you stay on
+   the screen you were on.
+[CORRIGIDO] The tray's plugin panel cut off the last
+   line ("Open in Settings").
+[CORRIGIDO] Screen recorders such as Medal captured
+   the tray's hidden panel instead of the app window.
+
+
+====================================================
+ v0.7.5 alpha — 13 Oct 2026
+====================================================
+
+FIND PLAYERS LIKE
+---------------------------------------------------
+[NOVO] Find players like: right-click a player (or use
+   the "Find players like…" button on the profile) and
+   FMSH finds players similar to him. There are two
+   kinds of search, and each measures something
+   different.
+[NOVO] Replacement: what the player delivers
+   (goals, assists, chances created and similar),
+   at a similar level and much cheaper. It accepts
+   players who deliver the same or more, with CA
+   from 85% to 115% of his, and value and wage up
+   to 70% and up to his. The table shows a Saving
+   column.
+[NOVO] Playing style: how the player plays (passes,
+   tackles, fouls, runs), up and down, in any
+   league, level or price.
+[NOVO] Each search panel lets you adjust the
+   tolerance, how many metrics may fall outside
+   the range, the minutes, the quality floor and
+   ceiling, value, age, contract end, the top 20
+   leagues and the preferred foot (by footprints).
+[NOVO] The result shows on the Seasons page, with
+   the similarity, each metric's difference from
+   the player's, and his row pinned at the top.
+   The Columns… button lets you add any statistic.
+[NOVO] Average profile: with 2 or 3 players
+   selected, the search uses their average.
+[NOVO] Recipes: a search can be saved to the
+   Library (.rsh file) and applied to another
+   season or shared.
+[NOVO] In Settings, the Find players like section sets
+   which restrictions the panel opens with.
+
+PLAYER PROFILE
+---------------------------------------------------
+[NOVO] The Player Data tab gained the Goalkeeper
+   tab and the goalkeeper Overview: saves, goals
+   prevented, footwork and what matters most to
+   someone in goal.
+[CORRIGIDO] Players generated by the game during a
+   save (newgens) show their photo again and open
+   correctly in the profile from the game.
+[NOVO] Open in FM: on the profile, in the
+   comparison (one button per player) and on the
+   tables' right-click menu, it opens the player
+   in the running FM. Needs the updated FMSH
+   in-game plugin.
+[NOVO] The Player Data tab shows inside the player
+   profile in FM itself, in any skin, with the
+   season picker (FMSH in-game plugin).
+[NOVO] In the Player Data inside FM you can mark the
+   player as a favourite, and the mark shows right
+   away in the FMSH window.
+[CORRIGIDO] FM24: the Player Data tab now shows the
+   data from each match (match by match, role in
+   the team, performance by context and splits),
+   also in the live reading.
+[MUDOU] When a player's per-match data is missing,
+   the notice says why: game version, matches the
+   game already deleted or a season without games.
+[CORRIGIDO] After the Euros, Copa América or AFCON,
+   the player's season counts his club games
+   again, not the national team ones.
+[MUDOU] In FM24, which does not accept the FMSH
+   plugins, the Open in FM button does not show.
+[NOVO] Player Data inside FM follows the skin:
+   graphite background and cards in MrTini; its
+   gradient and dark cards in CTRL 26; the original
+   game background with no skin.
+[MUDOU] Player Data inside FM uses the language
+   chosen in FMSH and switches without restarting.
+[MUDOU] A player from a league the game does not
+   keep in detail in this save gets a notice
+   saying so.
+
+SEASONS
+---------------------------------------------------
+[NOVO] Auto snapshot: when your club's league and
+   cups end, FMSH saves the season by itself. Turn
+   it on or off in Settings, with a name template
+   and the choice between warning or replacing the
+   oldest one when the slots are full.
+[NOVO] Season Tracker: leagues on another calendar
+   are read right after they end, and the Database
+   shows, for each player, his latest complete
+   season. When the number is not from the saved
+   season, a tag next to the name says so (for
+   example "28/29" or "2 clubs").
+[NOVO] In Archived seasons, the two blocks (Auto
+   snapshot and Season Tracker) show the dates and
+   have a Configure shortcut.
+[MUDOU] A notice over the game announces the Auto
+   snapshot, with sound; the Season Tracker shows
+   only a small pill, without sound.
+
+DATABASE
+---------------------------------------------------
+[CORRIGIDO] A filter you removed from the Database
+   no longer comes back when you reopen the app,
+   and "Clear all" also clears the filter count.
+[CORRIGIDO] FM24: the youth teams filter now
+   separates national teams, national youth teams
+   and reserves, and each club's league is no
+   longer a generic division ("Lower Division") or
+   a qualifier.
+
+WINDOWS TRAY
+---------------------------------------------------
+[NOVO] FMSH can stay in the Windows tray, next to
+   the clock: closing the window only hides it, and
+   Auto snapshot and Season Tracker keep saving.
+   The first time, the X asks what to do, with
+   "Remember my choice".
+[NOVO] The icon shows the connection: green dot,
+   connected to FM; dimmed, disconnected; red dot,
+   the connection to FM dropped.
+[NOVO] Right-click the icon: a menu with the
+   connected career, Connect to FM, shortcuts to
+   the app's screens, Settings, the installed
+   plugins and the update (the row checks or
+   updates).
+[NOVO] Connecting from the tray menu shows the same
+   notice as the Auto snapshot over the screen:
+   connecting, connected or the error.
+[NOVO] With the window hidden, Windows tells you
+   when the connection to FM drops and when a new
+   FMSH version is out.
+[NOVO] In Settings › App: what the X does
+   and "Start with Windows (in the tray)", off by
+   default.
+[MUDOU] Opening FMSH while it is already open brings
+   its window back instead of opening a second copy.
+
+
+====================================================
+ v0.7.3 alpha — 09 Oct 2026
+====================================================
+
+GAME PLUGINS
+---------------------------------------------------
+[NOVO] On opening, after checking for a new FMSH
+   version, the app also updates the game plugins
+   you already have (with the game closed).
+[NOVO] New plugin available: if you already use an
+   FMSH plugin, you get a notice when a new plugin
+   comes out, with a photo and description. It is
+   only installed if you click Install.
+[NOVO] In Settings, "Notify me when there is a new
+   plugin" turns that notice off.
+
+
+====================================================
+ v0.7.2 alpha — 08 Oct 2026
+====================================================
+
+DATABASE
+---------------------------------------------------
+[MUDOU] The youth team filter recognizes more
+   competitions: youth leagues the game saves
+   without a name get one from their category
+   (e.g. "U20 League · Ecuador 1"), and the Copa 2
+   de Julho now counts as youth. Applies to new
+   reads; seasons already saved do not change.
+[NOVO] School clubs (Japanese schools, MLS Next
+   academies and similar) show as "First team
+   (school)", with the competition's country.
+[NOVO] With the youth filter on and no age limit,
+   the screen warns that the filter is by team,
+   not by age, and offers "Apply age up to 20".
+
+INSTALLATION AND UPDATES
+---------------------------------------------------
+[NOVO] FMSH in-game: the installer adds the
+   "Player Profile" and "Compare" buttons to the
+   player profile in FM26. The first opens the
+   player in FMSH; the second opens the comparison
+   with that player already on one side. It comes
+   ticked on the installer's FMSH screen.
+[NOVO] Kits 3D, an optional plugin: shows the kits
+   in 3D on the club screen and opens the full kit
+   on a 3D player model.
+[NOVO] Stadiums 3D, an optional plugin: the club's
+   stadium in 3D on the club screen. Needs
+   bassyboy's CustomStadium stadium mod.
+[MUDOU] Plugins no longer ship inside the
+   installer: it downloads the latest version of
+   each one while installing. Without internet,
+   FMSH installs normally and the plugins wait for
+   the next time.
+[CORRIGIDO] The update window no longer shows up
+   empty: it says what it is doing and only closes
+   once FMSH is open.
+
+
+====================================================
+ v0.7.0 alpha — 25 Sep 2026
+====================================================
+
+INSTALLATION AND UPDATES
+---------------------------------------------------
+[MUDOU] This is an ALPHA build, for closed testing.
+   Before installing, make a copy of the
+   Documents\FM Season Hub folder — it is the safe
+   way back if something goes wrong.
+[NOVO] FMSH now has an installer: it shows up in the
+   Windows program list, with shortcuts on the
+   desktop and in the Start menu, and does not ask
+   for administrator permission.
+[NOVO] Automatic updates: when it opens, FMSH checks
+   for a new version and, if there is one, updates
+   itself and opens already on the new version. With
+   the app open, the version icon lets you know;
+   "Update now" closes, updates and reopens it.
+[NOVO] Optional plugins in the installer:
+   TacticalCam and PitchHUD, for FM26 on Steam, Epic
+   or Xbox. If the game does not have BepInEx, the
+   installer downloads it from the official site.
+   Automatic updates do not touch the plugins.
+[NOVO] FMSH - Diagnostics comes along, in the Start
+   menu: it creates a report for support when the
+   app will not open.
+[MUDOU] Seasons, ready-to-open copies and window
+   preferences moved out of Documents into the
+   program folder (dados). The installer moves them
+   on its own. Settings, log, Library and languages
+   stay in Documents.
+[MUDOU] Terms of Use and Privacy Policy at version
+   1.2. They are accepted in the installer, and the
+   app does not ask again.
+[NOVO] When uninstalling, FMSH asks whether to also
+   remove the plugins and BepInEx it installed. Your
+   seasons are kept.
+
+PERFORMANCE
+---------------------------------------------------
+[MUDOU] Opening a saved season went from many
+   seconds (minutes, on a hard drive) to under 1
+   second.
+[MUDOU] The player profile opens in about 2 seconds
+   the first time, and instantly after that.
+[MUDOU] Connecting to the game is about twice as
+   fast, and the Database is ready as soon as the
+   read ends.
+[MUDOU] Going back to a screen or a season you
+   already opened is instant, with no loading window
+   flashing.
+[NOVO] Settings > Preferences > App memory: how much
+   memory FMSH may use to keep seasons open. The
+   default is 1 GB; more memory makes switching
+   between seasons instant.
+[INTERNO] Each saved season gets a ready-to-open
+   copy, about 200 MB, in the program's dados\cache
+   folder. Deleting the season deletes the copy too.
+   While the app is idle, FMSH prepares these copies
+   on its own.
+[INTERNO] When connecting, the player read uses
+   several processor cores at once — CPU usage going
+   up for a few seconds is expected.
+
+PREVIEW AND QUICK CARD
+---------------------------------------------------
+[NOVO] Preview: right-click a player > Preview opens
+   a card docked to the footer, with their summary.
+   Up to 6 can be open; you can drag and minimise
+   them.
+[NOVO] Quick card: resting the mouse on a player in
+   the Database or My team for 1 second shows their
+   summary. It can be turned off in Settings.
+
+PLAYER PROFILE
+---------------------------------------------------
+[MUDOU] The profile Export button became Screenshot:
+   it saves an image of the profile window, without
+   the buttons.
+[NOVO] Overall from 0 to 100 in the ring on the
+   cards and the profile. In Settings you choose
+   whether it measures attributes, the season's
+   performance, or both.
+[NOVO] Form: the rating of every match, in a
+   match-by- match chart. It covers every player,
+   not only the ones scouted in the game. Friendlies
+   are left out.
+[NOVO] Preferred foot and overall joined the left
+   block of the profile.
+[MUDOU] The season numbers became scoreboard-style
+   cards. For goalkeepers, "Aerial duels %" gave way
+   to "Save %" and "Clean sheets %".
+[MUDOU] The career total decides the season player
+   by player. In a save on a Brazilian calendar, a
+   player in a European league no longer loses half
+   the season or counts it twice.
+[NOVO] A season captured before it ended for that
+   player shows the "incomplete" badge.
+[NOVO] Between 1 and 15 June, the Portal warns that
+   the European leagues have ended and it is time to
+   capture.
+
+COMPARE PLAYERS
+---------------------------------------------------
+[NOVO] Compare players: two players side by side,
+   with the season numbers, the overlaid pizza,
+   metric by metric and the personality profile. It
+   opens from the sidebar, by right-clicking, or
+   from the Compare tab of the profile.
+[NOVO] Each player's name leads to their profile.
+[NOVO] Export the comparison as an image.
+
+MY TEAM
+---------------------------------------------------
+[MUDOU] The advanced filter is the same as the
+   Database's, with AND/OR and brackets.
+[NOVO] My team opens without FM, with the season
+   picker, and saves and loads columns and filters.
+
+SCREEN
+---------------------------------------------------
+[NOVO] FMSH fits laptop screens: on smaller screens
+   (or with Windows zoom at 125% or 150%) everything
+   shrinks in the same proportion, with nothing cut
+   off.
+[NOVO] Loading screens show how long they have been
+   waiting.
+[NOVO] Alpha version strip at the top and a Report a
+   bug button that opens the bugs and ideas board.
+
+LANGUAGES
+---------------------------------------------------
+[NOVO] Turkish.
+[MUDOU] Spanish, French and German are complete:
+   this version's new phrases went into all three.
+
+FIXES
+---------------------------------------------------
+[CORRIGIDO] A new FM26 save dated before 2025 gave
+   "no save loaded" with the save open.
+[CORRIGIDO] "Refresh" on the same save could keep
+   showing the Database from the previous read.
+[CORRIGIDO] With a language other than Portuguese or
+   English, the choice was not kept and the legal
+   documents showed in Portuguese.
+[CORRIGIDO] The read screen stayed on "Starting…"
+   from start to finish; it now shows each stage.
+
+
+====================================================
+ v0.6.6 — 11 Sep 2026
+====================================================
+
+FOOTBALL MANAGER 2024
+---------------------------------------------------
+[NOVO] FMSH reads Football Manager 2024 saves. Open
+   FM24 with the save loaded and connect as usual:
+   players, attributes, positions, height, nationality
+   and career totals all come through. For now the STEAM
+   version only — on FM24 from Game Pass/Xbox or Epic the
+   app will not find the save. FM26 keeps working on all
+   three stores.
+[NOVO] Season statistics come from FM24 too — minutes,
+   rating, goals, assists and the advanced detail that
+   feeds Moneyball.
+[NOVO] Contract, club finances and coaching staff are
+   now read on FM24. They used to come empty or with
+   numbers that made no sense.
+[NOVO] Every season records which Football Manager it
+   came from, and the game icon shows next to the
+   connection state, in the season picker, in Save
+   Season, in Archived seasons, in the player profile
+   and on each career. With both games on screen, the
+   same number means different things.
+[INTERNO] A season saved BEFORE this version gets no
+   badge when there is no way to know its origin for
+   sure. FMSH would rather show nothing than stamp it
+   wrong.
+
+FIXES
+---------------------------------------------------
+[CORRIGIDO] Favouriting works again. The star did not
+   mark, did not write to disk and did not tell the
+   server — the list looked like it vanished when you
+   closed the app because it was never saved. If you
+   had favourites before, they are still there.
+[CORRIGIDO] FMSH connects to Football Manager 2026
+   again after the game's update. It claimed not to
+   recognise the version even with the save open.
+
+SIDEBAR
+---------------------------------------------------
+[MUDOU] The account block got a frame and a hover
+   highlight: it was always clickable, but the only
+   hint was a tiny arrow.
+[NOVO] The career has its own card, with the badge, the
+   name, how many seasons it holds and the invitation
+   to switch career. Anyone who never opened the
+   account menu had no idea more than one was possible.
+[MUDOU] The top shortcut is always "FM Season Hub"
+   again. It used to turn into the club name when a
+   save was open, and a shortcut labelled "Sunderland
+   AFC" that leads to the home screen was confusing.
+
+SEASON PICKER
+---------------------------------------------------
+[MUDOU] The button on both pickers (the Seasons tab and
+   the player profile) shows the game icon, the name and
+   the in-game date at the end. Two seasons with similar
+   names were impossible to tell apart without opening
+   the list.
+
+
+====================================================
+ v0.6.5 — 05 Sep 2026
+====================================================
+
+FIVE LANGUAGES
+---------------------------------------------------
+[NOVO] FMSH speaks French, Spanish and German, on top
+   of Portuguese and English. The translation is
+   complete: menus, submenus, the language picker on
+   the start screen, the filters, the column names and
+   the messages.
+[NOVO] Every language shows the country flag next to
+   its name.
+[NOVO] The statistic column names come from Football
+   Manager ITSELF, not from a translation of ours —
+   it is the same wording you read inside the game.
+[NOVO] The 59 playing styles are now translated. They
+   used to show in English in EVERY language,
+   Portuguese included.
+[MUDOU] The 47 attribute names and the group titles
+   moved into the language files — any of them can be
+   fixed in Notepad.
+
+THE LANGUAGE BECAME A FILE
+---------------------------------------------------
+[NOVO] FMSH's text moved out of the program and became
+   FILES you can open and edit. Each language is a
+   folder with two text files: one for the screen
+   phrases, one for the column names. You can fix a
+   translation in Notepad, save, reopen the app and see
+   the result — no need to wait for a new version.
+[NOVO] Settings > Preferences now lists the languages,
+   how much of each is translated, a button that
+   generates the file to translate and another that
+   opens the folder. The file comes with the English
+   next to every phrase, so the translator knows what
+   they are translating.
+[NOVO] To install a language somebody sent you, copy
+   their folder into the Idiomas folder. It shows up in
+   the list on its own.
+[MUDOU] A phrase that has not been translated yet shows
+   in ENGLISH, not Portuguese. English is now the
+   reference translators work from.
+
+ADVANCED FILTER
+---------------------------------------------------
+[CORRIGIDO] Several advanced-filter fields stayed in
+   Portuguese in the other languages — preferred foot,
+   contract type and over 300 column names. They all
+   follow the chosen language now, and they all go into
+   the files you can correct.
+
+CURRENCY
+---------------------------------------------------
+[CORRIGIDO] On a fresh install the currency picker kept
+   saying "connect to FM" even after connecting and
+   reading the save. The list of 173 currencies was read
+   from the game but only reached the screen after
+   closing and reopening the app.
+
+SAVE SEASON
+---------------------------------------------------
+[NOVO] The screen shows the last seasons already saved
+   in this career, with scope, in-game date, number of
+   players and size — so you can pick a name without
+   leaving the screen.
+[NOVO] A warning when the capture repeats one you
+   already have: same career, same scope, same in-game
+   date.
+
+PLAYER PROFILE
+---------------------------------------------------
+[CORRIGIDO] The "Career" option, which adds up every
+   season, did not show up even with two seasons saved.
+   The app decided whether the season had rolled over by
+   checking whether the number of appearances DROPPED —
+   and if you always save at the end of the season, both
+   captures hold a full year of matches, so nothing
+   dropped and the two counted as one. It now compares
+   season appearances against career appearances, which
+   is what the game itself records.
+[MUDOU] When the career total genuinely does not apply,
+   the option shows up disabled saying why, instead of
+   simply not being there.
+[NOVO] The data card shows how much the player has
+   GROWN since the comparison season — "173 cm +4". FM
+   re-estimates young players' height every season, so
+   it can go up or down.
+[CORRIGIDO] Nationality came out wrong in the CSV
+   exported from the player profile.
+
+IF SOMETHING SHOWS UP WITH NO TEXT
+---------------------------------------------------
+[MUDOU] The language change touched nearly every
+   screen. If something shows up blank or with an odd
+   name where the text should be, that is what it is —
+   please report it.
+
+THE WINDOW THAT CAME UP BLANK
+---------------------------------------------------
+[CORRIGIDO] On some computers FMSH opened the window
+   with the right background colour and nothing inside.
+   Windows on those machines described one of the
+   program's internal files incorrectly and the screen
+   refused to build. The app stopped asking Windows
+   about it.
+[NOVO] The diagnostics flags this case on one line,
+   instead of leaving the window empty with no
+   explanation.
+
+
+====================================================
+ v0.6.4.1 — 03 Sep 2026
+====================================================
+
+THE WINDOW THAT CAME UP BLANK
+---------------------------------------------------
+[CORRIGIDO] On some computers FMSH opened the window
+   with the right background colour and absolutely
+   nothing inside. It was not a freeze: Windows on
+   those machines described one of the program's
+   internal files incorrectly, and the screen refused
+   to build. The app stopped asking Windows about it
+   and now states it itself — those machines open
+   normally again, and nothing changes on the others.
+[NOVO] The diagnostics now has a line that flags this
+   straight away, instead of leaving the window empty
+   with no explanation.
+
+
+====================================================
+ v0.6.4 — 01 Sep 2026
+====================================================
+
+EPIC GAMES
+---------------------------------------------------
+[NOVO] FMSH now reads Football Manager bought on EPIC
+   GAMES. It previously recognised only Steam and Game
+   Pass; on Epic it would connect and find no save. All
+   three stores now work, and the app works out on its
+   own which one your game came from.
+[MUDOU] On Epic, two things are switched off for now:
+   the save's name (the screen shows the manager's name
+   instead) and the retirement warning. We would rather
+   switch them off than show something wrong — they come
+   back once they are confirmed.
+
+ALERTS AND UPDATES
+---------------------------------------------------
+[NOVO] A notice can now carry a BUTTON leading to
+   what it is about. Before leaving the app, the
+   screen shows the full address so you can check it.
+   FMSH only opens addresses from known places
+   (Patreon, Discord, X, GitHub, Notion).
+[NOVO] New notice type NEW VERSION, for when an
+   update ships.
+[NOVO] The app tells you when a new version exists,
+   with a banner on the Portal and a button to the
+   download. It does NOT download or install anything
+   on its own — updating stays your call.
+[NOVO] "Later" hides the notice for that version, and
+   only that one: the next release speaks up again.
+
+DIAGNOSTICS
+---------------------------------------------------
+[NOVO] The Diagnostics screen gained FULL
+   DIAGNOSTICS: the same examination the standalone
+   program runs, now one click inside the app. It
+   measures what the screen did not show — game
+   processes, memory addresses, antivirus, port and
+   WebView2 — and writes the file support asks for.
+[NOVO] A button to download the standalone
+   diagnostics, still the way in for anyone who
+   cannot open the app.
+
+
+====================================================
+ v0.6.3 — 29 Aug 2026
+====================================================
+
+CONNECTING TO THE GAME
+---------------------------------------------------
+[CORRIGIDO] Windows 11: the app said "no save loaded"
+   with the save open right in front of you. It was
+   throwing away the game's addresses for falling outside
+   a range that had been measured on a single computer.
+   The range is now learned on your machine.
+[CORRIGIDO] Game Pass installed in a folder you chose:
+   the app treated the game as if it were the Steam one
+   and read nothing. Where the game came from is now
+   recognised from the game's own file, and confirmed
+   when reading.
+[MUDOU] When reading fails, the screen says what
+   happened instead of always saying "no save loaded".
+[NOVO] FMSH DIAGNOSTICS: a separate program that works
+   even when the app won't open. It shows what it can
+   read from the game and writes a file to
+   Documents\FM Season Hub\diagnostic for you to send to
+   support.
+
+LANGUAGE
+---------------------------------------------------
+[CORRIGIDO] With the app in English, some text stayed in
+   Portuguese: your tier name, the wage explanation, and
+   the column descriptions that appear when you rest the
+   mouse on a table header.
+[CORRIGIDO] Searching for a column in English found
+   nothing — it only worked typing in Portuguese.
+[CORRIGIDO] The language you chose reverted to
+   Portuguese when you reopened the app.
+[MUDOU] "Presses" is now "Pressures", the game's own
+   term.
+
+CURRENCY AND WAGES
+---------------------------------------------------
+[CORRIGIDO] The currency list came up empty: you could
+   not pick the euro or change currency after connecting.
+[CORRIGIDO] Choosing monthly or yearly wages still
+   showed the weekly figure.
+
+GENERAL
+---------------------------------------------------
+[INTERNO] Security and stability fixes.
+
+
+====================================================
+ v0.6.2 — 28 Aug 2026
+====================================================
+
+PORTAL REBUILT
+---------------------------------------------------
+[MUDOU] The Portal was redesigned and is now the app's
+   entry screen: connection block at the top, the brand
+   with its logo, and everything else laid out in cards.
+[NOVO] NEXT STEP: the app suggests what to do now, based
+   on the state of your save.
+[NOVO] SAVED FILTERS: your Library searches one click
+   away, with the ones you created listed first.
+[NOVO] WHAT CHANGED: eight measures from one season to
+   the next — players, average age, average CA, wage bill
+   (in the period you chose), squad value change,
+   breakthroughs, expiring contracts and the wage
+   difference. Player names are clickable and open the
+   profile; expiring contracts takes you to My team
+   already filtered.
+[NOVO] Previews of the main screens and a community row
+   with Discord, Patreon, X and Roadmap.
+[MUDOU] The Portal now appears IN FULL even with no save
+   connected — before it depended on the live read.
+
+POSITION FILTER
+---------------------------------------------------
+[NOVO] A POSITION button on the Database toolbar, with
+   the 14 positions FM26 actually uses and the game's own
+   names. You can require a familiarity level (the
+   default brings players who are comfortable there).
+[NOVO] When the open analysis tab holds none of the
+   ticked positions, the screen says so instead of
+   returning an empty list with no explanation.
+
+ABOUT AND DOCUMENTS
+---------------------------------------------------
+[NOVO] ABOUT screen: what the app is, its version, the
+   statement that it is an independent project (not
+   connected to Sports Interactive or SEGA) and the
+   community shortcuts.
+[MUDOU] The Terms of Use and the Privacy Policy moved out
+   of Settings and now live on the About screen. Settings
+   keeps the shortcut.
+[MUDOU] The documents moved to version 1.1, so acceptance
+   is asked once more when you open the app.
+
+PLAYER PROFILE
+---------------------------------------------------
+[MUDOU] The four gauges are animated: the arc sweeps from
+   zero to the percentile and the number counts up with
+   it. Anyone who asks for less motion in their system
+   settings gets the result straight away.
+[MUDOU] The minutes cut to enter the comparison went from
+   450 to 900 (ten full matches). With five games, one
+   good match moved the whole per-90 average. The number
+   is still written in the footer.
+
+TABLES
+---------------------------------------------------
+[CORRIGIDO] The shadows that warn there is content out of
+   sight are back on all four sides, now light and no
+   longer covering the pinned columns.
+
+DIAGNOSTICS
+---------------------------------------------------
+[NOVO] PLATFORM: the screen says whether the game runs
+   from Steam or from Game Pass / Microsoft Store. They
+   are different installations, and knowing which one
+   settles half of the reading problems. It shows with FM
+   closed too, with the date it was last seen.
+
+OTHER CHANGES
+---------------------------------------------------
+[MUDOU] Both beta banners are gone from the screen.
+[INTERNO] Security and stability fixes.
+
+
+====================================================
+ v0.6.1 — 22 Aug 2026
+====================================================
+
+PLAYER PROFILE — WHICH SEASON YOU ARE LOOKING AT
+---------------------------------------------------
+[NOVO] A season selector on the far left of the profile.
+   You can look at the same player in any saved capture
+   of the save without leaving the screen: identity,
+   statistics, attributes and the charts all move
+   together. The current read is marked LIVE.
+[NOVO] ALL TIME: the last option in the list sums EVERY
+   saved season of that save. The charts compare against
+   the accumulated database too, so you can see who the
+   all-time top scorer of your career is, not just of
+   the season.
+[NOVO] The seven cards at the top (games, minutes,
+   goals, assists, cards and rating) now show ARROWS:
+   how much the number moved against another season.
+   Green is better and red is worse — picking up more
+   cards counts as worse, even with the arrow pointing
+   up.
+[NOVO] Arrows on the ATTRIBUTES as well, discreet, with
+   the exact difference in the tooltip.
+[NOVO] You choose which season the arrows compare
+   against. The default is season against season: the
+   most recent capture from an earlier in-game year.
+[NOVO] The wage on the profile now shows the period you
+   chose (/w, /m or /y).
+
+WHAT THE CHARTS COMPARE AGAINST
+---------------------------------------------------
+[NOVO] A MY LEAGUE / TOP 20 button beside the title. The
+   default is still the 20 highest-reputation leagues;
+   the other side answers "how would he do in my own
+   league?". The pizza and the four gauges follow it;
+   the radar does not change, because it shows
+   attributes, not percentiles.
+[NOVO] The footer says which benchmark is in use and
+   warns when it holds few players — with thirty in the
+   group, each one is worth more than three percentile
+   points.
+[MUDOU] The block was titled "Moneyball · per 90
+   minutes", and it had been wrong since the pizza
+   started drawing percentiles: slice size is the
+   player's standing in the group, and four of the
+   twelve slices are not per 90 at all — they are
+   percentages. It now reads "Performance profile".
+
+SEARCH
+---------------------------------------------------
+[MUDOU] The top search (Ctrl+K) now sorts by
+   REPUTATION. Searching "silva" used to return four
+   players from smaller leagues; now it returns Bernardo
+   Silva, Fábio Silva, António Silva.
+[CORRIGIDO] Finding a player in that search and clicking
+   did not open his profile: the app switched screens
+   and stopped there. Two causes — the address carried
+   the player and nobody read it, and the search looked
+   in the most recent season of ANY save rather than the
+   open career.
+
+TOP BAR
+---------------------------------------------------
+[NOVO] A shortcut to save the season, next to the
+   connection badge. It only appears with a save loaded,
+   which is the only moment capturing makes sense.
+
+====================================================
+ v0.6 — 21/08/2026
+====================================================
+
+INITIAL SETUP — the first-run guide
+---------------------------------------------------
+[NOVO] Opening FMSH for the first time now walks you
+   through EIGHT steps to the first useful result: a
+   saved season and the Portal open. Before that you
+   landed on the home screen and had to work out on your
+   own that you needed to open the game, connect, choose
+   a scope and name the season.
+[NOVO] The steps, in order: welcome and language · CA and
+   PA · graphics folder · how the app organises seasons ·
+   connect to Football Manager · currency · wage period ·
+   capture.
+[NOVO] You can go BACK, SKIP any step and close the app
+   halfway: your progress is stored and you return where
+   you left off. Skipping erases nothing you already
+   chose.
+[NOVO] The connection step has a checklist and says what
+   happened — game closed, no save loaded or unsupported
+   version, each with its own text and a retry button.
+[NOVO] The capture step lets you choose what to save with
+   the cost written on screen: squad only (about 30
+   players, seconds, ~20 KB) or the whole database (over
+   200,000, ~2 minutes, ~160 MB). There is a third door,
+   "capture later", and a warning when a season with the
+   same scope already exists for that save.
+[NOVO] With no connection, the capture step offers to
+   connect right there instead of becoming a dead end.
+[NOVO] "Run the initial setup again", in Settings > Files
+   and folders: reopens the guide without erasing any
+   preference.
+[NOVO] Anyone already using FMSH never sees the guide: if
+   you have a saved season you go straight in, as always.
+
+WAGES BY WEEK, MONTH OR YEAR
+---------------------------------------------------
+[NOVO] Football Manager stores wages WEEKLY, and until now
+   the app showed only that, with a warning in red. You
+   can now choose weekly, monthly or yearly, in Settings >
+   Preferences.
+[MUDOU] The choice applies everywhere: tables, My team,
+   player profile, advanced filter and the exported CSV.
+   The header says which one it is — "Wage (monthly)" —
+   on screen and in the file.
+[MUDOU] The wage period belongs to the SAVE, like the
+   currency: two saves can have different choices.
+[INTERNO] The stored value and what travels to the filter
+   are still pounds per week; month and year are display
+   maths (week × 52/12 and × 52), and the screen says so.
+
+HOME SCREEN
+---------------------------------------------------
+[MUDOU] Bigger logo, with a glow, and the name written
+   below it is now "FM SEASON HUB" — the same brand used
+   to appear three times on one screen.
+[NOVO] Animated background: a network of wires that links
+   itself, lights up near the cursor and sends golden
+   pulses along the links. The text arrives word by word
+   and clicking leaves a ripple.
+[MUDOU] The screen got shorter than the old one even with
+   the logo 60% bigger.
+
+LOADING AND TRANSITION
+---------------------------------------------------
+[MUDOU] Every wait in the app now shows the SAME loader: a
+   spinning cube with a lit core. There used to be three
+   different drawings for the same state.
+[NOVO] When the first capture finishes, the screen holds
+   for two seconds on "season saved" and makes a smooth
+   passage to the Portal — the Portal mounts behind while
+   the screen is still covered, so it appears ready.
+
+CURRENCY
+---------------------------------------------------
+[NOVO] A preview of the chosen currency, in the guide and
+   in Settings: symbol, name and two converted examples
+   (a market value and a wage). The list has 173
+   currencies named in English, and only the example
+   answers what actually changes.
+
+GRAPHICS FOLDER
+---------------------------------------------------
+[NOVO] A "Select folder…" button opens the Windows dialog,
+   in the guide and in Settings. Detecting automatically
+   or pasting the path still work.
+[NOVO] A folder that does not exist, or that the app
+   cannot open, now says so straight away and never
+   blocks anything else.
+
+TIPS
+---------------------------------------------------
+[NOVO] A short tip on the Portal explaining what that
+   screen sums up, with "got it, do not show again" — the
+   first of a series that will appear on each screen,
+   instead of a manual on first use.
+
+====================================================
+ v0.5.2 — 21/08/2026
+====================================================
+
+PLAYER PROFILE — A WHOLE NEW SCREEN
+---------------------------------------------------
+[NOVO] Clicking a player now opens a FULL PROFILE
+   SCREEN instead of the old small window: portrait,
+   club badge, league logo, value, wage, age and
+   contract up front, the full record (height, date of
+   birth, foot, squad number, reputation, nationality,
+   caps and goals for country and in the league) plus
+   the pitch with the positions he plays and his
+   playing style traits.
+[NOVO] Every attribute, grouped as in the game and
+   using Football Manager's own names. Set pieces
+   (corners, free kicks, penalties and long throws)
+   now sit in a block of their own.
+[NOVO] Attributes are coloured by band: 15 is yellow
+   and green starts at 16.
+[NOVO] PIZZA CHART with 12 slices. Slice size is the
+   player's PERCENTILE in that metric — a full slice
+   means almost nobody does more. The goalkeeper has
+   his own eight slices, with goals conceded and
+   possession lost inverted (conceding little is good).
+[NOVO] Four GAUGES per position, chosen so they never
+   repeat what the pizza already shows: centre-backs by
+   key tackles, clearances, blocks and duels; full-backs
+   by crossing and clear chances created; strikers by
+   xG, goals above expected and conversion; keepers by
+   fingertip saves, penalties saved, mistakes and
+   difficult saves.
+[NOVO] A metric that appears in more than one position
+   always sits in the SAME slot, so you can compare two
+   players of different positions without relearning
+   where each number lives.
+[NOVO] "Work Rate Score" in the midfield gauges: 0 to
+   100, combining distance covered, tackles and
+   pressures, the three weighted equally.
+[NOVO] PERSONALITY RADAR: the hidden attributes
+   Football Manager stores and never puts on screen.
+   Further from the centre is better.
+[NOVO] WHO TO COMPARE WITH: eight icons beside the
+   pizza switch the comparison group — from keepers to
+   strikers, or all positions at once. The app opens
+   comparing the player against his own peers.
+[NOVO] The comparison uses the TOP 20 LEAGUES of the
+   same sex plus your career's league, and only players
+   with 450 minutes or more in the season. The size of
+   the pool is written in the footer.
+[NOVO] Wingers are compared with attacking midfielders,
+   not with strikers. Measured in the save: the two are
+   not alike in ANY of the nine main metrics — the
+   median winger scored 36th for goals and the median
+   striker 33rd for progressive passing, purely because
+   of position.
+[NOVO] The centre of the pizza shows which position you
+   are comparing against, with its icon.
+[NOVO] A "?" button on every gauge, on the radar and on
+   the pizza, explaining what that number measures.
+[NOVO] An ESTIMATED DATA badge on players from leagues
+   Football Manager does not simulate in detail — there
+   the statistics are the game's estimate, not match by
+   match.
+[NOVO] The percentile caption now reads "42nd · BETTER
+   THAN 42 per cent" instead of the old "TOP 58 per
+   cent", which read backwards.
+
+SEARCH
+---------------------------------------------------
+[CORRIGIDO] Searching a name without accents found
+   nobody: "Estevao" returned zero and only "Estêvão"
+   worked. Now either works — including names with
+   stroked letters such as Højlund, Łukasz, Đurić and
+   Straße. Fixed in the Database and in My team.
+
+PREFERENCES
+---------------------------------------------------
+[CORRIGIDO] Closing and reopening the app wiped
+   everything you had set up: the LANGUAGE went back to
+   Portuguese, and with it the chosen columns, their
+   width, the screen's filters and the rest of the
+   Database state. The app window was starting in a
+   temporary profile and throwing it away on exit. It
+   keeps it now, and the language also has a backup
+   outside the browser.
+
+LIBRARY
+---------------------------------------------------
+[CORRIGIDO] The ready-made filters that ship with the
+   app were not being bundled: the Library opened empty
+   instead of showing Free agents, Contract expiring,
+   Transfer listed and Young prospects.
+
+====================================================
+ v0.5.1 — 18 Aug 2026
+====================================================
+
+ACCOUNT
+---------------------------------------------------
+[CORRIGIDO] Signing in with Patreon worked — the access
+   was stored — but the window kept showing "No account"
+   until the program was reopened. The sign-in comes back
+   through the BROWSER, outside the app window, and the
+   window had no way of knowing it had happened. It only
+   showed in the .exe: in a browser, switching tabs
+   refreshed the screen by accident.
+[NOVO] Clicking "Sign in with Patreon" now tells you a tab
+   was opened in your browser and waits. The result shows
+   up on its own, without closing or reloading anything,
+   and says which tier you got.
+[MUDOU] The notices in that flow got real prominence: a
+   large title in the colour of the state, a tinted panel
+   and the hint as a pill, instead of grey text.
+
+
+====================================================
+ v0.5 — 15 Aug 2026
+====================================================
+
+Patreon support now counts inside the app: there are five
+tiers, and each one unlocks more. Nothing you already
+saved is deleted because of this.
+
+
+ACCESS TIERS
+---------------------------------------------------
+[NOVO] Five tiers: Free, Supporter, Season Analyst,
+   Moneyball Scout and FMSH Pro. The tier shows in the
+   block at the top of the sidebar and on the Account tab.
+[NOVO] SIGN IN WITH PATREON: the app opens your browser,
+   you authorise it and the tier comes from your active
+   support. Anyone who cancels or has a card declined goes
+   back to Free.
+[NOVO] How many seasons each tier keeps PER CAREER: Free
+   and Supporter 1, Season Analyst 3, Moneyball Scout 10,
+   FMSH Pro unlimited. The limit is per career, not
+   overall — playing two saves is not punished.
+[NOVO] The SQUAD has its OWN limit, separate from the full
+   database: 3 per career on Free and Supporter, unlimited
+   from Season Analyst up. Saving the squad never uses up
+   a full season's slot. A squad takes about 20 KB; a full
+   season, 159 MB.
+[NOVO] Saving a season past the limit opens a window
+   saying how many you have, how many your tier keeps and
+   which step up solves it — with what that step unlocks,
+   up front. NOTHING is deleted. The window also offers
+   the way out that costs nothing: delete an old season.
+[NOVO] Favourites needs Season Analyst; Finances and
+   Moneyball Assistant need Moneyball Scout, which also
+   grants early access to new modules.
+[MUDOU] An access key now carries the TIER it was
+   generated for, instead of always unlocking everything.
+[MUDOU] "Access code" is now called ACCESS KEY throughout
+   the app.
+[NOVO] Sign out and see the whole ladder of tiers, all
+   on the Account tab.
+
+
+CAREERS
+---------------------------------------------------
+[CORRIGIDO] Opening FM created an EMPTY career next to the
+   one that already had your seasons, with the same name —
+   two "Avaí FC" in the list, and the active one with
+   nothing inside. Seasons saved before this version don't
+   store the save's identifier, so the app had no way of
+   knowing they belonged to the open save. Now, on
+   connecting, old seasons FROM THE SAME CLUB come across
+   to the open save, bringing the currency and the
+   favourites with them.
+[MUDOU] If you have two saves at the same club, they will
+   show up together after that adoption — the club is the
+   only clue old seasons carry. Use "Move to another
+   career", in Archived seasons, to split them.
+
+
+SCREENS YOU CAN'T OPEN YET
+---------------------------------------------------
+[MUDOU] A locked feature stopped being a greyed-out item
+   with no explanation: the screen shows the tier's name,
+   what it unlocks and a way to subscribe — over a blurred
+   background of the feature itself.
+[NOVO] A module still UNDER CONSTRUCTION has its own
+   screen, with a hammer, separate from the "needs a tier"
+   screen. They are two different reasons for not getting
+   in, and mixing them would make someone subscribe
+   expecting to open something today.
+[NOVO] Anyone with early access sees, on the
+   under-construction screen, that the module opens as
+   soon as development starts — ahead of general release.
+[MUDOU] In the sidebar, a locked item shows a PADLOCK and
+   an under-construction item shows a HAMMER, always
+   visible. A module still to be built stays dimmed at any
+   tier, FMSH Pro included.
+
+
+ALERTS
+---------------------------------------------------
+[MUDOU] The alert card got prominence: bigger title, the
+   kind of alert written above it (notice, news or alert)
+   and the date brought forward.
+[CORRIGIDO] Opening the Alerts screen marked everything as
+   read ON ENTRY. An alert discovered by the screen itself
+   was born already read, and the sidebar counter never
+   got a chance to appear. It now marks on LEAVING.
+[MUDOU] Alerts published in English show up translated for
+   anyone using the app in that language.
+
+
+TABLES — beta tester requests and fixes
+---------------------------------------------------
+[CORRIGIDO] The "Crz%" column (% of crosses completed)
+   came out as zero for everyone. It was labelled just
+   "Crosses" and treated as a whole number, but the sum is
+   completed ÷ attempted — 0.148 became 0. It now shows as
+   14.8%, under the right name.
+[CORRIGIDO] The heatmap on "Minutes per key pass",
+   "per goal scored" and similar columns was inverted:
+   whoever took LESS time showed up in red. That is 13
+   columns. "Minutes per goal conceded", for keepers, stays
+   as it was — there, taking longer is the good outcome.
+[MUDOU] In "My team" the list opens in PITCH ORDER
+   (keeper, defence, midfield, attack) and the position
+   column now sorts that way instead of alphabetically. In
+   the Database nothing changes: position stays
+   alphabetical there.
+[NOVO] Right-clicking a column HEADER opens a menu, in the
+   Database and in My team: filter by it, sort both ways,
+   highlight, pin to the left and hide. "Filter" opens the
+   advanced filter with that column's condition already
+   created.
+[MUDOU] Highlighting and pinning a column only existed as
+   small buttons that appeared on hovering the header.
+   They are still there, and now also in the right-click
+   menu, with the action spelled out.
+
+
+ACCOUNT AND SIDEBAR
+---------------------------------------------------
+[MUDOU] The user block shows the whole name on a single
+   line, with the tier below and where the access came
+   from (Patreon or key) to the right.
+[CORRIGIDO] A key generated for a middle tier opened as
+   FMSH Pro. The tier generated is now the tier delivered.
+
+
+====================================================
+ v0.4 — 14 Aug 2026 (shipped alongside v0.5)
+====================================================
+
+Everything below was finished and tested in the
+development environment, but had NOT YET shipped in an
+.exe. Anyone on v0.3.1 has none of this.
+
+
+CAREERS — each FM save with its own preferences
+---------------------------------------------------
+[NOVO] A CAREER is a Football Manager save. Anyone playing
+   several saves at once no longer has to reconfigure the
+   app on every switch.
+[NOVO] Currency, wage period and favourites now follow the
+   career: you can see R$ on the Avaí save and € on the
+   Schalke one, on the same computer.
+[NOVO] With FM open, the career is the one from the loaded
+   save — switching saves in the game switches the
+   preferences on its own.
+[NOVO] The block at the top of the sidebar shows the
+   active career and the menu switches career. The top bar
+   became "FMSH / <career> / <screen>".
+[MUDOU] "Archived seasons" now groups seasons by career.
+   You can rename a career and move a season from one to
+   another.
+[MUDOU] Seasons saved BEFORE this version were grouped by
+   CLUB, which is the only clue they carry. Two of your
+   saves at the same club land together — use "Move to
+   another career" to split them.
+[MUDOU] Your current favourites list was COPIED to the
+   active career. The old list was not deleted.
+[INTERNO] Every new season stores the save's identifier
+   (read from the game's memory), so the next ones are
+   born in the right career even with repeated clubs.
+
+
+ALERTS, RELEASE NOTES, DIAGNOSTICS AND CLUB PROFILE
+---------------------------------------------------
+[NOVO] ALERTS screen: notices and news we publish show up
+   there, with no new program needed. With no internet, it
+   shows the last alerts it downloaded.
+[NOVO] RELEASE NOTES screen: this file, inside the app.
+[NOVO] DIAGNOSTICS screen: version, folders, database size
+   and the recorded errors, with a button that opens the
+   folder and another that copies a summary to paste on
+   Discord.
+[NOVO] CLUB PROFILE screen: your club's finances,
+   attendance, facilities and supporters.
+[NOVO] ROADMAP item in the sidebar, opening the public
+   list of what's coming.
+[CORRIGIDO] A NEGATIVE club balance showed as "—". It now
+   shows in red, with the sign.
+
+
+ACCOUNT AND SETTINGS
+---------------------------------------------------
+[NOVO] Access code: anyone who receives a code activates
+   the full tier through Settings.
+[MUDOU] Settings now has three tabs: Account, Preferences,
+   and Files and folders.
+[MUDOU] The sidebar was reorganised: Portal, Alerts,
+   Release notes and Roadmap at the top; the "Main" group
+   became "HUB"; "Database" became "Seasons"; "Saved
+   seasons" became "Archived seasons".
+[MUDOU] The home screen lists the 4 most recent seasons,
+   with a link to see them all.
+
+
+POSITIONS — the column now says where the player plays
+---------------------------------------------------
+[MUDOU] The Position column shows EVERY position the game
+   lists on the player's profile, in FM's own format:
+   "ST, AM (RLC)", "M/AM (LC)", "D (RL)". Before, only the
+   main position appeared.
+
+[MUDOU] The MAIN position always comes first. This is a
+   deliberate difference from FM and FMST, which use a
+   fixed order (defence → attack) and write "AM (RLC), ST"
+   even for a striker. Here the first label is always what
+   the player actually is.
+
+[INTERNO] The cut-off for a position to appear is 17 on
+   the game's 1-to-20 scale — the same one FM uses on the
+   profile. Measured on 60 players against the familiarity
+   read by another route: cut-off 17 gets 60 out of 60;
+   16 gets 45 and 18 gets 48.
+
+[NOVO] The full notation also applies in MY TEAM and in
+   the exported CSV, not only in the Database. Checked row
+   by row: the first 13 rows of the CSV are identical to
+   the screen.
+
+[INTERNO] Left and right have always been separate data in
+   the game. Measured on the save: 26,903 players only
+   play at left-back, 30,081 only at right-back and 1,749
+   on both sides. Out wide the gap is much smaller — 9,491
+   play both sides, against 1,749 of the full-backs.
+
+
+ADVANCED SEARCH — attributes and parity with FMST
+---------------------------------------------------
+[NOVO] "Pick attributes" tab: the 62 attributes split by
+   category and in FMST's order — technical, set pieces,
+   mental, physical, goalkeeping, hidden and personality.
+   Tick several and build the condition for all at once.
+
+[NOVO] + and − buttons on every numeric box in the filter,
+   not just on attributes.
+
+[MUDOU] The position picker on a condition ROW became a
+   row of pills, like FMST. The drawn pitch stays at the
+   top of the modal — the two drive the SAME condition, so
+   ticking in one ticks in the other.
+
+[NOVO] The position condition shows up as a row in the
+   list, with its own AND/OR and on/off. Before it existed
+   only in the field at the top: the search filtered by
+   position and the condition list didn't say so.
+
+[MUDOU] The "+ Condition" button opens the field picker
+   straight away. The condition is only born after you
+   choose the field, already with the right operator —
+   before it was born with a guess of ours that you had to
+   undo.
+
+[MUDOU] The field picker took FMST's shape: hovering a
+   category swaps the list, the categories no longer
+   scroll (the panel grows until they all fit) and it
+   always opens at the top right of the modal.
+
+[MUDOU] Categories went from 18 down to 15. "Position"
+   (1 field) and "Ability" (3) moved into "General";
+   "Contract" and "Transfer" became "Contract and value".
+
+[CORRIGIDO] The field picker showed 596 fields on the All
+   tab, with 122 repeated names — "Full matches" appeared
+   SIX times, identically. The spreadsheet has one tab per
+   position and the same statistic lives in several of
+   them. It now reads the same curated list the column
+   picker uses: 596 → 296 on the All tab, 743 → 388 on
+   Forwards.
+
+[CORRIGIDO] Choosing positions in the advanced filter
+   while on a position tab WIPED the filter. The search is
+   stored per tab, and it was being written to the tab of
+   origin an instant before the analysis switched back to
+   "All" — the filter was born and died in the same click.
+
+[CORRIGIDO] The first click on the position pitch created
+   the condition with a threshold of 20 while the control
+   next to it showed 17.
+
+[MUDOU] Ticking positions in the filter takes the analysis
+   back to "All". The two contradicted each other: the tab
+   cuts by main position, so looking for "AM (RL)" inside
+   "Forwards" lost exactly the midfielder who plays wide.
+
+[NOVO] The little box on the left of each row got a
+   caption ("tick to group"). It is not the same thing as
+   the green ✓ on the row, which turns the condition on
+   and off.
+
+
+GOALKEEPERS
+---------------------------------------------------
+[CORRIGIDO] "Actions attempted" and "Successful actions"
+   counted the penalty TWICE. In a keeper, the address
+   that holds tackles holds penalties faced, and the
+   spreadsheet added the same number under both names.
+
+[MUDOU] The 7 "Sweeper action" columns left the pickers.
+   They don't measure what the name says and there is no
+   fixing it: the sum starts from tackles (which in a
+   keeper are penalties) and from pressures, which only
+   146 out of 10,896 keepers have. They stay calculable
+   for anyone already using them in a saved view.
+
+
+SAVED SEASONS
+---------------------------------------------------
+[NOVO] Each season shows how much disk it takes.
+
+[CORRIGIDO] Deleting a season left the youth tables behind
+   — 257,809 orphan rows in one measured case (squads,
+   competitions and youth teams). Deleting now clears
+   everything.
+
+[CORRIGIDO] Deleting didn't give the disk space back. The
+   file is now compacted after deletion. The first time is
+   slow (measured: 56s on a 1.3 GB database); from the
+   second time on it is instant.
+
+[NOVO] A waiting screen during deletion, warning about the
+   time and about the risk of closing the app halfway.
+
+
+====================================================
+ v0.3.1 — 09 Aug 2026
+====================================================
+
+ADVANCED SEARCH (the big one)
+---------------------------------
+[NOVO] The "Advanced filters" button opens a new screen,
+   in FMST's shape: quick filters on top, condition list
+   below, "Apply" in the footer.
+
+[NOVO] A POSITION PICKER drawn as a football pitch — ST at
+   the top, GK at the bottom, 14 positions. Two things
+   FMST doesn't do:
+     · the cell has THREE states, not two, because the
+       game stores familiarity from 1 to 20 and not a
+       "plays / doesn't play";
+     · the threshold is adjustable (default 15,
+       "Competent"). Without it, "plays at ST" would bring
+       in anyone with 3 out of 20 there.
+   Sweeper was left out: ZERO of the save's 376 thousand
+   players has that familiarity — the cell would exist
+   only to never return anyone.
+
+[NOVO] AND / OR between conditions, with ONE level of
+   brackets. You can ask for things like
+   "value ≥ 1m AND (age ≤ 21 OR age ≥ 34)".
+
+[NOVO] A plain-English summary above the list, with the
+   brackets written out. It isn't decoration: there is no
+   OR precedence, so "A AND B OR C" and "A AND (B OR C)"
+   are different things, and looking only at the rows that
+   is invisible.
+
+[NOVO] A condition can be TURNED OFF without being deleted
+   — it drops out of the filter and comes back whenever
+   you want.
+
+[NOVO] New operators: not equal to, not known, contains /
+   starts with / ends with (text), and comparing one field
+   against ANOTHER field (e.g. PA greater than CA).
+
+[NOVO] Field search: there are ~680 per tab, so the picker
+   has a search box and sections.
+
+[MUDOU] The old filter still works. It is read once to
+   bring across what you already had, and it is NOT
+   deleted.
+
+[CORRIGIDO] A condition on a column that doesn't apply to
+   that position was applied anyway. The game stores
+   "tackles attempted" and "penalties faced" in the SAME
+   place in memory, so in a keeper the sum came out under
+   the wrong name. Now the column isn't even offered, and
+   an old condition like that shows marked in red instead
+   of being applied in silence.
+
+
+FIXES
+----------
+[CORRIGIDO] The LEAGUE/CLUB FILTER wiped everything out.
+   Ticking two large nations worked; ticking the third
+   returned ZERO players. It wasn't the filter: the
+   address the app builds went past 64 KB and the server
+   refused the request. Measured: 8,171 clubs got through,
+   8,187 already failed. More than 50 thousand fit now.
+
+[CORRIGIDO] There was no way to SORT from "Player" through
+   to "Club". The text columns (player, position,
+   nationality, league, club, contract, foot) responded to
+   a click but sorted by MINUTES, silently. They now sort
+   alphabetically, ignoring accents and case.
+
+[NOVO] "Remove all" button on the Favourites screen. It
+   asks for confirmation — the list is the same one My
+   team uses.
+
+[CORRIGIDO] A query that FAILED looked identical to "no
+   players found". That is what hid the league filter bug
+   above. A banner now says so.
+
+[CORRIGIDO] Preferred foot found nobody when searched as
+   text: the program stores "right" and the screen shows
+   "Right". It became a fixed choice with the 3 options.
+
+[CORRIGIDO] CA and PA showed up in the search even with
+   "Show CA / PA" switched off in Settings.
+
+[CORRIGIDO] The statistics list in the field picker didn't
+   scroll — the only way to choose was by searching.
+
+
+====================================================
+ v0.3 — 06 Aug 2026
+====================================================
+
+YOUTH AND NATIONAL TEAM FILTER (the big one this version)
+----------------------------------------------------------
+[NOVO] A "Youth U20" button, next to "Select League/Club".
+   It opens a tree in the same shape as the league one:
+
+      Country > Competition > Club > U20 / U17 team / ...
+
+   Ticking "Flamengo U20" brings ONLY the U20 squad — not
+   the club's whole squad. The number next to each club is
+   the number of PLAYERS, not of teams.
+
+[NOVO] A national team picker inside "Leagues and Clubs",
+   showing them all. Senior national teams no longer turn
+   up mixed into the youth filter.
+
+[MUDOU] Reserve teams (B / II / Aspirantes) are left out
+   of the youth filter — it's a different category, not
+   youth.
+
+[INTERNO] Numbers from the reference save: 37,173 teams ·
+   1,301 youth and national competitions · 419,563
+   player-team links. The scan got ~8.7 s slower for it.
+
+[INTERNO] A player can be in more than one squad at the
+   same time (4.8% of them are: a kid in the first team and
+   in the U20, or called up by club and country). That is
+   why the link became a table of its own, instead of a
+   column that would have to pick one squad and lie about
+   the other.
+
+[CORRIGIDO] A team's player count counted squad objects
+   rather than distinct players — 9% of teams showed one
+   number and returned another in the query.
+
+KNOWN LIMITATION: on the Game Pass / Microsoft Store
+   build, each competition's official list of participants
+   still isn't read. The feature switches itself off there
+   rather than showing wrong data.
+
+
+DATABASE FILTERS
+-------------------------
+[NOVO] Range pills for MINUTES, AGE and RATING. Each opens
+   a panel with a minimum box, a maximum box and a slider.
+   Age runs from 15 to 50.
+
+[NOVO] An "Apply" button on the range panels — the page
+   only reloads when you confirm, not on every digit
+   typed. "Cancel" discards and "Reset" clears without
+   applying.
+
+[MUDOU] The filters hide behind the title: clicking the
+   name opens the panel. The bar stays clean.
+
+[MUDOU] The pills and "Advanced filters" are now the SAME
+   thing, synced both ways: moving the pill shows up in
+   the advanced filter, and the other way round.
+
+[MUDOU] "Advanced filters" moved to the far left of the
+   bar, before Minutes.
+
+[CORRIGIDO] "Clear all" didn't clear the youth filter.
+
+
+COLUMN NAMES — FULL REVIEW
+----------------------------------
+Before, the SAME column was named in four independent
+places (header, column menu, filter and CSV) — and they
+didn't agree with each other. Each column now has one
+name.
+
+[MUDOU] Identity columns standardised:
+      "Id"     ->  "Age"      (the short form became "ID"
+                               in the header and read as
+                               "identifier")
+      "Name"   ->  "Player"
+      "Team"   ->  "Club"     (with the youth filter,
+                               "Team" suggested the U20
+                               side, and the data is the
+                               club)
+      "Nat."   ->  "Nat"
+
+[MUDOU] The "d90" column (minutes ÷ 90) is now called
+   "Full matches" — it used to be "Games", the same as the
+   column for matches played, which confused the two.
+
+[NOVO] "Mins/Game" column — average minutes per match, the
+   number that says whether a player is a starter or a
+   substitute.
+
+[MUDOU] The rating now shows 2 decimal places.
+
+[CORRIGIDO] There were two rating columns ("Rating" and
+   "Average rating") with the same content. One is left.
+
+
+MONEYBALL STATISTIC NAMES — CURATION
+----------------------------------------------
+[MUDOU] The header now shows a standardised SHORT FORM
+   (xG/90, PasC%, DesCi...). The full name stays whole in
+   the "?" button, in the Columns menu, in the filter and
+   in the exported CSV — the short form is only there to
+   fit on screen.
+
+[MUDOU] Same sum = one name. The engine's 703 columns
+   correspond to 341 distinct calculations; different
+   labels for the same sum were unified. Out of 451
+   different names, 354 are left.
+
+[CORRIGIDO] NON-PENALTY xG now uses the number the game
+   itself provides (npxG), instead of the "xG minus 0.79
+   per penalty" estimate inherited from the spreadsheet.
+   The estimate gets shootouts wrong, and those don't
+   count towards xG. A real example: a player with xG 8.88
+   had npxG 8.88 in the game and 8.09 under the old
+   formula.
+
+[CORRIGIDO] A column that subtracted the penalty twice:
+   removed.
+
+[MUDOU] Columns that were the same sum on two different
+   tabs became one, which shows on both.
+
+VERIFIED: zero repeated names within the same tab and zero
+   colliding short forms.
+
+STATED CAVEAT: 29 cases of the SAME NAME with a DIFFERENT
+   SUM are still there, left deliberately for a future
+   review. And 3 goalkeeper pairs that give the same
+   number but are NOT the same statistic (the game stores
+   both things in the same place in memory) stay separate.
+
+
+MY TEAM
+---------
+[MUDOU] Two-line header, the same as the Database.
+
+[CORRIGIDO] Title and data misaligned (Position and
+   Nationality, for instance, had the data on the left and
+   the title out of line).
+
+[CORRIGIDO] The rating colours had gone missing from this
+   screen.
+
+[MUDOU] The HIGHLIGHT and PIN column buttons are always
+   visible, not only on hover.
+
+
+TABLES — FIXES
+--------------------
+[CORRIGIDO] Pinning a column and highlighting it made the
+   highlight vanish as soon as the table scrolled
+   sideways. Cause: the browser doesn't carry the border
+   along with the pinned cell. Replaced with a line drawn
+   inside the cell itself, which does follow.
+
+[CORRIGIDO] The heatmap didn't colour pinned columns. It
+   now does, in the solid (opaque) shade a pinned column
+   needs in order to hide what passes behind it.
+
+
+OTHER
+-------
+[NOVO] Right-click menu on table rows (Database,
+   Favourites and My team): open profile, favourite /
+   unfavourite, remove from the list. "Compare" shows
+   disabled, marked "coming soon". If the clicked row is
+   part of a selection, the action applies to the whole
+   selection.
+
+[NOVO] An error notice when connecting. Before, if FM was
+   closed or had no save loaded, clicking "Connect" simply
+   did nothing visible.
+
+[CORRIGIDO] GAME PASS / MICROSOFT STORE: the database scan
+   returned zero players even with the connection working.
+   The reading module had its own copies of three
+   addresses written out by hand with the Steam values —
+   the app swapped its own addresses, but those copies
+   stayed frozen. The result: one screen worked and the
+   other read zero. Validated live on the Game Pass build.
+
+
+====================================================
+ v0.2.2 — 03 Aug 2026
+====================================================
+
+[CORRIGIDO] GAME PASS / MICROSOFT STORE, second round. A
+   tester's log showed that the app DID open the game's
+   process, but Windows refused to list what is inside it
+   (the step that finds FM's data). The app now detects
+   that refusal and uses an alternative Windows route for
+   the same listing.
+
+[NOVO] If it still doesn't connect, the file
+   "Documents\FM Season Hub\fmsh.log" records everything
+   Windows reported (including where the game was
+   installed) — it's the file that closes the diagnosis.
+
+
+====================================================
+ v0.2.1 — 01 Aug 2026
+====================================================
+
+[MUDOU] First attempt at Game Pass compatibility: the app
+   started asking for the MINIMUM access to the game's
+   process (read only) instead of full access, which the
+   Store refuses.
+
+
+====================================================
+ v0.2 — 01 Aug 2026
+====================================================
+
+[MUDOU] EVERY TAB OPENS WITH WHAT MATTERS. Before, the
+   "Centre-Backs" tab started by showing goals, xG and
+   penalties — striker statistics — and the first
+   defensive column only appeared after scrolling well to
+   the right. Each position now opens with the ~16 columns
+   that decide a signing there (centre-back: tackles,
+   clearances, interceptions, aerial duels). The other ~90
+   are still there, under the "Columns" button.
+
+[NOVO] AVERAGE RATING on every position, in a fixed colour
+   (it doesn't depend on the heatmap): turquoise 9.0+ ·
+   dark green 8.0+ · green 7.5+ · lime 7.0+ · gold 6.7+ ·
+   orange 6.4+ · red up to 6.3. A grey dash = didn't play
+   (it is not a rating of zero).
+
+[CORRIGIDO] CA / PA are back in the tables (they had gone
+   missing). You can sort and filter by them. Anyone who
+   prefers playing without seeing those numbers can switch
+   them off in Settings — they then disappear from the
+   table and from the column menu.
+
+[CORRIGIDO] Columns with repeated names. There were cases
+   of two columns with the SAME header and different
+   numbers (e.g. "SoT" appeared for "Shots on target" and
+   for "Shots per goal").
+
+[MUDOU] A taller header bar, to fit the names and the
+   buttons.
+
+[MUDOU] The tab picker is now called "Analysis" — it swaps
+   the set of statistics, it doesn't just filter players.
+
+[NOVO] A "Report a bug" button fixed in the sidebar,
+   opening Discord.
+
+
+====================================================
+ v0.1.1 — 01 Aug 2026
+====================================================
+
+[CORRIGIDO] CA / PA in the tables (first fix; see also
+   v0.2, which extended the repair to the column menu and
+   to the CSV).
+
+[NOVO] Beta notice bars at the top and the bottom:
+   screenshots and videos allowed, redistribution not.
+
+[NOVO] Two "Report a bug" buttons (top bar and sidebar
+   footer) opening Discord.
+
+
+====================================================
+ v0.1 — first closed-test version
+====================================================
+
+[NOVO] Reading Football Manager 26's memory in real time,
+   read only, editing nothing in the game. The whole save
+   (~370 thousand players) is read in seconds.
+
+[NOVO] MY TEAM — the squad with ~70 metrics per player,
+   filters, percentile and heatmap.
+
+[NOVO] DATABASE — the whole save split into 7 positions
+   (Goalkeepers, Centre-Backs, Full-Backs, Holding Mids,
+   Central Mids, Attacking Mids, Forwards) plus the "All"
+   tab. More than 700 statistical columns, worked out from
+   the game's raw data with the same formulas as the
+   reference Moneyball spreadsheet.
+
+[NOVO] FAVOURITES — star players on any screen and find
+   them all together here.
+
+[NOVO] League/Club filter, sorting by any column,
+   percentile comparison, heatmap and CSV export (opens
+   correctly in Excel).
+
+[NOVO] SAVED SEASONS — records a snapshot of the save so
+   you can compare progress over time, even with FM
+   closed.
+
+[NOVO] Portuguese and English.
+
+[NOVO] The save is read straight from the game, on your
+   machine, and the seasons are stored there — you can
+   analyse everything with FM closed.
+
+
+====================================================
+ ABOUT THIS FILE
+====================================================
+
+The project has no automatic version history, so versions
+0.1 and 0.1.1 were rebuilt from the README files shipped
+with each release and from the work plan. They are less
+detailed than the later ones on purpose — only what is on
+record went in, with no gaps filled in by guesswork.
+
+Questions, bugs and suggestions: https://discord.gg/C32Kbaqd2h

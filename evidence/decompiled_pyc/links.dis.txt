@@ -1,0 +1,189 @@
+# Module: links
+# Filename: links.py
+
+  0           RESUME                   0
+
+ 21           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (('urlsplit',))
+              IMPORT_NAME              0 (urllib.parse)
+              IMPORT_FROM              1 (urlsplit)
+              STORE_NAME               1 (urlsplit)
+              POP_TOP
+
+ 24           LOAD_CONST               5 (('patreon.com', 'discord.gg', 'discord.com', 'x.com', 'github.com', 'notion.site', 'workers.dev', 'instant-gaming.com'))
+              STORE_NAME               2 (DOMINIOS_PERMITIDOS)
+
+ 36           LOAD_CONST               2 (<code object host_permitido at 0x1053d3670, file "links.py", line 36>)
+              MAKE_FUNCTION
+              STORE_NAME               3 (host_permitido)
+
+ 46           LOAD_CONST               3 (<code object conferir at 0x736d92f80, file "links.py", line 46>)
+              MAKE_FUNCTION
+              STORE_NAME               4 (conferir)
+              LOAD_CONST               4 (None)
+              RETURN_VALUE
+
+Disassembly of <code object host_permitido at 0x1053d3670, file "links.py", line 36>:
+ 36           RESUME                   0
+
+ 37           LOAD_FAST                0 (host)
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L1)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_CONST               0 ('')
+      L1:     LOAD_ATTR                1 (lower + NULL|self)
+              CALL                     0
+              LOAD_ATTR                3 (strip + NULL|self)
+              LOAD_CONST               1 ('.')
+              CALL                     1
+              STORE_FAST               0 (host)
+
+ 39           LOAD_FAST_BORROW         0 (host)
+              LOAD_ATTR                5 (split + NULL|self)
+              LOAD_CONST               2 (':')
+              CALL                     1
+              LOAD_SMALL_INT           0
+              BINARY_OP               26 ([])
+              STORE_FAST               0 (host)
+
+ 40           LOAD_GLOBAL              6 (DOMINIOS_PERMITIDOS)
+              GET_ITER
+      L2:     FOR_ITER                42 (to L4)
+              STORE_FAST               1 (d)
+
+ 41           LOAD_FAST_BORROW_LOAD_FAST_BORROW 1 (host, d)
+              COMPARE_OP              88 (bool(==))
+              POP_JUMP_IF_TRUE        33 (to L3)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         0 (host)
+              LOAD_ATTR                9 (endswith + NULL|self)
+              LOAD_CONST               1 ('.')
+              LOAD_FAST_BORROW         1 (d)
+              BINARY_OP                0 (+)
+              CALL                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE         3 (to L3)
+              NOT_TAKEN
+              JUMP_BACKWARD           41 (to L2)
+
+ 42   L3:     POP_TOP
+              LOAD_CONST               3 (True)
+              RETURN_VALUE
+
+ 40   L4:     END_FOR
+              POP_ITER
+
+ 43           LOAD_CONST               4 (False)
+              RETURN_VALUE
+
+Disassembly of <code object conferir at 0x736d92f80, file "links.py", line 46>:
+  46            RESUME                   0
+
+  49            LOAD_FAST_BORROW         0 (url)
+                TO_BOOL
+                POP_JUMP_IF_FALSE       23 (to L1)
+                NOT_TAKEN
+                LOAD_GLOBAL              1 (isinstance + NULL)
+                LOAD_FAST_BORROW         0 (url)
+                LOAD_GLOBAL              2 (str)
+                CALL                     2
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L2)
+                NOT_TAKEN
+
+  50    L1:     LOAD_CONST               6 ((False, 'endereco vazio'))
+                RETURN_VALUE
+
+  51    L2:     LOAD_GLOBAL              5 (len + NULL)
+                LOAD_FAST_BORROW         0 (url)
+                CALL                     1
+                LOAD_CONST               1 (2000)
+                COMPARE_OP             148 (bool(>))
+                POP_JUMP_IF_FALSE        3 (to L3)
+                NOT_TAKEN
+
+  52            LOAD_CONST               7 ((False, 'endereco longo demais'))
+                RETURN_VALUE
+
+  53    L3:     NOP
+
+  54    L4:     LOAD_GLOBAL              7 (urlsplit + NULL)
+                LOAD_FAST_BORROW         0 (url)
+                LOAD_ATTR                9 (strip + NULL|self)
+                CALL                     0
+                CALL                     1
+                STORE_FAST               1 (p)
+
+  57    L5:     LOAD_FAST                1 (p)
+                LOAD_ATTR               12 (scheme)
+                LOAD_CONST               2 ('https')
+                COMPARE_OP             119 (bool(!=))
+                POP_JUMP_IF_FALSE       32 (to L7)
+                NOT_TAKEN
+
+  58            LOAD_CONST               0 (False)
+                LOAD_CONST               3 ('so https e aceito (veio %r)')
+                LOAD_FAST                1 (p)
+                LOAD_ATTR               12 (scheme)
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L6)
+                NOT_TAKEN
+                POP_TOP
+                LOAD_CONST               4 ('nada')
+        L6:     BINARY_OP                6 (%)
+                BUILD_TUPLE              2
+                RETURN_VALUE
+
+  59    L7:     LOAD_FAST                1 (p)
+                LOAD_ATTR               14 (hostname)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L8)
+                NOT_TAKEN
+
+  60            LOAD_CONST               9 ((False, 'endereco sem dominio'))
+                RETURN_VALUE
+
+  61    L8:     LOAD_GLOBAL             17 (host_permitido + NULL)
+                LOAD_FAST                1 (p)
+                LOAD_ATTR               14 (hostname)
+                CALL                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE        22 (to L9)
+                NOT_TAKEN
+
+  62            LOAD_CONST               0 (False)
+                LOAD_CONST               5 ('dominio fora da lista: %s')
+                LOAD_FAST                1 (p)
+                LOAD_ATTR               14 (hostname)
+                BINARY_OP                6 (%)
+                BUILD_TUPLE              2
+                RETURN_VALUE
+
+  63    L9:     LOAD_CONST              10 ((True, ''))
+                RETURN_VALUE
+
+  --   L10:     PUSH_EXC_INFO
+
+  55            LOAD_GLOBAL             10 (ValueError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        6 (to L12)
+                NOT_TAKEN
+                POP_TOP
+
+  56            LOAD_CONST               8 ((False, 'endereco ilegivel'))
+                SWAP                     2
+       L11:     POP_EXCEPT
+                RETURN_VALUE
+
+  55   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L4 to L5 -> L10 [0]
+  L10 to L11 -> L13 [1] lasti
+  L12 to L13 -> L13 [1] lasti

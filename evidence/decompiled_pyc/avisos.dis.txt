@@ -1,0 +1,905 @@
+# Module: avisos
+# Filename: avisos.py
+
+  0           RESUME                   0
+
+  9           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              0 (json)
+              STORE_NAME               0 (json)
+
+ 10           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              1 (os)
+              STORE_NAME               1 (os)
+
+ 11           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              2 (time)
+              STORE_NAME               2 (time)
+
+ 12           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              3 (urllib.error)
+              STORE_NAME               4 (urllib)
+
+ 13           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              5 (urllib.request)
+              STORE_NAME               4 (urllib)
+
+ 15           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME              6 (paths)
+              STORE_NAME               6 (paths)
+
+ 17           LOAD_NAME                6 (paths)
+              LOAD_ATTR               14 (user_data_path)
+              PUSH_NULL
+              LOAD_CONST               2 ('fmsh.log')
+              CALL                     1
+              STORE_NAME               8 (LOG)
+
+ 20           LOAD_CONST               3 (<code object _log at 0x1053829e0, file "avisos.py", line 20>)
+              MAKE_FUNCTION
+              STORE_NAME               9 (_log)
+
+ 29           LOAD_SMALL_INT           0
+              LOAD_CONST               1 (None)
+              IMPORT_NAME             10 (settings)
+              STORE_NAME              10 (settings)
+
+ 31           LOAD_CONST               4 ('https://fmsh-acesso.marcellofelipe90.workers.dev')
+              STORE_NAME              11 (SERVICO)
+
+ 32           LOAD_NAME                6 (paths)
+              LOAD_ATTR               24 (local_data_path)
+              PUSH_NULL
+              LOAD_CONST               5 ('fmsh_avisos.json')
+              CALL                     1
+              STORE_NAME              13 (CACHE)
+
+ 33           LOAD_CONST              12 (1800)
+              STORE_NAME              14 (VALIDADE)
+
+ 34           LOAD_SMALL_INT           6
+              STORE_NAME              15 (TIMEOUT)
+
+ 35           LOAD_CONST              13 (524288)
+              STORE_NAME              16 (MAX_RESPOSTA)
+
+ 38           LOAD_CONST               6 (<code object _baixar at 0x737172a00, file "avisos.py", line 38>)
+              MAKE_FUNCTION
+              STORE_NAME              17 (_baixar)
+
+ 58           LOAD_CONST               7 (<code object _ler_cache at 0x10542bb40, file "avisos.py", line 58>)
+              MAKE_FUNCTION
+              STORE_NAME              18 (_ler_cache)
+
+ 66           LOAD_CONST               8 (<code object _no_idioma at 0x736dccc00, file "avisos.py", line 66>)
+              MAKE_FUNCTION
+              STORE_NAME              19 (_no_idioma)
+
+ 81           LOAD_CONST              14 ((False, 'pt'))
+              LOAD_CONST               9 (<code object listar at 0x736da6800, file "avisos.py", line 81>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              20 (listar)
+
+113           LOAD_CONST              15 (('pt',))
+              LOAD_CONST              10 (<code object marcar_lidos at 0x736dccf00, file "avisos.py", line 113>)
+              MAKE_FUNCTION
+              SET_FUNCTION_ATTRIBUTE   1 (defaults)
+              STORE_NAME              21 (marcar_lidos)
+
+124           LOAD_CONST              11 (<code object limpar_cache at 0x105421a50, file "avisos.py", line 124>)
+              MAKE_FUNCTION
+              STORE_NAME              22 (limpar_cache)
+              LOAD_CONST               1 (None)
+              RETURN_VALUE
+
+Disassembly of <code object _log at 0x1053829e0, file "avisos.py", line 20>:
+  20            RESUME                   0
+
+  22            NOP
+
+  23    L1:     LOAD_GLOBAL              1 (open + NULL)
+                LOAD_GLOBAL              2 (LOG)
+                LOAD_CONST               0 ('a')
+                LOAD_CONST               1 ('utf-8')
+                LOAD_CONST               2 (('encoding',))
+                CALL_KW                  3
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_FAST               1 (fh)
+
+  24            LOAD_FAST_BORROW         1 (fh)
+                LOAD_ATTR                5 (write + NULL|self)
+                LOAD_GLOBAL              6 (time)
+                LOAD_ATTR                8 (strftime)
+                PUSH_NULL
+                LOAD_CONST               3 ('%Y-%m-%d %H:%M:%S')
+                CALL                     1
+                CONVERT_VALUE            1 (str)
+                FORMAT_SIMPLE
+                LOAD_CONST               4 ('  [avisos] ')
+                LOAD_FAST_BORROW         0 (msg)
+                CONVERT_VALUE            1 (str)
+                FORMAT_SIMPLE
+                LOAD_CONST               5 ('\n')
+                BUILD_STRING             4
+                CALL                     1
+                POP_TOP
+
+  23    L3:     LOAD_CONST               6 (None)
+                LOAD_CONST               6 (None)
+                LOAD_CONST               6 (None)
+                CALL                     3
+                POP_TOP
+        L4:     LOAD_CONST               6 (None)
+                RETURN_VALUE
+        L5:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L6)
+                NOT_TAKEN
+                RERAISE                  2
+        L6:     POP_TOP
+        L7:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+        L8:     LOAD_CONST               6 (None)
+                RETURN_VALUE
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L10:     PUSH_EXC_INFO
+
+  25            LOAD_GLOBAL             10 (OSError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L12)
+                NOT_TAKEN
+                POP_TOP
+
+  26   L11:     POP_EXCEPT
+                LOAD_CONST               6 (None)
+                RETURN_VALUE
+
+  25   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L10 [0]
+  L2 to L3 -> L5 [2] lasti
+  L3 to L4 -> L10 [0]
+  L5 to L7 -> L9 [4] lasti
+  L7 to L8 -> L10 [0]
+  L9 to L10 -> L10 [0]
+  L10 to L11 -> L13 [1] lasti
+  L12 to L13 -> L13 [1] lasti
+
+Disassembly of <code object _baixar at 0x737172a00, file "avisos.py", line 38>:
+  38            RESUME                   0
+
+  42            LOAD_SMALL_INT           0
+                LOAD_CONST               1 (('VERSION',))
+                IMPORT_NAME              0 (version)
+                IMPORT_FROM              1 (VERSION)
+                STORE_FAST               0 (VERSION)
+                POP_TOP
+
+  43            LOAD_GLOBAL              4 (urllib)
+                LOAD_ATTR                6 (request)
+                LOAD_ATTR                9 (Request + NULL|self)
+
+  44            LOAD_GLOBAL             10 (SERVICO)
+                LOAD_CONST               2 ('/avisos')
+                BINARY_OP                0 (+)
+                LOAD_CONST               3 ('User-Agent')
+                LOAD_CONST               4 ('FMSH/')
+                LOAD_FAST_BORROW         0 (VERSION)
+                FORMAT_SIMPLE
+                BUILD_STRING             2
+                BUILD_MAP                1
+
+  43            LOAD_CONST               5 (('headers',))
+                CALL_KW                  2
+                STORE_FAST               1 (req)
+
+  45            NOP
+
+  46    L1:     LOAD_GLOBAL              4 (urllib)
+                LOAD_ATTR                6 (request)
+                LOAD_ATTR               13 (urlopen + NULL|self)
+                LOAD_FAST_BORROW         1 (req)
+                LOAD_GLOBAL             14 (TIMEOUT)
+                LOAD_CONST               6 (('timeout',))
+                CALL_KW                  2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_FAST               2 (r)
+
+  47            LOAD_GLOBAL             16 (json)
+                LOAD_ATTR               18 (loads)
+                PUSH_NULL
+                LOAD_FAST_BORROW         2 (r)
+                LOAD_ATTR               21 (read + NULL|self)
+                LOAD_GLOBAL             22 (MAX_RESPOSTA)
+                CALL                     1
+                LOAD_ATTR               25 (decode + NULL|self)
+                LOAD_CONST               7 ('utf-8')
+                CALL                     1
+                CALL                     1
+                STORE_FAST               3 (dados)
+
+  46    L3:     LOAD_CONST               8 (None)
+                LOAD_CONST               8 (None)
+                LOAD_CONST               8 (None)
+                CALL                     3
+                POP_TOP
+
+  48    L4:     LOAD_FAST_CHECK          3 (dados)
+                LOAD_ATTR               27 (get + NULL|self)
+                LOAD_CONST               9 ('avisos')
+                CALL                     1
+                STORE_FAST               4 (lista)
+
+  49            LOAD_GLOBAL             29 (isinstance + NULL)
+                LOAD_FAST_BORROW         4 (lista)
+                LOAD_GLOBAL             30 (list)
+                CALL                     2
+                TO_BOOL
+                POP_JUMP_IF_FALSE        3 (to L6)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         4 (lista)
+        L5:     RETURN_VALUE
+        L6:     BUILD_LIST               0
+        L7:     RETURN_VALUE
+
+  46    L8:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L9)
+                NOT_TAKEN
+                RERAISE                  2
+        L9:     POP_TOP
+       L10:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+                JUMP_BACKWARD_NO_INTERRUPT 59 (to L4)
+
+  --   L11:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L12:     PUSH_EXC_INFO
+
+  50            LOAD_GLOBAL              4 (urllib)
+                LOAD_ATTR               32 (error)
+                LOAD_ATTR               34 (HTTPError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       32 (to L18)
+                NOT_TAKEN
+                STORE_FAST               5 (e)
+
+  53   L13:     LOAD_FAST                5 (e)
+                LOAD_ATTR               36 (code)
+                LOAD_CONST              10 (404)
+                COMPARE_OP              88 (bool(==))
+                POP_JUMP_IF_FALSE        3 (to L14)
+                NOT_TAKEN
+                BUILD_LIST               0
+                JUMP_FORWARD             1 (to L15)
+       L14:     LOAD_CONST               8 (None)
+       L15:     SWAP                     2
+       L16:     POP_EXCEPT
+                LOAD_CONST               8 (None)
+                STORE_FAST               5 (e)
+                DELETE_FAST              5 (e)
+                RETURN_VALUE
+
+  --   L17:     LOAD_CONST               8 (None)
+                STORE_FAST               5 (e)
+                DELETE_FAST              5 (e)
+                RERAISE                  1
+
+  54   L18:     LOAD_GLOBAL             38 (Exception)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE        5 (to L22)
+       L19:     NOT_TAKEN
+       L20:     POP_TOP
+
+  55   L21:     POP_EXCEPT
+                LOAD_CONST               8 (None)
+                RETURN_VALUE
+
+  54   L22:     RERAISE                  0
+
+  --   L23:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L12 [0]
+  L2 to L3 -> L8 [2] lasti
+  L3 to L5 -> L12 [0]
+  L6 to L7 -> L12 [0]
+  L8 to L10 -> L11 [4] lasti
+  L10 to L12 -> L12 [0]
+  L12 to L13 -> L23 [1] lasti
+  L13 to L15 -> L17 [1] lasti
+  L15 to L16 -> L23 [1] lasti
+  L17 to L19 -> L23 [1] lasti
+  L20 to L21 -> L23 [1] lasti
+  L22 to L23 -> L23 [1] lasti
+
+Disassembly of <code object _ler_cache at 0x10542bb40, file "avisos.py", line 58>:
+  58            RESUME                   0
+
+  59            NOP
+
+  60    L1:     LOAD_GLOBAL              1 (open + NULL)
+                LOAD_GLOBAL              2 (CACHE)
+                LOAD_CONST               0 ('utf-8')
+                LOAD_CONST               1 (('encoding',))
+                CALL_KW                  2
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L2:     STORE_FAST               0 (f)
+
+  61            LOAD_GLOBAL              4 (json)
+                LOAD_ATTR                6 (load)
+                PUSH_NULL
+                LOAD_FAST_BORROW         0 (f)
+                CALL                     1
+
+  60    L3:     SWAP                     3
+                SWAP                     2
+                LOAD_CONST               2 (None)
+                LOAD_CONST               2 (None)
+                LOAD_CONST               2 (None)
+                CALL                     3
+                POP_TOP
+        L4:     RETURN_VALUE
+        L5:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L6)
+                NOT_TAKEN
+                RERAISE                  2
+        L6:     POP_TOP
+        L7:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+        L8:     LOAD_CONST               2 (None)
+                RETURN_VALUE
+
+  --    L9:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L10:     PUSH_EXC_INFO
+
+  62            LOAD_GLOBAL              8 (OSError)
+                LOAD_GLOBAL             10 (ValueError)
+                BUILD_TUPLE              2
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       10 (to L12)
+                NOT_TAKEN
+                POP_TOP
+
+  63            LOAD_CONST               3 ('avisos')
+                BUILD_LIST               0
+                LOAD_CONST               4 ('baixado_em')
+                LOAD_SMALL_INT           0
+                BUILD_MAP                2
+                SWAP                     2
+       L11:     POP_EXCEPT
+                RETURN_VALUE
+
+  62   L12:     RERAISE                  0
+
+  --   L13:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L10 [0]
+  L2 to L3 -> L5 [2] lasti
+  L3 to L4 -> L10 [0]
+  L5 to L7 -> L9 [4] lasti
+  L7 to L8 -> L10 [0]
+  L9 to L10 -> L10 [0]
+  L10 to L11 -> L13 [1] lasti
+  L12 to L13 -> L13 [1] lasti
+
+Disassembly of <code object _no_idioma at 0x736dccc00, file "avisos.py", line 66>:
+ 66           RESUME                   0
+
+ 74           LOAD_FAST_BORROW         1 (lang)
+              LOAD_ATTR                1 (startswith + NULL|self)
+              LOAD_CONST               0 ('pt')
+              CALL                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE       204 (to L5)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         0 (a)
+              LOAD_ATTR                3 (get + NULL|self)
+              LOAD_CONST               1 ('titulo_en')
+              CALL                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        47 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         0 (a)
+              LOAD_ATTR                3 (get + NULL|self)
+              LOAD_CONST               2 ('corpo_en')
+              CALL                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        24 (to L1)
+              NOT_TAKEN
+              LOAD_FAST_BORROW         0 (a)
+              LOAD_ATTR                3 (get + NULL|self)
+              LOAD_CONST               3 ('link_texto_en')
+              CALL                     1
+              TO_BOOL
+              POP_JUMP_IF_FALSE      135 (to L5)
+              NOT_TAKEN
+
+ 75   L1:     LOAD_GLOBAL              5 (dict + NULL)
+              LOAD_FAST_LOAD_FAST      0 (a, a)
+              LOAD_ATTR                3 (get + NULL|self)
+              LOAD_CONST               1 ('titulo_en')
+              CALL                     1
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        18 (to L2)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_FAST_BORROW         0 (a)
+              LOAD_ATTR                3 (get + NULL|self)
+              LOAD_CONST               4 ('titulo')
+              CALL                     1
+
+ 76   L2:     LOAD_FAST_BORROW         0 (a)
+              LOAD_ATTR                3 (get + NULL|self)
+              LOAD_CONST               2 ('corpo_en')
+              CALL                     1
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        18 (to L3)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_FAST_BORROW         0 (a)
+              LOAD_ATTR                3 (get + NULL|self)
+              LOAD_CONST               5 ('corpo')
+              CALL                     1
+
+ 77   L3:     LOAD_FAST_BORROW         0 (a)
+              LOAD_ATTR                3 (get + NULL|self)
+              LOAD_CONST               3 ('link_texto_en')
+              CALL                     1
+              COPY                     1
+              TO_BOOL
+              POP_JUMP_IF_TRUE        18 (to L4)
+              NOT_TAKEN
+              POP_TOP
+              LOAD_FAST_BORROW         0 (a)
+              LOAD_ATTR                3 (get + NULL|self)
+              LOAD_CONST               6 ('link_texto')
+              CALL                     1
+
+ 75   L4:     LOAD_CONST               7 (('titulo', 'corpo', 'link_texto'))
+              CALL_KW                  4
+              RETURN_VALUE
+
+ 78   L5:     LOAD_FAST_BORROW         0 (a)
+              RETURN_VALUE
+
+Disassembly of <code object listar at 0x736da6800, file "avisos.py", line 81>:
+  --            MAKE_CELL                9 (lidos)
+
+  81            RESUME                   0
+
+  87            LOAD_GLOBAL              1 (_ler_cache + NULL)
+                CALL                     0
+                STORE_FAST               2 (cache)
+
+  88            LOAD_GLOBAL              2 (time)
+                LOAD_ATTR                2 (time)
+                PUSH_NULL
+                CALL                     0
+                LOAD_FAST_BORROW         2 (cache)
+                LOAD_ATTR                5 (get + NULL|self)
+                LOAD_CONST               0 ('baixado_em')
+                LOAD_SMALL_INT           0
+                CALL                     2
+                BINARY_OP               10 (-)
+                LOAD_GLOBAL              6 (VALIDADE)
+                COMPARE_OP             132 (>)
+                STORE_FAST               3 (velho)
+
+  89            LOAD_FAST_BORROW         0 (forcar)
+                TO_BOOL
+                POP_JUMP_IF_TRUE         9 (to L1)
+                NOT_TAKEN
+                LOAD_FAST_BORROW         3 (velho)
+                TO_BOOL
+                POP_JUMP_IF_FALSE      100 (to L5)
+                NOT_TAKEN
+
+  90    L1:     LOAD_GLOBAL              9 (_baixar + NULL)
+                CALL                     0
+                STORE_FAST               4 (novos)
+
+  91            LOAD_FAST_BORROW         4 (novos)
+                POP_JUMP_IF_NONE        86 (to L5)
+                NOT_TAKEN
+
+  92            LOAD_CONST               2 ('avisos')
+                LOAD_FAST_BORROW         4 (novos)
+                LOAD_CONST               0 ('baixado_em')
+                LOAD_GLOBAL              2 (time)
+                LOAD_ATTR                2 (time)
+                PUSH_NULL
+                CALL                     0
+                BUILD_MAP                2
+                STORE_FAST               2 (cache)
+
+  93            NOP
+
+  94    L2:     LOAD_GLOBAL             11 (open + NULL)
+                LOAD_GLOBAL             12 (CACHE)
+                LOAD_CONST               3 ('w')
+                LOAD_CONST               4 ('utf-8')
+                LOAD_CONST               5 (('encoding',))
+                CALL_KW                  3
+                COPY                     1
+                LOAD_SPECIAL             1 (__exit__)
+                SWAP                     2
+                SWAP                     3
+                LOAD_SPECIAL             0 (__enter__)
+                CALL                     0
+        L3:     STORE_FAST               5 (f)
+
+  95            LOAD_GLOBAL             14 (json)
+                LOAD_ATTR               16 (dump)
+                PUSH_NULL
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 37 (cache, f)
+                LOAD_CONST               6 (False)
+                LOAD_CONST               7 (('ensure_ascii',))
+                CALL_KW                  3
+                POP_TOP
+
+  94    L4:     LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                LOAD_CONST               1 (None)
+                CALL                     3
+                POP_TOP
+
+ 101    L5:     LOAD_GLOBAL             23 (set + NULL)
+                LOAD_GLOBAL             24 (settings)
+                LOAD_ATTR               26 (load)
+                PUSH_NULL
+                CALL                     0
+                LOAD_ATTR                5 (get + NULL|self)
+                LOAD_CONST               9 ('avisos_lidos')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L6)
+                NOT_TAKEN
+                POP_TOP
+                BUILD_LIST               0
+        L6:     CALL                     1
+                STORE_DEREF              9 (lidos)
+
+ 102            LOAD_FAST_BORROW         2 (cache)
+                LOAD_ATTR                5 (get + NULL|self)
+                LOAD_CONST               2 ('avisos')
+                CALL                     1
+                COPY                     1
+                TO_BOOL
+                POP_JUMP_IF_TRUE         3 (to L7)
+                NOT_TAKEN
+                POP_TOP
+                BUILD_LIST               0
+        L7:     STORE_FAST               7 (avisos)
+
+ 107            LOAD_CONST               2 ('avisos')
+                LOAD_FAST_BORROW         7 (avisos)
+                GET_ITER
+                LOAD_FAST_AND_CLEAR      8 (a)
+                SWAP                     2
+        L8:     BUILD_LIST               0
+                SWAP                     2
+        L9:     FOR_ITER                52 (to L10)
+                STORE_FAST               8 (a)
+                LOAD_GLOBAL             29 (dict + NULL)
+                LOAD_GLOBAL             31 (_no_idioma + NULL)
+                LOAD_FAST_BORROW_LOAD_FAST_BORROW 129 (a, lang)
+                CALL                     2
+                LOAD_GLOBAL             33 (str + NULL)
+                LOAD_FAST_BORROW         8 (a)
+                LOAD_ATTR                5 (get + NULL|self)
+                LOAD_CONST              10 ('id')
+                CALL                     1
+                CALL                     1
+                LOAD_DEREF               9 (lidos)
+                CONTAINS_OP              0 (in)
+                LOAD_CONST              11 (('lido',))
+                CALL_KW                  2
+                LIST_APPEND              2
+                JUMP_BACKWARD           54 (to L9)
+       L10:     END_FOR
+                POP_ITER
+       L11:     SWAP                     2
+                STORE_FAST               8 (a)
+
+ 108            LOAD_CONST              12 ('nao_lidos')
+                LOAD_GLOBAL             35 (sum + NULL)
+                LOAD_FAST_BORROW         9 (lidos)
+                BUILD_TUPLE              1
+                LOAD_CONST              13 (<code object <genexpr> at 0x1054d8670, file "avisos.py", line 108>)
+                MAKE_FUNCTION
+                SET_FUNCTION_ATTRIBUTE   8 (closure)
+                LOAD_FAST_BORROW         7 (avisos)
+                GET_ITER
+                CALL                     0
+                CALL                     1
+
+ 109            LOAD_CONST              14 ('offline')
+                LOAD_FAST_BORROW         2 (cache)
+                LOAD_ATTR                5 (get + NULL|self)
+                LOAD_CONST               0 ('baixado_em')
+                LOAD_SMALL_INT           0
+                CALL                     2
+                LOAD_SMALL_INT           0
+                COMPARE_OP              72 (==)
+
+ 103            BUILD_MAP                3
+                RETURN_VALUE
+
+  94   L12:     PUSH_EXC_INFO
+                WITH_EXCEPT_START
+                TO_BOOL
+                POP_JUMP_IF_TRUE         2 (to L13)
+                NOT_TAKEN
+                RERAISE                  2
+       L13:     POP_TOP
+       L14:     POP_EXCEPT
+                POP_TOP
+                POP_TOP
+                POP_TOP
+       L15:     JUMP_BACKWARD_NO_INTERRUPT 207 (to L5)
+
+  --   L16:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L17:     PUSH_EXC_INFO
+
+  96            LOAD_GLOBAL             18 (OSError)
+                CHECK_EXC_MATCH
+                POP_JUMP_IF_FALSE       25 (to L21)
+                NOT_TAKEN
+                STORE_FAST               6 (e)
+
+  99   L18:     LOAD_GLOBAL             21 (_log + NULL)
+                LOAD_CONST               8 ('nao consegui gravar o cache do mural: ')
+                LOAD_FAST                6 (e)
+                FORMAT_SIMPLE
+                BUILD_STRING             2
+                CALL                     1
+                POP_TOP
+       L19:     POP_EXCEPT
+                LOAD_CONST               1 (None)
+                STORE_FAST               6 (e)
+                DELETE_FAST              6 (e)
+                JUMP_BACKWARD_NO_INTERRUPT 240 (to L5)
+
+  --   L20:     LOAD_CONST               1 (None)
+                STORE_FAST               6 (e)
+                DELETE_FAST              6 (e)
+                RERAISE                  1
+
+  96   L21:     RERAISE                  0
+
+  --   L22:     COPY                     3
+                POP_EXCEPT
+                RERAISE                  1
+       L23:     SWAP                     2
+                POP_TOP
+
+ 107            SWAP                     2
+                STORE_FAST               8 (a)
+                RERAISE                  0
+ExceptionTable:
+  L2 to L3 -> L17 [0]
+  L3 to L4 -> L12 [2] lasti
+  L4 to L5 -> L17 [0]
+  L8 to L11 -> L23 [3]
+  L12 to L14 -> L16 [4] lasti
+  L14 to L15 -> L17 [0]
+  L16 to L17 -> L17 [0]
+  L17 to L18 -> L22 [1] lasti
+  L18 to L19 -> L20 [1] lasti
+  L20 to L22 -> L22 [1] lasti
+
+Disassembly of <code object <genexpr> at 0x1054d8670, file "avisos.py", line 108>:
+  --           COPY_FREE_VARS           1
+
+ 108           RETURN_GENERATOR
+               POP_TOP
+       L1:     RESUME                   0
+               LOAD_FAST                0 (.0)
+       L2:     FOR_ITER                40 (to L5)
+               STORE_FAST               1 (a)
+               LOAD_GLOBAL              1 (str + NULL)
+               LOAD_FAST_BORROW         1 (a)
+               LOAD_ATTR                3 (get + NULL|self)
+               LOAD_CONST               0 ('id')
+               CALL                     1
+               CALL                     1
+               LOAD_DEREF               2 (lidos)
+               CONTAINS_OP              1 (not in)
+       L3:     POP_JUMP_IF_TRUE         3 (to L4)
+               NOT_TAKEN
+               JUMP_BACKWARD           36 (to L2)
+       L4:     LOAD_SMALL_INT           1
+               YIELD_VALUE              0
+               RESUME                   5
+               POP_TOP
+               JUMP_BACKWARD           42 (to L2)
+       L5:     END_FOR
+               POP_ITER
+               LOAD_CONST               1 (None)
+               RETURN_VALUE
+
+  --   L6:     CALL_INTRINSIC_1         3 (INTRINSIC_STOPITERATION_ERROR)
+               RERAISE                  1
+ExceptionTable:
+  L1 to L3 -> L6 [0] lasti
+  L4 to L6 -> L6 [0] lasti
+
+Disassembly of <code object marcar_lidos at 0x736dccf00, file "avisos.py", line 113>:
+ 113           RESUME                   0
+
+ 116           LOAD_GLOBAL              1 (_ler_cache + NULL)
+               CALL                     0
+               STORE_FAST               1 (cache)
+
+ 117           LOAD_FAST_BORROW         1 (cache)
+               LOAD_ATTR                3 (get + NULL|self)
+               LOAD_CONST               0 ('avisos')
+               CALL                     1
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L1)
+               NOT_TAKEN
+               POP_TOP
+               BUILD_LIST               0
+       L1:     GET_ITER
+               LOAD_FAST_AND_CLEAR      2 (a)
+               SWAP                     2
+       L2:     BUILD_LIST               0
+               SWAP                     2
+       L3:     FOR_ITER                53 (to L6)
+               STORE_FAST_LOAD_FAST    34 (a, a)
+               LOAD_ATTR                3 (get + NULL|self)
+               LOAD_CONST               1 ('id')
+               CALL                     1
+               TO_BOOL
+       L4:     POP_JUMP_IF_TRUE         3 (to L5)
+               NOT_TAKEN
+               JUMP_BACKWARD           27 (to L3)
+       L5:     LOAD_GLOBAL              5 (str + NULL)
+               LOAD_FAST_BORROW         2 (a)
+               LOAD_ATTR                3 (get + NULL|self)
+               LOAD_CONST               1 ('id')
+               CALL                     1
+               CALL                     1
+               LIST_APPEND              2
+               JUMP_BACKWARD           55 (to L3)
+       L6:     END_FOR
+               POP_ITER
+       L7:     STORE_FAST               3 (ids)
+               STORE_FAST               2 (a)
+
+ 118           LOAD_GLOBAL              7 (set + NULL)
+               LOAD_GLOBAL              8 (settings)
+               LOAD_ATTR               10 (load)
+               PUSH_NULL
+               CALL                     0
+               LOAD_ATTR                3 (get + NULL|self)
+               LOAD_CONST               2 ('avisos_lidos')
+               CALL                     1
+               COPY                     1
+               TO_BOOL
+               POP_JUMP_IF_TRUE         3 (to L8)
+               NOT_TAKEN
+               POP_TOP
+               BUILD_LIST               0
+       L8:     CALL                     1
+               LOAD_GLOBAL              7 (set + NULL)
+               LOAD_FAST_BORROW         3 (ids)
+               CALL                     1
+               BINARY_OP                7 (|)
+               STORE_FAST               4 (lidos)
+
+ 120           LOAD_GLOBAL              8 (settings)
+               LOAD_ATTR               12 (save)
+               PUSH_NULL
+               LOAD_GLOBAL             15 (sorted + NULL)
+               LOAD_FAST_BORROW         4 (lidos)
+               CALL                     1
+               LOAD_CONST               6 (-200)
+               LOAD_CONST               3 (None)
+               BINARY_SLICE
+               LOAD_CONST               4 (('avisos_lidos',))
+               CALL_KW                  1
+               POP_TOP
+
+ 121           LOAD_GLOBAL             17 (listar + NULL)
+               LOAD_FAST_BORROW         0 (lang)
+               LOAD_CONST               5 (('lang',))
+               CALL_KW                  1
+               RETURN_VALUE
+
+  --   L9:     SWAP                     2
+               POP_TOP
+
+ 117           SWAP                     2
+               STORE_FAST               2 (a)
+               RERAISE                  0
+ExceptionTable:
+  L2 to L4 -> L9 [2]
+  L5 to L7 -> L9 [2]
+
+Disassembly of <code object limpar_cache at 0x105421a50, file "avisos.py", line 124>:
+ 124           RESUME                   0
+
+ 125           NOP
+
+ 126   L1:     LOAD_GLOBAL              0 (os)
+               LOAD_ATTR                2 (remove)
+               PUSH_NULL
+               LOAD_GLOBAL              4 (CACHE)
+               CALL                     1
+               POP_TOP
+       L2:     LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+  --   L3:     PUSH_EXC_INFO
+
+ 127           LOAD_GLOBAL              6 (OSError)
+               CHECK_EXC_MATCH
+               POP_JUMP_IF_FALSE        5 (to L5)
+               NOT_TAKEN
+               POP_TOP
+
+ 128   L4:     POP_EXCEPT
+               LOAD_CONST               0 (None)
+               RETURN_VALUE
+
+ 127   L5:     RERAISE                  0
+
+  --   L6:     COPY                     3
+               POP_EXCEPT
+               RERAISE                  1
+ExceptionTable:
+  L1 to L2 -> L3 [0]
+  L3 to L4 -> L6 [1] lasti
+  L5 to L6 -> L6 [1] lasti
