@@ -27,6 +27,7 @@ from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Streamin
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import uvicorn
+import graphics
 
 # Configure logging
 logger = logging.getLogger("fmsh.server")
@@ -161,13 +162,6 @@ _CAPTURA_FAIXA: Dict[str, Any] = {
     "avisado": False,
 }
 
-_GRAPHICS_INDEX: Dict[str, Dict[int, Path]] = {
-    "portraits": {},
-    "flags": {},
-    "clubs": {},
-    "comps": {},
-}
-_GRAPHICS_LOCK = threading.Lock()
 _DB_LOCK = threading.Lock()
 
 # Ensure standard MIME types
@@ -234,9 +228,11 @@ class EscolherBody(BaseModel):
     item: str
 
 class OnboardingBody(BaseModel):
+    concluido: Optional[bool] = None
     etapa: Optional[int] = None
     pulado: Optional[bool] = None
     escopo_primeira: Optional[str] = None
+    carreira: Optional[str] = None
 
 class DicaBody(BaseModel):
     id: Union[str, int]
@@ -561,56 +557,20 @@ def _init_db(conn: sqlite3.Connection) -> None:
 
 def _boot_graphics():
     """Index graphics folder in background daemon thread."""
-    g_dir = None
-    if settings:
-        try:
-            cfg = settings.load()
-            g_dir = cfg.get("graphics_dir")
-        except Exception:
-            pass
-    if not g_dir and paths:
-        try:
-            doc_fm = Path(paths.documents_dir()) / "Sports Interactive" / "Football Manager 2026" / "graphics"
-            if doc_fm.exists():
-                g_dir = str(doc_fm)
-        except Exception:
-            pass
-
-    if not g_dir or not os.path.exists(g_dir):
-        return
-
-    logger.info(f"Indexing graphics from: {g_dir}")
-    portraits, flags, clubs, comps = {}, {}, {}, {}
     try:
-        for root, _, files in os.walk(g_dir):
-            for file in files:
-                ext = os.path.splitext(file)[1].lower()
-                if ext in {".png", ".jpg", ".jpeg", ".webp"}:
-                    base_name = os.path.splitext(file)[0]
-                    if base_name.isdigit():
-                        uid = int(base_name)
-                        p = Path(root) / file
-                        r_lower = root.lower()
-                        if "logo" in r_lower or "club" in r_lower:
-                            clubs[uid] = p
-                        elif "comp" in r_lower or "league" in r_lower:
-                            comps[uid] = p
-                        elif "flag" in r_lower or "nation" in r_lower:
-                            flags[uid] = p
-                        else:
-                            portraits[uid] = p
-        with _GRAPHICS_LOCK:
-            _GRAPHICS_INDEX["portraits"] = portraits
-            _GRAPHICS_INDEX["flags"] = flags
-            _GRAPHICS_INDEX["clubs"] = clubs
-            _GRAPHICS_INDEX["comps"] = comps
+        graphics.index_graphics()
     except Exception as e:
         logger.warning(f"Error during graphics boot: {e}")
 
 def _serve_graphic(kind: str, uid: int, error_msg: str):
-    with _GRAPHICS_LOCK:
-        path = _GRAPHICS_INDEX.get(kind, {}).get(uid)
-    if path and path.exists():
+    resolver = {
+        "portraits": graphics.portrait_file,
+        "flags": graphics.nation_flag_file,
+        "clubs": graphics.club_logo_file,
+        "comps": graphics.comp_logo_file,
+    }[kind]
+    path = resolver(uid)
+    if path and Path(path).is_file():
         return FileResponse(str(path), headers={"Cache-Control": "public, max-age=86400"})
     raise HTTPException(status_code=404, detail=error_msg)
 
@@ -761,20 +721,16 @@ def get_armazenamento():
 
 @app.get("/api/settings")
 def get_settings():
-    if settings:
-        try:
-            return settings.load()
-        except Exception:
-            pass
-    return {
-        "idioma": "pt",
-        "db_dir": str(get_db_path().parent),
-        "graphics_dir": "",
-        "overall_modo": "fm",
-        "memoria_mb": 512,
-        "bandeja": {"ligado": True},
-        "fim_de_temporada_auto": True,
-    }
+    config = settings.load()
+    database = get_db_path()
+    try:
+        database_size = database.stat().st_size
+    except OSError:
+        database_size = 0
+    return dict(config, graphics_dir_detected=graphics.default_graphics_dir(),
+                portraits=graphics.state(), data_dir=paths.data_root(),
+                local_dir=paths.local_root(), db_path=str(database),
+                db_size=database_size, **get_memoria())
 
 @app.post("/api/settings/overall")
 def set_overall_modo(body: OverallModoBody):
@@ -788,18 +744,23 @@ def set_overall_modo(body: OverallModoBody):
 def get_memoria():
     import psutil
     mem = psutil.virtual_memory()
+    physical = mem.total // (1024 * 1024)
+    maximum = max(1024, min(8192, physical // 2))
     return {
-        "total_mb": mem.total // (1024 * 1024),
+        "total_mb": physical,
         "disponivel_mb": mem.available // (1024 * 1024),
+        "memoria_max_mb": settings.load()["memoria_max_mb"],
+        "memoria_max_permitida_mb": maximum,
+        "memoria_fisica_mb": physical,
+        "memoria_em_uso_mb": psutil.Process().memory_info().rss // (1024 * 1024),
     }
 
 @app.post("/api/settings/memoria")
 def set_memoria(body: MemoriaBody):
-    if settings:
-        cfg = settings.load()
-        cfg["memoria_mb"] = body.mb
-        settings.save(**cfg)
-    return {"ok": True, "mb": body.mb}
+    if not 1024 <= body.mb <= get_memoria()["memoria_max_permitida_mb"]:
+        raise HTTPException(status_code=400, detail="fora da faixa permitida")
+    settings.save(memoria_max_mb=body.mb)
+    return get_memoria()
 
 @app.post("/api/settings/idioma")
 def set_idioma(body: IdiomaBody):
@@ -835,8 +796,8 @@ def set_graphics(body: GraphicsBody):
         cfg = settings.load()
         cfg["graphics_dir"] = str(p)
         settings.save(**cfg)
-    threading.Thread(target=_boot_graphics, daemon=True).start()
-    return {"ok": True, "dir": str(p)}
+    graphics.reindex(str(p))
+    return {"ok": True, "dir": str(p), "portraits": graphics.state()}
 
 @app.post("/api/settings/db_dir")
 def set_db_dir(body: DbDirBody):
@@ -1419,17 +1380,57 @@ def get_dicas():
 def post_dica_lida(body: DicaBody):
     return {"lidas": [body.id]}
 
+_ONBOARDING_LOCK = threading.Lock()
+
+
+def _onboarding_bruto():
+    # Read the file before defaults: missing means an older installation.
+    try:
+        with open(settings.SETTINGS_PATH, encoding="utf-8") as stream:
+            data = json.load(stream)
+        return data if isinstance(data, dict) else {}
+    except (OSError, ValueError):
+        return {}
+
+
+def _ja_usa_o_app(config):
+    if config.get("acesso_nivel"):
+        return True
+    database = get_db_path()
+    if database.is_file():
+        try:
+            with sqlite3.connect(str(database)) as conn:
+                return conn.execute("SELECT 1 FROM snapshots LIMIT 1").fetchone() is not None
+        except sqlite3.Error:
+            pass
+    return False
+
+
 @app.get("/api/onboarding")
 def get_onboarding():
-    return {"etapa": 1, "pulado": False}
+    config = _onboarding_bruto()
+    state = dict(settings.DEFAULTS["onboarding"])
+    stored = config.get("onboarding")
+    if isinstance(stored, dict):
+        state.update(stored)
+    elif _ja_usa_o_app(config):
+        state["concluido"] = True
+    return state
 
 @app.post("/api/onboarding")
 def post_onboarding(body: OnboardingBody):
-    return {"etapa": body.etapa or 1, "pulado": body.pulado or False}
+    with _ONBOARDING_LOCK:
+        state = get_onboarding()
+        state.update(body.model_dump(exclude_unset=True))
+        settings.save(onboarding=state)
+        return state
 
 @app.post("/api/onboarding/refazer")
 def post_onboarding_refazer():
-    return {"etapa": 1, "pulado": False}
+    with _ONBOARDING_LOCK:
+        state = dict(settings.DEFAULTS["onboarding"])
+        settings.save(onboarding=state)
+        return state
 
 # ==============================================================================
 # 15. Favorites Management Endpoints
@@ -1759,56 +1760,73 @@ def post_jogo_auto_snapshot_salvar():
 @app.get("/api/plugins")
 def get_plugins():
     return {
-        "plugins": [],
-        "instalados": [],
-        "pasta_jogo": "",
-        "avisar": True,
+        "aceito": legal.aceito_plugins(settings.load()),
+        "tem_lista": False,
+        "ultima": None,
+        "historico": [],
+        "jogos": [],
+        "instalado": False,
+        "disponivel": False,
     }
+
+
+def _plugins_indisponiveis():
+    raise HTTPException(status_code=501, detail="Plugins do jogo indisponiveis no macOS")
+
 
 @app.post("/api/plugins/verificar")
 def post_plugins_verificar():
-    return {"plugins": [], "resultado": {"atualizados": [], "reiniciar": []}}
+    return _plugins_indisponiveis()
 
 @app.post("/api/plugins/ligar")
 def post_plugins_ligar(body: PluginLigarBody):
-    return {"ok": True, "id": body.id, "ligado": body.ligado}
+    disabled = set(settings.load().get("plugins_desligados") or [])
+    if body.ligado:
+        disabled.discard(body.id)
+    else:
+        disabled.add(body.id)
+    settings.save(plugins_desligados=sorted(disabled))
+    return get_plugins()
 
 @app.post("/api/plugins/voltar")
 def post_plugins_voltar(body: PluginVoltarBody):
-    return {"ok": True, "id": body.id}
+    return _plugins_indisponiveis()
 
 @app.get("/api/plugins/oferta")
 def get_plugins_oferta():
-    return {"plugins": [], "avisar": False}
+    return {
+        "plugins": [],
+        "nao_vistos": [],
+        "avisar": bool(settings.load().get("plugins_avisar_novos", True)),
+    }
 
 @app.post("/api/plugins/avisar-novos")
 def post_plugins_avisar_novos(body: PluginsAvisarBody):
-    return {"ok": True, "avisar": body.ligado}
+    settings.save(plugins_avisar_novos=body.ligado)
+    return get_plugins_oferta()
 
 @app.post("/api/plugins/instalar")
 def post_plugins_instalar(body: PluginIdBody):
-    return {"ok": True, "instalado": True, "reiniciar": False}
+    return _plugins_indisponiveis()
 
 @app.post("/api/plugins/pasta-jogo")
 def post_plugins_pasta_jogo(body: PastaJogoBody):
-    # Folder picker for game directory
-    res = subprocess.run(
-        ["osascript", "-e", 'POSIX path of (choose folder with prompt "Select Football Manager folder")'],
-        capture_output=True,
-        text=True,
-    )
-    if res.returncode == 0 and res.stdout.strip():
-        fpath = res.stdout.strip()
-        return {"pasta_jogo": fpath, "achados": ["fm.app"], "cancelado": False}
-    return {"pasta_jogo": "", "cancelado": True}
+    return _plugins_indisponiveis()
 
 @app.post("/api/plugins/dispensar")
 def post_plugins_dispensar(body: PluginIdBody):
-    return {"ok": True}
+    dismissed = set(settings.load().get("plugins_dispensados") or [])
+    dismissed.add(body.id)
+    settings.save(plugins_dispensados=sorted(dismissed))
+    return get_plugins_oferta()
 
 @app.post("/api/plugins/oferta-vista")
 def post_plugins_oferta_vista(body: PluginsVistosBody):
-    return {"ok": True}
+    seen = settings.load().get("plugins_oferta_vista")
+    seen = set(seen if isinstance(seen, list) else [])
+    seen.update(body.ids)
+    settings.save(plugins_oferta_vista=sorted(seen))
+    return get_plugins_oferta()
 
 @app.get("/api/plugins/foto")
 def get_plugins_foto():
@@ -1981,16 +1999,12 @@ def get_idiomas():
 
 @app.get("/api/idiomas/{codigo}")
 def get_idioma_codigo(codigo: str):
-    if idiomas:
-        try:
-            return idiomas.carregar(codigo)
-        except Exception:
-            pass
-    f_path = FMSH_DIR / "idiomas" / codigo / f"{codigo}.json"
-    if f_path.exists():
-        with open(f_path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    raise HTTPException(status_code=404, detail="Idioma nao encontrado")
+    if not idiomas or codigo not in {item["codigo"] for item in idiomas.disponiveis()}:
+        raise HTTPException(status_code=404, detail="Idioma nao encontrado")
+    return {
+        "interface": idiomas.resolver(codigo),
+        "colunas": idiomas.resolver(codigo, "colunas"),
+    }
 
 @app.post("/api/idiomas/abrir-pasta")
 def post_idiomas_abrir_pasta():

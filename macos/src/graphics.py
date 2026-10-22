@@ -10,6 +10,7 @@ import os
 import re
 import sys
 import threading
+import time
 import paths
 import settings
 
@@ -31,6 +32,7 @@ _STATE = {
     "contagem": 0,
     "pasta": None,
     "erro": None,
+    "indexed_at": None,
 }
 _TRAVA = threading.Lock()
 
@@ -64,7 +66,8 @@ def ready():
 
 def state():
     with _TRAVA:
-        return dict(_STATE)
+        return dict(_STATE, dir=_STATE["pasta"], count=len(_PORTRAITS),
+                    logos=len(_LOGOS), flags=len(_FLAGS), error=_STATE["erro"])
 
 
 def _dentro(caminho, pasta_base):
@@ -101,11 +104,13 @@ def index_graphics(pasta=None, forcar=False):
 
     if not pasta or not os.path.isdir(pasta):
         with _TRAVA:
+            _LOGOS, _COMPS, _FLAGS, _PORTRAITS = {}, {}, {}, {}
             _STATE["indexando"] = False
             _STATE["pronto"] = True
             _STATE["pasta"] = pasta
             _STATE["contagem"] = 0
             _STATE["erro"] = "pasta nao encontrada"
+            _STATE["indexed_at"] = None
         return _STATE
 
     novos_logos = {}
@@ -168,6 +173,7 @@ def index_graphics(pasta=None, forcar=False):
         _STATE["indexando"] = False
         _STATE["pasta"] = pasta
         _STATE["contagem"] = total
+        _STATE["indexed_at"] = time.strftime("%Y-%m-%dT%H:%M:%S")
 
     return _STATE
 
