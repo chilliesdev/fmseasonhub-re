@@ -31,7 +31,7 @@ def verify_app(app: Path):
         root = Path(folder)
         env = {
             "HOME": str(root),
-            "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+            "PATH": "",
             "FMSH_PASTA_DADOS": str(root / "data"),
             "FMSH_PASTA_LOCAL": str(root / "local"),
         }
