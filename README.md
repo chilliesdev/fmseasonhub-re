@@ -20,7 +20,7 @@ workflow reaches `main`. See [macOS setup and test commands](macos/README.md).
 
 After a successful push build on `main`, CI creates a GitHub Release tagged
 `build-<workflow run number>` at the exact tested commit. Each release includes
-installable app ZIPs for Apple Silicon and Intel, SHA-256 checksums, build metadata,
+DMG installers for Apple Silicon and Intel, SHA-256 checksums, build metadata,
 and generated change notes. Failed builds and pull requests cannot publish. Manual runs only validate;
 retry the original push run to retry a failed release. A retry reuses the same tag
 and does not create a duplicate release. Superseded main builds are cancelled or
@@ -28,10 +28,12 @@ skipped, so an older build does not replace the latest release.
 
 Only the release job receives `contents: write`; build and test jobs stay read-only.
 Assets are uploaded to a draft before publication. Failed uploads can resume on retry.
-Download the ZIP for your Mac from [Releases](https://github.com/chilliesdev/fmseasonhub-re/releases),
-unzip it, and drag the app to Applications. macOS 15 or later is required. Builds
-are ad-hoc signed, not Apple-notarized; first launch can require **Open Anyway**
-approval in macOS settings. See [installation and build details](macos/README.md).
+Download the DMG for your Mac from [Releases](https://github.com/chilliesdev/fmseasonhub-re/releases),
+open it, and drag the app to the Applications shortcut. Eject the DMG and open the
+app from Applications. CI tests this copy-and-eject installation before publication.
+macOS 15 or later is required. Builds are ad-hoc signed, not Apple-notarized. A DMG
+does not remove Apple's security warning; first launch can require **Open Anyway**
+in macOS settings. See [installation and build details](macos/README.md).
 
 ## Repository Structure & Evidence Index
 

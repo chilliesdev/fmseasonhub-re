@@ -1,0 +1,22 @@
+FM Season Hub - macOS installation
+
+Requires macOS 15 or later. Python and app dependencies are included.
+
+1. Quit any older copy of FM Season Hub.
+2. Drag FM Season Hub.app to the Applications shortcut in this window.
+3. Eject the FM Season Hub disk image.
+4. Open FM Season Hub from Applications.
+
+Keep your existing Documents/FM Season Hub folder. It contains your app data.
+
+First launch
+
+This build is ad-hoc signed. It has no Apple Developer ID signature or
+notarization. A DMG does not remove Apple's security warning.
+
+If macOS says Apple could not verify the app, click Done. For this app from
+the official project release, use System Settings > Privacy & Security >
+Open Anyway. Confirm Open when asked. This approves only this app.
+
+Project releases: https://github.com/chilliesdev/fmseasonhub-re/releases
+Apple guidance: https://support.apple.com/102445

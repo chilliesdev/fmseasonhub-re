@@ -1,4 +1,4 @@
-"""Verify a relocated standalone app without Python on its executable PATH."""
+"""Verify an app or DMG installation without Python on its executable PATH."""
 
 import argparse
 import json
@@ -9,6 +9,34 @@ import subprocess
 import tempfile
 import time
 import urllib.request
+
+
+def verify_dmg(image: Path):
+    image = image.resolve(strict=True)
+    subprocess.run(["hdiutil", "verify", str(image)], check=True)
+    with tempfile.TemporaryDirectory(prefix="fmsh-dmg-check-") as folder:
+        root = Path(folder)
+        mount = root / "volume"
+        mount.mkdir()
+        installed = root / "Applications" / "FM Season Hub.app"
+        subprocess.run([
+            "hdiutil", "attach", str(image), "-readonly", "-nobrowse",
+            "-mountpoint", str(mount),
+        ], check=True)
+        try:
+            shortcut = mount / "Applications"
+            if not shortcut.is_symlink() or os.readlink(shortcut) != "/Applications":
+                raise RuntimeError("DMG is missing its Applications shortcut")
+            if not (mount / "INSTALL.txt").is_file():
+                raise RuntimeError("DMG is missing its installation instructions")
+            subprocess.run([
+                "ditto", str(mount / "FM Season Hub.app"), str(installed),
+            ], check=True)
+        finally:
+            subprocess.run(["hdiutil", "detach", str(mount)], check=True)
+        # Check the copied app after ejecting the installer, as users will run it.
+        verify_app(installed)
+    print("DMG integrity, Applications shortcut and installed app startup passed")
 
 
 def verify_app(app: Path):
@@ -73,5 +101,9 @@ def verify_app(app: Path):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("app", type=Path)
-    verify_app(parser.parse_args().app)
+    parser.add_argument("path", type=Path, help="App bundle or DMG installer")
+    target = parser.parse_args().path
+    if target.suffix.lower() == ".dmg":
+        verify_dmg(target)
+    else:
+        verify_app(target)

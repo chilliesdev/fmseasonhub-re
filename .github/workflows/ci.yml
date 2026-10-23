@@ -85,7 +85,7 @@ jobs:
           raise SystemExit(not result.wasSuccessful())
           PY
 
-      - name: Build and verify standalone app
+      - name: Build and verify standalone DMG installation
         env:
           BUILD_NUMBER: ${{ github.run_number }}
           EXPECTED_ARCH: ${{ matrix.arch }}
@@ -104,7 +104,7 @@ jobs:
           overwrite: true
 
   release:
-    name: Publish installable macOS apps
+    name: Publish macOS DMG installers
     needs: macos
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
@@ -127,7 +127,7 @@ jobs:
       - name: Verify release assets
         working-directory: artifacts
         run: |
-          sha256sum --check FMSeasonHub-macos-arm64.zip.sha256 FMSeasonHub-macos-x86_64.zip.sha256
+          sha256sum --check FMSeasonHub-macos-arm64.dmg.sha256 FMSeasonHub-macos-x86_64.dmg.sha256
           python3 - <<'PY'
           import json
           import os
@@ -137,6 +137,7 @@ jobs:
               metadata = json.loads(Path(f'FMSeasonHub-macos-{arch}.json').read_text())
               assert metadata['commit'] == os.environ['RELEASE_SHA']
               assert metadata['architecture'] == arch
+              assert metadata['format'] == 'dmg'
           PY
 
       - name: Publish the tested main commit
@@ -186,11 +187,11 @@ jobs:
 
           notes="$RUNNER_TEMP/release-notes.md"
           cat > "$notes" <<EOF
-          Standalone macOS apps from commit $RELEASE_SHA. Both architectures passed build, tests and relocated app startup checks.
+          Standalone macOS DMG installers from commit $RELEASE_SHA. Both architectures passed build, tests and app startup after copying from the mounted DMG and ejecting it.
 
-          Requires macOS 15 or later. Download **FMSeasonHub-macos-arm64.zip** for Apple Silicon, or **FMSeasonHub-macos-x86_64.zip** for Intel. Unzip and drag **FM Season Hub.app** to **Applications**. Python and dependencies are included.
+          Requires macOS 15 or later. Download **FMSeasonHub-macos-arm64.dmg** for Apple Silicon, or **FMSeasonHub-macos-x86_64.dmg** for Intel. Open the DMG, quit any older copy, and drag **FM Season Hub.app** to the **Applications** shortcut. Eject the DMG, then open the app from Applications. Python and dependencies are included.
 
-          These builds are ad-hoc signed, not Apple-notarized. On first launch, macOS may require approval in **System Settings → Privacy & Security → Open Anyway**. Do not disable Gatekeeper.
+          These builds are ad-hoc signed, not Apple-notarized. A DMG does not remove Apple's security warning. If macOS says Apple could not verify the app, click **Done**, then use **System Settings → Privacy & Security → Open Anyway** to approve this app. [Apple's instructions](https://support.apple.com/102445).
 
           SHA-256 checksums and build metadata are attached beside each app. [Installation details]($GITHUB_SERVER_URL/$GH_REPO/blob/$RELEASE_SHA/macos/README.md).
 
@@ -206,11 +207,11 @@ jobs:
           fi
           # A failed upload leaves a draft. Retrying replaces draft assets only.
           gh release upload "$RELEASE_TAG" --clobber \
-            artifacts/FMSeasonHub-macos-arm64.zip \
-            artifacts/FMSeasonHub-macos-arm64.zip.sha256 \
+            artifacts/FMSeasonHub-macos-arm64.dmg \
+            artifacts/FMSeasonHub-macos-arm64.dmg.sha256 \
             artifacts/FMSeasonHub-macos-arm64.json \
-            artifacts/FMSeasonHub-macos-x86_64.zip \
-            artifacts/FMSeasonHub-macos-x86_64.zip.sha256 \
+            artifacts/FMSeasonHub-macos-x86_64.dmg \
+            artifacts/FMSeasonHub-macos-x86_64.dmg.sha256 \
             artifacts/FMSeasonHub-macos-x86_64.json
           gh release edit "$RELEASE_TAG" --draft=false --latest
 

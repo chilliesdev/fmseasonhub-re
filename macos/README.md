@@ -5,23 +5,26 @@
 Download from [GitHub Releases](https://github.com/chilliesdev/fmseasonhub-re/releases).
 Requires macOS 15 or later.
 
-- Apple Silicon (M-series): `FMSeasonHub-macos-arm64.zip`.
-- Intel: `FMSeasonHub-macos-x86_64.zip`.
+- Apple Silicon (M-series): `FMSeasonHub-macos-arm64.dmg`.
+- Intel: `FMSeasonHub-macos-x86_64.dmg`.
 
-Unzip the download, quit any older copy, then drag **FM Season Hub.app** to
-**Applications**. Python and all app dependencies are included. Keep your existing
+Open the DMG and quit any older copy of the app. Drag **FM Season Hub.app** to the
+**Applications** shortcut in the disk image. Eject the DMG, then open the app from
+Applications. Python and all app dependencies are included. Keep your existing
 `~/Documents/FM Season Hub` data folder.
 
 The app has an ad-hoc signature, but no Apple Developer ID signature or notarization.
-After an initial blocked launch, use **System Settings → Privacy & Security →
-Open Anyway** to approve this app. Do not disable Gatekeeper. A Developer ID and
-Apple notarization credentials are needed to remove this first-open step.
+The DMG does not remove Apple's security warning. If macOS says **Apple could not
+verify the app**, click **Done**. Then use **System Settings → Privacy & Security →
+Open Anyway** to approve this app, and confirm **Open**. See [Apple's
+instructions](https://support.apple.com/102445). A Developer ID and Apple
+notarization credentials are needed to remove this first-open step.
 
-Each ZIP has a matching `.zip.sha256` file and `.json` build record. To verify a
-download, place the ZIP and checksum in the same folder, then run:
+Each DMG has a matching `.dmg.sha256` file and `.json` build record. To verify a
+download, place the DMG and checksum in the same folder, then run:
 
 ```sh
-shasum -a 256 -c FMSeasonHub-macos-arm64.zip.sha256
+shasum -a 256 -c FMSeasonHub-macos-arm64.dmg.sha256
 ```
 
 Use the `x86_64` filename for Intel.
@@ -39,7 +42,15 @@ macos/.venv/bin/python macos/build_release.py --output .tmp/release-build --buil
 Choose a new output directory for each build. The builder compiles the native
 bridge, freezes Python and dependencies with PyInstaller, moves the app, verifies
 its signature and internal links, imports Cocoa, and checks the packaged API and
-frontend with no Python on PATH. It then creates the ZIP, checksum and build record.
+frontend with no Python on PATH. It creates a compressed DMG with an Applications
+shortcut and install instructions, mounts it read-only, copies the app to a new
+test Applications folder, ejects the image, and repeats the app checks. It then
+writes the checksum and build record. To verify a downloaded DMG with the same checks:
+
+```sh
+macos/.venv/bin/python macos/verify_release.py /path/to/FMSeasonHub-macos-arm64.dmg
+```
+
 Build each architecture on its matching Mac; CI checks both before publishing.
 
 ## Local development bundle

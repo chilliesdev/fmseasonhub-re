@@ -29,6 +29,9 @@ if args[:2] == ['release', 'create']:
     print('https://github.com/example/project/releases/tag/build-4')
 elif args[:2] == ['release', 'upload']:
     if case.get('upload_failure'): sys.exit(1)
+    expected = {f'artifacts/FMSeasonHub-macos-{arch}.{suffix}'
+                for arch in ('arm64', 'x86_64') for suffix in ('dmg', 'dmg.sha256', 'json')}
+    if set(args[4:]) != expected: raise SystemExit('Expected both DMG installers, checksums and metadata')
 elif args[:2] == ['release', 'edit']:
     if case.get('publish_failure'): sys.exit(1)
     print('PUBLISHED')
@@ -89,6 +92,10 @@ class ReleaseWorkflowTests(unittest.TestCase):
         self.assertEqual(creates[0][creates[0].index('--target') + 1], SHA)
         self.assertIn('--generate-notes', creates[0])
         self.assertIn('Python and dependencies are included', notes)
+        self.assertIn('FMSeasonHub-macos-arm64.dmg', notes)
+        self.assertIn('FMSeasonHub-macos-x86_64.dmg', notes)
+        self.assertIn('Eject the DMG', notes)
+        self.assertIn("A DMG does not remove Apple's security warning", notes)
         self.assertIn(f'/blob/{SHA}/macos/README.md', notes)
 
     def test_existing_success_is_not_republished(self):
