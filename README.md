@@ -12,12 +12,26 @@
 ## Continuous integration
 
 [macOS CI](.github/workflows/ci.yml) runs on pull requests and pushes to `main`.
-It checks syntax, builds the native bridge and local app bundle, and runs the
-macOS test suite on macOS 15 with Python 3.14. No secrets are required.
+It checks syntax, builds the native bridge and app bundles, and runs the
+macOS test suite on macOS 15 with Python 3.14 for Apple Silicon and Intel.
+Standalone apps include Python and their dependencies. No custom secrets are required.
 To start a manual run, select **Actions → macOS CI → Run workflow** after the
 workflow reaches `main`. See [macOS setup and test commands](macos/README.md).
-The app bundle needs the runner's Python installation, so CI does not publish it
-as a portable release.
+
+After a successful push build on `main`, CI creates a GitHub Release tagged
+`build-<workflow run number>` at the exact tested commit. Each release includes
+installable app ZIPs for Apple Silicon and Intel, SHA-256 checksums, build metadata,
+and generated change notes. Failed builds and pull requests cannot publish. Manual runs only validate;
+retry the original push run to retry a failed release. A retry reuses the same tag
+and does not create a duplicate release. Superseded main builds are cancelled or
+skipped, so an older build does not replace the latest release.
+
+Only the release job receives `contents: write`; build and test jobs stay read-only.
+Assets are uploaded to a draft before publication. Failed uploads can resume on retry.
+Download the ZIP for your Mac from [Releases](https://github.com/chilliesdev/fmseasonhub-re/releases),
+unzip it, and drag the app to Applications. macOS 15 or later is required. Builds
+are ad-hoc signed, not Apple-notarized; first launch can require **Open Anyway**
+approval in macOS settings. See [installation and build details](macos/README.md).
 
 ## Repository Structure & Evidence Index
 

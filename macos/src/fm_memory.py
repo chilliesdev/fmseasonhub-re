@@ -84,7 +84,7 @@ class FmMemory:
 
         # 1. Tenta carregar a dylib direta
         dylib_paths = [
-            os.path.join(os.path.dirname(__file__), "..", "native", "libfmsh_bridge.dylib"),
+            paths.resource_path("..", "native", "libfmsh_bridge.dylib"),
             os.path.join(paths.app_dir(), "native", "libfmsh_bridge.dylib"),
             "/usr/local/lib/libfmsh_bridge.dylib",
         ]

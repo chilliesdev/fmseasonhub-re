@@ -39,7 +39,7 @@ if not logger.handlers:
 # ==============================================================================
 
 SRC_DIR = Path(__file__).resolve().parent
-MACOS_DIR = SRC_DIR.parent
+MACOS_DIR = Path(getattr(sys, "_MEIPASS", SRC_DIR.parent))
 FMSH_DIR = MACOS_DIR / "fmsh"
 DIST_DIR = FMSH_DIR / "frontend" / "dist"
 

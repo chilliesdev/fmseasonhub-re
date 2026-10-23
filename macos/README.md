@@ -1,4 +1,48 @@
-# Local macOS app
+# macOS app
+
+## Install a release
+
+Download from [GitHub Releases](https://github.com/chilliesdev/fmseasonhub-re/releases).
+Requires macOS 15 or later.
+
+- Apple Silicon (M-series): `FMSeasonHub-macos-arm64.zip`.
+- Intel: `FMSeasonHub-macos-x86_64.zip`.
+
+Unzip the download, quit any older copy, then drag **FM Season Hub.app** to
+**Applications**. Python and all app dependencies are included. Keep your existing
+`~/Documents/FM Season Hub` data folder.
+
+The app has an ad-hoc signature, but no Apple Developer ID signature or notarization.
+After an initial blocked launch, use **System Settings → Privacy & Security →
+Open Anyway** to approve this app. Do not disable Gatekeeper. A Developer ID and
+Apple notarization credentials are needed to remove this first-open step.
+
+Each ZIP has a matching `.zip.sha256` file and `.json` build record. To verify a
+download, place the ZIP and checksum in the same folder, then run:
+
+```sh
+shasum -a 256 -c FMSeasonHub-macos-arm64.zip.sha256
+```
+
+Use the `x86_64` filename for Intel.
+
+## Build a standalone release
+
+On macOS 15 or later, use Python 3.14 for the target architecture:
+
+```sh
+python3.14 -m venv macos/.venv
+macos/.venv/bin/python -m pip install -r macos/requirements-build.txt
+macos/.venv/bin/python macos/build_release.py --output .tmp/release-build --build-number 1
+```
+
+Choose a new output directory for each build. The builder compiles the native
+bridge, freezes Python and dependencies with PyInstaller, moves the app, verifies
+its signature and internal links, imports Cocoa, and checks the packaged API and
+frontend with no Python on PATH. It then creates the ZIP, checksum and build record.
+Build each architecture on its matching Mac; CI checks both before publishing.
+
+## Local development bundle
 
 The tracked `fmsh/frontend/dist` files are the existing prebuilt runtime assets.
 This repository has no frontend build source. CI uses these files for the web UI
