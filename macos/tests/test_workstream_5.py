@@ -139,8 +139,10 @@ class TestWorkstream5(unittest.TestCase):
         self.assertEqual(status, 200)
         status, data = self._req("/api/simular-captura", "POST", {})
         self.assertEqual(status, 200)
-        status, data = self._req("/api/capture", "POST", {})
+        status, data = self._req("/api/disconnect", "POST", {})
         self.assertEqual(status, 200)
+        status, data = self._req("/api/capture", "POST", {})
+        self.assertEqual(status, 409)
 
     def test_03_memory_bridge_primitives(self):
         """Verify universal libfmsh_bridge.dylib memory read primitives."""

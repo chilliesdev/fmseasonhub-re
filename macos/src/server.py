@@ -22,7 +22,7 @@ import threading
 import tempfile
 import ctypes
 import uuid
-from contextlib import ExitStack
+from contextlib import ExitStack, closing
 from datetime import date
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
@@ -33,8 +33,10 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import uvicorn
 import graphics
+import capture_all
+import db
 from fm_memory import FmMemory, FmNotRunning, FmAccessDenied, FmElevado, FmUnsupportedBuild
-from fm_reader import FmReader
+from fm_reader import FmReader, strict_reads
 
 # Configure logging
 logger = logging.getLogger("fmsh.server")
@@ -1080,30 +1082,36 @@ def list_snapshot_players(
     team: Optional[int] = None,
     sex: Optional[str] = None,
 ):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    query = """
-    SELECT p.*, s.apps_total, s.goals, s.assists, s.avg_rating, pr.value, pr.wage, pr.contract_end
-    FROM players p
-    LEFT JOIN player_stats s ON s.snapshot_id=p.snapshot_id AND s.uid=p.uid
-    LEFT JOIN player_profile pr ON pr.snapshot_id=p.snapshot_id AND pr.uid=p.uid
-    WHERE p.snapshot_id=?
-    """
-    params: List[Any] = [sid]
-    if search:
-        query += " AND (p.full_name LIKE ? OR p.common_name LIKE ?)"
-        params.extend([f"%{search}%", f"%{search}%"])
-    if club is not None:
-        query += " AND p.club_id=?"
-        params.append(club)
-    if team is not None:
-        query += " AND p.team_uid=?"
-        params.append(team)
+    with closing(get_db_connection()) as conn:
+        cur = conn.cursor()
+        profile_columns = {row[1] for row in conn.execute("PRAGMA table_info(player_profile)")}
+        profile_fields = []
+        for alias, candidates in (("value", ("guide_value", "value")), ("wage", ("wage_weekly", "wage"))):
+            columns = [f"pr.{column}" for column in candidates if column in profile_columns]
+            expression = f"COALESCE({','.join(columns)})" if len(columns) > 1 else (columns[0] if columns else "NULL")
+            profile_fields.append(f"{expression} AS {alias}")
+        query = f"""
+        SELECT p.*, s.apps_total, s.goals, s.assists, s.avg_rating, {','.join(profile_fields)}, pr.contract_end
+        FROM players p
+        LEFT JOIN player_stats s ON s.snapshot_id=p.snapshot_id AND s.uid=p.uid
+        LEFT JOIN player_profile pr ON pr.snapshot_id=p.snapshot_id AND pr.uid=p.uid
+        WHERE p.snapshot_id=?
+        """
+        params: List[Any] = [sid]
+        if search:
+            query += " AND (p.full_name LIKE ? OR p.common_name LIKE ?)"
+            params.extend([f"%{search}%", f"%{search}%"])
+        if club is not None:
+            query += " AND p.club_id=?"
+            params.append(club)
+        if team is not None:
+            query += " AND p.team_uid=?"
+            params.append(team)
 
-    query += f" LIMIT {limit} OFFSET {offset}"
-    cur.execute(query, params)
-    rows = cur.fetchall()
-    return [dict(r) for r in rows]
+        query += f" LIMIT {limit} OFFSET {offset}"
+        cur.execute(query, params)
+        rows = cur.fetchall()
+        return [dict(r) for r in rows]
 
 @app.get("/api/snapshots/{sid}/players/{uid}")
 def get_snapshot_player(sid: int, uid: int):
@@ -1253,18 +1261,73 @@ def disconnect_fm():
 @app.post("/api/capture")
 def capture_snapshot(body: Optional[CaptureBody] = None):
     body = body or CaptureBody()
-    conn = get_db_connection()
-    with _DB_LOCK:
-        cur = conn.cursor()
-        cur.execute("""
-        INSERT INTO snapshots (name, scope, game_date, save_name, carreira_id)
-        VALUES (?, ?, ?, ?, ?)
-        """, (body.name or "Snapshot Manual", body.scope, body.game_date or "2026-07-01", "Default Save", "carreira_default"))
-        sid = cur.lastrowid
-        conn.commit()
+    name = body.name or "Snapshot Manual"
+    with _CONNECTION_LOCK:
+        _JOB_STATUS.update(kind="capture", state="running", phase="lendo_times", done=0,
+                           total=0, sid=None, name=name, error=None, error_code=None)
+        try:
+            source = _capture_source()
+
+            def validate():
+                if _capture_source() != source:
+                    _clear_connection()
+                    raise HTTPException(409, "O save mudou durante a leitura. Conecte novamente e repita a captura.")
+
+            def progress(done, total, phase):
+                _JOB_STATUS.update(done=done, total=total, phase=phase)
+                validate()
+
+            # scan_base commits batches. Keep every batch outside the saved-season DB.
+            with strict_reads(_FM_READER), tempfile.TemporaryDirectory(prefix="fmsh-capture-") as folder:
+                validate()
+                with closing(db.connect(str(Path(folder) / "capture.db"))) as staged:
+                    db.init_schema(staged)
+                    staged_sid = db.create_snapshot(
+                        staged, name=name, scope=body.scope, game_date=source[1],
+                        save_name=source[2], savegame_id=source[0][0],
+                        fm_version=_FM_MEMORY.fm_version,
+                    )
+                    capture_all.scan_base(staged, staged_sid, _FM_READER, _FM_MEMORY,
+                                          progress=progress, ref_date=source[1])
+                    count = staged.execute("SELECT COUNT(*) FROM players WHERE snapshot_id=?", (staged_sid,)).fetchone()[0]
+                    if not count:
+                        raise HTTPException(422, "Nenhum jogador foi lido. Carregue um save e repita a captura.")
+                    validate()
+                    _JOB_STATUS.update(phase="salvando")
+                    with closing(get_db_connection()) as conn, _DB_LOCK:
+                        sid = db.publish_capture(conn, staged, staged_sid, validate)
+            _JOB_STATUS.update(state="done", phase="fim", sid=sid, done=count, total=count)
+        except HTTPException as exc:
+            _JOB_STATUS.update(state="error", phase="erro", sid=None, error=exc.detail, error_code="capture_failed")
+            raise
+        except Exception as exc:
+            logger.exception("Capture failed; no season was saved")
+            error = "Nao foi possivel ler e salvar os jogadores. Conecte novamente e repita a captura."
+            _JOB_STATUS.update(state="error", phase="erro", sid=None, error=error, error_code="capture_failed")
+            raise HTTPException(500, error) from exc
     if callable(AO_AVISO_DA_CAPTURA):
-        AO_AVISO_DA_CAPTURA({"sid": sid, "nome": body.name})
+        try:
+            AO_AVISO_DA_CAPTURA({"sid": sid, "nome": name})
+        except Exception:
+            logger.exception("Could not notify about the saved capture")
     return {"ok": True, "sid": sid}
+
+
+def _capture_source():
+    """Read fresh metadata from the verified connection, never from request defaults."""
+    if not _LIVE_STATUS.get("ready") or _FM_MEMORY is None or _FM_READER is None:
+        raise HTTPException(409, "Conecte ao Football Manager com um save carregado antes de capturar.")
+    session = _FM_READER.save_session()
+    game_date = _FM_READER.game_date()
+    save_name = _FM_READER.save_name()
+    if (not _FM_MEMORY.is_alive() or not _FM_READER.save_loaded() or not session[0]
+            or session != (_LIVE_STATUS.get("savegame_id"), _LIVE_STATUS.get("session_nonce"))
+            or _FM_READER.save_session() != session
+            or not isinstance(game_date, date) or game_date.year <= 2000
+            or not isinstance(save_name, str) or not save_name.strip()):
+        _clear_connection()
+        raise HTTPException(409, "A conexao ou o save mudou. Conecte novamente antes de capturar.")
+    return session, game_date.isoformat(), save_name
 
 @app.post("/api/captura/simular")
 @app.post("/api/simular-captura")

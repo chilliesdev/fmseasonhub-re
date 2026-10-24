@@ -7,11 +7,23 @@ Desempacota atributos, contratos, historico de partidas e metricas avancadas Mon
 import sys
 import struct
 import datetime
+from contextlib import contextmanager
 from datetime import date, timedelta
 import unicodedata
 
 import offsets
 from fm_memory import FmMemory, _to_int, _log
+
+
+@contextmanager
+def strict_reads(reader):
+    """Reject hidden or incomplete memory reads while staging a capture."""
+    previous = getattr(reader, "_strict_reads", False)
+    reader._strict_reads = True
+    try:
+        yield
+    finally:
+        reader._strict_reads = previous
 
 
 def decode_fm_date(raw):
@@ -149,6 +161,7 @@ PROFILE_KEYS = (
 
 
 class FmReader:
+    _strict_reads = False
     BASIC_KEYS = BASIC_KEYS
     ADV_KEYS = ADV_KEYS
     PROFILE_KEYS = PROFILE_KEYS
@@ -201,7 +214,15 @@ class FmReader:
         return self.mem.u64(addr)
 
     def rb(self, addr, size):
-        return self.mem.bytes(addr, size)
+        raw = self.mem.bytes(addr, size)
+        if self._strict_reads and len(raw) != size:
+            raise OSError(f"Leitura incompleta em 0x{addr:X} ({len(raw)}/{size} bytes)")
+        return raw
+
+    def _read_buffer(self, addr, size):
+        if self._strict_reads:
+            return self.rb(addr, size)
+        return self.mem.bytes_talvez(addr, size)
 
     def is_heap(self, addr):
         return addr > 0x10000
@@ -214,9 +235,11 @@ class FmReader:
             tam = self.u32(ptr)
             if tam <= 0 or tam > 256:
                 return ""
-            raw = self.mem.bytes_talvez(ptr + 4, tam)
+            raw = self._read_buffer(ptr + 4, tam)
             return raw.decode("utf-8", errors="replace").rstrip("\x00")
         except Exception:
+            if self._strict_reads:
+                raise
             return ""
 
     def fmstr(self, ptr):
@@ -232,6 +255,8 @@ class FmReader:
                 return ""
             return self._decode_str_at(str_rec)
         except Exception:
+            if self._strict_reads:
+                raise
             return ""
 
     def _nested_from_ptr(self, ptr):
@@ -244,14 +269,24 @@ class FmReader:
         try:
             begin = self.q(container_ptr)
             end = self.q(container_ptr + 8)
-            if not begin or not end or end < begin:
+            if not begin and not end:
+                return []
+            if not begin or not end or end < begin or (end - begin) % 8:
+                if self._strict_reads:
+                    raise OSError("Vetor de jogadores invalido durante a captura")
                 return []
             count = (end - begin) // 8
-            if count <= 0 or count > 1000000:
+            if count > 1000000:
+                if self._strict_reads:
+                    raise OSError("Vetor de jogadores excede o limite de leitura")
+                return []
+            if not count:
                 return []
             raw = self.rb(begin, count * 8)
             return list(struct.unpack(f"<{count}Q", raw))
         except Exception:
+            if self._strict_reads:
+                raise
             return []
 
     # =========================================================================
@@ -396,8 +431,10 @@ class FmReader:
         """Leitura contigua de 720 bytes do bloco de atleta do jogador."""
         try:
             start_addr = obj + 0xF8 + abias
-            return self.mem.bytes_talvez(start_addr, 720)
+            return self._read_buffer(start_addr, 720)
         except Exception:
+            if self._strict_reads:
+                raise
             return b""
 
     def player_identity(self, obj, abias=0, buf=None):
@@ -453,6 +490,8 @@ class FmReader:
                 "team_uid": self.u32(team_ptr + 0x0C) if team_ptr else None,
             }
         except Exception:
+            if self._strict_reads:
+                raise
             return None
 
     def player_season_stats(self, obj, abias=0, buf=None):
@@ -471,7 +510,7 @@ class FmReader:
                 return stats
 
             # Desempacota lvl1_fields
-            b = self.mem.bytes_talvez(lvl1, 0x20)
+            b = self._read_buffer(lvl1, 0x20)
             if len(b) >= 0x18:
                 rsum_x10 = struct.unpack_from("<H", b, 0x08)[0]
                 minutes = struct.unpack_from("<H", b, 0x0A)[0]
@@ -510,7 +549,7 @@ class FmReader:
             # Struct base fields (metricas Moneyball)
             sbase = self.q(lvl1)
             if sbase and sbase > 0x10000:
-                sb = self.mem.bytes_talvez(sbase, 0x78)
+                sb = self._read_buffer(sbase, 0x78)
                 if len(sb) >= 0x76:
                     stats["passes_attempted"] = struct.unpack_from("<H", sb, 0x08)[0]
                     stats["passes_completed"] = struct.unpack_from("<H", sb, 0x0A)[0]
@@ -537,6 +576,8 @@ class FmReader:
                     stats["presses_completed"] = struct.unpack_from("<H", sb, 0x68)[0]
                     stats["npxg"] = round(struct.unpack_from("<H", sb, 0x6C)[0] / 100.0, 2)
         except Exception:
+            if self._strict_reads:
+                raise
             pass
 
         return stats
@@ -571,6 +612,8 @@ class FmReader:
                     if 1 <= val <= 20:
                         prof[attr_name] = val
                 except Exception:
+                    if self._strict_reads:
+                        raise
                     continue
 
             # Posicoes
@@ -581,6 +624,8 @@ class FmReader:
                     val = self.u8(obj + off + abias)
                     prof[pos_name] = val
                 except Exception:
+                    if self._strict_reads:
+                        raise
                     continue
 
             # Contrato
@@ -593,6 +638,8 @@ class FmReader:
                 prof["contract_type"] = self.u8(c_ptr + 0x2C)
                 prof["agreed_playing_time"] = self.u8(c_ptr + 0x2D)
         except Exception:
+            if self._strict_reads:
+                raise
             pass
 
         return prof
@@ -636,6 +683,8 @@ class FmReader:
             container = tbl + _to_int(team_chain.get("container_off", 0x80))
             return self.vector(container)
         except Exception:
+            if self._strict_reads:
+                raise
             return []
 
     def roster(self, team_obj):
@@ -646,6 +695,8 @@ class FmReader:
             # Time possui player_roster_begin em +0x38 e end em +0x40
             return self.vector(team_obj + 0x38)
         except Exception:
+            if self._strict_reads:
+                raise
             return []
 
     def jogador_do_elenco(self, ptr):

@@ -73,24 +73,27 @@ class StartupContractTests(unittest.TestCase):
         except urllib.error.HTTPError as response:
             return response.code, json.load(response)
 
-    def test_fresh_startup_capture_supplies_empty_snapshot_metrics(self):
+    def saved_snapshot(self, name):
+        with closing(server.get_db_connection()) as conn, conn:
+            return conn.execute("INSERT INTO snapshots (name) VALUES (?)", (name,)).lastrowid
+
+    def test_fresh_startup_supplies_legacy_empty_snapshot_metrics(self):
         db.init_db(str(self.database))
         with closing(sqlite3.connect(self.database)) as conn:
             columns = [row[1] for row in conn.execute("PRAGMA table_info(snapshots)")]
         self.assertNotIn("n_players", columns)
         self.assertNotIn("size_bytes", columns)
         self.assertEqual(self.request("/api/snapshots?include_live=false"), (200, []))
-        status, captured = self.request("/api/capture", {"name": "Empty season"})
-        self.assertEqual(status, 200)
+        sid = self.saved_snapshot("Legacy empty season")
         status, snapshots = self.request("/api/snapshots?include_live=false")
         self.assertEqual(status, 200)
         self.assertEqual(len(snapshots), 1)
         snapshot = snapshots[0]
-        self.assertEqual(snapshot["id"], captured["sid"])
+        self.assertEqual(snapshot["id"], sid)
         self.assertEqual((snapshot["n_players"], snapshot["size_bytes"]), (0, 0))
         self.assertIs(type(snapshot["n_players"]), int)
         self.assertIs(type(snapshot["size_bytes"]), int)
-        self.assertEqual(self.request(f"/api/snapshots/{captured['sid']}"), (200, snapshot))
+        self.assertEqual(self.request(f"/api/snapshots/{sid}"), (200, snapshot))
         self.assertEqual(self.request("/api/snapshots/987654321")[0], 404)
 
     def test_snapshot_metrics_use_saved_rows_in_both_database_schemas(self):
@@ -100,8 +103,8 @@ class StartupContractTests(unittest.TestCase):
                 if startup_schema:
                     db.init_db(str(database))
                 with patch.object(server, "get_db_path", return_value=database):
-                    first = self.request("/api/capture", {"name": "Populated"})[1]["sid"]
-                    second = self.request("/api/capture", {"name": "Empty"})[1]["sid"]
+                    first = self.saved_snapshot("Populated")
+                    second = self.saved_snapshot("Legacy empty")
                     with closing(sqlite3.connect(database)) as conn:
                         with conn:
                             if startup_schema:
@@ -144,11 +147,11 @@ class StartupContractTests(unittest.TestCase):
     def test_archived_leagues_has_unavailable_agenda_and_empty_history(self):
         # The shipped Archived component checks proximos===null and reads lidas.length.
         expected = {"auto": None, "proximos": None, "lidas": [], "ligas": []}
-        for state in ("no-database", "startup", "captured"):
+        for state in ("no-database", "startup", "stored"):
             if state == "startup":
                 db.init_db(str(self.database))
-            elif state == "captured":
-                self.assertEqual(self.request("/api/capture", {"name": "Archived empty season"})[0], 200)
+            elif state == "stored":
+                self.saved_snapshot("Archived legacy empty season")
             for career in ("carreira_default", "unknown-career"):
                 with self.subTest(state=state, career=career):
                     self.assertEqual(self.request(f"/api/carreiras/{career}/outras-ligas"), (200, expected))
