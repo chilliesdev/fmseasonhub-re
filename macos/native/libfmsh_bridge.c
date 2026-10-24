@@ -178,8 +178,9 @@ static uint64_t get_image_base(const char *target) {
                 return (uint64_t)_dyld_get_image_header(i);
             }
         }
+        return 0;
     }
-    // Fallback: return image 0 (main executable)
+    // An empty target explicitly requests the main executable.
     if (count > 0) {
         return (uint64_t)_dyld_get_image_header(0);
     }

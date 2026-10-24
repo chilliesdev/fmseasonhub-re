@@ -23,6 +23,7 @@ import tempfile
 import ctypes
 import uuid
 from contextlib import ExitStack
+from datetime import date
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
@@ -32,6 +33,8 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import uvicorn
 import graphics
+from fm_memory import FmMemory, FmNotRunning, FmAccessDenied, FmElevado, FmUnsupportedBuild
+from fm_reader import FmReader
 
 # Configure logging
 logger = logging.getLogger("fmsh.server")
@@ -127,7 +130,7 @@ AO_ESCOLHER_NA_BANDEJA: Any = None
 AO_RESPOSTA_AO_FECHAR: Any = None
 
 # Internal state tracking
-_LIVE_STATUS: Dict[str, Any] = {
+_EMPTY_LIVE_STATUS: Dict[str, Any] = {
     "ready": False,
     "sid": None,
     "club": None,
@@ -141,7 +144,15 @@ _LIVE_STATUS: Dict[str, Any] = {
     "session_nonce": None,
     "fm_running": False,
     "save_changed": False,
+    "pid": None,
+    "fm_version": None,
+    "error_code": None,
+    "error": None,
 }
+_LIVE_STATUS: Dict[str, Any] = dict(_EMPTY_LIVE_STATUS)
+_CONNECTION_LOCK = threading.RLock()
+_FM_MEMORY = None
+_FM_READER = None
 
 _JOB_STATUS: Dict[str, Any] = {
     "kind": "idle",
@@ -598,19 +609,49 @@ def comp_logo(uid: int):
 # 7. System, Live, Job, Status & General REST Endpoints
 # ==============================================================================
 
+def _clear_connection():
+    global _FM_MEMORY, _FM_READER
+    if _FM_MEMORY is not None:
+        try:
+            _FM_MEMORY.close()
+        except Exception:
+            logger.exception("Could not close the game memory connection")
+    _FM_MEMORY = None
+    _FM_READER = None
+    _LIVE_STATUS.clear()
+    _LIVE_STATUS.update(_EMPTY_LIVE_STATUS)
+
+
 def parar_leitura_viva():
-    _LIVE_STATUS["ready"] = False
-    _JOB_STATUS["state"] = "idle"
+    with _CONNECTION_LOCK:
+        _clear_connection()
+        _JOB_STATUS.update(state="idle", error=None, error_code=None)
+
+
+def _connection_status():
+    with _CONNECTION_LOCK:
+        if _LIVE_STATUS.get("ready") and _FM_MEMORY is not None:
+            if not _FM_MEMORY.is_alive():
+                _clear_connection()
+            else:
+                session = _FM_READER.save_session()
+                game_date = _FM_READER.game_date()
+                if (session != (_LIVE_STATUS["savegame_id"], _LIVE_STATUS["session_nonce"])
+                        or not isinstance(game_date, date) or game_date.year <= 2000):
+                    _clear_connection()
+                    _LIVE_STATUS.update(fm_running=True, save_changed=True)
+        return dict(_LIVE_STATUS)
 
 def estado_da_conexao(anterior=None):
     try:
         import bandeja_estado
-        pronto = bool(_LIVE_STATUS.get("ready"))
+        status = _connection_status()
+        pronto = bool(status.get("ready"))
         job_ocupado = (_JOB_STATUS.get("state") == "running")
-        job_tipo = _JOB_STATUS.get("type")
-        fm_rodando = bool(_LIVE_STATUS.get("game_running"))
+        job_tipo = _JOB_STATUS.get("kind")
+        fm_rodando = bool(status.get("fm_running"))
         estado = bandeja_estado.estado_da_conexao(pronto, job_ocupado, job_tipo, fm_rodando, anterior)
-        clube = _LIVE_STATUS.get("club_name")
+        clube = _LIVE_STATUS.get("club")
         return estado, clube
     except Exception:
         return "desconectado", None
@@ -624,11 +665,11 @@ def iniciar_faixa_da_conexao():
 
 @app.get("/api/live")
 def get_live():
-    return _LIVE_STATUS
+    return _connection_status()
 
 @app.get("/api/status")
 def get_status():
-    return _LIVE_STATUS
+    return _connection_status()
 
 @app.get("/api/job")
 def get_job():
@@ -1134,21 +1175,75 @@ def get_buscar_como_config():
 def save_buscar_como_config(body: BuscarComoConfigBody):
     return {"ok": True}
 
+def _connect_game(kind="connect"):
+    global _FM_MEMORY, _FM_READER
+    with _CONNECTION_LOCK:
+        _clear_connection()
+        _JOB_STATUS.update(kind=kind, state="running", phase="conectando", error=None, error_code=None)
+        mem = None
+        error_code = "read_failed"
+        error = "Nao foi possivel ler o FM. Carregue um save e tente conectar novamente."
+        running = False
+        try:
+            mem = FmMemory()
+            if not mem.process_id:
+                raise FmNotRunning("Abra o Football Manager e carregue um save antes de conectar.")
+            running = True
+            if not mem.base:
+                raise FmUnsupportedBuild("O modulo game_plugin nao foi encontrado. Use uma versao suportada do FM.")
+            if not mem.is_alive():
+                raise FmAccessDenied("Nao foi possivel ler a memoria do FM. Abra o jogo pelo iniciador do Hub.")
+            reader = FmReader(mem)
+            session = reader.save_session()
+            game_date = reader.game_date()
+            if (not session[0] or not isinstance(game_date, date) or game_date.year <= 2000
+                    or not reader.save_loaded() or reader.save_session() != session):
+                error_code = "no_save"
+                error = "Carregue um save no Football Manager, espere a carga terminar e tente novamente."
+            else:
+                save_name = reader.save_name()
+                if not mem.is_alive():
+                    raise FmNotRunning("O Football Manager foi fechado. Abra o jogo e carregue um save.")
+                _FM_MEMORY, _FM_READER = mem, reader
+                _LIVE_STATUS.update(
+                    ready=True, fm_running=True, pid=mem.process_id, build=mem.build,
+                    game_date=game_date.isoformat(), savegame_id=session[0],
+                    session_nonce=session[1], save_name=save_name,
+                    read_at=time.strftime("%Y-%m-%dT%H:%M:%S"),
+                )
+                _JOB_STATUS.update(state="done", phase="fim", error=None)
+                return {"ok": True, "connected": True, "started": False}
+        except FmNotRunning as exc:
+            error_code, error, running = "fm_closed", str(exc), False
+        except FmAccessDenied as exc:
+            error_code, error, running = "access_denied", str(exc), True
+        except FmElevado as exc:
+            error_code, error, running = "fm_elevated", str(exc), True
+        except FmUnsupportedBuild as exc:
+            error_code, error, running = "unsupported_build", str(exc), True
+        except Exception:
+            logger.exception("Game connection failed")
+        if mem is not None:
+            try:
+                mem.close()
+            except Exception:
+                logger.exception("Could not close the failed game connection")
+        _LIVE_STATUS.update(fm_running=running, error_code=error_code, error=error)
+        _JOB_STATUS.update(state="error", phase="erro", error=error, error_code=error_code)
+        # The shipped client reads connection errors from the JSON result.
+        return {"ok": False, "connected": False, "error_code": error_code, "error": error}
+
+
 @app.post("/api/connect")
 def connect_fm(body: Optional[ConnectBody] = None):
-    body = body or ConnectBody()
-    _LIVE_STATUS["ready"] = True
-    _LIVE_STATUS["game_date"] = body.game_date or "2026-07-01"
-    _LIVE_STATUS["club"] = "User Club"
-    _LIVE_STATUS["manager"] = "User Manager"
-    _LIVE_STATUS["read_at"] = time.strftime("%Y-%m-%dT%H:%M:%S")
-    _LIVE_STATUS["session_nonce"] = str(int(time.time()))
-    return {"ok": True, "connected": True}
+    # A client-supplied date cannot establish that a save is loaded.
+    return _connect_game()
+
 
 @app.post("/api/refresh")
 def refresh_live(body: Optional[ConnectBody] = None):
-    _LIVE_STATUS["read_at"] = time.strftime("%Y-%m-%dT%H:%M:%S")
-    return {"ok": True, "refreshed": True}
+    result = _connect_game("refresh")
+    return dict(result, refreshed=result["connected"], started=False)
 
 @app.post("/api/disconnect")
 def disconnect_fm():

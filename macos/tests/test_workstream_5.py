@@ -9,6 +9,7 @@ import socket
 import unittest
 import threading
 import subprocess
+import tempfile
 import urllib.request
 import urllib.error
 
@@ -157,8 +158,14 @@ class TestWorkstream5(unittest.TestCase):
         if not os.path.isfile(target_bin):
             subprocess.run(["clang", "-O2", "-o", target_bin, "-x", "c", "-"], input=b"#include <unistd.h>\nint main(){sleep(5);return 0;}")
 
+        # Load a real named plugin; GET_BASE must not substitute the executable.
+        plugin_dir = tempfile.TemporaryDirectory(prefix="fmsh-plugin-")
+        self.addCleanup(plugin_dir.cleanup)
+        plugin_path = os.path.join(plugin_dir.name, "game_plugin.dylib")
+        subprocess.run(["clang", "-shared", "-o", plugin_path, "-x", "c", "-"],
+                       input=b"int fmsh_test_plugin = 1;", check=True)
         env = dict(os.environ)
-        env["DYLD_INSERT_LIBRARIES"] = dylib_path
+        env["DYLD_INSERT_LIBRARIES"] = dylib_path + ":" + plugin_path
         proc = subprocess.Popen([target_bin], env=env)
 
         try:
@@ -169,6 +176,12 @@ class TestWorkstream5(unittest.TestCase):
                 time.sleep(0.05)
             self.assertTrue(os.path.exists(sock_path))
 
+            # A missing named module must never receive a guessed base.
+            with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as probe:
+                probe.settimeout(2)
+                probe.connect(sock_path)
+                probe.sendall(b"GET_BASE fmsh_module_that_does_not_exist\n")
+                self.assertEqual(probe.recv(64), b"OK 0\n")
             mem = fm_memory.FmMemory(proc.pid)
             self.assertTrue(mem.is_alive())
             self.assertGreater(mem.base, 0)
