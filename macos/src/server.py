@@ -1612,11 +1612,10 @@ def get_clubs(snapshot: Optional[int] = None):
 
 @app.get("/api/club_profile")
 def get_club_profile(snapshot: Optional[int] = None):
-    return {
-        "name_full": "Club Profile",
-        "name_short": "Club",
-        "facilities": 20,
-    }
+    with closing(get_db_connection()) as conn:
+        sid = moneyball_data.snapshot_id(conn, snapshot)
+        profiles = moneyball_data.table_rows(conn, "club_profile", sid)
+        return profiles[0] if profiles else None
 
 @app.get("/api/myteams")
 def get_myteams(snapshot: Optional[int] = None):
