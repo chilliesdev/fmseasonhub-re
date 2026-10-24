@@ -79,7 +79,7 @@ def _um(campos, idx, nomes):
     return {k: np.asarray([float(campos[k][idx])]) for k in nomes}
 
 
-def executar(campos, meta, idx, params):
+def executar(campos, meta, idx, params, validade=None):
     tol = float(params.get('tol', 20.0))
     modo = params.get('modo', 'faixa')
     if modo not in ('faixa', 'melhor', 'pct'):
@@ -146,6 +146,10 @@ def executar(campos, meta, idx, params):
         else:
             e = np.ones(v.shape, dtype=bool)
 
+        e &= np.isfinite(v)
+        if validade is not None:
+            e &= np.asarray(validade[k], dtype=bool)[mascara]
+
         if fixa:
             m = float((fixa.get('valores') or {}).get(k, 0.0))
             ok = k in (fixa.get('valores') or {})
@@ -153,6 +157,9 @@ def executar(campos, meta, idx, params):
             m = float(np.mean([np.asarray(fn(eu), dtype=float)[0] for eu in eus]))
             ok = True if ele is None else all(bool(ele(eu)[0]) for eu in eus)
 
+        ok = ok and np.isfinite(m)
+        if validade is not None and idxs:
+            ok = ok and all(bool(validade[k][i]) for i in idxs)
         base = v[e]
         valores[k] = v
         elegivel[k] = e
@@ -162,7 +169,9 @@ def executar(campos, meta, idx, params):
         mediana[k] = float(np.median(base)) if base.size else 0.0
 
     possiveis = [k for k in candidatas if meu_ok[k] and abs(meu[k]) > 1e-9]
-    pedidas = [k for k in (params.get('metricas') or []) if k in possiveis]
+    pedidas = params.get('metricas') or []
+    if any(k not in possiveis for k in pedidas):
+        raise ValueError('metricas selecionadas sem medidas ou amostra suficientes')
 
     def p_bruto(k):
         if metricas_tab[k][2]:
@@ -215,6 +224,8 @@ def executar(campos, meta, idx, params):
 
     dentro = cabe.sum(axis=0)
     passou = (n - dentro) <= fora
+    # An out-of-range allowance cannot replace a missing measurement.
+    passou &= np.logical_and.reduce([elegivel[k] for k in ligadas])
     passou &= ~np.isin(indices_pool, idxs)
 
     ca = np.asarray(meta['ca'], dtype=float)[indices_pool]
@@ -314,7 +325,7 @@ def executar(campos, meta, idx, params):
             'posicao': pos_ref,
             'grupo': grupo,
             'coorte': coorte,
-            'idade': int(round(float(np.mean([meta['age'][i] for i in idxs])))),
+            'idade': (lambda vs: int(round(float(np.mean(vs)))) if vs else 0)([float(meta['age'][i]) for i in idxs if np.isfinite(meta['age'][i])]),
             'ca': (lambda v: int(round(v)) if np.isfinite(v) else 0)(float(np.mean([meta['ca'][i] for i in idxs]))),
             'pa': (lambda v: int(round(v)) if np.isfinite(v) else 0)(float(np.mean([meta['pa'][i] for i in idxs]))),
             'valor': (lambda vs: float(np.mean(vs)) if len(vs) else None)([float(meta['value'][i]) for i in idxs if np.isfinite(meta['value'][i])]),
