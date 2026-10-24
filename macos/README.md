@@ -40,6 +40,11 @@ Save ID and game date come from the loaded save. Fields that cannot be verified
 stay empty. Disconnect, game exit, or a changed save clears the live connection;
 select **Connect** again after you load the required save.
 
+Capture reads players and game metadata from the live save. The app saves the
+season only after a complete read with at least one player. A disconnected game,
+changed save, empty result, or read error creates no season and sends no success
+notice. Existing seasons stay intact. Reconnect or reload the save, then retry.
+
 ## Build a standalone release
 
 On macOS 15 or later, use Python 3.14 for the target architecture:

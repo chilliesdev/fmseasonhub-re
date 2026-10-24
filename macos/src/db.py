@@ -399,6 +399,12 @@ def _backfill_fm_version(conn):
 def init_schema(conn):
     """Cria tabelas e indices e executa migracoes."""
     conn.executescript(SCHEMA)
+    # The scanner writes every reader profile field, including positions and personality.
+    from fm_reader import PROFILE_KEYS
+    profile_columns = {row[1] for row in conn.execute("PRAGMA table_info(player_profile)")}
+    for column in PROFILE_KEYS:
+        if column not in profile_columns:
+            conn.execute(f'ALTER TABLE player_profile ADD COLUMN "{column}" INTEGER')
     _ensure_column(conn, "snapshots", "carreira_id", "TEXT")
     _ensure_column(conn, "snapshots", "fm_version", "TEXT")
     _ensure_column(conn, "snapshots", "savegame_id", "TEXT")
@@ -467,6 +473,47 @@ def create_snapshot(
     )
     conn.commit()
     return cur.lastrowid
+
+
+def publish_capture(conn, staged, staged_sid, validate):
+    """Publish a complete staged capture without changing any existing season."""
+    tables = ("snapshots", "players", "player_stats", "player_profile", "player_form")
+    with conn:
+        conn.execute("BEGIN IMMEDIATE")
+        # Older server-created databases contain only a subset of the reader columns.
+        # Apply additive schema changes inside the same transaction as the new rows.
+        for table in tables:
+            existing = {row[1] for row in conn.execute(f'PRAGMA table_info("{table}")')}
+            if not existing:
+                schema = staged.execute(
+                    "SELECT sql FROM sqlite_master WHERE type='table' AND name=?", (table,)
+                ).fetchone()[0]
+                conn.execute(schema)
+            else:
+                for column in staged.execute(f'PRAGMA table_info("{table}")'):
+                    if column[1] not in existing:
+                        conn.execute(f'ALTER TABLE "{table}" ADD COLUMN "{column[1]}" {column[2]}')
+
+        snapshot = dict(staged.execute("SELECT * FROM snapshots WHERE id=?", (staged_sid,)).fetchone())
+        del snapshot["id"]
+        columns = ",".join(f'"{column}"' for column in snapshot)
+        placeholders = ",".join("?" for _ in snapshot)
+        sid = conn.execute(
+            f"INSERT INTO snapshots ({columns}) VALUES ({placeholders})", tuple(snapshot.values())
+        ).lastrowid
+        for table in tables[1:]:
+            cursor = staged.execute(f'SELECT * FROM "{table}" WHERE snapshot_id=?', (staged_sid,))
+            names = [column[0] for column in cursor.description]
+            snapshot_index = names.index("snapshot_id")
+            columns = ",".join(f'"{column}"' for column in names)
+            placeholders = ",".join("?" for _ in names)
+            conn.executemany(
+                f'INSERT INTO "{table}" ({columns}) VALUES ({placeholders})',
+                (tuple(sid if i == snapshot_index else value for i, value in enumerate(row))
+                 for row in cursor),
+            )
+        validate()
+    return sid
 
 
 def insert_player(conn, snapshot_id, uid, data):
