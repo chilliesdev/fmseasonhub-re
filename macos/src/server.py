@@ -20,6 +20,7 @@ import traceback
 import subprocess
 import threading
 import tempfile
+import ctypes
 from contextlib import ExitStack
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
@@ -1612,15 +1613,42 @@ def post_biblioteca_gravar(body: BibliotecaBody):
             f.write(str(body.conteudo or ""))
     return {"ok": True, "arquivo": p.name}
 
+def _renomear_sem_substituir(src: Path, dst: Path) -> None:
+    """Rename atomically on macOS without replacing any existing entry."""
+    source, destination = os.fsencode(src), os.fsencode(dst)
+    if b"\0" in source or b"\0" in destination:
+        raise OSError("File names cannot contain null bytes")
+    try:
+        rename_exclusive = ctypes.CDLL(None, use_errno=True).renamex_np
+    except (AttributeError, OSError) as exc:
+        raise OSError("Exclusive rename is unavailable") from exc
+    rename_exclusive.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_uint]
+    rename_exclusive.restype = ctypes.c_int
+    # sys/stdio.h: RENAME_EXCL rejects destinations created during the operation.
+    if rename_exclusive(source, destination, 0x00000004) != 0:
+        error = ctypes.get_errno()
+        raise OSError(error, os.strerror(error), str(dst))
+
+
 @app.post("/api/biblioteca/{arquivo}/nome")
 def post_biblioteca_renomear(arquivo: str, body: RenomearBody):
     b_dir = _get_biblioteca_dir()
     src = b_dir / arquivo
     dst = b_dir / body.nome
-    if src.exists():
-        src.rename(dst)
+    if not src.exists():
+        raise HTTPException(status_code=404, detail="Arquivo original nao encontrado")
+    if src == dst:
         return {"ok": True, "novo": dst.name}
-    raise HTTPException(status_code=404, detail="Arquivo original nao encontrado")
+    try:
+        _renomear_sem_substituir(src, dst)
+    except FileExistsError as exc:
+        raise HTTPException(status_code=409, detail="Ja existe um arquivo com esse nome") from exc
+    except FileNotFoundError as exc:
+        raise HTTPException(status_code=404, detail="Arquivo original nao encontrado") from exc
+    except OSError as exc:
+        logger.exception("Library rename failed")
+        raise HTTPException(status_code=500, detail="Nao foi possivel renomear o arquivo") from exc
+    return {"ok": True, "novo": dst.name}
 
 @app.delete("/api/biblioteca/{arquivo}")
 def delete_biblioteca_apagar(arquivo: str):
