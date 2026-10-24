@@ -41,6 +41,7 @@ import moneyball as mb
 import moneyball_data
 import player_analysis
 import career_analysis
+import portal_data
 import csv_export
 import player_search
 from fm_memory import FmMemory, FmNotRunning, FmAccessDenied, FmElevado, FmUnsupportedBuild
@@ -1641,32 +1642,32 @@ def get_nomes_curtos(snapshot: Optional[int] = None):
 
 @app.get("/api/carreiras")
 def get_carreiras():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT DISTINCT carreira_id AS id FROM snapshots WHERE carreira_id IS NOT NULL")
-    rows = cur.fetchall()
-    carreiras = []
-    for r in rows:
-        cid = r["id"]
-        cur.execute("SELECT COUNT(*) AS c FROM snapshots WHERE carreira_id=?", (cid,))
-        count = cur.fetchone()["c"]
-        carreiras.append({
-            "id": cid,
-            "nome": cid.replace("_", " ").title(),
-            "ativa": True,
-            "n_temporadas": count,
-        })
-    if not carreiras:
-        carreiras = [{"id": "padrao", "nome": "Carreira Principal", "ativa": True, "n_temporadas": 1}]
+    with closing(get_db_connection()) as conn:
+        snapshots = portal_data.stored_snapshots(conn)
+    active = portal_data.active_career(snapshots)
+    counts = {}
+    for snapshot in snapshots:
+        cid = snapshot["carreira_id"]
+        if cid is not None:
+            counts[cid] = counts.get(cid, 0) + 1
     return {
-        "ativa": carreiras[0]["id"] if carreiras else None,
+        "ativa": active,
         "prefs": {"moeda": 1, "periodo_salario": "week"},
-        "carreiras": carreiras,
+        "carreiras": [
+            {"id": cid, "nome": cid.replace("_", " ").title(),
+             "ativa": cid == active, "n_temporadas": count}
+            for cid, count in counts.items()
+        ],
     }
 
 @app.post("/api/carreiras/ativa")
 def ativar_carreira(body: CarreiraAtivaBody):
-    return {"ok": True, "ativa": body.id}
+    with closing(get_db_connection()) as conn:
+        snapshots = portal_data.stored_snapshots(conn)
+    if body.id not in {snapshot["carreira_id"] for snapshot in snapshots}:
+        raise HTTPException(status_code=404, detail="Carreira nao encontrada")
+    settings.save(carreira_ativa=body.id)
+    return {"ok": True, **get_carreiras()}
 
 @app.put("/api/carreiras/{cid}")
 def salvar_carreira_prefs(cid: str, body: CarreiraPrefsBody):
@@ -1740,15 +1741,11 @@ def get_player_temporadas(uid: int):
 
 @app.get("/api/portal")
 def get_portal(snapshot: Optional[int] = None):
-    return {
-        "base": None,
-        "live": _LIVE_STATUS,
-        "season": {},
-        "highlights": [],
-        "prospects": [],
-        "youth": [],
-        "expiring": [],
-    }
+    with closing(get_db_connection()) as conn:
+        try:
+            return portal_data.summary(conn, snapshot, _LIVE_STATUS)
+        except LookupError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from None
 
 @app.get("/api/portal/garimpos")
 def get_portal_garimpos(snapshot: Optional[int] = None):

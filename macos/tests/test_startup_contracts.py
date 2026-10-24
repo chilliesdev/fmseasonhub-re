@@ -77,6 +77,98 @@ class StartupContractTests(unittest.TestCase):
         with closing(server.get_db_connection()) as conn, conn:
             return conn.execute("INSERT INTO snapshots (name) VALUES (?)", (name,)).lastrowid
 
+    def portal_fixture(self):
+        with closing(server.get_db_connection()) as conn, conn:
+            conn.executescript("""
+                INSERT INTO snapshots(id,name,game_date,in_game_season,scope,club_uid,carreira_id) VALUES
+                (901,'QA 901','2027-05-30','2026/27','squad',77,'qa_alpha'),
+                (902,'QA 902','2028-05-30','2027/28','full',77,'qa_alpha'),
+                (903,'QA 903','2027-05-30','2026/27','squad',88,'qa_beta'),
+                (904,'Transient','2029-05-30','2028/29','live_temp',77,'qa_alpha');
+                INSERT INTO players(snapshot_id,uid,full_name,club_id) VALUES
+                (901,1,'Alpha old',77),(902,1,'Alpha new',77),(903,2,'Beta',88);
+                INSERT INTO player_stats(snapshot_id,uid,avg_rating) VALUES
+                (901,1,7.1),(902,1,7.2),(903,2,7.3);
+            """)
+        settings.save(carreira_ativa='qa_alpha')
+
+    def test_portal_empty_database_and_unknown_selection(self):
+        status, result = self.request('/api/portal')
+        self.assertEqual(status, 200)
+        self.assertEqual(result['seasons'], 0)
+        self.assertEqual(result['total_seasons'], 0)
+        self.assertIsNone(result['base'])
+        self.assertIsNone(result['ultima'])
+        self.assertEqual(result['season'], {})
+        self.assertEqual(result['highlights'], [])
+        self.assertEqual(self.request('/api/carreiras')[1]['carreiras'], [])
+        for snapshot in (901, 0, -1, 999999999):
+            self.assertEqual(self.request(f'/api/portal?snapshot={snapshot}')[0], 404)
+        self.assertEqual(self.request('/api/portal?snapshot=invalid')[0], 422)
+
+    def test_portal_selected_saved_season_and_career_counts_while_disconnected(self):
+        self.portal_fixture()
+        with patch.object(server, '_LIVE_STATUS', dict(server._EMPTY_LIVE_STATUS)):
+            for sid, career, count, label, player in (
+                (901, 'qa_alpha', 2, '2026/27', 'Alpha old'),
+                (902, 'qa_alpha', 2, '2027/28', 'Alpha new'),
+                (903, 'qa_beta', 1, '2026/27', 'Beta'),
+            ):
+                with self.subTest(snapshot=sid):
+                    status, result = self.request(f'/api/portal?snapshot={sid}')
+                    self.assertEqual(status, 200)
+                    self.assertFalse(result['connected'])
+                    self.assertEqual(result['seasons'], count)
+                    self.assertEqual(result['total_seasons'], 3)
+                    self.assertEqual(result['carreira_id'], career)
+                    self.assertEqual(result['base']['id'], sid)
+                    self.assertEqual(result['ultima']['id'], sid)
+                    self.assertEqual(result['base']['n_players'], 1)
+                    self.assertEqual(result['season']['label'], label)
+                    self.assertIsNone(result['season']['days_left'])
+                    self.assertEqual([row['full_name'] for row in result['highlights']], [player])
+            self.assertEqual(self.request('/api/portal')[1]['ultima']['id'], 902)
+            self.assertEqual(self.request('/api/portal?snapshot=904')[0], 404)
+            self.assertEqual(self.request('/api/portal?snapshot=9999')[0], 404)
+
+    def test_portal_career_switch_persists_and_uses_latest_saved_capture(self):
+        self.portal_fixture()
+        self.assertEqual(self.request('/api/carreiras')[1]['ativa'], 'qa_alpha')
+        status, activation = self.request('/api/carreiras/ativa', {'id': 'qa_beta'})
+        self.assertEqual(status, 200)
+        self.assertTrue(activation.pop('ok'))
+        self.assertEqual(activation, self.request('/api/carreiras')[1])
+        self.assertEqual([row['id'] for row in activation['carreiras'] if row['ativa']],
+                         ['qa_beta'])
+        self.assertEqual(activation['prefs'], {'moeda': 1, 'periodo_salario': 'week'})
+        self.assertEqual(settings.load()['carreira_ativa'], 'qa_beta')
+        careers = self.request('/api/carreiras')[1]
+        self.assertEqual(careers['ativa'], 'qa_beta')
+        self.assertEqual({row['id']: row['n_temporadas'] for row in careers['carreiras']},
+                         {'qa_alpha': 2, 'qa_beta': 1})
+        result = self.request('/api/portal')[1]
+        self.assertEqual((result['seasons'], result['ultima']['id']), (1, 903))
+        self.assertEqual(self.request('/api/carreiras/ativa', {'id': 'missing'})[0], 404)
+        self.assertEqual(settings.load()['carreira_ativa'], 'qa_beta')
+        settings.save(carreira_ativa='deleted')
+        self.assertEqual(self.request('/api/carreiras')[1]['ativa'], 'qa_alpha')
+        self.assertEqual(self.request('/api/portal')[1]['ultima']['id'], 902)
+
+    def test_portal_live_status_does_not_add_stored_seasons_or_override_explicit_selection(self):
+        self.portal_fixture()
+        live = dict(server._EMPTY_LIVE_STATUS, ready=True, game_date='2029-01-01', club='Live club')
+        with patch.object(server, '_LIVE_STATUS', live):
+            for route in ('/api/portal', '/api/portal?snapshot=999999999'):
+                result = self.request(route)[1]
+                self.assertTrue(result['connected'])
+                self.assertEqual((result['seasons'], result['total_seasons']), (2, 3))
+                self.assertEqual(result['live'], live)
+                self.assertEqual(result['club'], 'Live club')
+            result = self.request('/api/portal?snapshot=901')[1]
+            self.assertFalse(result['connected'])
+            self.assertEqual(result['ultima']['id'], 901)
+            self.assertEqual(result['game_date'], '2027-05-30')
+
     def test_moneyball_columns_supply_iterable_catalog_sections_for_every_group(self):
         catalog = server._load_moneyball_catalog()
         self.assertTrue(catalog)

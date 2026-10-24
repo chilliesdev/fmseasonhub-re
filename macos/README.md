@@ -64,6 +64,10 @@ No analysis creates missing match records or changes saved player data.
 
 ## Career totals and saved seasons
 
+The Portal shows stored-season counts for the selected career, including while
+disconnected. Select a stored season in **Seasons**, then return to **Portal** to
+view that season. Live and temporary captures do not enter the stored count.
+
 Open a saved player and select **Carreira** in the season menu to view totals
 across the selected career. The menu also opens each recorded season. Each player
 contributes one capture per season, so repeated captures do not increase totals.
