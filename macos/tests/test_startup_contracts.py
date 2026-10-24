@@ -77,6 +77,82 @@ class StartupContractTests(unittest.TestCase):
         with closing(server.get_db_connection()) as conn, conn:
             return conn.execute("INSERT INTO snapshots (name) VALUES (?)", (name,)).lastrowid
 
+    def test_moneyball_columns_supply_iterable_catalog_sections_for_every_group(self):
+        catalog = server._load_moneyball_catalog()
+        self.assertTrue(catalog)
+        expected_keys = {column["key"] for columns in catalog.values() for column in columns}
+        for group in ("all", "fav", *catalog):
+            with self.subTest(group=group):
+                status, payload = self.request(f"/api/moneyball/columns?group={group}&snapshot=901")
+                self.assertEqual(status, 200)
+                self.assertEqual(payload["group"], group)
+                self.assertIsInstance(payload["sections"], list)
+                self.assertIsInstance(payload["current"], list)
+                self.assertEqual([section["group"] for section in payload["sections"]], list(catalog))
+                seen = set()
+                for section in payload["sections"]:
+                    self.assertIsInstance(section["columns"], list)
+                    self.assertEqual(len(section["columns"]), len(catalog[section["group"]]))
+                    for column in section["columns"]:
+                        self.assertNotIn(column["key"], seen)
+                        seen.add(column["key"])
+                        self.assertEqual(column["from"], section["group"])
+                        self.assertTrue(column["label"])
+                        self.assertTrue(column["short"])
+                        self.assertTrue(column["fmt"])
+                self.assertEqual(seen, expected_keys)
+                selected = [column["key"] for column in payload["current"] if not column.get("general")]
+                self.assertEqual(selected, [column["key"] for column in catalog.get(group, [])])
+                self.assertEqual(payload, self.request(f"/api/moneyball/columns?group={group}")[1])
+
+    def test_search_fields_supply_field_metadata_and_supported_ui_operators(self):
+        catalog = server._load_moneyball_catalog()
+        expected_keys = {column["key"] for columns in catalog.values() for column in columns}
+        for group in ("all", "fav", *catalog):
+            with self.subTest(group=group):
+                status, payload = self.request(f"/api/search/fields?group={group}&snapshot=901")
+                self.assertEqual(status, 200)
+                self.assertNotIn("columns", payload)
+                fields = payload["fields"]
+                self.assertIsInstance(fields, list)
+                by_key = {field["key"]: field for field in fields}
+                self.assertEqual(len(fields), len(by_key))
+                self.assertTrue(expected_keys <= by_key.keys())
+                for field in fields:
+                    self.assertTrue(field["label"])
+                    self.assertIn(field["section"], payload["sectionOrder"])
+                    self.assertIn(field["type"], payload["opsByType"])
+                    self.assertEqual(field["ops"], payload["opsByType"][field["type"]])
+                    self.assertTrue(field["ops"])
+                    for op in field["ops"]:
+                        self.assertIn(op, payload["valueSlots"])
+                self.assertEqual(by_key["name"]["type"], "text")
+                self.assertEqual(by_key["name"]["ops"][0], "contains")
+                self.assertEqual(by_key["_age"]["ops"][0], "gte")
+                self.assertEqual(by_key["_value"]["type"], "money")
+                self.assertEqual(by_key["xg"]["fmt"], "dec2")
+                self.assertEqual(set(payload["opsByType"]["num"]), server.player_search.NUM_OPS)
+                self.assertEqual(set(payload["opsByType"]["text"]), server.player_search.TEXT_OPS)
+                self.assertEqual(payload["valueSlots"]["between"], 2)
+                self.assertEqual(payload["valueSlots"]["contains"], 1)
+                self.assertEqual(payload, self.request(f"/api/search/fields?group={group}")[1])
+
+    def test_moneyball_metadata_handles_empty_catalog_and_invalid_groups(self):
+        for endpoint in ("/api/moneyball/columns", "/api/search/fields"):
+            with self.subTest(endpoint=endpoint):
+                for group in ("unknown", ""):
+                    status, payload = self.request(f"{endpoint}?group={group}")
+                    self.assertEqual(status, 400)
+                    self.assertIn("grupo invalido", payload["detail"])
+        with patch.object(server, "_load_moneyball_catalog", return_value={}):
+            status, payload = self.request("/api/moneyball/columns")
+            self.assertEqual(status, 200)
+            self.assertEqual(payload["sections"], [])
+            self.assertIsInstance(payload["current"], list)
+            status, payload = self.request("/api/search/fields")
+            self.assertEqual(status, 200)
+            self.assertIn("name", {field["key"] for field in payload["fields"]})
+
     def test_fresh_startup_supplies_legacy_empty_snapshot_metrics(self):
         db.init_db(str(self.database))
         with closing(sqlite3.connect(self.database)) as conn:
