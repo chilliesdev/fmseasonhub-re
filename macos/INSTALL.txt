@@ -14,9 +14,15 @@ First launch
 This build is ad-hoc signed. It has no Apple Developer ID signature or
 notarization. A DMG does not remove Apple's security warning.
 
-If macOS says Apple could not verify the app, click Done. For this app from
-the official project release, use System Settings > Privacy & Security >
-Open Anyway. Confirm Open when asked. This approves only this app.
+If macOS says Apple could not verify the app from the official project release:
+
+1. Click Done in the warning.
+2. Open System Settings and select Privacy & Security in the sidebar.
+3. Scroll down in the right pane to the Security section.
+4. Click Open Anyway beside the message that FM Season Hub was blocked.
+5. Confirm Open and enter your Mac login password or use Touch ID if asked.
+
+This approves only this app.
 
 Project releases: https://github.com/chilliesdev/fmseasonhub-re/releases
 Apple guidance: https://support.apple.com/102445
