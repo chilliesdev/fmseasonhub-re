@@ -141,6 +141,18 @@ class StartupContractTests(unittest.TestCase):
             self.assertTrue(snapshots[0]["is_live"])
             self.assertEqual(self.request("/api/snapshots?include_live=false"), (200, []))
 
+    def test_archived_leagues_has_unavailable_agenda_and_empty_history(self):
+        # The shipped Archived component checks proximos===null and reads lidas.length.
+        expected = {"auto": None, "proximos": None, "lidas": [], "ligas": []}
+        for state in ("no-database", "startup", "captured"):
+            if state == "startup":
+                db.init_db(str(self.database))
+            elif state == "captured":
+                self.assertEqual(self.request("/api/capture", {"name": "Archived empty season"})[0], 200)
+            for career in ("carreira_default", "unknown-career"):
+                with self.subTest(state=state, career=career):
+                    self.assertEqual(self.request(f"/api/carreiras/{career}/outras-ligas"), (200, expected))
+
     def test_original_language_object_contains_resolved_ui_and_columns(self):
         for code in ("en", "pt"):
             with self.subTest(code=code):

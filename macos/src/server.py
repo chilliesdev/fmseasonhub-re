@@ -1369,7 +1369,8 @@ def get_carreira_alltime(cid: str):
 
 @app.get("/api/carreiras/{cid}/outras-ligas")
 def get_carreiras_outras_ligas(cid: str):
-    return {"ligas": []}
+    # Archived seasons distinguishes an unavailable agenda from an empty history.
+    return {"auto": None, "proximos": None, "lidas": [], "ligas": []}
 
 @app.post("/api/carreiras/{cid}/auto-snapshot")
 def set_carreira_auto_snapshot(cid: str, body: AutoSnapshotDataBody):
