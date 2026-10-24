@@ -39,6 +39,7 @@ import capture_all
 import db
 import moneyball as mb
 import moneyball_data
+import player_analysis
 import csv_export
 import player_search
 from fm_memory import FmMemory, FmNotRunning, FmAccessDenied, FmElevado, FmUnsupportedBuild
@@ -375,11 +376,6 @@ class AutoSnapshotBody(BaseModel):
 class CapturaSomBody(BaseModel):
     ligado: Optional[bool] = None
     volume: Optional[float] = None
-
-class ReceitaBuscarComoBody(BaseModel):
-    faixa: Optional[Any] = None
-    metricas: Optional[List[str]] = None
-    params: Optional[Dict[str, Any]] = None
 
 class BuscarComoConfigBody(BaseModel):
     faixa: Optional[Any] = None
@@ -1124,58 +1120,68 @@ def list_snapshot_players(
 
 @app.get("/api/snapshots/{sid}/players/{uid}")
 def get_snapshot_player(sid: int, uid: int):
+    with closing(get_db_connection()) as conn:
+        identity = conn.execute("SELECT * FROM players WHERE snapshot_id=? AND uid=?", (sid, uid)).fetchone()
+        if identity is None:
+            raise HTTPException(status_code=404, detail="Jogador nao encontrado")
+        identity = dict(identity)
+        stats = conn.execute("SELECT * FROM player_stats WHERE snapshot_id=? AND uid=?", (sid, uid)).fetchone()
+        profile = conn.execute("SELECT * FROM player_profile WHERE snapshot_id=? AND uid=?", (sid, uid)).fetchone()
+        stats, profile = dict(stats) if stats else {}, dict(profile) if profile else {}
+        # Keep flat fields for existing callers; the shipped player/analysis view
+        # requires these three sections before it can request analysis.
+        result = {**profile, **stats, **identity}
+        snapshot = conn.execute("SELECT game_date FROM snapshots WHERE id=?", (sid,)).fetchone()
+        profile['age'] = moneyball_data._age(profile, snapshot['game_date'] if snapshot else None)
+        for alias, names in (('left_foot', ('foot_left', 'left_foot')),
+                             ('right_foot', ('foot_right', 'right_foot')),
+                             ('value', ('guide_value', 'value', 'transfer_value')),
+                             ('wage', ('wage_weekly', 'contract_wage', 'wage'))):
+            profile[alias] = next((profile[name] for name in names if profile.get(name) is not None), None)
+        form = [dict(row) for row in conn.execute(
+            "SELECT match_date,comp_uid,rating FROM player_form WHERE snapshot_id=? AND uid=? ORDER BY match_date",
+            (sid, uid))]
+        result.update(identity=identity, stats=stats, profile=profile, form=form)
+        return result
+
+
+def _stored_analysis_call(function, sid, uid=None, **params):
     conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("""
-    SELECT p.*, s.*, pr.*
-    FROM players p
-    LEFT JOIN player_stats s ON s.snapshot_id=p.snapshot_id AND s.uid=p.uid
-    LEFT JOIN player_profile pr ON pr.snapshot_id=p.snapshot_id AND pr.uid=p.uid
-    WHERE p.snapshot_id=? AND p.uid=?
-    """, (sid, uid))
-    row = cur.fetchone()
-    if not row:
-        raise HTTPException(status_code=404, detail="Jogador nao encontrado")
-    return dict(row)
+    try:
+        return function(conn, sid, uid, **params)
+    except LookupError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from None
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from None
+    finally:
+        conn.close()
+
 
 @app.get("/api/snapshots/{sid}/players/{uid}/percentis")
-def get_player_percentis(
-    sid: int,
-    uid: int,
-    coorte: Optional[str] = None,
-    regua: str = "top20",
-    min_minutes: Optional[int] = None,
-):
-    return {
-        "uid": uid,
-        "coorte": coorte or "geral",
-        "regua": regua,
-        "percentis": {},
-    }
+def get_player_percentis(sid: int, uid: int, coorte: Optional[str] = None,
+                        regua: str = "top20", min_minutes: Optional[int] = None):
+    return _stored_analysis_call(player_analysis.percentiles, sid, uid, coorte=coorte,
+                                 regua=regua, min_minutes=min_minutes)
+
 
 @app.get("/api/snapshots/{sid}/players/{uid}/analise")
-def get_player_analise(
-    sid: int,
-    uid: int,
-    coorte: Optional[str] = None,
-    regua: str = "top20",
-    min_minutes: Optional[int] = None,
-):
-    return {
-        "uid": uid,
-        "totais": {},
-        "partidas": [],
-        "contexto": {},
-        "similares": [],
-    }
+def get_player_analise(sid: int, uid: int, coorte: Optional[str] = None,
+                      regua: str = "top20", min_minutes: Optional[int] = None):
+    return _stored_analysis_call(player_analysis.analyse, sid, uid, coorte=coorte,
+                                 regua=regua, min_minutes=min_minutes)
+
 
 @app.get("/api/snapshots/{sid}/players/{uid}/buscar-como")
 def buscar_como_player(sid: int, uid: int, request: Request):
-    return {"uids": [], "params": dict(request.query_params)}
+    return _stored_analysis_call(player_analysis.search, sid, uid, params=dict(request.query_params))
+
 
 @app.post("/api/snapshots/{sid}/buscar-como-receita")
-def buscar_como_receita(sid: int, body: ReceitaBuscarComoBody):
-    return {"uids": [], "metricas": body.metricas or []}
+def buscar_como_receita(sid: int, body: Dict[str, Any]):
+    # The shipped client sends ref plus flat search options (not faixa/params).
+    return _stored_analysis_call(player_analysis.search, sid, params={key: value for key, value in body.items()
+                                 if key != "ref"}, ref=body.get("ref"))
+
 
 @app.get("/api/buscar-como/config")
 def get_buscar_como_config():
@@ -1681,6 +1687,7 @@ def get_carreira_alltime(cid: str):
         "cid": cid,
         "players": [],
         "seasons": [],
+        "temporadas": [],
     }
 
 @app.get("/api/carreiras/{cid}/outras-ligas")
@@ -1706,7 +1713,19 @@ def get_player_alltime_percentis(uid: int, carreira: Optional[str] = None, coort
 
 @app.get("/api/players/{uid}/temporadas")
 def get_player_temporadas(uid: int):
-    return {"uid": uid, "temporadas": []}
+    # The profile uses this array to select its saved snapshot and career.
+    with closing(get_db_connection()) as conn:
+        rows = conn.execute("""
+            SELECT s.*, s.id AS sid, p.height_cm
+            FROM snapshots s
+            JOIN players p ON p.snapshot_id=s.id
+            WHERE p.uid=?
+            ORDER BY s.game_date DESC, s.id DESC
+        """, (uid,)).fetchall()
+        stats = {row["snapshot_id"]: dict(row) for row in conn.execute(
+            "SELECT * FROM player_stats WHERE uid=?", (uid,))}
+        return [dict(row, temporada=row["in_game_season"], is_live=False,
+                     stats=stats.get(row["sid"], {})) for row in rows]
 
 # ==============================================================================
 # 14. Portal, Garimpos, Mudou, Apoiadores, Alertas, Dicas & Onboarding

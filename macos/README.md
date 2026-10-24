@@ -45,6 +45,23 @@ season only after a complete read with at least one player. A disconnected game,
 changed save, empty result, or read error creates no season and sends no success
 notice. Existing seasons stay intact. Reconnect or reload the save, then retry.
 
+## Stored player analysis
+
+Open a saved season, select a player, then open **Player Data** or **Search Similar**.
+Analysis uses stored totals, measured attributes and saved club match logs from the
+selected snapshot. Percentiles and chart samples use the selected comparison group.
+Goalkeepers use goalkeeper metrics. National-team logs do not replace club matches.
+
+Missing measurements and ranks show as unavailable; measured zero values remain
+visible. Rates need recorded minutes. Match coverage states how many saved games
+support the view. Goal probability uses the existing Poisson model when goals and
+xG are recorded. It is a model result, not a measured match statistic.
+
+Similar-player search needs at least three measured, nonzero reference metrics.
+Saved recipes must include supported metric IDs and their reference values.
+Insufficient inputs return a validation message; valid searches can have no matches.
+No analysis creates missing match records or changes saved player data.
+
 ## Build a standalone release
 
 On macOS 15 or later, use Python 3.14 for the target architecture:
@@ -116,5 +133,6 @@ FMSH_PASTA_LOCAL=/private/tmp/fmsh-tests-local \
 macos/.venv/bin/python -m unittest discover -s macos/tests -v
 ```
 
-These tests need local socket and Cocoa access. The packaging test moves a bundle
+These tests need Node.js, local socket and Cocoa access. Node.js executes the shipped
+frontend renderer contract tests. The packaging test moves a bundle
 and checks its real launcher with a minimal PATH, including native window imports.
