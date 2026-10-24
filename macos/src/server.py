@@ -19,6 +19,8 @@ import mimetypes
 import traceback
 import subprocess
 import threading
+import tempfile
+from contextlib import ExitStack
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
@@ -808,25 +810,61 @@ def set_db_dir(body: DbDirBody):
         except Exception as e:
             raise HTTPException(status_code=400, detail="nao consegui criar a pasta: " + str(e))
     # Write test
-    test_file = p / ".fmsh_write_test"
     try:
-        test_file.touch()
-        test_file.unlink()
+        with tempfile.TemporaryFile(dir=p):
+            pass
     except Exception as e:
         raise HTTPException(status_code=400, detail="sem permissao de escrita nessa pasta: " + str(e))
 
     old_db = get_db_path()
     new_db = p / "fm26_snapshots.db"
-    if body.move and old_db.exists() and old_db != new_db:
-        for suffix in ["", "-wal", "-shm"]:
-            s_file = Path(str(old_db) + suffix)
-            if s_file.exists():
-                shutil.move(str(s_file), str(new_db) + suffix)
-
-    if settings:
-        cfg = settings.load()
-        cfg["db_dir"] = str(p)
-        settings.save(**cfg)
+    source_files = []
+    created_files = []
+    try:
+        if body.move and old_db.parent.resolve() != p.resolve():
+            targets = [Path(str(new_db) + suffix) for suffix in ("", "-wal", "-shm")]
+            if any(os.path.lexists(target) for target in targets):
+                raise FileExistsError(str(new_db))
+            # Exclusive creation also catches files added after the check above.
+            # Retain every source file until all copies and settings are saved.
+            unused_files = []
+            with ExitStack() as stack:
+                for suffix, target in zip(("", "-wal", "-shm"), targets):
+                    destination = stack.enter_context(target.open("xb"))
+                    created_files.append(target)
+                    source = Path(str(old_db) + suffix)
+                    if source.exists():
+                        with source.open("rb") as original:
+                            shutil.copyfileobj(original, destination)
+                        destination.flush()
+                        os.fsync(destination.fileno())
+                        source_files.append(source)
+                    else:
+                        unused_files.append(target)
+            for target in unused_files:
+                target.unlink()
+                created_files.remove(target)
+        if settings:
+            cfg = settings.load()
+            cfg["db_dir"] = str(p)
+            settings.save(**cfg)
+    except Exception as error:
+        for target in created_files:
+            try:
+                target.unlink()
+            except OSError:
+                logger.exception("Could not remove incomplete database copy: %s", target)
+        if isinstance(error, FileExistsError):
+            raise HTTPException(status_code=409, detail=(
+                "a pasta de destino ja contem um banco ou arquivos do banco; "
+                "escolha uma pasta vazia ou use o banco existente sem mover")) from error
+        raise HTTPException(status_code=500, detail="nao consegui mover o banco: " + str(error)) from error
+    for source in source_files:
+        try:
+            source.unlink()
+        except OSError:
+            # The selected copy is complete; retain the old file if cleanup fails.
+            logger.exception("Could not remove original database file: %s", source)
     return {"ok": True, "dir": str(p)}
 
 @app.post("/api/settings/fim-de-temporada")

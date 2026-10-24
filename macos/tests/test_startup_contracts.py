@@ -2,6 +2,7 @@
 
 import importlib
 import json
+from contextlib import closing
 from pathlib import Path
 import socket
 import sqlite3
@@ -244,6 +245,151 @@ class StartupContractTests(unittest.TestCase):
         self.assertEqual(self.request("/api/settings")[1]["memoria_max_mb"], 1024)
         self.assertEqual(self.request("/api/settings/memoria", {"mb": 1})[0], 400)
         self.assertEqual(settings.load()["memoria_max_mb"], 1024)
+
+    def create_database(self, path, value):
+        with closing(sqlite3.connect(path)) as connection:
+            with connection:
+                connection.execute("CREATE TABLE qa_existing_data (value TEXT)")
+                connection.execute("INSERT INTO qa_existing_data VALUES (?)", (value,))
+
+    def database_value(self, path):
+        with closing(sqlite3.connect(path)) as connection:
+            return connection.execute("SELECT value FROM qa_existing_data").fetchone()[0]
+
+    def test_database_move_rejects_existing_destination_and_preserves_settings(self):
+        destination = self.root / "destination"
+        destination.mkdir()
+        target = destination / self.database.name
+        self.create_database(self.database, "source")
+        self.create_database(target, "keep-me")
+        for path in (self.database, target):
+            for suffix in ("-wal", "-shm"):
+                Path(str(path) + suffix).write_bytes((path.name + suffix).encode())
+        settings.save(db_dir=str(self.root), idioma="en")
+        files = [self.settings_path] + [Path(str(path) + suffix)
+                  for path in (self.database, target) for suffix in ("", "-wal", "-shm")]
+        before = {path: path.read_bytes() for path in files}
+        status, data = self.request("/api/settings/db_dir", {"dir": str(destination), "move": True})
+        self.assertEqual(status, 409)
+        self.assertIn("pasta vazia", data["detail"])
+        self.assertEqual({path: path.read_bytes() for path in files}, before)
+        self.assertEqual(self.request("/api/settings")[1]["db_path"], str(self.database))
+        # Remove only disposable invalid sidecar fixtures before opening SQLite.
+        for path in (self.database, target):
+            for suffix in ("-wal", "-shm"):
+                Path(str(path) + suffix).unlink()
+        self.assertEqual(self.database_value(self.database), "source")
+        self.assertEqual(self.database_value(target), "keep-me")
+        empty = self.root / "empty"
+        self.assertEqual(self.request("/api/settings/db_dir", {"dir": str(empty), "move": True})[0], 200)
+        self.assertEqual(self.database_value(empty / self.database.name), "source")
+        self.assertFalse(self.database.exists())
+        self.assertEqual(settings.load()["db_dir"], str(empty))
+
+    def test_database_move_rejects_destination_links_directories_and_sidecars(self):
+        self.create_database(self.database, "source")
+        settings.save(db_dir=str(self.root))
+        source_before = self.database.read_bytes()
+        settings_before = self.settings_path.read_bytes()
+        for kind in ("symlink", "dangling", "hardlink", "directory", "-wal", "-shm"):
+            with self.subTest(kind=kind):
+                destination = self.root / kind
+                destination.mkdir()
+                target = destination / self.database.name
+                if kind in ("symlink", "dangling"):
+                    target.symlink_to(self.database if kind == "symlink" else self.root / "missing")
+                elif kind == "hardlink":
+                    target.hardlink_to(self.database)
+                elif kind == "directory":
+                    target.mkdir()
+                else:
+                    target = Path(str(target) + kind)
+                    target.write_bytes(b"keep-sidecar")
+                self.assertEqual(self.request("/api/settings/db_dir", {"dir": str(destination), "move": True})[0], 409)
+                self.assertTrue(server.os.path.lexists(target))
+                if kind in ("-wal", "-shm"):
+                    self.assertEqual(target.read_bytes(), b"keep-sidecar")
+                self.assertEqual(self.database.read_bytes(), source_before)
+                self.assertEqual(self.settings_path.read_bytes(), settings_before)
+
+    def test_database_same_folder_and_explicit_use_existing_preserve_both_files(self):
+        self.create_database(self.database, "source")
+        source_before = self.database.read_bytes()
+        alias = self.root / "alias"
+        alias.symlink_to(self.root, target_is_directory=True)
+        for folder in (self.root, alias):
+            self.assertEqual(self.request("/api/settings/db_dir", {"dir": str(folder), "move": True})[0], 200)
+            self.assertEqual(self.database.read_bytes(), source_before)
+        destination = self.root / "existing"
+        destination.mkdir()
+        target = destination / self.database.name
+        self.create_database(target, "keep-me")
+        target_before = target.read_bytes()
+        probe = destination / ".fmsh_write_test"
+        probe.write_bytes(b"user-file")
+        self.assertEqual(self.request("/api/settings/db_dir", {"dir": str(destination), "move": False})[0], 200)
+        self.assertEqual(settings.load()["db_dir"], str(destination))
+        self.assertEqual(self.database.read_bytes(), source_before)
+        self.assertEqual(target.read_bytes(), target_before)
+        self.assertEqual(probe.read_bytes(), b"user-file")
+
+    def test_database_move_copies_all_components_before_removing_source(self):
+        self.create_database(self.database, "source")
+        for suffix in ("-wal", "-shm"):
+            Path(str(self.database) + suffix).write_bytes(suffix.encode())
+        source_before = {suffix: Path(str(self.database) + suffix).read_bytes()
+                         for suffix in ("", "-wal", "-shm")}
+        destination = self.root / "new"
+        self.assertEqual(self.request("/api/settings/db_dir", {"dir": str(destination), "move": True})[0], 200)
+        for suffix, content in source_before.items():
+            self.assertFalse(Path(str(self.database) + suffix).exists())
+            self.assertEqual(Path(str(destination / self.database.name) + suffix).read_bytes(), content)
+
+    def test_database_move_late_collision_does_not_replace_new_file(self):
+        self.create_database(self.database, "source")
+        settings.save(db_dir=str(self.root))
+        source_before = self.database.read_bytes()
+        settings_before = self.settings_path.read_bytes()
+        for suffix in ("", "-wal", "-shm"):
+            with self.subTest(suffix=suffix):
+                destination = self.root / ("late" + suffix)
+                destination.mkdir()
+                target = destination / self.database.name
+                collision = Path(str(target) + suffix)
+                original_open = Path.open
+
+                def create_collision(path, mode="r", *args, **kwargs):
+                    if path == collision and mode == "xb":
+                        with original_open(path, "wb") as file:
+                            file.write(b"late-user-data")
+                    return original_open(path, mode, *args, **kwargs)
+
+                with patch.object(Path, "open", create_collision):
+                    self.assertEqual(self.request("/api/settings/db_dir", {"dir": str(destination), "move": True})[0], 409)
+                self.assertEqual(collision.read_bytes(), b"late-user-data")
+                self.assertEqual(list(destination.iterdir()), [collision])
+                self.assertEqual(self.database.read_bytes(), source_before)
+                self.assertEqual(self.settings_path.read_bytes(), settings_before)
+
+    def test_database_move_copy_or_settings_failure_keeps_original_and_active_path(self):
+        self.create_database(self.database, "source")
+        settings.save(db_dir=str(self.root))
+        source_before = self.database.read_bytes()
+        settings_before = self.settings_path.read_bytes()
+        for failure in ("copy", "settings"):
+            with self.subTest(failure=failure):
+                destination = self.root / failure
+                destination.mkdir()
+                if failure == "copy":
+                    operation = patch.object(server.shutil, "copyfileobj", side_effect=OSError("copy failed"))
+                else:
+                    operation = patch.object(settings, "save", side_effect=OSError("save failed"))
+                with operation:
+                    self.assertEqual(self.request("/api/settings/db_dir", {"dir": str(destination), "move": True})[0], 500)
+                self.assertEqual(list(destination.iterdir()), [])
+                self.assertEqual(self.database.read_bytes(), source_before)
+                self.assertEqual(self.settings_path.read_bytes(), settings_before)
+                self.assertEqual(self.request("/api/settings")[1]["db_path"], str(self.database))
 
 if __name__ == "__main__":
     unittest.main()
