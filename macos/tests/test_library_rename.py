@@ -194,7 +194,7 @@ class LibraryRenameTests(unittest.TestCase):
         source = self.root / "qa-one.fsh"
         source.write_bytes(b'{"qa":1}')
         with patch.object(server.logger, "exception"):
-            self.assertEqual(self.rename(source.name, "qa-new.fsh\0ignored")[0], 500)
+            self.assertEqual(self.rename(source.name, "qa-new.fsh\0ignored")[0], 400)
         self.assertEqual(source.read_bytes(), b'{"qa":1}')
         self.assertEqual(list(self.root.iterdir()), [source])
 

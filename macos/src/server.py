@@ -21,10 +21,11 @@ import subprocess
 import threading
 import tempfile
 import ctypes
+import errno
 import uuid
 from contextlib import ExitStack, closing
 from datetime import date
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Any, Dict, List, Optional, Union
 
 from fastapi import FastAPI, HTTPException, Request, Response
@@ -1778,6 +1779,17 @@ def _get_biblioteca_dir() -> Path:
     b_dir.mkdir(parents=True, exist_ok=True)
     return b_dir
 
+def _validar_nome_biblioteca(nome: str) -> str:
+    """Library names identify one entry, never a relative or absolute path."""
+    if (not nome.strip() or nome in (".", "..") or "\0" in nome
+            or "/" in nome or "\\" in nome or PureWindowsPath(nome).drive):
+        raise HTTPException(status_code=400, detail="Nome de arquivo invalido")
+    try:
+        nome.encode("utf-8")
+    except UnicodeEncodeError as exc:
+        raise HTTPException(status_code=400, detail="Nome de arquivo invalido") from exc
+    return nome
+
 @app.get("/api/biblioteca")
 @app.get("/api/biblioteca/listar")
 def get_biblioteca():
@@ -1823,8 +1835,15 @@ def get_biblioteca_ler(arquivo: str):
 @app.post("/api/biblioteca")
 def post_biblioteca_gravar(body: BibliotecaBody):
     b_dir = _get_biblioteca_dir()
-    p = b_dir / (body.arquivo or "salvo.fsh")
-    with open(p, "w", encoding="utf-8") as f:
+    nome = body.arquivo if body.arquivo is not None else "salvo.fsh"
+    p = b_dir / _validar_nome_biblioteca(nome)
+    try:
+        fd = os.open(p, os.O_WRONLY | os.O_CREAT | os.O_TRUNC | os.O_NOFOLLOW, 0o666)
+    except OSError as exc:
+        if exc.errno == errno.ELOOP:
+            raise HTTPException(status_code=400, detail="Arquivo nao pode ser um link simbolico") from exc
+        raise
+    with os.fdopen(fd, "w", encoding="utf-8") as f:
         if isinstance(body.conteudo, (dict, list)):
             json.dump(body.conteudo, f, indent=2)
         else:
@@ -1851,8 +1870,10 @@ def _renomear_sem_substituir(src: Path, dst: Path) -> None:
 @app.post("/api/biblioteca/{arquivo}/nome")
 def post_biblioteca_renomear(arquivo: str, body: RenomearBody):
     b_dir = _get_biblioteca_dir()
-    src = b_dir / arquivo
-    dst = b_dir / body.nome
+    src = b_dir / _validar_nome_biblioteca(arquivo)
+    dst = b_dir / _validar_nome_biblioteca(body.nome)
+    if src.is_symlink():
+        raise HTTPException(status_code=400, detail="Arquivo nao pode ser um link simbolico")
     if not src.exists():
         raise HTTPException(status_code=404, detail="Arquivo original nao encontrado")
     if src == dst:
