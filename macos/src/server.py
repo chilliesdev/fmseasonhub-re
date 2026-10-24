@@ -36,6 +36,8 @@ import uvicorn
 import graphics
 import capture_all
 import db
+import moneyball as mb
+import player_search
 from fm_memory import FmMemory, FmNotRunning, FmAccessDenied, FmElevado, FmUnsupportedBuild
 from fm_reader import FmReader, strict_reads
 
@@ -1374,32 +1376,73 @@ def get_moneyball_percentiles(
         "percentiles": {},
     }
 
+# Keys match the shipped frontend's identity columns and quick filters.
+_SEARCH_ID_FIELDS = (
+    ("name", "Nome", "Name", "text", "txt"),
+    ("pos", "Posição", "Position", "text", "txt"),
+    ("nat", "Nacionalidade", "Nationality", "text", "txt"),
+    ("club", "Clube", "Club", "text", "txt"),
+    ("league", "Liga", "League", "text", "txt"),
+    ("_age", "Idade", "Age", "num", "int"),
+    ("_height", "Altura", "Height", "num", "dec2"),
+    ("_ca", "Capacidade atual", "Current ability", "num", "int"),
+    ("_pa", "Capacidade potencial", "Potential ability", "num", "int"),
+    ("_rating", "Classificação média", "Average rating", "num", "rating"),
+    ("_value", "Valor", "Value", "money", "money"),
+    ("_wage", "Salário", "Wage", "money", "money"),
+)
+
+
+def _moneyball_column_catalog(group: str) -> Dict[str, Any]:
+    catalog = _load_moneyball_catalog()
+    if group not in {"all", "fav"} and group not in catalog:
+        raise HTTPException(status_code=400, detail=f"grupo invalido: {group}")
+    sections = [
+        {"group": position, "columns": [
+            {**column, "from": position, "short": column.get("col", column["key"])}
+            for column in columns
+        ]}
+        for position, columns in catalog.items()
+    ]
+    general = [
+        {"key": key, "label": label, "labelEn": label_en, "type": field_type,
+         "fmt": fmt, "general": True, "section": "contrato" if field_type == "money" else "id"}
+        for key, label, label_en, field_type, fmt in _SEARCH_ID_FIELDS
+    ]
+    general.extend(
+        {"key": key, "label": mb.GENERAL_LABELS[key], "fmt": "rating" if key == "avg_rating" else "dec2" if key in {"xg", "xa"} else "int",
+         "general": True, "section": "geral", "type": "num"}
+        for key in mb.GENERAL_CORE
+    )
+    current = general + next((section["columns"] for section in sections if section["group"] == group), [])
+    return {"group": group, "current": current, "sections": sections}
+
+
 @app.get("/api/search/fields")
 def get_search_fields(group: str = "all", snapshot: Optional[int] = None):
-    catalog = _load_moneyball_catalog()
-    items = catalog.get(group, []) if group != "all" else [it for g in catalog.values() for it in g]
+    columns = _moneyball_column_catalog(group)
+    # Sets in the search engine must have a stable order: ops[0] is the UI default.
+    num_ops = ["gte", "lte", "eq", "gt", "lt", "ne", "between", *sorted(player_search.FIELD_OPS)]
+    text_ops = ["contains", "is", "is_not", "starts_with", "ends_with"]
+    ops_by_type = {"num": num_ops, "money": num_ops, "text": text_ops}
+    fields = {}
+    for column in columns["current"] + [column for section in columns["sections"] for column in section["columns"]]:
+        field_type = column.get("type", "num")
+        fields.setdefault(column["key"], {
+            **column, "type": field_type, "section": column.get("section", "derivado"),
+            "ops": ops_by_type[field_type],
+        })
     return {
-        "columns": items,
-        "sectionOrder": ["geral", "ataque", "passe", "defesa", "fisico", "goleiro"],
-        "opsByType": {"num": [">=", "<=", "="], "text": ["contains", "equals"]},
-        "valueSlots": {},
+        "fields": list(fields.values()),
+        "sectionOrder": ["id", "geral", "contrato", "derivado"],
+        "opsByType": ops_by_type,
+        "valueSlots": {op: 2 if op == "between" else 1 for ops in ops_by_type.values() for op in ops},
     }
+
 
 @app.get("/api/moneyball/columns")
 def get_moneyball_columns(group: str = "all", snapshot: Optional[int] = None):
-    catalog = _load_moneyball_catalog()
-    current = catalog.get(group, []) if group != "all" else []
-    return {
-        "current": current,
-        "sections": {
-            "geral": [],
-            "ataque": [],
-            "passe": [],
-            "defesa": [],
-            "fisico": [],
-            "goleiro": [],
-        },
-    }
+    return _moneyball_column_catalog(group)
 
 @app.get("/api/moneyball/browse")
 def moneyball_browse(request: Request):
