@@ -21,6 +21,7 @@ import subprocess
 import threading
 import tempfile
 import ctypes
+import uuid
 from contextlib import ExitStack
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
@@ -738,9 +739,7 @@ def get_settings():
 @app.post("/api/settings/overall")
 def set_overall_modo(body: OverallModoBody):
     if settings:
-        cfg = settings.load()
-        cfg["overall_modo"] = body.modo
-        settings.save(**cfg)
+        settings.save(overall_modo=body.modo)
     return {"ok": True, "modo": body.modo}
 
 @app.get("/api/memoria")
@@ -768,9 +767,7 @@ def set_memoria(body: MemoriaBody):
 @app.post("/api/settings/idioma")
 def set_idioma(body: IdiomaBody):
     if settings:
-        cfg = settings.load()
-        cfg["idioma"] = body.idioma
-        settings.save(**cfg)
+        settings.save(idioma=body.idioma)
     return {"ok": True, "idioma": body.idioma}
 
 @app.get("/api/settings/bandeja")
@@ -786,8 +783,7 @@ def set_bandeja_settings(body: Dict[str, Any]):
         cfg = settings.load()
         cur_b = cfg.get("bandeja", {})
         cur_b.update(body)
-        cfg["bandeja"] = cur_b
-        settings.save(**cfg)
+        settings.save(bandeja=cur_b)
     return {"ok": True}
 
 @app.post("/api/settings/graphics")
@@ -796,9 +792,7 @@ def set_graphics(body: GraphicsBody):
     if not p.exists() or not p.is_dir():
         raise HTTPException(status_code=400, detail="pasta nao encontrada: " + body.dir)
     if settings:
-        cfg = settings.load()
-        cfg["graphics_dir"] = str(p)
-        settings.save(**cfg)
+        settings.save(graphics_dir=str(p))
     graphics.reindex(str(p))
     return {"ok": True, "dir": str(p), "portraits": graphics.state()}
 
@@ -846,9 +840,7 @@ def set_db_dir(body: DbDirBody):
                 target.unlink()
                 created_files.remove(target)
         if settings:
-            cfg = settings.load()
-            cfg["db_dir"] = str(p)
-            settings.save(**cfg)
+            settings.save(db_dir=str(p))
     except Exception as error:
         for target in created_files:
             try:
@@ -871,17 +863,13 @@ def set_db_dir(body: DbDirBody):
 @app.post("/api/settings/fim-de-temporada")
 def set_fim_de_temporada(body: FimDeTemporadaBody):
     if settings:
-        cfg = settings.load()
-        cfg["fim_de_temporada_auto"] = body.ligado
-        settings.save(**cfg)
+        settings.save(fim_de_temporada_auto=body.ligado)
     return {"ok": True, "ligado": body.ligado}
 
 @app.post("/api/settings/auto-snapshot")
 def set_auto_snapshot(body: Dict[str, Any]):
     if settings:
-        cfg = settings.load()
-        cfg["auto_snapshot"] = body
-        settings.save(**cfg)
+        settings.save(auto_snapshot=body)
     return {"ok": True}
 
 @app.get("/api/settings/auto-snapshot/nome")
@@ -894,8 +882,7 @@ def set_captura_som(body: Dict[str, Any]):
         cfg = settings.load()
         cur_s = cfg.get("captura_som", {})
         cur_s.update(body)
-        cfg["captura_som"] = cur_s
-        settings.save(**cfg)
+        settings.save(captura_som=cur_s)
     return {"ok": True}
 
 @app.post("/api/settings/captura-som/testar")
@@ -1475,68 +1462,106 @@ def post_onboarding_refazer():
 # 15. Favorites Management Endpoints
 # ==============================================================================
 
-_FAVORITOS_CACHE: Dict[str, Any] = {
-    "listas": [
-        {"id": "fav_default", "nome": "Favoritos", "cor": "#3b82f6", "uids": []}
-    ]
-}
+_FAVORITOS_LOCK = threading.Lock()
+
+
+def _carregar_favoritos():
+    config = settings.load()
+    listas = config.get("favoritos_listas") or []
+    # True is the first-install sentinel. None means the user deleted all lists.
+    if not listas and config.get("favoritos_lista_padrao") is True:
+        return [{"id": "fav_default", "nome": "Favoritos", "cor": "#3b82f6", "uids": []}]
+    return listas
+
+
+def _gravar_favoritos(listas):
+    padrao = settings.load().get("favoritos_lista_padrao")
+    if not any(lista["id"] == padrao for lista in listas):
+        padrao = listas[0]["id"] if listas else None
+    settings.save(favoritos_listas=listas, favoritos_lista_padrao=padrao)
+
 
 @app.get("/api/favoritos/listas")
 @app.get("/api/favoritos")
 def get_favoritos_listas():
-    return _FAVORITOS_CACHE
+    with _FAVORITOS_LOCK:
+        return {"listas": _carregar_favoritos()}
+
 
 @app.post("/api/favoritos/listas")
 def post_favoritos_criar(body: FavListaNovaBody):
-    new_id = f"fav_{int(time.time())}"
-    nova = {"id": new_id, "nome": body.nome, "cor": body.cor, "uids": body.uids or []}
-    _FAVORITOS_CACHE["listas"].append(nova)
-    return {"lista": nova, "listas": _FAVORITOS_CACHE["listas"]}
+    with _FAVORITOS_LOCK:
+        listas = _carregar_favoritos()
+        nova = {"id": f"fav_{uuid.uuid4().hex}", "nome": body.nome, "cor": body.cor, "uids": body.uids or []}
+        listas.append(nova)
+        _gravar_favoritos(listas)
+        return {"lista": nova, "listas": listas}
+
 
 @app.patch("/api/favoritos/listas/{id_lista}")
 def patch_favoritos_editar(id_lista: str, body: FavListaEditarBody):
-    for l in _FAVORITOS_CACHE["listas"]:
-        if l["id"] == id_lista:
-            if body.nome:
-                l["nome"] = body.nome
-            if body.cor:
-                l["cor"] = body.cor
-            return {"lista": l}
+    with _FAVORITOS_LOCK:
+        listas = _carregar_favoritos()
+        for lista in listas:
+            if lista["id"] == id_lista:
+                if body.nome:
+                    lista["nome"] = body.nome
+                if body.cor:
+                    lista["cor"] = body.cor
+                _gravar_favoritos(listas)
+                return {"lista": lista}
     raise HTTPException(status_code=404, detail="Lista nao encontrada")
+
 
 @app.delete("/api/favoritos/listas/{id_lista}")
 def delete_favoritos_apagar(id_lista: str):
-    _FAVORITOS_CACHE["listas"] = [l for l in _FAVORITOS_CACHE["listas"] if l["id"] != id_lista]
-    return {"ok": True}
+    with _FAVORITOS_LOCK:
+        listas = [lista for lista in _carregar_favoritos() if lista["id"] != id_lista]
+        _gravar_favoritos(listas)
+        return {"ok": True}
+
 
 @app.post("/api/favoritos/listas/{id_lista}/jogadores")
 def post_favoritos_jogadores(id_lista: str, body: FavJogadoresBody):
-    for l in _FAVORITOS_CACHE["listas"]:
-        if l["id"] == id_lista:
-            u_set = set(l["uids"])
-            if body.marcar:
-                u_set.update(body.uids)
-            else:
-                u_set.difference_update(body.uids)
-            l["uids"] = list(u_set)
-            return {"ok": True, "lista": l}
+    with _FAVORITOS_LOCK:
+        listas = _carregar_favoritos()
+        for lista in listas:
+            if lista["id"] == id_lista:
+                u_set = set(lista["uids"])
+                if body.marcar:
+                    u_set.update(body.uids)
+                else:
+                    u_set.difference_update(body.uids)
+                lista["uids"] = list(u_set)
+                _gravar_favoritos(listas)
+                return {"ok": True, "lista": lista}
     return {"ok": True}
+
 
 @app.post("/api/favoritos/listas/{id_lista}/duplicar")
 def post_favoritos_duplicar(id_lista: str, body: FavDuplicarBody):
-    for l in _FAVORITOS_CACHE["listas"]:
-        if l["id"] == id_lista:
-            dupl = {"id": f"fav_{int(time.time())}", "nome": body.nome, "cor": l["cor"], "uids": list(l["uids"])}
-            _FAVORITOS_CACHE["listas"].append(dupl)
-            return {"lista": dupl}
+    with _FAVORITOS_LOCK:
+        listas = _carregar_favoritos()
+        for lista in listas:
+            if lista["id"] == id_lista:
+                dupl = {"id": f"fav_{uuid.uuid4().hex}", "nome": body.nome,
+                        "cor": lista["cor"], "uids": list(lista["uids"])}
+                listas.append(dupl)
+                _gravar_favoritos(listas)
+                return {"lista": dupl}
     raise HTTPException(status_code=404, detail="Lista nao encontrada")
+
 
 @app.post("/api/favoritos/tirar-de-todas")
 def post_favoritos_tirar_de_todas(body: FavJogadoresBody):
-    rem_set = set(body.uids)
-    for l in _FAVORITOS_CACHE["listas"]:
-        l["uids"] = [u for u in l["uids"] if u not in rem_set]
-    return {"ok": True}
+    with _FAVORITOS_LOCK:
+        listas = _carregar_favoritos()
+        rem_set = set(body.uids)
+        for lista in listas:
+            lista["uids"] = [u for u in lista["uids"] if u not in rem_set]
+        _gravar_favoritos(listas)
+        return {"ok": True}
+
 
 @app.post("/api/favoritos/migrar-local")
 def post_favoritos_migrar_local(body: FavMigrarLocalBody):
