@@ -1440,6 +1440,10 @@ def main():
     log('perfil do webview em %s' % perfil)
 
     def ao_iniciar_o_webview():
+        if sys.platform == 'darwin':
+            from PyObjCTools import AppHelper
+            from window_macos import install_window_menu
+            AppHelper.callAfter(install_window_menu)
         threading.Thread(target=orquestrar, daemon=True).start()
         threading.Thread(target=preparar_menu_da_bandeja, name='menu-da-bandeja', daemon=True).start()
 

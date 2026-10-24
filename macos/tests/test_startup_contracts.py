@@ -83,6 +83,15 @@ class StartupContractTests(unittest.TestCase):
                 self.assertNotEqual(data["interface"]["ob.title"], "ob.title")
         self.assertEqual(self.request("/api/idiomas/en")[1]["interface"]["ob.next"], "Continue")
 
+    def test_game_request_poll_does_not_reopen_the_window(self):
+        with patch.object(server, "AO_PEDIDO_DO_JOGO") as show_for_game_request:
+            for _ in range(3):
+                self.assertEqual(self.request("/api/jogo/pedido"), (200, {"pedido": None}))
+            show_for_game_request.assert_not_called()
+        with patch.object(server, "AO_MOSTRAR_JANELA") as show_on_request:
+            self.assertEqual(self.request("/api/janela/mostrar", {}), (200, {"ok": True}))
+            show_on_request.assert_called_once_with()
+
     def test_partial_language_inherits_fallback_and_rejects_unknown_paths(self):
         language = self.root / "idiomas" / "qa"
         language.mkdir(parents=True)

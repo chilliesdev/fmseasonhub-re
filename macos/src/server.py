@@ -1686,11 +1686,9 @@ def post_lista_preferencial_atualizar(id_lista: str):
 
 @app.get("/api/jogo/pedido")
 def get_jogo_pedido():
-    if callable(AO_PEDIDO_DO_JOGO):
-        try:
-            return AO_PEDIDO_DO_JOGO()
-        except Exception:
-            pass
+    # The frontend polls this route. Reading pending requests must not reopen
+    # the window or emit another request event. The macOS game bridge currently
+    # has no pending player requests.
     return {"pedido": None}
 
 @app.post("/api/jogo/abrir-jogador")
