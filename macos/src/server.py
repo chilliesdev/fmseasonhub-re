@@ -40,6 +40,7 @@ import db
 import moneyball as mb
 import moneyball_data
 import player_analysis
+import career_analysis
 import csv_export
 import player_search
 from fm_memory import FmMemory, FmNotRunning, FmAccessDenied, FmElevado, FmUnsupportedBuild
@@ -1683,12 +1684,8 @@ def mover_temporada(cid: str, sid: int):
 
 @app.get("/api/carreiras/{cid}/alltime")
 def get_carreira_alltime(cid: str):
-    return {
-        "cid": cid,
-        "players": [],
-        "seasons": [],
-        "temporadas": [],
-    }
+    with closing(get_db_connection()) as conn:
+        return career_analysis.composition(conn, cid)
 
 @app.get("/api/carreiras/{cid}/outras-ligas")
 def get_carreiras_outras_ligas(cid: str):
@@ -1701,15 +1698,25 @@ def set_carreira_auto_snapshot(cid: str, body: AutoSnapshotDataBody):
 
 @app.get("/api/players/{uid}/alltime")
 def get_player_alltime(uid: int, carreira: Optional[str] = None):
-    return {
-        "uid": uid,
-        "carreira": carreira,
-        "temporadas": [],
-    }
+    with closing(get_db_connection()) as conn:
+        try:
+            result = career_analysis.player(conn, uid, carreira)
+        except LookupError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from None
+    latest = get_snapshot_player(result['snapshot_id'], uid)
+    latest.update(result['stats'])
+    latest.update(result)
+    return latest
 
 @app.get("/api/players/{uid}/alltime/percentis")
 def get_player_alltime_percentis(uid: int, carreira: Optional[str] = None, coorte: Optional[str] = None):
-    return {"uid": uid, "percentis": {}}
+    with closing(get_db_connection()) as conn:
+        try:
+            return career_analysis.percentiles(conn, uid, carreira, coorte)
+        except LookupError as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from None
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from None
 
 @app.get("/api/players/{uid}/temporadas")
 def get_player_temporadas(uid: int):

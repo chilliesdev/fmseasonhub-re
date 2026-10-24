@@ -62,6 +62,15 @@ Saved recipes must include supported metric IDs and their reference values.
 Insufficient inputs return a validation message; valid searches can have no matches.
 No analysis creates missing match records or changes saved player data.
 
+## Career totals and saved seasons
+
+Open a saved player and select **Carreira** in the season menu to view totals
+across the selected career. The menu also opens each recorded season. Each player
+contributes one capture per season, so repeated captures do not increase totals.
+Ratings use appearance counts as weights. Missing measurements stay unavailable;
+attributes and identity use the latest saved record. Other careers and live
+captures do not enter these totals.
+
 ## Build a standalone release
 
 On macOS 15 or later, use Python 3.14 for the target architecture:
