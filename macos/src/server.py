@@ -10,6 +10,7 @@ import os
 import sys
 import time
 import json
+import re
 import math
 import shutil
 import sqlite3
@@ -37,6 +38,8 @@ import graphics
 import capture_all
 import db
 import moneyball as mb
+import moneyball_data
+import csv_export
 import player_search
 from fm_memory import FmMemory, FmNotRunning, FmAccessDenied, FmElevado, FmUnsupportedBuild
 from fm_reader import FmReader, strict_reads
@@ -1355,26 +1358,42 @@ def _load_moneyball_catalog() -> Dict[str, Any]:
             return json.load(f)
     return {}
 
+def _moneyball_rows(snapshot=None, groups=()):
+    with closing(get_db_connection()) as conn:
+        career = settings.load().get("carreira_ativa") if settings else None
+        return moneyball_data.load(conn, snapshot, career, groups)
+
+
+def _moneyball_public_row(row):
+    return {key: value for key, value in row.items() if not key.startswith("_")}
+
+
 @app.get("/api/moneyball")
 def get_moneyball(snapshot: Optional[int] = None, team: Optional[int] = None):
-    return {
-        "team": team,
-        "players": [],
-        "columns": [],
-    }
+    sid, rows = _moneyball_rows(snapshot)
+    if team is not None:
+        rows = [row for row in rows if team in row["_teams"]]
+    return {"snapshot": sid, "team": team,
+            "players": [_moneyball_public_row(row) for row in rows],
+            "columns": _moneyball_columns("all")}
+
 
 @app.get("/api/moneyball/percentiles")
 def get_moneyball_percentiles(
     snapshot: Optional[int] = None,
     team: Optional[int] = None,
-    pool: Optional[str] = None,
-    min_minutes: Optional[int] = None,
+    pool: str = "top20",
+    min_minutes: int = 0,
 ):
-    return {
-        "team": team,
-        "pool": pool or "top20",
-        "percentiles": {},
-    }
+    sid, rows = _moneyball_rows(snapshot)
+    queries = [row for row in rows if team is None or team in row["_teams"]]
+    try:
+        if min_minutes < 0:
+            raise ValueError("min_minutes: must be at least 0")
+        percentiles = moneyball_data.percentiles(rows, queries, pool, min_minutes, team_columns=True)
+    except ValueError as exc:
+        raise HTTPException(400, str(exc)) from exc
+    return {"snapshot": sid, "team": team, "pool": pool, "percentiles": percentiles}
 
 # Keys match the shipped frontend's identity columns and quick filters.
 _SEARCH_ID_FIELDS = (
@@ -1390,6 +1409,13 @@ _SEARCH_ID_FIELDS = (
     ("_rating", "Classificação média", "Average rating", "num", "rating"),
     ("_value", "Valor", "Value", "money", "money"),
     ("_wage", "Salário", "Wage", "money", "money"),
+    ("_asking", "Preço pedido", "Asking price", "money", "money"),
+    ("contract", "Fim do contrato", "Contract end", "text", "txt"),
+    ("foot", "Pé preferido", "Preferred foot", "text", "txt"),
+    ("birth", "Data de nascimento", "Birth date", "text", "txt"),
+    ("_lfoot", "Pé esquerdo", "Left foot", "num", "int"),
+    ("_rfoot", "Pé direito", "Right foot", "num", "int"),
+    ("_uid", "UID", "UID", "num", "int"),
 )
 
 
@@ -1424,14 +1450,20 @@ def get_search_fields(group: str = "all", snapshot: Optional[int] = None):
     # Sets in the search engine must have a stable order: ops[0] is the UI default.
     num_ops = ["gte", "lte", "eq", "gt", "lt", "ne", "between", *sorted(player_search.FIELD_OPS)]
     text_ops = ["contains", "is", "is_not", "starts_with", "ends_with"]
-    ops_by_type = {"num": num_ops, "money": num_ops, "text": text_ops}
+    ops_by_type = {"num": num_ops, "money": num_ops, "text": text_ops,
+                   "positions": ["includes", "excludes"]}
     fields = {}
-    for column in columns["current"] + [column for section in columns["sections"] for column in section["columns"]]:
+    for column in columns["current"] + moneyball_data.search_alias_columns() + [column for section in columns["sections"] for column in section["columns"]]:
         field_type = column.get("type", "num")
         fields.setdefault(column["key"], {
             **column, "type": field_type, "section": column.get("section", "derivado"),
             "ops": ops_by_type[field_type],
         })
+    fields["f.positions"] = {
+        "key": "f.positions", "label": "Posições", "labelEn": "Positions", "type": "positions",
+        "section": "id", "fmt": "txt", "ops": ops_by_type["positions"], "thresholdDefault": 17,
+        "options": [{"code": code} for code in moneyball_data.POSITION_CODES],
+    }
     return {
         "fields": list(fields.values()),
         "sectionOrder": ["id", "geral", "contrato", "derivado"],
@@ -1444,24 +1476,107 @@ def get_search_fields(group: str = "all", snapshot: Optional[int] = None):
 def get_moneyball_columns(group: str = "all", snapshot: Optional[int] = None):
     return _moneyball_column_catalog(group)
 
+def _moneyball_columns(group, extra=""):
+    catalog = _moneyball_column_catalog(group)
+    identity = {field[0] for field in _SEARCH_ID_FIELDS}
+    columns = [column for column in catalog["current"] if column["key"] not in identity]
+    known = {column["key"] for column in columns}
+    available = {column["key"]: column for section in catalog["sections"] for column in section["columns"]}
+    available.update({column["key"]: column for column in moneyball_data.search_alias_columns()})
+    for key in extra.split(","):
+        if key in available and key not in known:
+            columns.append(available[key])
+            known.add(key)
+    return columns
+
+
+def _moneyball_selection(params):
+    group = params.get("group", "all")
+    columns = _moneyball_columns(group, params.get("extra", ""))
+    try:
+        # Derive only positional catalogs used by this view, sort, search or export.
+        requested = " ".join(str(value) for value in params.values())
+        groups = set(re.findall(r"\b(gk|def|wing|dm|b2b|amc|att)_", requested))
+        if group in mb.POSITION_GROUPS_ORDER:
+            groups.add(group)
+        sid, rows = _moneyball_rows(moneyball_data.integer(params, "snapshot"), groups)
+        allowed = None
+        uid_filter = params.get("uids", "")
+        if uid_filter.startswith(("lista:", "favlista:")):
+            kind, list_id = uid_filter.split(":", 1)
+            config = settings.load() if settings else {}
+            lists = config.get("favoritos_listas" if kind == "favlista" else "listas_preferenciais") or []
+            allowed = set(next((item.get("uids", []) for item in lists if item.get("id") == list_id), []))
+        selected, warnings = moneyball_data.select(rows, params, allowed)
+        ordered = moneyball_data.sort_rows(selected, params)
+        return sid, rows, ordered, columns, warnings
+    except ValueError as exc:
+        raise HTTPException(400, str(exc)) from exc
+
+
 @app.get("/api/moneyball/browse")
 def moneyball_browse(request: Request):
-    return {
-        "total": 0,
-        "filtered": 0,
-        "players": [],
-        "att": {},
-    }
+    params = request.query_params
+    sid, rows, selected, columns, warnings = _moneyball_selection(params)
+    try:
+        offset = moneyball_data.integer(params, "offset", 0, 0)
+        limit = moneyball_data.integer(params, "limit", 100, 1)
+        page = selected[offset:offset + limit]
+        percentiles = {}
+        if params.get("pct") == "1":
+            pool = params.get("pool", "filtered")
+            reference = selected if pool == "filtered" else rows
+            percentiles = moneyball_data.percentiles(reference, page, pool,
+                moneyball_data.integer(params, "min_minutes", 0, 0))
+    except ValueError as exc:
+        raise HTTPException(400, str(exc)) from exc
+    public = [_moneyball_public_row(row) for row in page]
+    return {"snapshot": sid, "group": params.get("group", "all"),
+            "total": len(selected), "total_db": len(rows), "filtered": len(selected),
+            "rows": public, "players": public, "columns": columns,
+            "percentiles": percentiles, "warnings": warnings, "att": {}}
+
 
 @app.get("/api/moneyball/export")
 @app.get("/api/moneyball/export.csv")
 def moneyball_export(request: Request):
-    content = "uid,name,club,position,rating\n"
-    return Response(
-        content=content,
-        media_type="text/csv; charset=utf-8",
-        headers={"Content-Disposition": 'attachment; filename="fmsh_export.csv"'},
-    )
+    params = request.query_params
+    sid, rows, selected, columns, warnings = _moneyball_selection(params)
+    keys = [key for key in params.get("cols", "uid,name,club,position,rating").split(",") if key]
+    metadata = {column["key"]: column for column in _moneyball_column_catalog("all")["current"]}
+    metadata.update({column["key"]: column for section in _moneyball_column_catalog("all")["sections"] for column in section["columns"]})
+    metadata.update({"uid": {"fmt": "txt"}, "position": {"fmt": "txt"}, "rating": {"fmt": "rating"}})
+    metadata.update({column["key"]: column for column in moneyball_data.search_alias_columns()})
+    metadata.update({key: {"fmt": "dec2"} for key in mb.RAW_FIELDS})
+    metadata.update({key + "_per90": {"fmt": "dec2"} for key in
+                     ("goals", "assists", "xg", "xa", "shots", "passes_completed", "tackles_completed", "interceptions")})
+    if not keys or any(key not in metadata and key not in moneyball_data.ALIASES for key in keys):
+        raise HTTPException(400, "invalid export columns")
+    profile = params.get("profile", "intl")
+    if profile not in csv_export.PROFILES:
+        raise HTTPException(400, "invalid CSV profile")
+    config = csv_export.PROFILES[profile]
+    loc = "en" if params.get("lang", config["loc"]) == "en" else "pt"
+    delimiter = config["delim"]
+    currency = next((item for item in get_currencies()["currencies"] if str(item["uid"]) == params.get("currency")), None)
+    symbol, rate = (currency["symbol"], currency["rate"]) if currency else ("£", 1)
+    wage_period = params.get("wage_period", "week")
+    if wage_period not in ("week", "month", "year"):
+        raise HTTPException(400, "invalid wage period")
+    content = ("\ufeff" if config["bom"] else "") + csv_export.csv_line(keys, delimiter)
+    for row in selected:
+        values = []
+        for key in keys:
+            item = moneyball_data.value(row, key)
+            fmt = metadata.get(key, {}).get("fmt", "txt")
+            if fmt == "money":
+                item = moneyball_data.number(item) * rate
+                if key == "_wage":
+                    item *= {"week": 1, "month": 52 / 12, "year": 52}[wage_period]
+            values.append(csv_export.fmt_value(item, fmt, loc, symbol))
+        content += csv_export.csv_line(values, delimiter)
+    return Response(content=content, media_type="text/csv; charset=utf-8",
+                    headers={"Content-Disposition": 'attachment; filename="fmsh_export.csv"'})
 
 @app.post("/api/resumo-jogadores")
 def resumo_jogadores(body: UidsBody):
@@ -1483,11 +1598,9 @@ def jogadores_fora_da_captura(body: UidsBody):
 
 @app.get("/api/clubs")
 def get_clubs(snapshot: Optional[int] = None):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT DISTINCT club_uid, club_name, league_uid, league_name FROM club_leagues")
-    rows = cur.fetchall()
-    return {"clubs": [dict(r) for r in rows]}
+    with closing(get_db_connection()) as conn:
+        sid = moneyball_data.snapshot_id(conn, snapshot)
+        return {"clubs": moneyball_data.table_rows(conn, "club_leagues", sid)}
 
 @app.get("/api/club_profile")
 def get_club_profile(snapshot: Optional[int] = None):
@@ -1499,11 +1612,9 @@ def get_club_profile(snapshot: Optional[int] = None):
 
 @app.get("/api/myteams")
 def get_myteams(snapshot: Optional[int] = None):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM teams")
-    rows = cur.fetchall()
-    return {"teams": [dict(r) for r in rows]}
+    with closing(get_db_connection()) as conn:
+        sid = moneyball_data.snapshot_id(conn, snapshot)
+        return {"teams": moneyball_data.table_rows(conn, "teams", sid)}
 
 @app.get("/api/youth-teams")
 def get_youth_teams(snapshot: Optional[int] = None):
