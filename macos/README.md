@@ -29,6 +29,17 @@ shasum -a 256 -c FMSeasonHub-macos-arm64.dmg.sha256
 
 Use the `x86_64` filename for Intel.
 
+## Connect to Football Manager
+
+Open Football Manager and load a save before you select **Connect**. The app
+checks the running process, memory access, and loaded save before it reports ready.
+If the game is closed, access is denied, or no save is loaded, follow the error
+message and try again. Capture stays disabled until the connection is ready.
+
+Save ID and game date come from the loaded save. Fields that cannot be verified
+stay empty. Disconnect, game exit, or a changed save clears the live connection;
+select **Connect** again after you load the required save.
+
 ## Build a standalone release
 
 On macOS 15 or later, use Python 3.14 for the target architecture:

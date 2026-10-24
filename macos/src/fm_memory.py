@@ -29,6 +29,10 @@ class FmElevado(Exception):
     """O Football Manager esta aberto com privilegios elevados que impedem a conexao."""
 
 
+class FmUnsupportedBuild(Exception):
+    """O modulo de memoria do Football Manager nao foi encontrado."""
+
+
 class FmAccessDenied(Exception):
     """O sistema operacional negou acesso a memoria do processo do Football Manager."""
 
@@ -75,7 +79,11 @@ class FmMemory:
         self._FALHAS = 0
 
         self._init_bridge_backend()
-        self._open_game_process(pid)
+        try:
+            self._open_game_process(pid)
+        except Exception:
+            self.close()
+            raise
 
     def _init_bridge_backend(self):
         """Inicializa backend nativo C / dylib ou socket IPC para macOS."""
@@ -140,35 +148,22 @@ class FmMemory:
         self.process_id = None
         # Localiza o processo do Football Manager
         if target_pid is None:
-            # Procura por "fm" ou "game_plugin" via ps / pgrep
+            # Procura apenas nomes exatos do executavel do jogo.
             pids = []
             try:
-                out = subprocess.check_output(["pgrep", "-x", "fm"]).decode().split()
+                out = subprocess.check_output(["pgrep", "-x", "fm"], timeout=3).decode().split()
                 pids = [int(p) for p in out]
             except Exception as e:
                 _log(f"_try_socket_connect failed: {e}")
 
             if not pids:
                 try:
-                    out = subprocess.check_output(["pgrep", "-f", "Football Manager"]).decode().split()
+                    out = subprocess.check_output(["pgrep", "-x", "Football Manager"], timeout=3).decode().split()
                     pids = [int(p) for p in out]
                 except Exception:
                     pass
 
-            # Filtra o processo que possui game_plugin carregado ou tamanho de memoria
             if not pids:
-                # Se nao encontrou ativo, ainda define caminhos padrao do bundle
-                steam_plugin = "/Users/apple/Library/Application Support/Steam/steamapps/common/Football Manager 26/fm.app/Contents/PlugIns/game_plugin.bundle/Contents/MacOS/game_plugin"
-                if os.path.isfile(steam_plugin):
-                    self.dll_path = steam_plugin
-                    self.game_module = "game_plugin"
-                    # Define arquitetura padrao da maquina
-                    arch = platform.machine()
-                    if arch == "arm64":
-                        self.build = "steam_macos_arm64"
-                    else:
-                        self.build = "steam_macos_x86_64"
-                    return
                 raise FmNotRunning("O Football Manager nao esta aberto. Abra o FM e carregue um save.")
 
             target_pid = pids[0]
@@ -197,8 +192,8 @@ class FmMemory:
                     self._bridge_socket = None
 
         # Socket in-process ja permite leitura; task_for_pid pode pedir autorizacao.
-        if not socket_attached:
-            self._ensure_native_attached()
+        if not socket_attached and not self._ensure_native_attached():
+            raise FmAccessDenied("O macOS negou acesso ao FM. Abra o jogo pelo iniciador do Hub e tente novamente.")
 
         # Localiza endereco base de game_plugin no processo
         self._resolve_macos_module_base()
@@ -254,7 +249,7 @@ class FmMemory:
         # 2. Usa vmmap se o processo estiver rodando
         if self.process_id:
             try:
-                out = subprocess.check_output(["vmmap", str(self.process_id)]).decode(errors="ignore")
+                out = subprocess.check_output(["vmmap", str(self.process_id)], timeout=5).decode(errors="ignore")
                 for line in out.splitlines():
                     if "game_plugin" in line and "__TEXT" in line:
                         parts = line.split()
@@ -267,11 +262,20 @@ class FmMemory:
             except Exception as e:
                 _log(f"_try_socket_connect failed: {e}")
 
-        # Fallback padrao para macOS ASLR / relocacao:
-        # Quando carregado via ASLR, a base do bundle game_plugin mapeia tipicamente
-        # no endereco dinamico. Em modo mock ou pre-attach:
-        if self.base == 0:
-            self.base = 0x100000000
+        raise FmUnsupportedBuild("O modulo game_plugin nao foi encontrado. Carregue um save em uma versao suportada do FM.")
+
+    def close(self):
+        """Libera somente a conexao de memoria deste leitor."""
+        if self._bridge_socket:
+            self._bridge_socket.close()
+            self._bridge_socket = None
+        if self._bridge_dylib and self._bridge_dylib.fmsh_get_attached_pid() == self.process_id:
+            self._bridge_dylib.fmsh_detach()
+        if self.process_handle and sys.platform == "win32":
+            ctypes.windll.kernel32.CloseHandle(self.process_handle)
+        self.process_handle = None
+        self.process_id = None
+        self.base = 0
 
     def _open_game_process_windows(self, target_pid=None):
         import pymem

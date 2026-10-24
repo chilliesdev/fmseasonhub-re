@@ -298,7 +298,7 @@ class FmReader:
             root_ptr = self.mem.rva(rva_off)
             obj = self.q(root_ptr)
             if not obj:
-                return "Jogo Salvo"
+                return None
             # Nome geralmente no offset 0x7D0 ou 0x20
             for name_off in (0x7D0, 0x20, 0x8):
                 try:
@@ -307,9 +307,9 @@ class FmReader:
                         return s
                 except Exception:
                     continue
-            return "Jogo Salvo"
+            return None
         except Exception:
-            return "Jogo Salvo"
+            return None
 
     def game_date(self):
         """Data in-game atual."""

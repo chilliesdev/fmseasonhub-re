@@ -89,7 +89,9 @@ class TestMemoryAttach(unittest.TestCase):
         self.mem._bridge_socket = None
         self.mem._bridge_dylib.fmsh_attach.side_effect = None
         self.mem._bridge_dylib.fmsh_attach.return_value = 5
-        self.attach()
+        with self.assertRaises(fm_memory.FmAccessDenied):
+            self.mem._open_game_process_macos(1234)
+        self.mem._resolve_macos_module_base.assert_not_called()
         self.log.assert_called_with("task_for_pid falhou com codigo 5")
 
     def socket_attach(self):
