@@ -1087,7 +1087,10 @@ def list_snapshot_players(
         cur = conn.cursor()
         profile_columns = {row[1] for row in conn.execute("PRAGMA table_info(player_profile)")}
         profile_fields = []
-        for alias, candidates in (("value", ("guide_value", "value")), ("wage", ("wage_weekly", "wage"))):
+        for alias, candidates in (
+            ("value", ("guide_value", "transfer_value", "value")),
+            ("wage", ("wage_weekly", "contract_wage", "wage")),
+        ):
             columns = [f"pr.{column}" for column in candidates if column in profile_columns]
             expression = f"COALESCE({','.join(columns)})" if len(columns) > 1 else (columns[0] if columns else "NULL")
             profile_fields.append(f"{expression} AS {alias}")

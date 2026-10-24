@@ -134,6 +134,99 @@ class StartupContractTests(unittest.TestCase):
                         # Normalization is read-only: legacy metadata stays untouched.
                         self.assertEqual(conn.execute("SELECT n_players, size_bytes FROM snapshots WHERE id=?", (first,)).fetchone(), (999, 999))
 
+    def test_player_list_uses_startup_schema_and_keeps_filters_and_missing_profiles(self):
+        db.init_db(str(self.database))
+        with closing(sqlite3.connect(self.database)) as conn, conn:
+            conn.executemany("INSERT INTO snapshots (id, name) VALUES (?, ?)",
+                             [(901, "QA first"), (902, "QA other"), (903, "QA empty")])
+            conn.executemany(
+                "INSERT INTO players (snapshot_id, uid, full_name, common_name, club_id, team_uid) VALUES (?, ?, ?, ?, ?, ?)",
+                [(901, 900001, "QA Alpha", "QA nickname", 77, 771),
+                 (901, 900002, "QA Missing Profile", None, 88, 881),
+                 (902, 900001, "Other season", None, 77, 771)])
+            conn.executemany(
+                "INSERT INTO player_profile (snapshot_id, uid, guide_value, transfer_value, contract_wage, contract_end) VALUES (?, ?, ?, ?, ?, ?)",
+                [(901, 900001, 1000000, 2000000, 10000, "2030-06-30"),
+                 (902, 900001, 3000000, 4000000, 20000, "2031-06-30")])
+            conn.executemany(
+                "INSERT INTO player_stats (snapshot_id, uid, apps_total, goals, assists, avg_rating) VALUES (?, ?, ?, ?, ?, ?)",
+                [(901, 900001, 20, 10, 5, 7.1), (902, 900001, 30, 20, 10, 8.1)])
+
+        status, rows = self.request("/api/snapshots/901/players")
+        self.assertEqual(status, 200)
+        by_uid = {row["uid"]: row for row in rows}
+        self.assertEqual(set(by_uid), {900001, 900002})
+        player = by_uid[900001]
+        self.assertEqual((player["value"], player["wage"], player["contract_end"]),
+                         (1000000, 10000, "2030-06-30"))
+        self.assertEqual((player["apps_total"], player["goals"], player["assists"], player["avg_rating"]),
+                         (20, 10, 5, 7.1))
+        for key in ("value", "wage", "contract_end", "apps_total", "goals", "assists", "avg_rating"):
+            self.assertIsNone(by_uid[900002][key], key)
+        for query, expected in (
+            ("search=Alpha", {900001}), ("search=nickname", {900001}),
+            ("team=771", {900001}), ("club=77", {900001}),
+            ("search=Alpha&team=771&club=77", {900001}),
+            ("search=Alpha&team=881", set()), ("search=Absent", set()),
+            ("team=999", set()), ("club=999", set()),
+        ):
+            with self.subTest(query=query):
+                status, filtered = self.request("/api/snapshots/901/players?" + query)
+                self.assertEqual(status, 200)
+                self.assertEqual({row["uid"] for row in filtered}, expected)
+                self.assertTrue(all(row["snapshot_id"] == 901 for row in filtered))
+        for sid in (903, 999):
+            self.assertEqual(self.request(f"/api/snapshots/{sid}/players"), (200, []))
+        pages = [self.request(f"/api/snapshots/901/players?limit=1&offset={offset}") for offset in (0, 1)]
+        self.assertTrue(all(status == 200 and len(page) == 1 for status, page in pages))
+        self.assertEqual({page[0]["uid"] for _, page in pages}, {900001, 900002})
+        self.assertEqual(self.request("/api/snapshots/901/players?limit=1&offset=2"), (200, []))
+
+    def test_player_list_finance_fallback_preserves_zero_and_unknown_values(self):
+        db.init_db(str(self.database))
+        sid = self.saved_snapshot("Startup finances")
+        with closing(sqlite3.connect(self.database)) as conn, conn:
+            conn.executemany("INSERT INTO players (snapshot_id, uid) VALUES (?, ?)",
+                             [(sid, uid) for uid in (1, 2, 3)])
+            conn.executemany(
+                "INSERT INTO player_profile (snapshot_id, uid, guide_value, transfer_value, contract_wage) VALUES (?, ?, ?, ?, ?)",
+                [(sid, 1, None, 2000000, 10000), (sid, 2, 0, 2000000, 0),
+                 (sid, 3, None, None, None)])
+        status, rows = self.request(f"/api/snapshots/{sid}/players")
+        self.assertEqual(status, 200)
+        self.assertEqual({row["uid"]: (row["value"], row["wage"]) for row in rows},
+                         {1: (2000000, 10000), 2: (0, 0), 3: (None, None)})
+
+    def test_player_list_keeps_legacy_finance_columns(self):
+        sid = self.saved_snapshot("Legacy finances")
+        with closing(sqlite3.connect(self.database)) as conn, conn:
+            conn.execute("INSERT INTO players (snapshot_id, uid) VALUES (?, 1)", (sid,))
+            conn.execute("INSERT INTO player_profile (snapshot_id, uid, value, wage) VALUES (?, 1, 500000, 2500)", (sid,))
+        status, rows = self.request(f"/api/snapshots/{sid}/players")
+        self.assertEqual(status, 200)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual((rows[0]["value"], rows[0]["wage"]), (500000, 2500))
+
+    def test_player_list_mixed_schema_prefers_current_fields_with_null_fallback(self):
+        db.init_db(str(self.database))
+        sid = self.saved_snapshot("Mixed finances")
+        with closing(sqlite3.connect(self.database)) as conn, conn:
+            for column in ("value", "wage"):
+                conn.execute(f"ALTER TABLE player_profile ADD COLUMN {column} INTEGER")
+            conn.executemany("INSERT INTO players (snapshot_id, uid) VALUES (?, ?)",
+                             [(sid, uid) for uid in (1, 2, 3, 4)])
+            conn.executemany(
+                "INSERT INTO player_profile (snapshot_id, uid, guide_value, transfer_value, value, wage_weekly, contract_wage, wage) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                [(sid, 1, 1000000, 2000000, 3000000, 1000, 2000, 3000),
+                 (sid, 2, None, 2000000, 3000000, None, 2000, 3000),
+                 (sid, 3, None, None, 3000000, None, None, 3000),
+                 (sid, 4, 0, 2000000, 3000000, 0, 2000, 3000)])
+        status, rows = self.request(f"/api/snapshots/{sid}/players")
+        self.assertEqual(status, 200)
+        self.assertEqual({row["uid"]: (row["value"], row["wage"]) for row in rows},
+                         {1: (1000000, 1000), 2: (2000000, 2000),
+                          3: (3000000, 3000), 4: (0, 0)})
+
     def test_live_snapshot_placeholder_has_safe_metadata(self):
         with patch.object(server, "_LIVE_STATUS", {"ready": True, "read_at": None}):
             status, snapshots = self.request("/api/snapshots")
