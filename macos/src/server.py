@@ -961,29 +961,63 @@ def patreon_callback(code: Optional[str] = None, ticket: Optional[str] = None):
 # 10. Snapshots, Players & Capture Endpoints
 # ==============================================================================
 
+def _snapshot_metrics(conn: sqlite3.Connection, sid: Optional[int] = None) -> Dict[int, Dict[str, int]]:
+    """Count players and UTF-8 scalar payload bytes of snapshot-owned rows.
+
+    Excludes snapshot_id links, snapshot headers and SQLite/index overhead.
+    """
+    metrics = {}
+    where = " WHERE snapshot_id=?" if sid is not None else ""
+    params = (sid,) if sid is not None else ()
+    for row in conn.execute(f"SELECT snapshot_id, COUNT(*) AS n FROM players{where} GROUP BY snapshot_id", params):
+        metrics[row["snapshot_id"]] = {"n_players": row["n"], "size_bytes": 0}
+
+    # Schemas vary between app startup and older server-created databases.
+    # Derive sizes from saved values, not optional or stale metadata columns.
+    for table_row in conn.execute("SELECT name FROM sqlite_master WHERE type='table'"):
+        table = '"' + table_row["name"].replace('"', '""') + '"'
+        columns = [row["name"] for row in conn.execute(f"PRAGMA table_info({table})")]
+        if "snapshot_id" not in columns:
+            continue
+        payload = []
+        for column in columns:
+            if column != "snapshot_id":
+                quoted = '"' + column.replace('"', '""') + '"'
+                payload.append(f"COALESCE(LENGTH(CAST({quoted} AS BLOB)), 0)")
+        if not payload:
+            continue
+        query = f"SELECT snapshot_id, SUM({' + '.join(payload)}) AS n FROM {table}{where} GROUP BY snapshot_id"
+        for row in conn.execute(query, params):
+            values = metrics.setdefault(row["snapshot_id"], {"n_players": 0, "size_bytes": 0})
+            values["size_bytes"] += row["n"]
+    return metrics
+
+
 @app.get("/api/snapshots")
 def list_snapshots(include_live: bool = True):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM snapshots ORDER BY created_at DESC")
-    rows = cur.fetchall()
-    snaps = [dict(r) for r in rows]
+    with ExitStack() as stack:
+        conn = get_db_connection()
+        stack.callback(conn.close)
+        rows = conn.execute("SELECT * FROM snapshots ORDER BY created_at DESC").fetchall()
+        metrics = _snapshot_metrics(conn)
+        snaps = [dict(row, **metrics.get(row["id"], {"n_players": 0, "size_bytes": 0})) for row in rows]
     if include_live and _LIVE_STATUS.get("ready"):
         live_snap = dict(_LIVE_STATUS)
-        live_snap["id"] = 999999999
-        live_snap["name"] = "Live Season"
+        live_snap.update(id=999999999, name="Live Season", n_players=0, size_bytes=0,
+                         created_at=live_snap.get("read_at") or "", is_live=True)
         snaps.insert(0, live_snap)
     return snaps
 
 @app.get("/api/snapshots/{sid}")
 def get_snapshot(sid: int):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM snapshots WHERE id=?", (sid,))
-    row = cur.fetchone()
-    if not row:
-        raise HTTPException(status_code=404, detail="Snapshot nao encontrado")
-    return dict(row)
+    with ExitStack() as stack:
+        conn = get_db_connection()
+        stack.callback(conn.close)
+        row = conn.execute("SELECT * FROM snapshots WHERE id=?", (sid,)).fetchone()
+        if not row:
+            raise HTTPException(status_code=404, detail="Snapshot nao encontrado")
+        metrics = _snapshot_metrics(conn, sid)
+        return dict(row, **metrics.get(sid, {"n_players": 0, "size_bytes": 0}))
 
 @app.delete("/api/snapshots/{sid}")
 def delete_snapshot(sid: int):
@@ -1335,7 +1369,8 @@ def get_carreira_alltime(cid: str):
 
 @app.get("/api/carreiras/{cid}/outras-ligas")
 def get_carreiras_outras_ligas(cid: str):
-    return {"ligas": []}
+    # Archived seasons distinguishes an unavailable agenda from an empty history.
+    return {"auto": None, "proximos": None, "lidas": [], "ligas": []}
 
 @app.post("/api/carreiras/{cid}/auto-snapshot")
 def set_carreira_auto_snapshot(cid: str, body: AutoSnapshotDataBody):

@@ -17,6 +17,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+import db
 import idiomas
 import graphics
 import server
@@ -71,6 +72,86 @@ class StartupContractTests(unittest.TestCase):
                 return response.status, json.load(response)
         except urllib.error.HTTPError as response:
             return response.code, json.load(response)
+
+    def test_fresh_startup_capture_supplies_empty_snapshot_metrics(self):
+        db.init_db(str(self.database))
+        with closing(sqlite3.connect(self.database)) as conn:
+            columns = [row[1] for row in conn.execute("PRAGMA table_info(snapshots)")]
+        self.assertNotIn("n_players", columns)
+        self.assertNotIn("size_bytes", columns)
+        self.assertEqual(self.request("/api/snapshots?include_live=false"), (200, []))
+        status, captured = self.request("/api/capture", {"name": "Empty season"})
+        self.assertEqual(status, 200)
+        status, snapshots = self.request("/api/snapshots?include_live=false")
+        self.assertEqual(status, 200)
+        self.assertEqual(len(snapshots), 1)
+        snapshot = snapshots[0]
+        self.assertEqual(snapshot["id"], captured["sid"])
+        self.assertEqual((snapshot["n_players"], snapshot["size_bytes"]), (0, 0))
+        self.assertIs(type(snapshot["n_players"]), int)
+        self.assertIs(type(snapshot["size_bytes"]), int)
+        self.assertEqual(self.request(f"/api/snapshots/{captured['sid']}"), (200, snapshot))
+        self.assertEqual(self.request("/api/snapshots/987654321")[0], 404)
+
+    def test_snapshot_metrics_use_saved_rows_in_both_database_schemas(self):
+        for startup_schema in (True, False):
+            with self.subTest(startup_schema=startup_schema):
+                database = self.root / f"schema-{startup_schema}.db"
+                if startup_schema:
+                    db.init_db(str(database))
+                with patch.object(server, "get_db_path", return_value=database):
+                    first = self.request("/api/capture", {"name": "Populated"})[1]["sid"]
+                    second = self.request("/api/capture", {"name": "Empty"})[1]["sid"]
+                    with closing(sqlite3.connect(database)) as conn:
+                        with conn:
+                            if startup_schema:
+                                conn.execute("ALTER TABLE snapshots ADD COLUMN n_players INTEGER")
+                                conn.execute("ALTER TABLE snapshots ADD COLUMN bytes_crus INTEGER")
+                            conn.execute("ALTER TABLE snapshots ADD COLUMN size_bytes INTEGER")
+                            conn.execute("UPDATE snapshots SET n_players=999, size_bytes=999, bytes_crus=999 WHERE id=?", (first,))
+                            conn.execute("UPDATE snapshots SET n_players=NULL, size_bytes=NULL, bytes_crus=NULL WHERE id=?", (second,))
+                            conn.executemany("INSERT INTO players (snapshot_id, uid, full_name) VALUES (?, ?, ?)",
+                                             [(first, 1, "João"), (first, 2, "李")])
+                            conn.execute("INSERT INTO teams (snapshot_id, team_uid, label) VALUES (?, ?, ?)",
+                                         (first, 10, "Équipe"))
+                            # A third snapshot must not contribute to the first count/size.
+                            third = conn.execute("INSERT INTO snapshots (name) VALUES ('Other')").lastrowid
+                            conn.execute("INSERT INTO players (snapshot_id, uid, full_name) VALUES (?, ?, ?)",
+                                         (third, 3, "Other player"))
+                    snapshots = self.request("/api/snapshots?include_live=false")[1]
+                    snapshots = {snapshot["id"]: snapshot for snapshot in snapshots}
+                    self.assertEqual(snapshots[first]["n_players"], 2)
+                    # Server schema gives team_type/n_players zero defaults; startup leaves them null.
+                    expected = len("1João2李10Équipe".encode("utf-8")) + (0 if startup_schema else 2)
+                    self.assertEqual(snapshots[first]["size_bytes"], expected)
+                    self.assertEqual((snapshots[second]["n_players"], snapshots[second]["size_bytes"]), (0, 0))
+                    self.assertEqual(snapshots[third]["n_players"], 1)
+                    self.assertEqual(self.request(f"/api/snapshots/{first}"), (200, snapshots[first]))
+                    with closing(sqlite3.connect(database)) as conn:
+                        # Normalization is read-only: legacy metadata stays untouched.
+                        self.assertEqual(conn.execute("SELECT n_players, size_bytes FROM snapshots WHERE id=?", (first,)).fetchone(), (999, 999))
+
+    def test_live_snapshot_placeholder_has_safe_metadata(self):
+        with patch.object(server, "_LIVE_STATUS", {"ready": True, "read_at": None}):
+            status, snapshots = self.request("/api/snapshots")
+            self.assertEqual(status, 200)
+            self.assertEqual(len(snapshots), 1)
+            self.assertEqual((snapshots[0]["n_players"], snapshots[0]["size_bytes"]), (0, 0))
+            self.assertEqual(snapshots[0]["created_at"], "")
+            self.assertTrue(snapshots[0]["is_live"])
+            self.assertEqual(self.request("/api/snapshots?include_live=false"), (200, []))
+
+    def test_archived_leagues_has_unavailable_agenda_and_empty_history(self):
+        # The shipped Archived component checks proximos===null and reads lidas.length.
+        expected = {"auto": None, "proximos": None, "lidas": [], "ligas": []}
+        for state in ("no-database", "startup", "captured"):
+            if state == "startup":
+                db.init_db(str(self.database))
+            elif state == "captured":
+                self.assertEqual(self.request("/api/capture", {"name": "Archived empty season"})[0], 200)
+            for career in ("carreira_default", "unknown-career"):
+                with self.subTest(state=state, career=career):
+                    self.assertEqual(self.request(f"/api/carreiras/{career}/outras-ligas"), (200, expected))
 
     def test_original_language_object_contains_resolved_ui_and_columns(self):
         for code in ("en", "pt"):
