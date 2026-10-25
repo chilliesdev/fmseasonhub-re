@@ -1588,13 +1588,16 @@ def moneyball_export(request: Request):
 
 @app.post("/api/resumo-jogadores")
 def resumo_jogadores(body: UidsBody):
-    conn = get_db_connection()
-    cur = conn.cursor()
     if not body.uids:
         return []
-    placeholders = ",".join("?" for _ in body.uids)
-    cur.execute(f"SELECT uid, full_name, club_id, ca, pa FROM players WHERE uid IN ({placeholders})", body.uids)
-    return [dict(r) for r in cur.fetchall()]
+    with closing(get_db_connection()) as conn:
+        sid = moneyball_data.snapshot_id(conn, body.snapshot)
+        placeholders = ",".join("?" for _ in body.uids)
+        rows = conn.execute(
+            f"SELECT uid, full_name, club_id, ca, pa FROM players WHERE snapshot_id=? AND uid IN ({placeholders})",
+            [sid, *body.uids],
+        )
+        return [dict(row) for row in rows]
 
 @app.post("/api/jogadores-fora-da-captura")
 def jogadores_fora_da_captura(body: UidsBody):
@@ -1625,11 +1628,9 @@ def get_myteams(snapshot: Optional[int] = None):
 
 @app.get("/api/youth-teams")
 def get_youth_teams(snapshot: Optional[int] = None):
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM youth_teams")
-    rows = cur.fetchall()
-    return {"youth_teams": [dict(r) for r in rows]}
+    with closing(get_db_connection()) as conn:
+        sid = moneyball_data.snapshot_id(conn, snapshot)
+        return {"youth_teams": moneyball_data.table_rows(conn, "youth_teams", sid)}
 
 @app.get("/api/nomes-curtos")
 def get_nomes_curtos(snapshot: Optional[int] = None):
