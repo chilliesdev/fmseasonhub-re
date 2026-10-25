@@ -27,12 +27,12 @@ import uuid
 from contextlib import ExitStack, closing
 from datetime import date
 from pathlib import Path, PureWindowsPath
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Literal, Optional, Union
 
 from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 import uvicorn
 import graphics
 import capture_all
@@ -121,6 +121,7 @@ BANDEJA_ATIVA: bool = True
 
 SIMULACAO: Dict[str, Any] = {}
 CAPTURA_AUTO: Dict[str, Any] = {}
+_AUTO_SNAPSHOT_DATAS_LOCK = threading.Lock()
 ESTADO_DA_BANDEJA: Dict[str, Any] = {
     "ativo": True,
     "itens": [],
@@ -368,19 +369,47 @@ class CaptureBody(BaseModel):
     game_date: Optional[str] = None
 
 class AutoSnapshotDataBody(BaseModel):
-    data: str
+    model_config = ConfigDict(extra="forbid")
+    data: Optional[str] = Field(..., strict=True)
+
+    @field_validator("data")
+    @classmethod
+    def validar_data(cls, value):
+        if value is not None:
+            try:
+                if date.fromisoformat(value).isoformat() != value:
+                    raise ValueError
+            except ValueError:
+                raise ValueError("data deve usar AAAA-MM-DD") from None
+        return value
 
 class FimDeTemporadaBody(BaseModel):
     ligado: bool
 
 class AutoSnapshotBody(BaseModel):
-    ligado: Optional[bool] = None
-    modelo: Optional[str] = None
-    vagas: Optional[str] = None
+    model_config = ConfigDict(extra="forbid")
+    ligado: Optional[bool] = Field(None, strict=True)
+    nome: Optional[str] = Field(None, strict=True, max_length=60)
+    vagas: Optional[Literal["avisar", "substituir"]] = None
+
+    @field_validator("ligado", "nome", "vagas")
+    @classmethod
+    def rejeitar_nulo(cls, value):
+        if value is None:
+            raise ValueError("valor nao pode ser nulo")
+        return value
 
 class CapturaSomBody(BaseModel):
-    ligado: Optional[bool] = None
-    volume: Optional[float] = None
+    model_config = ConfigDict(extra="forbid")
+    ligado: Optional[bool] = Field(None, strict=True)
+    volume: Optional[int] = Field(None, strict=True, ge=0, le=100)
+
+    @field_validator("ligado", "volume")
+    @classmethod
+    def rejeitar_nulo(cls, value):
+        if value is None:
+            raise ValueError("valor nao pode ser nulo")
+        return value
 
 # ==============================================================================
 # 4. FastAPI Application Setup & Host Security Middleware
@@ -909,9 +938,10 @@ def set_fim_de_temporada(body: FimDeTemporadaBody):
     return {"ok": True, "ligado": body.ligado}
 
 @app.post("/api/settings/auto-snapshot")
-def set_auto_snapshot(body: Dict[str, Any]):
+def set_auto_snapshot(body: AutoSnapshotBody):
     if settings:
-        settings.save(auto_snapshot=body)
+        settings.save(**{"auto_snapshot_" + key: value
+                         for key, value in body.model_dump(exclude_unset=True).items()})
     return {"ok": True}
 
 @app.get("/api/settings/auto-snapshot/nome")
@@ -919,12 +949,10 @@ def nome_do_auto_snapshot(modelo: str = "FM 2026"):
     return {"nome": f"Auto Snapshot - {modelo}"}
 
 @app.post("/api/settings/captura-som")
-def set_captura_som(body: Dict[str, Any]):
+def set_captura_som(body: CapturaSomBody):
     if settings:
-        cfg = settings.load()
-        cur_s = cfg.get("captura_som", {})
-        cur_s.update(body)
-        settings.save(captura_som=cur_s)
+        settings.save(**{"captura_som_" + key: value
+                         for key, value in body.model_dump(exclude_unset=True).items()})
     return {"ok": True}
 
 @app.post("/api/settings/captura-som/testar")
@@ -1691,6 +1719,17 @@ def get_carreiras_outras_ligas(cid: str):
 
 @app.post("/api/carreiras/{cid}/auto-snapshot")
 def set_carreira_auto_snapshot(cid: str, body: AutoSnapshotDataBody):
+    with closing(get_db_connection()) as conn:
+        snapshots = portal_data.stored_snapshots(conn)
+    if cid not in {snapshot["carreira_id"] for snapshot in snapshots}:
+        raise HTTPException(status_code=404, detail="Carreira nao encontrada")
+    with _AUTO_SNAPSHOT_DATAS_LOCK:
+        datas = dict(settings.load().get("auto_snapshot_datas") or {})
+        if body.data is None:
+            datas.pop(cid, None)
+        else:
+            datas[cid] = body.data
+        settings.save(auto_snapshot_datas=datas)
     return {"ok": True, "data": body.data}
 
 @app.get("/api/players/{uid}/alltime")
