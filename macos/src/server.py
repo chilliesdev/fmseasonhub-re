@@ -41,6 +41,7 @@ import moneyball as mb
 import moneyball_data
 import player_analysis
 import career_analysis
+import carreiras
 import portal_data
 import csv_export
 import player_search
@@ -1645,6 +1646,8 @@ def get_carreiras():
     with closing(get_db_connection()) as conn:
         snapshots = portal_data.stored_snapshots(conn)
     active = portal_data.active_career(snapshots)
+    saved = settings.load().get("carreiras") or {}
+    prefs = saved.get(active) or {}
     counts = {}
     for snapshot in snapshots:
         cid = snapshot["carreira_id"]
@@ -1652,9 +1655,10 @@ def get_carreiras():
             counts[cid] = counts.get(cid, 0) + 1
     return {
         "ativa": active,
-        "prefs": {"moeda": 1, "periodo_salario": "week"},
+        "prefs": {"moeda": prefs.get("moeda") or 1,
+                  "periodo_salario": prefs.get("periodo_salario") or "week"},
         "carreiras": [
-            {"id": cid, "nome": cid.replace("_", " ").title(),
+            {"id": cid, "nome": (saved.get(cid) or {}).get("nome") or cid.replace("_", " ").title(),
              "ativa": cid == active, "n_temporadas": count}
             for cid, count in counts.items()
         ],
@@ -1671,6 +1675,11 @@ def ativar_carreira(body: CarreiraAtivaBody):
 
 @app.put("/api/carreiras/{cid}")
 def salvar_carreira_prefs(cid: str, body: CarreiraPrefsBody):
+    with closing(get_db_connection()) as conn:
+        snapshots = portal_data.stored_snapshots(conn)
+    if cid not in {snapshot["carreira_id"] for snapshot in snapshots}:
+        raise HTTPException(status_code=404, detail="Carreira nao encontrada")
+    carreiras.gravar_prefs(cid, **body.model_dump(exclude_none=True))
     return {"ok": True, "cid": cid}
 
 @app.post("/api/carreiras/{cid}/temporadas/{sid}")
