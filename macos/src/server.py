@@ -50,6 +50,7 @@ import player_search
 import buscar_como_config
 import biblioteca
 import biblioteca_listas
+import lista_fmf
 from buscar_como_config import BuscarComoConfigBody
 from fm_memory import FmMemory, FmNotRunning, FmAccessDenied, FmElevado, FmUnsupportedBuild
 from fm_reader import FmReader, strict_reads
@@ -2324,35 +2325,94 @@ def post_views_fm(request: Request):
 
 @app.get("/api/listas-preferenciais")
 def get_listas_preferenciais():
-    return {"listas": []}
+    return {"listas": [_lista_preferencial_json(lista) for lista in lista_fmf.listar()]}
+
+
+def _lista_preferencial_json(lista):
+    """Expose the persisted list with dates in the shipped UI's format."""
+    result = {**lista, "carregada_em": lista.get("atualizada_em")}
+    if isinstance(result.get("arquivo_em"), (int, float)):
+        result["arquivo_em"] = datetime.fromtimestamp(result["arquivo_em"], timezone.utc).isoformat()
+    return result
+
+
+def _resposta_lista_preferencial(lista):
+    return {"ok": True, "lista": _lista_preferencial_json(lista), **get_listas_preferenciais()}
+
+
+def _operar_lista_preferencial(operacao, *args, **kwargs):
+    try:
+        return operacao(*args, **kwargs)
+    except KeyError as exc:
+        raise HTTPException(404, "Lista nao encontrada") from exc
+    except lista_fmf.ListaInvalida as exc:
+        raise HTTPException(400, str(exc)) from exc
+    except OSError as exc:
+        logger.exception("Could not save the preferred list")
+        raise HTTPException(500, "Nao foi possivel salvar a lista") from exc
 
 @app.delete("/api/listas-preferenciais/{id_lista}")
 def delete_lista_preferencial(id_lista: str):
-    return {"ok": True}
+    if not _operar_lista_preferencial(lista_fmf.remover, id_lista):
+        raise HTTPException(404, "Lista nao encontrada")
+    return {"ok": True, **get_listas_preferenciais()}
 
 @app.get("/api/listas-preferenciais/pasta")
 def get_listas_preferenciais_pasta():
-    return {"pastas": [], "arquivos": []}
+    result = _operar_lista_preferencial(lista_fmf.listar_pasta)
+    for pasta in result["pastas"]:
+        for lista in pasta["listas"]:
+            lista["modificado"] = datetime.fromtimestamp(lista["modificado"], timezone.utc).isoformat()
+    return result
 
 @app.post("/api/listas-preferenciais/da-pasta")
 def post_lista_preferencial_da_pasta(body: ListaDaPastaBody):
-    return {"ok": True, "lista": {"id": "lp_1", "nome": body.arquivo}}
+    # UI folder entries use basenames; API clients can supply a local absolute path.
+    if Path(body.arquivo).is_absolute():
+        lista = _operar_lista_preferencial(lista_fmf.importar_do_caminho, body.arquivo)
+    else:
+        lista = _operar_lista_preferencial(lista_fmf.importar_da_pasta, body.arquivo, body.jogo)
+    return _resposta_lista_preferencial(lista)
+
+
+@app.post("/api/listas-preferenciais")
+async def post_lista_preferencial_bytes(request: Request, arquivo: str):
+    if not arquivo or Path(arquivo).name != arquivo or "\\" in arquivo or "\0" in arquivo:
+        raise HTTPException(400, "Nome de arquivo invalido")
+    if Path(arquivo).suffix.lower() != ".fmf":
+        raise HTTPException(400, "Selecione uma lista .fmf do Football Manager")
+    dados = bytearray()
+    async for trecho in request.stream():
+        dados.extend(trecho)
+        if len(dados) > lista_fmf.TAMANHO_MAXIMO_ARQUIVO:
+            raise HTTPException(413, "A lista excede o limite de 2 MB")
+    lista = _operar_lista_preferencial(lista_fmf.adicionar, bytes(dados), arquivo=arquivo)
+    return _resposta_lista_preferencial(lista)
 
 @app.post("/api/listas-preferenciais/escolher")
 def post_lista_preferencial_escolher():
-    res = subprocess.run(
-        ["osascript", "-e", 'POSIX path of (choose file with prompt "Select FM Shortlist file" of type {"fmf", "lsh"})'],
-        capture_output=True,
-        text=True,
-    )
-    if res.returncode == 0 and res.stdout.strip():
-        fpath = res.stdout.strip()
-        return {"disponivel": True, "cancelado": False, "lista": {"path": fpath, "nome": Path(fpath).name}}
-    return {"disponivel": True, "cancelado": True}
+    try:
+        res = subprocess.run(
+            ["osascript", "-e", 'POSIX path of (choose file with prompt "Select FM Shortlist file" of type {"fmf"})'],
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        # The UI has a browser file-input fallback when no native picker exists.
+        return {"disponivel": False, "cancelado": False}
+    if res.returncode != 0:
+        if "(-128)" in res.stderr:
+            return {"disponivel": True, "cancelado": True}
+        return {"disponivel": False, "cancelado": False}
+    if not res.stdout.strip():
+        return {"disponivel": True, "cancelado": True}
+    lista = _operar_lista_preferencial(lista_fmf.importar_do_caminho, res.stdout.strip())
+    return {"disponivel": True, "cancelado": False, **_resposta_lista_preferencial(lista)}
 
 @app.post("/api/listas-preferenciais/{id_lista}/atualizar")
 def post_lista_preferencial_atualizar(id_lista: str):
-    return {"ok": True}
+    lista = _operar_lista_preferencial(lista_fmf.atualizar, id_lista)
+    return _resposta_lista_preferencial(lista)
 
 # ==============================================================================
 # 18. Game Plugin & Live In-Game HUD Endpoints
