@@ -70,18 +70,30 @@ def ler(dados: bytes) -> dict:
         raise ArquivoCorrompido('O arquivo esta incompleto ou corrompido.')
     try:
         externo = json.loads(aberto[CABECALHO_VIEW:CABECALHO_VIEW + tamanho].decode('utf-8'))
+        if not isinstance(externo, dict) or not isinstance(externo.get('ViewData'), str):
+            raise ValueError('Invalid view record')
         dados_view = json.loads(externo['ViewData'])
-        colunas = [str(c['m_columnID']) for c in dados_view['m_tableConfig']]
+        tabela = dados_view['m_tableConfig']
+        if not isinstance(tabela, list) or not 0 < len(tabela) <= MAXIMO_COLUNAS:
+            raise ValueError('Invalid view columns')
+        colunas = []
+        for coluna in tabela:
+            if not isinstance(coluna, dict):
+                raise ValueError('Invalid view column')
+            identificador = coluna['m_columnID']
+            if not isinstance(identificador, str) or not identificador.strip():
+                raise ValueError('Invalid view column ID')
+            colunas.append(identificador)
     except (ValueError, KeyError, TypeError, RecursionError) as erro:
         raise ArquivoCorrompido('O conteudo da view nao foi reconhecido.') from erro
     colecao = str(externo.get('ViewSettingsCollectionName') or '')
     if 'TacticTeamSelection' in colecao:
         raise ViewDeTatica('Esta view e da tela de tatica do FM, que nao existe no app.')
-    if len(colunas) > MAXIMO_COLUNAS:
-        raise ArquivoCorrompido('A view tem colunas demais.')
+    if colecao not in TELAS:
+        raise ViewDeOutraTela('Esta view e de uma tela do FM que nao existe no app.')
     return {
         'nome_interno': str(externo.get('SerialisedName') or ''),
-        'tela': TELAS.get(colecao, 'busca'),
+        'tela': TELAS[colecao],
         'colunas': colunas,
     }
 
@@ -120,6 +132,7 @@ def destino_da_tela(tela: str) -> str:
 
 def revisar(dados: bytes, nome_arquivo: str, destino: str = 'base') -> dict:
     import moneyball as mb
+    import moneyball_data
     from view_fmf_colunas import EQUIVALENCIA, EQUIVALENCIA_MEUTIME
 
     if destino not in TELA_DO_DESTINO:
@@ -132,10 +145,11 @@ def revisar(dados: bytes, nome_arquivo: str, destino: str = 'base') -> dict:
             raise ViewDeOutraTela('Esta view e da busca de jogadores no FM: importe na Base.')
     meutime = (destino == 'meutime')
     tabela = EQUIVALENCIA_MEUTIME if meutime else EQUIVALENCIA
-    if meutime:
-        proprias = set()
-    else:
-        proprias = {c['key'] for c in mb.group_columns_meta('all')}
+    gerais = mb.general_columns_meta()
+    proprias = set() if meutime else {c['key'] for c in gerais}
+    catalogo = {**mb.CATALOG_BY_KEY, **{
+        c['key']: c for c in moneyball_data.search_alias_columns() + gerais
+    }}
     colunas = []
     contagem = {}
     usadas = set()
@@ -143,7 +157,9 @@ def revisar(dados: bytes, nome_arquivo: str, destino: str = 'base') -> dict:
         regra = tabela.get(id_fm)
         estado = regra[0] if regra else 'desconhecida'
         chave = regra[1] if regra and estado in ('ok', 'nova', 'aprox') else None
-        if regra and estado == 'aprox':
+        if not meutime and chave and chave != 'name' and chave not in IDENTIDADE_BASE and chave not in catalogo:
+            estado, chave, motivo = 'sem', None, 'nao_le'
+        elif regra and estado == 'aprox':
             motivo = regra[2]
         elif regra and estado in ('sem', 'fm'):
             motivo = regra[1]
@@ -156,7 +172,7 @@ def revisar(dados: bytes, nome_arquivo: str, destino: str = 'base') -> dict:
             da_base = regra[1]
         else:
             da_base = None if meutime else chave
-        coluna = mb.columns_meta([da_base])[0] if da_base in mb.CATALOG_BY_KEY else None
+        coluna = catalogo.get(da_base)
         colunas.append({
             'id_fm': id_fm,
             'estado': estado,
@@ -186,16 +202,20 @@ def revisar(dados: bytes, nome_arquivo: str, destino: str = 'base') -> dict:
 def pastas_views() -> list[dict]:
     saida = []
     for p in lista_fmf.pastas_dos_jogos():
-        pasta = os.path.join(os.path.dirname(p['pasta']), 'views')
+        pasta = os.path.join(p['pasta'], 'views')
         if os.path.isdir(pasta):
             saida.append({**p, 'pasta': pasta})
     return saida
 
 
 def _ler_caminho(caminho: str) -> bytes:
+    if not caminho or '\0' in caminho:
+        raise ListaInvalida('Nome de arquivo invalido.')
     if os.path.splitext(caminho)[1].lower() != '.fmf':
         raise NaoEhFmf('Este arquivo nao e um .fmf do Football Manager.')
     try:
+        if not os.path.isfile(caminho):
+            raise ListaInvalida('Nao foi possivel ler o arquivo. Ele ainda existe nesse lugar?')
         if os.path.getsize(caminho) > lista_fmf.TAMANHO_MAXIMO_ARQUIVO:
             raise ArquivoCorrompido('O arquivo e grande demais para ser uma view (limite de 2 MB).')
         with open(caminho, 'rb') as fh:
@@ -208,7 +228,9 @@ def listar_pasta() -> dict:
     pastas = []
     for p in pastas_views():
         views = []
-        for caminho in sorted(glob.glob(os.path.join(p['pasta'], '*.fmf')), key=lambda c: os.path.basename(c).lower()):
+        for caminho in sorted(glob.glob(os.path.join(p['pasta'], '*')), key=lambda c: os.path.basename(c).lower()):
+            if os.path.splitext(caminho)[1].lower() != '.fmf':
+                continue
             arquivo = os.path.basename(caminho)
             try:
                 tela = ler(_ler_caminho(caminho))['tela']
@@ -226,7 +248,7 @@ def listar_pasta() -> dict:
 
 
 def ler_da_pasta(arquivo: str, jogo: str | None = None, destino: str = 'base') -> dict:
-    if not arquivo or os.path.basename(arquivo) != arquivo or arquivo in ('.', '..') or '\\' in arquivo:
+    if not arquivo or os.path.basename(arquivo) != arquivo or arquivo in ('.', '..') or '\\' in arquivo or '\0' in arquivo:
         raise ListaInvalida('Nome de arquivo invalido.')
     pasta = next((p['pasta'] for p in pastas_views() if jogo is None or p['jogo'] == str(jogo)), None)
     if not pasta:
