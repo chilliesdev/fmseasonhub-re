@@ -41,6 +41,7 @@ import db
 import moneyball as mb
 import moneyball_data
 import list_summary
+import diagnostics
 import favoritos
 import player_analysis
 import career_analysis
@@ -436,31 +437,40 @@ async def verify_host_middleware(request: Request, call_next):
         return JSONResponse(status_code=403, content={"detail": "Forbidden: Loopback only"})
 
     # Process request
-    response = await call_next(request)
+    try:
+        response = await call_next(request)
+    except Exception:
+        logger.exception("Request failed: %s %s", request.method, request.url.path)
+        raise
+    if response.status_code >= 500:
+        logger.error("Request returned HTTP %s: %s %s", response.status_code,
+                     request.method, request.url.path)
     return response
 
 # ==============================================================================
 # 5. Database Connection Helper
 # ==============================================================================
 
-def get_db_path() -> Path:
+def get_db_path(create_parent: bool = True) -> Path:
     if settings:
         try:
             cfg = settings.load()
             if cfg.get("db_dir"):
                 p = Path(cfg["db_dir"]) / "fm26_snapshots.db"
-                p.parent.mkdir(parents=True, exist_ok=True)
+                if create_parent:
+                    p.parent.mkdir(parents=True, exist_ok=True)
                 return p
         except Exception:
             pass
     if paths:
         try:
-            return Path(paths.banco_padrao())
+            return Path(paths.banco_padrao(create_parent=create_parent))
         except Exception:
             pass
     # Fallback to standard user data path
     data_dir = Path.home() / "Library" / "Application Support" / "FMSeasonHub"
-    data_dir.mkdir(parents=True, exist_ok=True)
+    if create_parent:
+        data_dir.mkdir(parents=True, exist_ok=True)
     return data_dir / "fm26_snapshots.db"
 
 def get_db_connection() -> sqlite3.Connection:
@@ -2739,28 +2749,27 @@ def get_atualizando_page():
 
 @app.get("/api/diagnostico")
 def get_diagnostico():
-    v = "1.0.0"
-    if version and hasattr(version, "VERSION"):
-        v = version.VERSION
-    return {
-        "versao": v,
-        "pasta": str(get_db_path().parent),
-        "log": {"linhas": ["FMSH backend running smoothly on macOS"]},
-    }
+    return diagnostics.status(get_db_path(create_parent=False), dict(_LIVE_STATUS))
 
 @app.get("/api/diagnostico/completo")
 def get_diagnostico_completo_res():
-    return {"em": time.strftime("%Y-%m-%dT%H:%M:%S"), "relatorio": "All systems operational"}
+    with diagnostics.REPORT_LOCK:
+        return diagnostics.load_report()
 
 @app.post("/api/diagnostico/completo")
 def post_diagnostico_completo(lang: str = "pt"):
-    return {"ok": True, "em": time.strftime("%Y-%m-%dT%H:%M:%S")}
+    try:
+        with diagnostics.REPORT_LOCK:
+            result = diagnostics.save_report(get_diagnostico(), lang)
+    except OSError as error:
+        logger.exception("Could not save diagnostics report")
+        raise HTTPException(status_code=500, detail="Could not save diagnostics report") from error
+    return {"ok": True, "em": result["em"]}
 
 @app.post("/api/diagnostico/abrir-pasta")
 def post_diagnostico_abrir_pasta():
-    p = get_db_path().parent
     try:
-        subprocess.Popen(["open", str(p)])
+        subprocess.Popen(["open", str(diagnostics.report_folder())])
         return {"ok": True}
     except Exception as e:
         return {"ok": False, "erro": str(e)}
