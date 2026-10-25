@@ -1,6 +1,11 @@
 import io
 import json
 import os
+from pathlib import Path
+import re
+import tempfile
+import threading
+
 import paths
 
 RESERVA = ('en', 'pt')
@@ -130,7 +135,8 @@ def carregar(codigo, arquivo='interface'):
     dados = {}
     problemas = []
     for pasta in _pastas(codigo):
-        for ext in ('.txt', '.json'):
+        # Editable text exports override JSON without removing the saved source.
+        for ext in ('.json', '.txt'):
             d, p = _ler_arquivo(os.path.join(pasta, arquivo + ext))
             dados.update(d)
             problemas.extend(p)
@@ -236,3 +242,65 @@ def modelo(codigo, base=None, arquivo='interface'):
         'origem': {k: origem.get(k, '') for k in chaves},
         'atual': {k: meu.get(k, '') for k in chaves},
     }
+
+
+_EXPORTAR_LOCK = threading.Lock()
+
+
+def exportar(codigo, base='en', nome=None):
+    """Create editable user translations without changing the shipped files."""
+    for valor in (codigo, base):
+        if not re.fullmatch(r'[a-z][a-z0-9]*(?:[-_][a-z0-9]+)*', valor) or len(valor) > 35:
+            raise ValueError('Codigo de idioma invalido')
+    with _EXPORTAR_LOCK:
+        return _exportar(codigo, base, nome)
+
+
+def _exportar(codigo, base, nome):
+    raiz = Path(paths.idiomas_dir())
+    destino = raiz / codigo
+    if destino.is_symlink() or (destino.exists() and not destino.is_dir()):
+        raise ValueError('Pasta de idioma invalida')
+    for arquivo in ARQUIVOS:
+        for ext in ('.txt', '.json'):
+            caminho = destino / (arquivo + ext)
+            if caminho.is_symlink() or (caminho.exists() and not caminho.is_file()):
+                raise ValueError('Arquivo de idioma invalido')
+
+    meta = carregar(codigo)[0]
+    arquivos = []
+    with tempfile.TemporaryDirectory(prefix='.idioma-', dir=raiz) as temporaria:
+        for arquivo in ARQUIVOS:
+            dados = modelo(codigo, base, arquivo)
+            linhas = [
+                '# FM Season Hub - ' + arquivo,
+                '# Keep keys before =. Edit translations after =.',
+                '# Copy {{placeholders}} unchanged. Use \\n for a new line.',
+                '# Base text is shown in the comment above each translation.',
+                '',
+            ]
+            if arquivo == 'interface':
+                linhas.extend([
+                    '_idioma.codigo = ' + codigo,
+                    '_idioma.nome = ' + escapar(nome or meta.get('_idioma.nome') or codigo),
+                    '_idioma.autor = ' + escapar(meta.get('_idioma.autor', '')),
+                    '',
+                ])
+            for chave in dados['chaves']:
+                linhas.extend([
+                    '# ' + dados['base'] + ': ' + escapar(dados['origem'][chave]),
+                    chave + ' = ' + escapar(dados['atual'][chave]),
+                    '',
+                ])
+            arquivo_txt = arquivo + '.txt'
+            (Path(temporaria) / arquivo_txt).write_text('\n'.join(linhas), encoding='utf-8')
+            arquivos.append({
+                'arquivo': arquivo_txt,
+                'total': len(dados['chaves']),
+                'faltando': len(dados['faltando']),
+            })
+        destino.mkdir(exist_ok=True)
+        for item in arquivos:
+            os.replace(Path(temporaria) / item['arquivo'], destino / item['arquivo'])
+    _CACHE.clear()
+    return {'ok': True, 'pasta': str(destino), 'arquivos': arquivos}
