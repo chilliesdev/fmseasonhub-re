@@ -32,16 +32,23 @@ class FavoritesRestartTests(unittest.TestCase):
         self.log = (self.root / "server.log").open("w+")
         self.addCleanup(self.log.close)
 
-    def start(self):
+    def start(self, wall_clock=None):
         with socket.socket() as listener:
             listener.bind(("127.0.0.1", 0))
             port = listener.getsockname()[1]
         self.base = f"http://127.0.0.1:{port}"
         env = dict(os.environ, PYTHONPATH=str(SRC), FMSH_PASTA_DADOS=str(self.data),
                    FMSH_PASTA_LOCAL=str(self.root / "local"))
+        command = [sys.executable, "-m", "uvicorn", "server:app", "--host", "127.0.0.1",
+                   "--port", str(port), "--log-level", "error"]
+        if wall_clock is not None:
+            command = [sys.executable, "-c", (
+                "import server, uvicorn\n"
+                f"server.time.time = lambda: {wall_clock!r}\n"
+                f"uvicorn.run(server.app, host='127.0.0.1', port={port}, log_level='error')\n"
+            )]
         self.process = subprocess.Popen(
-            [sys.executable, "-m", "uvicorn", "server:app", "--host", "127.0.0.1",
-             "--port", str(port), "--log-level", "error"],
+            command,
             cwd=SRC, env=env, stdout=self.log, stderr=subprocess.STDOUT,
         )
         deadline = time.monotonic() + 10
@@ -123,6 +130,47 @@ class FavoritesRestartTests(unittest.TestCase):
         self.restart()
         self.assertFalse(any(x["id"] == original["id"] for x in self.request("/api/favoritos/listas")["listas"]))
         self.assertTrue(any(x["id"] == copy["id"] for x in self.request("/api/favoritos/listas")["listas"]))
+
+    def test_issue_19_same_second_creates_and_duplicate_have_stable_independent_ids(self):
+        wall_clock = 1792829029
+        self.start(wall_clock=wall_clock)
+        first = self.create(name="First", uids=[900001])
+        second = self.create(name="Second", color="#aa0055", uids=[900002])
+        first_route = "/api/favoritos/listas/" + first["id"]
+        copy = self.request(first_route + "/duplicar", {"nome": "Copy"})["lista"]
+        ids = {first["id"], second["id"], copy["id"]}
+        self.assertEqual(len(ids), 3)
+        self.assertEqual(copy["uids"], first["uids"])
+        self.assertEqual(copy["cor"], first["cor"])
+        state = self.request("/api/favoritos/listas")
+        initial = {item["id"]: item for item in state["listas"]}
+        self.assertEqual([initial[item["id"]] for item in (first, second, copy)],
+                         [first, second, copy])
+
+        second_route = "/api/favoritos/listas/" + second["id"]
+        copy_route = "/api/favoritos/listas/" + copy["id"]
+        self.request(second_route, {"nome": "Renamed second"}, "PATCH")
+        self.request(copy_route + "/jogadores", {"uids": [900003]})
+        changed = {item["id"]: item for item in self.request("/api/favoritos/listas")["listas"]}
+        self.assertEqual(changed[first["id"]], initial[first["id"]])
+        self.assertEqual(changed[second["id"]]["nome"], "Renamed second")
+        self.assertEqual(changed[second["id"]]["uids"], [900002])
+        self.assertEqual(changed[copy["id"]]["nome"], "Copy")
+        self.assertEqual(changed[copy["id"]]["uids"], [900001, 900003])
+
+        self.request(second_route, method="DELETE")
+        expected = self.request("/api/favoritos/listas")
+        self.assertEqual(expected["listas"], [
+            item for item in changed.values() if item["id"] != second["id"]
+        ])
+        self.stop()
+        self.start(wall_clock=wall_clock)
+        self.assertEqual(self.request("/api/favoritos/listas"), expected)
+        self.assertEqual(json.loads(self.settings_path.read_text())["favoritos_listas"], expected["listas"])
+        after_restart = self.create(name="After restart", uids=[900004])
+        self.assertNotIn(after_restart["id"], initial)
+        self.assertEqual(self.request("/api/favoritos/listas")["listas"],
+                         [*expected["listas"], after_restart])
 
     def test_deleted_default_and_empty_collection_stay_deleted(self):
         self.start()
