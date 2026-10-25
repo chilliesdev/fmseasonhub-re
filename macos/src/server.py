@@ -878,13 +878,18 @@ def set_idioma(body: IdiomaBody):
 
 @app.get("/api/settings/bandeja")
 def get_bandeja_settings():
-    if settings:
-        cfg = settings.load()
-        return cfg.get("bandeja", {"ligado": True})
-    return {"ligado": True}
+    cfg = settings.load() if settings else {}
+    result = dict(cfg.get("bandeja", {"ligado": True}), plataforma=sys.platform)
+    if sys.platform == "darwin":
+        # Bandeja.iniciar() is disabled on macOS; closing quits the app.
+        result.update(ao_fechar="fechar", icone_ativo=False,
+                      iniciar_com_windows=False, iniciar_disponivel=False)
+    return result
 
 @app.post("/api/settings/bandeja")
 def set_bandeja_settings(body: Dict[str, Any]):
+    if sys.platform == "darwin" and {"ao_fechar", "iniciar_com_windows"}.intersection(body):
+        raise HTTPException(status_code=400, detail="Tray and login startup controls are unavailable on macOS")
     if settings:
         cfg = settings.load()
         cur_b = cfg.get("bandeja", {})

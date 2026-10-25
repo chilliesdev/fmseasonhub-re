@@ -1197,8 +1197,8 @@ config.dbDir = Seasons database folder
 config.dbDirApply = Apply
 #   EN: Current database: {{path}} ({{size}})
 config.dbDirCurrent = Current database: {{path}} ({{size}})
-#   EN: The database grows a lot (over 1 GB with full seasons). If your Windows drive is tight on space, point it to another dri
-config.dbDirHelp = The database grows a lot (over 1 GB with full seasons). If your Windows drive is tight on space, point it to another drive. Leave blank to use the data folder.
+#   EN: The database can exceed 1 GB. If this disk has little free space, choose another disk. Leave blank to use the data folder.
+config.dbDirHelp = The database can exceed 1 GB. If this disk has little free space, choose another disk. Leave blank to use the data folder.
 #   EN: Applying… if you chose to move it, large files may take a few minutes.
 config.dbDirMoving = Applying… if you chose to move it, large files may take a few minutes.
 #   EN: The current database is {{size}}. You can take it along to the new folder, or leave it where it is and start an empty on
@@ -5100,3 +5100,8 @@ vfm.vaoParaMeuTime = Going to My Team
 vfm.aplicarMeuTime = Apply to My Team
 vfm.semViews.busca = No player search view in the FM folder.
 vfm.semViews.plantel = No squad view in the FM folder.
+
+# macOS app capabilities
+config.macosTitulo = macOS app behavior
+config.macosAjuda = Closing the last app window quits FM Season Hub. Use Window > Minimize (⌘M) to keep the app running.
+config.macosInicioAjuda = The menu bar icon and start at login are not available in this macOS version.

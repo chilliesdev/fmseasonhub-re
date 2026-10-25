@@ -1198,8 +1198,8 @@ config.dbDir = Dossier de la base des saisons
 config.dbDirApply = Appliquer
 #   EN: Current database: {{path}} ({{size}})
 config.dbDirCurrent = Base actuelle : {{path}} ({{size}})
-#   EN: The database grows a lot (over 1 GB with full seasons). If your Windows drive is tight on space, point it to another dri
-config.dbDirHelp = La base grossit beaucoup (plus de 1 Go avec des saisons complètes). Si votre disque Windows manque de place, pointez vers un autre disque. Laissez vide pour utiliser le dossier de données.
+#   EN: The database can exceed 1 GB. If this disk has little free space, choose another disk. Leave blank to use the data folder.
+config.dbDirHelp = La base peut dépasser 1 Go. Si ce disque manque de place, choisissez un autre disque. Laissez vide pour utiliser le dossier de données.
 #   EN: Applying… if you chose to move it, large files may take a few minutes.
 config.dbDirMoving = Application en cours… si vous avez choisi de la déplacer, les gros fichiers peuvent prendre quelques minutes.
 #   EN: The current database is {{size}}. You can take it along to the new folder, or leave it where it is and start an empty on
@@ -5287,3 +5287,8 @@ vfm.vaoParaMeuTime = Vont dans Mon équipe
 vfm.aplicarMeuTime = Appliquer à Mon équipe
 vfm.semViews.busca = Aucune vue de recherche de joueurs dans le dossier de FM.
 vfm.semViews.plantel = Aucune vue d'effectif dans le dossier de FM.
+
+# macOS app capabilities
+config.macosTitulo = Comportement de l’app sur macOS
+config.macosAjuda = Fermer la dernière fenêtre de l’app quitte FM Season Hub. Utilisez Window > Minimize (⌘M) pour garder l’app en cours d’exécution.
+config.macosInicioAjuda = L’icône dans la barre des menus et le démarrage à l’ouverture de session ne sont pas disponibles dans cette version pour macOS.
