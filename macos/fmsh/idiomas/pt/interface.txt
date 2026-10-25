@@ -2607,7 +2607,7 @@ diag.fullBusy = Termine a operação em andamento antes de rodar o diagnóstico.
 #   EN: Do not close the app. The folder with the file opens on its own when it finishes.
 diag.fullEspera = Não feche o app. A pasta com o arquivo abre sozinha ao terminar.
 #   EN: Measures what this screen does not show: game processes, memory addresses, antivirus, port and WebView2. Takes a few sec
-diag.fullHelp = Mede o que esta tela não mostra: processos do jogo, endereços de memória, antivírus, porta e WebView2. Leva alguns segundos e grava um arquivo para o suporte.
+diag.fullHelp = Verifica o ambiente do macOS, a conexão com o jogo, o banco SQLite e o log recente do aplicativo. Grava os resultados em um arquivo para o suporte.
 #   EN: measuring…
 diag.fullRunning = medindo…
 #   EN: File saved to

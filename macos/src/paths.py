@@ -103,12 +103,12 @@ _PARA_A_PASTA_LOCAL = ('webview', 'fmsh_avisos.json', 'fmsh_versao.json', 'fmsh_
 BANCO = 'fm26_snapshots.db'
 
 
-def banco_padrao():
+def banco_padrao(create_parent=True):
     local = os.path.join(_LOCAL_ROOT, BANCO)
     antigo = os.path.join(_DATA_ROOT, BANCO)
     if not os.path.exists(local) and os.path.exists(antigo):
         return antigo
-    return local_data_path(BANCO)
+    return local_data_path(BANCO) if create_parent else local
 
 
 def migrar_para_pasta_local(mover_banco=True, log=None):
