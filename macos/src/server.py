@@ -32,7 +32,7 @@ from typing import Any, Dict, List, Literal, Optional, Union
 from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, field_validator
 import uvicorn
 import graphics
 import capture_all
@@ -48,6 +48,8 @@ import portal_data
 import csv_export
 import player_search
 import buscar_como_config
+import biblioteca
+import biblioteca_listas
 from buscar_como_config import BuscarComoConfigBody
 from fm_memory import FmMemory, FmNotRunning, FmAccessDenied, FmElevado, FmUnsupportedBuild
 from fm_reader import FmReader, strict_reads
@@ -295,8 +297,8 @@ class UidsBody(BaseModel):
 class BibliotecaBody(BaseModel):
     arquivo: Optional[str] = None
     conteudo: Optional[Any] = None
-    uids: Optional[List[int]] = None
-    snapshot: Optional[int] = None
+    uids: Optional[List[StrictInt]] = Field(default=None, max_length=biblioteca.MAX_JOGADORES)
+    snapshot: Optional[StrictInt] = None
 
 class RenomearBody(BaseModel):
     nome: str
@@ -2088,6 +2090,63 @@ def _validar_nome_biblioteca(nome: str) -> str:
         raise HTTPException(status_code=400, detail="Nome de arquivo invalido") from exc
     return nome
 
+def _lista_biblioteca(conteudo):
+    """Read the native .lsh contract, including files imported by the shipped UI."""
+    try:
+        dados = json.loads(conteudo) if isinstance(conteudo, str) else conteudo
+    except ValueError as exc:
+        raise HTTPException(400, "Lista de jogadores invalida") from exc
+    if not isinstance(dados, dict) or not isinstance(dados.get("nome"), str) or not dados["nome"].strip():
+        raise HTTPException(400, "Lista de jogadores invalida")
+    if any(dados.get(key) is not None and not isinstance(dados[key], str)
+           for key in ("id", "criado", "jogo")):
+        raise HTTPException(400, "Metadados de lista invalidos")
+    jogadores = dados.get("jogadores")
+    if not isinstance(jogadores, list) or not 0 < len(jogadores) <= biblioteca.MAX_JOGADORES:
+        raise HTTPException(400, "Selecione entre 1 e 5000 jogadores")
+    uids = [j.get("uid") if isinstance(j, dict) else None for j in jogadores]
+    if any(type(uid) is not int or uid <= 0 for uid in uids) or len(set(uids)) != len(uids):
+        raise HTTPException(400, "Identidades de jogadores invalidas")
+    return dados
+
+
+def _selecionar_lista_biblioteca(body, nome):
+    max_sqlite_integer = (1 << 63) - 1
+    if (not body.uids or any(not 0 < uid <= max_sqlite_integer for uid in body.uids)
+            or body.snapshot is None or not 0 < body.snapshot <= max_sqlite_integer):
+        raise HTTPException(400, "Selecione jogadores e uma captura valida")
+    if Path(nome).suffix.lower() != ".lsh" or body.conteudo is not None:
+        raise HTTPException(400, "Salve a selecao como uma lista .lsh")
+    uids = list(dict.fromkeys(body.uids))
+    with closing(get_db_connection()) as conn:
+        snapshot = conn.execute("SELECT * FROM snapshots WHERE id=?", (body.snapshot,)).fetchone()
+        if not snapshot:
+            raise HTTPException(400, "Captura nao encontrada")
+        placeholders = ",".join("?" for _ in uids)
+        rows = conn.execute(f"""
+            SELECT p.*, perfil.birth_date FROM players p
+            LEFT JOIN player_profile perfil ON perfil.snapshot_id=p.snapshot_id AND perfil.uid=p.uid
+            WHERE p.snapshot_id=? AND p.uid IN ({placeholders})
+        """, [body.snapshot, *uids])
+        identidades = {}
+        for raw in rows:
+            row = dict(raw)
+            identidades[row["uid"]] = {
+                "nome": row.get("full_name") or row.get("common_name") or " ".join(
+                    str(row.get(key) or "") for key in ("name_first", "name_last")).strip() or str(row["uid"]),
+                "nascimento": row.get("birth_date"),
+            }
+        if len(identidades) != len(uids):
+            raise HTTPException(400, "Jogador nao encontrado na captura selecionada")
+    dados = biblioteca_listas.conteudo({"id": f"fav_{uuid.uuid4().hex}", "nome": Path(nome).stem,
+                                        "uids": uids}, identidades)
+    dados.update(snapshot=body.snapshot, carreira_id=snapshot["carreira_id"],
+                 criado=datetime.now(timezone.utc).isoformat())
+    if snapshot["fm_version"]:
+        dados["jogo"] = snapshot["fm_version"]
+    return dados
+
+
 @app.get("/api/biblioteca")
 @app.get("/api/biblioteca/listar")
 def get_biblioteca():
@@ -2106,13 +2165,21 @@ def get_biblioteca():
             })
     # User saved presets
     for f in b_dir.glob("*.*"):
-        items.append({
-            "arquivo": f.name,
-            "nome": f.stem,
-            "nomeEn": f.stem,
-            "tipo": "filtro",
-            "fabrica": False,
-        })
+        item = {"arquivo": f.name, "nome": f.stem, "nomeEn": f.stem,
+                "tipo": "filtro", "fabrica": False}
+        if f.suffix.lower() == ".lsh":
+            item["tipo"] = "lista"
+            try:
+                if f.is_symlink() or f.stat().st_size > biblioteca.TAMANHO_MAXIMO:
+                    raise HTTPException(400, "Arquivo de lista invalido")
+                dados = _lista_biblioteca(f.read_text(encoding="utf-8"))
+                loaded = {x.get("id") for x in settings.load().get("favoritos_listas") or []}
+                item.update(nome=dados["nome"], nomeEn=dados["nome"], listaId=dados.get("id"),
+                            jogadores=len(dados["jogadores"]), criado=dados.get("criado"),
+                            jogo=dados.get("jogo"), carregada=bool(dados.get("id")) and dados["id"] in loaded)
+            except (OSError, UnicodeError, HTTPException) as exc:
+                item["erro"] = exc.detail if isinstance(exc, HTTPException) else "Arquivo de lista invalido"
+        items.append(item)
     return {"arquivos": items, "pasta": str(b_dir)}
 
 @app.get("/api/biblioteca/{arquivo}")
@@ -2133,8 +2200,15 @@ def get_biblioteca_ler(arquivo: str):
 @app.post("/api/biblioteca")
 def post_biblioteca_gravar(body: BibliotecaBody):
     b_dir = _get_biblioteca_dir()
-    nome = body.arquivo if body.arquivo is not None else "salvo.fsh"
+    selecao = body.uids is not None or body.snapshot is not None
+    nome = body.arquivo if body.arquivo is not None else ("salvo.lsh" if selecao else "salvo.fsh")
     p = b_dir / _validar_nome_biblioteca(nome)
+    conteudo = _selecionar_lista_biblioteca(body, nome) if selecao else body.conteudo
+    if p.suffix.lower() == ".lsh":
+        conteudo = _lista_biblioteca(conteudo)
+    texto = json.dumps(conteudo, indent=2) if isinstance(conteudo, (dict, list)) else str(conteudo or "")
+    if p.suffix.lower() == ".lsh" and len(texto.encode("utf-8")) > biblioteca.TAMANHO_MAXIMO:
+        raise HTTPException(400, "Arquivo excede o tamanho maximo de 5 MB")
     try:
         fd = os.open(p, os.O_WRONLY | os.O_CREAT | os.O_TRUNC | os.O_NOFOLLOW, 0o666)
     except OSError as exc:
@@ -2142,10 +2216,7 @@ def post_biblioteca_gravar(body: BibliotecaBody):
             raise HTTPException(status_code=400, detail="Arquivo nao pode ser um link simbolico") from exc
         raise
     with os.fdopen(fd, "w", encoding="utf-8") as f:
-        if isinstance(body.conteudo, (dict, list)):
-            json.dump(body.conteudo, f, indent=2)
-        else:
-            f.write(str(body.conteudo or ""))
+        f.write(texto)
     return {"ok": True, "arquivo": p.name}
 
 def _renomear_sem_substituir(src: Path, dst: Path) -> None:
