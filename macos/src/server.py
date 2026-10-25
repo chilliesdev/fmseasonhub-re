@@ -36,6 +36,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, field_validator
 import uvicorn
 import graphics
 import capture_all
+import cache_browse
 import db
 import moneyball as mb
 import moneyball_data
@@ -1115,11 +1116,24 @@ def get_snapshot(sid: int):
 
 @app.delete("/api/snapshots/{sid}")
 def delete_snapshot(sid: int):
-    conn = get_db_connection()
-    with _DB_LOCK:
-        cur = conn.cursor()
-        cur.execute("DELETE FROM snapshots WHERE id=?", (sid,))
-        conn.commit()
+    try:
+        with closing(get_db_connection()) as conn, _DB_LOCK, conn:
+            conn.execute("BEGIN IMMEDIATE")
+            # Some saved schemas have no foreign keys or only a subset of tables.
+            # A snapshot_id column identifies data owned by that saved season.
+            tables = conn.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()
+            for row in tables:
+                table = '"' + row[0].replace('"', '""') + '"'
+                columns = {column[1] for column in conn.execute(f"PRAGMA table_info({table})")}
+                if "snapshot_id" in columns:
+                    conn.execute(f"DELETE FROM {table} WHERE snapshot_id=?", (sid,))
+            conn.execute("DELETE FROM snapshots WHERE id=?", (sid,))
+            # Cache removal must succeed before committing the database deletion.
+            # A failed commit can leave a cache miss, which is safe to rebuild.
+            cache_browse.apagar(sid)
+    except (sqlite3.Error, OSError) as error:
+        logger.exception("Could not delete snapshot %s", sid)
+        raise HTTPException(status_code=500, detail="Nao foi possivel apagar a temporada") from error
     return {"ok": True}
 
 @app.get("/api/snapshots/{sid}/players")
