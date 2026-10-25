@@ -796,10 +796,22 @@ def get_armazenamento():
                 carreiras[career] = carreiras.get(career, 0) + size
             else:
                 outros += size
+    database = get_db_path()
+    try:
+        database_size = database.stat().st_size
+    except OSError:
+        database_size = 0
+    try:
+        disk = shutil.disk_usage(database.parent)
+        disk_size, disk_free = disk.total, disk.free
+    except OSError:
+        disk_size, disk_free = 0, 0
     return {
         "carreiras": [{"nome": name, "bytes": size} for name, size in carreiras.items()],
         "outros": outros,
         "total": sum(carreiras.values()) + outros,
+        "banco": database_size,
+        "disco": {"total": disk_size, "livre": disk_free},
     }
 
 # ==============================================================================

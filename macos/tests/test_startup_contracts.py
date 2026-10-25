@@ -264,16 +264,54 @@ class StartupContractTests(unittest.TestCase):
         self.assertEqual(self.request(f"/api/snapshots/{sid}"), (200, snapshot))
         self.assertEqual(self.request("/api/snapshots/987654321")[0], 404)
 
+    def assert_storage(self, expected, database=None):
+        status, result = self.request("/api/armazenamento")
+        self.assertEqual(status, 200)
+        self.assertEqual({key: result[key] for key in expected}, expected)
+        self.assertEqual(set(result), set(expected) | {"banco", "disco"})
+        self.assertEqual(result["banco"], (database or self.database).stat().st_size)
+        for size in (result["banco"], result["disco"]["total"], result["disco"]["livre"]):
+            self.assertIs(type(size), int)
+            self.assertGreaterEqual(size, 0)
+        self.assertGreaterEqual(result["disco"]["total"], result["disco"]["livre"])
+        return result
+
+    def test_storage_reports_active_database_file_and_volume_sizes(self):
+        selected = self.root / "selected volume" / "fm26_snapshots.db"
+        selected.parent.mkdir()
+        disk = server.shutil.disk_usage(selected.parent)
+        with patch.object(server, "get_db_path", return_value=selected), \
+                patch.object(server.shutil, "disk_usage", return_value=disk) as disk_usage:
+            result = self.assert_storage({"carreiras": [], "outros": 0, "total": 0}, selected)
+        self.assertEqual(result["disco"], {"total": disk.total, "livre": disk.free})
+        disk_usage.assert_called_once_with(selected.parent)
+        self.assertGreater(result["banco"], 0)
+        self.assertFalse(self.database.exists(), "Storage must use the configured database")
+
+    def test_storage_keeps_widget_contract_when_filesystem_sizes_unavailable(self):
+        db.init_db(str(self.database))
+        empty = {"carreiras": [], "outros": 0, "total": 0}
+        with patch.object(Path, "stat", side_effect=PermissionError("size unavailable")):
+            status, result = self.request("/api/armazenamento")
+        self.assertEqual(status, 200)
+        self.assertEqual(result["banco"], 0)
+        self.assertGreater(result["disco"]["total"], 0)
+        with patch.object(server.shutil, "disk_usage", side_effect=OSError("volume unavailable")):
+            result = self.assert_storage(empty)
+        self.assertEqual(result["disco"], {"total": 0, "livre": 0})
+        with patch.object(Path, "stat", side_effect=OSError("size unavailable")), \
+                patch.object(server.shutil, "disk_usage", side_effect=OSError("volume unavailable")):
+            self.assertEqual(self.request("/api/armazenamento"),
+                             (200, dict(empty, banco=0, disco={"total": 0, "livre": 0})))
+
     def test_storage_fresh_app_database_and_empty_snapshot(self):
         db.init_db(str(self.database))
-        self.assertEqual(self.request("/api/armazenamento"),
-                         (200, {"carreiras": [], "outros": 0, "total": 0}))
+        self.assert_storage({"carreiras": [], "outros": 0, "total": 0})
         with closing(db.connect(str(self.database))) as conn:
             db.create_snapshot(conn, "Empty season", carreira_id="qa_empty")
         expected = {"carreiras": [{"nome": "qa_empty", "bytes": 0}], "outros": 0, "total": 0}
         for _ in range(2):
-            status, result = self.request("/api/armazenamento")
-            self.assertEqual((status, result), (200, expected))
+            result = self.assert_storage(expected)
             self.assertIs(type(result["total"]), int)
             self.assertIs(type(result["outros"]), int)
             self.assertIs(type(result["carreiras"][0]["bytes"]), int)
@@ -312,7 +350,7 @@ class StartupContractTests(unittest.TestCase):
                         {"nome": "qa_beta", "bytes": sizes[903]},
                         {"nome": "qa_empty", "bytes": 0}],
                         "outros": sizes[904] + sizes[905], "total": sum(sizes.values())}
-                    self.assertEqual(self.request("/api/armazenamento"), (200, expected))
+                    self.assert_storage(expected, database)
                     with closing(sqlite3.connect(database)) as conn, conn:
                         if startup_schema:
                             columns = {row[1] for row in conn.execute("PRAGMA table_info(snapshots)")}
@@ -325,7 +363,7 @@ class StartupContractTests(unittest.TestCase):
                     with closing(sqlite3.connect(database)) as conn:
                         before = list(conn.iterdump())
                     for _ in range(2):
-                        self.assertEqual(self.request("/api/armazenamento"), (200, expected))
+                        self.assert_storage(expected, database)
                     status, snapshots = self.request("/api/snapshots?include_live=false")
                     self.assertEqual(status, 200)
                     self.assertEqual({row["id"]: row["size_bytes"] for row in snapshots}, sizes)
