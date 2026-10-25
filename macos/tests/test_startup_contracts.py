@@ -264,6 +264,117 @@ class StartupContractTests(unittest.TestCase):
         self.assertEqual(self.request(f"/api/snapshots/{sid}"), (200, snapshot))
         self.assertEqual(self.request("/api/snapshots/987654321")[0], 404)
 
+    def assert_storage(self, expected, database=None):
+        status, result = self.request("/api/armazenamento")
+        self.assertEqual(status, 200)
+        self.assertEqual({key: result[key] for key in expected}, expected)
+        self.assertEqual(set(result), set(expected) | {"banco", "disco"})
+        self.assertEqual(result["banco"], (database or self.database).stat().st_size)
+        for size in (result["banco"], result["disco"]["total"], result["disco"]["livre"]):
+            self.assertIs(type(size), int)
+            self.assertGreaterEqual(size, 0)
+        self.assertGreaterEqual(result["disco"]["total"], result["disco"]["livre"])
+        return result
+
+    def test_storage_reports_active_database_file_and_volume_sizes(self):
+        selected = self.root / "selected volume" / "fm26_snapshots.db"
+        selected.parent.mkdir()
+        disk = server.shutil.disk_usage(selected.parent)
+        with patch.object(server, "get_db_path", return_value=selected), \
+                patch.object(server.shutil, "disk_usage", return_value=disk) as disk_usage:
+            result = self.assert_storage({"carreiras": [], "outros": 0, "total": 0}, selected)
+        self.assertEqual(result["disco"], {"total": disk.total, "livre": disk.free})
+        disk_usage.assert_called_once_with(selected.parent)
+        self.assertGreater(result["banco"], 0)
+        self.assertFalse(self.database.exists(), "Storage must use the configured database")
+
+    def test_storage_keeps_widget_contract_when_filesystem_sizes_unavailable(self):
+        db.init_db(str(self.database))
+        empty = {"carreiras": [], "outros": 0, "total": 0}
+        with patch.object(Path, "stat", side_effect=PermissionError("size unavailable")):
+            status, result = self.request("/api/armazenamento")
+        self.assertEqual(status, 200)
+        self.assertEqual(result["banco"], 0)
+        self.assertGreater(result["disco"]["total"], 0)
+        with patch.object(server.shutil, "disk_usage", side_effect=OSError("volume unavailable")):
+            result = self.assert_storage(empty)
+        self.assertEqual(result["disco"], {"total": 0, "livre": 0})
+        with patch.object(Path, "stat", side_effect=OSError("size unavailable")), \
+                patch.object(server.shutil, "disk_usage", side_effect=OSError("volume unavailable")):
+            self.assertEqual(self.request("/api/armazenamento"),
+                             (200, dict(empty, banco=0, disco={"total": 0, "livre": 0})))
+
+    def test_storage_fresh_app_database_and_empty_snapshot(self):
+        db.init_db(str(self.database))
+        self.assert_storage({"carreiras": [], "outros": 0, "total": 0})
+        with closing(db.connect(str(self.database))) as conn:
+            db.create_snapshot(conn, "Empty season", carreira_id="qa_empty")
+        expected = {"carreiras": [{"nome": "qa_empty", "bytes": 0}], "outros": 0, "total": 0}
+        for _ in range(2):
+            result = self.assert_storage(expected)
+            self.assertIs(type(result["total"]), int)
+            self.assertIs(type(result["outros"]), int)
+            self.assertIs(type(result["carreiras"][0]["bytes"]), int)
+        with closing(sqlite3.connect(self.database)) as conn:
+            columns = {row[1] for row in conn.execute("PRAGMA table_info(snapshots)")}
+        self.assertNotIn("bytes_crus", columns)
+
+    def test_storage_uses_saved_payload_in_both_database_schemas(self):
+        for startup_schema in (True, False):
+            with self.subTest(startup_schema=startup_schema):
+                database = self.root / f"storage-{startup_schema}.db"
+                if startup_schema:
+                    db.init_db(str(database))
+                with patch.object(server, "get_db_path", return_value=database):
+                    with closing(server.get_db_connection()) as conn, conn:
+                        conn.executemany(
+                            "INSERT INTO snapshots (id, name, carreira_id) VALUES (?, ?, ?)",
+                            [(901, "First", "qa_alpha"), (902, "Second", "qa_alpha"),
+                             (903, "Teams only", "qa_beta"), (904, "Unassigned", None),
+                             (905, "Empty career ID", ""), (906, "Empty season", "qa_empty")])
+                        conn.executemany(
+                            "INSERT INTO players (snapshot_id, uid, full_name) VALUES (?, ?, ?)",
+                            [(901, 1, "João"), (902, 2, "李"), (904, 3, "No career")])
+                        conn.executemany(
+                            "INSERT INTO teams (snapshot_id, team_uid, label, team_type, n_players) "
+                            "VALUES (?, ?, ?, NULL, NULL)",
+                            [(901, 10, "Équipe"), (903, 20, "Équipe"), (905, 30, "未分配")])
+                    # Independent expected UTF-8 payload sizes, excluding snapshot_id links.
+                    sizes = {901: len("1João10Équipe".encode("utf-8")),
+                             902: len("2李".encode("utf-8")),
+                             903: len("20Équipe".encode("utf-8")),
+                             904: len("3No career".encode("utf-8")),
+                             905: len("30未分配".encode("utf-8")), 906: 0}
+                    expected = {"carreiras": [
+                        {"nome": "qa_alpha", "bytes": sizes[901] + sizes[902]},
+                        {"nome": "qa_beta", "bytes": sizes[903]},
+                        {"nome": "qa_empty", "bytes": 0}],
+                        "outros": sizes[904] + sizes[905], "total": sum(sizes.values())}
+                    self.assert_storage(expected, database)
+                    with closing(sqlite3.connect(database)) as conn, conn:
+                        if startup_schema:
+                            columns = {row[1] for row in conn.execute("PRAGMA table_info(snapshots)")}
+                            self.assertNotIn("bytes_crus", columns)
+                            conn.execute("ALTER TABLE snapshots ADD COLUMN bytes_crus INTEGER")
+                            conn.execute("ALTER TABLE snapshots ADD COLUMN n_players INTEGER")
+                        conn.execute("ALTER TABLE snapshots ADD COLUMN size_bytes INTEGER")
+                        conn.execute("UPDATE snapshots SET bytes_crus=999999, n_players=999, size_bytes=999999")
+                        conn.execute("UPDATE snapshots SET bytes_crus=NULL, n_players=NULL, size_bytes=NULL WHERE id=902")
+                    with closing(sqlite3.connect(database)) as conn:
+                        before = list(conn.iterdump())
+                    for _ in range(2):
+                        self.assert_storage(expected, database)
+                    status, snapshots = self.request("/api/snapshots?include_live=false")
+                    self.assertEqual(status, 200)
+                    self.assertEqual({row["id"]: row["size_bytes"] for row in snapshots}, sizes)
+                    self.assertEqual(sum(row["n_players"] for row in snapshots), 3)
+                    for sid in sizes:
+                        status, snapshot = self.request(f"/api/snapshots/{sid}")
+                        self.assertEqual(status, 200)
+                        self.assertEqual(snapshot["size_bytes"], sizes[sid])
+                    with closing(sqlite3.connect(database)) as conn:
+                        self.assertEqual(list(conn.iterdump()), before)
+
     def test_snapshot_metrics_use_saved_rows_in_both_database_schemas(self):
         for startup_schema in (True, False):
             with self.subTest(startup_schema=startup_schema):
