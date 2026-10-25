@@ -785,16 +785,21 @@ def open_link(body: OpenLinkBody):
 
 @app.get("/api/armazenamento")
 def get_armazenamento():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    cur.execute("SELECT carreira_id AS nome, SUM(COALESCE(bytes_crus, 0)) AS bytes FROM snapshots GROUP BY carreira_id")
-    rows = cur.fetchall()
-    carreiras = [dict(r) for r in rows if r["nome"]]
-    total = sum(c["bytes"] for c in carreiras)
+    carreiras = {}
+    outros = 0
+    with closing(get_db_connection()) as conn:
+        metrics = _snapshot_metrics(conn)
+        for row in conn.execute("SELECT id, carreira_id FROM snapshots ORDER BY carreira_id, id"):
+            size = metrics.get(row["id"], {}).get("size_bytes", 0)
+            career = row["carreira_id"]
+            if career:
+                carreiras[career] = carreiras.get(career, 0) + size
+            else:
+                outros += size
     return {
-        "carreiras": carreiras,
-        "outros": 0,
-        "total": total,
+        "carreiras": [{"nome": name, "bytes": size} for name, size in carreiras.items()],
+        "outros": outros,
+        "total": sum(carreiras.values()) + outros,
     }
 
 # ==============================================================================
