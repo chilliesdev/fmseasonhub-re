@@ -45,6 +45,19 @@ season only after a complete read with at least one player. A disconnected game,
 changed save, empty result, or read error creates no season and sends no success
 notice. Existing seasons stay intact. Reconnect or reload the save, then retry.
 
+## Import preferred lists
+
+Open **Preferred list**, then select **Import from FM list**. Select a native
+Football Manager `.fmf` shortlist. The app reads and validates the file, saves its
+player IDs, and keeps a copy in the Library. Missing or invalid files show an
+error and create no list.
+
+Saved list names, counts, and actions stay available without a game connection.
+Open a saved season to see matching players. Lists remain after a restart or
+source-file removal. **Update from file** reads the source again; a failed update
+keeps the last saved list. Importing the same source again keeps its list ID.
+Removing a list keeps the source file.
+
 ## Stored player analysis
 
 Open a saved season, select a player, then open **Player Data** or **Search Similar**.

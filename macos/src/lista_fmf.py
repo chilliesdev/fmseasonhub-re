@@ -159,7 +159,10 @@ class _Cursor:
 def _abrir_zlib(quadro, limite):
     import zlib
     decodificador = zlib.decompressobj()
-    aberto = decodificador.decompress(quadro, limite)
+    try:
+        aberto = decodificador.decompress(quadro, limite)
+    except zlib.error as exc:
+        raise ArquivoCorrompido('O arquivo esta incompleto ou corrompido.') from exc
     if decodificador.unconsumed_tail or not decodificador.eof:
         raise ArquivoCorrompido('O arquivo esta incompleto, corrompido ou grande demais.')
     return aberto
@@ -169,7 +172,10 @@ def _abrir_zstd(quadro, limite):
     if zstd is None:
         raise ListaInvalida('Este computador nao consegue abrir listas (falta o zstd do Python 3.14).')
     decodificador = zstd.ZstdDecompressor()
-    aberto = decodificador.decompress(quadro, max_length=limite)
+    try:
+        aberto = decodificador.decompress(quadro, max_length=limite)
+    except zstd.ZstdError as exc:
+        raise ArquivoCorrompido('O arquivo esta incompleto ou corrompido.') from exc
     if not decodificador.eof:
         raise ArquivoCorrompido('O arquivo esta incompleto, corrompido ou grande demais.')
     return aberto
@@ -307,17 +313,23 @@ def adicionar(dados: bytes, arquivo: str | None = None, origem: str | None = Non
     with _TRAVA:
         existentes = listar()
         nome = lida['nome']
-        anterior = next((x for x in existentes if x['nome'] == nome), None)
+        anterior = next((x for x in existentes if (
+            _mesmo_caminho(x.get('origem'), origem) if origem else
+            not x.get('origem') and x.get('arquivo') == arquivo and (arquivo or x['nome'] == nome)
+        )), None)
+        if arquivo_biblioteca:
+            anterior = next((x for x in existentes if x.get('arquivo_biblioteca') == arquivo_biblioteca), anterior)
         if anterior and sem_substituir and anterior.get('arquivo_biblioteca') != arquivo_biblioteca:
-            usados = {x['nome'].casefold() for x in existentes}
+            anterior = None
+        if any(x is not anterior and x['nome'].casefold() == nome.casefold() for x in existentes):
+            usados = {x['nome'].casefold() for x in existentes if x is not anterior}
             n = 2
             while f"{nome} ({n})".casefold() in usados:
                 n += 1
             nome = f"{nome} ({n})"
             lida['nome'] = nome
-            anterior = None
-        if not anterior and teto is not None and len(existentes) >= teto:
-            raise limites.LimiteDeListas('Voce atingiu o limite de listas preferenciais do seu plano.')
+        if not anterior:
+            limites.conferir_listas('listas_fm', teto, len(existentes))
         agora = datetime.datetime.now(datetime.timezone.utc).isoformat()
         nova = {
             'id': anterior['id'] if anterior else str(uuid.uuid4()),
@@ -402,20 +414,9 @@ def _espelhar(dados, registro, ocupados):
     import paths
 
     pasta = paths.biblioteca_dir()
-    ligado = registro.get('arquivo_biblioteca')
-    if ligado and os.path.isfile(os.path.join(pasta, ligado)):
-        caminho = os.path.join(pasta, ligado)
-        with open(caminho, 'rb') as fh:
-            igual = (fh.read(TAMANHO_MAXIMO_ARQUIVO + 1) == dados)
-        if igual:
-            return ligado
-        with open(caminho, 'wb') as fh:
-            fh.write(dados)
-        return ligado
-
     for nome in sorted(os.listdir(pasta)):
         caminho = os.path.join(pasta, nome)
-        if nome in ocupados or not nome.lower().endswith('.fmf'):
+        if nome in ocupados or not nome.lower().endswith('.fmf') or os.path.islink(caminho) or not os.path.isfile(caminho):
             continue
         if os.path.getsize(caminho) == len(dados):
             with open(caminho, 'rb') as fh:
@@ -425,13 +426,16 @@ def _espelhar(dados, registro, ocupados):
     nome_base = _nome_na_biblioteca(registro)
     candidato = nome_base
     n = 2
-    while candidato in ocupados or os.path.exists(os.path.join(pasta, candidato)):
-        sem_ext = nome_base[:-4]
-        candidato = f"{sem_ext} ({n}).fmf"
-        n += 1
-    with open(os.path.join(pasta, candidato), 'wb') as fh:
-        fh.write(dados)
-    return candidato
+    while True:
+        try:
+            if candidato in ocupados:
+                raise FileExistsError(candidato)
+            with open(os.path.join(pasta, candidato), 'xb') as fh:
+                fh.write(dados)
+            return candidato
+        except FileExistsError:
+            candidato = f"{nome_base[:-4]} ({n}).fmf"
+            n += 1
 
 
 def espelhar_existentes() -> int:
@@ -566,6 +570,8 @@ def pasta_listas(jogo: str | None = None) -> str | None:
 
 
 def _ler_arquivo(caminho: str) -> tuple[bytes, float]:
+    if '\0' in caminho:
+        raise ListaInvalida('Nome de arquivo invalido.')
     if os.path.splitext(caminho)[1].lower() != '.fmf':
         raise NaoEhFmf('Este arquivo nao e um .fmf do Football Manager.')
     try:
@@ -624,7 +630,7 @@ def _listas_da_pasta(pasta, existentes):
 
 
 def importar_da_pasta(arquivo: str, jogo: str | None = None, teto: int | None = None) -> dict:
-    if not arquivo or os.path.basename(arquivo.replace('\\', '/')) != arquivo or arquivo in ('.', '..') or '\\' in arquivo or '/' in arquivo:
+    if not arquivo or '\0' in arquivo or os.path.basename(arquivo.replace('\\', '/')) != arquivo or arquivo in ('.', '..') or '\\' in arquivo or '/' in arquivo:
         raise ListaInvalida('Nome de arquivo invalido.')
     pasta = pasta_listas(jogo)
     if not pasta:
