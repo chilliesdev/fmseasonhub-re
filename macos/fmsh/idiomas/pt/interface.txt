@@ -1223,8 +1223,8 @@ config.dbDir = Pasta do banco de temporadas
 config.dbDirApply = Aplicar
 #   EN: Current database: {{path}} ({{size}})
 config.dbDirCurrent = Banco atual: {{path}} ({{size}})
-#   EN: The database grows a lot (over 1 GB with full seasons). If your Windows drive is tight on space, point it to another dri
-config.dbDirHelp = O banco cresce bastante (mais de 1 GB com temporadas completas). Se o disco do Windows estiver apertado, aponte para outro disco. Deixe em branco para usar a pasta de dados.
+#   EN: The database can exceed 1 GB. If this disk has little free space, choose another disk. Leave blank to use the data folder.
+config.dbDirHelp = O banco pode passar de 1 GB. Se este disco tiver pouco espaço livre, escolha outro disco. Deixe em branco para usar a pasta de dados.
 #   EN: Applying… if you chose to move it, large files may take a few minutes.
 config.dbDirMoving = Aplicando… se escolheu mover, arquivos grandes podem levar alguns minutos.
 #   EN: The current database is {{size}}. You can take it along to the new folder, or leave it where it is and start an empty on
@@ -5556,3 +5556,8 @@ vfm.vaoParaMeuTime = Vão para o Meu time
 vfm.aplicarMeuTime = Aplicar no Meu time
 vfm.semViews.busca = Nenhuma view de busca de jogadores na pasta do FM.
 vfm.semViews.plantel = Nenhuma view de plantel na pasta do FM.
+
+# macOS app capabilities
+config.macosTitulo = Comportamento do app no macOS
+config.macosAjuda = Fechar a última janela do app encerra o FM Season Hub. Use Window > Minimize (⌘M) para manter o app em execução.
+config.macosInicioAjuda = O ícone na barra de menus e o início automático ao entrar não estão disponíveis nesta versão para macOS.
