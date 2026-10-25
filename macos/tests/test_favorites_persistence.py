@@ -176,10 +176,10 @@ class FavoritesRestartTests(unittest.TestCase):
              "db_dir", str(self.data)),
             ("season", lambda: server.set_fim_de_temporada(server.FimDeTemporadaBody(ligado=True)),
              "fim_de_temporada_auto", True),
-            ("snapshot", lambda: server.set_auto_snapshot({"ligado": True}),
-             "auto_snapshot", {"ligado": True}),
-            ("sound", lambda: server.set_captura_som({"ligado": False}),
-             "captura_som", {"keep": True, "ligado": False}),
+            ("snapshot", lambda: server.set_auto_snapshot(server.AutoSnapshotBody(ligado=True)),
+             "auto_snapshot_ligado", True),
+            ("sound", lambda: server.set_captura_som(server.CapturaSomBody(ligado=False)),
+             "captura_som_ligado", False),
         ]
         with patch.object(settings, "SETTINGS_PATH", str(self.settings_path)), patch.object(
             server.graphics, "reindex"
