@@ -2200,10 +2200,22 @@ def get_biblioteca():
     presets_dir = FMSH_DIR / "src" / "presets_fabrica"
     if presets_dir.exists():
         for f in presets_dir.glob("*.fsh"):
+            nome = f.stem.replace("-", " ").title()
+            nome_en = nome
+            try:
+                dados = json.loads(f.read_text(encoding="utf-8"))
+                if isinstance(dados, dict):
+                    if isinstance(dados.get("nome"), str) and dados["nome"].strip():
+                        nome = dados["nome"]
+                    nome_en = dados.get("nomeEn")
+                    if not isinstance(nome_en, str) or not nome_en.strip():
+                        nome_en = nome
+            except (OSError, UnicodeError, ValueError):
+                pass
             items.append({
                 "arquivo": f.name,
-                "nome": f.stem.replace("-", " ").title(),
-                "nomeEn": f.stem.replace("-", " ").title(),
+                "nome": nome,
+                "nomeEn": nome_en,
                 "tipo": "filtro",
                 "fabrica": True,
             })
