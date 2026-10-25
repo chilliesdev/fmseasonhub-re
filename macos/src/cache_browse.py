@@ -134,12 +134,15 @@ def gravar_overall(snapshot_id, dados):
 
 
 def apagar(snapshot_id):
-    """Exclui toda a pasta de cache do snapshot."""
-    p = os.path.join(_raiz(), str(snapshot_id))
-    if os.path.isdir(p):
-        shutil.rmtree(p, ignore_errors=True)
-        return True
-    return False
+    """Exclui o cache do snapshot; propaga falhas para permitir rollback."""
+    p = paths.local_data_path("cache_browse", str(snapshot_id))
+    try:
+        shutil.rmtree(p)
+    except FileNotFoundError:
+        if os.path.lexists(p):
+            raise
+        return False
+    return True
 
 
 def podar_orfaos(snapshots_validos):
