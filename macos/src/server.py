@@ -51,6 +51,7 @@ import buscar_como_config
 import biblioteca
 import biblioteca_listas
 import lista_fmf
+import view_fmf
 from buscar_como_config import BuscarComoConfigBody
 from fm_memory import FmMemory, FmNotRunning, FmAccessDenied, FmElevado, FmUnsupportedBuild
 from fm_reader import FmReader, strict_reads
@@ -289,7 +290,7 @@ class ListaDaPastaBody(BaseModel):
 class ViewDaPastaBody(BaseModel):
     arquivo: str
     jogo: Optional[str] = None
-    destino: Optional[str] = None
+    destino: str = "base"
 
 class UidsBody(BaseModel):
     uids: List[int]
@@ -1465,11 +1466,7 @@ def _moneyball_column_catalog(group: str) -> Dict[str, Any]:
          "fmt": fmt, "general": True, "section": "contrato" if field_type == "money" else "id"}
         for key, label, label_en, field_type, fmt in _SEARCH_ID_FIELDS
     ]
-    general.extend(
-        {"key": key, "label": mb.GENERAL_LABELS[key], "fmt": "rating" if key == "avg_rating" else "dec2" if key in {"xg", "xa"} else "int",
-         "general": True, "section": "geral", "type": "num"}
-        for key in mb.GENERAL_CORE
-    )
+    general.extend(mb.general_columns_meta())
     current = general + next((section["columns"] for section in sections if section["group"] == group), [])
     return {"group": group, "current": current, "sections": sections}
 
@@ -2291,37 +2288,76 @@ def get_biblioteca_bruto(arquivo: str):
     raise HTTPException(status_code=404, detail="Arquivo nao encontrado")
 
 @app.post("/api/biblioteca-fmf")
-def post_biblioteca_fmf(request: Request):
-    return {"tipo": "view", "review": {}}
+async def post_biblioteca_fmf(request: Request, arquivo: str):
+    dados = await _ler_upload_fmf(request, arquivo)
+    tipo = view_fmf.tipo_do_fmf(dados)
+    if tipo == "view":
+        lida = _operar_view_fm(view_fmf.ler, dados)
+        destino = _operar_view_fm(view_fmf.destino_da_tela, lida["tela"])
+        review = _operar_view_fm(view_fmf.revisar, dados, arquivo, destino)
+        return {"tipo": "view", "review": review}
+    if tipo == "lista":
+        lista = _operar_lista_preferencial(lista_fmf.adicionar, dados, arquivo=arquivo)
+        return {"tipo": "lista", **_resposta_lista_preferencial(lista)}
+    raise HTTPException(400, "Selecione uma view ou lista .fmf valida do Football Manager")
 
 # ==============================================================================
 # 17. FM Views & Shortlists Endpoints
 # ==============================================================================
 
+def _operar_view_fm(operacao, *args):
+    try:
+        return operacao(*args)
+    except lista_fmf.ListaInvalida as exc:
+        raise HTTPException(400, str(exc)) from exc
+
+
+async def _ler_upload_fmf(request: Request, arquivo: str) -> bytes:
+    if not arquivo or Path(arquivo).name != arquivo or "\\" in arquivo or "\0" in arquivo:
+        raise HTTPException(400, "Nome de arquivo invalido")
+    if Path(arquivo).suffix.lower() != ".fmf":
+        raise HTTPException(400, "Selecione um arquivo .fmf do Football Manager")
+    dados = bytearray()
+    async for trecho in request.stream():
+        dados.extend(trecho)
+        if len(dados) > lista_fmf.TAMANHO_MAXIMO_ARQUIVO:
+            raise HTTPException(413, "O arquivo excede o limite de 2 MB")
+    return bytes(dados)
+
+
 @app.get("/api/views-fm/pasta")
 def get_views_fm_pasta():
-    return {"pastas": [], "arquivos": []}
+    return _operar_view_fm(view_fmf.listar_pasta)
 
 @app.post("/api/views-fm/da-pasta")
 def post_views_fm_da_pasta(body: ViewDaPastaBody):
-    return {"ok": True, "review": {}}
+    if Path(body.arquivo).is_absolute():
+        return _operar_view_fm(view_fmf.ler_do_caminho, body.arquivo, body.destino)
+    return _operar_view_fm(view_fmf.ler_da_pasta, body.arquivo, body.jogo, body.destino)
 
 @app.post("/api/views-fm/escolher")
-def post_views_fm_escolher(destino: Optional[str] = None):
-    # Prompt user for .fmf file via native macOS picker
-    res = subprocess.run(
-        ["osascript", "-e", 'POSIX path of (choose file with prompt "Select FM View file" of type {"fmf"})'],
-        capture_output=True,
-        text=True,
-    )
-    if res.returncode == 0 and res.stdout.strip():
-        fpath = res.stdout.strip()
-        return {"disponivel": True, "cancelado": False, "review": {"path": fpath, "name": Path(fpath).name}}
-    return {"disponivel": True, "cancelado": True}
+def post_views_fm_escolher(destino: str = "base"):
+    if destino not in view_fmf.TELA_DO_DESTINO:
+        raise HTTPException(400, "Destino desconhecido")
+    try:
+        res = subprocess.run(
+            ["osascript", "-e", 'POSIX path of (choose file with prompt "Select FM View file" of type {"fmf"})'],
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        return {"disponivel": False, "cancelado": False}
+    if res.returncode != 0:
+        return {"disponivel": "(-128)" in res.stderr, "cancelado": "(-128)" in res.stderr}
+    if not res.stdout.strip():
+        return {"disponivel": True, "cancelado": True}
+    review = _operar_view_fm(view_fmf.ler_do_caminho, res.stdout.strip(), destino)
+    return {"disponivel": True, "cancelado": False, "review": review}
 
 @app.post("/api/views-fm")
-def post_views_fm(request: Request):
-    return {"ok": True, "review": {}}
+async def post_views_fm(request: Request, arquivo: str, destino: str = "base"):
+    dados = await _ler_upload_fmf(request, arquivo)
+    return _operar_view_fm(view_fmf.revisar, dados, arquivo, destino)
 
 @app.get("/api/listas-preferenciais")
 def get_listas_preferenciais():

@@ -277,6 +277,15 @@ def visible_columns():
     return list(DEFAULT_VISIBLE)
 
 
+def general_columns_meta():
+    return [
+        {"key": key, "label": GENERAL_LABELS[key],
+         "fmt": "rating" if key == "avg_rating" else "dec2" if key in {"xg", "xa"} else "int",
+         "general": True, "section": "geral", "type": "num"}
+        for key in GENERAL_CORE
+    ]
+
+
 def group_columns_meta(group):
     itens = CATALOG.get(group, []) if isinstance(CATALOG, dict) else []
     return itens
