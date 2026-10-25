@@ -5,9 +5,13 @@ e configuracoes particulares (colunas visiveis, filtros, favoritos).
 """
 
 import sqlite3
+import threading
 import settings
 
 CHAVES_PREFS = (
+    "nome",
+    "moeda",
+    "periodo_salario",
     "colunas",
     "filtros",
     "ordenacao",
@@ -16,6 +20,7 @@ CHAVES_PREFS = (
     "buscar_como",
 )
 SO_TEMPORADAS = ("squad", "leagues", "full")
+_PREFS_LOCK = threading.Lock()
 
 
 class Carreira:
@@ -62,14 +67,15 @@ def gravar_prefs(cid, **campos):
     """Grava so o que veio; o que nao veio fica como estava."""
     if not cid:
         return
-    s = settings.load()
-    carreiras = s.get("carreiras") or {}
-    atual = dict(carreiras.get(cid) or {})
-    for k, v in campos.items():
-        if k in CHAVES_PREFS:
-            atual[k] = v
-    carreiras[cid] = atual
-    settings.save(carreiras=carreiras)
+    with _PREFS_LOCK:
+        s = settings.load()
+        carreiras = dict(s.get("carreiras") or {})
+        atual = dict(carreiras.get(cid) or {})
+        for k, v in campos.items():
+            if k in CHAVES_PREFS:
+                atual[k] = v
+        carreiras[cid] = atual
+        settings.save(carreiras=carreiras)
 
 
 def ativa_id(conn=None):
