@@ -2776,7 +2776,7 @@ def get_idioma_codigo(codigo: str):
 
 @app.post("/api/idiomas/abrir-pasta")
 def post_idiomas_abrir_pasta():
-    i_dir = FMSH_DIR / "idiomas"
+    i_dir = Path(paths.idiomas_dir())
     try:
         subprocess.Popen(["open", str(i_dir)])
         return {"ok": True}
@@ -2785,10 +2785,13 @@ def post_idiomas_abrir_pasta():
 
 @app.post("/api/idiomas/exportar")
 def post_idiomas_exportar(body: ExportarIdiomaBody):
-    i_dir = FMSH_DIR / "idiomas"
-    out_dir = i_dir / body.codigo
-    out_dir.mkdir(parents=True, exist_ok=True)
-    return {"ok": True, "pasta": str(out_dir), "arquivos": [f"{body.codigo}.json"]}
+    try:
+        return idiomas.exportar(body.codigo, body.base, body.nome)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except OSError as exc:
+        logger.warning("Could not export language files", exc_info=True)
+        raise HTTPException(status_code=500, detail="Nao foi possivel criar os arquivos de idioma") from exc
 
 @app.get("/api/legal")
 @app.get("/api/legal/estado")
