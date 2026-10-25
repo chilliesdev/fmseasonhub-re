@@ -260,8 +260,8 @@ class FavoritesRestartTests(unittest.TestCase):
         import server
         import settings
         cases = [
-            ("overall", lambda: server.set_overall_modo(server.OverallModoBody(modo="ca")),
-             "overall_modo", "ca"),
+            ("overall", lambda: server.set_overall_modo(server.OverallModoBody(modo="atributos")),
+             "overall_modo", "atributos"),
             ("language", lambda: server.set_idioma(server.IdiomaBody(idioma="pt")),
              "idioma", "pt"),
             ("tray", lambda: server.set_bandeja_settings({"ligado": False}),

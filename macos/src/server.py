@@ -231,6 +231,14 @@ class GraphicsBody(BaseModel):
 class OverallModoBody(BaseModel):
     modo: str
 
+    @field_validator("modo")
+    @classmethod
+    def validar_modo(cls, value):
+        import overall
+        if value not in overall.MODOS:
+            raise ValueError("modo de calculo invalido")
+        return value
+
 class MemoriaBody(BaseModel):
     mb: int
 
