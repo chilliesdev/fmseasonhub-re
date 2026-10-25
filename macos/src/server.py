@@ -45,6 +45,8 @@ import carreiras
 import portal_data
 import csv_export
 import player_search
+import buscar_como_config
+from buscar_como_config import BuscarComoConfigBody
 from fm_memory import FmMemory, FmNotRunning, FmAccessDenied, FmElevado, FmUnsupportedBuild
 from fm_reader import FmReader, strict_reads
 
@@ -379,14 +381,6 @@ class AutoSnapshotBody(BaseModel):
 class CapturaSomBody(BaseModel):
     ligado: Optional[bool] = None
     volume: Optional[float] = None
-
-class BuscarComoConfigBody(BaseModel):
-    faixa: Optional[Any] = None
-    melhor: Optional[bool] = None
-    pct: Optional[bool] = None
-    tolIdx: Optional[int] = None
-    pisoPct: Optional[int] = None
-    minMinutos: Optional[int] = None
 
 # ==============================================================================
 # 4. FastAPI Application Setup & Host Security Middleware
@@ -1188,18 +1182,11 @@ def buscar_como_receita(sid: int, body: Dict[str, Any]):
 
 @app.get("/api/buscar-como/config")
 def get_buscar_como_config():
-    return {
-        "faixa": None,
-        "melhor": True,
-        "pct": True,
-        "tolIdx": 1,
-        "pisoPct": 70,
-        "minMinutos": 450,
-    }
+    return buscar_como_config.load()
 
 @app.post("/api/buscar-como/config")
 def save_buscar_como_config(body: BuscarComoConfigBody):
-    return {"ok": True}
+    return buscar_como_config.save(body)
 
 def _connect_game(kind="connect"):
     global _FM_MEMORY, _FM_READER

@@ -29,7 +29,7 @@ DEFAULTS = {
         "idade": False,
         "contrato12": False,
         "top20": False,
-        "pe": 1024,
+        "pe": False,
     },
     "memoria_max_mb": 2048,
     "ao_fechar": "perguntar",
