@@ -1,6 +1,7 @@
 """Favorites must survive fresh server processes using the same data folders."""
 
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
@@ -128,20 +129,67 @@ class FavoritesRestartTests(unittest.TestCase):
         self.assertEqual(self.request("/api/favoritos/listas")["listas"][0]["id"], "fav_default")
         self.request("/api/favoritos/listas/fav_default", method="DELETE")
         self.restart()
-        self.assertEqual(self.request("/api/favoritos/listas"), {"listas": []})
+        self.assertEqual(self.request("/api/favoritos/listas")["listas"], [])
         self.restart()
-        self.assertEqual(self.request("/api/favoritos/listas"), {"listas": []})
+        self.assertEqual(self.request("/api/favoritos/listas")["listas"], [])
 
     def test_existing_saved_lists_are_loaded_without_replacing_them(self):
         saved = [{"id": "existing-id", "nome": "Saved", "cor": "#f0876a", "uids": [71, 72],
                   "entrou": {"71": 1, "72": 2}}]
         self.settings_path.write_text(json.dumps({"favoritos_listas": saved, "idioma": "en"}))
+        timestamp = 1700000000
+        os.utime(self.settings_path, (timestamp, timestamp))
         self.start()
-        self.assertEqual(self.request("/api/favoritos/listas"), {"listas": saved})
+        loaded = self.request("/api/favoritos/listas")["listas"][0]
+        self.assertEqual({key: loaded[key] for key in saved[0]}, saved[0])
+        expected_date = datetime.fromtimestamp(timestamp, timezone.utc).isoformat()
+        self.assertEqual((loaded["criada_em"], loaded["atualizada_em"]), (expected_date, expected_date))
         self.create()
         self.restart()
-        self.assertEqual(self.request("/api/favoritos/listas")["listas"][0], saved[0])
+        self.assertEqual(self.request("/api/favoritos/listas")["listas"][0], loaded)
         self.assertEqual(json.loads(self.settings_path.read_text())["idioma"], "en")
+
+    def test_creation_dates_and_mutation_state_are_stable_across_restart(self):
+        self.start()
+        before = datetime.now(timezone.utc)
+        created = self.create(uids=[900001, 900002])
+        after = datetime.now(timezone.utc)
+        creation = datetime.fromisoformat(created["criada_em"])
+        self.assertLessEqual(before, creation)
+        self.assertLessEqual(creation, after)
+        self.assertEqual(created["criada_em"], created["atualizada_em"])
+        self.assertEqual(set(created["entrou"]), {"900001", "900002"})
+        route = "/api/favoritos/listas/" + created["id"]
+        previous = created["atualizada_em"]
+        for endpoint, body, method in (
+            (route, {"nome": "Dated rename"}, "PATCH"),
+            (route + "/jogadores", {"uids": [900003]}, "POST"),
+            (route + "/jogadores", {"uids": [900001], "marcar": False}, "POST"),
+            (route, {"esvaziar": True}, "PATCH"),
+        ):
+            state = self.request(endpoint, body, method)
+            self.assertTrue({"listas", "padrao", "paleta", "aviso", "lista"} <= state.keys())
+            changed = state["lista"]
+            self.assertEqual(changed["criada_em"], created["criada_em"])
+            self.assertGreater(changed["atualizada_em"], previous)
+            previous = changed["atualizada_em"]
+            self.assertEqual(next(item for item in state["listas"] if item["id"] == created["id"]), changed)
+        self.assertEqual((changed["uids"], changed["entrou"]), ([], {}))
+        expected = self.request("/api/favoritos/listas")
+        self.restart()
+        self.assertEqual(self.request("/api/favoritos/listas"), expected)
+        saved = json.loads(self.settings_path.read_text())
+        self.assertEqual(saved["favoritos_listas"], expected["listas"])
+
+    def test_existing_native_dates_and_metadata_are_preserved(self):
+        saved = {"id": "native", "nome": "Native", "cor": "#f0876a", "uids": [71],
+                 "entrou": {"71": 35}, "criada_em": "2025-01-02T03:04:05",
+                 "atualizada_em": "2026-02-03T04:05:06", "custom": {"keep": True}}
+        self.settings_path.write_text(json.dumps({"favoritos_listas": [saved]}))
+        self.start()
+        self.assertEqual(self.request("/api/favoritos/listas")["listas"], [saved])
+        self.restart()
+        self.assertEqual(self.request("/api/favoritos/listas")["listas"], [saved])
 
     def test_parallel_creates_and_membership_updates_are_not_lost(self):
         self.start()

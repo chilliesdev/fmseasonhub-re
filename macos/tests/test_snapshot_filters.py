@@ -48,6 +48,19 @@ class SnapshotFilterTests(unittest.TestCase):
             with response:
                 return response.code, json.load(response)
 
+    def assert_empty_summary(self, uids, **params):
+        status, result = self.summary(uids, **params)
+        self.assertEqual(status, 200, result)
+        self.assertEqual(result, {
+            'qtd': len(set(uids)), 'na_carreira': 0, 'idade_media': None,
+            'valor_somado': 0, 'salarios_semana': 0,
+            'setores': {'gr': 0, 'def': 0, 'med': 0, 'ata': 0},
+            'pa': [], 'idades': [],
+            'destaques': {'maior_pa': None, 'barato_145': None, 'mais_valioso': None,
+                         'contrato_ate': result['destaques']['contrato_ate'],
+                         'emprestados': 0, 'nacionalidades': 0},
+        })
+
     def test_options_stay_in_selected_season_and_career(self):
         expected = {901: (2, 1, 1), 902: (1, 1, 1), 903: (1, 1, 1)}
         for sid in (901, 902, 903, 901):
@@ -64,29 +77,32 @@ class SnapshotFilterTests(unittest.TestCase):
         self.assertEqual(self.request('/api/youth-teams', snapshot=902)[1]['youth_teams'][0]['club_name'], 'New youth')
 
     def test_summaries_use_selected_season_and_career_for_each_uid(self):
-        for sid, name, ca, pa, club in ((901, 'Alpha, "Old"', 100, 150, 77),
-                                       (902, 'Alpha New', 110, 160, 77),
-                                       (903, 'Same UID in other career', 130, 180, 88),
-                                       (901, 'Alpha, "Old"', 100, 150, 77)):
+        for sid, name, pa in ((901, 'Alpha, "Old"', 150),
+                              (902, 'Alpha New', 160),
+                              (903, 'Same UID in other career', 180),
+                              (901, 'Alpha, "Old"', 150)):
             with self.subTest(snapshot=sid):
-                self.assertEqual(self.summary([1, 999999], snapshot=sid), (200, [
-                    {'uid': 1, 'full_name': name, 'club_id': club, 'ca': ca, 'pa': pa}]))
-        self.assertEqual(self.summary([11], snapshot=901), (200, []))
+                status, result = self.summary([1, 999999], snapshot=sid)
+                self.assertEqual(status, 200, result)
+                self.assertEqual((result['qtd'], result['na_carreira']), (2, 1))
+                player = result['pa'][0]
+                self.assertEqual((player['uid'], player['sid'], player['nome'], player['pa']), (1, sid, name, pa))
+        self.assert_empty_summary([11], snapshot=901)
         self.assertEqual(self.summary([1, 1], snapshot=902)[1], self.summary([1], snapshot=902)[1])
-        self.assertEqual({row['uid'] for row in self.summary([1, 2, 11], snapshot=901)[1]}, {1, 2})
+        self.assertEqual({row['uid'] for row in self.summary([1, 2, 11], snapshot=901)[1]['pa']}, {1, 2})
 
     def test_missing_or_empty_selection_never_falls_back_to_another_snapshot(self):
         for sid in (904, 999999, 0, -1):
             for endpoint, key in self.options:
                 with self.subTest(snapshot=sid, endpoint=endpoint):
                     self.assertEqual(self.request(endpoint, snapshot=sid), (200, {key: []}))
-            self.assertEqual(self.summary([1, 11], snapshot=sid), (200, []))
+            self.assert_empty_summary([1, 11], snapshot=sid)
 
     def test_omitted_selection_uses_latest_stored_snapshot_and_keeps_it_empty(self):
         for endpoint, key in self.options:
             self.assertEqual(self.request(endpoint), (200, {key: []}))
-        self.assertEqual(self.summary([1, 11]), (200, []))
-        self.assertEqual(self.summary([1, 11], snapshot=None), (200, []))
+        self.assert_empty_summary([1, 11])
+        self.assert_empty_summary([1, 11], snapshot=None)
         with closing(server.get_db_connection()) as conn, conn:
             conn.execute('DELETE FROM snapshots WHERE id=904')
         for endpoint, key in self.options:
@@ -104,24 +120,24 @@ class SnapshotFilterTests(unittest.TestCase):
                 self.assertEqual(status, 200)
                 self.assertEqual({row['snapshot_id'] for row in result[key]}, {sid})
             expected = 'Live player' if sid == 905 else 'Temporary player'
-            self.assertEqual(self.summary([1], snapshot=sid)[1][0]['full_name'], expected)
+            self.assertEqual(self.summary([1], snapshot=sid)[1]['pa'][0]['nome'], expected)
 
     def test_empty_uid_list_and_missing_players_return_empty_summary(self):
-        self.assertEqual(self.summary([], snapshot=901), (200, []))
-        self.assertEqual(self.summary([]), (200, []))
-        self.assertEqual(self.summary([999999], snapshot=901), (200, []))
+        self.assert_empty_summary([], snapshot=901)
+        self.assert_empty_summary([])
+        self.assert_empty_summary([999999], snapshot=901)
 
     def test_only_live_captures_and_empty_database_do_not_leak_rows(self):
         with closing(server.get_db_connection()) as conn, conn:
             conn.execute('DELETE FROM snapshots WHERE id < 905')
         for endpoint, key in self.options:
             self.assertEqual(self.request(endpoint), (200, {key: []}))
-        self.assertEqual(self.summary([1, 11]), (200, []))
+        self.assert_empty_summary([1, 11])
         with closing(server.get_db_connection()) as conn, conn:
             conn.execute('DELETE FROM snapshots')
         for endpoint, key in self.options:
             self.assertEqual(self.request(endpoint), (200, {key: []}))
-        self.assertEqual(self.summary([1, 11]), (200, []))
+        self.assert_empty_summary([1, 11])
 
     def test_malformed_snapshot_is_rejected(self):
         for value in ('invalid', '901.5', ''):

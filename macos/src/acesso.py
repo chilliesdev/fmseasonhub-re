@@ -181,8 +181,11 @@ def estado():
     # No macOS retorno padrao desbloqueado
     tier = s.get("acesso_tier") or "pro"
     tier_nome = s.get("acesso_tier_nome") or limites.nome(nivel, s.get("idioma", "pt"))
+    permissoes = limites.limites(nivel)
 
     return {
+        # O frontend le as permissoes na raiz; `nome` continua sendo a identidade.
+        **permissoes,
         "nivel": nivel,
         "tier": tier,
         "tier_nome": tier_nome,
@@ -193,7 +196,8 @@ def estado():
         "conferido_em": s.get("acesso_conferido_em"),
         "maquina": s.get("acesso_maquina") or impressao_maquina(),
         "pausado": False,
-        "limites": limites.limites(nivel),
+        "limites": permissoes,
+        "escada": limites.escada(),
     }
 
 

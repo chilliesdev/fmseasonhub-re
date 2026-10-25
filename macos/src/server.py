@@ -25,7 +25,7 @@ import ctypes
 import errno
 import uuid
 from contextlib import ExitStack, closing
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path, PureWindowsPath
 from typing import Any, Dict, List, Literal, Optional, Union
 
@@ -39,6 +39,8 @@ import capture_all
 import db
 import moneyball as mb
 import moneyball_data
+import list_summary
+import favoritos
 import player_analysis
 import career_analysis
 import carreiras
@@ -342,6 +344,7 @@ class FavListaNovaBody(BaseModel):
 class FavListaEditarBody(BaseModel):
     nome: Optional[str] = None
     cor: Optional[str] = None
+    esvaziar: bool = False
 
 class FavJogadoresBody(BaseModel):
     uids: List[int]
@@ -1531,6 +1534,13 @@ def _moneyball_selection(params):
             config = settings.load() if settings else {}
             lists = config.get("favoritos_listas" if kind == "favlista" else "listas_preferenciais") or []
             allowed = set(next((item.get("uids", []) for item in lists if item.get("id") == list_id), []))
+        outside = params.get("fora", "0")
+        if outside not in ("0", "1"):
+            raise ValueError("fora: expected 0 or 1")
+        if outside == "1":
+            wanted = allowed if allowed is not None else moneyball_data.ids(uid_filter)
+            with closing(get_db_connection()) as conn:
+                rows = list_summary.outside_rows(conn, wanted or [], sid, groups)
         selected, warnings = moneyball_data.select(rows, params, allowed)
         ordered = moneyball_data.sort_rows(selected, params)
         return sid, rows, ordered, columns, warnings
@@ -1604,20 +1614,13 @@ def moneyball_export(request: Request):
 
 @app.post("/api/resumo-jogadores")
 def resumo_jogadores(body: UidsBody):
-    if not body.uids:
-        return []
     with closing(get_db_connection()) as conn:
-        sid = moneyball_data.snapshot_id(conn, body.snapshot)
-        placeholders = ",".join("?" for _ in body.uids)
-        rows = conn.execute(
-            f"SELECT uid, full_name, club_id, ca, pa FROM players WHERE snapshot_id=? AND uid IN ({placeholders})",
-            [sid, *body.uids],
-        )
-        return [dict(row) for row in rows]
+        return list_summary.summary(conn, body.uids, body.snapshot)
 
 @app.post("/api/jogadores-fora-da-captura")
 def jogadores_fora_da_captura(body: UidsBody):
-    return {"uids": []}
+    with closing(get_db_connection()) as conn:
+        return list_summary.outside_capture(conn, body.uids, body.snapshot)
 
 # ==============================================================================
 # 12. Clubs, Profiles, Youth Teams & Currencies
@@ -1874,37 +1877,99 @@ def post_onboarding_refazer():
 _FAVORITOS_LOCK = threading.Lock()
 
 
+def _agora_favoritos():
+    return datetime.now(timezone.utc).isoformat(timespec="microseconds")
+
+
+def _data_favoritos(value):
+    if not isinstance(value, str) or not re.match(r"^\d{4}-\d{2}-\d{2}(?:T| |$)", value):
+        return None
+    try:
+        datetime.fromisoformat(value)
+        return value
+    except ValueError:
+        return None
+
+
+def _normalizar_favoritos(listas):
+    config = settings.load()
+    seq = max([int(config.get("favoritos_seq") or 0), *[
+        value for lista in listas for value in (lista.get("entrou") if isinstance(lista.get("entrou"), dict) else {}).values()
+        if isinstance(value, int)
+    ]])
+    try:
+        # Old files did not record creation. Their last saved time is the only
+        # available timestamp; persist that fallback once, never use reload time.
+        saved = datetime.fromtimestamp(Path(settings.SETTINGS_PATH).stat().st_mtime, timezone.utc).isoformat()
+    except OSError:
+        saved = _agora_favoritos()
+    changed = False
+    for lista in listas:
+        created = _data_favoritos(lista.get("criada_em")) or _data_favoritos(lista.get("atualizada_em")) or saved
+        updated = _data_favoritos(lista.get("atualizada_em")) or created
+        for key, value in (("criada_em", created), ("atualizada_em", updated)):
+            if lista.get(key) != value:
+                lista[key] = value
+                changed = True
+        if not isinstance(lista.get("entrou"), dict):
+            lista["entrou"] = {}
+            changed = True
+        for uid in lista["uids"]:
+            if str(uid) not in lista["entrou"]:
+                seq += 1
+                lista["entrou"][str(uid)] = seq
+                changed = True
+    return changed, seq
+
+
 def _carregar_favoritos():
     config = settings.load()
     listas = config.get("favoritos_listas") or []
     # True is the first-install sentinel. None means the user deleted all lists.
     if not listas and config.get("favoritos_lista_padrao") is True:
-        return [{"id": "fav_default", "nome": "Favoritos", "cor": "#3b82f6", "uids": []}]
+        listas = [{"id": "fav_default", "nome": "Favoritos", "cor": "#3b82f6", "uids": []}]
+    changed, _ = _normalizar_favoritos(listas)
+    if changed:
+        _gravar_favoritos(listas)
     return listas
 
 
 def _gravar_favoritos(listas):
+    _, seq = _normalizar_favoritos(listas)
     padrao = settings.load().get("favoritos_lista_padrao")
     if not any(lista["id"] == padrao for lista in listas):
         padrao = listas[0]["id"] if listas else None
-    settings.save(favoritos_listas=listas, favoritos_lista_padrao=padrao)
+    settings.save(favoritos_listas=listas, favoritos_lista_padrao=padrao, favoritos_seq=seq)
+
+
+def _estado_favoritos(listas):
+    config = settings.load()
+    aviso = config.get("favoritos_aviso")
+    return {"listas": listas, "padrao": config.get("favoritos_lista_padrao"),
+            "paleta": list(favoritos.PALETA), "aviso": aviso if isinstance(aviso, list) else None}
+
+
+def _nova_lista_favoritos(nome, cor, uids):
+    now = _agora_favoritos()
+    return {"id": f"fav_{uuid.uuid4().hex}", "nome": nome, "cor": cor,
+            "uids": list(dict.fromkeys(uids)), "criada_em": now, "atualizada_em": now}
 
 
 @app.get("/api/favoritos/listas")
 @app.get("/api/favoritos")
 def get_favoritos_listas():
     with _FAVORITOS_LOCK:
-        return {"listas": _carregar_favoritos()}
+        return _estado_favoritos(_carregar_favoritos())
 
 
 @app.post("/api/favoritos/listas")
 def post_favoritos_criar(body: FavListaNovaBody):
     with _FAVORITOS_LOCK:
         listas = _carregar_favoritos()
-        nova = {"id": f"fav_{uuid.uuid4().hex}", "nome": body.nome, "cor": body.cor, "uids": body.uids or []}
+        nova = _nova_lista_favoritos(body.nome, body.cor, body.uids or [])
         listas.append(nova)
         _gravar_favoritos(listas)
-        return {"lista": nova, "listas": listas}
+        return {**_estado_favoritos(listas), "lista": nova}
 
 
 @app.patch("/api/favoritos/listas/{id_lista}")
@@ -1913,12 +1978,18 @@ def patch_favoritos_editar(id_lista: str, body: FavListaEditarBody):
         listas = _carregar_favoritos()
         for lista in listas:
             if lista["id"] == id_lista:
+                before = (lista["nome"], lista["cor"], list(lista["uids"]))
                 if body.nome:
                     lista["nome"] = body.nome
                 if body.cor:
                     lista["cor"] = body.cor
+                if body.esvaziar:
+                    lista["uids"] = []
+                    lista["entrou"] = {}
+                if before != (lista["nome"], lista["cor"], lista["uids"]):
+                    lista["atualizada_em"] = _agora_favoritos()
                 _gravar_favoritos(listas)
-                return {"lista": lista}
+                return {**_estado_favoritos(listas), "lista": lista}
     raise HTTPException(status_code=404, detail="Lista nao encontrada")
 
 
@@ -1927,7 +1998,7 @@ def delete_favoritos_apagar(id_lista: str):
     with _FAVORITOS_LOCK:
         listas = [lista for lista in _carregar_favoritos() if lista["id"] != id_lista]
         _gravar_favoritos(listas)
-        return {"ok": True}
+        return {**_estado_favoritos(listas), "ok": True}
 
 
 @app.post("/api/favoritos/listas/{id_lista}/jogadores")
@@ -1936,15 +2007,19 @@ def post_favoritos_jogadores(id_lista: str, body: FavJogadoresBody):
         listas = _carregar_favoritos()
         for lista in listas:
             if lista["id"] == id_lista:
-                u_set = set(lista["uids"])
+                before = list(lista["uids"])
                 if body.marcar:
-                    u_set.update(body.uids)
+                    lista["uids"] = list(dict.fromkeys([*before, *body.uids]))
                 else:
-                    u_set.difference_update(body.uids)
-                lista["uids"] = list(u_set)
+                    removed = set(body.uids)
+                    lista["uids"] = [uid for uid in before if uid not in removed]
+                    for uid in removed:
+                        lista["entrou"].pop(str(uid), None)
+                if before != lista["uids"]:
+                    lista["atualizada_em"] = _agora_favoritos()
                 _gravar_favoritos(listas)
-                return {"ok": True, "lista": lista}
-    return {"ok": True}
+                return {**_estado_favoritos(listas), "ok": True, "lista": lista}
+        return {**_estado_favoritos(listas), "ok": True}
 
 
 @app.post("/api/favoritos/listas/{id_lista}/duplicar")
@@ -1953,11 +2028,10 @@ def post_favoritos_duplicar(id_lista: str, body: FavDuplicarBody):
         listas = _carregar_favoritos()
         for lista in listas:
             if lista["id"] == id_lista:
-                dupl = {"id": f"fav_{uuid.uuid4().hex}", "nome": body.nome,
-                        "cor": lista["cor"], "uids": list(lista["uids"])}
+                dupl = _nova_lista_favoritos(body.nome, lista["cor"], lista["uids"])
                 listas.append(dupl)
                 _gravar_favoritos(listas)
-                return {"lista": dupl}
+                return {**_estado_favoritos(listas), "lista": dupl}
     raise HTTPException(status_code=404, detail="Lista nao encontrada")
 
 
@@ -1967,18 +2041,27 @@ def post_favoritos_tirar_de_todas(body: FavJogadoresBody):
         listas = _carregar_favoritos()
         rem_set = set(body.uids)
         for lista in listas:
-            lista["uids"] = [u for u in lista["uids"] if u not in rem_set]
+            before = list(lista["uids"])
+            lista["uids"] = [u for u in before if u not in rem_set]
+            if before != lista["uids"]:
+                lista["atualizada_em"] = _agora_favoritos()
+                for uid in rem_set:
+                    lista["entrou"].pop(str(uid), None)
         _gravar_favoritos(listas)
-        return {"ok": True}
+        return {**_estado_favoritos(listas), "ok": True}
 
 
 @app.post("/api/favoritos/migrar-local")
 def post_favoritos_migrar_local(body: FavMigrarLocalBody):
-    return {"ok": True}
+    with _FAVORITOS_LOCK:
+        return {**_estado_favoritos(_carregar_favoritos()), "ok": True}
 
 @app.post("/api/favoritos/aviso-visto")
 def post_favoritos_aviso_visto():
-    return {"ok": True}
+    with _FAVORITOS_LOCK:
+        listas = _carregar_favoritos()
+        settings.save(favoritos_aviso=None)
+        return {**_estado_favoritos(listas), "ok": True}
 
 # ==============================================================================
 # 16. Library (Biblioteca) Endpoints
