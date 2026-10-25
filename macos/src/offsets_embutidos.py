@@ -2974,11 +2974,17 @@ ASSINATURAS = {
         "chain_offset_2": "0x04E35F60",
         "person_root_rva": "0x5548790"
       },
+      # GAME_UI stores the serialized ID and a new random nonce on each load.
       "savegame_id_chain": {
-        "savegame_id_rva": "0x55270D0",
-        "alt_rva": "0x55270D0",
+        "savegame_id_rva": "0x5547838",
+        "object_vtable_rva": "0x533C760",
         "field_off": "0xB8",
         "session_nonce_off": "0xBC"
+      },
+      "save_name_chain": {
+        "root_rva": "0x55270D0",
+        "object_vtable_rva": "0x54186C8",
+        "name_ptr_off": "0x28"
       },
       "save_name": {
         "module": "game_plugin.dll",
@@ -2994,7 +3000,7 @@ ASSINATURAS = {
         ]
       },
       "game_date_chain": {
-        "game_date_rva": "0x5547638"
+        "game_date_rva": "0x553E3A8"
       },
       "person_table_chain": {
         "person_root_rva": "0x5548790",

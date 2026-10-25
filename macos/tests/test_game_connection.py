@@ -210,6 +210,47 @@ class GameConnectionTests(unittest.TestCase):
 
 
 class RealMemoryProbeRegressionTests(unittest.TestCase):
+    def test_macos_detects_exact_game_executable_names(self):
+        for executable in ("fm", "Football Manager", "Football Manager 26"):
+            with self.subTest(executable=executable):
+                def pgrep(command, timeout):
+                    self.assertEqual(command[:2], ["pgrep", "-x"])
+                    self.assertEqual(timeout, 3)
+                    if command[2] == executable:
+                        return b"82076\n"
+                    raise subprocess.CalledProcessError(1, command)
+
+                with patch.object(fm_memory.sys, "platform", "darwin"), \
+                        patch.object(fm_memory.FmMemory, "_init_bridge_backend"), \
+                        patch.object(fm_memory.FmMemory, "_try_socket_connect", return_value=False), \
+                        patch.object(fm_memory.FmMemory, "_ensure_native_attached", return_value=True) as attach, \
+                        patch.object(fm_memory.FmMemory, "_resolve_macos_module_base") as resolve, \
+                        patch.object(fm_memory, "_log"), \
+                        patch.object(fm_memory.subprocess, "check_output", side_effect=pgrep):
+                    mem = fm_memory.FmMemory()
+                    self.assertEqual(mem.process_id, 82076)
+                    attach.assert_called_once_with()
+                    resolve.assert_called_once_with()
+                    mem.close()
+
+    def test_macos_rejects_game_helpers_and_launchers(self):
+        running_names = {"Football Manager 26 Helper", "launch_fm26_with_hub.sh"}
+
+        def pgrep(command, timeout):
+            self.assertEqual(command[:2], ["pgrep", "-x"])
+            if command[2] in running_names:
+                return b"82077\n"
+            raise subprocess.CalledProcessError(1, command)
+
+        with patch.object(fm_memory.sys, "platform", "darwin"), \
+                patch.object(fm_memory.FmMemory, "_init_bridge_backend"), \
+                patch.object(fm_memory.FmMemory, "_ensure_native_attached") as attach, \
+                patch.object(fm_memory, "_log"), \
+                patch.object(fm_memory.subprocess, "check_output", side_effect=pgrep):
+            with self.assertRaises(fm_memory.FmNotRunning):
+                fm_memory.FmMemory()
+            attach.assert_not_called()
+
     def test_installed_plugin_does_not_count_as_running_game(self):
         with patch.object(fm_memory.sys, "platform", "darwin"), \
                 patch.object(fm_memory.FmMemory, "_init_bridge_backend"), \

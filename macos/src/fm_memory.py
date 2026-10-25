@@ -150,18 +150,17 @@ class FmMemory:
         if target_pid is None:
             # Procura apenas nomes exatos do executavel do jogo.
             pids = []
-            try:
-                out = subprocess.check_output(["pgrep", "-x", "fm"], timeout=3).decode().split()
-                pids = [int(p) for p in out]
-            except Exception as e:
-                _log(f"_try_socket_connect failed: {e}")
-
-            if not pids:
+            for executable in ("fm", "Football Manager", "Football Manager 26"):
                 try:
-                    out = subprocess.check_output(["pgrep", "-x", "Football Manager"], timeout=3).decode().split()
+                    out = subprocess.check_output(["pgrep", "-x", executable], timeout=3).decode().split()
                     pids = [int(p) for p in out]
-                except Exception:
-                    pass
+                except subprocess.CalledProcessError as exc:
+                    if exc.returncode != 1:
+                        _log(f"Process discovery failed for {executable}: {exc}")
+                except Exception as exc:
+                    _log(f"Process discovery failed for {executable}: {exc}")
+                if pids:
+                    break
 
             if not pids:
                 raise FmNotRunning("O Football Manager nao esta aberto. Abra o FM e carregue um save.")

@@ -293,41 +293,48 @@ class FmReader:
     # Sessao & Savegame
     # =========================================================================
 
+    def _save_object(self, chain, rva_key):
+        rva = chain.get(rva_key)
+        if not rva:
+            return None
+        obj = self.q(self.mem.rva(rva))
+        if not obj or obj < 0x10000:
+            return None
+        vtable = chain.get("object_vtable_rva")
+        if vtable and self.q(obj) != self.mem.rva(vtable):
+            return None
+        return obj
+
     def savegame_id(self):
         """ID exclusivo do savegame carregado."""
-        try:
-            chain = self.cfg.get("savegame_id_chain", {})
-            rva_off = chain.get("savegame_id_rva")
-            if not rva_off:
-                return None
-            root_ptr = self.mem.rva(rva_off)
-            obj = self.q(root_ptr)
-            if not obj:
-                return None
-            foff = _to_int(chain.get("field_off", 0xB8))
-            val = self.u32(obj + foff)
-            return str(val) if val else None
-        except Exception:
-            return None
+        return self.save_session()[0]
 
     def save_session(self):
         try:
-            sid = self.savegame_id()
             chain = self.cfg.get("savegame_id_chain", {})
-            rva_off = chain.get("savegame_id_rva")
-            root_ptr = self.mem.rva(rva_off)
-            obj = self.q(root_ptr)
-            nonce = 0
-            if obj:
-                nonce_off = _to_int(chain.get("session_nonce_off", 0xBC))
-                nonce = self.u32(obj + nonce_off)
-            return (sid, nonce)
+            obj = self._save_object(chain, "savegame_id_rva")
+            if obj is None:
+                return (None, 0)
+            sid = self.u32(obj + _to_int(chain.get("field_off", 0xB8)))
+            if not sid:
+                return (None, 0)
+            nonce = self.u32(obj + _to_int(chain.get("session_nonce_off", 0xBC)))
+            if self._save_object(chain, "savegame_id_rva") != obj:
+                return (None, 0)
+            return (str(sid), nonce)
         except Exception:
             return (None, 0)
 
     def save_name(self):
         """Nome do arquivo de save aberto."""
         try:
+            name_chain = self.cfg.get("save_name_chain")
+            if name_chain is not None:
+                obj = self._save_object(name_chain, "root_rva")
+                if obj is None:
+                    return None
+                name_ptr = self.q(obj + _to_int(name_chain["name_ptr_off"]))
+                return self._decode_str_at(name_ptr) or None
             chain = self.cfg.get("savegame_id_chain", {})
             rva_off = chain.get("savegame_id_rva")
             root_ptr = self.mem.rva(rva_off)
