@@ -64,7 +64,7 @@ jobs:
         run: macos/.venv/bin/python macos/build_mac_app.py
 
       - name: Run tests
-        timeout-minutes: 5
+        timeout-minutes: 6
         env:
           FMSH_PASTA_DADOS: ${{ runner.temp }}/fmsh-ci-data
           FMSH_PASTA_LOCAL: ${{ runner.temp }}/fmsh-ci-local
@@ -76,7 +76,8 @@ jobs:
           import unittest
 
           faulthandler.enable()
-          faulthandler.dump_traceback_later(120, exit=True)
+          # Bound the full suite, including slower Intel database and restart tests.
+          faulthandler.dump_traceback_later(300, exit=True)
           try:
               suite = unittest.defaultTestLoader.discover('macos/tests')
               result = unittest.TextTestRunner(verbosity=2).run(suite)
