@@ -1,0 +1,30 @@
+// Feed a real saved API response into the shipped similarity-dialog adapter.
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+import {fileURLToPath} from 'node:url';
+
+const source = fs.readFileSync(fileURLToPath(new URL('../fmsh/frontend/dist/assets/index-Cvmv7E2F.js', import.meta.url)), 'utf8');
+const start = source.indexOf('var Pp=[10,15,20,25,30,40]');
+const end = source.indexOf('var Up=', start);
+assert(start >= 0 && end > start, 'shipped search adapter exists');
+const context = vm.createContext({id: () => ({rate: 1}), cd: number => number});
+vm.runInContext(source.slice(start, end), context);
+const saved = JSON.parse(process.argv[2]);
+const config = context.zp('reposicao', true, saved);
+assert.equal(config.pisoPct, saved.pisoPct);
+assert.equal(config.minMinutos, saved.minMinutos);
+assert.equal(config.valorOn, saved.valor);
+assert.equal(config.idadeOn, saved.idade);
+assert.equal(config.contrato12, saved.contrato12);
+assert.equal(config.top20, saved.top20);
+assert.equal(config.peModo, saved.pe ? 'igual' : '');
+const request = context.Hp(config, {valor: 10000000, idade: 25});
+assert.equal(request.piso_ca, saved.pisoPct);
+assert.equal(request.min_minutes, saved.minMinutos);
+assert.equal(request.contrato12, Number(saved.contrato12));
+assert.equal(request.top20, Number(saved.top20));
+assert.equal(request.pe, 'igual');
+assert.equal(request.idade_max, 27);
+assert(!('valor_max' in request));
+console.log('Saved similarity preferences reach the shipped search request');
