@@ -9,6 +9,13 @@ Requires macOS 15 or later. Python and app dependencies are included.
 
 Keep your existing Documents/FM Season Hub folder. It contains your app data.
 
+Connect Football Manager
+
+If Hub reports denied game access, save and close Football Manager.
+Select Launch FM with Hub in the error dialog. Load your save, then select
+Try again. This starts FM26 from your Steam library with the Hub memory bridge.
+Hub never closes your game. Keep Steam open and signed in.
+
 First launch
 
 This build is ad-hoc signed. It has no Apple Developer ID signature or
