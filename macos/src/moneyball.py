@@ -277,9 +277,35 @@ def visible_columns():
     return list(DEFAULT_VISIBLE)
 
 
+# General headings use shorter labels than the language-file source names.
+GENERAL_LOCALE = {
+    "apps_total": ("jogostotais", "Total Appearances", "Apps"),
+    "apps_starts": ("jogoscomotitular", "Starting Appearances", "St Apps"),
+    "apps_sub": ("entradasdobanco", "Sub Appearances", "Sub"),
+    "minutes": ("minutos", "Minutes", "Mins"),
+    "avg_rating": ("classifmedia", "Average Rating", "Av Rat"),
+    "goals": ("gols", "Goals", "Gls"),
+    "assists": ("assistencias", "Assists", "Ast"),
+    "xg": ("golsesperadosxg", "Expected Goals (xG)", "xG"),
+    "xa": ("assistenciasesperadasxa", "Expected Assists (xA)", "xA"),
+}
+
+
+def column_locale(column):
+    """Attach the stable language-file key without changing stored catalog labels."""
+    def normalize(label):
+        return "".join(c for c in _norm_label(label) if c.isalnum() or c == "%")
+
+    key = normalize(column.get("label"))
+    key = normalize(ROTULOS.get(key, column.get("label")))
+    return {**column, "tkey": key}
+
+
 def general_columns_meta():
     return [
         {"key": key, "label": GENERAL_LABELS[key],
+         "tkey": GENERAL_LOCALE[key][0], "labelEn": GENERAL_LOCALE[key][1],
+         "shortEn": GENERAL_LOCALE[key][2],
          "fmt": "rating" if key == "avg_rating" else "dec2" if key in {"xg", "xa"} else "int",
          "general": True, "section": "geral", "type": "num"}
         for key in GENERAL_CORE
