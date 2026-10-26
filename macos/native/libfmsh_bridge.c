@@ -218,6 +218,13 @@ static bool wait_for_client(int client_fd, int server_fd, short events) {
             return false;
         }
         if (!g_server_running) return false;
+        /* Release an already closed reader before deciding the server is busy. */
+        if ((fds[1].revents & POLLIN) && (events & POLLIN) &&
+            (fds[0].revents & POLLIN)) {
+            char byte;
+            ssize_t n = recv(client_fd, &byte, 1, MSG_PEEK | MSG_DONTWAIT);
+            if (n == 0) return true;
+        }
         if (fds[1].revents & POLLIN) {
             int busy_fd = accept_client(server_fd);
             if (busy_fd >= 0) {

@@ -1,5 +1,6 @@
 """Exercise the compiled bridge in disposable hosts with default SIGPIPE handling."""
 
+import errno
 import json
 import os
 from pathlib import Path
@@ -109,8 +110,9 @@ class NativeBridgeSocketTests(unittest.TestCase):
                 if response == b"PONG\n":
                     return client
                 self.assertEqual(response, b"ERR_BUSY\n")
-            except (BrokenPipeError, ConnectionResetError):
-                pass
+            except OSError as error:
+                if error.errno not in (errno.EPIPE, errno.ECONNRESET, errno.ENOTCONN):
+                    raise
             client.close()
             if time.monotonic() >= deadline:
                 self.fail("active client was not released")
@@ -125,11 +127,26 @@ class NativeBridgeSocketTests(unittest.TestCase):
         # Reproduce the closed B, then closed A sequence from issue #65.
         for _ in range(20):
             second = self.connect()
-            second.sendall(b"PING\n")
-            second.close()
+            try:
+                second.sendall(b"PING\n")
+            except OSError as error:
+                # The server may deliver ERR_BUSY and close before this send.
+                if error.errno not in (errno.EPIPE, errno.ECONNRESET, errno.ENOTCONN):
+                    raise
+            finally:
+                second.close()
         self.client.close()
         with self.reconnect() as later:
             self.assertEqual(self.command(later, b"PING"), b"PONG\n")
+        self.assertIsNone(self.host.poll())
+
+    def test_immediate_reconnect_after_client_close(self):
+        # A closed prior peer must not make the next client fall back to Mach.
+        for _ in range(100):
+            self.client.close()
+            self.client = self.connect()
+            self.addCleanup(self.client.close)
+            self.assertEqual(self.command(self.client, b"PING"), b"PONG\n")
         self.assertIsNone(self.host.poll())
 
     def test_protocol_and_binary_read_integrity(self):
