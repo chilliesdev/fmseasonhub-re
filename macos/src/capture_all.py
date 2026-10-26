@@ -57,7 +57,7 @@ def primary_position(prof):
     melhor_val = 0
     for pos_key, rotulo in _POS_MAP.items():
         val = prof.get(pos_key, 0)
-        if val > melhor_val:
+        if val is not None and val > melhor_val:
             melhor_val = val
             melhor_pos = rotulo
     return melhor_pos

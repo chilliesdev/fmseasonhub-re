@@ -2966,7 +2966,20 @@ ASSINATURAS = {
     },
     "26.3.2+2329565_macos_arm64": {
       "fm_version": "26.3.2+2329565",
-      "person_base": "0x288",
+      "person_base": "0x278",
+      # ARM64 26.3.2: verified from virtual getters and live roster records.
+      "capture_layout": {
+        "player_person": "0x278",
+        "player_entity": "0x388",
+        "player_staff_person": "0x370",
+        "player_staff_entity": "0x480",
+        "ca": "0x25C",
+        "pa": "0x25E",
+        "height": "0x226",
+        "team": "0x130",
+        "attribute_bias": -8,
+        "attribute_scale": 5
+      },
       "birth_date_offset": "0x310",
       "regen_uid_threshold": 2002068000,
       "chain": {
@@ -3120,7 +3133,8 @@ ASSINATURAS = {
       },
       "team_table_chain": {
         "team_root_rva": "0x55487C0",
-        "container_off": "0x80"
+        "container_off": "0x88",
+        "container_indirect": True
       },
       "comp_table_chain": {
         "comp_root_rva": "0x5548740",
@@ -3142,6 +3156,7 @@ ASSINATURAS = {
       "vtable_rvas": {
         "ptr_person_ap": "0x5492830",
         "ptr_person_apnp": "0x5498AA0",
+        "virtual_player": "0x54D49F0",
         "vtb_club": "0x54A6CF8",
         "vtb_team": "0x54CD3D8",
         "vtb_comp": "0x54AAB48",

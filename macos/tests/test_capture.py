@@ -183,6 +183,39 @@ class CaptureTests(unittest.TestCase):
         self.mem, self.reader = memory, reader
         return memory, reader
 
+    def test_arm64_layout_captures_real_fields_and_preserves_null_stats(self):
+        from test_capture_reader_arm64 import CaptureMemory
+        memory = CaptureMemory()
+        memory.process_id = 1234
+        memory.fm_version = "26.3.2+2329565"
+        memory.is_alive = Mock(return_value=True)
+        memory.close = Mock()
+        memory.put(memory.TEAM + 0x38, "QQ", memory.ITEMS + 0x100, memory.ITEMS + 0x108)
+        memory.put(memory.ITEMS + 0x100, "Q", memory.PLAYER)
+        reader = FmReader(memory)
+        self.start_patch(patch.object(server, "FmMemory", return_value=memory))
+        self.start_patch(patch.object(server, "FmReader", return_value=reader))
+        self.connect()
+        for scope in ("squad", "full"):
+            status, response = self.request("/api/capture", {"name": scope, "scope": scope})
+            self.assertEqual(status, 200, response)
+            sid = response["sid"]
+            with closing(server.get_db_connection()) as conn:
+                player = conn.execute("SELECT uid, full_name, ca, pa FROM players WHERE snapshot_id=?", (sid,)).fetchone()
+                self.assertEqual(tuple(player), (67214451, "Luca Zidane", 126, 133))
+                stats = conn.execute("SELECT goals, minutes, xg FROM player_stats WHERE snapshot_id=?", (sid,)).fetchone()
+                self.assertEqual(tuple(stats), (None, None, None))
+                profile = conn.execute("SELECT passing, pos_gk, contract_end, wage_weekly FROM player_profile WHERE snapshot_id=?", (sid,)).fetchone()
+                self.assertEqual(tuple(profile), (9, 20, None, None))
+            status, response = self.request(f"/api/snapshots/{sid}/players")
+            self.assertEqual(status, 200, response)
+        memory.put(memory.TABLE + 0x88, "Q", 0)
+        status, response = self.request("/api/capture", {"name": "Must fail"})
+        self.assertEqual(status, 500, response)
+        with closing(server.get_db_connection()) as conn:
+            self.assertEqual(conn.execute("SELECT COUNT(*) FROM snapshots").fetchone()[0], 2)
+            self.assertEqual(conn.execute("SELECT COUNT(*) FROM players").fetchone()[0], 2)
+
     def test_hidden_roster_and_vector_failures_are_not_saved(self):
         self.seed_existing()
         memory, reader = self.use_real_reader()
