@@ -35,6 +35,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, field_validator
 import uvicorn
 import graphics
+import game_launcher
 import capture_all
 import cache_browse
 import db
@@ -1334,6 +1335,16 @@ def _connect_game(kind="connect"):
         _JOB_STATUS.update(state="error", phase="erro", error=error, error_code=error_code)
         # The shipped client reads connection errors from the JSON result.
         return {"ok": False, "connected": False, "error_code": error_code, "error": error}
+
+
+@app.get("/api/game/launcher")
+def game_launcher_capabilities():
+    return {"platform": sys.platform, "available": sys.platform == "darwin"}
+
+
+@app.post("/api/game/launch")
+def launch_game():
+    return game_launcher.launch_game()
 
 
 @app.post("/api/connect")

@@ -5292,3 +5292,16 @@ vfm.semViews.plantel = Keine Kader-Ansicht im FM-Ordner.
 config.macosTitulo = App-Verhalten unter macOS
 config.macosAjuda = Das Schließen des letzten App-Fensters beendet FM Season Hub. Mit Window > Minimize (⌘M) läuft die App weiter.
 config.macosInicioAjuda = Ein Symbol in der Menüleiste und der Start bei der Anmeldung sind in dieser macOS-Version nicht verfügbar.
+
+# macOS game connection recovery
+conn.macosAccessDeniedBody = Speichere und schließe Football Manager. Wähle FM mit Hub starten, lade deinen Spielstand und wähle Erneut versuchen. Der Hub benötigt unter macOS seine Speicherbrücke.
+conn.launchGame = FM mit Hub starten
+conn.launchingGame = Wird gestartet…
+conn.launch.started = Football Manager wurde gestartet. Lade deinen Spielstand und versuche es erneut.
+conn.launch.game_running = Football Manager ist noch geöffnet. Speichere und schließe das Spiel, bevor du es mit dem Hub startest.
+conn.launch.bridge_busy = Eine Speicherbrücke ist bereits aktiv. Versuche es erneut. Schließe bei Bedarf andere Hub-Instanzen.
+conn.launch.game_not_found = Football Manager 26 wurde in deinen Steam-Bibliotheken nicht gefunden. Installiere es mit Steam.
+conn.launch.bridge_missing = Die Hub-Speicherbrücke fehlt. Installiere FM Season Hub erneut.
+conn.launch.launch_failed = Football Manager konnte nicht starten. Prüfe den Start über Steam, schließe das Spiel und versuche es hier erneut.
+conn.launch.unsupported_platform = Diese Aktion ist nur unter macOS verfügbar.
+conn.accessDeniedPendingBody = Das System hat den Zugriff auf Football Manager blockiert. Warte auf die Wiederherstellungsoptionen oder versuche es erneut.

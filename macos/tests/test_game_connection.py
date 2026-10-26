@@ -75,6 +75,12 @@ class GameConnectionTests(unittest.TestCase):
             if code:
                 self.assertEqual(status["error_code"], code)
 
+    def test_packaged_game_launch_routes(self):
+        self.assertEqual(self.request("/api/game/launcher"), {"platform": sys.platform, "available": sys.platform == "darwin"})
+        with patch.object(server.game_launcher, "launch_game", return_value={"ok": False, "error_code": "game_running"}) as launch:
+            self.assertEqual(self.request("/api/game/launch", {}), {"ok": False, "error_code": "game_running"})
+            launch.assert_called_once_with()
+
     def test_closed_game_rejects_even_a_supplied_date(self):
         self.memory_class.side_effect = fm_memory.FmNotRunning("Open Football Manager and load a save.")
         result = self.request("/api/connect", {"game_date": "2030-01-01"})

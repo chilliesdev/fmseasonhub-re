@@ -112,6 +112,18 @@ macos/.venv/bin/python macos/verify_release.py /path/to/FMSeasonHub-macos-arm64.
 
 Build each architecture on its matching Mac; CI checks both before publishing.
 
+## Connect Football Manager on macOS
+
+If connection reports denied access, save and close Football Manager first.
+Select **Launch FM with Hub** in the error dialog. Load your save, then select
+**Try again**. The action finds FM26 in the default or additional Steam libraries
+and starts it with the packaged memory bridge. It never closes a running game
+or starts a second instance. A game started normally from Steam may not have the
+bridge; direct memory access can then be denied by macOS.
+
+Both app build paths include the Python launch service and native bridge.
+No administrator access or system security changes are required.
+
 ## Local development bundle
 
 The tracked `fmsh/frontend/dist` files are the existing prebuilt runtime assets.

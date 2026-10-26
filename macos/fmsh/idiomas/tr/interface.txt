@@ -5456,3 +5456,16 @@ vfm.semViews.plantel = FM klasöründe kadro görünümü yok.
 config.macosTitulo = macOS uygulama davranışı
 config.macosAjuda = Son uygulama penceresini kapatmak FM Season Hub uygulamasını kapatır. Uygulamayı çalışır tutmak için Window > Minimize (⌘M) kullanın.
 config.macosInicioAjuda = Menü çubuğu simgesi ve oturum açılışında başlatma bu macOS sürümünde kullanılamaz.
+
+# macOS game connection recovery
+conn.macosAccessDeniedBody = Football Manager oyununu kaydedip kapatın. FM’yi Hub ile başlat seçeneğini seçin, kaydınızı yükleyin ve yeniden deneyin. Hub, macOS üzerinde oyunu okumak için bellek köprüsüne ihtiyaç duyar.
+conn.launchGame = FM’yi Hub ile başlat
+conn.launchingGame = Başlatılıyor…
+conn.launch.started = Football Manager başlatıldı. Kaydınızı yükleyip yeniden deneyin.
+conn.launch.game_running = Football Manager hâlâ açık. Hub ile başlatmadan önce oyunu kaydedip kapatın.
+conn.launch.bridge_busy = Bir bellek köprüsü zaten etkin. Yeniden deneyin. Gerekirse diğer Hub kopyalarını kapatın.
+conn.launch.game_not_found = Football Manager 26 Steam kütüphanelerinizde bulunamadı. Steam üzerinden yükleyin.
+conn.launch.bridge_missing = Hub bellek köprüsü eksik. FM Season Hub uygulamasını yeniden yükleyin.
+conn.launch.launch_failed = Football Manager başlatılamadı. Steam üzerinden açıldığını kontrol edin, kapatın ve burada yeniden deneyin.
+conn.launch.unsupported_platform = Bu işlem yalnızca macOS üzerinde kullanılabilir.
+conn.accessDeniedPendingBody = Sistem Football Manager erişimini engelledi. Kurtarma seçeneklerini bekleyin veya yeniden deneyin.
