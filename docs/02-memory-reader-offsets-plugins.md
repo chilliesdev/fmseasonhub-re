@@ -532,3 +532,32 @@ The analysis documented in this report is cross-verified against primary evidenc
 3. **ActionLink Protocol:** Verified via disassembly of Python 3.14 code object `abrir` in `abrir_no_jogo.pyc` (`decompiled_pyc/abrir_no_jogo.dis.txt`).
 4. **Database Schemas:** Confirmed via embedded SQL statements extracted from `db.cp314-win_amd64.pyd`.
 5. **Plugin Management:** Verified via docstrings and method dispatch tables in `plugins_atualizador.cp314-win_amd64.pyd`.
+
+### FM26 26.3.2 macOS ARM64 capture
+
+The team table at RVA `0x55487C0` stores a **pointer** to its vector at
+`+0x88`. Team-table getters at RVAs `0x3329CB8` and `0x32C1538` confirm
+this indirection. A roster is an inline pointer vector at team `+0x38`.
+Large vectors use reads of at most 65,536 bytes, the bridge frame limit.
+
+An `ACTUAL_PLAYER` uses PERSON `+0x278` and ENTITY `+0x388`;
+`ACTUAL_PLAYER_AND_NON_PLAYER` uses `+0x370` and `+0x480`. The vtable
+prefixes encode these virtual-base offsets. UID is ENTITY `+0x0C`.
+PERSON holds full name at `+0x10`, nested first/last/common names at
+`+0x20/+0x28/+0x30`, and birth date at `+0x58`. CA/PA getters at
+`0x2FA7638` / `0x2FC7210` read `+0x25C/+0x25E`. Height is `+0x226`,
+current team is `+0x130`. Position and attribute offsets are eight bytes
+before the existing Windows offsets; positions use 0–20, attributes use
+0–100 and convert to the nearest 1–20 value. Live roster records confirm
+these fields. Verified `VIRTUAL_PLAYER` roster fillers are skipped;
+unrecognized types or invalid reads fail capture.
+
+ARM64 captures store **NULL** for unverified season statistics (all
+`BASIC_KEYS` and `ADV_KEYS`) and unverified profile fields: nationality,
+contract, wage, transfer values/status, adaptability, ambition, loyalty,
+pressure, professionalism, sportsmanship, temperament, controversy, appearance, traits,
+joined/loan dates, weight and squad number. These are missing values,
+not zero performance or a fabricated contract. Match-form history is
+not extracted. Analysis that needs these fields remains incomplete.
+Legacy build extraction stays unchanged. Both existing API scope values
+currently use the same database scanner; `scope` labels the snapshot.

@@ -282,7 +282,10 @@ class FmReader:
                 return []
             if not count:
                 return []
-            raw = self.rb(begin, count * 8)
+            # The in-process bridge accepts at most 64 KiB per READ frame.
+            size = count * 8
+            raw = b"".join(self.rb(begin + off, min(65536, size - off))
+                           for off in range(0, size, 65536))
             return list(struct.unpack(f"<{count}Q", raw))
         except Exception:
             if self._strict_reads:
@@ -410,8 +413,7 @@ class FmReader:
             tbl = self.q(self.mem.rva(rva_off))
             if not tbl:
                 return (None, None, "Clube Local", "CLB")
-            container = tbl + _to_int(team_chain.get("container_off", 0x80))
-            teams = self.vector(container)
+            teams = self.all_teams_with_players()
             if not teams:
                 return (None, None, "Clube Local", "CLB")
 
@@ -447,6 +449,8 @@ class FmReader:
     def player_identity(self, obj, abias=0, buf=None):
         """Desempacota a identidade do jogador."""
         try:
+            if self.cfg.get("capture_layout"):
+                return self._arm64_player_identity(obj)
             uid = self.u32(obj + 0x294 + abias)
             ca = self.u16(obj + 0x264 + abias)
             pa = self.u16(obj + 0x266 + abias)
@@ -501,8 +505,48 @@ class FmReader:
                 raise
             return None
 
+    def _arm64_player_identity(self, obj):
+        """Read the PERSON and ENTITY virtual bases of an ARM64 roster player."""
+        layout = self.cfg["capture_layout"]
+        vtable = self.q(obj) - self.base
+        if vtable == _to_int(self.vtables["ptr_person_ap"]):
+            person = obj + _to_int(layout["player_person"])
+            entity = obj + _to_int(layout["player_entity"])
+        elif vtable == _to_int(self.vtables["ptr_person_apnp"]):
+            person = obj + _to_int(layout["player_staff_person"])
+            entity = obj + _to_int(layout["player_staff_entity"])
+        else:
+            raise OSError("Tipo de jogador ARM64 invalido durante a captura")
+        uid = self.u32(entity + 0x0C)
+        first = self.nested_str(self.q(person + 0x20))
+        last = self.nested_str(self.q(person + 0x28))
+        common = self.nested_str(self.q(person + 0x30))
+        legal = self.fmstr(self.q(person + 0x10)) or " ".join(filter(None, (first, last)))
+        display = common or " ".join(filter(None, (first, last))) or legal
+        if not uid or not display:
+            raise OSError("Identidade de jogador ARM64 invalida durante a captura")
+        ca = self.u16(obj + _to_int(layout["ca"]))
+        pa = self.u16(obj + _to_int(layout["pa"]))
+        if not 0 <= ca <= 200 or not 0 <= pa <= 200:
+            raise OSError("Capacidade de jogador ARM64 invalida durante a captura")
+        team = self.q(obj + _to_int(layout["team"]))
+        club = self.q(team + 0x30) if team else 0
+        birth = decode_fm_date(self.u32(person + 0x58))
+        return {
+            "uid": uid, "name_first": first, "name_last": last,
+            "common_name": common, "full_name": display, "legal_name": legal,
+            "display_norm": display, "ca": ca, "pa": pa,
+            "height_cm": self.u8(obj + _to_int(layout["height"])),
+            "birth_date": birth.isoformat() if birth else None,
+            "club_uid": self.u32(club + 0x0C) if club else None,
+            "team_uid": self.u32(team + 0x0C) if team else None,
+        }
+
     def player_season_stats(self, obj, abias=0, buf=None):
         """Desempacota estatisticas da temporada do jogador."""
+        if self.cfg.get("capture_layout"):
+            # The Windows season-stat chain is not valid on this ARM64 build.
+            return {key: None for key in (*BASIC_KEYS, *ADV_KEYS)}
         stats = {k: 0 for k in BASIC_KEYS}
         stats.update({k: 0 for k in ADV_KEYS})
         stats["avg_rating"] = 0.0
@@ -591,6 +635,8 @@ class FmReader:
 
     def player_profile(self, obj, abias=0, buf=None):
         """Desempacota os 54 atributos tecnicos/mentais, posicoes, personalidade e contrato."""
+        if self.cfg.get("capture_layout"):
+            return self._arm64_player_profile(obj)
         prof = {k: 10 for k in PROFILE_KEYS if k.startswith("pos_") or k in ("crossing", "finishing", "passing")}
         prof.update({
             "nationality": "Desconhecida",
@@ -651,6 +697,28 @@ class FmReader:
 
         return prof
 
+    def _arm64_player_profile(self, obj):
+        """Capture only fields verified on the supported ARM64 layout."""
+        layout = self.cfg["capture_layout"]
+        prof = {key: None for key in PROFILE_KEYS}
+        bias = layout["attribute_bias"]
+        scale = layout["attribute_scale"]
+        attributes = self.rb(obj + 0x140, 0x55)
+        for key, off in self.cfg.get("attrs_u8", {}).items():
+            value = attributes[_to_int(off) + bias - 0x140]
+            if 1 <= value <= 100:
+                prof[key] = max(1, min(20, (value + scale // 2) // scale))
+        for key, off in self.cfg.get("positions_u8", {}).items():
+            value = attributes[_to_int(off) + bias - 0x140]
+            prof[key] = value if 0 <= value <= 20 else None
+        vtable = self.q(obj) - self.base
+        person_key = "player_staff_person" if vtable == _to_int(self.vtables["ptr_person_apnp"]) else "player_person"
+        birth = decode_fm_date(self.u32(obj + _to_int(layout[person_key]) + 0x58))
+        prof["birth_date"] = birth.isoformat() if birth else None
+        prof["foot_left"] = prof.get("left_foot")
+        prof["foot_right"] = prof.get("right_foot")
+        return prof
+
     def player_form(self, obj, abias=0):
         """Historico de form / ultimas notas de partidas do jogador."""
         return []
@@ -688,6 +756,12 @@ class FmReader:
             if not tbl:
                 return []
             container = tbl + _to_int(team_chain.get("container_off", 0x80))
+            if team_chain.get("container_indirect"):
+                container = self.q(container)
+                if container < 0x10000:
+                    if self._strict_reads:
+                        raise OSError("Container de times indisponivel durante a captura")
+                    return []
             return self.vector(container)
         except Exception:
             if self._strict_reads:
@@ -708,6 +782,10 @@ class FmReader:
 
     def jogador_do_elenco(self, ptr):
         """Identifica o ponteiro do jogador a partir do slot do roster."""
+        if ptr and self.cfg.get("capture_layout"):
+            # VIRTUAL_PLAYER is a roster filler, not a persistent database player.
+            if self.q(ptr) == self.base + _to_int(self.vtables["virtual_player"]):
+                return None
         return ptr
 
     def youth_comps_and_teams(self):
