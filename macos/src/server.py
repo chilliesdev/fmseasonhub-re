@@ -1510,7 +1510,7 @@ def _moneyball_column_catalog(group: str) -> Dict[str, Any]:
         raise HTTPException(status_code=400, detail=f"grupo invalido: {group}")
     sections = [
         {"group": position, "columns": [
-            {**column, "from": position, "short": column.get("col", column["key"])}
+            {**mb.column_locale(column), "from": position, "short": column.get("col", column["key"])}
             for column in columns
         ]}
         for position, columns in catalog.items()
@@ -1534,7 +1534,11 @@ def get_search_fields(group: str = "all", snapshot: Optional[int] = None):
     ops_by_type = {"num": num_ops, "money": num_ops, "text": text_ops,
                    "positions": ["includes", "excludes"]}
     fields = {}
-    for column in columns["current"] + moneyball_data.search_alias_columns() + [column for section in columns["sections"] for column in section["columns"]]:
+    aliases = [mb.column_locale(column) for column in moneyball_data.search_alias_columns()]
+    all_columns = columns["current"] + aliases + [
+        column for section in columns["sections"] for column in section["columns"]
+    ]
+    for column in all_columns:
         field_type = column.get("type", "num")
         fields.setdefault(column["key"], {
             **column, "type": field_type, "section": column.get("section", "derivado"),
@@ -1563,7 +1567,7 @@ def _moneyball_columns(group, extra=""):
     columns = [column for column in catalog["current"] if column["key"] not in identity]
     known = {column["key"] for column in columns}
     available = {column["key"]: column for section in catalog["sections"] for column in section["columns"]}
-    available.update({column["key"]: column for column in moneyball_data.search_alias_columns()})
+    available.update({column["key"]: mb.column_locale(column) for column in moneyball_data.search_alias_columns()})
     for key in extra.split(","):
         if key in available and key not in known:
             columns.append(available[key])
