@@ -182,7 +182,7 @@ def _meta(codigo):
 def disponiveis():
     base = set(carregar('en')[0]) | set(carregar('pt')[0])
     base = {k for k in base if not k.startswith('_idioma.')}
-    total = max(1, len(base))
+    total = len(base)
     embarcado = paths.idiomas_embarcados()
     do_usuario = paths.idiomas_dir()
     fontes = [(embarcado, 'app')]
@@ -208,13 +208,17 @@ def disponiveis():
             continue
         problemas = carregar(codigo)[1] + carregar(codigo, 'colunas')[1]
         m = _meta(codigo)
+        traduzidos = len(proprios & base)
+        cobertura = int(100 * traduzidos / total) if total else 0
         saida.append({
             'codigo': codigo,
             'nome': m['nome'],
             'autor': m['autor'],
             'origem': achados[codigo],
-            'completo': codigo in ('pt', 'en') or not (base - proprios),
-            'cobertura': 100 if codigo in ('pt', 'en') else min(99, int(100 * len(proprios & base) / total)),
+            'completo': cobertura,
+            'cobertura': cobertura,
+            'traduzidos': traduzidos,
+            'total': total,
             'problemas': problemas[:20],
             'n_problemas': len(problemas),
         })
