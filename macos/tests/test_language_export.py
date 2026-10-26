@@ -74,6 +74,62 @@ class LanguageExportTests(unittest.TestCase):
     def export(self, code='zz', base='en', name=None):
         return self.request(body={'codigo': code, 'base': base, 'nome': name})
 
+    def test_language_cards_report_actual_numeric_coverage(self):
+        for code, text in (
+            ('pt', '_idioma.nome = Português\nhello = Olá\n'),
+            ('full', '_idioma.nome = Full\nhello = Hi\nbye = Bye\n'),
+            ('partial', '_idioma.nome = Partial\nhello = Hi\nbye = \nextra = Ignore\n'),
+            ('empty', '_idioma.nome = Empty\nhello = \nbye = \n'),
+        ):
+            target = self.user / code
+            target.mkdir()
+            (target / 'interface.txt').write_text(text, encoding='utf-8')
+            (target / 'colunas.txt').write_text('goals.nome = Goals\n', encoding='utf-8')
+        status, result = self.request('/api/idiomas')
+        self.assertEqual(status, 200)
+        cards = {item['codigo']: item for item in result['idiomas']}
+        for code, translated, percent in (
+            ('en', 2, 100), ('pt', 1, 50), ('full', 2, 100),
+            ('partial', 1, 50), ('empty', 0, 0),
+        ):
+            with self.subTest(code=code):
+                card = cards[code]
+                for key in ('completo', 'cobertura', 'traduzidos', 'total'):
+                    self.assertIs(type(card[key]), int)
+                self.assertEqual((card['completo'], card['cobertura']), (percent, percent))
+                self.assertEqual((card['traduzidos'], card['total']), (translated, 2))
+                self.assertEqual(card['n_problemas'], 0)
+
+    def test_language_cards_have_zero_counts_without_base_keys(self):
+        (self.shipped / 'en' / 'interface.txt').write_text(
+            '_idioma.nome = English\n', encoding='utf-8')
+        status, result = self.request('/api/idiomas')
+        self.assertEqual(status, 200)
+        card = result['idiomas'][0]
+        self.assertEqual((card['completo'], card['traduzidos'], card['total']), (0, 0, 0))
+
+    def test_language_card_fallback_keeps_numeric_contract(self):
+        for module_available in (False, True):
+            for scanned in (False, True):
+                with self.subTest(module_available=module_available, scanned=scanned):
+                    root = self.root / ('scan' if scanned else 'no-scan')
+                    if scanned:
+                        (root / 'idiomas' / 'zz').mkdir(parents=True, exist_ok=True)
+                    with patch.object(server, 'FMSH_DIR', root):
+                        if module_available:
+                            with patch.object(idiomas, 'disponiveis', side_effect=OSError('QA')):
+                                status, result = self.request('/api/idiomas')
+                        else:
+                            with patch.object(server, 'idiomas', None):
+                                status, result = self.request('/api/idiomas')
+                    self.assertEqual(status, 200)
+                    self.assertEqual({item['codigo'] for item in result['idiomas']},
+                                     {'zz'} if scanned else {'en', 'pt'})
+                    for card in result['idiomas']:
+                        for key in ('completo', 'cobertura', 'traduzidos', 'total'):
+                            self.assertIs(type(card[key]), int)
+                            self.assertEqual(card[key], 0)
+
     def test_new_language_files_and_frontend_metadata(self):
         status, result = self.export(name='QA language')
         self.assertEqual(status, 200)

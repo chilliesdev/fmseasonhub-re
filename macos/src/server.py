@@ -2832,6 +2832,8 @@ def get_idiomas():
                 langs.append({"codigo": d.name, "nome": d.name.upper()})
     if not langs:
         langs = [{"codigo": "pt", "nome": "Português"}, {"codigo": "en", "nome": "English"}]
+    for lang in langs:
+        lang.update(completo=0, cobertura=0, traduzidos=0, total=0)
     return {"idiomas": langs}
 
 @app.get("/api/idiomas/{codigo}")
