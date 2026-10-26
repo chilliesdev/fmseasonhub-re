@@ -16,6 +16,9 @@
 #include <unistd.h>
 #include <errno.h>
 #include <pthread.h>
+#include <poll.h>
+#include <fcntl.h>
+#include <stdatomic.h>
 #include <sys/socket.h>
 #include <sys/un.h>
 #include <sys/stat.h>
@@ -23,7 +26,9 @@
 #include <mach/mach_vm.h>
 #include <mach-o/dyld.h>
 
+#ifndef FMSH_SOCKET_PATH
 #define FMSH_SOCKET_PATH "/tmp/fmsh_mem_bridge.sock"
+#endif
 #define FMSH_BUFFER_SIZE 65536
 
 static mach_port_t g_target_task = MACH_PORT_NULL;
@@ -31,8 +36,7 @@ static pid_t g_target_pid = 0;
 static pthread_mutex_t g_task_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 static pthread_t g_server_thread;
-static volatile bool g_server_running = false;
-static int g_server_fd = -1;
+static atomic_bool g_server_running = false;
 
 /* =========================================================================
  * Mach VM Direct APIs (Callable via ctypes / C linking)
@@ -187,7 +191,74 @@ static uint64_t get_image_base(const char *target) {
     return 0;
 }
 
-static void handle_client(int client_fd) {
+/* SIGPIPE belongs to the host. Suppress it only on bridge sockets. */
+static int accept_client(int server_fd) {
+    int fd = accept(server_fd, NULL, NULL);
+    if (fd >= 0) {
+        int enabled = 1;
+        if (setsockopt(fd, SOL_SOCKET, SO_NOSIGPIPE, &enabled, sizeof(enabled)) < 0 ||
+            fcntl(fd, F_SETFL, O_NONBLOCK) < 0) {
+            close(fd);
+            return -1;
+        }
+    }
+    return fd;
+}
+
+/* Keep admission responsive even during an incomplete command or slow read. */
+static bool wait_for_client(int client_fd, int server_fd, short events) {
+    while (g_server_running) {
+        struct pollfd fds[] = {
+            { .fd = client_fd, .events = events },
+            { .fd = server_fd, .events = POLLIN }
+        };
+        int ready = poll(fds, 2, 100);
+        if (ready < 0) {
+            if (errno == EINTR) continue;
+            return false;
+        }
+        if (!g_server_running) return false;
+        /* Release an already closed reader before deciding the server is busy. */
+        if ((fds[1].revents & POLLIN) && (events & POLLIN) &&
+            (fds[0].revents & POLLIN)) {
+            char byte;
+            ssize_t n = recv(client_fd, &byte, 1, MSG_PEEK | MSG_DONTWAIT);
+            if (n == 0) return true;
+        }
+        if (fds[1].revents & POLLIN) {
+            int busy_fd = accept_client(server_fd);
+            if (busy_fd >= 0) {
+                const char busy[] = "ERR_BUSY\n";
+                /* Never block the active client on a rejected peer. */
+                send(busy_fd, busy, sizeof(busy) - 1, MSG_DONTWAIT);
+                close(busy_fd);
+            }
+        }
+        if (fds[1].revents & (POLLERR | POLLHUP | POLLNVAL)) return false;
+        if (fds[0].revents & (events | POLLERR | POLLHUP | POLLNVAL)) return true;
+    }
+    return false;
+}
+
+static bool write_response(int client_fd, int server_fd, const void *data, size_t size) {
+    const uint8_t *bytes = data;
+    size_t sent = 0;
+    while (sent < size && g_server_running) {
+        ssize_t n = send(client_fd, bytes + sent, size - sent, MSG_DONTWAIT);
+        if (n > 0) {
+            sent += (size_t)n;
+        } else if (n < 0 && errno == EINTR) {
+            continue;
+        } else if (n < 0 && (errno == EAGAIN || errno == EWOULDBLOCK)) {
+            if (!wait_for_client(client_fd, server_fd, POLLOUT)) return false;
+        } else {
+            return false;
+        }
+    }
+    return sent == size;
+}
+
+static void handle_client(int client_fd, int server_fd) {
     char line[512];
     uint8_t read_buffer[FMSH_BUFFER_SIZE];
 
@@ -196,7 +267,12 @@ static void handle_client(int client_fd) {
         ssize_t idx = 0;
         char c;
         while (idx < (ssize_t)sizeof(line) - 1) {
-            ssize_t r = read(client_fd, &c, 1);
+            if (!wait_for_client(client_fd, server_fd, POLLIN)) {
+                close(client_fd);
+                return;
+            }
+            ssize_t r = recv(client_fd, &c, 1, MSG_DONTWAIT);
+            if (r < 0 && (errno == EINTR || errno == EAGAIN || errno == EWOULDBLOCK)) continue;
             if (r <= 0) {
                 close(client_fd);
                 return;
@@ -208,27 +284,27 @@ static void handle_client(int client_fd) {
 
         if (strcmp(line, "PING") == 0) {
             const char *resp = "PONG\n";
-            write(client_fd, resp, strlen(resp));
+            if (!write_response(client_fd, server_fd, resp, strlen(resp))) break;
         } else if (strncmp(line, "ATTACH ", 7) == 0) {
             pid_t pid = (pid_t)atoi(line + 7);
             int res = fmsh_attach(pid);
             if (res == 0) {
                 const char *resp = "OK\n";
-                write(client_fd, resp, strlen(resp));
+                if (!write_response(client_fd, server_fd, resp, strlen(resp))) break;
             } else {
                 char resp[64];
                 snprintf(resp, sizeof(resp), "ERR %d\n", res);
-                write(client_fd, resp, strlen(resp));
+                if (!write_response(client_fd, server_fd, resp, strlen(resp))) break;
             }
         } else if (strcmp(line, "DETACH") == 0) {
             fmsh_detach();
             const char *resp = "OK\n";
-            write(client_fd, resp, strlen(resp));
+            if (!write_response(client_fd, server_fd, resp, strlen(resp))) break;
         } else if (strcmp(line, "IS_ATTACHED") == 0) {
             int att = fmsh_is_attached();
             char resp[32];
             snprintf(resp, sizeof(resp), "%d\n", att);
-            write(client_fd, resp, strlen(resp));
+            if (!write_response(client_fd, server_fd, resp, strlen(resp))) break;
         } else if (strncmp(line, "GET_BASE", 8) == 0) {
             const char *modname = "";
             if (strlen(line) > 8) {
@@ -238,7 +314,7 @@ static void handle_client(int client_fd) {
             uint64_t base = get_image_base(modname);
             char resp[64];
             snprintf(resp, sizeof(resp), "OK %llx\n", (unsigned long long)base);
-            write(client_fd, resp, strlen(resp));
+            if (!write_response(client_fd, server_fd, resp, strlen(resp))) break;
         } else if (strncmp(line, "READ ", 5) == 0) {
             uint64_t addr = 0;
             size_t size = 0;
@@ -246,28 +322,28 @@ static void handle_client(int client_fd) {
                 if (size > sizeof(read_buffer)) {
                     // Send error if size too large for single frame
                     const char *resp = "ERR_TOO_LARGE\n";
-                    write(client_fd, resp, strlen(resp));
+                    if (!write_response(client_fd, server_fd, resp, strlen(resp))) break;
                     continue;
                 }
                 size_t n = fmsh_read(addr, read_buffer, size);
                 if (n == size) {
                     char header[64];
                     int hlen = snprintf(header, sizeof(header), "OK %zu\n", n);
-                    write(client_fd, header, hlen);
-                    write(client_fd, read_buffer, n);
+                    if (!write_response(client_fd, server_fd, header, (size_t)hlen) ||
+                        !write_response(client_fd, server_fd, read_buffer, n)) break;
                 } else {
                     const char *resp = "ERR_READ\n";
-                    write(client_fd, resp, strlen(resp));
+                    if (!write_response(client_fd, server_fd, resp, strlen(resp))) break;
                 }
             } else {
                 const char *resp = "ERR_SYNTAX\n";
-                write(client_fd, resp, strlen(resp));
+                if (!write_response(client_fd, server_fd, resp, strlen(resp))) break;
             }
         } else if (strcmp(line, "QUIT") == 0) {
             break;
         } else {
             const char *resp = "ERR_UNKNOWN\n";
-            write(client_fd, resp, strlen(resp));
+            if (!write_response(client_fd, server_fd, resp, strlen(resp))) break;
         }
     }
     close(client_fd);
@@ -282,7 +358,11 @@ static void *server_worker(void *arg) {
         g_server_running = false;
         return NULL;
     }
-    g_server_fd = sfd;
+    if (fcntl(sfd, F_SETFL, O_NONBLOCK) < 0) {
+        close(sfd);
+        g_server_running = false;
+        return NULL;
+    }
 
     struct sockaddr_un addr;
     memset(&addr, 0, sizeof(addr));
@@ -291,7 +371,6 @@ static void *server_worker(void *arg) {
 
     if (bind(sfd, (struct sockaddr *)&addr, sizeof(addr)) < 0) {
         close(sfd);
-        g_server_fd = -1;
         g_server_running = false;
         return NULL;
     }
@@ -300,25 +379,30 @@ static void *server_worker(void *arg) {
 
     if (listen(sfd, 16) < 0) {
         close(sfd);
-        g_server_fd = -1;
         g_server_running = false;
         return NULL;
     }
 
     while (g_server_running) {
-        struct sockaddr_un caddr;
-        socklen_t clen = sizeof(caddr);
-        int cfd = accept(sfd, (struct sockaddr *)&caddr, &clen);
+        struct pollfd listener = { .fd = sfd, .events = POLLIN };
+        int ready = poll(&listener, 1, 100);
+        if (!g_server_running) break;
+        if (ready < 0) {
+            if (errno == EINTR) continue;
+            break;
+        }
+        if (ready == 0) continue;
+        if (!(listener.revents & POLLIN)) break;
+        int cfd = accept_client(sfd);
         if (cfd < 0) {
             if (!g_server_running) break;
             continue;
         }
-        handle_client(cfd);
+        handle_client(cfd, sfd);
     }
 
     close(sfd);
     unlink(FMSH_SOCKET_PATH);
-    g_server_fd = -1;
     return NULL;
 }
 
@@ -337,11 +421,6 @@ __attribute__((visibility("default")))
 void fmsh_stop_socket_server(void) {
     if (!g_server_running) return;
     g_server_running = false;
-    if (g_server_fd >= 0) {
-        shutdown(g_server_fd, SHUT_RDWR);
-        close(g_server_fd);
-        g_server_fd = -1;
-    }
     pthread_join(g_server_thread, NULL);
     unlink(FMSH_SOCKET_PATH);
 }
