@@ -130,8 +130,10 @@ class LibraryShortlistTests(unittest.TestCase):
         self.assertEqual(outside.read_bytes(), b'outside')
 
     def test_library_lists_player_count_and_shipped_renderer_uses_raw_download(self):
+        from test_preferred_shortlists import fmf_bytes
         self.assertEqual(self.save()[0], 200)
         (self.library / 'broken.lsh').write_bytes(b'')
+        (self.library / 'Scouting.fmf').write_bytes(fmf_bytes('Scouting', [101, 202]))
         listing = self.request()[1]
         saved = next(item for item in listing['arquivos'] if item['arquivo'] == 'Équipe.lsh')
         self.assertEqual((saved['tipo'], saved['nome'], saved['jogadores'], saved['carregada']),
@@ -141,6 +143,9 @@ class LibraryShortlistTests(unittest.TestCase):
         broken = next(item for item in listing['arquivos'] if item['arquivo'] == 'broken.lsh')
         self.assertEqual(broken['tipo'], 'lista')
         self.assertTrue(broken['erro'])
+        fmf = next(item for item in listing['arquivos'] if item['arquivo'] == 'Scouting.fmf')
+        self.assertEqual((fmf['tipo'], fmf['nome'], fmf['jogadores'], fmf['carregada']),
+                         ('listaFm', 'Scouting', 2, False))
         check = subprocess.run(['node', str(Path(__file__).with_name('library_shortlists_ui.mjs'))],
             input=json.dumps(listing), text=True, capture_output=True, check=False)
         self.assertEqual(check.returncode, 0, check.stdout + check.stderr)
@@ -233,6 +238,37 @@ class LibraryShortlistTests(unittest.TestCase):
         fmf_after = next(i for i in listing_after['arquivos'] if i['arquivo'] == 'Scouting.fmf')
         self.assertTrue(lsh_after['carregada'])
         self.assertTrue(fmf_after['carregada'])
+
+    def test_fmf_shortlist_reading_as_text_rejected_with_400(self):
+        from test_preferred_shortlists import fmf_bytes
+        (self.library / 'Scouting.fmf').write_bytes(fmf_bytes('Scouting', [101, 202]))
+        status, res = self.request('/Scouting.fmf')
+        self.assertEqual(status, 400)
+        self.assertIn('Arquivo binario', res['detail'])
+        # Saving text to .fmf via post_biblioteca must also be rejected
+        status, res = self.request(body={'arquivo': 'test.fmf', 'conteudo': {'nome': 'Test'}})
+        self.assertEqual(status, 400)
+
+    def test_fmf_shortlist_with_uppercase_slf_member_supported(self):
+        from test_preferred_shortlists import fmf_bytes
+        (self.library / 'Upper.fmf').write_bytes(fmf_bytes('Upper', [303], extension='.SLF'))
+        status, listing = self.request()
+        self.assertEqual(status, 200)
+        item = next(i for i in listing['arquivos'] if i['arquivo'] == 'Upper.fmf')
+        self.assertEqual(item['tipo'], 'listaFm')
+        self.assertEqual(item['jogadores'], 1)
+        status, res = self.carregar('Upper.fmf')
+        self.assertEqual(status, 200)
+        self.assertEqual(res['destino'], 'lista')
+        self.assertEqual(res['importados'], 1)
+
+    def test_broken_fmf_remains_lista_fm_type_with_error(self):
+        (self.library / 'broken.fmf').write_bytes(b'corrupt fmf binary')
+        status, listing = self.request()
+        self.assertEqual(status, 200)
+        item = next(i for i in listing['arquivos'] if i['arquivo'] == 'broken.fmf')
+        self.assertEqual(item['tipo'], 'listaFm')
+        self.assertNotEqual(item['tipo'], 'filtro')
 
 
 if __name__ == '__main__':

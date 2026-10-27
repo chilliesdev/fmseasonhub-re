@@ -49,16 +49,16 @@ def _conferir_tamanho(dados):
 def tipo_do_fmf(dados: bytes) -> str | None:
     try:
         _conferir_tamanho(dados)
-        extensoes = {m[1] for m in lista_fmf._ler_indice(dados)}
-        return next((tipo for ext, tipo in TIPOS_POR_MEMBRO.items() if ext in extensoes), None)
-    except ListaInvalida:
+        extensoes = {m[1].lower() for m in lista_fmf._ler_indice(dados)}
+        return next((tipo for ext, tipo in TIPOS_POR_MEMBRO.items() if ext.lower() in extensoes), None)
+    except Exception:
         return None
 
 
 def ler(dados: bytes) -> dict:
     _conferir_tamanho(dados)
     membros = lista_fmf._ler_indice(dados)
-    views = [m for m in membros if m[1] == '.view']
+    views = [m for m in membros if m[1].lower() == '.view']
     if not views:
         raise NaoEhView('Este arquivo .fmf nao e uma view do FM.')
     _, _, deslocamento, tamanho_arquivo, tamanho_aberto = views[0]
