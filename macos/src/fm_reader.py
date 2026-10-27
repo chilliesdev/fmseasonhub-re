@@ -210,6 +210,10 @@ class FmReader:
         b = self.mem.read_bytes(addr, 4)
         return struct.unpack("<i", b)[0]
 
+    def i64(self, addr):
+        b = self.mem.read_bytes(addr, 8)
+        return struct.unpack("<q", b)[0]
+
     def q(self, addr):
         return self.mem.u64(addr)
 
@@ -395,9 +399,23 @@ class FmReader:
             obj = self.q(mgr_ptr)
             if not obj:
                 return None
+            full_name = ""
+            try:
+                p_first = self.q(obj + 0x20)
+                p_last = self.q(obj + 0x28)
+                first = self.nested_str(p_first) if p_first else ""
+                last = self.nested_str(p_last) if p_last else ""
+                full_name = f"{first} {last}".strip()
+            except Exception:
+                pass
+            if not full_name:
+                try:
+                    full_name = self.nested_str(obj + 0x288) or self.nested_str(obj)
+                except Exception:
+                    pass
             return {
                 "manager_obj": obj,
-                "full_name": "Treinador Principal",
+                "full_name": full_name or "Treinador Principal",
             }
         except Exception:
             return None
@@ -405,7 +423,6 @@ class FmReader:
     def manager_club(self):
         """Clube comandado pelo usuario. Retorna (club_obj, team_obj, name_full, name_short)."""
         try:
-            # Varre os times para achar o time cujo manager_ptr coincide ou time 0
             team_chain = self.cfg.get("team_table_chain", {})
             rva_off = team_chain.get("team_root_rva")
             if not rva_off:
@@ -417,13 +434,36 @@ class FmReader:
             if not teams:
                 return (None, None, "Clube Local", "CLB")
 
-            # Pega o primeiro clube / time principal
-            t0 = teams[0]
+            # Check if any team matches human manager pointer
+            mgr_team = None
+            hm = None
             try:
-                club_ptr = self.q(t0 + 0x30)
+                hm = self.human_manager()
+            except Exception:
+                pass
+            if hm and hm.get("manager_obj"):
+                mgr_obj = hm["manager_obj"]
+                team_offsets = self.cfg.get("team_offsets", {})
+                mgr_off = _to_int(team_offsets.get("manager_ptr", 0x80))
+                for t in teams:
+                    try:
+                        if self.q(t + mgr_off) == mgr_obj:
+                            mgr_team = t
+                            break
+                    except Exception:
+                        pass
+
+            t0 = mgr_team or teams[0]
+            try:
+                team_offsets = self.cfg.get("team_offsets", {})
+                club_off = _to_int(team_offsets.get("club_ptr", 0x30))
+                club_ptr = self.q(t0 + club_off)
                 if club_ptr:
-                    c_full = self.nested_str(club_ptr) or "Clube"
-                    c_short = self.nested_str(club_ptr + 8) or c_full[:3].upper()
+                    club_offsets = self.cfg.get("club_offsets", {})
+                    name_full_off = _to_int(club_offsets.get("name_full", 0xC0))
+                    name_short_off = _to_int(club_offsets.get("name_short", 0xC8))
+                    c_full = (self.nested_str(club_ptr + name_full_off) if name_full_off else "") or self.nested_str(club_ptr) or "Clube"
+                    c_short = (self.nested_str(club_ptr + name_short_off) if name_short_off else "") or self.nested_str(club_ptr + 8) or c_full[:3].upper()
                     return (club_ptr, t0, c_full, c_short)
             except Exception:
                 pass
@@ -739,10 +779,314 @@ class FmReader:
         return None
 
     def club_profile(self, club_obj):
-        return {}
+        """Le perfil, infraestrutura e financas do clube a partir do ponteiro club_obj."""
+        if not club_obj or club_obj < 0x10000:
+            return {}
+        try:
+            club_offsets = self.cfg.get("club_offsets", {})
+            cino_offsets = self.cfg.get("club_cino_offsets", {})
+            cint_offsets = self.cfg.get("club_cint_offsets", {})
+            fin_offsets = self.cfg.get("club_fin_offsets", {})
+
+            # UID
+            uid_off = _to_int(club_offsets.get("uid", 0x0C))
+            club_uid = None
+            try:
+                club_uid = self.u32(club_obj + uid_off)
+            except Exception:
+                pass
+
+            # Nomes
+            name_full_off = _to_int(club_offsets.get("name_full", 0xC0))
+            name_short_off = _to_int(club_offsets.get("name_short", 0xC8))
+            name_full = ""
+            name_short = ""
+            try:
+                name_full = self.nested_str(club_obj + name_full_off) or self.nested_str(club_obj) or ""
+            except Exception:
+                pass
+            try:
+                name_short = self.nested_str(club_obj + name_short_off) or self.nested_str(club_obj + 8) or ""
+            except Exception:
+                pass
+
+            # Ponteiros secundarios
+            cino_off = _to_int(club_offsets.get("cino_ptr", 0xB0))
+            cint_off = _to_int(club_offsets.get("cint_ptr", 0x100))
+            fin_off = _to_int(club_offsets.get("fin_ptr", 0x150))
+
+            cino = 0
+            try:
+                cino = self.q(club_obj + cino_off) if cino_off else 0
+            except Exception:
+                pass
+            if not cino:
+                try:
+                    cino = self.q(club_obj + 0xC8)
+                except Exception:
+                    pass
+
+            cint = 0
+            try:
+                cint = self.q(club_obj + cint_off) if cint_off else 0
+            except Exception:
+                pass
+            if not cint:
+                try:
+                    cint = self.q(club_obj + 0xD8)
+                except Exception:
+                    pass
+
+            fin = 0
+            try:
+                fin = self.q(club_obj + fin_off) if fin_off else 0
+            except Exception:
+                pass
+            if not fin:
+                try:
+                    fin = self.q(club_obj + 0xE0)
+                except Exception:
+                    pass
+
+            # CINO fields (attendance, nickname, colors)
+            nickname = None
+            color_fg = None
+            color_bg = None
+            avg_att = None
+            min_att = None
+            max_att = None
+            if cino and cino >= 0x10000:
+                try:
+                    nick_off = _to_int(cino_offsets.get("nickname", 0x90))
+                    nickname = self.nested_str(cino + nick_off) or None
+                except Exception:
+                    pass
+                try:
+                    fg_off = _to_int(cino_offsets.get("fg_color", 0xA0))
+                    bg_off = _to_int(cino_offsets.get("bg_color", 0xA8))
+                    color_fg = self.nested_str(cino + fg_off) or None
+                    color_bg = self.nested_str(cino + bg_off) or None
+                except Exception:
+                    pass
+                try:
+                    avg_off = _to_int(cino_offsets.get("avg_attendance", 0x68))
+                    min_off = _to_int(cino_offsets.get("min_attendance", 0x6C))
+                    max_off = _to_int(cino_offsets.get("max_attendance", 0x70))
+                    avg_att = self.u32(cino + avg_off)
+                    min_att = self.u32(cino + min_off)
+                    max_att = self.u32(cino + max_off)
+                except Exception:
+                    pass
+
+            # CINT fields (facilities, year founded, supporters)
+            year_founded = None
+            training_facilities = None
+            youth_facilities = None
+            youth_coaching = None
+            youth_recruitment = None
+            youth_importance = None
+            supporter_loyalty = None
+            supporter_passion = None
+            if cint and cint >= 0x10000:
+                try:
+                    yf_off = _to_int(cint_offsets.get("year_founded", 0xD0))
+                    yf_val = self.u16(cint + yf_off)
+                    if 1800 <= yf_val <= 2050:
+                        year_founded = yf_val
+                except Exception:
+                    pass
+                try:
+                    tf_off = _to_int(cint_offsets.get("training_facilities", 0x118))
+                    yf_fac_off = _to_int(cint_offsets.get("youth_facilities", 0x123))
+                    yc_off = _to_int(cint_offsets.get("youth_coaching", 0x124))
+                    yr_off = _to_int(cint_offsets.get("youth_recruitment", 0x125))
+                    yi_off = _to_int(cint_offsets.get("youth_importance", 0x11E))
+                    sl_off = _to_int(cint_offsets.get("supporter_loyalty", 0x10C))
+                    sp_off = _to_int(cint_offsets.get("supporter_passion", 0x10D))
+
+                    training_facilities = self.u8(cint + tf_off)
+                    youth_facilities = self.u8(cint + yf_fac_off)
+                    youth_coaching = self.u8(cint + yc_off)
+                    youth_recruitment = self.u8(cint + yr_off)
+                    youth_importance = self.u8(cint + yi_off)
+                    supporter_loyalty = self.u8(cint + sl_off)
+                    supporter_passion = self.u8(cint + sp_off)
+                except Exception:
+                    pass
+
+            if year_founded is None and club_obj:
+                try:
+                    yf_val = self.u32(club_obj + 0xD0)
+                    if 1800 <= yf_val <= 2050:
+                        year_founded = yf_val
+                except Exception:
+                    pass
+
+            # FIN fields (finances)
+            balance = None
+            transfer_budget = None
+            wage_budget = None
+            wage_total = None
+            if fin and fin >= 0x10000:
+                try:
+                    bal_off = _to_int(fin_offsets.get("balance", 0x14))
+                    balance = self.i32(fin + bal_off)
+                except Exception:
+                    pass
+                try:
+                    tb_off = _to_int(fin_offsets.get("transfer_budget_current", 0x7CC))
+                    wb_off = _to_int(fin_offsets.get("wage_budget", 0x810))
+                    wt_off = _to_int(fin_offsets.get("wage_total", 0x818))
+                    transfer_budget = self.i64(fin + tb_off)
+                    wage_budget = self.i64(fin + wb_off)
+                    wage_total = self.i64(fin + wt_off)
+                except Exception:
+                    pass
+
+            if club_uid is None and not name_full and balance is None and training_facilities is None:
+                return {}
+
+            return {
+                "club_uid": club_uid,
+                "name_full": name_full or None,
+                "name_short": name_short or None,
+                "nickname": nickname,
+                "year_founded": year_founded,
+                "color_fg": color_fg,
+                "color_bg": color_bg,
+                "avg_attendance": avg_att,
+                "min_attendance": min_att,
+                "max_attendance": max_att,
+                "balance": balance,
+                "transfer_budget": transfer_budget,
+                "wage_budget": wage_budget,
+                "wage_total": wage_total,
+                "training_facilities": training_facilities,
+                "youth_facilities": youth_facilities,
+                "youth_coaching": youth_coaching,
+                "youth_recruitment": youth_recruitment,
+                "youth_importance": youth_importance,
+                "supporter_loyalty": supporter_loyalty,
+                "supporter_passion": supporter_passion,
+            }
+        except Exception:
+            return {}
 
     def club_teams(self, club_obj):
-        return []
+        """Devolve os ponteiros de times pertencentes ao club_obj."""
+        if not club_obj or club_obj < 0x10000:
+            return []
+        try:
+            club_offsets = self.cfg.get("club_offsets", {})
+            first_team_container = _to_int(club_offsets.get("first_team_container", 0x18))
+            teams = []
+            if first_team_container:
+                try:
+                    teams = self.vector(club_obj + first_team_container)
+                except Exception:
+                    teams = []
+            if not teams:
+                club_uid = None
+                try:
+                    club_uid = self.u32(club_obj + _to_int(club_offsets.get("uid", 0x0C)))
+                except Exception:
+                    pass
+                all_teams = []
+                try:
+                    all_teams = self.all_teams_with_players()
+                except Exception:
+                    pass
+                team_offsets = self.cfg.get("team_offsets", {})
+                club_ptr_off = _to_int(team_offsets.get("club_ptr", 0x30))
+                for t in all_teams:
+                    try:
+                        c = self.q(t + club_ptr_off)
+                        if c == club_obj or (club_uid and c and self.u32(c + 0x0C) == club_uid):
+                            teams.append(t)
+                    except Exception:
+                        pass
+            return teams
+        except Exception:
+            return []
+
+    TEAM_TYPE_LABELS = {
+        0: "First Team",
+        1: "Reserves",
+        2: "A Team",
+        3: "B Team",
+        4: "Superdraft A",
+        5: "Superdraft B",
+        6: "Superdraft C",
+        7: "Superdraft D",
+        8: "Waivers",
+        9: "U23",
+        10: "U21",
+        11: "U19",
+        12: "U18",
+        13: "C Team",
+        14: "Amateur",
+        15: "II",
+        16: "Team 2",
+        17: "Team 3",
+        18: "U20",
+        22: "Youth Evaluation",
+        30: "Dutch Reserves",
+        33: "U22",
+        36: "U19 B Team",
+        37: "U18 B Team",
+    }
+
+    def team_details(self, team_obj, club_uid=None):
+        """Retorna dicionario com metadados estruturados de um time."""
+        if not team_obj or team_obj < 0x10000:
+            return None
+        try:
+            team_offsets = self.cfg.get("team_offsets", {})
+            uid_off = _to_int(team_offsets.get("uid", 0x0C))
+            type_off = _to_int(team_offsets.get("team_type", 0x28))
+            min_age_off = _to_int(team_offsets.get("min_age", 0x2C))
+            max_age_off = _to_int(team_offsets.get("max_age", 0x2D))
+            club_off = _to_int(team_offsets.get("club_ptr", 0x30))
+            rep_off = _to_int(team_offsets.get("reputation", 0xA8))
+
+            t_uid = self.u32(team_obj + uid_off)
+            t_type = self.u8(team_obj + type_off) if type_off else 0
+            min_age = self.u8(team_obj + min_age_off) if min_age_off else None
+            max_age = self.u8(team_obj + max_age_off) if max_age_off else None
+            reputation = self.u16(team_obj + rep_off) if rep_off else 0
+
+            if not club_uid:
+                try:
+                    c_ptr = self.q(team_obj + club_off)
+                    if c_ptr:
+                        club_uid = self.u32(c_ptr + 0x0C)
+                except Exception:
+                    pass
+
+            n_players = 0
+            try:
+                roster = self.roster(team_obj)
+                n_players = len(roster)
+            except Exception:
+                pass
+
+            enum_labels = self.cfg.get("team_type_enum") or self.TEAM_TYPE_LABELS
+            label = enum_labels.get(str(t_type)) or enum_labels.get(t_type) or (
+                "First Team" if t_type == 0 else f"Team {t_type}"
+            )
+
+            return {
+                "team_uid": t_uid,
+                "club_uid": club_uid,
+                "team_type": t_type,
+                "label": label,
+                "min_age": min_age if min_age and 0 < min_age < 100 else None,
+                "max_age": max_age if max_age and 0 < max_age < 100 else None,
+                "reputation": reputation,
+                "n_players": n_players,
+            }
+        except Exception:
+            return None
 
     def club_first_team(self, club_obj):
         return None

@@ -477,7 +477,17 @@ def create_snapshot(
 
 def publish_capture(conn, staged, staged_sid, validate):
     """Publish a complete staged capture without changing any existing season."""
-    tables = ("snapshots", "players", "player_stats", "player_profile", "player_form")
+    tables = (
+        "snapshots",
+        "players",
+        "player_stats",
+        "player_profile",
+        "player_form",
+        "club_profile",
+        "teams",
+        "player_teams",
+        "club_leagues",
+    )
     with conn:
         conn.execute("BEGIN IMMEDIATE")
         # Older server-created databases contain only a subset of the reader columns.
@@ -585,6 +595,29 @@ def save_club(conn, snapshot_id, club_data):
             club_data.get("youth_importance"),
             club_data.get("supporter_loyalty"),
             club_data.get("supporter_passion"),
+        ),
+    )
+
+
+def save_team(conn, snapshot_id, team_data):
+    """Grava metadados de um time no snapshot."""
+    conn.execute(
+        """
+        INSERT OR REPLACE INTO teams (
+            snapshot_id, team_uid, club_uid, team_type, label,
+            min_age, max_age, reputation, n_players
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """,
+        (
+            snapshot_id,
+            team_data.get("team_uid"),
+            team_data.get("club_uid"),
+            team_data.get("team_type", 0),
+            team_data.get("label"),
+            team_data.get("min_age"),
+            team_data.get("max_age"),
+            team_data.get("reputation", 0),
+            team_data.get("n_players", 0),
         ),
     )
 
