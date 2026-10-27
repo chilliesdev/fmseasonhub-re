@@ -419,13 +419,18 @@ class FmReader:
 
             # Pega o primeiro clube / time principal
             t0 = teams[0]
-            club_ptr = self.q(t0 + 0x30)
-            if club_ptr:
-                c_full = self.nested_str(club_ptr) or "Clube"
-                c_short = self.nested_str(club_ptr + 8) or c_full[:3].upper()
-                return (club_ptr, t0, c_full, c_short)
+            try:
+                club_ptr = self.q(t0 + 0x30)
+                if club_ptr:
+                    c_full = self.nested_str(club_ptr) or "Clube"
+                    c_short = self.nested_str(club_ptr + 8) or c_full[:3].upper()
+                    return (club_ptr, t0, c_full, c_short)
+            except Exception:
+                pass
             return (None, t0, "Clube", "CLB")
         except Exception:
+            if getattr(self, "_strict_reads", False):
+                raise
             return (None, None, "Clube", "CLB")
 
     def manager_team(self):

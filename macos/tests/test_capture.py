@@ -156,8 +156,11 @@ class CaptureTests(unittest.TestCase):
             conn.execute("INSERT INTO players (snapshot_id, uid, full_name) VALUES (?, 99, 'Keep player')", (sid,))
         return sid
 
-    def assert_no_capture(self, expected_status):
-        status, response = self.request("/api/capture", {"name": "Must not be saved", "game_date": "2040-01-01"})
+    def assert_no_capture(self, expected_status, scope=None):
+        payload = {"name": "Must not be saved", "game_date": "2040-01-01"}
+        if scope is not None:
+            payload["scope"] = scope
+        status, response = self.request("/api/capture", payload)
         self.assertEqual(status, expected_status, response)
         self.assertNotIn("sid", response)
         with closing(server.get_db_connection()) as conn:
@@ -219,15 +222,19 @@ class CaptureTests(unittest.TestCase):
     def test_hidden_roster_and_vector_failures_are_not_saved(self):
         self.seed_existing()
         memory, reader = self.use_real_reader()
-        for failure in ((0x50038, 8), (0x64000, 8)):
-            with self.subTest(failure=failure):
+        for failure, scope in (((0x40038, 8), "squad"),
+                               ((0x63000, 8), "squad"),
+                               ((0x50038, 8), "full"),
+                               ((0x64000, 8), "full")):
+            with self.subTest(failure=failure, scope=scope):
                 self.connect()
                 memory.failures = {failure}
                 memory.read_requests.clear()
-                self.assert_no_capture(500)
+                self.assert_no_capture(500, scope=scope)
                 self.assertIn(failure, memory.read_requests)
                 self.assertFalse(reader._strict_reads)
-                self.assertEqual(reader.roster(0x50000), [])
+                team = 0x40000 if scope == "squad" else 0x50000
+                self.assertEqual(reader.roster(team), [])
                 memory.failures.clear()
 
     def test_hidden_player_data_failures_are_not_saved(self):
@@ -245,7 +252,7 @@ class CaptureTests(unittest.TestCase):
                 self.connect()
                 memory.failures = {failure}
                 memory.read_requests.clear()
-                self.assert_no_capture(500)
+                self.assert_no_capture(500, scope="full")
                 self.assertIn(failure, memory.read_requests)
                 self.assertFalse(reader._strict_reads)
                 memory.failures.clear()
@@ -266,13 +273,13 @@ class CaptureTests(unittest.TestCase):
                 self.connect()
                 memory.short_reads = {(address, size)}
                 memory.read_requests.clear()
-                self.assert_no_capture(500)
+                self.assert_no_capture(500, scope="full")
                 self.assertIn((address, size), memory.read_requests)
                 self.assertFalse(reader._strict_reads)
                 memory.short_reads.clear()
         memory.write(0x50040, "Q", 0x64007)
         self.connect()
-        self.assert_no_capture(500)
+        self.assert_no_capture(500, scope="full")
         self.assertFalse(reader._strict_reads)
         self.assertEqual(reader.roster(0x50000), [])
 
@@ -287,7 +294,7 @@ class CaptureTests(unittest.TestCase):
                     db.init_db(str(self.database))
                 existing = self.seed_existing()
                 self.connect()
-                status, response = self.request("/api/capture", {"name": "Raw reader season"})
+                status, response = self.request("/api/capture", {"name": "Raw reader season", "scope": "full"})
                 self.assertEqual(status, 200, response)
                 sid = response["sid"]
                 self.assertNotEqual(sid, existing)
@@ -491,6 +498,99 @@ class CaptureTests(unittest.TestCase):
         tocar_som.assert_called_once_with("captura-fim")
         webview_mock.create_window.assert_called_once()
         self.assertEqual(janelas.get("faixa_tamanho"), (app_main.LARGURA_FAIXA, app_main.ALTURA_FAIXA))
+
+    def test_capture_scope_squad_captures_only_active_squad_and_ignores_other_teams(self):
+        team_a = 0x40000
+        team_b = 0x50000
+        players_a = [0x20000, 0x20001]
+        players_b = [0x30000, 0x30001]
+
+        self.reader.all_teams_with_players.return_value = [team_a, team_b]
+        self.reader.manager_team = Mock(return_value=team_a)
+        self.reader.roster = Mock(side_effect=lambda team: players_a if team == team_a else players_b)
+
+        self.connect()
+        status, response = self.request("/api/capture", {"name": "Squad 2027", "scope": "squad"})
+        self.assertEqual(status, 200, response)
+        sid = response["sid"]
+
+        with closing(server.get_db_connection()) as conn:
+            scope = conn.execute("SELECT scope FROM snapshots WHERE id=?", (sid,)).fetchone()[0]
+            self.assertEqual(scope, "squad")
+            saved_uids = [row[0] for row in conn.execute("SELECT uid FROM players WHERE snapshot_id=? ORDER BY uid", (sid,)).fetchall()]
+            self.assertEqual(saved_uids, players_a)
+
+        self.reader.roster.assert_called_once_with(team_a)
+
+    def test_capture_scope_full_and_all_captures_all_teams_and_players(self):
+        team_a = 0x40000
+        team_b = 0x50000
+        players_a = [0x20000, 0x20001]
+        players_b = [0x30000, 0x30001]
+        all_players = sorted(players_a + players_b)
+
+        self.reader.all_teams_with_players.return_value = [team_a, team_b]
+        self.reader.manager_team = Mock(return_value=team_a)
+        self.reader.roster = Mock(side_effect=lambda team: players_a if team == team_a else players_b)
+
+        self.connect()
+
+        for scope in ("full", "all"):
+            with self.subTest(scope=scope):
+                status, response = self.request("/api/capture", {"name": f"DB {scope}", "scope": scope})
+                self.assertEqual(status, 200, response)
+                sid = response["sid"]
+
+                with closing(server.get_db_connection()) as conn:
+                    saved_scope = conn.execute("SELECT scope FROM snapshots WHERE id=?", (sid,)).fetchone()[0]
+                    self.assertEqual(saved_scope, scope)
+                    saved_uids = [row[0] for row in conn.execute("SELECT uid FROM players WHERE snapshot_id=? ORDER BY uid", (sid,)).fetchall()]
+                    self.assertEqual(saved_uids, all_players)
+
+    def test_capture_scope_squad_empty_roster_raises_422(self):
+        team_a = 0x40000
+        self.reader.all_teams_with_players.return_value = [team_a]
+        self.reader.manager_team = Mock(return_value=team_a)
+        self.reader.roster = Mock(return_value=[])
+
+        self.connect()
+        status, response = self.request("/api/capture", {"name": "Empty Squad", "scope": "squad"})
+        self.assertEqual(status, 422, response)
+        self.assertIn("Nenhum jogador foi lido", response.get("detail", ""))
+
+        job = self.request("/api/job")[1]
+        self.assertEqual(job["state"], "error")
+        self.assertIsNone(job["sid"])
+
+    def test_capture_scope_squad_reports_progress(self):
+        team_a = 0x40000
+        players_a = [0x20000, 0x20001, 0x20002]
+        progress_calls = []
+
+        self.reader.all_teams_with_players.return_value = [team_a]
+        self.reader.manager_team = Mock(return_value=team_a)
+        self.reader.roster = Mock(return_value=players_a)
+
+        import capture
+        orig_scan_squad = capture.scan_squad
+
+        def spy_scan_squad(conn, sid, rdr, team, ref_date, progress=None):
+            def wrapped_progress(done, total, phase):
+                progress_calls.append((done, total, phase))
+                if progress:
+                    progress(done, total, phase)
+            return orig_scan_squad(conn, sid, rdr, team, ref_date, progress=wrapped_progress)
+
+        self.start_patch(patch.object(capture, "scan_squad", side_effect=spy_scan_squad))
+
+        self.connect()
+        status, response = self.request("/api/capture", {"name": "Progress Squad", "scope": "squad"})
+        self.assertEqual(status, 200, response)
+        self.assertEqual(progress_calls, [
+            (1, 3, "lendo_elenco"),
+            (2, 3, "lendo_elenco"),
+            (3, 3, "lendo_elenco"),
+        ])
 
 
 if __name__ == "__main__":
