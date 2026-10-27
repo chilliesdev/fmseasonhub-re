@@ -2261,20 +2261,43 @@ def get_biblioteca():
         items.append(item)
     return {"arquivos": items, "pasta": str(b_dir)}
 
+def _obter_caminho_biblioteca(arquivo: str) -> Path:
+    nome = _validar_nome_biblioteca(arquivo)
+    b_dir = _get_biblioteca_dir().resolve()
+    presets_dir = (FMSH_DIR / "src" / "presets_fabrica").resolve()
+    user_path = _get_biblioteca_dir() / nome
+    if user_path.is_symlink() or user_path.exists():
+        caminho = user_path
+    else:
+        caminho = FMSH_DIR / "src" / "presets_fabrica" / nome
+
+    if caminho.is_symlink():
+        try:
+            alvo = caminho.resolve(strict=True)
+        except (OSError, RuntimeError) as exc:
+            raise HTTPException(status_code=400, detail="Arquivo nao pode ser um link simbolico") from exc
+        if not (alvo.is_relative_to(b_dir) or alvo.is_relative_to(presets_dir)):
+            raise HTTPException(status_code=400, detail="Arquivo nao pode ser um link simbolico")
+        if not alvo.is_file():
+            raise HTTPException(status_code=404, detail="Arquivo nao encontrado")
+        return alvo
+
+    if not caminho.is_file():
+        raise HTTPException(status_code=404, detail="Arquivo nao encontrado")
+    return caminho
+
 @app.get("/api/biblioteca/{arquivo}")
 def get_biblioteca_ler(arquivo: str):
-    b_dir = _get_biblioteca_dir()
-    p = b_dir / arquivo
-    if not p.exists():
-        p = FMSH_DIR / "src" / "presets_fabrica" / arquivo
-    if p.exists():
+    p = _obter_caminho_biblioteca(arquivo)
+    try:
         with open(p, "r", encoding="utf-8") as f:
             try:
                 return json.load(f)
             except Exception:
                 f.seek(0)
                 return {"texto": f.read()}
-    raise HTTPException(status_code=404, detail="Arquivo nao encontrado")
+    except OSError as exc:
+        raise HTTPException(status_code=404, detail="Arquivo nao encontrado") from exc
 
 @app.post("/api/biblioteca")
 def post_biblioteca_gravar(body: BibliotecaBody):
@@ -2340,8 +2363,8 @@ def post_biblioteca_renomear(arquivo: str, body: RenomearBody):
 @app.delete("/api/biblioteca/{arquivo}")
 def delete_biblioteca_apagar(arquivo: str):
     b_dir = _get_biblioteca_dir()
-    target = b_dir / arquivo
-    if target.exists():
+    target = b_dir / _validar_nome_biblioteca(arquivo)
+    if target.is_symlink() or target.exists():
         target.unlink()
     return {"ok": True}
 
@@ -2360,13 +2383,8 @@ def post_biblioteca_carregar(arquivo: str):
 
 @app.get("/api/biblioteca/{arquivo}/bruto")
 def get_biblioteca_bruto(arquivo: str):
-    b_dir = _get_biblioteca_dir()
-    p = b_dir / arquivo
-    if not p.exists():
-        p = FMSH_DIR / "src" / "presets_fabrica" / arquivo
-    if p.exists():
-        return FileResponse(str(p))
-    raise HTTPException(status_code=404, detail="Arquivo nao encontrado")
+    p = _obter_caminho_biblioteca(arquivo)
+    return FileResponse(str(p))
 
 @app.post("/api/biblioteca-fmf")
 async def post_biblioteca_fmf(request: Request, arquivo: str):
@@ -2967,6 +2985,9 @@ if DIST_DIR.exists():
 @app.get("/{full_path:path}")
 def serve_spa(full_path: str):
     """Serve files from frontend dist, falling back to index.html for client routing."""
+    if full_path.startswith("api/") or full_path == "api":
+        raise HTTPException(status_code=404, detail="Nao encontrado")
+
     target_path = (DIST_DIR / full_path).resolve()
 
     # Security check: ensure path is within dist

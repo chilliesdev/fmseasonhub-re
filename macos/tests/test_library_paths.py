@@ -53,17 +53,35 @@ class LibraryPathTests(unittest.TestCase):
         library.start()
         self.addCleanup(library.stop)
 
-    def request(self, route, body=None):
+    def request(self, route, body=None, raw=False):
         request = urllib.request.Request(self.base + route)
         if body is not None:
             request.data = json.dumps(body).encode()
             request.add_header("Content-Type", "application/json")
         try:
             with urllib.request.urlopen(request, timeout=5) as response:
-                return response.status, json.load(response)
+                content = response.read()
+                if raw:
+                    return response.status, content
+                try:
+                    return response.status, json.loads(content)
+                except Exception:
+                    return response.status, content
         except urllib.error.HTTPError as response:
             with response:
-                return response.code, json.load(response)
+                content = response.read()
+                try:
+                    return response.code, json.loads(content)
+                except Exception:
+                    return response.code, content
+
+    def read_file(self, name):
+        encoded = urllib.parse.quote(name, safe="").replace(".", "%2E")
+        return self.request(f"/api/biblioteca/{encoded}")
+
+    def download_bruto(self, name):
+        encoded = urllib.parse.quote(name, safe="").replace(".", "%2E")
+        return self.request(f"/api/biblioteca/{encoded}/bruto", raw=True)
 
     def save(self, name, content):
         return self.request("/api/biblioteca", {"arquivo": name, "conteudo": content})
@@ -189,6 +207,73 @@ class LibraryPathTests(unittest.TestCase):
             with self.subTest(body=body):
                 self.assertEqual(self.request("/api/biblioteca", body), (200, {"ok": True, "arquivo": "salvo.fsh"}))
                 self.assertEqual(json.loads((self.library / "salvo.fsh").read_text()), body["conteudo"])
+
+    def test_read_and_download_reject_unsafe_paths(self):
+        source = self.library / "source.fsh"
+        source.write_bytes(b"source marker")
+        for name in self.invalid_names():
+            if "\ud800" in name:
+                continue
+            with self.subTest(name=repr(name)):
+                self.assertIn(self.read_file(name)[0], (400, 404, 405))
+                self.assertIn(self.download_bruto(name)[0], (400, 404, 405))
+                self.assert_original_files(source)
+
+    def test_read_and_download_reject_symlinks_pointing_outside_and_dangling(self):
+        source = self.library / "source.fsh"
+        source.write_bytes(b"source marker")
+        link = self.library / "linked.fsh"
+        for target in (self.outside, self.root / "missing.fsh"):
+            with self.subTest(target=target.name):
+                link.symlink_to(target)
+                try:
+                    status_read, body_read = self.read_file(link.name)
+                    self.assertIn(status_read, (400, 404))
+                    if status_read == 400:
+                        self.assertEqual(body_read.get("detail"), "Arquivo nao pode ser um link simbolico")
+
+                    status_raw, body_raw = self.download_bruto(link.name)
+                    self.assertIn(status_raw, (400, 404))
+                    if status_raw == 400:
+                        payload = json.loads(body_raw) if isinstance(body_raw, bytes) else body_raw
+                        self.assertEqual(payload.get("detail"), "Arquivo nao pode ser um link simbolico")
+
+                    self.assertTrue(link.is_symlink())
+                finally:
+                    if link.is_symlink() or link.exists():
+                        link.unlink()
+                self.assert_original_files(source)
+
+    def test_read_and_download_allow_regular_files_and_presets_and_internal_symlinks(self):
+        source = self.library / "source.fsh"
+        source.write_text(json.dumps({"qa": "source"}))
+        status, data = self.read_file(source.name)
+        self.assertEqual(status, 200)
+        self.assertEqual(data, {"qa": "source"})
+
+        status, raw = self.download_bruto(source.name)
+        self.assertEqual(status, 200)
+        self.assertEqual(json.loads(raw), {"qa": "source"})
+
+        internal = self.library / "internal.fsh"
+        internal.symlink_to(source)
+        status, data = self.read_file(internal.name)
+        self.assertEqual(status, 200)
+        self.assertEqual(data, {"qa": "source"})
+
+        status, raw = self.download_bruto(internal.name)
+        self.assertEqual(status, 200)
+        self.assertEqual(json.loads(raw), {"qa": "source"})
+        internal.unlink()
+
+        preset_name = "agentes-livres.fsh"
+        status, data = self.read_file(preset_name)
+        self.assertEqual(status, 200)
+        self.assertIsInstance(data, dict)
+
+        status, raw = self.download_bruto(preset_name)
+        self.assertEqual(status, 200)
+        self.assertEqual(json.loads(raw), data)
 
 
 if __name__ == "__main__":
