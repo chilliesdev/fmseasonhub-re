@@ -254,6 +254,29 @@ class FavoritesRestartTests(unittest.TestCase):
         self.restart()
         self.assertEqual(self.request("/api/favoritos/listas"), expected)
 
+    def test_post_jogadores_missing_list_returns_404_and_existing_succeeds(self):
+        self.start()
+        req = urllib.request.Request(
+            self.base + "/api/favoritos/listas/missing_id/jogadores",
+            data=json.dumps({"uids": [900001], "marcar": True}).encode(),
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+        with self.assertRaises(urllib.error.HTTPError) as ctx:
+            urllib.request.urlopen(req, timeout=5)
+        self.assertEqual(ctx.exception.code, 404)
+        error_body = json.loads(ctx.exception.read().decode())
+        self.assertEqual(error_body.get("detail"), "Lista nao encontrada")
+
+        created = self.create(name="Existing List", uids=[900001])
+        res = self.request(
+            f"/api/favoritos/listas/{created['id']}/jogadores",
+            body={"uids": [900002], "marcar": True},
+            method="POST",
+        )
+        self.assertTrue(res.get("ok"))
+        self.assertIn(900002, res["lista"]["uids"])
+
 
     def test_pending_preference_writes_cannot_erase_saved_favorites(self):
         sys.path.insert(0, str(SRC))
@@ -331,6 +354,41 @@ class FavoritesWriteFailureTests(unittest.TestCase):
             self.assertEqual(server.get_favoritos_listas(), before)
             self.assertEqual(settings.load()["idioma"], "en")
             self.assertFalse(Path(settings.SETTINGS_PATH + ".tmp").exists())
+
+
+class FavoritesPlayerMembershipEndpointTests(unittest.TestCase):
+    def test_missing_list_raises_404_detail(self):
+        sys.path.insert(0, str(SRC))
+        import server
+        import settings
+        with tempfile.TemporaryDirectory() as folder, patch.object(
+            settings, "SETTINGS_PATH", str(Path(folder) / "settings.json")
+        ):
+            settings.save(idioma="en")
+            with self.assertRaises(server.HTTPException) as ctx:
+                server.post_favoritos_jogadores("missing_id", server.FavJogadoresBody(uids=[900001], marcar=True))
+            self.assertEqual(ctx.exception.status_code, 404)
+            self.assertEqual(ctx.exception.detail, "Lista nao encontrada")
+
+            with self.assertRaises(server.HTTPException) as ctx_unmark:
+                server.post_favoritos_jogadores("missing_id", server.FavJogadoresBody(uids=[900001], marcar=False))
+            self.assertEqual(ctx_unmark.exception.status_code, 404)
+            self.assertEqual(ctx_unmark.exception.detail, "Lista nao encontrada")
+
+    def test_existing_list_adds_player_successfully(self):
+        sys.path.insert(0, str(SRC))
+        import server
+        import settings
+        with tempfile.TemporaryDirectory() as folder, patch.object(
+            settings, "SETTINGS_PATH", str(Path(folder) / "settings.json")
+        ):
+            settings.save(idioma="en")
+            create_res = server.post_favoritos_criar(server.FavListaNovaBody(nome="Lista Teste", cor="#00aa55", uids=[900001]))
+            list_id = create_res["lista"]["id"]
+
+            res = server.post_favoritos_jogadores(list_id, server.FavJogadoresBody(uids=[900002], marcar=True))
+            self.assertTrue(res.get("ok"))
+            self.assertIn(900002, res["lista"]["uids"])
 
 
 if __name__ == "__main__":
