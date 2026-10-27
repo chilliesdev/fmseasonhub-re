@@ -359,41 +359,36 @@ class FavoritesWriteFailureTests(unittest.TestCase):
 class FavoritesPlayerMembershipEndpointTests(unittest.TestCase):
     def test_missing_list_raises_404_detail(self):
         sys.path.insert(0, str(SRC))
-        from fastapi.testclient import TestClient
         import server
         import settings
         with tempfile.TemporaryDirectory() as folder, patch.object(
             settings, "SETTINGS_PATH", str(Path(folder) / "settings.json")
         ):
             settings.save(idioma="en")
-            client = TestClient(server.app)
-            res = client.post("/api/favoritos/listas/missing_id/jogadores", json={"uids": [900001], "marcar": True})
-            self.assertEqual(res.status_code, 404)
-            self.assertEqual(res.json(), {"detail": "Lista nao encontrada"})
+            with self.assertRaises(server.HTTPException) as ctx:
+                server.post_favoritos_jogadores("missing_id", server.FavJogadoresBody(uids=[900001], marcar=True))
+            self.assertEqual(ctx.exception.status_code, 404)
+            self.assertEqual(ctx.exception.detail, "Lista nao encontrada")
 
-            res_unmark = client.post("/api/favoritos/listas/missing_id/jogadores", json={"uids": [900001], "marcar": False})
-            self.assertEqual(res_unmark.status_code, 404)
-            self.assertEqual(res_unmark.json(), {"detail": "Lista nao encontrada"})
+            with self.assertRaises(server.HTTPException) as ctx_unmark:
+                server.post_favoritos_jogadores("missing_id", server.FavJogadoresBody(uids=[900001], marcar=False))
+            self.assertEqual(ctx_unmark.exception.status_code, 404)
+            self.assertEqual(ctx_unmark.exception.detail, "Lista nao encontrada")
 
     def test_existing_list_adds_player_successfully(self):
         sys.path.insert(0, str(SRC))
-        from fastapi.testclient import TestClient
         import server
         import settings
         with tempfile.TemporaryDirectory() as folder, patch.object(
             settings, "SETTINGS_PATH", str(Path(folder) / "settings.json")
         ):
             settings.save(idioma="en")
-            client = TestClient(server.app)
-            create_res = client.post("/api/favoritos/listas", json={"nome": "Lista Teste", "cor": "#00aa55", "uids": [900001]})
-            self.assertEqual(create_res.status_code, 200)
-            list_id = create_res.json()["lista"]["id"]
+            create_res = server.post_favoritos_criar(server.FavListaNovaBody(nome="Lista Teste", cor="#00aa55", uids=[900001]))
+            list_id = create_res["lista"]["id"]
 
-            res = client.post(f"/api/favoritos/listas/{list_id}/jogadores", json={"uids": [900002], "marcar": True})
-            self.assertEqual(res.status_code, 200)
-            data = res.json()
-            self.assertTrue(data.get("ok"))
-            self.assertIn(900002, data["lista"]["uids"])
+            res = server.post_favoritos_jogadores(list_id, server.FavJogadoresBody(uids=[900002], marcar=True))
+            self.assertTrue(res.get("ok"))
+            self.assertIn(900002, res["lista"]["uids"])
 
 
 if __name__ == "__main__":
