@@ -170,6 +170,36 @@ def scan_base(conn, sid, reader, mem, progress=None, ref_date=None):
     """Le a base inteira da memoria e grava no snapshot sid."""
     p_sql, s_sql, f_sql, m_sql = _insert_sql(conn)
 
+    club_uid = None
+    try:
+        row = conn.execute("SELECT club_uid FROM snapshots WHERE id=?", (sid,)).fetchone()
+        if row and row[0]:
+            club_uid = row[0]
+    except Exception:
+        pass
+
+    club_ptr = None
+    if hasattr(reader, "manager_club"):
+        try:
+            m_res = reader.manager_club()
+            if m_res and len(m_res) >= 1:
+                club_ptr = m_res[0]
+        except Exception:
+            pass
+    if not club_uid and club_ptr and hasattr(reader, "u32"):
+        try:
+            club_uid = reader.u32(club_ptr + 0x0C)
+        except Exception:
+            pass
+
+    # Track managed club teams
+    managed_teams = set()
+    if club_ptr and hasattr(reader, "club_teams"):
+        try:
+            managed_teams = set(reader.club_teams(club_ptr))
+        except Exception:
+            pass
+
     # Busca todos os times
     times = reader.all_teams_with_players()
     total_jogadores = 0
@@ -178,9 +208,54 @@ def scan_base(conn, sid, reader, mem, progress=None, ref_date=None):
     srows = []
     frows = []
     mrows = []
+    ptrows = []
 
     for idx, t in enumerate(times):
+        t_uid = None
+        if hasattr(reader, "u32"):
+            try:
+                t_uid = reader.u32(t + 0x0C)
+            except Exception:
+                pass
+
+        # Check if t belongs to managed club
+        is_managed = False
+        if t in managed_teams:
+            is_managed = True
+        elif club_ptr and hasattr(reader, "q"):
+            try:
+                if reader.q(t + 0x30) == club_ptr:
+                    is_managed = True
+            except Exception:
+                pass
+        elif club_uid and hasattr(reader, "q") and hasattr(reader, "u32"):
+            try:
+                c_obj = reader.q(t + 0x30)
+                if c_obj and reader.u32(c_obj + 0x0C) == club_uid:
+                    is_managed = True
+            except Exception:
+                pass
+
         r = reader.roster(t)
+
+        if is_managed:
+            t_data = None
+            if hasattr(reader, "team_details"):
+                try:
+                    t_data = reader.team_details(t, club_uid=club_uid)
+                except Exception:
+                    pass
+            if not t_data and t_uid:
+                t_data = {
+                    "team_uid": t_uid,
+                    "club_uid": club_uid,
+                    "team_type": 0,
+                    "label": "First Team",
+                    "n_players": len(r),
+                }
+            if t_data:
+                db.save_team(conn, sid, t_data)
+
         for pe in r:
             obj = reader.jogador_do_elenco(pe)
             rows = build_player_rows(reader, obj, sid, ref_date)
@@ -191,6 +266,9 @@ def scan_base(conn, sid, reader, mem, progress=None, ref_date=None):
             srows.append(sr)
             frows.append(fr)
             mrows.extend(mr)
+            uid = pr[1]
+            p_tuid = t_uid or pr[13] or uid
+            ptrows.append((sid, uid, p_tuid))
             total_jogadores += 1
 
             if len(prows) >= 2000:
@@ -199,11 +277,17 @@ def scan_base(conn, sid, reader, mem, progress=None, ref_date=None):
                 conn.executemany(f_sql, frows)
                 if mrows:
                     conn.executemany(m_sql, mrows)
+                if ptrows:
+                    conn.executemany(
+                        "INSERT OR REPLACE INTO player_teams (snapshot_id, player_uid, team_uid) VALUES (?, ?, ?)",
+                        ptrows,
+                    )
                 conn.commit()
                 prows.clear()
                 srows.clear()
                 frows.clear()
                 mrows.clear()
+                ptrows.clear()
 
         if progress:
             progress(idx + 1, len(times), "lendo_times")
@@ -214,6 +298,26 @@ def scan_base(conn, sid, reader, mem, progress=None, ref_date=None):
         conn.executemany(f_sql, frows)
         if mrows:
             conn.executemany(m_sql, mrows)
+        if ptrows:
+            conn.executemany(
+                "INSERT OR REPLACE INTO player_teams (snapshot_id, player_uid, team_uid) VALUES (?, ?, ?)",
+                ptrows,
+            )
+        conn.commit()
+
+    # Save managed club profile
+    if club_ptr and hasattr(reader, "club_profile"):
+        try:
+            cprof = reader.club_profile(club_ptr)
+            if cprof:
+                if not cprof.get("club_uid") and club_uid:
+                    cprof["club_uid"] = club_uid
+                db.save_club(conn, sid, cprof)
+        except Exception:
+            pass
+
+    if club_uid:
+        conn.execute("UPDATE snapshots SET club_uid=? WHERE id=? AND club_uid IS NULL", (club_uid, sid))
         conn.commit()
 
     return total_jogadores
@@ -232,6 +336,11 @@ def capture_all(snapshot_name, game_date_iso=None):
     ref_date = gd.isoformat() if gd else (game_date_iso or "2026-07-01")
     sname = reader.save_name() or "Save Atual"
 
+    mgr = reader.human_manager() if hasattr(reader, "human_manager") else None
+    club_info = reader.manager_club() if hasattr(reader, "manager_club") else None
+    club_ptr = club_info[0] if club_info and len(club_info) >= 1 else None
+    club_uid = reader.u32(club_ptr + 0x0C) if club_ptr and hasattr(reader, "u32") else None
+
     conn = db.connect()
     db.init_schema(conn)
 
@@ -241,6 +350,8 @@ def capture_all(snapshot_name, game_date_iso=None):
         save_name=sname,
         game_date=ref_date,
         scope="full",
+        club_uid=club_uid,
+        manager=mgr.get("full_name") if mgr else None,
         fm_version=mem.fm_version,
     )
 

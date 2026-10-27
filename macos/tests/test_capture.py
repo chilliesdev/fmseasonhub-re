@@ -210,8 +210,22 @@ class CaptureTests(unittest.TestCase):
                 self.assertEqual(tuple(stats), (None, None, None))
                 profile = conn.execute("SELECT passing, pos_gk, contract_end, wage_weekly FROM player_profile WHERE snapshot_id=?", (sid,)).fetchone()
                 self.assertEqual(tuple(profile), (9, 20, None, None))
+                club_p = conn.execute("SELECT club_uid, name_full, training_facilities, balance FROM club_profile WHERE snapshot_id=?", (sid,)).fetchone()
+                self.assertEqual(tuple(club_p), (1714, "Real Betis Balompié", 16, 12500000))
+                team_row = conn.execute("SELECT team_uid, club_uid, label FROM teams WHERE snapshot_id=?", (sid,)).fetchone()
+                self.assertEqual(tuple(team_row), (1714, 1714, "First Team"))
+                snap = conn.execute("SELECT club_uid FROM snapshots WHERE id=?", (sid,)).fetchone()
+                self.assertEqual(snap[0], 1714)
             status, response = self.request(f"/api/snapshots/{sid}/players")
             self.assertEqual(status, 200, response)
+            status, myteams = self.request(f"/api/myteams?snapshot={sid}")
+            self.assertEqual(status, 200)
+            self.assertEqual(len(myteams["teams"]), 1)
+            self.assertEqual(myteams["teams"][0]["team_uid"], 1714)
+            status, club_prof = self.request(f"/api/club_profile?snapshot={sid}")
+            self.assertEqual(status, 200)
+            self.assertEqual(club_prof["club_uid"], 1714)
+            self.assertEqual(club_prof["training_facilities"], 16)
         memory.put(memory.TABLE + 0x88, "Q", 0)
         status, response = self.request("/api/capture", {"name": "Must fail"})
         self.assertEqual(status, 500, response)
@@ -594,6 +608,28 @@ class CaptureTests(unittest.TestCase):
             (2, 3, "lendo_elenco"),
             (3, 3, "lendo_elenco"),
         ])
+
+    def test_capture_unreadable_club_presents_accurate_empty_limitation(self):
+        team_a = 0x40000
+        players_a = [0x20000, 0x20001]
+        self.reader.all_teams_with_players.return_value = [team_a]
+        self.reader.manager_team = Mock(return_value=team_a)
+        self.reader.roster = Mock(return_value=players_a)
+        self.reader.manager_club = Mock(return_value=(None, team_a, "Clube Local", "CLB"))
+        self.reader.club_profile = Mock(return_value={})
+        self.reader.club_teams = Mock(return_value=[])
+
+        self.connect()
+        status, response = self.request("/api/capture", {"name": "Unemployed / No Club", "scope": "squad"})
+        self.assertEqual(status, 200, response)
+        sid = response["sid"]
+
+        with closing(server.get_db_connection()) as conn:
+            self.assertEqual(conn.execute("SELECT COUNT(*) FROM club_profile WHERE snapshot_id=?", (sid,)).fetchone()[0], 0)
+
+        status, club_prof = self.request(f"/api/club_profile?snapshot={sid}")
+        self.assertEqual(status, 200)
+        self.assertIsNone(club_prof)
 
 
 if __name__ == "__main__":

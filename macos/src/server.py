@@ -608,7 +608,24 @@ def _init_db(conn: sqlite3.Connection) -> None:
             club_uid INTEGER,
             name_full TEXT,
             name_short TEXT,
-            nickname TEXT
+            nickname TEXT,
+            year_founded INTEGER,
+            color_fg TEXT,
+            color_bg TEXT,
+            avg_attendance INTEGER,
+            min_attendance INTEGER,
+            max_attendance INTEGER,
+            balance INTEGER,
+            transfer_budget INTEGER,
+            wage_budget INTEGER,
+            wage_total INTEGER,
+            training_facilities INTEGER,
+            youth_facilities INTEGER,
+            youth_coaching INTEGER,
+            youth_recruitment INTEGER,
+            youth_importance INTEGER,
+            supporter_loyalty INTEGER,
+            supporter_passion INTEGER
         )
         """)
         cur.execute("""
@@ -1389,19 +1406,62 @@ def capture_snapshot(body: Optional[CaptureBody] = None):
                 validate()
                 with closing(db.connect(str(Path(folder) / "capture.db"))) as staged:
                     db.init_schema(staged)
+
+                    club_ptr = None
+                    mgr_team = None
+                    c_full = None
+                    c_short = None
+                    if hasattr(_FM_READER, "manager_club"):
+                        try:
+                            m_res = _FM_READER.manager_club()
+                            if m_res and len(m_res) >= 4:
+                                club_ptr, mgr_team, c_full, c_short = m_res
+                            elif m_res and len(m_res) >= 2:
+                                club_ptr, mgr_team = m_res[0], m_res[1]
+                        except Exception:
+                            pass
+
+                    mgr_name = None
+                    if hasattr(_FM_READER, "human_manager"):
+                        try:
+                            hm = _FM_READER.human_manager()
+                            if isinstance(hm, dict):
+                                mgr_name = hm.get("full_name")
+                        except Exception:
+                            pass
+                    if not mgr_name and source[2] and " - " in source[2]:
+                        mgr_name = source[2].split(" - ")[0].strip() or None
+
+                    club_uid = None
+                    if club_ptr and hasattr(_FM_READER, "u32"):
+                        try:
+                            club_uid = _FM_READER.u32(club_ptr + 0x0C)
+                        except Exception:
+                            pass
+
                     staged_sid = db.create_snapshot(
                         staged, name=name, scope=body.scope, game_date=source[1],
                         save_name=source[2], savegame_id=source[0][0],
+                        club_uid=club_uid, manager=mgr_name,
                         fm_version=_FM_MEMORY.fm_version,
                     )
                     if (body.scope or "squad") == "squad":
-                        team = capture.resolve_manager_team(_FM_READER)
+                        team = mgr_team or capture.resolve_manager_team(_FM_READER)
                         if team:
                             capture.scan_squad(staged, staged_sid, _FM_READER, team,
                                                ref_date=source[1], progress=progress)
                     else:
                         capture_all.scan_base(staged, staged_sid, _FM_READER, _FM_MEMORY,
                                               progress=progress, ref_date=source[1])
+
+                    if club_uid:
+                        club_name = c_full or (source[2].split(" - ")[-1].strip() if " - " in source[2] else "Managed Club")
+                        db.save_club_leagues(staged, staged_sid, [{
+                            "club_uid": club_uid,
+                            "league_uid": None,
+                            "league_name": None,
+                            "club_name": club_name,
+                        }])
                     count = staged.execute("SELECT COUNT(*) FROM players WHERE snapshot_id=?", (staged_sid,)).fetchone()[0]
                     if not count:
                         raise HTTPException(422, "Nenhum jogador foi lido. Carregue um save e repita a captura.")
