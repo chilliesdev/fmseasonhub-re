@@ -143,14 +143,16 @@ class SnapshotDeleteTests(unittest.TestCase):
         for endpoint, key in (('/api/myteams', 'teams'), ('/api/youth-teams', 'youth_teams'),
                               ('/api/clubs', 'clubs')):
             self.assertEqual(len(self.request(endpoint, snapshot=903)[1][key]), 1)
-        self.assertEqual(len(self.request('/api/snapshots/903/players')[1]), 1)
+        players_resp = self.request('/api/snapshots/903/players')[1]
+        players = players_resp["players"] if isinstance(players_resp, dict) else players_resp
+        self.assertEqual(len(players), 1)
         self.assertEqual(self.delete(), (200, {'ok': True}))
         self.assertEqual(self.summary(903)['na_carreira'], 0)
         self.assertEqual(self.summary(902), control_summary)
         for endpoint, key in (('/api/myteams', 'teams'), ('/api/youth-teams', 'youth_teams'),
                               ('/api/clubs', 'clubs')):
             self.assertEqual(self.request(endpoint, snapshot=903), (200, {key: []}))
-        self.assertEqual(self.request('/api/snapshots/903/players'), (200, []))
+        self.assertEqual(self.request('/api/snapshots/903/players'), (200, {"players": []}))
         self.assertEqual(self.request('/api/snapshots/903')[0], 404)
         self.assertEqual({row['id'] for row in self.request('/api/snapshots', include_live='false')[1]}, {901, 902})
 
