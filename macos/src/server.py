@@ -1440,7 +1440,10 @@ def simular_captura(estado: str = "concluida", tipo: str = "auto"):
     SIMULACAO["estado"] = estado
     SIMULACAO["tipo"] = tipo
     if callable(AO_AVISO_DA_CAPTURA):
-        AO_AVISO_DA_CAPTURA({"simulada": True, "estado": estado, "tipo": tipo})
+        try:
+            AO_AVISO_DA_CAPTURA({"simulada": True, "estado": estado, "tipo": tipo})
+        except Exception:
+            logger.exception("Could not notify about simulated capture")
     return {"ok": True}
 
 # ==============================================================================

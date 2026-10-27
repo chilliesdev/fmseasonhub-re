@@ -466,6 +466,32 @@ class CaptureTests(unittest.TestCase):
         self.assertEqual(status, 200, response)
         self.assertEqual(self.request(f"/api/snapshots/{response['sid']}")[1]["n_players"], 2)
 
+    def test_capture_notification_with_app_main_callback_succeeds_without_exception(self):
+        import app_main
+        self.seed_existing()
+        self.connect()
+        tocar_som = Mock()
+        janelas = {}
+        trava = threading.Lock()
+        webview_mock = Mock()
+        webview_mock.create_window.return_value = Mock()
+        real_aviso = app_main.criar_aviso_da_captura(
+            server,
+            tocar_som,
+            janelas,
+            trava,
+            "http://127.0.0.1:8000",
+            webview_mod=webview_mock,
+        )
+        self.notice.side_effect = real_aviso
+        with patch.object(server.logger, "exception") as mock_logger_exc:
+            status, response = self.request("/api/capture", {"name": "Saved and notified"})
+            self.assertEqual(status, 200, response)
+            mock_logger_exc.assert_not_called()
+        tocar_som.assert_called_once_with("captura-fim")
+        webview_mock.create_window.assert_called_once()
+        self.assertEqual(janelas.get("faixa_tamanho"), (app_main.LARGURA_FAIXA, app_main.ALTURA_FAIXA))
+
 
 if __name__ == "__main__":
     unittest.main()
