@@ -270,13 +270,13 @@ def ler(dados: bytes) -> dict:
     if len(dados) > TAMANHO_MAXIMO_ARQUIVO:
         raise ArquivoCorrompido('O arquivo e grande demais para ser uma lista (limite de 2 MB).')
     membros = _ler_indice(dados)
-    listas = [m for m in membros if m[1] == '.slf']
+    listas = [m for m in membros if m[1].lower() == '.slf']
     if not listas:
-        if any(m[1] == '.view' for m in membros):
+        if any(m[1].lower() == '.view' for m in membros):
             raise NaoEhLista('Este arquivo e uma view do FM (configuracao de colunas), nao uma lista de jogadores.')
-        if any(m[1] == '.pft' for m in membros):
+        if any(m[1].lower() == '.pft' for m in membros):
             raise NaoEhLista('Este arquivo e um filtro do FM, nao uma lista de jogadores.')
-        if any(m[1] == '.ssf' for m in membros):
+        if any(m[1].lower() == '.ssf' for m in membros):
             raise NaoEhLista('Este arquivo e uma lista de staff (treinadores e funcionarios), nao de jogadores.')
         raise NaoEhLista('Este arquivo .fmf nao contem uma lista de jogadores.')
 

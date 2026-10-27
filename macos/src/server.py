@@ -2368,11 +2368,12 @@ def get_biblioteca():
                 "fabrica": True,
             })
     # User saved presets
+    ligadas = {x.get("arquivo_biblioteca"): x["id"] for x in lista_fmf.listar() if x.get("arquivo_biblioteca")}
     for f in b_dir.glob("*.*"):
-        item = {"arquivo": f.name, "nome": f.stem, "nomeEn": f.stem,
-                "tipo": "filtro", "fabrica": False}
-        if f.suffix.lower() == ".lsh":
-            item["tipo"] = "lista"
+        ext = f.suffix.lower()
+        if ext == ".lsh":
+            item = {"arquivo": f.name, "nome": f.stem, "nomeEn": f.stem,
+                    "tipo": "lista", "fabrica": False}
             try:
                 if f.is_symlink() or f.stat().st_size > biblioteca.TAMANHO_MAXIMO:
                     raise HTTPException(400, "Arquivo de lista invalido")
@@ -2383,27 +2384,48 @@ def get_biblioteca():
                             jogo=dados.get("jogo"), carregada=bool(dados.get("id")) and dados["id"] in loaded)
             except (OSError, UnicodeError, HTTPException) as exc:
                 item["erro"] = exc.detail if isinstance(exc, HTTPException) else "Arquivo de lista invalido"
-        elif f.suffix.lower() == ".fmf":
+        elif ext == ".fmf":
+            lista_id = ligadas.get(f.name, "")
+            is_ligada = bool(lista_id)
+            item = {
+                "arquivo": f.name,
+                "nome": f.stem,
+                "nomeEn": f.stem,
+                "tipo": "listaFm",
+                "fabrica": False,
+                "listaId": lista_id,
+                "carregada": is_ligada,
+            }
             try:
-                if f.is_symlink() or f.stat().st_size > lista_fmf.TAMANHO_MAXIMO_ARQUIVO:
+                if f.is_symlink():
+                    raise HTTPException(400, "Arquivo nao pode ser um link simbolico")
+                if f.stat().st_size > biblioteca.TAMANHO_MAXIMO:
                     raise HTTPException(400, "Arquivo invalido")
                 dados = f.read_bytes()
                 tipo_fmf = view_fmf.tipo_do_fmf(dados)
-                if tipo_fmf == "lista":
+                if tipo_fmf == "view" and not is_ligada:
+                    item["tipo"] = "visao"
+                else:
                     item["tipo"] = "listaFm"
-                    ligadas = {x.get("arquivo_biblioteca"): x["id"] for x in lista_fmf.listar() if x.get("arquivo_biblioteca")}
-                    lista_id = ligadas.get(f.name, "")
-                    item.update(listaId=lista_id, carregada=bool(lista_id))
                     try:
                         lida = lista_fmf.ler(dados)
-                        item.update(nome=lida.get("nome") or f.stem, nomeEn=lida.get("nome") or f.stem,
-                                    jogadores=len(lida.get("uids") or []))
+                        item.update(
+                            nome=lida.get("nome") or f.stem,
+                            nomeEn=lida.get("nome") or f.stem,
+                            jogadores=len(lida.get("uids") or []),
+                        )
                     except Exception:
                         pass
-                elif tipo_fmf == "view":
-                    item["tipo"] = "visao"
             except Exception as exc:
-                item["erro"] = str(exc)
+                item["erro"] = exc.detail if isinstance(exc, HTTPException) else str(exc)
+        else:
+            item = {
+                "arquivo": f.name,
+                "nome": f.stem,
+                "nomeEn": f.stem,
+                "tipo": "filtro",
+                "fabrica": False,
+            }
         items.append(item)
     return {"arquivos": items, "pasta": str(b_dir)}
 
@@ -2435,6 +2457,8 @@ def _obter_caminho_biblioteca(arquivo: str) -> Path:
 @app.get("/api/biblioteca/{arquivo}")
 def get_biblioteca_ler(arquivo: str):
     p = _obter_caminho_biblioteca(arquivo)
+    if p.suffix.lower() == ".fmf":
+        raise HTTPException(status_code=400, detail="Arquivo binario nao pode ser lido como filtro")
     try:
         with open(p, "r", encoding="utf-8") as f:
             try:
@@ -2442,6 +2466,8 @@ def get_biblioteca_ler(arquivo: str):
             except Exception:
                 f.seek(0)
                 return {"texto": f.read()}
+    except (UnicodeDecodeError, UnicodeError) as exc:
+        raise HTTPException(status_code=400, detail="Arquivo binario nao pode ser lido como filtro") from exc
     except OSError as exc:
         raise HTTPException(status_code=404, detail="Arquivo nao encontrado") from exc
 
@@ -2451,6 +2477,8 @@ def post_biblioteca_gravar(body: BibliotecaBody):
     selecao = body.uids is not None or body.snapshot is not None
     nome = body.arquivo if body.arquivo is not None else ("salvo.lsh" if selecao else "salvo.fsh")
     p = b_dir / _validar_nome_biblioteca(nome)
+    if p.suffix.lower() == ".fmf":
+        raise HTTPException(status_code=400, detail="Arquivo binario nao pode ser salvo como filtro")
     conteudo = _selecionar_lista_biblioteca(body, nome) if selecao else body.conteudo
     if p.suffix.lower() == ".lsh":
         conteudo = _lista_biblioteca(conteudo)

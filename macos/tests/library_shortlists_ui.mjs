@@ -38,4 +38,12 @@ assert.equal(downloads[0][1], 'Équipe.lsh');
 const broken = rendered.find(node => node.type === 'tr' && JSON.stringify(node).includes('broken.lsh'));
 assert(broken);
 assert(!nodes(broken).some(node => node.type === 'button' && node.props.title === 'bib.baixarArquivo'), 'invalid list cannot be downloaded as valid');
+const fmfRow = rendered.find(node => node.type === 'tr' && JSON.stringify(node).includes('Scouting.fmf'));
+if (fmfRow) {
+  const fmfContents = JSON.stringify(fmfRow);
+  assert(fmfContents.includes('arq.tipo.listaFm'), 'FM shortlist label');
+  assert(!fmfContents.includes('arq.tipo.filtro'), 'FM shortlist must not use filter label');
+  const action = nodes(fmfRow).find(node => node.type === 'button' && (node.props.title === 'bib.abrirLista' || node.props.title === 'bib.carregarLista'));
+  assert(action, 'FM shortlist open/load action exists');
+}
 console.log('Library shortlist renderer passed');
