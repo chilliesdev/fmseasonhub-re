@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import subprocess
 import unittest
+from unittest.mock import patch
 import urllib.error
 import urllib.request
 
@@ -182,6 +183,21 @@ class ListSummaryTests(unittest.TestCase):
                                 capture_output=True, text=True, timeout=15)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn('List renderer regressions passed: 5 cases', result.stdout)
+
+    def test_summary_and_outside_load_only_requested_uids(self):
+        loaded_uids = []
+        original_load = fixtures.moneyball_data.load
+        def spy_load(conn, selected=None, career=None, groups=(), uids=None):
+            loaded_uids.append(uids)
+            return original_load(conn, selected, career, groups, uids)
+
+        with patch.object(fixtures.moneyball_data, 'load', side_effect=spy_load):
+            self.summary([1, 2], snapshot=901)
+            self.assertEqual(loaded_uids[-1], {1, 2})
+
+            loaded_uids.clear()
+            self.outside([1, 30], snapshot=901)
+            self.assertEqual(loaded_uids[-1], {1, 30})
 
 
 if __name__ == '__main__':

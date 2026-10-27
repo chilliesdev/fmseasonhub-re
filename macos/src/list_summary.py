@@ -27,7 +27,7 @@ def _selection(conn, uids, selected):
     sid = data.snapshot_id(conn, selected)
     snapshot = conn.execute('SELECT * FROM snapshots WHERE id=?', (sid,)).fetchone()
     wanted = set(uids)
-    rows = data.load(conn, sid)[1] if snapshot and wanted else []
+    rows = data.load(conn, sid, uids=wanted)[1] if snapshot and wanted else []
     return dict(snapshot) if snapshot else {}, [row for row in rows if row['uid'] in wanted]
 
 
@@ -122,7 +122,7 @@ def outside_rows(conn, uids, selected=None, groups=()):
     result = []
     for sid, players in by_snapshot.items():
         source = conn.execute('SELECT game_date FROM snapshots WHERE id=?', (sid,)).fetchone()
-        for row in data.load(conn, sid, groups=groups)[1]:
+        for row in data.load(conn, sid, groups=groups, uids=players.keys())[1]:
             item = players.get(row['uid'])
             if item:
                 result.append({**row, 'fora': {

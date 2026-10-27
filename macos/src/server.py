@@ -1465,10 +1465,18 @@ def _load_moneyball_catalog() -> Dict[str, Any]:
             return json.load(f)
     return {}
 
-def _moneyball_rows(snapshot=None, groups=()):
+def _moneyball_rows(snapshot=None, groups=(), uids=None):
     with closing(get_db_connection()) as conn:
         career = settings.load().get("carreira_ativa") if settings else None
-        return moneyball_data.load(conn, snapshot, career, groups)
+        return moneyball_data.load(conn, snapshot, career, groups, uids=uids)
+
+
+def _snapshot_player_count(sid):
+    if sid is None:
+        return 0
+    with closing(get_db_connection()) as conn:
+        row = conn.execute("SELECT COUNT(*) FROM players WHERE snapshot_id=?", (sid,)).fetchone()
+        return row[0] if row else 0
 
 
 def _moneyball_public_row(row):
@@ -1606,7 +1614,6 @@ def _moneyball_selection(params):
         groups = set(re.findall(r"\b(gk|def|wing|dm|b2b|amc|att)_", requested))
         if group in mb.POSITION_GROUPS_ORDER:
             groups.add(group)
-        sid, rows = _moneyball_rows(moneyball_data.integer(params, "snapshot"), groups)
         allowed = None
         uid_filter = params.get("uids", "")
         if uid_filter.startswith(("lista:", "favlista:")):
@@ -1617,10 +1624,15 @@ def _moneyball_selection(params):
         outside = params.get("fora", "0")
         if outside not in ("0", "1"):
             raise ValueError("fora: expected 0 or 1")
+        target_uids = allowed if allowed is not None else (moneyball_data.ids(uid_filter) if uid_filter else None)
         if outside == "1":
-            wanted = allowed if allowed is not None else moneyball_data.ids(uid_filter)
             with closing(get_db_connection()) as conn:
-                rows = list_summary.outside_rows(conn, wanted or [], sid, groups)
+                career = settings.load().get("carreira_ativa") if settings else None
+                sid = moneyball_data.snapshot_id(conn, moneyball_data.integer(params, "snapshot"), career)
+                rows = list_summary.outside_rows(conn, target_uids or [], sid, groups)
+        else:
+            load_uids = target_uids if (target_uids is not None and not (params.get("pct") == "1" and params.get("pool", "filtered") != "filtered")) else None
+            sid, rows = _moneyball_rows(moneyball_data.integer(params, "snapshot"), groups, uids=load_uids)
         selected, warnings = moneyball_data.select(rows, params, allowed)
         ordered = moneyball_data.sort_rows(selected, params)
         return sid, rows, ordered, columns, warnings
@@ -1645,8 +1657,10 @@ def moneyball_browse(request: Request):
     except ValueError as exc:
         raise HTTPException(400, str(exc)) from exc
     public = [_moneyball_public_row(row) for row in page]
+    outside = params.get("fora", "0")
+    total_db = len(rows) if (outside == "1" or not params.get("uids")) else _snapshot_player_count(sid)
     return {"snapshot": sid, "group": params.get("group", "all"),
-            "total": len(selected), "total_db": len(rows), "filtered": len(selected),
+            "total": len(selected), "total_db": total_db, "filtered": len(selected),
             "rows": public, "players": public, "columns": columns,
             "percentiles": percentiles, "warnings": warnings, "att": {}}
 
@@ -1659,12 +1673,13 @@ def moneyball_export(request: Request):
     keys = [key for key in params.get("cols", "uid,name,club,position,rating").split(",") if key]
     metadata = {column["key"]: column for column in _moneyball_column_catalog("all")["current"]}
     metadata.update({column["key"]: column for section in _moneyball_column_catalog("all")["sections"] for column in section["columns"]})
-    metadata.update({"uid": {"fmt": "txt"}, "position": {"fmt": "txt"}, "rating": {"fmt": "rating"}})
+    metadata.update({"uid": {"fmt": "txt"}, "position": {"fmt": "txt"}, "rating": {"fmt": "rating"}, "age": {"fmt": "int"}})
+    metadata.update({target: {"fmt": "int" if target in ("age", "ca", "pa") else "money" if target in ("transfer_value", "asking_price", "wage") else "txt"} for target in moneyball_data.ALIASES.values()})
     metadata.update({column["key"]: column for column in moneyball_data.search_alias_columns()})
     metadata.update({key: {"fmt": "dec2"} for key in mb.RAW_FIELDS})
     metadata.update({key + "_per90": {"fmt": "dec2"} for key in
                      ("goals", "assists", "xg", "xa", "shots", "passes_completed", "tackles_completed", "interceptions")})
-    if not keys or any(key not in metadata and key not in moneyball_data.ALIASES for key in keys):
+    if not keys or any(key not in metadata and key not in moneyball_data.ALIASES and key not in moneyball_data.ALIASES.values() for key in keys):
         raise HTTPException(400, "invalid export columns")
     profile = params.get("profile", "intl")
     if profile not in csv_export.PROFILES:

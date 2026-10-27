@@ -371,6 +371,41 @@ class MoneyballDataTests(unittest.TestCase):
         self.assertEqual(self.request('/api/moneyball/percentiles', snapshot=901)[0], 200)
         self.assertEqual(self.request('/api/moneyball/export.csv', snapshot=901)[0], 200)
 
+    def test_shortlist_and_uid_selection_loads_only_requested_players_without_full_database_derivation(self):
+        extra_players = [(901, uid, f'Extra Player {uid}', 77, 771, 100, 150) for uid in range(1000, 3000)]
+        extra_players.append((901, 352, 'Target One', 77, 771, 110, 160))
+        extra_players.append((901, 12315, 'Target Two', 78, 781, 120, 170))
+        with closing(server.get_db_connection()) as conn, conn:
+            conn.executemany('INSERT INTO players(snapshot_id,uid,full_name,club_id,team_uid,ca,pa) VALUES(?,?,?,?,?,?,?)', extra_players)
+            conn.executemany('INSERT INTO player_profile(snapshot_id,uid,birth_date) VALUES(?,?,?)', [
+                (901, 352, '2001-01-01'), (901, 12315, '2002-02-02')])
+
+        settings.save(listas_preferenciais=[{
+            'id': 'shortlist-two',
+            'nome': 'Two Player List',
+            'uids': [352, 12315],
+        }])
+
+        derived_sizes = []
+        original_derive = moneyball_data._derive
+        def spy_derive(rows, groups):
+            derived_sizes.append(len(rows))
+            return original_derive(rows, groups)
+
+        with patch.object(moneyball_data, '_derive', side_effect=spy_derive):
+            result = self.browse(group='all', uids='lista:shortlist-two')
+            self.assertEqual(result['total'], 2)
+            self.assertEqual({row['uid'] for row in result['rows']}, {352, 12315})
+            self.assertEqual(derived_sizes[-1], 2)
+
+            derived_sizes.clear()
+            status, csv_data = self.request('/api/moneyball/export.csv', snapshot=901, group='all',
+                                            uids='352,12315', cols='uid,name,age', profile='intl')
+            self.assertEqual(status, 200)
+            records = list(csv.reader(io.StringIO(csv_data)))
+            self.assertEqual(len(records), 3)
+            self.assertEqual(derived_sizes[-1], 2)
+
 
 if __name__ == '__main__':
     unittest.main()
