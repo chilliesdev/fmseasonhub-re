@@ -401,6 +401,100 @@ def _trazer_para_frente():
         _forcar_frente(hwnd)
 
 
+LARGURA_FAIXA = 620
+ALTURA_FAIXA = 96
+TOPO_FAIXA = 120
+LARGURA_PILULA = 440
+ALTURA_PILULA = 36
+TITULO_FAIXA = 'FM Season Hub - captura'
+TITULO_FAIXA_CONEXAO = 'FM Season Hub - conexao'
+SOM_DA_FAIXA = {
+    'inicio': 'captura-inicio',
+    'concluida': 'captura-fim',
+    'falhou': 'captura-alerta',
+}
+
+
+def resolver_momento_captura(momento):
+    """Normalize capture callback argument into (estado, tipo)."""
+    if isinstance(momento, dict):
+        estado = momento.get('estado') or momento.get('momento') or momento.get('status')
+        if not estado:
+            estado = 'concluida' if 'sid' in momento else 'concluida'
+        return str(estado), momento.get('tipo')
+    if momento is None:
+        return 'concluida', None
+    return str(momento), None
+
+
+def criar_aviso_da_captura(server_mod, tocar_som_fn, janelas_dict, trava_faixa_obj,
+                           base_url, guardar_no_topo_fn=None, recortar_fn=None,
+                           webview_mod=None):
+    """Build capture window and sound notification callback."""
+    if webview_mod is None:
+        import webview
+        webview_mod = webview
+
+    def aviso_da_captura(momento):
+        estado, tipo_payload = resolver_momento_captura(momento)
+        if tipo_payload:
+            tipo = tipo_payload
+        elif server_mod.SIMULACAO.get('estado'):
+            tipo = server_mod.SIMULACAO.get('tipo')
+        else:
+            tipo = server_mod.CAPTURA_AUTO.get('tipo')
+        pilula = (tipo == 'tracker')
+        sem_som = (not server_mod.SIMULACAO.get('estado')) and (server_mod.CAPTURA_AUTO.get('estado') == 'ja_salva')
+        if estado in SOM_DA_FAIXA and not pilula and not sem_som:
+            tocar_som_fn(SOM_DA_FAIXA[estado])
+        largura, altura = (LARGURA_PILULA, ALTURA_PILULA) if pilula else (LARGURA_FAIXA, ALTURA_FAIXA)
+        with trava_faixa_obj:
+            atual = janelas_dict.get('faixa')
+            if atual is not None and estado != 'fechar' and janelas_dict.get('faixa_tamanho') != (largura, altura):
+                janelas_dict['faixa'] = None
+                try:
+                    atual.destroy()
+                except Exception:
+                    pass
+                atual = None
+            if estado == 'fechar':
+                if atual is not None:
+                    janelas_dict['faixa'] = None
+                    try:
+                        atual.destroy()
+                    except Exception:
+                        pass
+                return
+            if atual is not None:
+                return
+            import janela_dados
+            tela = janela_dados.tela_principal() or (0, 0, 1920, 1080)
+            janela = webview_mod.create_window(
+                TITULO_FAIXA,
+                f"{base_url}/janela/captura",
+                width=largura,
+                height=altura,
+                x=tela[0] + (tela[2] - largura) // 2,
+                min_size=(largura, altura),
+                y=tela[1] + TOPO_FAIXA,
+                frameless=True,
+                on_top=True,
+                resizable=False,
+                easy_drag=False,
+                focus=False,
+                background_color='#10202E',
+            )
+            janelas_dict['faixa'] = janela
+            janelas_dict['faixa_tamanho'] = (largura, altura)
+        log(f"faixa da captura: aberta ({estado}, {'pilula' if pilula else 'faixa'})")
+        if pilula and callable(recortar_fn):
+            threading.Thread(target=recortar_fn, args=(janela, TITULO_FAIXA), daemon=True).start()
+        if callable(guardar_no_topo_fn):
+            guardar_no_topo_fn(janela, 'faixa', TITULO_FAIXA)
+
+    return aviso_da_captura
+
+
 def main():
     em_bandeja = ARGUMENTO_BANDEJA in sys.argv[1:]
     server_only = ('--server-only' in sys.argv[1:]) or ('-s' in sys.argv[1:])
@@ -742,74 +836,32 @@ def main():
         volume = max(0, min(100, int(s.get('captura_som_volume', 100))))
         fila_de_sons.put((nome, volume))
 
-    def aviso_da_captura(momento):
-        if server.SIMULACAO.get('estado'):
-            tipo = server.SIMULACAO.get('tipo')
-        else:
-            tipo = server.CAPTURA_AUTO.get('tipo')
-        pilula = (tipo == 'tracker')
-        sem_som = (not server.SIMULACAO.get('estado')) and (server.CAPTURA_AUTO.get('estado') == 'ja_salva')
-        if momento in SOM_DA_FAIXA and not pilula and not sem_som:
-            tocar_som(SOM_DA_FAIXA[momento])
-        largura, altura = (LARGURA_PILULA, ALTURA_PILULA) if pilula else (LARGURA_FAIXA, ALTURA_FAIXA)
-        with trava_faixa:
-            atual = janelas.get('faixa')
-            if atual is not None and momento != 'fechar' and janelas.get('faixa_tamanho') != (largura, altura):
-                janelas['faixa'] = None
-                try:
-                    atual.destroy()
-                except Exception:
-                    pass
-                atual = None
-            if momento == 'fechar':
-                if atual is not None:
-                    janelas['faixa'] = None
-                    try:
-                        atual.destroy()
-                    except Exception:
-                        pass
-                return
-            if atual is not None:
-                return
-            import janela_dados
-            tela = janela_dados.tela_principal() or (0, 0, 1920, 1080)
-            janela = webview.create_window(
-                TITULO_FAIXA,
-                f"{base}/janela/captura",
-                width=largura,
-                height=altura,
-                x=tela[0] + (tela[2] - largura) // 2,
-                min_size=(largura, altura),
-                y=tela[1] + TOPO_FAIXA,
-                frameless=True,
-                on_top=True,
-                resizable=False,
-                easy_drag=False,
-                focus=False,
-                background_color='#10202E',
-            )
-            janelas['faixa'] = janela
-            janelas['faixa_tamanho'] = (largura, altura)
-        log(f"faixa da captura: aberta ({momento}, {'pilula' if pilula else 'faixa'})")
-        if pilula:
-            threading.Thread(target=recortar_em_pilula, args=(janela, TITULO_FAIXA), daemon=True).start()
-        guardar_no_topo(janela, 'faixa', TITULO_FAIXA)
+    aviso_da_captura = criar_aviso_da_captura(
+        server,
+        tocar_som,
+        janelas,
+        trava_faixa,
+        base,
+        guardar_no_topo_fn=guardar_no_topo,
+        recortar_fn=recortar_em_pilula,
+    )
 
     TITULO_FAIXA_CONEXAO = 'FM Season Hub - conexao'
 
     def aviso_da_conexao(momento):
-        if momento in SOM_DA_FAIXA:
-            tocar_som(SOM_DA_FAIXA[momento])
+        estado, _ = resolver_momento_captura(momento) if isinstance(momento, dict) else (str(momento or 'inicio'), None)
+        if estado in SOM_DA_FAIXA:
+            tocar_som(SOM_DA_FAIXA[estado])
         with trava_faixa:
             atual = janelas.get('faixa_conexao')
-            if momento == 'fechar' or (momento == 'inicio' and atual is not None):
+            if estado == 'fechar' or (estado == 'inicio' and atual is not None):
                 janelas['faixa_conexao'] = None
                 if atual is not None:
                     try:
                         atual.destroy()
                     except Exception:
                         pass
-                if momento == 'fechar':
+                if estado == 'fechar':
                     return
             elif atual is not None:
                 return
@@ -831,7 +883,7 @@ def main():
                 background_color='#10202E',
             )
             janelas['faixa_conexao'] = janela
-        log('faixa da conexao: aberta')
+        log(f'faixa da conexao: aberta ({estado})')
         guardar_no_topo(janela, 'faixa_conexao', TITULO_FAIXA_CONEXAO)
 
     import server
