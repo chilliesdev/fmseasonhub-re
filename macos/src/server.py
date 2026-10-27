@@ -36,6 +36,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictInt, field_validator
 import uvicorn
 import graphics
 import game_launcher
+import capture
 import capture_all
 import cache_browse
 import db
@@ -1368,7 +1369,8 @@ def capture_snapshot(body: Optional[CaptureBody] = None):
     body = body or CaptureBody()
     name = body.name or "Snapshot Manual"
     with _CONNECTION_LOCK:
-        _JOB_STATUS.update(kind="capture", state="running", phase="lendo_times", done=0,
+        initial_phase = "lendo_elenco" if (body.scope or "squad") == "squad" else "lendo_times"
+        _JOB_STATUS.update(kind="capture", state="running", phase=initial_phase, done=0,
                            total=0, sid=None, name=name, error=None, error_code=None)
         try:
             source = _capture_source()
@@ -1392,8 +1394,14 @@ def capture_snapshot(body: Optional[CaptureBody] = None):
                         save_name=source[2], savegame_id=source[0][0],
                         fm_version=_FM_MEMORY.fm_version,
                     )
-                    capture_all.scan_base(staged, staged_sid, _FM_READER, _FM_MEMORY,
-                                          progress=progress, ref_date=source[1])
+                    if (body.scope or "squad") == "squad":
+                        team = capture.resolve_manager_team(_FM_READER)
+                        if team:
+                            capture.scan_squad(staged, staged_sid, _FM_READER, team,
+                                               ref_date=source[1], progress=progress)
+                    else:
+                        capture_all.scan_base(staged, staged_sid, _FM_READER, _FM_MEMORY,
+                                              progress=progress, ref_date=source[1])
                     count = staged.execute("SELECT COUNT(*) FROM players WHERE snapshot_id=?", (staged_sid,)).fetchone()[0]
                     if not count:
                         raise HTTPException(422, "Nenhum jogador foi lido. Carregue um save e repita a captura.")

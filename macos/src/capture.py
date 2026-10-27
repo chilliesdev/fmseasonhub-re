@@ -13,7 +13,24 @@ from capture_all import build_player_rows, _insert_sql, gravar_arquivo_partidas
 import db
 
 
-def scan_squad(conn, sid, reader, team, ref_date):
+def resolve_manager_team(reader):
+    """Obtem o ponteiro do time do treinador humano / elenco atual."""
+    if hasattr(reader, "manager_team") and callable(reader.manager_team):
+        team = reader.manager_team()
+        if team:
+            return team
+    if hasattr(reader, "manager_club") and callable(reader.manager_club):
+        res = reader.manager_club()
+        if res and len(res) >= 2 and res[1]:
+            return res[1]
+    if hasattr(reader, "all_teams_with_players") and callable(reader.all_teams_with_players):
+        teams = reader.all_teams_with_players()
+        if teams:
+            return teams[0]
+    return None
+
+
+def scan_squad(conn, sid, reader, team, ref_date, progress=None):
     """Le o elenco do `team` da memoria e grava no snapshot `sid` (players + stats + profile)."""
     p_sql, s_sql, f_sql, m_sql = _insert_sql(conn)
 
@@ -25,17 +42,34 @@ def scan_squad(conn, sid, reader, team, ref_date):
     srows = []
     frows = []
     mrows = []
+    total_jogadores = 0
 
-    for entrada in roster:
+    total_roster = len(roster)
+    for idx, entrada in enumerate(roster):
         obj = reader.jogador_do_elenco(entrada)
         rows = build_player_rows(reader, obj, sid, ref_date)
-        if not rows:
-            continue
-        prow, srow, frow, mr = rows
-        prows.append(prow)
-        srows.append(srow)
-        frows.append(frow)
-        mrows.extend(mr)
+        if rows:
+            prow, srow, frow, mr = rows
+            prows.append(prow)
+            srows.append(srow)
+            frows.append(frow)
+            mrows.extend(mr)
+            total_jogadores += 1
+
+            if len(prows) >= 2000:
+                conn.executemany(p_sql, prows)
+                conn.executemany(s_sql, srows)
+                conn.executemany(f_sql, frows)
+                if mrows:
+                    conn.executemany(m_sql, mrows)
+                conn.commit()
+                prows.clear()
+                srows.clear()
+                frows.clear()
+                mrows.clear()
+
+        if progress:
+            progress(idx + 1, total_roster, "lendo_elenco")
 
     if prows:
         conn.executemany(p_sql, prows)
@@ -45,7 +79,7 @@ def scan_squad(conn, sid, reader, team, ref_date):
             conn.executemany(m_sql, mrows)
         conn.commit()
 
-    return len(prows)
+    return total_jogadores
 
 
 def capture(snapshot_name):
