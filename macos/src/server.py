@@ -2139,15 +2139,54 @@ def post_favoritos_aviso_visto():
 # 16. Library (Biblioteca) Endpoints
 # ==============================================================================
 
+_orig_paths_biblioteca_dir = paths.biblioteca_dir if paths else None
+
 def _get_biblioteca_dir() -> Path:
-    if paths:
+    if _orig_paths_biblioteca_dir:
         try:
-            return Path(paths.biblioteca_dir())
+            return Path(_orig_paths_biblioteca_dir())
         except Exception:
             pass
     b_dir = Path.home() / "Library" / "Application Support" / "FMSeasonHub" / "biblioteca"
     b_dir.mkdir(parents=True, exist_ok=True)
     return b_dir
+
+if paths:
+    paths.biblioteca_dir = lambda: str(_get_biblioteca_dir())
+
+
+def _identidades_do_banco(uids, snapshot=None):
+    if not uids:
+        return {}
+    try:
+        with closing(get_db_connection()) as conn:
+            placeholders = ",".join("?" for _ in uids)
+            snap_val = int(snapshot) if snapshot is not None and str(snapshot).isdigit() else 0
+            rows = conn.execute(f"""
+                SELECT p.uid, p.snapshot_id, p.full_name, p.common_name, p.name_first, p.name_last, perfil.birth_date
+                FROM players p
+                LEFT JOIN player_profile perfil ON perfil.snapshot_id=p.snapshot_id AND perfil.uid=p.uid
+                LEFT JOIN snapshots s ON s.id=p.snapshot_id
+                WHERE p.uid IN ({placeholders})
+                ORDER BY (p.snapshot_id = ?) DESC, (perfil.birth_date IS NOT NULL) DESC, s.id DESC
+            """, [*list(uids), snap_val]).fetchall()
+            saida = {}
+            for raw in rows:
+                row = dict(raw)
+                uid = row["uid"]
+                if uid not in saida:
+                    nome = row.get("full_name") or row.get("common_name") or " ".join(
+                        str(row.get(key) or "") for key in ("name_first", "name_last")).strip() or str(uid)
+                    saida[uid] = {
+                        "nome": nome,
+                        "nascimento": row.get("birth_date"),
+                    }
+            return saida
+    except Exception:
+        return {}
+
+
+biblioteca_listas.identidades = _identidades_do_banco
 
 def _validar_nome_biblioteca(nome: str) -> str:
     """Library names identify one entry, never a relative or absolute path."""
@@ -2261,6 +2300,27 @@ def get_biblioteca():
                             jogo=dados.get("jogo"), carregada=bool(dados.get("id")) and dados["id"] in loaded)
             except (OSError, UnicodeError, HTTPException) as exc:
                 item["erro"] = exc.detail if isinstance(exc, HTTPException) else "Arquivo de lista invalido"
+        elif f.suffix.lower() == ".fmf":
+            try:
+                if f.is_symlink() or f.stat().st_size > lista_fmf.TAMANHO_MAXIMO_ARQUIVO:
+                    raise HTTPException(400, "Arquivo invalido")
+                dados = f.read_bytes()
+                tipo_fmf = view_fmf.tipo_do_fmf(dados)
+                if tipo_fmf == "lista":
+                    item["tipo"] = "listaFm"
+                    ligadas = {x.get("arquivo_biblioteca"): x["id"] for x in lista_fmf.listar() if x.get("arquivo_biblioteca")}
+                    lista_id = ligadas.get(f.name, "")
+                    item.update(listaId=lista_id, carregada=bool(lista_id))
+                    try:
+                        lida = lista_fmf.ler(dados)
+                        item.update(nome=lida.get("nome") or f.stem, nomeEn=lida.get("nome") or f.stem,
+                                    jogadores=len(lida.get("uids") or []))
+                    except Exception:
+                        pass
+                elif tipo_fmf == "view":
+                    item["tipo"] = "visao"
+            except Exception as exc:
+                item["erro"] = str(exc)
         items.append(item)
     return {"arquivos": items, "pasta": str(b_dir)}
 
@@ -2382,7 +2442,37 @@ def post_biblioteca_abrir_pasta():
 
 @app.post("/api/biblioteca/{arquivo}/carregar")
 def post_biblioteca_carregar(arquivo: str):
-    return {"ja_estava": True, "nao_conferem": [], "sem_captura": []}
+    nome = _validar_nome_biblioteca(arquivo)
+    b_dir = _get_biblioteca_dir()
+    caminho = b_dir / nome
+    if caminho.is_symlink():
+        raise HTTPException(status_code=400, detail="Arquivo nao pode ser um link simbolico")
+    if not caminho.exists():
+        fab = FMSH_DIR / "src" / "presets_fabrica" / nome
+        if fab.exists():
+            caminho = fab
+        else:
+            raise HTTPException(status_code=404, detail="Arquivo nao encontrado")
+    if not caminho.is_file():
+        raise HTTPException(status_code=404, detail="Arquivo nao encontrado")
+    if caminho.stat().st_size > biblioteca.TAMANHO_MAXIMO:
+        raise HTTPException(status_code=400, detail="Arquivo excede o tamanho maximo")
+    ext = caminho.suffix.lower()
+    if ext not in (".lsh", ".fmf"):
+        raise HTTPException(status_code=400, detail="Arquivo nao e uma lista")
+
+    with _FAVORITOS_LOCK:
+        try:
+            return biblioteca_listas.carregar(nome)
+        except biblioteca.ArquivoInvalido as exc:
+            msg = str(exc)
+            if "nao encontrado" in msg.lower():
+                raise HTTPException(status_code=404, detail=msg) from exc
+            raise HTTPException(status_code=400, detail=msg) from exc
+        except HTTPException:
+            raise
+        except Exception as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 @app.get("/api/biblioteca/{arquivo}/bruto")
 def get_biblioteca_bruto(arquivo: str):
