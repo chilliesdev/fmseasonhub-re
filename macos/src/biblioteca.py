@@ -117,16 +117,24 @@ def ler_bytes(nome):
 
 
 def ler_texto(nome_ou_texto, extensao=None):
-    if isinstance(nome_ou_texto, str) and not os.path.isfile(nome_ou_texto):
-        # Texto ja lido
-        if extensao in (".lsh", ".fsh", ".json"):
-            import json
-            try:
-                dados = json.loads(nome_ou_texto)
-                return conferir(dados, extensao)
-            except Exception as e:
-                raise ArquivoInvalido(str(e))
-        return nome_ou_texto
+    if isinstance(nome_ou_texto, str):
+        c = _caminho(nome_ou_texto)
+        c_fab = os.path.join(_pasta_fabrica(), nome_seguro(nome_ou_texto))
+        is_arquivo = os.path.isfile(nome_ou_texto) or os.path.isfile(c) or os.path.isfile(c_fab)
+        if not is_arquivo:
+            stripped = nome_ou_texto.strip()
+            if stripped.startswith(("{", "[")):
+                if extensao in (".lsh", ".fsh", ".json"):
+                    import json
+                    try:
+                        dados = json.loads(nome_ou_texto)
+                        return conferir(dados, extensao)
+                    except Exception as e:
+                        raise ArquivoInvalido(str(e))
+                return nome_ou_texto
+            dados = ler_bytes(nome_ou_texto)
+            if dados is None:
+                return None
 
     dados = ler_bytes(nome_ou_texto)
     if dados is None:
@@ -142,7 +150,16 @@ def ler_texto(nome_ou_texto, extensao=None):
 
 
 def ler(nome):
-    return ler_bytes(nome)
+    ext = os.path.splitext(str(nome))[1].lower()
+    if ext in (".lsh", ".fsh", ".json"):
+        res = ler_texto(nome, ext)
+        if res is None:
+            raise ArquivoInvalido("arquivo nao encontrado")
+        return res
+    res = ler_bytes(nome)
+    if res is None:
+        raise ArquivoInvalido("arquivo nao encontrado")
+    return res
 
 
 def gravar_bytes_livre(nome, dados):

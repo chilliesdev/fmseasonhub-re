@@ -29,17 +29,25 @@ class LibraryShortlistTests(unittest.TestCase):
         with closing(server.get_db_connection()) as conn, conn:
             conn.execute("UPDATE snapshots SET fm_version='26' WHERE id=901")
 
-    def request(self, endpoint='', body=None, raw=False):
+    def request(self, endpoint='', body=None, raw=False, method=None):
         request = urllib.request.Request(self.base + '/api/biblioteca' + endpoint)
         if body is not None:
             request.data = json.dumps(body).encode()
             request.add_header('Content-Type', 'application/json')
+        elif method == 'POST':
+            request.data = b''
+        if method:
+            request.method = method
         try:
             with urllib.request.urlopen(request, timeout=10) as response:
                 return response.status, response.read() if raw else json.load(response)
         except urllib.error.HTTPError as response:
             with response:
                 return response.code, json.load(response)
+
+    def carregar(self, arquivo):
+        encoded = '/' + urllib.parse.quote(arquivo, safe='') + '/carregar'
+        return self.request(encoded, method='POST')
 
     def save(self, **changes):
         return self.request(body={'arquivo': 'Équipe.lsh', 'uids': [2, 1], 'snapshot': 901, **changes})
@@ -137,6 +145,94 @@ class LibraryShortlistTests(unittest.TestCase):
             input=json.dumps(listing), text=True, capture_output=True, check=False)
         self.assertEqual(check.returncode, 0, check.stdout + check.stderr)
         self.assertIn('Library shortlist renderer passed', check.stdout)
+
+    def test_carregar_unimported_lsh_creates_favorite_list_with_resolved_players(self):
+        status, saved = self.save(uids=[2, 1])
+        self.assertEqual(status, 200)
+        status, res = self.carregar('Équipe.lsh')
+        self.assertEqual(status, 200)
+        self.assertEqual(res['destino'], 'favoritos')
+        self.assertFalse(res['ja_estava'])
+        self.assertEqual(res['importados'], 2)
+        self.assertEqual(res['nao_conferem'], [])
+        self.assertEqual(res['sem_captura'], 0)
+        self.assertTrue(res['id'])
+
+        with urllib.request.urlopen(self.base + '/api/favoritos', timeout=10) as response:
+            favs = json.load(response)
+        matching = [l for l in favs['listas'] if l['id'] == res['id']]
+        self.assertEqual(len(matching), 1)
+        self.assertEqual(matching[0]['nome'], 'Équipe')
+        self.assertEqual(matching[0]['uids'], [2, 1])
+
+    def test_carregar_already_imported_lsh_reports_ja_estava_without_duplication(self):
+        self.assertEqual(self.save(uids=[2, 1])[0], 200)
+        status1, res1 = self.carregar('Équipe.lsh')
+        self.assertEqual(status1, 200)
+        self.assertFalse(res1['ja_estava'])
+
+        status2, res2 = self.carregar('Équipe.lsh')
+        self.assertEqual(status2, 200)
+        self.assertEqual(res2['destino'], 'favoritos')
+        self.assertTrue(res2['ja_estava'])
+        self.assertEqual(res2['id'], res1['id'])
+
+        with urllib.request.urlopen(self.base + '/api/favoritos', timeout=10) as response:
+            favs = json.load(response)
+        matching = [l for l in favs['listas'] if l['id'] == res1['id']]
+        self.assertEqual(len(matching), 1)
+
+    def test_carregar_fmf_shortlist_loads_into_preferred_shortlists(self):
+        from test_preferred_shortlists import fmf_bytes
+        (self.library / 'Scouting.fmf').write_bytes(fmf_bytes('Scouting', [101, 202]))
+        status, res = self.carregar('Scouting.fmf')
+        self.assertEqual(status, 200)
+        self.assertEqual(res['destino'], 'lista')
+        self.assertFalse(res['ja_estava'])
+        self.assertEqual(res['importados'], 2)
+        self.assertTrue(res['id'])
+
+        status2, res2 = self.carregar('Scouting.fmf')
+        self.assertEqual(status2, 200)
+        self.assertEqual(res2['destino'], 'lista')
+        self.assertTrue(res2['ja_estava'])
+        self.assertEqual(res2['id'], res['id'])
+
+    def test_carregar_error_handling(self):
+        self.assertEqual(self.carregar('missing.lsh')[0], 404)
+        self.assertEqual(self.carregar('missing.fmf')[0], 404)
+
+        (self.library / 'filter.fsh').write_text(json.dumps({'nome': 'Filter'}))
+        self.assertEqual(self.carregar('filter.fsh')[0], 400)
+
+        outside = self.root / 'outside.lsh'
+        outside.write_text(json.dumps({'nome': 'Outside', 'jogadores': [{'uid': 1}]}))
+        linked = self.library / 'linked.lsh'
+        linked.symlink_to(outside)
+        self.assertEqual(self.carregar('linked.lsh')[0], 400)
+
+        (self.library / 'corrupt.lsh').write_text('bad json')
+        self.assertEqual(self.carregar('corrupt.lsh')[0], 400)
+
+    def test_library_listing_reflects_carregada_status(self):
+        from test_preferred_shortlists import fmf_bytes
+        self.assertEqual(self.save(uids=[2, 1])[0], 200)
+        (self.library / 'Scouting.fmf').write_bytes(fmf_bytes('Scouting', [101, 202]))
+
+        listing_before = self.request()[1]
+        lsh_before = next(i for i in listing_before['arquivos'] if i['arquivo'] == 'Équipe.lsh')
+        fmf_before = next(i for i in listing_before['arquivos'] if i['arquivo'] == 'Scouting.fmf')
+        self.assertFalse(lsh_before['carregada'])
+        self.assertFalse(fmf_before['carregada'])
+
+        self.assertEqual(self.carregar('Équipe.lsh')[0], 200)
+        self.assertEqual(self.carregar('Scouting.fmf')[0], 200)
+
+        listing_after = self.request()[1]
+        lsh_after = next(i for i in listing_after['arquivos'] if i['arquivo'] == 'Équipe.lsh')
+        fmf_after = next(i for i in listing_after['arquivos'] if i['arquivo'] == 'Scouting.fmf')
+        self.assertTrue(lsh_after['carregada'])
+        self.assertTrue(fmf_after['carregada'])
 
 
 if __name__ == '__main__':

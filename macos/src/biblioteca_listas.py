@@ -177,9 +177,30 @@ def carregar(arquivo, teto_fm=None, teto_favoritos=None):
 
 def _carregar_lsh(arquivo, teto=None):
     import favoritos
+    caminho = os.path.join(paths.biblioteca_dir(), arquivo)
+    if not os.path.isfile(caminho):
+        c_fab = os.path.join(biblioteca._pasta_fabrica(), biblioteca.nome_seguro(arquivo))
+        if not os.path.isfile(c_fab):
+            raise biblioteca.ArquivoInvalido('arquivo nao encontrado')
     dados = biblioteca.ler(arquivo)
+    if isinstance(dados, (bytes, bytearray)):
+        import json
+        try:
+            dados = json.loads(dados.decode('utf-8'))
+        except Exception as e:
+            raise biblioteca.ArquivoInvalido(str(e))
+    elif isinstance(dados, str):
+        import json
+        try:
+            dados = json.loads(dados)
+        except Exception as e:
+            raise biblioteca.ArquivoInvalido(str(e))
+    if not isinstance(dados, dict):
+        raise biblioteca.ArquivoInvalido('formato de lista invalido')
     id_arquivo = dados.get('id') or ''
-    ja = next((x for x in favoritos.listas() if id_arquivo and x['id'] == id_arquivo), None)
+    nome_lista = dados.get('nome') or os.path.splitext(arquivo)[0]
+    ja = next((x for x in favoritos.listas() if (id_arquivo and x['id'] == id_arquivo)
+               or (not id_arquivo and x.get('nome') == nome_lista)), None)
     if ja:
         return {
             'destino': 'favoritos',
@@ -189,12 +210,21 @@ def _carregar_lsh(arquivo, teto=None):
             'nao_conferem': [],
             'sem_captura': 0,
         }
-    jogadores = dados['jogadores']
-    locais = identidades([j['uid'] for j in jogadores]) if jogadores else {}
+    jogadores = dados.get('jogadores')
+    if not isinstance(jogadores, list):
+        raise biblioteca.ArquivoInvalido('formato de lista invalido')
+    uids = [j['uid'] for j in jogadores if isinstance(j, dict) and 'uid' in j]
+    snapshot = dados.get('snapshot')
+    try:
+        locais = identidades(uids, snapshot=snapshot) if uids else {}
+    except TypeError:
+        locais = identidades(uids) if uids else {}
     aceitos = []
     nao_conferem = []
     sem_captura = 0
     for j in jogadores:
+        if not isinstance(j, dict) or 'uid' not in j:
+            continue
         local = locais.get(j['uid'])
         if not local:
             sem_captura += 1
@@ -204,7 +234,7 @@ def _carregar_lsh(arquivo, teto=None):
         else:
             nao_conferem.append(j.get('nome') or str(j['uid']))
     lista, _ = favoritos.criar(
-        dados.get('nome') or os.path.splitext(arquivo)[0],
+        nome_lista,
         dados.get('cor'),
         aceitos,
         id_lista=id_arquivo or None,
