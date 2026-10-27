@@ -1204,7 +1204,7 @@ def list_snapshot_players(
         query += f" LIMIT {limit} OFFSET {offset}"
         cur.execute(query, params)
         rows = cur.fetchall()
-        return [dict(r) for r in rows]
+        return {"players": [dict(r) for r in rows]}
 
 @app.get("/api/snapshots/{sid}/players/{uid}")
 def get_snapshot_player(sid: int, uid: int):

@@ -431,8 +431,10 @@ class StartupContractTests(unittest.TestCase):
                 "INSERT INTO player_stats (snapshot_id, uid, apps_total, goals, assists, avg_rating) VALUES (?, ?, ?, ?, ?, ?)",
                 [(901, 900001, 20, 10, 5, 7.1), (902, 900001, 30, 20, 10, 8.1)])
 
-        status, rows = self.request("/api/snapshots/901/players")
+        status, response = self.request("/api/snapshots/901/players")
         self.assertEqual(status, 200)
+        self.assertIn("players", response)
+        rows = response["players"]
         by_uid = {row["uid"]: row for row in rows}
         self.assertEqual(set(by_uid), {900001, 900002})
         player = by_uid[900001]
@@ -452,14 +454,15 @@ class StartupContractTests(unittest.TestCase):
             with self.subTest(query=query):
                 status, filtered = self.request("/api/snapshots/901/players?" + query)
                 self.assertEqual(status, 200)
-                self.assertEqual({row["uid"] for row in filtered}, expected)
-                self.assertTrue(all(row["snapshot_id"] == 901 for row in filtered))
+                filtered_rows = filtered["players"]
+                self.assertEqual({row["uid"] for row in filtered_rows}, expected)
+                self.assertTrue(all(row["snapshot_id"] == 901 for row in filtered_rows))
         for sid in (903, 999):
-            self.assertEqual(self.request(f"/api/snapshots/{sid}/players"), (200, []))
+            self.assertEqual(self.request(f"/api/snapshots/{sid}/players"), (200, {"players": []}))
         pages = [self.request(f"/api/snapshots/901/players?limit=1&offset={offset}") for offset in (0, 1)]
-        self.assertTrue(all(status == 200 and len(page) == 1 for status, page in pages))
-        self.assertEqual({page[0]["uid"] for _, page in pages}, {900001, 900002})
-        self.assertEqual(self.request("/api/snapshots/901/players?limit=1&offset=2"), (200, []))
+        self.assertTrue(all(status == 200 and len(page["players"]) == 1 for status, page in pages))
+        self.assertEqual({page["players"][0]["uid"] for _, page in pages}, {900001, 900002})
+        self.assertEqual(self.request("/api/snapshots/901/players?limit=1&offset=2"), (200, {"players": []}))
 
     def test_player_list_finance_fallback_preserves_zero_and_unknown_values(self):
         db.init_db(str(self.database))
@@ -471,8 +474,9 @@ class StartupContractTests(unittest.TestCase):
                 "INSERT INTO player_profile (snapshot_id, uid, guide_value, transfer_value, contract_wage) VALUES (?, ?, ?, ?, ?)",
                 [(sid, 1, None, 2000000, 10000), (sid, 2, 0, 2000000, 0),
                  (sid, 3, None, None, None)])
-        status, rows = self.request(f"/api/snapshots/{sid}/players")
+        status, response = self.request(f"/api/snapshots/{sid}/players")
         self.assertEqual(status, 200)
+        rows = response["players"]
         self.assertEqual({row["uid"]: (row["value"], row["wage"]) for row in rows},
                          {1: (2000000, 10000), 2: (0, 0), 3: (None, None)})
 
@@ -481,8 +485,9 @@ class StartupContractTests(unittest.TestCase):
         with closing(sqlite3.connect(self.database)) as conn, conn:
             conn.execute("INSERT INTO players (snapshot_id, uid) VALUES (?, 1)", (sid,))
             conn.execute("INSERT INTO player_profile (snapshot_id, uid, value, wage) VALUES (?, 1, 500000, 2500)", (sid,))
-        status, rows = self.request(f"/api/snapshots/{sid}/players")
+        status, response = self.request(f"/api/snapshots/{sid}/players")
         self.assertEqual(status, 200)
+        rows = response["players"]
         self.assertEqual(len(rows), 1)
         self.assertEqual((rows[0]["value"], rows[0]["wage"]), (500000, 2500))
 
@@ -500,11 +505,31 @@ class StartupContractTests(unittest.TestCase):
                  (sid, 2, None, 2000000, 3000000, None, 2000, 3000),
                  (sid, 3, None, None, 3000000, None, None, 3000),
                  (sid, 4, 0, 2000000, 3000000, 0, 2000, 3000)])
-        status, rows = self.request(f"/api/snapshots/{sid}/players")
+        status, response = self.request(f"/api/snapshots/{sid}/players")
         self.assertEqual(status, 200)
+        rows = response["players"]
         self.assertEqual({row["uid"]: (row["value"], row["wage"]) for row in rows},
                          {1: (1000000, 1000), 2: (2000000, 2000),
                           3: (3000000, 3000), 4: (0, 0)})
+
+    def test_issue_84_saved_snapshot_players_contract(self):
+        """Verify issue #84 contract: /api/snapshots/{sid}/players returns dict with 'players' array."""
+        db.init_db(str(self.database))
+        sid = self.saved_snapshot("Saved Season 84")
+        with closing(sqlite3.connect(self.database)) as conn, conn:
+            conn.execute("INSERT INTO players (snapshot_id, uid, full_name, common_name, club_id) VALUES (?, 777, 'Alpha Player', 'Alpha', 10)", (sid,))
+        status, response = self.request(f"/api/snapshots/{sid}/players")
+        self.assertEqual(status, 200)
+        self.assertIsInstance(response, dict)
+        self.assertIn("players", response)
+        self.assertIsInstance(response["players"], list)
+        self.assertEqual(len(response["players"]), 1)
+        self.assertEqual(response["players"][0]["full_name"], "Alpha Player")
+
+        # Empty snapshot returns dict with empty 'players' list
+        status, empty_response = self.request("/api/snapshots/99999/players")
+        self.assertEqual(status, 200)
+        self.assertEqual(empty_response, {"players": []})
 
     def test_live_snapshot_placeholder_has_safe_metadata(self):
         with patch.object(server, "_LIVE_STATUS", {"ready": True, "read_at": None}):

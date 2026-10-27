@@ -298,8 +298,9 @@ class CaptureTests(unittest.TestCase):
                 self.assertEqual(status, 200, response)
                 sid = response["sid"]
                 self.assertNotEqual(sid, existing)
-                status, players = self.request(f"/api/snapshots/{sid}/players")
+                status, response = self.request(f"/api/snapshots/{sid}/players")
                 self.assertEqual(status, 200)
+                players = response["players"] if isinstance(response, dict) else response
                 self.assertEqual([player["uid"] for player in players], [0x20000, 0x30000])
                 self.assertEqual([player["goals"] for player in players], [0, 7])
                 self.assertEqual([player["wage"] for player in players], [0, 2500])
@@ -360,8 +361,9 @@ class CaptureTests(unittest.TestCase):
                     self.assertEqual(conn.execute("SELECT rating FROM player_form WHERE snapshot_id=?", (sid,)).fetchall(), [(7.5,)] * 2)
                     self.assertEqual(conn.execute("SELECT full_name FROM players WHERE snapshot_id=?", (existing,)).fetchone(), ("Keep player",))
                 self.assertEqual(self.request(f"/api/snapshots/{sid}")[1]["n_players"], 2)
-                player_status, players = self.request(f"/api/snapshots/{sid}/players")
+                player_status, response = self.request(f"/api/snapshots/{sid}/players")
                 self.assertEqual(player_status, 200)
+                players = response["players"] if isinstance(response, dict) else response
                 self.assertEqual([player["wage"] for player in players], [2500, 2500])
                 self.assertEqual([player["value"] for player in players], [750000, 750000])
                 job = self.request("/api/job")[1]
@@ -413,8 +415,9 @@ class CaptureTests(unittest.TestCase):
             conn.execute("INSERT INTO player_profile (snapshot_id, uid, value, wage) VALUES (?, 99, 120000, 1500)", (existing,))
         self.connect()
         self.assertEqual(self.request("/api/capture", {})[0], 200)
-        status, players = self.request(f"/api/snapshots/{existing}/players")
+        status, response = self.request(f"/api/snapshots/{existing}/players")
         self.assertEqual(status, 200)
+        players = response["players"] if isinstance(response, dict) else response
         self.assertEqual((players[0]["value"], players[0]["wage"]), (120000, 1500))
 
     def test_session_or_memory_change_during_scan_is_not_saved(self):

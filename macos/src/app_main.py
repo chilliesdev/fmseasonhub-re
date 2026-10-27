@@ -836,6 +836,8 @@ def main():
         volume = max(0, min(100, int(s.get('captura_som_volume', 100))))
         fila_de_sons.put((nome, volume))
 
+    import server
+
     aviso_da_captura = criar_aviso_da_captura(
         server,
         tocar_som,
@@ -886,7 +888,6 @@ def main():
         log(f'faixa da conexao: aberta ({estado})')
         guardar_no_topo(janela, 'faixa_conexao', TITULO_FAIXA_CONEXAO)
 
-    import server
     _iniciar_atualizador_de_plugins()
     server.AO_PEDIDO_DO_JOGO = pedido_do_jogo
     server.AO_MENU_DO_JOGO = abrir_menu_do_jogo
