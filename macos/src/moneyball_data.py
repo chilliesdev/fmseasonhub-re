@@ -75,30 +75,55 @@ def snapshot_id(conn, selected=None, career=None):
     return row['id'] if row else None
 
 
-def table_rows(conn, table, sid):
+def table_rows(conn, table, sid, uids=None, uid_col='uid'):
     # Table names are internal constants, never request values.
     columns = {row[1] for row in conn.execute(f'PRAGMA table_info({table})')}
     if 'snapshot_id' not in columns or sid is None:
         return []
+    if uids is not None:
+        uids_list = [int(x) for x in uids if str(x).lstrip('-').isdigit()]
+        if not uids_list:
+            return []
+        results = []
+        chunk_size = 500
+        for i in range(0, len(uids_list), chunk_size):
+            chunk = uids_list[i:i + chunk_size]
+            placeholders = ','.join('?' for _ in chunk)
+            results.extend(dict(row) for row in conn.execute(
+                f'SELECT * FROM {table} WHERE snapshot_id=? AND {uid_col} IN ({placeholders})',
+                (sid, *chunk)))
+        return results
     return [dict(row) for row in conn.execute(f'SELECT * FROM {table} WHERE snapshot_id=?', (sid,))]
 
 
-def load(conn, selected=None, career=None, groups=()):
+def load(conn, selected=None, career=None, groups=(), uids=None):
     sid = snapshot_id(conn, selected, career)
     snapshot = conn.execute('SELECT * FROM snapshots WHERE id=?', (sid,)).fetchone()
     if not snapshot:
         return sid, []
+    if uids is not None:
+        uids = {int(x) for x in uids if str(x).lstrip('-').isdigit()}
+        if not uids:
+            return sid, []
     snapshot = dict(snapshot)
-    stats = {row['uid']: row for row in table_rows(conn, 'player_stats', sid)}
-    profiles = {row['uid']: row for row in table_rows(conn, 'player_profile', sid)}
-    clubs = {row['club_uid']: row for row in table_rows(conn, 'club_leagues', sid)}
-    club_profiles = {row['club_uid']: row for row in table_rows(conn, 'club_profile', sid)}
-    comps = {row['uid']: row for row in table_rows(conn, 'comps', sid)}
+    stats = {row['uid']: row for row in table_rows(conn, 'player_stats', sid, uids)}
+    profiles = {row['uid']: row for row in table_rows(conn, 'player_profile', sid, uids)}
     memberships = {}
-    for row in table_rows(conn, 'player_teams', sid):
+    for row in table_rows(conn, 'player_teams', sid, uids, uid_col='player_uid'):
         memberships.setdefault(row['player_uid'], set()).add(row['team_uid'])
+    identities = table_rows(conn, 'players', sid, uids)
+    if uids is not None:
+        club_ids = {row['club_id'] for row in identities if row.get('club_id')}
+        clubs = {row['club_uid']: row for row in table_rows(conn, 'club_leagues', sid, club_ids, uid_col='club_uid')}
+        club_profiles = {row['club_uid']: row for row in table_rows(conn, 'club_profile', sid, club_ids, uid_col='club_uid')}
+        league_uids = {row['league_uid'] for row in clubs.values() if row.get('league_uid')}
+        comps = {row['uid']: row for row in table_rows(conn, 'comps', sid, league_uids)}
+    else:
+        clubs = {row['club_uid']: row for row in table_rows(conn, 'club_leagues', sid)}
+        club_profiles = {row['club_uid']: row for row in table_rows(conn, 'club_profile', sid)}
+        comps = {row['uid']: row for row in table_rows(conn, 'comps', sid)}
     rows = []
-    for identity in table_rows(conn, 'players', sid):
+    for identity in identities:
         uid = identity['uid']
         row = {**profiles.get(uid, {}), **identity, **stats.get(uid, {})}
         row = {key: (None if isinstance(value, float) and not math.isfinite(value) else value)
