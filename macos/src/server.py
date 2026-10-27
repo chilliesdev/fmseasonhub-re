@@ -2091,7 +2091,7 @@ def post_favoritos_jogadores(id_lista: str, body: FavJogadoresBody):
                     lista["atualizada_em"] = _agora_favoritos()
                 _gravar_favoritos(listas)
                 return {**_estado_favoritos(listas), "ok": True, "lista": lista}
-        return {**_estado_favoritos(listas), "ok": True}
+    raise HTTPException(status_code=404, detail="Lista nao encontrada")
 
 
 @app.post("/api/favoritos/listas/{id_lista}/duplicar")
