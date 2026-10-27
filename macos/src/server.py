@@ -2702,6 +2702,9 @@ def get_listas_preferenciais_pasta():
     for pasta in result["pastas"]:
         for lista in pasta["listas"]:
             lista["modificado"] = datetime.fromtimestamp(lista["modificado"], timezone.utc).isoformat()
+        for inv in pasta.get("invalidas") or []:
+            if isinstance(inv.get("modificado"), (int, float)):
+                inv["modificado"] = datetime.fromtimestamp(inv["modificado"], timezone.utc).isoformat()
     return result
 
 @app.post("/api/listas-preferenciais/da-pasta")

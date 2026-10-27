@@ -212,22 +212,42 @@ def _ler_indice(dados):
         cursor.pegar(16)
         return (nome, extensao, deslocamento, tamanho_arquivo, tamanho_aberto)
 
-    pastas = cursor.u32()
-    if pastas == 0:
-        quantidade = cursor.u32()
-        if quantidade > MAXIMO_MEMBROS:
-            raise ArquivoCorrompido('O arquivo esta incompleto ou corrompido.')
-        return [membro() for _ in range(quantidade)]
-    if pastas > MAXIMO_MEMBROS:
-        raise ArquivoCorrompido('O arquivo esta incompleto ou corrompido.')
-    membros = []
-    for _ in range(pastas):
-        cursor.texto()
+    pos_antes = cursor.pos
+    try:
+        membros = []
         quantidade = cursor.u32()
         if quantidade > MAXIMO_MEMBROS:
             raise ArquivoCorrompido('O arquivo esta incompleto ou corrompido.')
         membros += [membro() for _ in range(quantidade)]
-    return membros
+        if cursor.pos < len(cursor.dados):
+            pastas = cursor.u32()
+            if pastas > MAXIMO_MEMBROS:
+                raise ArquivoCorrompido('O arquivo esta incompleto ou corrompido.')
+            for _ in range(pastas):
+                cursor.texto()
+                qtd_pasta = cursor.u32()
+                if qtd_pasta > MAXIMO_MEMBROS:
+                    raise ArquivoCorrompido('O arquivo esta incompleto ou corrompido.')
+                membros += [membro() for _ in range(qtd_pasta)]
+        return membros
+    except (ArquivoCorrompido, struct.error):
+        cursor.pos = pos_antes
+        pastas = cursor.u32()
+        if pastas == 0:
+            quantidade = cursor.u32()
+            if quantidade > MAXIMO_MEMBROS:
+                raise ArquivoCorrompido('O arquivo esta incompleto ou corrompido.')
+            return [membro() for _ in range(quantidade)]
+        if pastas > MAXIMO_MEMBROS:
+            raise ArquivoCorrompido('O arquivo esta incompleto ou corrompido.')
+        membros = []
+        for _ in range(pastas):
+            cursor.texto()
+            quantidade = cursor.u32()
+            if quantidade > MAXIMO_MEMBROS:
+                raise ArquivoCorrompido('O arquivo esta incompleto ou corrompido.')
+            membros += [membro() for _ in range(quantidade)]
+        return membros
 
 
 def _abrir_membro(dados, deslocamento, tamanho_arquivo, tamanho_aberto):
@@ -593,17 +613,23 @@ def listar_pasta() -> dict:
         caminho_listas = os.path.join(p['pasta'], 'shortlists')
         if not os.path.isdir(caminho_listas):
             caminho_listas = os.path.join(p['pasta'], 'listas')
-        listas = _listas_da_pasta(caminho_listas, existentes) if os.path.isdir(caminho_listas) else []
-        pastas.append({**p, 'listas': listas})
+        listas, invalidas = _listas_da_pasta(caminho_listas, existentes) if os.path.isdir(caminho_listas) else ([], [])
+        pastas.append({
+            **p,
+            'listas': listas,
+            'invalidas': invalidas,
+            'arquivos_invalidos': invalidas,
+        })
     return {'pastas': pastas}
 
 
 def _listas_da_pasta(pasta, existentes):
     saida = []
+    invalidas = []
     try:
         nomes = sorted(f for f in os.listdir(pasta) if f.lower().endswith('.fmf'))[:200]
     except OSError:
-        return saida
+        return saida, invalidas
 
     for arquivo in nomes:
         caminho = os.path.join(pasta, arquivo)
@@ -622,11 +648,20 @@ def _listas_da_pasta(pasta, existentes):
                 'carregada': ja is not None,
                 'id': ja['id'] if ja else None,
             })
-        except ListaInvalida:
+        except ListaInvalida as exc:
+            try:
+                modificado = os.path.getmtime(caminho)
+            except OSError:
+                modificado = 0.0
+            invalidas.append({
+                'arquivo': arquivo,
+                'erro': str(exc),
+                'modificado': modificado,
+            })
             continue
     saida.sort(key=lambda x: x['modificado'], reverse=True)
     saida.sort(key=lambda x: x['carregada'])
-    return saida
+    return saida, invalidas
 
 
 def importar_da_pasta(arquivo: str, jogo: str | None = None, teto: int | None = None) -> dict:
