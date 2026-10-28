@@ -553,9 +553,9 @@ def _init_db(conn: sqlite3.Connection) -> None:
             birth_date TEXT,
             left_foot INTEGER DEFAULT 10,
             right_foot INTEGER DEFAULT 10,
-            value REAL DEFAULT 0,
-            asking REAL DEFAULT 0,
-            wage REAL DEFAULT 0,
+            value REAL,
+            asking REAL,
+            wage REAL,
             contract_type INTEGER DEFAULT 0,
             contract_end TEXT,
             transfer_flags INTEGER DEFAULT 0,
@@ -1408,6 +1408,8 @@ def list_snapshot_players(
         profile_fields = []
         for alias, candidates in (
             ("value", ("guide_value", "transfer_value", "value")),
+            ("transfer_value", ("transfer_value", "guide_value", "value")),
+            ("asking_price", ("asking", "asking_price", "transfer_value", "guide_value", "value")),
             ("wage", ("wage_weekly", "contract_wage", "wage")),
         ):
             columns = [f"pr.{column}" for column in candidates if column in profile_columns]
@@ -1475,7 +1477,15 @@ def list_snapshot_players(
                     mock_players = [p for p in mock_players if p.get("is_female") == 1 or p.get("is_female") is True]
                 elif sf in ('u', 'unknown'):
                     mock_players = [p for p in mock_players if p.get("is_female") is None]
-            return {"players": mock_players[offset:offset + limit]}
+            result_players = []
+            for p in mock_players[offset:offset + limit]:
+                p_copy = dict(p)
+                p_copy['value'] = next((p_copy[k] for k in ('guide_value', 'value', 'transfer_value') if p_copy.get(k) is not None), None)
+                p_copy['transfer_value'] = next((p_copy[k] for k in ('transfer_value', 'guide_value', 'value') if p_copy.get(k) is not None), None)
+                p_copy['asking_price'] = next((p_copy[k] for k in ('asking', 'asking_price', 'transfer_value', 'guide_value', 'value') if p_copy.get(k) is not None), None)
+                p_copy['wage'] = next((p_copy[k] for k in ('wage_weekly', 'contract_wage', 'wage') if p_copy.get(k) is not None), None)
+                result_players.append(p_copy)
+            return {"players": result_players}
 
         return {"players": [dict(r) for r in rows]}
 
@@ -1492,11 +1502,19 @@ def get_snapshot_player(sid: int, uid: int):
             if sid == LIVE_SNAPSHOT_ID and _LIVE_STATUS.get("players"):
                 mock_player = next((p for p in _LIVE_STATUS["players"] if p.get("uid") == uid), None)
                 if mock_player:
+                    mock_prof = dict(mock_player)
+                    for alias, names in (('left_foot', ('foot_left', 'left_foot')),
+                                         ('right_foot', ('foot_right', 'right_foot')),
+                                         ('value', ('guide_value', 'value', 'transfer_value')),
+                                         ('transfer_value', ('transfer_value', 'guide_value', 'value')),
+                                         ('asking_price', ('asking', 'asking_price', 'transfer_value', 'guide_value', 'value')),
+                                         ('wage', ('wage_weekly', 'contract_wage', 'wage'))):
+                        mock_prof[alias] = next((mock_prof[name] for name in names if mock_prof.get(name) is not None), None)
                     return {
-                        **mock_player,
+                        **mock_prof,
                         "identity": mock_player,
                         "stats": {},
-                        "profile": mock_player,
+                        "profile": mock_prof,
                         "form": [],
                     }
             raise HTTPException(status_code=404, detail="Jogador nao encontrado")
@@ -1513,8 +1531,12 @@ def get_snapshot_player(sid: int, uid: int):
         for alias, names in (('left_foot', ('foot_left', 'left_foot')),
                              ('right_foot', ('foot_right', 'right_foot')),
                              ('value', ('guide_value', 'value', 'transfer_value')),
+                             ('transfer_value', ('transfer_value', 'guide_value', 'value')),
+                             ('asking_price', ('asking', 'asking_price', 'transfer_value', 'guide_value', 'value')),
                              ('wage', ('wage_weekly', 'contract_wage', 'wage'))):
-            profile[alias] = next((profile[name] for name in names if profile.get(name) is not None), None)
+            resolved = next((profile[name] for name in names if profile.get(name) is not None), None)
+            profile[alias] = resolved
+            result[alias] = resolved
         form = [dict(row) for row in conn.execute(
             "SELECT match_date,comp_uid,rating FROM player_form WHERE snapshot_id=? AND uid=? ORDER BY match_date",
             (sid, uid))]
@@ -2046,9 +2068,12 @@ def moneyball_export(request: Request):
             item = moneyball_data.value(row, key)
             fmt = metadata.get(key, {}).get("fmt", "txt")
             if fmt == "money":
-                item = moneyball_data.number(item) * rate
-                if key == "_wage":
-                    item *= {"week": 1, "month": 52 / 12, "year": 52}[wage_period]
+                if item is not None:
+                    item = moneyball_data.number(item) * rate
+                    if key == "_wage":
+                        item *= {"week": 1, "month": 52 / 12, "year": 52}[wage_period]
+                else:
+                    item = None
             values.append(csv_export.fmt_value(item, fmt, loc, symbol))
         content += csv_export.csv_line(values, delimiter)
     return Response(content=content, media_type="text/csv; charset=utf-8",

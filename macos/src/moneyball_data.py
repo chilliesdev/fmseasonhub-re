@@ -153,7 +153,10 @@ def load(conn, selected=None, career=None, groups=(), uids=None):
         row['age'] = _age(row, snapshot.get('game_date'))
         row['height_m'] = number(row['height_cm']) / 100 if row.get('height_cm') else None
         row['transfer_value'] = _first(row, 'guide_value', 'value', 'transfer_value')
-        row['asking_price'] = _first(profiles.get(uid, {}), 'asking', 'transfer_value')
+        row['value'] = row['transfer_value']
+        row['asking_price'] = _first(profiles.get(uid, {}), 'asking', 'asking_price')
+        if row['asking_price'] is None:
+            row['asking_price'] = row['transfer_value']
         row['wage'] = _first(row, 'wage_weekly', 'contract_wage', 'wage')
         row['left_foot'] = _first(row, 'foot_left', 'left_foot')
         row['right_foot'] = _first(row, 'foot_right', 'right_foot')
@@ -417,7 +420,7 @@ def team_metrics(row):
         'min': minutes, 'apps': n('apps_total'), 'd90': minutes / 90,
         'minpg': _ratio(minutes, n('apps_total')), 'height': n('height_cm') / 100,
         'rating': n('avg_rating'), 'age': n('age'), 'ca': n('ca'), 'pa': n('pa'),
-        'value': n('guide_value'), 'asking': n('asking_price'), 'wage': n('wage'),
+        'value': row.get('value'), 'asking': row.get('asking_price'), 'wage': row.get('wage'),
         'passW': passing_wide, 'passW90': per90(passing_wide),
         'passPct': _ratio(n('passes_completed'), n('passes_attempted')),
         'passWpct': _ratio(passing_wide, n('passes_attempted')),
