@@ -20,7 +20,7 @@
    "key": "gk_P",
    "col": "P",
    "label": "Minutos pra ser o homem do jogo",
-   "expr": "_iferror((f['minutes']/r['gk_O']), 5400)",
+   "expr": "_iferror((f['minutes']/r['gk_O']), np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -292,7 +292,7 @@
    "key": "gk_BD",
    "col": "BD",
    "label": "Minutos pra sofrer um gol",
-   "expr": "_iferror(f['minutes']/f['goals_conceded_gk'], 0)",
+   "expr": "_iferror(f['minutes']/f['goals_conceded_gk'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -718,7 +718,7 @@
    "key": "def_P",
    "col": "P",
    "label": "Minutos por partida",
-   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -838,7 +838,7 @@
    "key": "def_AF",
    "col": "AF",
    "label": "Minutos pra ser o homem do jogo",
-   "expr": "_iferror((f['minutes']/f['man_of_the_match']), 5400)",
+   "expr": "_iferror((f['minutes']/f['man_of_the_match']), np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -1560,7 +1560,7 @@
    "key": "wing_O",
    "col": "O",
    "label": "Minutos por partida",
-   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -1984,7 +1984,7 @@
    "key": "wing_BQ",
    "col": "BQ",
    "label": "Minutos pra criar uma chance de perigo",
-   "expr": "_iferror(f['minutes']/(f['clear_cut_chances']+f['key_passes']+f['shots_on_target']), 0)",
+   "expr": "_iferror(f['minutes']/(f['clear_cut_chances']+f['key_passes']+f['shots_on_target']), np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -1992,7 +1992,7 @@
    "key": "wing_BR",
    "col": "BR",
    "label": "Minutos pra fazer um Passe Decisivo",
-   "expr": "_iferror((f['minutes']/f['key_passes']), 0)",
+   "expr": "_iferror((f['minutes']/f['key_passes']), np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -2370,7 +2370,7 @@
    "key": "dm_P",
    "col": "P",
    "label": "Minutos por partida",
-   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -2498,7 +2498,7 @@
    "key": "dm_AG",
    "col": "AG",
    "label": "Faltas pra um cartão AMARELO",
-   "expr": "_iferror(f['fouls_committed']/(f['yellow_cards']), 50)",
+   "expr": "_iferror(f['fouls_committed']/(f['yellow_cards']), np.nan)",
    "fmt": "int",
    "lowerBetter": true
   },
@@ -2506,7 +2506,7 @@
    "key": "dm_AH",
    "col": "AH",
    "label": "Faltas pra um cartão",
-   "expr": "_iferror(f['fouls_committed']/(f['yellow_cards']+f['red_cards']), 50)",
+   "expr": "_iferror(f['fouls_committed']/(f['yellow_cards']+f['red_cards']), np.nan)",
    "fmt": "int",
    "lowerBetter": true
   },
@@ -3156,7 +3156,7 @@
    "key": "b2b_P",
    "col": "P",
    "label": "Minutos por partida",
-   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -3292,7 +3292,7 @@
    "key": "b2b_AH",
    "col": "AH",
    "label": "Finalizações pra um gol",
-   "expr": "_iferror((f['shots']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), 100)",
+   "expr": "_iferror((f['shots']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), np.nan)",
    "fmt": "int",
    "lowerBetter": false
   },
@@ -3300,7 +3300,7 @@
    "key": "b2b_AI",
    "col": "AI",
    "label": "Finalizações certas pra um gol",
-   "expr": "_iferror((f['shots_on_target']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), 0)",
+   "expr": "_iferror((f['shots_on_target']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), np.nan)",
    "fmt": "int",
    "lowerBetter": false
   },
@@ -3444,7 +3444,7 @@
    "key": "b2b_BB",
    "col": "BB",
    "label": "Minutos pra ser o homem do jogo",
-   "expr": "_iferror(f['minutes']/r['b2b_BA'], 5000)",
+   "expr": "_iferror(f['minutes']/r['b2b_BA'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -3860,7 +3860,7 @@
    "key": "b2b_DF",
    "col": "DF",
    "label": "Passes Decisivos pra uma assistência",
-   "expr": "_iferror(f['key_passes']/f['assists'], 25)",
+   "expr": "_iferror(f['key_passes']/f['assists'], np.nan)",
    "fmt": "int",
    "lowerBetter": false
   },
@@ -3998,7 +3998,7 @@
    "key": "amc_P",
    "col": "P",
    "label": "Minutos por partida",
-   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -4038,7 +4038,7 @@
    "key": "amc_V",
    "col": "V",
    "label": "Minutos pra ser o homem do jogo",
-   "expr": "_iferror(f['minutes']/r['amc_U'], 5000)",
+   "expr": "_iferror(f['minutes']/r['amc_U'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -4406,7 +4406,7 @@
    "key": "amc_BR",
    "col": "BR",
    "label": "Passes Decisivos pra uma assistência",
-   "expr": "_iferror(f['key_passes']/f['assists'], 25)",
+   "expr": "_iferror(f['key_passes']/f['assists'], np.nan)",
    "fmt": "int",
    "lowerBetter": false
   },
@@ -4438,7 +4438,7 @@
    "key": "amc_BV",
    "col": "BV",
    "label": "Minutos pra fazer um Passe Decisivo",
-   "expr": "_iferror(f['minutes']/f['key_passes'], 0)",
+   "expr": "_iferror(f['minutes']/f['key_passes'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -4446,7 +4446,7 @@
    "key": "amc_BW",
    "col": "BW",
    "label": "Minutos pra criar uma chance perigosa",
-   "expr": "_iferror(f['minutes']/((f['clear_cut_chances']-f['penalties_taken'])+f['shots_on_target']+f['key_passes']), 0)",
+   "expr": "_iferror(f['minutes']/((f['clear_cut_chances']-f['penalties_taken'])+f['shots_on_target']+f['key_passes']), np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -4534,7 +4534,7 @@
    "key": "amc_CH",
    "col": "CH",
    "label": "Finalizações pra um gol",
-   "expr": "_iferror(r['amc_BZ']/(f['goals']-f['penalties_scored']), 50)",
+   "expr": "_iferror(r['amc_BZ']/(f['goals']-f['penalties_scored']), np.nan)",
    "fmt": "int",
    "lowerBetter": false
   },
@@ -4542,7 +4542,7 @@
    "key": "amc_CI",
    "col": "CI",
    "label": "Finalizações certas pra um gol",
-   "expr": "_iferror(f['shots_on_target']/f['goals'], 50)",
+   "expr": "_iferror(f['shots_on_target']/f['goals'], np.nan)",
    "fmt": "int",
    "lowerBetter": false
   },
@@ -4840,7 +4840,7 @@
    "key": "att_P",
    "col": "P",
    "label": "Minutos por partida",
-   "expr": "_iferror(f['minutes'] / f['apps_total'], 0)",
+   "expr": "_iferror(f['minutes'] / f['apps_total'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -4880,7 +4880,7 @@
    "key": "att_X",
    "col": "X",
    "label": "Minutos pra ser o homem do jogo",
-   "expr": "_iferror(f['minutes']/r['att_W'], 5000)",
+   "expr": "_iferror(f['minutes']/r['att_W'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -5288,7 +5288,7 @@
    "key": "att_BW",
    "col": "BW",
    "label": "Finalizações pra um gol",
-   "expr": "_iferror((f['shots']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), 100)",
+   "expr": "_iferror((f['shots']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), np.nan)",
    "fmt": "int",
    "lowerBetter": false
   },
@@ -5296,7 +5296,7 @@
    "key": "att_BX",
    "col": "BX",
    "label": "Finalizações certas pra um gol",
-   "expr": "_iferror((f['shots_on_target']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), 0)",
+   "expr": "_iferror((f['shots_on_target']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), np.nan)",
    "fmt": "int",
    "lowerBetter": false
   },
@@ -5304,7 +5304,7 @@
    "key": "att_BY",
    "col": "BY",
    "label": "Finalização ou Cabeceio pra um gol",
-   "expr": "_iferror((f['shots']+f['headers_attempted']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), 0)",
+   "expr": "_iferror((f['shots']+f['headers_attempted']-f['penalties_taken'])/(f['goals']-f['penalties_scored']), np.nan)",
    "fmt": "int",
    "lowerBetter": false
   },
@@ -5328,7 +5328,7 @@
    "key": "att_CF",
    "col": "CF",
    "label": "Minutos pra tentar uma finalização",
-   "expr": "_iferror(f['minutes']/f['shots'], 0)",
+   "expr": "_iferror(f['minutes']/f['shots'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -5336,7 +5336,7 @@
    "key": "att_CG",
    "col": "CG",
    "label": "Minutos pra acertar uma finalização no gol",
-   "expr": "_iferror(f['minutes']/f['shots_on_target'], 0)",
+   "expr": "_iferror(f['minutes']/f['shots_on_target'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -5344,7 +5344,7 @@
    "key": "att_CH",
    "col": "CH",
    "label": "Minutos pra MARCAR um gol",
-   "expr": "_iferror(f['minutes']/f['goals'], r['att_N']*90)",
+   "expr": "_iferror(f['minutes']/f['goals'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },
@@ -5352,7 +5352,7 @@
    "key": "att_CI",
    "col": "CI",
    "label": "Minutos pra PARTICIPAR de um gol",
-   "expr": "_iferror(f['minutes']/r['att_AB'], 300)",
+   "expr": "_iferror(f['minutes']/r['att_AB'], np.nan)",
    "fmt": "dec",
    "lowerBetter": false
   },

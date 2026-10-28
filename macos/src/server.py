@@ -1484,10 +1484,25 @@ def list_snapshot_players(
                 p_copy['transfer_value'] = next((p_copy[k] for k in ('transfer_value', 'guide_value', 'value') if p_copy.get(k) is not None), None)
                 p_copy['asking_price'] = next((p_copy[k] for k in ('asking', 'asking_price', 'transfer_value', 'guide_value', 'value') if p_copy.get(k) is not None), None)
                 p_copy['wage'] = next((p_copy[k] for k in ('wage_weekly', 'contract_wage', 'wage') if p_copy.get(k) is not None), None)
+                p_copy['vals'] = p_copy.get('vals', {})
                 result_players.append(p_copy)
             return {"players": result_players}
 
-        return {"players": [dict(r) for r in rows]}
+        player_uids = [r['uid'] for r in rows]
+        vals_by_uid = {}
+        if player_uids:
+            try:
+                _, mb_rows = moneyball_data.load(conn, sid, groups=('att', 'b2b', 'amc', 'gk', 'def', 'wing', 'dm'), uids=player_uids)
+                vals_by_uid = {r['uid']: r.get('vals', {}) for r in mb_rows}
+            except Exception:
+                pass
+        result_players = []
+        for r in rows:
+            p = dict(r)
+            if p['uid'] in vals_by_uid:
+                p['vals'] = vals_by_uid[p['uid']]
+            result_players.append(p)
+        return {"players": result_players}
 
 @app.get("/api/snapshots/{sid}/players/{uid}")
 def get_snapshot_player(sid: int, uid: int):
@@ -1540,7 +1555,14 @@ def get_snapshot_player(sid: int, uid: int):
         form = [dict(row) for row in conn.execute(
             "SELECT match_date,comp_uid,rating FROM player_form WHERE snapshot_id=? AND uid=? ORDER BY match_date",
             (sid, uid))]
-        result.update(identity=identity, stats=stats, profile=profile, form=form)
+        vals = {}
+        try:
+            _, mb_rows = moneyball_data.load(conn, sid, groups=('att', 'b2b', 'amc', 'gk', 'def', 'wing', 'dm'), uids=[uid])
+            if mb_rows:
+                vals = mb_rows[0].get('vals', {})
+        except Exception:
+            pass
+        result.update(identity=identity, stats=stats, profile=profile, form=form, vals=vals)
         return result
 
 
