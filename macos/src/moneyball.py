@@ -213,10 +213,13 @@ if isinstance(CATALOG, dict):
 CATALOG_OCULTAS = set()
 CATALOG_PATCH = {}
 CATALOG_DROP = set()
+FABRICATED_FALLBACKS = {5000, 5400, 100, 300, 50, 25}
 
 
 def _iferror(val, fallback=0.0):
     """Substitui infinitos por valor de fallback seguro, mas preserva NaNs de estatisticas nao medidas."""
+    if fallback in FABRICATED_FALLBACKS:
+        fallback = np.nan
     arr = np.asarray(val, dtype=np.float64)
     return np.where(np.isnan(arr), np.nan, np.where(np.isneginf(arr) | np.isposinf(arr), fallback, arr))
 
@@ -389,6 +392,9 @@ def derive_catalog(raw_dict, group=None):
     f = {k: np.asarray(v, dtype=np.float64) for k, v in raw_dict.items()}
     r = {}
 
+    mins = f.get("minutes")
+    has_mins = (mins is not None) and (np.asarray(mins) > 0) & np.isfinite(np.asarray(mins))
+
     grp_itens = CATALOG.get(group, []) if (group and isinstance(CATALOG, dict)) else []
     for item in grp_itens:
         chave = item.get("key")
@@ -398,8 +404,90 @@ def derive_catalog(raw_dict, group=None):
         try:
             # Avalia formula segura com f e r
             val = eval(expr, {"__builtins__": None, "np": np, "_iferror": _iferror}, {"f": f, "r": r})
-            r[chave] = np.asarray(val, dtype=np.float64)
+            arr = np.asarray(val, dtype=np.float64)
         except Exception:
-            r[chave] = np.full(len(next(iter(f.values()))), np.nan, dtype=np.float64) if f else np.zeros(0)
+            arr = np.full(len(next(iter(f.values()))), np.nan, dtype=np.float64) if f else np.zeros(0)
+
+        lbl = item.get("label", "")
+        is_rate = (
+            "Minutos pra" in lbl
+            or "Minutos por" in lbl
+            or "pra um gol" in lbl
+            or "pra 1 gol" in lbl
+            or "pra uma" in lbl
+            or "pra um" in lbl
+            or "/90" in lbl
+            or "/ 90" in lbl
+            or chave in {
+                "b2b_BB", "amc_V", "att_X", "gk_P", "def_AF",
+                "b2b_AH", "att_BW", "amc_CH", "amc_CI", "att_CI", "att_CH",
+                "att_CF", "att_CG", "att_BX", "att_BY", "b2b_AI",
+                "dm_AG", "dm_AH", "b2b_DF", "amc_BR", "wing_BQ", "wing_BR",
+                "amc_BV", "amc_BW", "gk_BD", "gk_BE", "gk_BF"
+            }
+        )
+
+        if is_rate:
+            if mins is not None:
+                arr = np.where(has_mins, arr, np.nan)
+
+            if chave in {"b2b_AH", "att_BW", "amc_CH", "att_BX", "att_BY", "amc_CI"}:
+                shots = f.get("shots", np.zeros_like(arr))
+                goals = f.get("goals", np.zeros_like(arr))
+                valid = np.isfinite(shots) & (shots > 0) & np.isfinite(goals) & (goals > 0)
+                arr = np.where(valid, arr, np.nan)
+            elif chave in {"b2b_BB", "amc_V", "att_X", "gk_P", "def_AF"}:
+                pom = f.get("man_of_the_match")
+                if pom is None and "gk_O" in r:
+                    pom = r["gk_O"]
+                if pom is None and "b2b_BA" in r:
+                    pom = r["b2b_BA"]
+                if pom is None and "amc_U" in r:
+                    pom = r["amc_U"]
+                if pom is None and "att_W" in r:
+                    pom = r["att_W"]
+                if pom is not None:
+                    valid_pom = np.isfinite(pom) & (pom > 0)
+                    arr = np.where(valid_pom, arr, np.nan)
+                else:
+                    arr = np.full_like(arr, np.nan)
+            elif chave == "att_CI":
+                contrib = r.get("att_AB")
+                if contrib is None:
+                    g = f.get("goals")
+                    a = f.get("assists")
+                    if g is not None and a is not None:
+                        contrib = g + a
+                if contrib is not None:
+                    valid_contrib = np.isfinite(contrib) & (contrib > 0)
+                    arr = np.where(valid_contrib, arr, np.nan)
+                else:
+                    arr = np.full_like(arr, np.nan)
+            elif chave == "att_CH":
+                goals = f.get("goals", np.zeros_like(arr))
+                valid_goals = np.isfinite(goals) & (goals > 0)
+                arr = np.where(valid_goals, arr, np.nan)
+            elif chave in {"att_CF", "att_CG"}:
+                shots = f.get("shots" if chave == "att_CF" else "shots_on_target", np.zeros_like(arr))
+                valid_shots = np.isfinite(shots) & (shots > 0)
+                arr = np.where(valid_shots, arr, np.nan)
+            elif chave in {"dm_AG", "dm_AH"}:
+                fouls = f.get("fouls_committed", np.zeros_like(arr))
+                cards = f.get("yellow_cards", np.zeros_like(arr))
+                if chave == "dm_AH":
+                    cards = cards + f.get("red_cards", np.zeros_like(arr))
+                valid_fc = np.isfinite(fouls) & (fouls > 0) & np.isfinite(cards) & (cards > 0)
+                arr = np.where(valid_fc, arr, np.nan)
+            elif chave in {"b2b_DF", "amc_BR"}:
+                kp = f.get("key_passes", np.zeros_like(arr))
+                ast = f.get("assists", np.zeros_like(arr))
+                valid_ka = np.isfinite(kp) & (kp > 0) & np.isfinite(ast) & (ast > 0)
+                arr = np.where(valid_ka, arr, np.nan)
+            elif chave in {"wing_BR", "amc_BV"}:
+                kp = f.get("key_passes", np.zeros_like(arr))
+                valid_kp = np.isfinite(kp) & (kp > 0)
+                arr = np.where(valid_kp, arr, np.nan)
+
+        r[chave] = arr
 
     return r
