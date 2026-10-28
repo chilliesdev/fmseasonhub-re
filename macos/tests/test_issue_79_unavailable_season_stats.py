@@ -1,25 +1,48 @@
 """Tests for GitHub Issue #79: Preserving NULL season statistics across browse and player APIs."""
 
-from contextlib import closing
 import json
+from contextlib import closing
 from pathlib import Path
+import socket
 import sqlite3
+import sys
 import tempfile
+import threading
+import time
 import unittest
 from unittest.mock import patch
 import urllib.error
 import urllib.parse
 import urllib.request
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+
 import db
 import server
 import settings
+import uvicorn
 
 
 class UnavailableSeasonStatsTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        server.app.dependency_overrides = {}
+        cls.listener = socket.socket()
+        cls.listener.bind(('127.0.0.1', 0))
+        cls.base = f'http://127.0.0.1:{cls.listener.getsockname()[1]}'
+        cls.srv = uvicorn.Server(uvicorn.Config(server.app, log_level='error'))
+        cls.thread = threading.Thread(target=cls.srv.run, kwargs={'sockets': [cls.listener]}, daemon=True)
+        cls.thread.start()
+        deadline = time.monotonic() + 5
+        while not cls.srv.started and cls.thread.is_alive() and time.monotonic() < deadline:
+            time.sleep(0.02)
+        if not cls.srv.started:
+            raise RuntimeError('HTTP server did not start')
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.srv.should_exit = True
+        cls.thread.join(5)
+        cls.listener.close()
 
     def setUp(self):
         folder = tempfile.TemporaryDirectory(prefix='fmsh-issue-79-test-')
@@ -33,6 +56,11 @@ class UnavailableSeasonStatsTests(unittest.TestCase):
             self.addCleanup(replacement.stop)
         db.init_db(str(self.database))
         self.seed()
+
+    def get_json(self, path):
+        req = urllib.request.Request(f'{self.base}{path}')
+        with urllib.request.urlopen(req) as resp:
+            return resp.status, json.loads(resp.read().decode('utf-8'))
 
     def seed(self):
         with closing(server.get_db_connection()) as conn, conn:
@@ -69,12 +97,8 @@ class UnavailableSeasonStatsTests(unittest.TestCase):
 
     def test_snapshot_players_browse_api_preserves_null_stats_and_measured_zero(self):
         """GET /api/snapshots/{sid}/players preserves null stats vs measured zeros."""
-        from fastapi.testclient import TestClient
-        client = TestClient(server.app)
-
-        res = client.get('/api/snapshots/950/players')
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
+        status, data = self.get_json('/api/snapshots/950/players')
+        self.assertEqual(status, 200)
         players_by_uid = {p['uid']: p for p in data['players']}
 
         # Player 101 (unverified NULL stats)
@@ -99,13 +123,9 @@ class UnavailableSeasonStatsTests(unittest.TestCase):
 
     def test_player_detail_api_preserves_null_stats_and_measured_zero(self):
         """GET /api/snapshots/{sid}/players/{uid} preserves null stats vs measured zeros."""
-        from fastapi.testclient import TestClient
-        client = TestClient(server.app)
-
         # Player 101 (NULL stats)
-        res101 = client.get('/api/snapshots/950/players/101')
-        self.assertEqual(res101.status_code, 200)
-        d101 = res101.json()
+        status101, d101 = self.get_json('/api/snapshots/950/players/101')
+        self.assertEqual(status101, 200)
         self.assertIsNone(d101['stats']['apps_total'])
         self.assertIsNone(d101['stats']['minutes'])
         self.assertIsNone(d101['stats']['goals'])
@@ -114,9 +134,8 @@ class UnavailableSeasonStatsTests(unittest.TestCase):
         self.assertIsNone(d101['goals'])
 
         # Player 102 (measured zeros)
-        res102 = client.get('/api/snapshots/950/players/102')
-        self.assertEqual(res102.status_code, 200)
-        d102 = res102.json()
+        status102, d102 = self.get_json('/api/snapshots/950/players/102')
+        self.assertEqual(status102, 200)
         self.assertEqual(d102['stats']['apps_total'], 0)
         self.assertEqual(d102['stats']['minutes'], 0)
         self.assertEqual(d102['stats']['goals'], 0)
@@ -126,13 +145,9 @@ class UnavailableSeasonStatsTests(unittest.TestCase):
 
     def test_moneyball_browse_preserves_nulls_in_vals_and_derived_rates(self):
         """GET /api/moneyball/browse preserves null values and derived rates without coercing to 0."""
-        from fastapi.testclient import TestClient
-        client = TestClient(server.app)
-
         # Browse group 'att' (Forwards analysis)
-        res = client.get('/api/moneyball/browse?snapshot=950&group=att')
-        self.assertEqual(res.status_code, 200)
-        data = res.json()
+        status, data = self.get_json('/api/moneyball/browse?snapshot=950&group=att')
+        self.assertEqual(status, 200)
         rows_by_uid = {r['uid']: r for r in data['rows']}
 
         # Player 101: unverified season stats
@@ -172,20 +187,15 @@ class UnavailableSeasonStatsTests(unittest.TestCase):
 
     def test_player_temporadas_api_preserves_null_stats(self):
         """GET /api/players/{uid}/temporadas preserves null stats for seasons with unverified data."""
-        from fastapi.testclient import TestClient
-        client = TestClient(server.app)
-
-        res101 = client.get('/api/players/101/temporadas')
-        self.assertEqual(res101.status_code, 200)
-        t101 = res101.json()
+        status101, t101 = self.get_json('/api/players/101/temporadas')
+        self.assertEqual(status101, 200)
         self.assertEqual(len(t101), 1)
         self.assertIsNone(t101[0]['stats']['apps_total'])
         self.assertIsNone(t101[0]['stats']['minutes'])
         self.assertIsNone(t101[0]['stats']['goals'])
 
-        res102 = client.get('/api/players/102/temporadas')
-        self.assertEqual(res102.status_code, 200)
-        t102 = res102.json()
+        status102, t102 = self.get_json('/api/players/102/temporadas')
+        self.assertEqual(status102, 200)
         self.assertEqual(len(t102), 1)
         self.assertEqual(t102[0]['stats']['apps_total'], 0)
         self.assertEqual(t102[0]['stats']['minutes'], 0)
