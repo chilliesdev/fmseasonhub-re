@@ -216,20 +216,29 @@ CATALOG_DROP = set()
 
 
 def _iferror(val, fallback=0.0):
-    """Substitui NaNs e infinitos por valor de fallback seguro."""
-    return np.where(np.isfinite(val), val, fallback)
+    """Substitui infinitos por valor de fallback seguro, mas preserva NaNs de estatisticas nao medidas."""
+    arr = np.asarray(val, dtype=np.float64)
+    return np.where(np.isnan(arr), np.nan, np.where(np.isneginf(arr) | np.isposinf(arr), fallback, arr))
 
 
 def _per90(val, minutes):
     """Calcula estatistica por 90 minutos de jogo."""
-    mins = np.maximum(minutes, 1)
-    return _iferror((val / mins) * 90.0, 0.0)
+    val = np.asarray(val, dtype=np.float64)
+    minutes = np.asarray(minutes, dtype=np.float64)
+    valid = np.isfinite(val) & np.isfinite(minutes) & (minutes > 0)
+    with np.errstate(divide='ignore', invalid='ignore'):
+        res = (val / minutes) * 90.0
+    return np.where(valid, res, np.nan)
 
 
 def _pct(num, den):
     """Calcula porcentagem segura entre dois campos."""
-    d = np.maximum(den, 1)
-    return _iferror((num / d) * 100.0, 0.0)
+    num = np.asarray(num, dtype=np.float64)
+    den = np.asarray(den, dtype=np.float64)
+    valid = np.isfinite(num) & np.isfinite(den) & (den > 0)
+    with np.errstate(divide='ignore', invalid='ignore'):
+        res = (num / den) * 100.0
+    return np.where(valid, res, np.nan)
 
 
 def _norm_label(lbl):
@@ -356,7 +365,11 @@ def derive(raw_dict, position_group=None):
             r[f"{k}_per90"] = _per90(f[k], mins)
 
     if "xg" in f and "shots" in f:
-        r["xg_per_shot"] = _iferror(f["xg"] / np.maximum(f["shots"], 1), 0.0)
+        shots = f["shots"]
+        valid = np.isfinite(f["xg"]) & np.isfinite(shots) & (shots > 0)
+        with np.errstate(divide='ignore', invalid='ignore'):
+            res = f["xg"] / shots
+        r["xg_per_shot"] = np.where(valid, res, np.nan)
 
     if "passes_completed" in f and "passes_attempted" in f:
         r["pass_accuracy_pct"] = _pct(f["passes_completed"], f["passes_attempted"])
@@ -387,6 +400,6 @@ def derive_catalog(raw_dict, group=None):
             val = eval(expr, {"__builtins__": None, "np": np, "_iferror": _iferror}, {"f": f, "r": r})
             r[chave] = np.asarray(val, dtype=np.float64)
         except Exception:
-            r[chave] = np.zeros(len(next(iter(f.values()))), dtype=np.float64) if f else np.zeros(0)
+            r[chave] = np.full(len(next(iter(f.values()))), np.nan, dtype=np.float64) if f else np.zeros(0)
 
     return r

@@ -533,16 +533,16 @@ def _init_db(conn: sqlite3.Connection) -> None:
         CREATE TABLE IF NOT EXISTS player_stats (
             snapshot_id INTEGER NOT NULL REFERENCES snapshots(id) ON DELETE CASCADE,
             uid INTEGER NOT NULL,
-            apps_total INTEGER DEFAULT 0,
-            apps_starts INTEGER DEFAULT 0,
-            apps_sub INTEGER DEFAULT 0,
-            apps_complete INTEGER DEFAULT 0,
-            minutes INTEGER DEFAULT 0,
-            goals INTEGER DEFAULT 0,
-            assists INTEGER DEFAULT 0,
-            yellow_cards INTEGER DEFAULT 0,
-            red_cards INTEGER DEFAULT 0,
-            avg_rating REAL DEFAULT 0.0,
+            apps_total INTEGER,
+            apps_starts INTEGER,
+            apps_sub INTEGER,
+            apps_complete INTEGER,
+            minutes INTEGER,
+            goals INTEGER,
+            assists INTEGER,
+            yellow_cards INTEGER,
+            red_cards INTEGER,
+            avg_rating REAL,
             PRIMARY KEY (snapshot_id, uid)
         )
         """)

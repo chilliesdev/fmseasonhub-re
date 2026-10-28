@@ -133,7 +133,7 @@ class MoneyballDataTests(unittest.TestCase):
         self.assertEqual(self.browse(sort='name', offset=1, limit=1)['rows'][0]['uid'], 2)
         self.assertEqual(self.browse(sort='_rating', dir='desc', limit=1)['rows'][0]['uid'], 2)
         self.assertEqual(self.browse(group='gk')['rows'][0]['uid'], 3)
-        self.assertEqual(self.browse(group='all', q='Missing')['rows'][0]['vals']['goals_per90'], 0)
+        self.assertIsNone(self.browse(group='all', q='Missing')['rows'][0]['vals']['goals_per90'])
 
     def test_shipped_quick_filter_aliases_and_search_metadata(self):
         condition = {'id': 'quick-minutes', 'on': True, 'logic': 'and', 'g': None,
