@@ -59,6 +59,16 @@ def number(value, fallback=0.0):
         return fallback
 
 
+def is_female_value(val):
+    if val is None or val == "":
+        return None
+    if val in (1, "1", True):
+        return True
+    if val in (0, "0", False):
+        return False
+    return None
+
+
 def _first(row, *keys):
     return next((row[key] for key in keys if row.get(key) is not None), None)
 
@@ -238,8 +248,19 @@ def select(rows, params, allowed_uids=None):
             continue
         if words and not all(word in player_search.normalize_str(row['name']) for word in words):
             continue
-        if params.get('sex') in ('m', 'f') and bool(row.get('is_female')) != (params['sex'] == 'f'):
-            continue
+        sex_filter = params.get('sex') or params.get('sexo')
+        if sex_filter:
+            sf = str(sex_filter).strip().lower()
+            gender = is_female_value(row.get('is_female'))
+            if sf in ('m', 'male'):
+                if gender is not False:
+                    continue
+            elif sf in ('f', 'female'):
+                if gender is not True:
+                    continue
+            elif sf in ('u', 'unknown'):
+                if gender is not None:
+                    continue
         result.append(row)
     for field, suffix in (('minutes', 'minutes'), ('age', 'age'), ('avg_rating', 'rating')):
         for prefix, compare in (('min', lambda a, b: a >= b), ('max', lambda a, b: a <= b)):

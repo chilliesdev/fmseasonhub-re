@@ -565,6 +565,7 @@ def _init_db(conn: sqlite3.Connection) -> None:
             home_rep INTEGER DEFAULT 0,
             world_rep INTEGER DEFAULT 0,
             traits TEXT,
+            is_female INTEGER,
             PRIMARY KEY (snapshot_id, uid)
         )
         """)
@@ -640,6 +641,9 @@ def _init_db(conn: sqlite3.Connection) -> None:
             PRIMARY KEY (snapshot_id, team_uid)
         )
         """)
+        profile_cols = {row[1] for row in conn.execute("PRAGMA table_info(player_profile)")}
+        if "is_female" not in profile_cols:
+            conn.execute("ALTER TABLE player_profile ADD COLUMN is_female INTEGER")
         conn.commit()
 
 # ==============================================================================
@@ -1409,6 +1413,10 @@ def list_snapshot_players(
             columns = [f"pr.{column}" for column in candidates if column in profile_columns]
             expression = f"COALESCE({','.join(columns)})" if len(columns) > 1 else (columns[0] if columns else "NULL")
             profile_fields.append(f"{expression} AS {alias}")
+        if "is_female" in profile_columns:
+            profile_fields.append("pr.is_female AS is_female")
+        else:
+            profile_fields.append("NULL AS is_female")
         query = f"""
         SELECT p.*, s.apps_total, s.goals, s.assists, s.avg_rating, {','.join(profile_fields)}, pr.contract_end
         FROM players p
@@ -1426,6 +1434,21 @@ def list_snapshot_players(
         if team is not None:
             query += " AND p.team_uid=?"
             params.append(team)
+        if sex:
+            sf = str(sex).strip().lower()
+            if sf in ('m', 'male'):
+                if "is_female" in profile_columns:
+                    query += " AND pr.is_female = 0"
+                else:
+                    query += " AND 1=0"
+            elif sf in ('f', 'female'):
+                if "is_female" in profile_columns:
+                    query += " AND pr.is_female = 1"
+                else:
+                    query += " AND 1=0"
+            elif sf in ('u', 'unknown'):
+                if "is_female" in profile_columns:
+                    query += " AND pr.is_female IS NULL"
 
         query += f" LIMIT {limit} OFFSET {offset}"
         cur.execute(query, params)
@@ -1444,6 +1467,14 @@ def list_snapshot_players(
                 mock_players = [p for p in mock_players if p.get("club_id") == club]
             if team is not None:
                 mock_players = [p for p in mock_players if p.get("team_uid") == team]
+            if sex:
+                sf = str(sex).strip().lower()
+                if sf in ('m', 'male'):
+                    mock_players = [p for p in mock_players if p.get("is_female") == 0 or p.get("is_female") is False]
+                elif sf in ('f', 'female'):
+                    mock_players = [p for p in mock_players if p.get("is_female") == 1 or p.get("is_female") is True]
+                elif sf in ('u', 'unknown'):
+                    mock_players = [p for p in mock_players if p.get("is_female") is None]
             return {"players": mock_players[offset:offset + limit]}
 
         return {"players": [dict(r) for r in rows]}
