@@ -190,13 +190,13 @@ def _derive(rows, groups):
     for group in groups:
         for column in mb.CATALOG.get(group, []):
             fields.update(mb.column_fields(column["key"]))
-    raw = {key: np.array([number(row.get(key)) for row in rows]) for key in fields}
+    raw = {key: np.array([number(row.get(key), np.nan) for row in rows]) for key in fields}
     with np.errstate(divide='ignore', invalid='ignore', over='ignore'):
         derived = mb.derive(raw)
         for group in groups:
             derived.update(mb.derive_catalog(raw, group))
     for i, row in enumerate(rows):
-        row['vals'] = {key: number(values.item() if values.ndim == 0 else values[i])
+        row['vals'] = {key: number(values.item() if values.ndim == 0 else values[i], None)
                        for key, values in {**raw, **derived}.items()}
         row['vals'].update({key: value for key, value in team_metrics(row).items() if key not in row['vals']})
         row['vals'].update({key: value(row, key) for key in SEARCH_ALIASES})
@@ -362,7 +362,7 @@ def sort_rows(rows, params):
 def percentiles(rows, queries, pool='save', min_minutes=0, team_columns=False):
     if pool not in ('save', 'pos', 'filtered', 'top20', 'top5'):
         raise ValueError('invalid percentile pool')
-    eligible = [row for row in rows if number(row.get('minutes')) >= min_minutes]
+    eligible = [row for row in rows if row.get('minutes') is not None and number(row.get('minutes')) >= min_minutes]
     if pool in ('top20', 'top5'):
         leagues = {}
         for row in eligible:
@@ -391,15 +391,24 @@ def percentiles(rows, queries, pool='save', min_minutes=0, team_columns=False):
 
 
 def _n(row, key):
-    return number(row.get(key))
+    val = row.get(key)
+    return number(val, None) if val is not None else None
+
+
+def _diff(a, b):
+    return (a - b) if a is not None and b is not None else None
+
+
+def _sum(*vals):
+    return sum(vals) if all(v is not None for v in vals) else None
 
 
 def _per90(total, minutes):
-    return total * 90 / minutes if minutes > 0 else 0.0
+    return (total * 90.0 / minutes) if total is not None and minutes is not None and minutes > 0 else None
 
 
 def _ratio(numerator, denominator):
-    return numerator / denominator if denominator > 0 else 0.0
+    return (numerator / denominator) if numerator is not None and denominator is not None and denominator > 0 else None
 
 
 def team_metrics(row):
@@ -407,18 +416,30 @@ def team_metrics(row):
     minutes = _n(row, 'minutes')
     n = lambda key: _n(row, key)
     per90 = lambda total: _per90(total, minutes)
-    passing_wide = n('passes_attempted') - n('passes_completed')
+    passing_wide = _diff(n('passes_attempted'), n('passes_completed'))
     open_crosses, open_completed = n('crosses_open_play_attempted'), n('crosses_open_play_completed')
-    set_crosses, set_completed = n('crosses_attempted') - open_crosses, n('crosses_completed') - open_completed
-    nonpenalty_xg = n('xg') - n('penalties_scored') * 0.79
-    missed_penalties = n('penalties_taken') - n('penalties_scored')
-    nonpenalty_shots = n('shots') - n('penalties_scored')
-    tackles = n('tackles_attempted') + n('fouls_committed')
-    actions = open_crosses + n('shots') + n('dribbles') + minutes
-    sca = n('clear_cut_chances') + n('xa') + n('shots_on_target') + n('goals')
+    set_crosses = _diff(n('crosses_attempted'), open_crosses)
+    set_completed = _diff(n('crosses_completed'), open_completed)
+    pen_scored = n('penalties_scored')
+    xg = n('xg')
+    nonpenalty_xg = (xg - pen_scored * 0.79) if xg is not None and pen_scored is not None else xg
+    missed_penalties = _diff(n('penalties_taken'), pen_scored) if n('penalties_taken') is not None else (0 if n('goals') is not None else None)
+    nonpenalty_shots = _diff(n('shots'), pen_scored) if pen_scored is not None else n('shots')
+    tackles = _sum(n('tackles_attempted'), n('fouls_committed'))
+    actions = _sum(open_crosses, n('shots'), n('dribbles'), minutes)
+    sca = _sum(n('clear_cut_chances'), n('xa'), n('shots_on_target'), n('goals'))
+    height = (n('height_cm') / 100.0) if n('height_cm') is not None else None
+    d90 = (minutes / 90.0) if minutes is not None else None
+    sot_adj = _diff(n('shots_on_target'), missed_penalties) if missed_penalties is not None else n('shots_on_target')
+    goals_adj = _diff(n('goals'), missed_penalties) if missed_penalties is not None else n('goals')
+    sot90_den = (d90 - pen_scored) if d90 is not None and pen_scored is not None and (d90 - pen_scored) > 0 else None
+    sot90 = (sot_adj / sot90_den) if sot_adj is not None and sot90_den is not None else None
+    ga = _sum(n('goals'), n('assists'))
+    xgxa = _sum(n('xa'), nonpenalty_xg)
+
     metrics = {
-        'min': minutes, 'apps': n('apps_total'), 'd90': minutes / 90,
-        'minpg': _ratio(minutes, n('apps_total')), 'height': n('height_cm') / 100,
+        'min': minutes, 'apps': n('apps_total'), 'd90': d90,
+        'minpg': _ratio(minutes, n('apps_total')), 'height': height,
         'rating': n('avg_rating'), 'age': n('age'), 'ca': n('ca'), 'pa': n('pa'),
         'value': row.get('value'), 'asking': row.get('asking_price'), 'wage': row.get('wage'),
         'passW': passing_wide, 'passW90': per90(passing_wide),
@@ -427,12 +448,12 @@ def team_metrics(row):
         'actions': actions, 'actions90': per90(actions), 'sca': sca, 'sca90': per90(sca),
         'spA': set_crosses, 'spC': set_completed, 'spPct': _ratio(set_completed, set_crosses),
         'npxg': nonpenalty_xg, 'npxg90': per90(nonpenalty_xg),
-        'xgxa': n('xa') + nonpenalty_xg, 'xgxa90': per90(n('xa') + nonpenalty_xg),
+        'xgxa': xgxa, 'xgxa90': per90(xgxa),
         'shots': nonpenalty_shots, 'shots90': per90(nonpenalty_shots),
-        'sot90': _ratio(n('shots_on_target') - missed_penalties, minutes / 90 - n('penalties_scored')),
-        'sotPct': _ratio(n('shots_on_target') - missed_penalties, nonpenalty_shots),
-        'conv': _ratio(n('goals') - missed_penalties, nonpenalty_shots),
-        'ga': n('goals') + n('assists'), 'ga90': per90(n('goals') + n('assists')),
+        'sot90': sot90,
+        'sotPct': _ratio(sot_adj, nonpenalty_shots),
+        'conv': _ratio(goals_adj, nonpenalty_shots),
+        'ga': ga, 'ga90': per90(ga),
         'tckA': tackles, 'tckA90': per90(tackles), 'tckPct': _ratio(n('tackles_completed'), tackles),
     }
     raw_aliases = {
