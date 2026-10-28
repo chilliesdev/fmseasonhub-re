@@ -156,7 +156,7 @@ PROFILE_KEYS = (
     "dirtiness", "important_matches", "injury_proneness", "versatility",
     "pos_gk", "pos_sw", "pos_dl", "pos_dc", "pos_dr", "pos_dm",
     "pos_ml", "pos_mc", "pos_mr", "pos_aml", "pos_amc", "pos_amr",
-    "pos_st", "pos_wbl", "pos_wbr"
+    "pos_st", "pos_wbl", "pos_wbr", "is_female"
 )
 
 
@@ -698,6 +698,7 @@ class FmReader:
             "guide_value": 0,
             "foot_left": 10,
             "foot_right": 20,
+            "is_female": None,
         })
 
         try:

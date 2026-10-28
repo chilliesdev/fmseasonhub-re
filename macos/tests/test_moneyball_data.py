@@ -406,6 +406,75 @@ class MoneyballDataTests(unittest.TestCase):
             self.assertEqual(len(records), 3)
             self.assertEqual(derived_sizes[-1], 2)
 
+    def test_sex_filter_excludes_unknown_from_male_and_matches_specs(self):
+        # 1. Direct unit test of moneyball_data.select()
+        test_rows = [
+            {'uid': 101, 'name': 'Male Player', 'position': 'ST', 'club_uid': 77, 'league_uid': 770, '_teams': {771}, 'is_female': 0},
+            {'uid': 102, 'name': 'Female Player', 'position': 'ST', 'club_uid': 77, 'league_uid': 770, '_teams': {771}, 'is_female': 1},
+            {'uid': 103, 'name': 'Unknown Player', 'position': 'ST', 'club_uid': 77, 'league_uid': 770, '_teams': {771}, 'is_female': None},
+        ]
+        res_m, _ = moneyball_data.select(test_rows, {'sex': 'm'})
+        self.assertEqual([r['uid'] for r in res_m], [101])
+
+        res_f, _ = moneyball_data.select(test_rows, {'sex': 'f'})
+        self.assertEqual([r['uid'] for r in res_f], [102])
+
+        res_u, _ = moneyball_data.select(test_rows, {'sex': 'u'})
+        self.assertEqual([r['uid'] for r in res_u], [103])
+
+        res_unknown, _ = moneyball_data.select(test_rows, {'sex': 'unknown'})
+        self.assertEqual([r['uid'] for r in res_unknown], [103])
+
+        res_all, _ = moneyball_data.select(test_rows, {'sex': 'all'})
+        self.assertEqual([r['uid'] for r in res_all], [101, 102, 103])
+
+        res_none, _ = moneyball_data.select(test_rows, {})
+        self.assertEqual([r['uid'] for r in res_none], [101, 102, 103])
+
+        # 2. HTTP API endpoints regression
+        with closing(server.get_db_connection()) as conn, conn:
+            conn.execute("UPDATE player_profile SET is_female=0 WHERE snapshot_id=901 AND uid=1")
+            conn.execute("INSERT OR REPLACE INTO player_profile(snapshot_id,uid,pos_st,is_female) VALUES(901,2,20,1)")
+            conn.execute("INSERT OR REPLACE INTO player_profile(snapshot_id,uid,pos_st,is_female) VALUES(901,3,20,NULL)")
+
+        # /api/moneyball/browse
+        status_m, data_m = self.request('/api/moneyball/browse', snapshot=901, sex='m')
+        self.assertEqual(status_m, 200)
+        uids_m = {row['uid'] for row in data_m['rows']}
+        self.assertIn(1, uids_m)
+        self.assertNotIn(2, uids_m)
+        self.assertNotIn(3, uids_m)
+
+        status_f, data_f = self.request('/api/moneyball/browse', snapshot=901, sex='f')
+        self.assertEqual(status_f, 200)
+        uids_f = {row['uid'] for row in data_f['rows']}
+        self.assertEqual(uids_f, {2})
+
+        status_u, data_u = self.request('/api/moneyball/browse', snapshot=901, sex='unknown')
+        self.assertEqual(status_u, 200)
+        uids_u = {row['uid'] for row in data_u['rows']}
+        self.assertIn(3, uids_u)
+        self.assertNotIn(1, uids_u)
+        self.assertNotIn(2, uids_u)
+
+        # /api/snapshots/901/players
+        status_pm, data_pm = self.request('/api/snapshots/901/players', sex='m')
+        self.assertEqual(status_pm, 200)
+        pm_uids = {p['uid'] for p in data_pm['players']}
+        self.assertEqual(pm_uids, {1})
+
+        status_pf, data_pf = self.request('/api/snapshots/901/players', sex='f')
+        self.assertEqual(status_pf, 200)
+        pf_uids = {p['uid'] for p in data_pf['players']}
+        self.assertEqual(pf_uids, {2})
+
+        status_pu, data_pu = self.request('/api/snapshots/901/players', sex='unknown')
+        self.assertEqual(status_pu, 200)
+        pu_uids = {p['uid'] for p in data_pu['players']}
+        self.assertIn(3, pu_uids)
+        self.assertNotIn(1, pu_uids)
+        self.assertNotIn(2, pu_uids)
+
 
 if __name__ == '__main__':
     unittest.main()
