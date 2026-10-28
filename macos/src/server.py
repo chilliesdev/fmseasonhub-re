@@ -175,6 +175,7 @@ _EMPTY_LIVE_STATUS: Dict[str, Any] = {
     "error": None,
 }
 _LIVE_STATUS: Dict[str, Any] = dict(_EMPTY_LIVE_STATUS)
+LIVE_SNAPSHOT_ID: int = portal_data.LIVE_SNAPSHOT_ID
 _CONNECTION_LOCK = threading.RLock()
 _FM_MEMORY = None
 _FM_READER = None
@@ -202,7 +203,7 @@ _CAPTURA_FAIXA: Dict[str, Any] = {
     "avisado": False,
 }
 
-_DB_LOCK = threading.Lock()
+_DB_LOCK = threading.RLock()
 
 # Ensure standard MIME types
 for ext, mt in [
@@ -684,6 +685,152 @@ def comp_logo(uid: int):
 # 7. System, Live, Job, Status & General REST Endpoints
 # ==============================================================================
 
+def _clear_live_snapshot():
+    try:
+        db_path = get_db_path(create_parent=False)
+        if not os.path.exists(db_path):
+            return
+        with closing(get_db_connection()) as conn, _DB_LOCK:
+            cur = conn.cursor()
+            tables = cur.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()
+            for row in tables:
+                table = '"' + row[0].replace('"', '""') + '"'
+                columns = {c[1] for c in cur.execute(f"PRAGMA table_info({table})")}
+                if "snapshot_id" in columns:
+                    cur.execute(f"DELETE FROM {table} WHERE snapshot_id=?", (LIVE_SNAPSHOT_ID,))
+            has_s = cur.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='snapshots'").fetchone()
+            if has_s:
+                cur.execute("DELETE FROM snapshots WHERE id=?", (LIVE_SNAPSHOT_ID,))
+            conn.commit()
+    except Exception:
+        logger.exception("Could not clear live snapshot")
+
+
+def _sync_live_snapshot():
+    """Sync live save metadata and squad players into virtual snapshot 999999999."""
+    if not _LIVE_STATUS.get("ready"):
+        return
+    if _FM_READER is None or _FM_MEMORY is None:
+        return
+    try:
+        if not _FM_MEMORY.is_alive() or not _FM_READER.save_loaded():
+            return
+    except Exception:
+        return
+
+    # Extract manager club and human manager if reader supports it
+    club_ptr = None
+    mgr_team = None
+    c_full = None
+    c_short = None
+    if hasattr(_FM_READER, "manager_club"):
+        try:
+            m_res = _FM_READER.manager_club()
+            if m_res and len(m_res) >= 4:
+                club_ptr, mgr_team, c_full, c_short = m_res
+            elif m_res and len(m_res) >= 2:
+                club_ptr, mgr_team = m_res[0], m_res[1]
+        except Exception:
+            pass
+
+    mgr_name = None
+    if hasattr(_FM_READER, "human_manager"):
+        try:
+            hm = _FM_READER.human_manager()
+            if isinstance(hm, dict):
+                mgr_name = hm.get("full_name")
+        except Exception:
+            pass
+
+    save_name = _LIVE_STATUS.get("save_name")
+    if not mgr_name and save_name and " - " in save_name:
+        mgr_name = save_name.split(" - ")[0].strip() or None
+
+    club_uid = None
+    if club_ptr and hasattr(_FM_READER, "u32"):
+        try:
+            club_uid = _FM_READER.u32(club_ptr + 0x0C)
+        except Exception:
+            pass
+
+    club_name = c_full or (save_name.split(" - ")[-1].strip() if save_name and " - " in save_name else None)
+    updates = {}
+    if club_name and not _LIVE_STATUS.get("club"):
+        updates["club"] = club_name
+    if club_uid and not _LIVE_STATUS.get("club_uid"):
+        updates["club_uid"] = club_uid
+    if mgr_name and not _LIVE_STATUS.get("manager"):
+        updates["manager"] = mgr_name
+    if updates:
+        _LIVE_STATUS.update(updates)
+
+    team = mgr_team
+    if not team and hasattr(capture, "resolve_manager_team"):
+        try:
+            team = capture.resolve_manager_team(_FM_READER)
+        except Exception:
+            pass
+
+    ref_date = _LIVE_STATUS.get("game_date")
+    savegame_id = _LIVE_STATUS.get("savegame_id")
+    fm_version = getattr(_FM_MEMORY, "fm_version", None)
+
+    try:
+        with closing(get_db_connection()) as conn, _DB_LOCK:
+            cur = conn.cursor()
+            has_snapshots = cur.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='snapshots'"
+            ).fetchone()
+            if not has_snapshots:
+                return
+
+            cur.execute("""
+                UPDATE snapshots SET name=?, save_name=?, game_date=?, club_uid=?, manager=?, savegame_id=?, fm_version=?
+                WHERE id=?
+            """, ("Live Season", save_name, ref_date, club_uid, mgr_name, savegame_id, fm_version, LIVE_SNAPSHOT_ID))
+            if cur.rowcount == 0:
+                cur.execute("""
+                    INSERT INTO snapshots (id, name, save_name, game_date, scope, club_uid, manager, savegame_id, fm_version)
+                    VALUES (?, ?, ?, ?, 'live', ?, ?, ?, ?)
+                """, (LIVE_SNAPSHOT_ID, "Live Season", save_name, ref_date, club_uid, mgr_name, savegame_id, fm_version))
+            conn.commit()
+
+            if team:
+                count_row = cur.execute("SELECT COUNT(*) FROM players WHERE snapshot_id=?", (LIVE_SNAPSHOT_ID,)).fetchone()
+                if count_row and count_row[0] > 0:
+                    _LIVE_STATUS["n_players"] = count_row[0]
+                    return
+
+                for table in ("players", "player_stats", "player_profile", "player_form", "player_teams", "club_leagues"):
+                    has_t = cur.execute(
+                        "SELECT name FROM sqlite_master WHERE type='table' AND name=?", (table,)
+                    ).fetchone()
+                    if has_t:
+                        cur.execute(f"DELETE FROM {table} WHERE snapshot_id=?", (LIVE_SNAPSHOT_ID,))
+                conn.commit()
+
+                try:
+                    n_players = capture.scan_squad(conn, LIVE_SNAPSHOT_ID, _FM_READER, team, ref_date=ref_date)
+                    if n_players:
+                        _LIVE_STATUS["n_players"] = n_players
+                except Exception:
+                    logger.exception("Could not scan live squad")
+
+                if club_uid and club_name:
+                    has_cl = cur.execute(
+                        "SELECT name FROM sqlite_master WHERE type='table' AND name='club_leagues'"
+                    ).fetchone()
+                    if has_cl:
+                        db.save_club_leagues(conn, LIVE_SNAPSHOT_ID, [{
+                            "club_uid": club_uid,
+                            "league_uid": None,
+                            "league_name": None,
+                            "club_name": club_name,
+                        }])
+    except Exception:
+        logger.exception("Could not sync live snapshot")
+
+
 def _clear_connection():
     global _FM_MEMORY, _FM_READER
     if _FM_MEMORY is not None:
@@ -695,6 +842,7 @@ def _clear_connection():
     _FM_READER = None
     _LIVE_STATUS.clear()
     _LIVE_STATUS.update(_EMPTY_LIVE_STATUS)
+    _clear_live_snapshot()
 
 
 def parar_leitura_viva():
@@ -1135,18 +1283,70 @@ def list_snapshots(include_live: bool = True):
     with ExitStack() as stack:
         conn = get_db_connection()
         stack.callback(conn.close)
-        rows = conn.execute("SELECT * FROM snapshots ORDER BY created_at DESC").fetchall()
+        columns = {c[1] for c in conn.execute("PRAGMA table_info(snapshots)")}
+        where_clause = "WHERE scope NOT IN ('live','live_temp') OR scope IS NULL " if "scope" in columns else ""
+        query = f"SELECT * FROM snapshots {where_clause}ORDER BY created_at DESC"
+        rows = conn.execute(query).fetchall()
         metrics = _snapshot_metrics(conn)
         snaps = [dict(row, **metrics.get(row["id"], {"n_players": 0, "size_bytes": 0})) for row in rows]
     if include_live and _LIVE_STATUS.get("ready"):
+        _sync_live_snapshot()
+        with ExitStack() as stack:
+            conn = get_db_connection()
+            stack.callback(conn.close)
+            live_metrics = _snapshot_metrics(conn, LIVE_SNAPSHOT_ID).get(LIVE_SNAPSHOT_ID, {"n_players": 0, "size_bytes": 0})
         live_snap = dict(_LIVE_STATUS)
-        live_snap.update(id=999999999, name="Live Season", n_players=0, size_bytes=0,
-                         created_at=live_snap.get("read_at") or "", is_live=True)
+        n_players = live_snap.get("n_players")
+        if n_players is None:
+            n_players = live_metrics["n_players"]
+        live_snap.update(
+            id=LIVE_SNAPSHOT_ID,
+            name="Live Season",
+            n_players=n_players,
+            size_bytes=live_metrics["size_bytes"],
+            created_at=live_snap.get("read_at") or "",
+            is_live=True,
+        )
         snaps.insert(0, live_snap)
     return snaps
 
 @app.get("/api/snapshots/{sid}")
 def get_snapshot(sid: int):
+    if sid == LIVE_SNAPSHOT_ID:
+        if not _LIVE_STATUS.get("ready"):
+            raise HTTPException(status_code=404, detail="Snapshot nao encontrado")
+        _sync_live_snapshot()
+        with ExitStack() as stack:
+            conn = get_db_connection()
+            stack.callback(conn.close)
+            metrics = _snapshot_metrics(conn, sid)
+            live_metrics = metrics.get(sid, {"n_players": 0, "size_bytes": 0})
+            row = conn.execute("SELECT * FROM snapshots WHERE id=?", (sid,)).fetchone()
+            base = dict(row) if row else {}
+            live_snap = dict(_LIVE_STATUS)
+            n_players = live_snap.get("n_players")
+            if n_players is None:
+                n_players = live_metrics["n_players"]
+            live_snap.update(
+                id=LIVE_SNAPSHOT_ID,
+                name=base.get("name") or "Live Season",
+                save_name=live_snap.get("save_name") or base.get("save_name"),
+                game_date=live_snap.get("game_date") or base.get("game_date"),
+                in_game_season=base.get("in_game_season"),
+                scope="live",
+                club=live_snap.get("club") or base.get("club"),
+                club_uid=live_snap.get("club_uid") or base.get("club_uid"),
+                manager=live_snap.get("manager") or base.get("manager"),
+                savegame_id=live_snap.get("savegame_id") or base.get("savegame_id"),
+                created_at=live_snap.get("read_at") or base.get("created_at") or "",
+                is_live=True,
+                ready=True,
+                fm_running=live_snap.get("fm_running", True),
+                n_players=n_players,
+                size_bytes=live_metrics["size_bytes"],
+            )
+            return live_snap
+
     with ExitStack() as stack:
         conn = get_db_connection()
         stack.callback(conn.close)
@@ -1158,6 +1358,10 @@ def get_snapshot(sid: int):
 
 @app.delete("/api/snapshots/{sid}")
 def delete_snapshot(sid: int):
+    if sid == LIVE_SNAPSHOT_ID:
+        if not _LIVE_STATUS.get("ready"):
+            raise HTTPException(status_code=404, detail="Snapshot nao encontrado")
+        raise HTTPException(status_code=400, detail="A temporada ao vivo nao pode ser apagada")
     try:
         with closing(get_db_connection()) as conn, _DB_LOCK, conn:
             conn.execute("BEGIN IMMEDIATE")
@@ -1189,6 +1393,11 @@ def list_snapshot_players(
     team: Optional[int] = None,
     sex: Optional[str] = None,
 ):
+    if sid == LIVE_SNAPSHOT_ID:
+        if not _LIVE_STATUS.get("ready"):
+            raise HTTPException(status_code=404, detail="Snapshot nao encontrado")
+        _sync_live_snapshot()
+
     with closing(get_db_connection()) as conn:
         cur = conn.cursor()
         profile_columns = {row[1] for row in conn.execute("PRAGMA table_info(player_profile)")}
@@ -1221,13 +1430,44 @@ def list_snapshot_players(
         query += f" LIMIT {limit} OFFSET {offset}"
         cur.execute(query, params)
         rows = cur.fetchall()
+
+        if sid == LIVE_SNAPSHOT_ID and not rows and _LIVE_STATUS.get("players"):
+            mock_players = list(_LIVE_STATUS.get("players", []))
+            if search:
+                s_lower = search.lower()
+                mock_players = [
+                    p for p in mock_players
+                    if s_lower in (p.get("full_name") or "").lower()
+                    or s_lower in (p.get("common_name") or "").lower()
+                ]
+            if club is not None:
+                mock_players = [p for p in mock_players if p.get("club_id") == club]
+            if team is not None:
+                mock_players = [p for p in mock_players if p.get("team_uid") == team]
+            return {"players": mock_players[offset:offset + limit]}
+
         return {"players": [dict(r) for r in rows]}
 
 @app.get("/api/snapshots/{sid}/players/{uid}")
 def get_snapshot_player(sid: int, uid: int):
+    if sid == LIVE_SNAPSHOT_ID:
+        if not _LIVE_STATUS.get("ready"):
+            raise HTTPException(status_code=404, detail="Snapshot nao encontrado")
+        _sync_live_snapshot()
+
     with closing(get_db_connection()) as conn:
         identity = conn.execute("SELECT * FROM players WHERE snapshot_id=? AND uid=?", (sid, uid)).fetchone()
         if identity is None:
+            if sid == LIVE_SNAPSHOT_ID and _LIVE_STATUS.get("players"):
+                mock_player = next((p for p in _LIVE_STATUS["players"] if p.get("uid") == uid), None)
+                if mock_player:
+                    return {
+                        **mock_player,
+                        "identity": mock_player,
+                        "stats": {},
+                        "profile": mock_player,
+                        "form": [],
+                    }
             raise HTTPException(status_code=404, detail="Jogador nao encontrado")
         identity = dict(identity)
         stats = conn.execute("SELECT * FROM player_stats WHERE snapshot_id=? AND uid=?", (sid, uid)).fetchone()
@@ -1237,7 +1477,8 @@ def get_snapshot_player(sid: int, uid: int):
         # requires these three sections before it can request analysis.
         result = {**profile, **stats, **identity}
         snapshot = conn.execute("SELECT game_date FROM snapshots WHERE id=?", (sid,)).fetchone()
-        profile['age'] = moneyball_data._age(profile, snapshot['game_date'] if snapshot else None)
+        game_date = snapshot['game_date'] if snapshot else (_LIVE_STATUS.get("game_date") if sid == LIVE_SNAPSHOT_ID else None)
+        profile['age'] = moneyball_data._age(profile, game_date)
         for alias, names in (('left_foot', ('foot_left', 'left_foot')),
                              ('right_foot', ('foot_right', 'right_foot')),
                              ('value', ('guide_value', 'value', 'transfer_value')),
@@ -1251,6 +1492,10 @@ def get_snapshot_player(sid: int, uid: int):
 
 
 def _stored_analysis_call(function, sid, uid=None, **params):
+    if sid == LIVE_SNAPSHOT_ID:
+        if not _LIVE_STATUS.get("ready"):
+            raise HTTPException(status_code=404, detail="Snapshot ao vivo indisponivel")
+        _sync_live_snapshot()
     conn = get_db_connection()
     try:
         return function(conn, sid, uid, **params)
@@ -1526,9 +1771,17 @@ def _load_moneyball_catalog() -> Dict[str, Any]:
     return {}
 
 def _moneyball_rows(snapshot=None, groups=(), uids=None):
+    if snapshot == LIVE_SNAPSHOT_ID and _LIVE_STATUS.get("ready"):
+        _sync_live_snapshot()
     with closing(get_db_connection()) as conn:
         career = settings.load().get("carreira_ativa") if settings else None
-        return moneyball_data.load(conn, snapshot, career, groups, uids=uids)
+        sid, rows = moneyball_data.load(conn, snapshot, career, groups, uids=uids)
+        if sid == LIVE_SNAPSHOT_ID and not rows and _LIVE_STATUS.get("players"):
+            rows = [
+                {**p, "_teams": [p.get("team_uid")] if p.get("team_uid") else []}
+                for p in _LIVE_STATUS["players"]
+            ]
+        return sid, rows
 
 
 def _snapshot_player_count(sid):
@@ -1536,7 +1789,10 @@ def _snapshot_player_count(sid):
         return 0
     with closing(get_db_connection()) as conn:
         row = conn.execute("SELECT COUNT(*) FROM players WHERE snapshot_id=?", (sid,)).fetchone()
-        return row[0] if row else 0
+        count = row[0] if row else 0
+        if sid == LIVE_SNAPSHOT_ID and count == 0 and _LIVE_STATUS.get("players"):
+            return len(_LIVE_STATUS["players"])
+        return count
 
 
 def _moneyball_public_row(row):
@@ -1858,6 +2114,8 @@ def salvar_carreira_prefs(cid: str, body: CarreiraPrefsBody):
 @app.post("/api/carreiras/{cid}/temporadas/{sid}")
 @app.put("/api/carreiras/{cid}/temporadas/{sid}")
 def mover_temporada(cid: str, sid: int):
+    if sid == LIVE_SNAPSHOT_ID:
+        raise HTTPException(status_code=400, detail="Temporada ao vivo nao pode ser movida")
     conn = get_db_connection()
     with _DB_LOCK:
         cur = conn.cursor()
@@ -1920,7 +2178,7 @@ def get_player_temporadas(uid: int):
             SELECT s.*, s.id AS sid, p.height_cm
             FROM snapshots s
             JOIN players p ON p.snapshot_id=s.id
-            WHERE p.uid=?
+            WHERE p.uid=? AND (s.scope NOT IN ('live','live_temp') OR s.scope IS NULL)
             ORDER BY s.game_date DESC, s.id DESC
         """, (uid,)).fetchall()
         stats = {row["snapshot_id"]: dict(row) for row in conn.execute(
