@@ -159,9 +159,9 @@ def adotar_legado(conn, savegame_id=None, club_uid=None):
 
 def mover_temporada(conn, snapshot_id, carreira_destino):
     """Move um snapshot especifico para outra carreira."""
-    conn.execute(
+    cursor = conn.execute(
         "UPDATE snapshots SET carreira_id=? WHERE id=?",
         (carreira_destino, snapshot_id),
     )
     conn.commit()
-    return True
+    return cursor.rowcount > 0
