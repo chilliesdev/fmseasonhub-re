@@ -4973,8 +4973,8 @@ nav.listaPreferencial = Tercih listesi
 lista.titulo = Tercih listesi
 #   EN: Import from FM list
 lista.adicionar = FM listesinden içe aktar
-#   EN: In the FM{{jogo}} folder
-lista.naPasta = FM{{jogo}} klasöründe
+#   EN: In the {{jogo}} folder
+lista.naPasta = {{jogo}} klasöründe
 #   EN: new
 lista.nova = yeni
 #   EN: already here

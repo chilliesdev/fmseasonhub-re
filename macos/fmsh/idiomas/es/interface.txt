@@ -4809,8 +4809,8 @@ nav.listaPreferencial = Lista preferente
 lista.titulo = Lista preferente
 #   EN: Import from FM list
 lista.adicionar = Importar lista del FM
-#   EN: In the FM{{jogo}} folder
-lista.naPasta = En la carpeta del FM{{jogo}}
+#   EN: In the {{jogo}} folder
+lista.naPasta = En la carpeta de {{jogo}}
 #   EN: new
 lista.nova = nueva
 #   EN: already here
