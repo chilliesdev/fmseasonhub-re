@@ -2194,11 +2194,9 @@ def salvar_carreira_prefs(cid: str, body: CarreiraPrefsBody):
 def mover_temporada(cid: str, sid: int):
     if sid == LIVE_SNAPSHOT_ID:
         raise HTTPException(status_code=400, detail="Temporada ao vivo nao pode ser movida")
-    conn = get_db_connection()
-    with _DB_LOCK:
-        cur = conn.cursor()
-        cur.execute("UPDATE snapshots SET carreira_id=? WHERE id=?", (cid, sid))
-        conn.commit()
+    with closing(get_db_connection()) as conn, _DB_LOCK:
+        if not carreiras.mover_temporada(conn, sid, cid):
+            raise HTTPException(status_code=404, detail="Temporada nao encontrada")
     return {"ok": True}
 
 @app.get("/api/carreiras/{cid}/alltime")
