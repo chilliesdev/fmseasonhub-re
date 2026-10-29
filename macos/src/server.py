@@ -2157,17 +2157,23 @@ def get_carreiras():
     saved = settings.load().get("carreiras") or {}
     prefs = saved.get(active) or {}
     counts = {}
+    latest_by_career = {}
     for snapshot in snapshots:
         cid = snapshot["carreira_id"]
         if cid is not None:
             counts[cid] = counts.get(cid, 0) + 1
+            if cid not in latest_by_career:
+                latest_by_career[cid] = snapshot
     return {
         "ativa": active,
         "prefs": {"moeda": prefs.get("moeda") or 1,
                   "periodo_salario": prefs.get("periodo_salario") or "week"},
         "carreiras": [
             {"id": cid, "nome": (saved.get(cid) or {}).get("nome") or cid.replace("_", " ").title(),
-             "ativa": cid == active, "n_temporadas": count}
+             "ativa": cid == active, "n_temporadas": count, "temporadas": count,
+             "ultima": (latest_by_career.get(cid) or {}).get("game_date"),
+             "club_uid": (latest_by_career.get(cid) or {}).get("club_uid"),
+             "fm_version": (latest_by_career.get(cid) or {}).get("fm_version")}
             for cid, count in counts.items()
         ],
     }

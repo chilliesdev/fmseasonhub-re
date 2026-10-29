@@ -2330,6 +2330,7 @@ carreira.scoped = Solo se aplica a la carrera {{nome}}.
 carreira.seasons_one = 1 temporada
 #   EN: {{count}} seasons
 carreira.seasons_other = {{count}} temporadas
+carreira.seasons = {{count}} temporadas
 #   EN: Switch career
 carreira.switch = Cambiar de carrera
 #   EN: This season belongs to the {{nome}} career. To analyse it the app switches the active career: currency and club profile become that career's.
