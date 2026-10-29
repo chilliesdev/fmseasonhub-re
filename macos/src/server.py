@@ -173,6 +173,7 @@ _EMPTY_LIVE_STATUS: Dict[str, Any] = {
     "fm_version": None,
     "error_code": None,
     "error": None,
+    "platform": sys.platform,
 }
 _LIVE_STATUS: Dict[str, Any] = dict(_EMPTY_LIVE_STATUS)
 LIVE_SNAPSHOT_ID: int = portal_data.LIVE_SNAPSHOT_ID
