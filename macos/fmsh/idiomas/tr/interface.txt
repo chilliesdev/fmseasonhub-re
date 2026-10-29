@@ -2392,6 +2392,7 @@ carreira.scoped = Yalnızca {{nome}} kariyeri için geçerli.
 carreira.seasons_one = 1 sezon
 #   EN: {{count}} seasons
 carreira.seasons_other = {{count}} sezon
+carreira.seasons = {{count}} sezon
 #   EN: Your careers
 carreira.suas = Kariyerleriniz
 #   EN: Switch career

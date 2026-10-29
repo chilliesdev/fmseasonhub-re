@@ -2366,6 +2366,7 @@ carreira.scoped = Vale só para a carreira {{nome}}.
 carreira.seasons_one = 1 temporada
 #   EN: {{count}} seasons
 carreira.seasons_other = {{count}} temporadas
+carreira.seasons = {{count}} temporadas
 #   EN: Your careers
 carreira.suas = Suas carreiras
 #   EN: Switch career

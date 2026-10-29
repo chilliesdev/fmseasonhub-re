@@ -2338,6 +2338,7 @@ carreira.scoped = Applies only to the {{nome}} career.
 carreira.seasons_one = 1 season
 #   EN: {{count}} seasons
 carreira.seasons_other = {{count}} seasons
+carreira.seasons = {{count}} seasons
 carreira.suas = Your careers
 #   EN: Switch career
 carreira.switch = Switch career
