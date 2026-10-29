@@ -282,8 +282,8 @@ portal.shortlist = Shortlist
 portal.shortlistP = The players you flagged as favourites inside FM.
 #   EN: Market
 portal.shortlistTag = Market
-#   EN: coming soon
-portal.soon = coming soon
+#   EN: Coming soon
+portal.soon = Coming soon
 #   EN: {{n}} players at the club
 portal.squadLine = {{n}} players at the club
 #   EN: Last read
