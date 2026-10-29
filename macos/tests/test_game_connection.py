@@ -70,6 +70,7 @@ class GameConnectionTests(unittest.TestCase):
         for route in ("/api/live", "/api/status"):
             status = self.request(route)
             self.assertFalse(status["ready"])
+            self.assertEqual(status["platform"], sys.platform)
             for key in ("pid", "build", "savegame_id", "session_nonce", "read_at", "game_date", "club", "manager", "save_name"):
                 self.assertIsNone(status[key], key)
             if code:
@@ -146,6 +147,7 @@ class GameConnectionTests(unittest.TestCase):
         self.reader_class.assert_called_once_with(self.mem)
         status = self.request("/api/live")
         self.assertTrue(status["ready"])
+        self.assertEqual(status["platform"], sys.platform)
         self.assertTrue(status["fm_running"])
         self.assertEqual(status["pid"], 1234)
         self.assertEqual(status["build"], "steam_macos_arm64")
@@ -158,6 +160,13 @@ class GameConnectionTests(unittest.TestCase):
         self.assertIsNone(status["manager"])
         self.assertIsNone(status["fm_version"])
         self.assertEqual(self.request("/api/job")["state"], "done")
+
+    def test_status_and_live_expose_platform_contract(self):
+        for route in ("/api/live", "/api/status"):
+            status = self.request(route)
+            self.assertEqual(status["platform"], sys.platform)
+            self.assertIn("ready", status)
+            self.assertIn("error_code", status)
 
     def test_failure_after_success_closes_and_clears_old_session(self):
         self.request("/api/connect", {})

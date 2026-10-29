@@ -40,7 +40,21 @@ for (const locale of ['en', 'pt', 'de', 'es', 'fr', 'tr']) {
   assert.equal(nodes(tree).filter(node => node.type === 'button').length, 2);
   platform = null;
   assert(JSON.stringify(render()).includes(translations['conn.accessDeniedPendingBody']));
+
+  // Status-driven platform detection when launcher platform is pending
+  context.Gd = () => ({connError: 'access_denied', clearConnError: () => {}, connect: () => {}, status: {ready: false, platform: 'darwin'}});
+  let statusTree = render();
+  assert(JSON.stringify(statusTree).includes(translations['conn.macosAccessDeniedBody']));
+  assert(!JSON.stringify(statusTree).includes('Windows'));
+
+  // Status response reporting access_denied directly
+  context.Gd = () => ({connError: null, clearConnError: () => {}, connect: () => {}, status: {ready: false, error_code: 'access_denied', platform: 'darwin'}});
+  let statusErrTree = render();
+  assert(JSON.stringify(statusErrTree).includes(translations['conn.macosAccessDeniedBody']));
+  assert(!JSON.stringify(statusErrTree).includes('Windows'));
+
   error = null;
+  context.Gd = () => ({connError: error, clearConnError: () => {error = null;}, connect: () => {}});
   assert.equal(render(), null);
 }
 console.log('Game launch recovery renderer regressions passed');
