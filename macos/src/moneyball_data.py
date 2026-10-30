@@ -2,6 +2,8 @@
 
 import json
 import math
+import os
+import threading
 from datetime import date
 
 import numpy as np
@@ -85,36 +87,89 @@ def snapshot_id(conn, selected=None, career=None):
     return row['id'] if row else None
 
 
+_CACHE_LOCK = threading.Lock()
+_CACHE = {}  # cache_key -> {'base': rows, 'derived': {groups_tuple: rows}}
+
+
+def clear_cache():
+    with _CACHE_LOCK:
+        _CACHE.clear()
+
+
+def _get_cache_key(conn, sid):
+    if sid is None or sid == 999999:
+        return None
+    try:
+        cur = conn.cursor()
+        cur.row_factory = None
+        row = cur.execute("SELECT scope, game_date FROM snapshots WHERE id=?", (sid,)).fetchone()
+        if not row or row[0] in ('live', 'live_temp'):
+            return None
+    except Exception:
+        return None
+
+    db_file = None
+    try:
+        cur = conn.cursor()
+        cur.row_factory = None
+        db_list = cur.execute("PRAGMA database_list").fetchall()
+        for item in db_list:
+            if item[1] == 'main' and item[2]:
+                db_file = item[2]
+                break
+    except Exception:
+        pass
+
+    mtime = 0
+    if db_file:
+        try:
+            mtime = os.path.getmtime(db_file)
+        except OSError:
+            pass
+
+    try:
+        cur = conn.cursor()
+        cur.row_factory = None
+        dv = cur.execute("PRAGMA data_version").fetchone()[0]
+    except Exception:
+        dv = 0
+
+    tc = getattr(conn, 'total_changes', 0)
+    return (db_file or id(conn), sid, mtime, dv, tc)
+
+
 def table_rows(conn, table, sid, uids=None, uid_col='uid'):
     # Table names are internal constants, never request values.
-    columns = {row[1] for row in conn.execute(f'PRAGMA table_info({table})')}
+    cur = conn.cursor()
+    cur.row_factory = None
+    columns = {row[1] for row in cur.execute(f'PRAGMA table_info({table})')}
     if 'snapshot_id' not in columns or sid is None:
         return []
     if uids is not None:
         uids_list = [int(x) for x in uids if str(x).lstrip('-').isdigit()]
         if not uids_list:
             return []
+        if len(uids_list) == 1:
+            cur.execute(f'SELECT * FROM {table} WHERE snapshot_id=? AND {uid_col}=?', (sid, uids_list[0]))
+            col_names = [d[0] for d in cur.description]
+            return [dict(zip(col_names, row)) for row in cur.fetchall()]
         results = []
         chunk_size = 500
         for i in range(0, len(uids_list), chunk_size):
             chunk = uids_list[i:i + chunk_size]
             placeholders = ','.join('?' for _ in chunk)
-            results.extend(dict(row) for row in conn.execute(
+            cur.execute(
                 f'SELECT * FROM {table} WHERE snapshot_id=? AND {uid_col} IN ({placeholders})',
-                (sid, *chunk)))
+                (sid, *chunk))
+            col_names = [d[0] for d in cur.description]
+            results.extend(dict(zip(col_names, row)) for row in cur.fetchall())
         return results
-    return [dict(row) for row in conn.execute(f'SELECT * FROM {table} WHERE snapshot_id=?', (sid,))]
+    cur.execute(f'SELECT * FROM {table} WHERE snapshot_id=?', (sid,))
+    col_names = [d[0] for d in cur.description]
+    return [dict(zip(col_names, row)) for row in cur.fetchall()]
 
 
-def load(conn, selected=None, career=None, groups=(), uids=None):
-    sid = snapshot_id(conn, selected, career)
-    snapshot = conn.execute('SELECT * FROM snapshots WHERE id=?', (sid,)).fetchone()
-    if not snapshot:
-        return sid, []
-    if uids is not None:
-        uids = {int(x) for x in uids if str(x).lstrip('-').isdigit()}
-        if not uids:
-            return sid, []
+def _build_base_rows(conn, sid, snapshot, uids=None):
     snapshot = dict(snapshot)
     stats = {row['uid']: row for row in table_rows(conn, 'player_stats', sid, uids)}
     profiles = {row['uid']: row for row in table_rows(conn, 'player_profile', sid, uids)}
@@ -133,6 +188,7 @@ def load(conn, selected=None, career=None, groups=(), uids=None):
         club_profiles = {row['club_uid']: row for row in table_rows(conn, 'club_profile', sid)}
         comps = {row['uid']: row for row in table_rows(conn, 'comps', sid)}
     rows = []
+    game_date = snapshot.get('game_date')
     for identity in identities:
         uid = identity['uid']
         row = {**profiles.get(uid, {}), **identity, **stats.get(uid, {})}
@@ -150,7 +206,7 @@ def load(conn, selected=None, career=None, groups=(), uids=None):
         row['league_name'] = club.get('league_name') or ''
         row['_league_reputation'] = number(comps.get(row['league_uid'], {}).get('reputation'))
         row['_teams'] = sorted(memberships.get(uid, set()) | ({row['team_uid']} if row.get('team_uid') else set()))
-        row['age'] = _age(row, snapshot.get('game_date'))
+        row['age'] = _age(row, game_date)
         row['height_m'] = number(row['height_cm']) / 100 if row.get('height_cm') else None
         row['transfer_value'] = _first(row, 'guide_value', 'value', 'transfer_value')
         row['value'] = row['transfer_value']
@@ -163,8 +219,47 @@ def load(conn, selected=None, career=None, groups=(), uids=None):
         left, right = number(row.get('left_foot')), number(row.get('right_foot'))
         row['foot'] = ('both' if min(left, right) >= 15 else 'left' if left > right else 'right') if max(left, right) else ''
         rows.append(row)
-    _derive(rows, groups)
-    return sid, rows
+    if uids is None:
+        rows.sort(key=lambda r: r['uid'])
+    return rows
+
+
+def load(conn, selected=None, career=None, groups=(), uids=None):
+    sid = snapshot_id(conn, selected, career)
+    snapshot = conn.execute('SELECT * FROM snapshots WHERE id=?', (sid,)).fetchone()
+    if not snapshot:
+        return sid, []
+    if uids is not None:
+        uids_set = {int(x) for x in uids if str(x).lstrip('-').isdigit()}
+        if not uids_set:
+            return sid, []
+        rows = _build_base_rows(conn, sid, snapshot, uids=uids_set)
+        _derive(rows, groups)
+        return sid, rows
+
+    cache_key = _get_cache_key(conn, sid)
+    if cache_key is None:
+        rows = _build_base_rows(conn, sid, snapshot, uids=None)
+        _derive(rows, groups)
+        return sid, rows
+
+    groups_key = tuple(sorted(groups))
+    with _CACHE_LOCK:
+        entry = _CACHE.get(cache_key)
+        if entry is not None and groups_key in entry['derived']:
+            return sid, list(entry['derived'][groups_key])
+
+        if entry is None:
+            base_rows = _build_base_rows(conn, sid, snapshot, uids=None)
+            entry = {'base': base_rows, 'derived': {}}
+            if len(_CACHE) >= 4:
+                _CACHE.clear()
+            _CACHE[cache_key] = entry
+
+        derived_rows = [dict(r) for r in entry['base']]
+        _derive(derived_rows, groups)
+        entry['derived'][groups_key] = derived_rows
+        return sid, list(derived_rows)
 
 
 def _age(row, game_date):
@@ -195,10 +290,28 @@ def _derive(rows, groups):
         derived = mb.derive(raw)
         for group in groups:
             derived.update(mb.derive_catalog(raw, group))
+
+    all_metrics = {**raw, **derived}
+    metric_cols = {}
+    scalar_metrics = {}
+    for k, v in all_metrics.items():
+        if isinstance(v, np.ndarray) and v.ndim > 0:
+            metric_cols[k] = v.tolist()
+        else:
+            scalar_metrics[k] = number(v.item() if hasattr(v, 'item') else v, None)
+    metric_keys = list(metric_cols.keys())
+    metric_lists = [metric_cols[k] for k in metric_keys]
+    num_metrics = len(metric_keys)
+
     for i, row in enumerate(rows):
-        row['vals'] = {key: number(values.item() if values.ndim == 0 else values[i], None)
-                       for key, values in {**raw, **derived}.items()}
-        row['vals'].update({key: value for key, value in team_metrics(row).items() if key not in row['vals']})
+        vals = dict(scalar_metrics)
+        for j in range(num_metrics):
+            val = metric_lists[j][i]
+            vals[metric_keys[j]] = None if val is None or not math.isfinite(val) else val
+        for key, value_item in team_metrics(row).items():
+            if key not in vals:
+                vals[key] = value_item
+        row['vals'] = vals
         row['vals'].update({key: value(row, key) for key in SEARCH_ALIASES})
 
 

@@ -4,6 +4,7 @@ Missing measurements stay missing. Percentiles use the existing mid-rank rule;
 similarity uses the shipped search engine and its three-metric minimum.
 """
 
+import bisect
 from datetime import date
 import math
 
@@ -104,10 +105,13 @@ def load(conn, sid, uid=None):
     if snapshot is None:
         raise LookupError('Snapshot nao encontrado')
     _, rows = data.load(conn, sid)
-    rows.sort(key=lambda row: row['uid'])
     if uid is None:
         return dict(snapshot), rows, None
-    index = next((i for i, row in enumerate(rows) if row['uid'] == uid), None)
+    pos = bisect.bisect_left(rows, uid, key=lambda row: row['uid'])
+    if pos < len(rows) and rows[pos]['uid'] == uid:
+        index = pos
+    else:
+        index = next((i for i, row in enumerate(rows) if row['uid'] == uid), None)
     if index is None:
         raise LookupError('Jogador nao encontrado neste snapshot')
     return dict(snapshot), rows, index
