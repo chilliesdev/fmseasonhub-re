@@ -23,7 +23,7 @@ def season(snapshot):
         return f"#{snapshot['id']}"
 
 
-def load(conn, career=None, uid=None):
+def load(conn, career=None, uid=None, uids=None):
     """Choose the selected career and FM version before grouping any player."""
     if career is None:
         row = conn.execute("""
@@ -39,8 +39,8 @@ def load(conn, career=None, uid=None):
         ORDER BY game_date,id
     """, (career,))]
     if snapshots:
-        version = snapshots[-1]['fm_version']
-        snapshots = [item for item in snapshots if item['fm_version'] == version]
+        version = str(snapshots[-1]['fm_version']).split('.')[0]
+        snapshots = [item for item in snapshots if str(item['fm_version']).split('.')[0] == version]
     fields = [row[1] for row in conn.execute('PRAGMA table_info(player_stats)')
               if row[1] not in ('snapshot_id', 'uid')]
     seasons, players, latest = {}, {}, {}
@@ -48,7 +48,7 @@ def load(conn, career=None, uid=None):
         label = season(snapshot)
         descriptor = dict(snapshot, sid=snapshot['id'], temporada=label, is_live=False)
         seasons[label] = descriptor
-        _, rows = data.load(conn, snapshot['id'])
+        _, rows = data.load(conn, snapshot['id'], uids=uids)
         for row in rows:
             player_uid = row['uid']
             latest[player_uid] = row
@@ -101,14 +101,14 @@ def composition(conn, career):
 
 
 def player(conn, uid, career=None):
-    career, _, histories, rows = load(conn, career, uid)
+    career, _, histories, rows = load(conn, career, uid, uids=[uid])
     row = next((row for row in rows if row['uid'] == uid), None)
     if row is None:
         raise LookupError('Jogador nao encontrado nesta carreira')
     fields = [column[1] for column in conn.execute('PRAGMA table_info(player_stats)')
               if column[1] not in ('snapshot_id', 'uid')]
     return {'uid': uid, 'carreira': career, 'snapshot_id': row['snapshot_id'],
-            'temporadas': histories[uid], 'stats': {key: row[key] for key in fields}}
+            'temporadas': histories.get(uid, []), 'stats': {key: row[key] for key in fields}}
 
 
 def percentiles(conn, uid, career=None, coorte=None):
